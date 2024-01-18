@@ -3,7 +3,7 @@ class Connect {
     private $host = 'localhost';
     private $user = 'root';
     private $pass = '';
-    // private $db = 'Arm-mo';
+    // private $db = 'Arm_mo';
 
     function __construct() {
 

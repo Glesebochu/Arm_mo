@@ -1,0 +1,368 @@
+.signin-container {
+  width: 100%;
+  display: flex;
+  overflow: auto;
+  min-height: 100vh;
+  align-items: center;
+  flex-direction: column;
+}
+.signin-signin {
+  width: 100%;
+  height: 1366px;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-radius: 80px;
+  background-color: rgba(255, 255, 255, 1);
+}
+.signin-logo {
+  top: 61px;
+  left: 139px;
+  width: 170px;
+  height: 93px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 1;
+}
+.signin-writing1 {
+  top: 33.21471405029297px;
+  left: 85px;
+  width: 85px;
+  height: 28px;
+  position: absolute;
+}
+.signin-armimo-logo21 {
+  top: 0px;
+  left: 0px;
+  width: 85px;
+  height: 93px;
+  position: absolute;
+}
+.signin-text {
+  top: 196px;
+  left: 800px;
+  color: rgba(4, 61, 3, 1);
+  height: auto;
+  position: absolute;
+  font-size: 90px;
+  font-style: Regular;
+  text-align: center;
+  font-family: Marcellus SC;
+  font-weight: 400;
+  line-height: 137.5%;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.signin-text01 {
+  color: rgba(4, 61, 3, 1);
+}
+.signin-text02 {
+  color: rgba(0, 0, 0, 1);
+}
+.signin-text03 {
+  color: rgba(245, 177, 60, 1);
+}
+.signin-emailbox {
+  top: 373px;
+  left: 700px;
+  width: 521px;
+  height: 55px;
+  position: absolute;
+}
+.signin-firstnamebox {
+  top: 459px;
+  left: 700px;
+  width: 521px;
+  height: 56px;
+  position: absolute;
+}
+.signin-lastnamebox {
+  top: 546px;
+  left: 700px;
+  width: 521px;
+  height: 57px;
+  position: absolute;
+}
+.signin-confirmpasswordbox {
+  top: 632px;
+  left: 700px;
+  width: 521px;
+  height: 60px;
+  position: absolute;
+}
+.signin-passwordbox {
+  top: 632px;
+  left: 700px;
+  width: 521px;
+  height: 60px;
+  position: absolute;
+}
+.signin-eye1 {
+  top: 650px;
+  left: 1170px;
+  width: 28px;
+  height: 27px;
+  position: absolute;
+}
+.signin-dateofbirthbox {
+  top: 811px;
+  left: 700px;
+  width: 521px;
+  height: 60px;
+  position: absolute;
+}
+.signin-expanddown {
+  top: 824px;
+  left: 1170px;
+  width: 30px;
+  height: 30px;
+  position: absolute;
+}
+.signin-button {
+  top: 1029px;
+  left: 740px;
+  width: 432px;
+  height: 72px;
+  position: absolute;
+  border-radius: 90px;
+}
+.signin-text04 {
+  top: 1040px;
+  left: 900px;
+  color: rgba(253, 204, 121, 1);
+  height: auto;
+  position: absolute;
+  font-size: 35px;
+  font-style: Regular;
+  text-align: center;
+  font-family: Inter;
+  font-weight: 400;
+  line-height: 137.5%;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.signin-text06 {
+  top: 385px;
+  left: 750px;
+  color: rgba(2, 66, 0, 0.47999998927116394);
+  height: auto;
+  position: absolute;
+  font-size: 30px;
+  font-style: Regular;
+  text-align: center;
+  font-family: Linden Hill;
+  font-weight: 400;
+  line-height: 137.5%;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.signin-text07 {
+  color: rgba(2, 66, 0, 0.47999998927116394);
+}
+.signin-text08 {
+  top: 469px;
+  left: 720px;
+  color: rgba(0, 0, 0, 1);
+  height: auto;
+  position: absolute;
+  font-size: 30px;
+  font-style: Regular;
+  text-align: center;
+  font-family: Linden Hill;
+  font-weight: 400;
+  line-height: 137.5%;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.signin-text10 {
+  top: 558px;
+  left: 720px;
+  color: rgba(0, 0, 0, 1);
+  height: auto;
+  position: absolute;
+  font-size: 30px;
+  font-style: Regular;
+  text-align: center;
+  font-family: Linden Hill;
+  font-weight: 400;
+  line-height: 137.5%;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.signin-text12 {
+  top: 650px;
+  left: 750px;
+  color: rgba(2, 66, 0, 0.47999998927116394);
+  height: auto;
+  position: absolute;
+  font-size: 30px;
+  font-style: Regular;
+  text-align: center;
+  font-family: Linden Hill;
+  font-weight: 400;
+  line-height: 137.5%;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.signin-text14 {
+  top: 827px;
+  left: 720px;
+  color: rgba(0, 0, 0, 1);
+  height: auto;
+  position: absolute;
+  font-size: 30px;
+  font-style: Regular;
+  text-align: center;
+  font-family: Linden Hill;
+  font-weight: 400;
+  line-height: 137.5%;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.signin-text16 {
+  top: 919px;
+  left: 740px;
+  color: rgba(0, 0, 0, 1);
+  height: auto;
+  position: absolute;
+  font-size: 30px;
+  font-style: Regular;
+  text-align: center;
+  font-family: Linden Hill;
+  font-weight: 400;
+  line-height: 137.5%;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.signin-passwordicon1 {
+  top: 658px;
+  left: 720px;
+  width: 20px;
+  height: 22px;
+  opacity: 0.80;
+  position: absolute;
+}
+.signin-passwordbox1 {
+  top: 722px;
+  left: 700px;
+  width: 521px;
+  height: 60px;
+  position: absolute;
+}
+.signin-confirmpasswordbox1 {
+  top: 722px;
+  left: 700px;
+  width: 521px;
+  height: 60px;
+  position: absolute;
+}
+.signin-eye2 {
+  top: 740px;
+  left: 1170px;
+  width: 28px;
+  height: 27px;
+  position: absolute;
+}
+.signin-text18 {
+  top: 740px;
+  left: 750px;
+  color: rgba(2, 66, 0, 0.47999998927116394);
+  height: auto;
+  position: absolute;
+  font-size: 30px;
+  font-style: Regular;
+  text-align: center;
+  font-family: Linden Hill;
+  font-weight: 400;
+  line-height: 137.5%;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.signin-passwordicon2 {
+  top: 748px;
+  left: 720px;
+  width: 20px;
+  height: 22px;
+  opacity: 0.80;
+  position: absolute;
+}
+.signin-text20 {
+  top: 1212px;
+  left: 730px;
+  color: rgba(0, 0, 0, 1);
+  height: auto;
+  position: absolute;
+  font-size: 30px;
+  font-style: Regular;
+  text-align: center;
+  font-family: Linden Hill;
+  font-weight: 400;
+  line-height: 137.5%;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.signin-bellpin {
+  top: 1214px;
+  left: 690px;
+  width: 27px;
+  height: 29px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  background-color: rgba(255, 255, 255, 1);
+}
+.signin-subtract {
+  top: 2.625px;
+  left: 3.1176598072052px;
+  width: 21px;
+  height: 19px;
+  position: absolute;
+}
+.signin-ellipse45 {
+  top: 25.375px;
+  left: 16.875px;
+  width: 7px;
+  height: 11px;
+  position: absolute;
+  border-color: rgba(245, 177, 60, 1);
+  border-style: solid;
+  border-width: 2px;
+}
+.signin-ellipse6 {
+  top: 4.833332538604736px;
+  left: 17.999998092651367px;
+  width: 4px;
+  height: 5px;
+  position: absolute;
+  box-sizing: content-box;
+  border-color: rgba(245, 177, 60, 1);
+  border-style: solid;
+  border-width: 1px;
+}
+.signin-text22 {
+  top: 1135px;
+  left: 800px;
+  color: rgba(0, 0, 0, 1);
+  width: 330px;
+  height: auto;
+  position: absolute;
+  font-size: 25px;
+  font-style: Regular;
+  text-align: center;
+  font-family: Linden Hill;
+  font-weight: 400;
+  line-height: 137.5%;
+  font-stretch: normal;
+  text-decoration: underline;
+}
+.signin-done {
+  top: 924px;
+  left: 700px;
+  width: 24px;
+  height: 24px;
+  position: absolute;
+}

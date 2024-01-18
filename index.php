@@ -4,7 +4,7 @@
     $con = new Connect();
     $db = $con->__getConnection();
     
-    // Creating the database
+    // Creating the Arm_mo database
     {
         $databaseName = 'Arm_mo';
         $queryDbExists = "SHOW DATABASES LIKE '$databaseName'";
@@ -35,7 +35,6 @@
         }
     }   
 
-
     // Making arm_mo the current database
     {
         $queryUseArm_mo ="USE  $databaseName";
@@ -62,7 +61,7 @@
         // $db->query("DROP TABLE Meditator");
     }
 
-    // Adding the Meditation Stage table
+    // Creating the Meditation Stage table
     {
         $queryCreateMeditationStage= "CREATE TABLE Meditation_Stage(Stage_ID INT PRIMARY KEY AUTO_INCREMENT,
                                                                     GOAL VARCHAR(8000) NOT NULL)
@@ -95,7 +94,7 @@
 
     }
 
-    // Adding the Meditator table
+    // Creating the Meditator table
     {
         $queryCreateMeditator= "CREATE TABLE Meditator(Meditator_ID INT PRIMARY KEY AUTO_INCREMENT,
                                     Username VARCHAR(20) NOT NULL,
@@ -164,10 +163,78 @@
 
     }
 
+     // Creating the mastery table
+    {
+         $queryCreateMastery= "CREATE TABLE Mastery(Mastery_ID INT PRIMARY KEY AUTO_INCREMENT,
+                                                                    Stage_ID INT NOT NULL,
+                                                                    Prompt VARCHAR(8000),
+                                                                    Correct_Value VARCHAR(8000),
+                                                                    FOREIGN KEY (Stage_ID) REFERENCES Meditation_Stage(Stage_ID))";
+        if(($db->query("SHOW TABLES LIKE 'Mastery'"))->num_rows>0){
+            echo"
+                <script>
+                    alert('Table Mastery already exists')
+                </script>
+            ";
+        }
+        else{
+            if($db->query($queryCreateMastery)){
+                echo"
+                    <script>
+                        alert('Created the table Mastery succesfully!')
+                    </script>
+                ";
+            }
+            else{
+                echo"
+                    <script>
+                        alert('Creation of the table Mastery failed!')
+                    </script>
+                ";
+            }
+
+        }
+
+    }
+
+       // Creating the Skill table
+    {
+         $queryCreateSkill= "CREATE TABLE Skill(Skill_ID INT PRIMARY KEY AUTO_INCREMENT,
+                                                                    Stage_ID INT NOT NULL,
+                                                                    Description VARCHAR(8000) NOT NULL,
+                                                                    FOREIGN KEY (Stage_ID) REFERENCES Meditation_Stage(Stage_ID))";
+        if(($db->query("SHOW TABLES LIKE 'Skill'"))->num_rows>0){
+            echo"
+                <script>
+                    alert('Table Skill already exists')
+                </script>
+            ";
+        }
+        else{
+            if($db->query($queryCreateSkill)){
+                echo"
+                    <script>
+                        alert('Created the table Skill succesfully!')
+                    </script>
+                ";
+            }
+            else{
+                echo"
+                    <script>
+                        alert('Creation of the table Skill failed!')
+                    </script>
+                ";
+            }
+
+        }
+
+    }
+    
+
     // Checking foreign keys
     {
         
-        $tableName = 'Meditator';  // The table name you want to check
+        $tableName = 'Skill';  // The table name you want to check
         $databaseName = 'Arm_mo';  // The name of the database
 
         // Query to retrieve foreign key information for the specified table

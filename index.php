@@ -58,7 +58,7 @@
     // Drop tables here
     {
 
-        // $db->query("DROP TABLE Meditator");
+        // $db->query("DROP TABLE Stage_Obstacle_Assocation");
     }
 
     // Creating the Meditation Stage table
@@ -299,12 +299,47 @@
         }
 
     }
+
+    // Creating the Stage obstacle association table
+    {
+         $queryStage_Obstacle_Association= "CREATE TABLE Stage_Obstacle_Association(Obstacle_ID INT NOT NULL,
+                                                                    Stage_ID INT NOT NULL,
+                                                                    PRIMARY KEY (Stage_ID,Obstacle_ID),
+                                                                    FOREIGN KEY (Stage_ID) REFERENCES Meditation_Stage(Stage_ID),
+                                                                    FOREIGN KEY (Obstacle_ID) REFERENCES Obstacle(Obstacle_ID))";
+
+        if(($db->query("SHOW TABLES LIKE 'Stage_Obstacle_Association'"))->num_rows>0){
+            echo"
+                <script>
+                    alert('Table Stage_Obstacle_Association already exists')
+                </script>
+            ";
+        }
+        else{
+            if($db->query($queryStage_Obstacle_Association)){
+                echo"
+                    <script>
+                        alert('Created the table Stage_Obstacle_Association succesfully!')
+                    </script>
+                ";
+            }
+            else{
+                echo"
+                    <script>
+                        alert('Creation of the table Stage_Obstacle_Association failed!')
+                    </script>
+                ";
+            }
+
+        }
+
+    }
     
 
     // Checking foreign keys
     {
         
-        $tableName = 'Session';  // The table name you want to check
+        $tableName = 'Stage_Obstacle_Association';  // The table name you want to check
         $databaseName = 'Arm_mo';  // The name of the database
 
         // Query to retrieve foreign key information for the specified table

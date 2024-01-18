@@ -163,7 +163,7 @@
 
     }
 
-     // Creating the mastery table
+    // Creating the mastery table
     {
          $queryCreateMastery= "CREATE TABLE Mastery(Mastery_ID INT PRIMARY KEY AUTO_INCREMENT,
                                                                     Stage_ID INT NOT NULL,
@@ -197,7 +197,7 @@
 
     }
 
-       // Creating the Skill table
+    // Creating the Skill table
     {
          $queryCreateSkill= "CREATE TABLE Skill(Skill_ID INT PRIMARY KEY AUTO_INCREMENT,
                                                                     Stage_ID INT NOT NULL,
@@ -229,12 +229,82 @@
         }
 
     }
+
+    // Creating the Intention table
+    {
+         $queryCreateIntention= "CREATE TABLE Intention(Intention_ID INT PRIMARY KEY AUTO_INCREMENT,
+                                                                    Stage_ID INT NOT NULL,
+                                                                    Description VARCHAR(8000) NOT NULL,
+                                                                    FOREIGN KEY (Stage_ID) REFERENCES Meditation_Stage(Stage_ID))";
+        if(($db->query("SHOW TABLES LIKE 'Intention'"))->num_rows>0){
+            echo"
+                <script>
+                    alert('Table Intention already exists')
+                </script>
+            ";
+        }
+        else{
+            if($db->query($queryCreateIntention)){
+                echo"
+                    <script>
+                        alert('Created the table Intention succesfully!')
+                    </script>
+                ";
+            }
+            else{
+                echo"
+                    <script>
+                        alert('Creation of the table Intention failed!')
+                    </script>
+                ";
+            }
+
+        }
+
+    }
+
+    // Creating the Session table
+    {
+         $queryCreateSession= "CREATE TABLE Session(Session_ID INT PRIMARY KEY AUTO_INCREMENT,
+                                                                    Stage_ID INT NOT NULL,
+                                                                    Meditator_ID INT NOT NULL,
+                                                                    Start_Time DATETIME NOT NULL,
+                                                                    End_Time DATETIME NOT NULL,
+                                                                    FOREIGN KEY (Stage_ID) REFERENCES Meditation_Stage(Stage_ID),
+                                                                    FOREIGN KEY (Meditator_ID) REFERENCES Meditator(Meditator_ID))";
+
+        if(($db->query("SHOW TABLES LIKE 'Session'"))->num_rows>0){
+            echo"
+                <script>
+                    alert('Table Session already exists')
+                </script>
+            ";
+        }
+        else{
+            if($db->query($queryCreateSession)){
+                echo"
+                    <script>
+                        alert('Created the table Session succesfully!')
+                    </script>
+                ";
+            }
+            else{
+                echo"
+                    <script>
+                        alert('Creation of the table Session failed!')
+                    </script>
+                ";
+            }
+
+        }
+
+    }
     
 
     // Checking foreign keys
     {
         
-        $tableName = 'Skill';  // The table name you want to check
+        $tableName = 'Session';  // The table name you want to check
         $databaseName = 'Arm_mo';  // The name of the database
 
         // Query to retrieve foreign key information for the specified table

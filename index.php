@@ -58,7 +58,7 @@
     // Drop tables here
     {
 
-        // $db->query("DROP TABLE Stage_Obstacle_Assocation");
+        $db->query("DROP TABLE Skill");
     }
 
     // Creating the Meditation Stage table
@@ -200,9 +200,8 @@
     // Creating the Skill table
     {
          $queryCreateSkill= "CREATE TABLE Skill(Skill_ID INT PRIMARY KEY AUTO_INCREMENT,
-                                                                    Stage_ID INT NOT NULL,
-                                                                    Description VARCHAR(8000) NOT NULL,
-                                                                    FOREIGN KEY (Stage_ID) REFERENCES Meditation_Stage(Stage_ID))";
+                                                Description VARCHAR(8000) NOT NULL)";
+
         if(($db->query("SHOW TABLES LIKE 'Skill'"))->num_rows>0){
             echo"
                 <script>

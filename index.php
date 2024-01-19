@@ -298,6 +298,39 @@
 
     }
 
+    // Creating the Antidote table
+    {
+       $queryCreateAntidote= "CREATE TABLE Antidote(Antidote_ID INT PRIMARY KEY AUTO_INCREMENT,
+                                                                    Type VARCHAR(200) NOT NULL,
+                                                                    Severity VARCHAR(100) NOT NULL,
+                                                                    Antidote VARCHAR(8000) NOT NULL)";
+
+        if(($db->query("SHOW TABLES LIKE 'Antidote'"))->num_rows>0){
+            echo"
+                <script>
+                    alert('Table Antidote already exists')
+                </script>
+            ";
+        }
+        else{
+            if($db->query($queryCreateAntidote)){
+                echo"
+                    <script>
+                        alert('Created the table Antidote succesfully!')
+                    </script>
+                ";
+            }
+            else{
+                echo"
+                    <script>
+                        alert('Creation of the table Antidote failed!')
+                    </script>
+                ";
+            }
+
+        } 
+    }
+
     // Creating the Stage obstacle association table
     {
          $queryStage_Obstacle_Association= "CREATE TABLE Stage_Obstacle_Association(Obstacle_ID INT NOT NULL,
@@ -368,7 +401,6 @@
 
     }
     
-
     // Checking foreign keys
     {
         

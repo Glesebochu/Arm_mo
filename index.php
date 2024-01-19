@@ -57,8 +57,7 @@
 
     // Drop tables here
     {
-
-        $db->query("DROP TABLE Skill");
+        // $db->query("DROP TABLE Mastery");
     }
 
     // Creating the Meditation Stage table
@@ -163,32 +162,32 @@
 
     }
 
-    // Creating the mastery table
+    // Creating the mastery requirement table
     {
-         $queryCreateMastery= "CREATE TABLE Mastery(Mastery_ID INT PRIMARY KEY AUTO_INCREMENT,
+         $queryCreateMastery_Requirement= "CREATE TABLE Mastery_Requirement(Mastery_ID INT PRIMARY KEY AUTO_INCREMENT,
                                                                     Stage_ID INT NOT NULL,
                                                                     Prompt VARCHAR(8000),
                                                                     Correct_Value VARCHAR(8000),
                                                                     FOREIGN KEY (Stage_ID) REFERENCES Meditation_Stage(Stage_ID))";
-        if(($db->query("SHOW TABLES LIKE 'Mastery'"))->num_rows>0){
+        if(($db->query("SHOW TABLES LIKE 'Mastery_Requirement'"))->num_rows>0){
             echo"
                 <script>
-                    alert('Table Mastery already exists')
+                    alert('Table Mastery_Requirement already exists')
                 </script>
             ";
         }
         else{
-            if($db->query($queryCreateMastery)){
+            if($db->query($queryCreateMastery_Requirement)){
                 echo"
                     <script>
-                        alert('Created the table Mastery succesfully!')
+                        alert('Created the table Mastery_Requirement succesfully!')
                     </script>
                 ";
             }
             else{
                 echo"
                     <script>
-                        alert('Creation of the table Mastery failed!')
+                        alert('Creation of the table Mastery_Requirement failed!')
                     </script>
                 ";
             }
@@ -333,12 +332,47 @@
         }
 
     }
+
+    // Creating the Stage Skill association table
+    {
+        $queryStage_Skill_Association= "CREATE TABLE Stage_Skill_Association(Skill_ID INT NOT NULL,
+                                                                   Stage_ID INT NOT NULL,
+                                                                   PRIMARY KEY (Stage_ID,Skill_ID),
+                                                                   FOREIGN KEY (Stage_ID) REFERENCES Meditation_Stage(Stage_ID),
+                                                                   FOREIGN KEY (Skill_ID) REFERENCES Skill(Skill_ID))";
+
+       if(($db->query("SHOW TABLES LIKE 'Stage_Skill_Association'"))->num_rows>0){
+           echo"
+               <script>
+                   alert('Table Stage_Skill_Association already exists')
+               </script>
+           ";
+       }
+       else{
+           if($db->query($queryStage_Skill_Association)){
+               echo"
+                   <script>
+                       alert('Created the table Stage_Skill_Association succesfully!')
+                   </script>
+               ";
+           }
+           else{
+               echo"
+                   <script>
+                       alert('Creation of the table Stage_Skill_Association failed!')
+                   </script>
+               ";
+           }
+
+       }
+
+    }
     
 
     // Checking foreign keys
     {
         
-        $tableName = 'Stage_Obstacle_Association';  // The table name you want to check
+        $tableName = 'Stage_Skill_Association';  // The table name you want to check
         $databaseName = 'Arm_mo';  // The name of the database
 
         // Query to retrieve foreign key information for the specified table

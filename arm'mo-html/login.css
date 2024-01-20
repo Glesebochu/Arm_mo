@@ -54,7 +54,7 @@ body {
   width: 30%;
   display: flex;
   gap: 6%;
-  margin-left: 14%;
+  margin-left: 10%;
 }
 .loginText > * {
   font-size: 300%;
@@ -101,7 +101,7 @@ body {
 .emailIconWhole {
   padding-top: 3%;
   padding-left: 2%;
-  height: 150%;
+  height: 142%;
   background-color: rgb(216, 211, 211);
 }
 .emailIconWhole > * {
@@ -132,7 +132,7 @@ body {
 .pwdIconWhole {
   padding-top: 3%;
   padding-left: 2%;
-  height: 150%;
+  height: 142%;
   width: 9%;
   background-color: rgb(216, 211, 211);
 }

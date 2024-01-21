@@ -49,7 +49,7 @@ body {
   box-sizing: border-box;
 }
 /* -------The big login text---- */
-.signinText {
+.signupText {
   height: 10%;
   width: 30%;
   display: flex;
@@ -57,17 +57,17 @@ body {
   margin-left: 5%;
   box-sizing: border-box;
 }
-.signinText > * {
+.signupText > * {
   font-size: 300%;
   font-style: Regular;
   font-family: Marcellus SC;
   height: 100%;
   box-sizing: border-box;
 }
-.signinText1 {
+.signupText1 {
   color: rgba(0, 0, 0, 1);
 }
-.signinText2 {
+.signupText2 {
   color: rgba(245, 177, 60, 1);
 }
 /* ------The whole text box area */
@@ -95,7 +95,7 @@ body {
   box-shadow: 0 0 10px black;
 }
 .email > input {
-  padding: 5%;
+  padding: 4%;
   height: 100%;
   width: 100%;
   border: none;
@@ -174,7 +174,7 @@ body {
   box-shadow: 0 0 10px black;
 }
 .confirmPwd > input {
-  padding: 5%;
+  padding: 4%;
   height: 100%;
   width: 77%;
   border: none;

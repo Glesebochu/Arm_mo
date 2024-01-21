@@ -1,422 +1,153 @@
-.aboutus-container {
+* {
+  /* font-family: Linden Hill; */
+  box-sizing: border-box;
+}
+html {
+  padding: 0;
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+}
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
   width: 100%;
+}
+.whole {
   display: flex;
-  overflow: auto;
-  min-height: 100vh;
+  flex-direction: row;
+  height: 100%;
+  width: 100vw;
+  /* margin: 5%; */
+}
+/* ----nav--- */
+.nav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-top: 2%;
+  padding-right: 2%;
+  padding-left: 2%;
+}
+.fa-cog {
+  flex: 1;
+  font-size: 200%;
+  text-decoration: none;
+  color: black;
+  width: 10%;
+}
+.fa-cog:hover {
+  text-shadow: 0 0 10px rgb(4, 33, 77);
+}
+.fa-home {
+  flex: 1;
+  font-size: 200%;
+  text-decoration: none;
+  color: black;
+}
+.fa-home:hover {
+  text-shadow: 0 0 2px black;
+}
+/* -----------logo work-------- */
+.logo {
+  padding-top: 2%;
+  padding-left: 2%;
+  display: flex;
+  flex-direction: row;
+  width: 100%; 
+   /* height: %; */
+  padding-bottom: 300%;
+  gap: 10%;
+  flex: 0;
+}
+.logoImg {
+  flex: 1;
+  /* height:30%;
+  width: 100%; */
+}
+.armimoLogoText {
+  flex:1;
+  margin-top: 30%;
+  /* width: 100%;
+  height: 10%; */
+}
+
+/* ----right margin--- */
+.rightMargin {
+  width: 50%;
+  /* padding-right: 5%; */
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 0;
+  box-sizing: border-box;
+  flex:3;
+}
+
+/* -----The central region------ */
+.center {
+  /* margin-left: 10%; */
+  padding-top: 5%;
+  display: flex;
   align-items: center;
   flex-direction: column;
+  height: 80%;
+  width: 80%;
+  /* box-sizing: border-box; */
 }
-.aboutus-aboutus {
-  width: 100%;
-  height: 1080px;
+/* ----Heading-- */
+.aboutusText {
   display: flex;
-  overflow: hidden;
-  position: relative;
-  align-items: flex-start;
-  flex-shrink: 0;
-  border-radius: 80px;
-  background-color: rgba(255, 255, 255, 1);
+  flex-direction: row;
+  gap: 5%;
+  font-family: Megrim;
 }
-.aboutus-text {
-  top: 560px;
-  left: 661px;
+.aboutusText1 {
+  font-size: 700%;
+}
+.aboutusText2 {
+  padding-top: 30%;
+  color: rgba(4, 61, 3, 1);
+  font-size: 300%;
+}
+.aboutusText3 {
   color: rgba(245, 177, 60, 1);
-  height: auto;
-  position: absolute;
-  font-size: 40px;
-  font-style: Regular;
-  text-align: center;
-  font-family: Linden Hill;
-  font-weight: 400;
-  line-height: 137.5%;
-  font-stretch: normal;
-  text-decoration: none;
+  font-size: 200%;
+  padding-top: 36%;
 }
-.aboutus-text02 {
-  top: 323px;
-  left: 615px;
+/* ---texts---- */
+.texts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.question1 {
+  padding-top: 3%;
+  font-size:220%;
+  letter-spacing: 2.5px;
+  font-family: Linden Hill;
   color: rgba(56, 101, 38, 1);
-  width: 471px;
-  height: auto;
-  position: absolute;
-  font-size: 40px;
-  font-style: Regular;
-  text-align: center;
-  font-family: Linden Hill;
-  font-weight: 400;
-  line-height: 137.5%;
-  font-stretch: normal;
-  text-decoration: none;
 }
-.aboutus-text04 {
-  top: 415px;
-  left: 458px;
+.text1 {
+  padding-top: 15%;
+  /* padding-left: 16%; */
+  padding-right: 9%;
+  padding-top: 2%;
+  font-size: 200%;
+  font-family: Linden Hill;
   color: rgba(0, 0, 0, 1);
-  height: auto;
-  position: absolute;
-  font-size: 30px;
-  font-style: Regular;
-  text-align: left;
+ text-align: justify;
+}
+.question2 {
+  font-size: 220%;
   font-family: Linden Hill;
-  font-weight: 400;
-  line-height: 137.5%;
-  font-stretch: normal;
-  text-decoration: none;
-}
-.aboutus-logo {
-  top: 61px;
-  left: 139px;
-  width: 170px;
-  height: 93px;
-  display: flex;
-  position: absolute;
-  align-items: flex-start;
-  flex-shrink: 1;
-}
-.aboutus-writing1 {
-  top: 33.21452713012695px;
-  left: 85px;
-  width: 85px;
-  height: 28px;
-  position: absolute;
-}
-.aboutus-armimo-logo21 {
-  top: 0px;
-  left: 0px;
-  width: 85px;
-  height: 93px;
-  position: absolute;
-}
-.aboutus-text09 {
-  top: 120px;
-  left: 658px;
-  color: rgba(4, 61, 3, 1);
-  height: auto;
-  position: absolute;
-  font-size: 110px;
-  font-style: Medium;
-  text-align: center;
-  font-family: Megrim;
-  font-weight: 500;
-  line-height: 137.5%;
-  font-stretch: normal;
-  text-decoration: none;
-}
-.aboutus-text10 {
-  font-weight: 500;
-}
-.aboutus-text11 {
-  color: rgba(4, 61, 3, 1);
-}
-.aboutus-text12 {
   color: rgba(245, 177, 60, 1);
+  padding-top: 5%;
 }
-.aboutus-text13 {
-  top: 967px;
-  left: 811px;
-  color: rgba(4, 61, 3, 1);
-  height: auto;
-  position: absolute;
-  font-size: 35px;
-  font-style: Medium;
-  text-align: center;
-  font-family: Megrim;
-  font-weight: 500;
-  line-height: 137.5%;
-  font-stretch: normal;
-  text-decoration: none;
-}
-.aboutus-centerline {
-  top: 271px;
-  left: 853px;
-  width: 52px;
-  height: 1px;
-  position: absolute;
-}
-.aboutus-leftline {
-  top: 588px;
-  left: 387px;
-  width: 323px;
-  height: 1px;
-  position: absolute;
-}
-.aboutus-lineabove {
-  top: 586px;
-  left: 615px;
-  width: 228px;
-  height: 1px;
-  position: absolute;
-}
-.aboutus-text15 {
-  top: 629px;
-  left: 440px;
-  color: rgba(0, 0, 0, 1);
-  width: 848px;
-  height: auto;
-  position: absolute;
-  font-size: 40px;
-  font-style: Regular;
-  text-align: left;
-  font-family: Linden Hill;
-  font-weight: 400;
-  line-height: 137.5%;
-  font-stretch: normal;
-  text-decoration: none;
-}
-.aboutus-fade {
-  top: -2px;
-  left: 1134.3013916015625px;
-  width: 251px;
-  height: 1080px;
-  position: absolute;
-}
-.aboutus-roadimage {
-  top: -0.886993408203125px;
-  left: 1380.0218505859375px;
-  width: 556px;
-  height: 1080px;
-  position: absolute;
-  border-radius: 0 90px 90px 0;
-}
-.aboutus-settingline {
-  top: 495.24267578125px;
-  left: 1237px;
-  width: 155px;
-  height: 140.2089385986328px;
-  display: flex;
-  position: absolute;
-  align-items: flex-start;
-  flex-shrink: 0;
-}
-.aboutus-subtract {
-  top: -0.49419069290161133px;
-  left: 13.01024055480957px;
-  width: 129px;
-  height: 117px;
-  position: absolute;
-}
-.aboutus-settingbutton {
-  top: 471px;
-  left: 1226.51953125px;
-  width: 156px;
-  height: 140.22747802734375px;
-  display: flex;
-  position: absolute;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) ;
-  align-items: flex-start;
-  flex-shrink: 0;
-}
-.aboutus-subtract1 {
-  top: 11.685626983642578px;
-  left: 12.968292236328125px;
-  width: 130px;
-  height: 117px;
-  position: absolute;
-}
-.aboutus-aboutus1 {
-  width: 100%;
-  height: 1080px;
-  display: flex;
-  overflow: hidden;
-  position: relative;
-  align-items: flex-start;
-  flex-shrink: 0;
-  border-radius: 80px;
-  background-color: rgba(255, 255, 255, 1);
-}
-.aboutus-text26 {
-  top: 560px;
-  left: 661px;
-  color: rgba(245, 177, 60, 1);
-  height: auto;
-  position: absolute;
-  font-size: 40px;
-  font-style: Regular;
-  text-align: center;
-  font-family: Linden Hill;
-  font-weight: 400;
-  line-height: 137.5%;
-  font-stretch: normal;
-  text-decoration: none;
-}
-.aboutus-text28 {
-  top: 323px;
-  left: 615px;
-  color: rgba(56, 101, 38, 1);
-  width: 471px;
-  height: auto;
-  position: absolute;
-  font-size: 40px;
-  font-style: Regular;
-  text-align: center;
-  font-family: Linden Hill;
-  font-weight: 400;
-  line-height: 137.5%;
-  font-stretch: normal;
-  text-decoration: none;
-}
-.aboutus-text30 {
-  top: 415px;
-  left: 458px;
-  color: rgba(0, 0, 0, 1);
-  height: auto;
-  position: absolute;
-  font-size: 30px;
-  font-style: Regular;
-  text-align: left;
-  font-family: Linden Hill;
-  font-weight: 400;
-  line-height: 137.5%;
-  font-stretch: normal;
-  text-decoration: none;
-}
-.aboutus-logo1 {
-  top: 61px;
-  left: 139px;
-  width: 170px;
-  height: 93px;
-  display: flex;
-  position: absolute;
-  align-items: flex-start;
-  flex-shrink: 1;
-}
-.aboutus-writing11 {
-  top: 33.21452713012695px;
-  left: 85px;
-  width: 85px;
-  height: 28px;
-  position: absolute;
-}
-.aboutus-armimo-logo211 {
-  top: 0px;
-  left: 0px;
-  width: 85px;
-  height: 93px;
-  position: absolute;
-}
-.aboutus-text35 {
-  top: 120px;
-  left: 658px;
-  color: rgba(4, 61, 3, 1);
-  height: auto;
-  position: absolute;
-  font-size: 110px;
-  font-style: Medium;
-  text-align: center;
-  font-family: Megrim;
-  font-weight: 500;
-  line-height: 137.5%;
-  font-stretch: normal;
-  text-decoration: none;
-}
-.aboutus-text36 {
-  font-weight: 500;
-}
-.aboutus-text37 {
-  color: rgba(4, 61, 3, 1);
-}
-.aboutus-text38 {
-  color: rgba(245, 177, 60, 1);
-}
-.aboutus-text39 {
-  top: 967px;
-  left: 811px;
-  color: rgba(4, 61, 3, 1);
-  height: auto;
-  position: absolute;
-  font-size: 35px;
-  font-style: Medium;
-  text-align: center;
-  font-family: Megrim;
-  font-weight: 500;
-  line-height: 137.5%;
-  font-stretch: normal;
-  text-decoration: none;
-}
-.aboutus-centerline1 {
-  top: 271px;
-  left: 853px;
-  width: 52px;
-  height: 1px;
-  position: absolute;
-}
-.aboutus-leftline1 {
-  top: 588px;
-  left: 387px;
-  width: 323px;
-  height: 1px;
-  position: absolute;
-}
-.aboutus-lineabove1 {
-  top: 586px;
-  left: 615px;
-  width: 228px;
-  height: 1px;
-  position: absolute;
-}
-.aboutus-text41 {
-  top: 629px;
-  left: 440px;
-  color: rgba(0, 0, 0, 1);
-  width: 848px;
-  height: auto;
-  position: absolute;
-  font-size: 40px;
-  font-style: Regular;
-  text-align: left;
-  font-family: Linden Hill;
-  font-weight: 400;
-  line-height: 137.5%;
-  font-stretch: normal;
-  text-decoration: none;
-}
-.aboutus-fade1 {
-  top: -2px;
-  left: 1134.3013916015625px;
-  width: 251px;
-  height: 1080px;
-  position: absolute;
-}
-.aboutus-roadimage1 {
-  top: -0.886993408203125px;
-  left: 1380.0218505859375px;
-  width: 556px;
-  height: 1080px;
-  position: absolute;
-  border-radius: 0 90px 90px 0;
-}
-.aboutus-settingline1 {
-  top: 495.24267578125px;
-  left: 1237px;
-  width: 155px;
-  height: 140.2089385986328px;
-  display: flex;
-  position: absolute;
-  align-items: flex-start;
-  flex-shrink: 0;
-}
-.aboutus-subtract2 {
-  top: -0.49419069290161133px;
-  left: 13.01024055480957px;
-  width: 129px;
-  height: 117px;
-  position: absolute;
-}
-.aboutus-settingbutton1 {
-  top: 471px;
-  left: 1226.51953125px;
-  width: 156px;
-  height: 140.22747802734375px;
-  display: flex;
-  position: absolute;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) ;
-  align-items: flex-start;
-  flex-shrink: 0;
-}
-.aboutus-subtract3 {
-  top: 11.685626983642578px;
-  left: 12.968292236328125px;
-  width: 130px;
-  height: 117px;
-  position: absolute;
+.text2 {
+  padding-top: 3%;
+  font-family: linden hill;
+  font-size: 200%;
+  text-align: justify;
 }

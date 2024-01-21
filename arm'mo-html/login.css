@@ -54,7 +54,7 @@ body {
   width: 30%;
   display: flex;
   gap: 6%;
-  margin-left: 10%;
+  margin-left: 8%;
 }
 .loginText > * {
   font-size: 300%;
@@ -85,6 +85,9 @@ body {
   height: 15%;
   width: 100%;
   gap: 0;
+}
+.email:hover {
+  box-shadow: 0 0 10px black;
 }
 .email > input {
   padding: 5%;
@@ -117,6 +120,9 @@ body {
   height: 15%;
   width: 100%;
   gap: 0;
+}
+.password:hover {
+  box-shadow: 0 0 10px black;
 }
 .password > input {
   padding: 5%;
@@ -153,28 +159,34 @@ body {
 } */
 /* ------button---- */
 .button {
-  margin-left: 17%;
+  margin-left: 15%;
   margin-top: 3%;
-  width: 70%;
-  height: 15%;
+  width: 75%;
+  height: 20%;
   border: none;
   color: rgba(253, 204, 121, 1);
   background-color: rgba(1, 65, 0, 1);
   border-radius: 5px;
-  font-size: 140%;
+  font-size: 120%;
   font-family: inter;
+}
+.button:active {
+  box-shadow: 0 0 10px black;
 }
 /* -------no acc or forgot pwd---- */
 .text1 {
   display: flex;
   flex-direction: row;
-  gap: 4%;
-  padding-left: 60%;
+  gap: 3%;
+  padding-left: 50%;
   width: 100%;
 }
 .text1 a {
   text-decoration: none;
   color: rgb(108, 106, 106);
+}
+.text1 a:hover {
+  text-shadow: 0 0 1px rgb(24, 72, 35);
 }
 .text2 {
   padding-left: 17%;
@@ -187,9 +199,6 @@ body {
   text-decoration: none;
   color: rgb(108, 106, 106);
 }
-@media (min-width: 1200px) {
-  .whole {
-    height: 100vh;
-    width: 100vw;
-  }
+.text2 a:hover {
+  text-shadow: 0 0 1px black;
 }

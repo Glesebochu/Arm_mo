@@ -1,0 +1,111 @@
+
+html {
+	font-size:62.5%;
+}
+* {
+	margin: 0;
+	padding: 0;
+}
+ul, li {
+	list-style: none;
+}
+input {
+	border: none;
+}
+body {
+  width: 162.6rem;
+}.frame-2-YrP {
+  box-sizing: border-box;
+  padding: 19rem 58.8rem 34.6rem 51.7rem;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+}
+.frame-2-YrP .auto-group-cs6x-TyM {
+  margin-bottom: 3.6rem;
+  width: 100%;
+  height: 6rem;
+  position: relative;
+  flex-shrink: 0;
+}
+.frame-2-YrP .auto-group-cs6x-TyM .expanddown-1EB {
+  width: 1.5rem;
+  height: 0.75rem;
+  position: absolute;
+  left: 46.75rem;
+  top: 2.825rem;
+  object-fit: contain;
+  vertical-align: top;
+}
+.frame-2-YrP .auto-group-cs6x-TyM .expanddown-LXM {
+  width: 1.5rem;
+  height: 0.75rem;
+  position: absolute;
+  left: 45.75rem;
+  top: 2.025rem;
+  object-fit: contain;
+  vertical-align: top;
+}
+.frame-2-YrP .auto-group-cs6x-TyM .level-box-4iF {
+  width: 52.1rem;
+  height: 6rem;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: #d9d9d9;
+}
+.frame-2-YrP .auto-group-cs6x-TyM .expanddown-17h {
+  width: 1.5rem;
+  height: 0.75rem;
+  position: absolute;
+  left: 47.75rem;
+  top: 2.225rem;
+  object-fit: contain;
+  vertical-align: top;
+}
+.frame-2-YrP .auto-group-cs6x-TyM .how-would-you-rate-your-skill-level-L9y {
+  width: 41.1rem;
+  height: 4.2rem;
+  position: absolute;
+  left: 1rem;
+  top: 1.5rem;
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 400;
+  line-height: 1.375;
+  color: #000000;
+  font-family: Linden Hill, 'Source Sans Pro';
+  white-space: nowrap;
+}
+.frame-2-YrP .auto-group-7xaf-cdH {
+  box-sizing: border-box;
+  padding: 0.8rem 2.85rem 1rem 1rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background-color: #d9d9d9;
+  flex-shrink: 0;
+}
+.frame-2-YrP .auto-group-7xaf-cdH .what-challenges-have-you-been-facing-8bd {
+  margin-right: 3.55rem;
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 400;
+  line-height: 1.375;
+  color: #000000;
+  font-family: Linden Hill, 'Source Sans Pro';
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.frame-2-YrP .auto-group-7xaf-cdH .expanddown-ScK {
+  margin-bottom: 0.4rem;
+  width: 1.5rem;
+  height: 0.75rem;
+  object-fit: contain;
+  vertical-align: top;
+  flex-shrink: 0;
+}

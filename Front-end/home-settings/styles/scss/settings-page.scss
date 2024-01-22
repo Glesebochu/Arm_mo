@@ -1,0 +1,203 @@
+
+html {
+	font-size:62.5%;
+}
+* {
+	margin: 0;
+	padding: 0;
+}
+ul, li {
+	list-style: none;
+}
+input {
+	border: none;
+}
+body {
+  width: 364rem;
+}.settings-page-w2T {
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  padding: 0rem 5.2rem 0rem 0.3rem;
+  width: 100%;
+
+  .side-menu-fDM {
+    padding: 1.842rem 0rem 119.3rem 1.917rem;
+    width: 100.5rem;
+    background-color: rgba(217, 217, 217, 0.400000006);
+    flex-shrink: 0;
+    box-sizing: border-box;
+
+    .auto-group-anzq-yzj {
+      margin-bottom: 12.9415rem;
+      width: 100%;
+      display: flex;
+      align-items: center;
+
+      .healthicons-ui-user-profile-LKV {
+        height: 12.4168rem;
+        object-fit: contain;
+        vertical-align: top;
+        flex-shrink: 0;
+        margin-right: 75.25rem;
+        width: 12.1667rem;
+      }
+      .vector-4WP {
+        margin-top: 0.0577rem;
+        width: 11.1765rem;
+        height: 7.3579rem;
+        object-fit: contain;
+        vertical-align: top;
+        flex-shrink: 0;
+      }
+    }
+    .account-details-zuq {
+      width: calc(100% - 48.6664rem);
+      height: 15.8rem;
+      display: flex;
+      align-items: center;
+      margin: 0rem 48.15rem 9.4rem 0.516rem;
+      box-sizing: border-box;
+      padding-left: 1.233rem;
+
+      .mdi-account-cog-6hy {
+        flex-shrink: 0;
+        margin: 1.336rem 4.524rem 0rem 0rem;
+        width: 12.8605rem;
+        height: 11.834rem;
+        object-fit: contain;
+        vertical-align: top;
+      }
+      .account-bPq {
+        margin-bottom: 3.4rem;
+        font-weight: 400;
+        font-family: Mako, 'Source Sans Pro';
+        white-space: nowrap;
+        flex-shrink: 0;
+        text-align: center;
+        font-size: 9rem;
+        line-height: 1.375;
+        color: #000000;
+      }
+    }
+    .theme-5K1 {
+      display: flex;
+      align-items: center;
+      margin: 0rem 33.45rem 10.7rem 1.783rem;
+      box-sizing: border-box;
+      padding-left: 1rem;
+      width: calc(100% - 35.2333rem);
+      height: 15.2rem;
+
+      .fluent-dark-theme-24-regular-P4o {
+        object-fit: contain;
+        vertical-align: top;
+        flex-shrink: 0;
+        margin: 4.1rem 6.45rem 0rem 0rem;
+        width: 10rem;
+        height: 9.25rem;
+      }
+      .appearance-6E7 {
+        margin-bottom: 2.8rem;
+        line-height: 1.375;
+        flex-shrink: 0;
+        font-family: Mako, 'Source Sans Pro';
+        white-space: nowrap;
+        text-align: center;
+        font-size: 9rem;
+        font-weight: 400;
+        color: #000000;
+      }
+    }
+    .auto-group-sto5-Cnw {
+      margin-left: 2.2833rem;
+      width: calc(100% - 2.2833rem);
+      display: flex;
+      align-items: flex-end;
+
+      .sound-and-music-YM1 {
+        margin: 0rem 289.55rem 2rem 0rem;
+        width: 64.15rem;
+        height: 13.1rem;
+        position: relative;
+        flex-shrink: 0;
+
+        .sound-controls-G27 {
+          height: 12.4rem;
+          position: absolute;
+          left: 4.65rem;
+          line-height: 1.375;
+          font-family: Mako, 'Source Sans Pro';
+          white-space: nowrap;
+          width: 59.5rem;
+          top: 0;
+          text-align: center;
+          font-size: 9rem;
+          font-weight: 400;
+          color: #000000;
+        }
+        .lets-icons-sound-max-fill-mDm {
+          object-fit: contain;
+          vertical-align: top;
+          width: 8.5436rem;
+          height: 6.8797rem;
+          position: absolute;
+          left: 1.7816rem;
+          top: 4.2103rem;
+        }
+      }
+      .mdi-hamburger-open-UP5 {
+        flex-shrink: 0;
+        width: 2.4rem;
+        height: 2.4rem;
+        overflow: hidden;
+        position: relative;
+      }
+    }
+  }
+  .settingscontent-C4B {
+    margin-top: 0.6rem;
+    width: 258rem;
+    height: 220.5rem;
+    position: relative;
+    flex-shrink: 0;
+
+    .rectangle-2-Y83 {
+      top: 0;
+      background-color: #ffffff;
+      width: 258rem;
+      height: 220.5rem;
+      position: absolute;
+      left: 0;
+    }
+    .logo-57y {
+      width: 42.5rem;
+      height: 20.3rem;
+      position: absolute;
+      left: 215.5rem;
+      top: 6.3rem;
+
+      .writing-1-opf {
+        object-fit: cover;
+        vertical-align: top;
+        width: 21.25rem;
+        height: 6.09rem;
+        position: absolute;
+        left: 21.25rem;
+        top: 7.2501rem;
+      }
+      .armimo-logo-2-1-LJo {
+        height: 20.3rem;
+        position: absolute;
+        left: 0;
+        top: 0;
+        object-fit: cover;
+        vertical-align: top;
+        width: 21.25rem;
+      }
+    }
+  }
+}

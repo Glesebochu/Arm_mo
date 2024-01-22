@@ -1,0 +1,206 @@
+
+html {
+	font-size:20.5%;
+}
+* {
+	margin: 0;
+	padding: 0;
+}
+ul, li {
+	list-style: none;
+}
+input {
+	border: none;
+}
+body {
+  width: 100%;
+}.settings-page-w2T {
+  box-sizing: border-box;
+  padding: 0rem 5.2rem 0rem 0.3rem;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  background-color: #ffffff;
+}
+.settings-page-w2T .side-menu-fDM {
+  box-sizing: border-box;
+  padding: 1.842rem 0rem 119.3rem 1.917rem;
+  position: relative;
+  width: 100.5rem;
+  background-color: rgba(217, 217, 217, 0.400000006);
+  flex-shrink: 0;
+}
+.settings-page-w2T .side-menu-fDM .auto-group-anzq-yzj {
+  margin-bottom: 12.9415rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.settings-page-w2T .side-menu-fDM .auto-group-anzq-yzj .healthicons-ui-user-profile-LKV {
+  margin-right: 75.25rem;
+  width: 12.1667rem;
+  height: 12.4168rem;
+  object-fit: contain;
+  vertical-align: top;
+  flex-shrink: 0;
+}
+.settings-page-w2T .side-menu-fDM .auto-group-anzq-yzj .vector-4WP {
+  margin-top: 0.0577rem;
+  width: 11.1765rem;
+  height: 7.3579rem;
+  object-fit: contain;
+  vertical-align: top;
+  flex-shrink: 0;
+}
+.settings-page-w2T .side-menu-fDM .account-details-zuq {
+  margin: 0rem 48.15rem 9.4rem 0.516rem;
+  box-sizing: border-box;
+  padding-left: 1.233rem;
+  width: calc(100% - 48.6664rem);
+  height: 15.8rem;
+  display: flex;
+  align-items: center;
+}
+.settings-page-w2T .side-menu-fDM .account-details-zuq .mdi-account-cog-6hy {
+  margin: 1.336rem 4.524rem 0rem 0rem;
+  width: 12.8605rem;
+  height: 11.834rem;
+  object-fit: contain;
+  vertical-align: top;
+  flex-shrink: 0;
+}
+.settings-page-w2T .side-menu-fDM .account-details-zuq .account-bPq {
+  margin-bottom: 3.4rem;
+  text-align: center;
+  font-size: 9rem;
+  font-weight: 400;
+  line-height: 1.375;
+  color: #000000;
+  font-family: Mako, 'Source Sans Pro';
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.settings-page-w2T .side-menu-fDM .theme-5K1 {
+  margin: 0rem 33.45rem 10.7rem 1.783rem;
+  box-sizing: border-box;
+  padding-left: 1rem;
+  width: calc(100% - 35.2333rem);
+  height: 15.2rem;
+  display: flex;
+  align-items: center;
+}
+.settings-page-w2T .side-menu-fDM .theme-5K1 .fluent-dark-theme-24-regular-P4o {
+  margin: 4.1rem 6.45rem 0rem 0rem;
+  width: 10rem;
+  height: 9.25rem;
+  object-fit: contain;
+  vertical-align: top;
+  flex-shrink: 0;
+}
+.settings-page-w2T .side-menu-fDM .theme-5K1 .appearance-6E7 {
+  margin-bottom: 2.8rem;
+  text-align: center;
+  font-size: 9rem;
+  font-weight: 400;
+  line-height: 1.375;
+  color: #000000;
+  font-family: Mako, 'Source Sans Pro';
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.settings-page-w2T .side-menu-fDM .auto-group-sto5-Cnw {
+  margin-left: 2.2833rem;
+  width: calc(100% - 2.2833rem);
+  display: flex;
+  align-items: flex-end;
+}
+.settings-page-w2T .side-menu-fDM .auto-group-sto5-Cnw .sound-and-music-YM1 {
+  margin: 0rem 289.55rem 2rem 0rem;
+  width: 64.15rem;
+  height: 13.1rem;
+  position: relative;
+  flex-shrink: 0;
+}
+.settings-page-w2T .side-menu-fDM .auto-group-sto5-Cnw .sound-and-music-YM1 .sound-controls-G27 {
+  width: 59.5rem;
+  height: 12.4rem;
+  position: absolute;
+  left: 15.65rem;
+  top: 0;
+  text-align: center;
+  font-size: 9rem;
+  font-weight: 400;
+  line-height: 1.375;
+  color: #000000;
+  font-family: Mako, 'Source Sans Pro';
+  white-space: nowrap;
+}
+.settings-page-w2T .side-menu-fDM .auto-group-sto5-Cnw .sound-and-music-YM1 .lets-icons-sound-max-fill-mDm {
+  width: 8.5436rem;
+  height: 6.8797rem;
+  position: absolute;
+  left: 1.7816rem;
+  top: 4.2103rem;
+  object-fit: contain;
+  vertical-align: top;
+}
+.settings-page-w2T .side-menu-fDM .auto-group-sto5-Cnw .mdi-hamburger-open-UP5 {
+  width: 2.4rem;
+  height: 2.4rem;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+}
+.settings-page-w2T .settingscontent-C4B {
+  margin-top: 0.6rem;
+  width: 258rem;
+  height: 220.5rem;
+  position: relative;
+  flex-shrink: 0;
+}
+.settings-page-w2T .settingscontent-C4B .rectangle-2-Y83 {
+  width: 258rem;
+  height: 220.5rem;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: #ffffff;
+}
+.settings-page-w2T .settingscontent-C4B .logo-57y {
+  width: 42.5rem;
+  height: 20.3rem;
+  position: absolute;
+  left: 215.5rem;
+  top: 6.3rem;
+}
+.settings-page-w2T .settingscontent-C4B .logo-57y .writing-1-opf {
+  width: 21.25rem;
+  height: 6.09rem;
+  position: absolute;
+  left: 60.25rem;
+  top: 7.2501rem;
+  object-fit: cover;
+  vertical-align: top;
+}
+.settings-page-w2T .settingscontent-C4B .logo-57y .armimo-logo-2-1-LJo {
+  width: 21.25rem;
+  height: 20.3rem;
+  position: absolute;
+  left: 40rem;
+  top: 0;
+  object-fit: cover;
+  vertical-align: top;
+}
+
+.vector-4WP:hover{
+  transform: translateY(-3px);
+}
+
+.armimo-logo-2-1-LJo:hover{
+  transform: scale(1.1);
+}
+
+
+

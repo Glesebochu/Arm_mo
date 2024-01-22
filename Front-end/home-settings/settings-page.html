@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <title>Settings Page</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mako%3A400"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro%3A400"/>
+  <link rel="stylesheet" href="./styles/settings-page.css"/>
+  <script>
+    function hideMenuBar(className){
+      var elem=window.document.getElementsByClassName(className);
+      if(elem[0].style.left!='-291px'){
+        elem[0].style.left='-291px';
+        elem[0].style.backgroundColor='white';
+      }
+      else{
+        elem[0].style.backgroundColor='#f0f0f0';
+        elem[0].style.left='0px';
+      }
+      
+    }
+    function navigateToHome(link){
+      window.open(link,'_self')
+    }
+  </script>
+</head>
+<body>
+<div class="settings-page-w2T">
+  <div class="side-menu-fDM">
+    <div class="auto-group-anzq-yzj">
+      <img class="healthicons-ui-user-profile-LKV" src="./assets/healthicons-ui-user-profile-YyH.png"/>
+      <img class="vector-4WP" onclick="hideMenuBar('side-menu-fDM')" src="./assets/vector-RtP.png"/>
+    </div>
+    <div class="account-details-zuq">
+      <img class="mdi-account-cog-6hy" src="./assets/mdi-account-cog.png"/>
+      <p class="account-bPq">Account</p>
+    </div>
+    <div class="theme-5K1">
+      <img class="fluent-dark-theme-24-regular-P4o" src="./assets/fluent-dark-theme-24-regular.png"/>
+      <p class="appearance-6E7">Appearance</p>
+    </div>
+    <div class="auto-group-sto5-Cnw">
+      <div class="sound-and-music-YM1">
+        <p class="sound-controls-G27">           Sound Controls</p>
+        <img class="lets-icons-sound-max-fill-mDm" src="./assets/lets-icons-sound-max-fill.png"/>
+      </div>
+      <div class="mdi-hamburger-open-UP5">
+      </div>
+    </div>
+  </div>
+  <div class="settingscontent-C4B">
+    <div class="rectangle-2-Y83">
+    </div>
+    <div class="logo-57y">
+      <img class="writing-1-opf" src="./assets/writing-1-Qcb.png"/>
+      <img class="armimo-logo-2-1-LJo" onclick="navigateToHome('./home-page.html')" src="./assets/armimo-logo-2-1-mPH.png"/>
+    </div>
+  </div>
+</div>
+</body>

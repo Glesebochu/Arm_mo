@@ -30,7 +30,8 @@ body {
   position: relative;
   width: 85.5rem;
   font-size: 10%;
-  background-color: rgba(217, 217, 217, 0.400000006);
+  /* background-color: rgb(217, 217, 217); */
+
   flex-shrink: 0;
 }
 .settings-page-w2T .side-menu-fDM .auto-group-anzq-yzj {
@@ -208,9 +209,15 @@ body {
 }
 
 /* Account details hover */
-#sideMenuButtons:hover{
+.sideMenuButtons:hover{
   transform: scale(1.06);
   transition: transform 1s;
+}
+.activeTab{
+  background-color: #f9f9f9;
+}
+.activeTab img{
+  filter: invert(48%) sepia(60%) saturate(222222222222%) hue-rotate(130deg) brightness(95%) contrast(80%);
 }
 .account-details-zuq img{
   transform: scale(0.7);
@@ -228,8 +235,8 @@ body {
   top:3px;
 }
 
-#sideMenuButtons p{
-  font-size:large;
+.sideMenuButtons p{
+  font-size:large !important;
 }
 #contentDiv iframe{
   width: 100%;

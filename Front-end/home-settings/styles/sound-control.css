@@ -1,6 +1,6 @@
 
 html {
-	font-size:62.5%;
+	font-size:30.5%;
 }
 * {
 	margin: 0;
@@ -46,6 +46,8 @@ body {
   font-family: Mako, 'Source Sans Pro';
   white-space: nowrap;
   flex-shrink: 0;
+  position: relative;
+  left: 10px;
 }
 .sound-control-h7H .nature-sounds-29Z .auto-group-7abm-ewd {
   width: 100%;
@@ -145,6 +147,8 @@ body {
   font-family: Mako, 'Source Sans Pro';
   white-space: nowrap;
   flex-shrink: 0;
+  position:relative;
+  left:-135px;
 }
 .sound-control-h7H .narration-vgB .auto-group-p7uo-mwh {
   margin-left: 0.4rem;

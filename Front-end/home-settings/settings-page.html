@@ -14,10 +14,10 @@
       var elem=window.document.getElementsByClassName(className);
       if(elem[0].style.left!='-200px'){
         elem[0].style.left='-200px';
-        elem[0].style.backgroundColor='white';
+        // elem[0].style.backgroundColor='white';
       }
       else{
-        elem[0].style.backgroundColor='#f0f0f0';
+        // elem[0].style.backgroundColor='#f0f0f0';
         elem[0].style.left='0px';
       }
       
@@ -30,6 +30,23 @@
       var contentDiv = document.getElementById('contentDiv');
       contentDiv.innerHTML='<iframe src="' + link + '"></iframe>';
     }
+
+    
+  </script>
+
+  <script>
+    var tabs = document.getElementsByClassName("sideMenuButtons");
+    
+    function activeTab(tabClicked){
+      for(tab of tabs){
+        tab.classList.remove('activeTab');
+      }
+      var tabClick= document.getElementsByClassName(tabClicked);
+      for(tab of tabClick){
+        tab.classList.add('activeTab')
+      }
+      
+    }
   </script>
 </head>
 <body>
@@ -39,16 +56,16 @@
       <img class="healthicons-ui-user-profile-LKV" src="./assets/healthicons-ui-user-profile-YyH.png"/>
       <img class="vector-4WP" onclick="hideMenuBar('side-menu-fDM')" src="./assets/vector-RtP.png"/>
     </div>
-    <div class="account-details-zuq" id="sideMenuButtons" onclick="openSideMenu('./account-panel-.html')">
+    <div class="account-details-zuq sideMenuButtons" onclick="openSideMenu('./account-panel-.html');activeTab('account-details-zuq')">
       <img class="mdi-account-cog-6hy" src="./assets/mdi-account-cog.png"/>
       <p class="account-bPq">Account</p>
     </div>
-    <div class="theme-5K1" id="sideMenuButtons" onclick="openSideMenu('./theme.html')">
+    <div class="theme-5K1 sideMenuButtons" onclick="openSideMenu('./theme.html');activeTab('theme-5K1')">
       <img class="fluent-dark-theme-24-regular-P4o" src="./assets/fluent-dark-theme-24-regular.png"/>
       <p class="appearance-6E7">Appearance</p>
     </div>
-    <div class="auto-group-sto5-Cnw" id="sideMenuButtons" onclick="openSideMenu('./sound-control.html')">
-      <div class="sound-and-music-YM1">
+    <div class="auto-group-sto5-Cnw sideMenuButtons" onclick="openSideMenu('./sound-control.html');activeTab('auto-group-sto5-Cnw')" on>
+      <div class="sound-and-music-YM1" >
         <p class="sound-controls-G27">Sound Controls</p>
         <img class="lets-icons-sound-max-fill-mDm" src="./assets/lets-icons-sound-max-fill.png"/>
       </div>

@@ -1,5 +1,4 @@
 * {
-  /* font-family: Linden Hill; */
   box-sizing: border-box;
 }
 html {
@@ -14,7 +13,7 @@ body {
   height: 100%;
   width: 100%;
 }
-/* ------The website content withoutn the logo------ */
+/* ------The website content without the logo------ */
 .whole {
   height: 100%;
   width: 100%;
@@ -37,7 +36,7 @@ body {
   height: 20%;
   margin-top: 25%;
 }
-/* -----The central region------ */
+/* -----The central div------ */
 .center {
   align-items: center;
   margin-top: 5%;
@@ -49,7 +48,7 @@ body {
   width: 70%;
   box-sizing: border-box;
 }
-/* -------The big login text---- */
+/* -------The big sign up text---- */
 .signupText {
   flex: 0.3;
   display: flex;
@@ -68,7 +67,7 @@ body {
 .signupText2 {
   color: rgba(245, 177, 60, 1);
 }
-/* ------The whole text box area */
+/* ----The whole text box area-- */
 .textBox {
   flex: 2;
   width: 60%;
@@ -80,6 +79,7 @@ body {
 .textBox > * {
   box-sizing: border-box;
 }
+/* ----email div that has the input & logo div---- */
 .email {
   flex: 1;
   display: flex;
@@ -103,6 +103,7 @@ body {
   font-size: 150%;
   font-weight: 700;
 }
+/* --email icon div--- */
 .emailIconWhole {
   padding-top: 4%;
   padding-left: 2.2%;
@@ -113,7 +114,7 @@ body {
 .emailIconWhole > * {
   font-size: 120%;
 }
-/* ---pwd text box--- */
+/* ---pwd div--- */
 .password {
   flex: 1;
   display: flex;
@@ -146,7 +147,7 @@ body {
 .pwdIconWhole > * {
   font-size: 120%;
 }
-/* ---confirm pwd text box---- */
+/* ---confirm pwd div---- */
 .confirmPwd {
   flex: 1;
   display: flex;
@@ -177,7 +178,7 @@ body {
   background-color: rgb(216, 211, 211);
 }
 .cpwdIconWhole > * {
-  font-size:120%;
+  font-size: 120%;
 }
 /* ----Firstname text box---- */
 .fnameInput {
@@ -213,6 +214,7 @@ body {
   font-size: 150%;
   font-weight: 700;
 }
+/* -singn up button--- */
 .button {
   flex: 0.8;
   margin-left: 10%;
@@ -227,6 +229,7 @@ body {
 .button:active {
   box-shadow: 0 0 10px black;
 }
+/* ---date div that has the date of birth label & date input-- */
 .date {
   flex: 1.1;
   display: flex;
@@ -239,6 +242,7 @@ body {
   font-family: inter;
   color: rgb(75, 74, 74);
 }
+/* ---date input style--- */
 .datePicker {
   color: rgb(57, 55, 55);
   border-radius: 15%;
@@ -247,6 +251,7 @@ body {
 .datePicker:hover {
   text-shadow: 0 0 10px black;
 }
+/* --already have an acount link style-- */
 .haveAcc {
   flex: 1;
   padding-left: 35%;
@@ -257,6 +262,7 @@ body {
 .haveAcc:hover {
   text-shadow: 0 0 1px black;
 }
+/* --semd rexommendation link style--- */
 .recom {
   flex: 1;
   display: flex;
@@ -270,6 +276,6 @@ body {
 .recom a:hover {
   text-shadow: 0 0 1px black;
 }
-.fa-bell{
+.fa-bell {
   font-size: 150%;
 }

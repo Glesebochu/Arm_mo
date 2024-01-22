@@ -66,6 +66,7 @@
         data-tag="font" />
     <link rel="stylesheet" href="https://unpkg.com/@teleporthq/teleport-custom-scripts/dist/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 
 <body>
@@ -94,7 +95,7 @@
                     </div>
                     <input type="password" class="pwdInput" placeholder="Password">
                     <div class="pwdIconWhole">
-                        <i class="fas fa-eye"></i>
+                        <i class="eye one fas fa-eye-slash"></i>
                     </div>
                 </div>
                 <div class="confirmPwd">
@@ -103,7 +104,7 @@
                     </div>
                     <input type="password" class="cpwdInput" placeholder="Confirm Password">
                     <div class="pwdIconWhole">
-                        <i class="fas fa-eye"></i>
+                        <i class="eye two fas fa-eye-slash"></i>
                     </div>
                 </div>
                 <div class="date">
@@ -119,6 +120,20 @@
             </div>
         </div>
     </div>
+    <script>
+        $('.eye.one').on('click', function () {
+            $('.pwdInput').attr('type', function (index, attr) {
+                return attr === 'password' ? 'text' : 'password';
+            });
+            $('.eye.one').toggleClass('fas fa-eye-slash fas fa-eye');
+        })
+        $('.eye.two').on('click', function () {
+            $('.cpwdInput').attr('type', function (index, attr) {
+                return attr === 'password' ? 'text' : 'password';
+            });
+            $('.eye.two').toggleClass('fas fa-eye-slash fas fa-eye');
+        })
+    </script>
 </body>
 
 </html>

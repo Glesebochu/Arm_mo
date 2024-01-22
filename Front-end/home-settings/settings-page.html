@@ -12,8 +12,8 @@
   <script>
     function hideMenuBar(className){
       var elem=window.document.getElementsByClassName(className);
-      if(elem[0].style.left!='-291px'){
-        elem[0].style.left='-291px';
+      if(elem[0].style.left!='-200px'){
+        elem[0].style.left='-200px';
         elem[0].style.backgroundColor='white';
       }
       else{
@@ -25,6 +25,11 @@
     function navigateToHome(link){
       window.open(link,'_self')
     }
+
+    function openSideMenu(link){
+      var contentDiv = document.getElementById('contentDiv');
+      contentDiv.innerHTML='<iframe src="' + link + '"></iframe>';
+    }
   </script>
 </head>
 <body>
@@ -34,25 +39,23 @@
       <img class="healthicons-ui-user-profile-LKV" src="./assets/healthicons-ui-user-profile-YyH.png"/>
       <img class="vector-4WP" onclick="hideMenuBar('side-menu-fDM')" src="./assets/vector-RtP.png"/>
     </div>
-    <div class="account-details-zuq">
+    <div class="account-details-zuq" id="sideMenuButtons" onclick="openSideMenu('./account-panel-.html')">
       <img class="mdi-account-cog-6hy" src="./assets/mdi-account-cog.png"/>
       <p class="account-bPq">Account</p>
     </div>
-    <div class="theme-5K1">
+    <div class="theme-5K1" id="sideMenuButtons" onclick="openSideMenu('./theme.html')">
       <img class="fluent-dark-theme-24-regular-P4o" src="./assets/fluent-dark-theme-24-regular.png"/>
       <p class="appearance-6E7">Appearance</p>
     </div>
-    <div class="auto-group-sto5-Cnw">
+    <div class="auto-group-sto5-Cnw" id="sideMenuButtons" onclick="openSideMenu('./sound-control.html')">
       <div class="sound-and-music-YM1">
-        <p class="sound-controls-G27">           Sound Controls</p>
+        <p class="sound-controls-G27">Sound Controls</p>
         <img class="lets-icons-sound-max-fill-mDm" src="./assets/lets-icons-sound-max-fill.png"/>
-      </div>
-      <div class="mdi-hamburger-open-UP5">
       </div>
     </div>
   </div>
   <div class="settingscontent-C4B">
-    <div class="rectangle-2-Y83">
+    <div class="rectangle-2-Y83" id="contentDiv">
     </div>
     <div class="logo-57y">
       <img class="writing-1-opf" src="./assets/writing-1-Qcb.png"/>

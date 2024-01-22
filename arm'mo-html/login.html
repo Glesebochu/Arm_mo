@@ -5,22 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="aboutus.css">
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Linden+Hill:ital,wght@0,400;1,400&amp;display=swap"
-    data-tag="font" />
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Linden+Hill:ital,wght@0,400;1,400&amp;display=swap"
-    data-tag="font" />
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
-    data-tag="font" />
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
-    data-tag="font" />
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Linden+Hill:ital,wght@0,400;1,400&amp;display=swap"
-    data-tag="font" />
+  <link href="./login.css" rel="stylesheet" />
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
     data-tag="font" />
@@ -65,52 +50,51 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Megrim:wght@400&amp;display=swap"
     data-tag="font" />
   <link rel="stylesheet" href="https://unpkg.com/@teleporthq/teleport-custom-scripts/dist/style.css" />
+  <link rel="stylesheet" href="./style.css" />
+  <link href="./login.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 </head>
+
 <body>
   <div class="whole">
-    <div class="nav">
-      <div class="logo">
-        <img alt="Writing12217" src="public/external/armimologo215810-q1qp-200w.png" class="logoImg" />
-        <img alt="armimoLogo" src="public/external/logoText.png" class="armimoLogoText" />
-     </div> 
-      <a href="login.html"<i class="fas fa-cog"></i></a>
-      <a href="login.html"<i class="fas fa-home"></i></a>
-          </div>
-       
-    <div class="center">
-      <div class="aboutusText">
-        <span class="aboutusText1">A</span>
-        <span class="aboutusText2">bout</span>
-        <span class="aboutusText3">US</span>
-      </div>
-      <img src="public/external/centerline8494-w2dn.svg" alt="Centerline8494" class="centerLine" />
-      <div class="texts">
-        <div class="question1">
-          Who are We ?
-        </div>
-        <div class="text1">
-          Glesebochu is a team of individuals that aim to CREATE the
-          grandest REALITIES through all of our projects.
-        </div>
-        <div class="question2">
-          Our Dream for Arm'mo
-        </div>
-        <div class="text2">
-          We made Arm’mo to aid as a mirror to self, so that a player can
-          see reality as it truly is by practicing the art of being present. 
-          <br><br>Through this window
-           we seek to inspire a higher level of consciousness in the hearts
-          of whomever
-            finds their way to it. It is our wholehearted desire for this
-            game to fuel your
-         journey towards AWAKENING & beyond.
-        </div>
-      </div>
+    <div class="logo">
+      <img alt="Writing12217" src="public/external/armimologo215810-q1qp-200w.png" class="logo" />
+      <img alt="armimoLogo" src="public/external/logoText.png" class="armimoLogoText" />
     </div>
-    <div class="rightMargin">
-      <img src="public/external/fade.jpg" alt="Fade1151" class="fade" />
-      <img src="public/external/road.jpg" alt="Roadimage1151" class="aboutus-roadimage" />
+    <div class="center">
+      <div class="loginText">
+        <span class="loginText1">Log</span>
+        <span class="loginText2">in</span>
+      </div>
+      <div class="textBox">
+        <div class="email">
+          <div class="emailIconWhole">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <input type="email" class="emailInput" placeholder="Email or Player Name">
+        </div>
+        <div class="password">
+          <div class="pwdIconWhole">
+            <i class="fas fa-lock"></i>
+          </div>
+          <input type="password" class="pwdInput" placeholder="Password">
+          <div class="pwdeyeIconWhole">
+            <i class="fas fa-eye"></i>
+          </div>
+        </div>
+        <button class="button">log in</button>
+        <div class="text1">
+          <a href="#">keep me logged in</a>
+          <i class="fas fa-check"></i>
+        </div>
+      </div>
+      <div class="text2">
+        <a href="signup.html">
+          Create an account</a>
+        <a href="#">
+          Forgot password?
+        </a>
+      </div>
     </div>
   </div>
 </body>

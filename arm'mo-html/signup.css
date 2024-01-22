@@ -1,0 +1,282 @@
+* {
+  /* font-family: Linden Hill; */
+  box-sizing: border-box;
+}
+html {
+  padding: 0;
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+}
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+/* ------The website content withoutn the logo------ */
+.whole {
+  height: 100%;
+  width: 100%;
+  margin: 5%;
+  margin-left: 5%;
+  box-sizing: border-box;
+}
+/* -----------logo work-------- */
+.logo {
+  display: flex;
+  flex-direction: row;
+  width: 8%;
+  height: 10%;
+}
+.logo > * {
+  height: 55%;
+  width: 100%;
+}
+.armimoLogoText {
+  height: 20%;
+  margin-top: 25%;
+}
+/* -----The central region------ */
+.center {
+  margin-top: 5%;
+  margin-left: 10%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  width: 70%;
+  box-sizing: border-box;
+}
+/* -------The big login text---- */
+.signupText {
+  height: 10%;
+  width: 30%;
+  display: flex;
+  gap: 6%;
+  margin-left: 5%;
+  box-sizing: border-box;
+}
+.signupText > * {
+  font-size: 300%;
+  font-style: Regular;
+  font-family: Marcellus SC;
+  height: 100%;
+  box-sizing: border-box;
+}
+.signupText1 {
+  color: rgba(0, 0, 0, 1);
+}
+.signupText2 {
+  color: rgba(245, 177, 60, 1);
+}
+/* ------The whole text box area */
+.textBox {
+  height: 60%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 5%;
+  box-sizing: border-box;
+}
+.textBox > * {
+  box-sizing: border-box;
+}
+.email {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  height: 7%;
+  width: 100%;
+  gap: 0;
+}
+.email:hover {
+  box-shadow: 0 0 10px black;
+}
+.email > input {
+  padding: 4%;
+  height: 100%;
+  width: 100%;
+  border: none;
+  box-sizing: border-box;
+  background-color: rgb(216, 211, 211);
+}
+.emailInput::placeholder {
+  color: rgba(2, 66, 0, 0.47999998927116394);
+  font-family: inter;
+  font-size: 120%;
+  position: relative;
+}
+.emailIconWhole {
+  padding-top: 3%;
+  padding-left: 3%;
+  height: 100%;
+  width: 13%;
+  box-sizing: border-box;
+  background-color: rgb(216, 211, 211);
+}
+.emailIconWhole > * {
+  height: 50%;
+  width: 50%;
+  box-sizing: border-box;
+}
+/* ---pwd text box--- */
+.password {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  height: 7%;
+  width: 100%;
+  gap: 0;
+}
+.password:hover {
+  box-shadow: 0 0 10px black;
+}
+.password > input {
+  padding: 5%;
+  height: 100%;
+  width: 77%;
+  border: none;
+  background-color: rgb(216, 211, 211);
+  box-sizing: border-box;
+}
+.pwdInput::placeholder {
+  color: rgba(2, 66, 0, 0.47999998927116394);
+  font-family: inter;
+  font-size: 120%;
+}
+.pwdIconWhole {
+  padding-top: 3%;
+  padding-left: 3%;
+  height: 100%;
+  width: 13%;
+  background-color: rgb(216, 211, 211);
+  box-sizing: border-box;
+}
+.pwdIconWhole > * {
+  height: 50%;
+  width: 50%;
+  box-sizing: border-box;
+}
+/* ---confirm pwd text box---- */
+.confirmPwd {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  height: 7%;
+  width: 100%;
+  gap: 0;
+}
+.confirmPwd:hover {
+  box-shadow: 0 0 10px black;
+}
+.confirmPwd > input {
+  padding: 4%;
+  height: 100%;
+  width: 77%;
+  border: none;
+  background-color: rgb(216, 211, 211);
+  box-sizing: border-box;
+}
+.cpwdInput::placeholder {
+  color: rgba(2, 66, 0, 0.47999998927116394);
+  font-family: inter;
+  font-size: 120%;
+}
+.cpwdIconWhole {
+  padding-top: 3%;
+  padding-left: 3%;
+  height: 100%;
+  width: 13%;
+  background-color: rgb(216, 211, 211);
+  box-sizing: border-box;
+}
+.cpwdIconWhole > * {
+  height: 50%;
+  width: 50%;
+  box-sizing: border-box;
+}
+/* ----Firstname text box---- */
+.fnameInput {
+  padding: 5%;
+  padding-left: 17%;
+  height: 7%;
+  width: 100%;
+  border: none;
+  background-color: rgb(216, 211, 211);
+}
+.fnameInput:hover {
+  box-shadow: 0 0 10px black;
+}
+.fnameInput::placeholder {
+  color: rgba(1, 1, 1, 0.689);
+  font-family: inter;
+  font-size: 120%;
+}
+/* -- */
+.lnameInput {
+  padding: 5%;
+  padding-left: 17%;
+  height: 7%;
+  width: 100%;
+  border: none;
+  background-color: rgb(216, 211, 211);
+}
+.lnameInput:hover {
+  box-shadow: 0 0 10px black;
+}
+.lnameInput::placeholder {
+  color: rgba(1, 1, 1, 0.689);
+  font-family: inter;
+  font-size: 120%;
+}
+.button {
+  margin-left: 6%;
+  /* margin-top: 3%; */
+  width: 90%;
+  height: 8%;
+  border: none;
+  color: rgba(253, 204, 121, 1);
+  background-color: rgba(1, 65, 0, 1);
+  border-radius: 10%;
+  font-size: 140%;
+  font-family: inter;
+}
+.button:active {
+  box-shadow: 0 0 10px black;
+}
+.date {
+  display: flex;
+  flex-direction: column;
+}
+.date > * {
+  font-size: 100%;
+  font-family: inter;
+}
+.datePicker {
+  margin-top: 3%;
+  color: rgb(57, 55, 55);
+  border-radius: 15%;
+  border: solid 1px rgb(158, 158, 158);
+}
+.datePicker:hover {
+  text-shadow: 0 0 10px black;
+}
+.haveAcc {
+  padding-left: 25%;
+  text-decoration: none;
+  color: rgb(92, 91, 91);
+}
+.haveAcc:hover {
+  text-shadow: 0 0 1px black;
+}
+.recom a {
+  text-decoration: none;
+  color: rgb(92, 91, 91);
+}
+.recom a:hover {
+  text-shadow: 0 0 1px black;
+}

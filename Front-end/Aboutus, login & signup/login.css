@@ -44,23 +44,20 @@ body {
   align-items: center;
   flex-direction: column;
   height: 100%;
-  width: 70%;
+  width: 80%;
 }
 /* -------The big login text---- */
 .loginText {
-  margin-bottom: 0;
-  margin-top: 10%;
-  height: 10%;
-  width: 30%;
+  flex: 1;
   display: flex;
+  align-items: center;
   gap: 6%;
-  margin-left: 8%;
+  
 }
 .loginText > * {
-  font-size: 300%;
+  font-size: 500%;
   font-style: Regular;
   font-family: Marcellus SC;
-  height: 100%;
 }
 .loginText1 {
   color: rgba(0, 0, 0, 1);
@@ -70,7 +67,8 @@ body {
 }
 /* ------The whole text box area */
 .textBox {
-  height: 30%;
+  flex: 2;
+  height: 40%;
   width: 60%;
   display: flex;
   flex-direction: column;
@@ -78,96 +76,90 @@ body {
 }
 /* ----------email section------------ */
 .email {
-  margin: 0;
-  padding: 0;
+  flex: 1;
   display: flex;
   flex-direction: row;
-  height: 15%;
-  width: 100%;
-  gap: 0;
 }
 .email:hover {
   box-shadow: 0 0 10px black;
 }
 .email > input {
-  padding: 5%;
-  height: 100%;
-  width: 100%;
+  flex: 1;
+  padding: 2%;
+  padding-left: 5%;
   border: none;
   background-color: rgb(216, 211, 211);
 }
 .emailInput::placeholder {
-  color: rgba(2, 66, 0, 0.47999998927116394);
+  color: rgba(4, 54, 2, 0.48);
   font-family: inter;
-  font-size: 110%;
+  font-size: 170%;
+  font-weight: 700;
 }
 .emailIconWhole {
-  padding-top: 3%;
-  padding-left: 2%;
+  padding-top: 4%;
+  padding-left: 2.2%;
   height: 100%;
-  width: 9%;
+  width: 8%;
   background-color: rgb(216, 211, 211);
 }
 .emailIconWhole > * {
-  height: 50%;
-  width: 50%;
+  font-size: 120%;
 }
 .password {
-  margin: 0;
-  padding: 0;
   display: flex;
   flex-direction: row;
-  height: 15%;
-  width: 100%;
-  gap: 0;
+  flex: 1;
 }
 .password:hover {
   box-shadow: 0 0 10px black;
 }
 .password > input {
-  padding: 5%;
-  height: 100%;
-  width: 82%;
+  padding: 2%;
+  padding-left: 5%;
+  flex: 1;
   border: none;
   background-color: rgb(216, 211, 211);
 }
 .pwdInput::placeholder {
-  color: rgba(2, 66, 0, 0.47999998927116394);
+  color: rgba(4, 54, 2, 0.48);
   font-family: inter;
-  font-size: 110%;
+  font-size: 170%;
+  font-weight: 700;
 }
 .pwdIconWhole {
-  padding-top: 3%;
-  padding-left: 2%;
+  padding-top: 4%;
+  padding-left: 2.2%;
   height: 100%;
-  width: 9%;
+  width: 8%;
   background-color: rgb(216, 211, 211);
 }
 .pwdeyeIconWhole {
-  padding-top: 3%;
-  padding-left: 1%;
+  padding-top: 4%;
+  padding-left: 2.2%;
   height: 100%;
-  width: 9%;
+  width: 8%;
   background-color: rgb(216, 211, 211);
 }
 .pwdIconWhole > * {
-  height: 50%;
-  width: 50%;
+  font-size: 120%;
+}
+.pwdeyeIconWhole > * {
+  font-size: 120%;
 }
 /* .pwdIcon {
   height: 10%;
 } */
 /* ------button---- */
 .button {
-  margin-left: 15%;
-  margin-top: 3%;
-  width: 75%;
-  height: 20%;
+  flex: 0.8;
+  margin-left: 10%;
+  width: 80%;
   border: none;
   color: rgba(253, 204, 121, 1);
   background-color: rgba(1, 65, 0, 1);
   border-radius: 5px;
-  font-size: 120%;
+  font-size: 180%;
   font-family: inter;
 }
 .button:active {
@@ -175,29 +167,35 @@ body {
 }
 /* -------no acc or forgot pwd---- */
 .text1 {
+  flex: 0.8;
   display: flex;
   flex-direction: row;
   gap: 3%;
-  padding-left: 50%;
+  padding-left: 65%;
   width: 100%;
 }
 .text1 a {
   text-decoration: none;
   color: rgb(108, 106, 106);
+  font-size: x-large;
 }
 .text1 a:hover {
   text-shadow: 0 0 1px rgb(24, 72, 35);
 }
 .text2 {
-  padding-left: 17%;
-  padding-top: 5%;
+  flex: 1;
+  padding-top: 10%;
+  padding-left: 10%;
   width: 100%;
   display: flex;
-  gap: 50%;
+  gap: 60%;
 }
 .text2 a {
+  flex: 1;
   text-decoration: none;
   color: rgb(108, 106, 106);
+  font-size: 150%;
+  /* width: 50%; */
 }
 .text2 a:hover {
   text-shadow: 0 0 1px black;

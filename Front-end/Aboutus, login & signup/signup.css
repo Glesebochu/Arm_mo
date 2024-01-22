@@ -39,6 +39,7 @@ body {
 }
 /* -----The central region------ */
 .center {
+  align-items: center;
   margin-top: 5%;
   margin-left: 10%;
   display: flex;
@@ -50,18 +51,15 @@ body {
 }
 /* -------The big login text---- */
 .signupText {
-  height: 10%;
-  width: 30%;
+  flex: 0.3;
   display: flex;
-  gap: 6%;
-  margin-left: 5%;
+  gap: 10%;
   box-sizing: border-box;
 }
 .signupText > * {
-  font-size: 300%;
+  font-size: 400%;
   font-style: Regular;
   font-family: Marcellus SC;
-  height: 100%;
   box-sizing: border-box;
 }
 .signupText1 {
@@ -72,139 +70,120 @@ body {
 }
 /* ------The whole text box area */
 .textBox {
-  height: 60%;
-  width: 50%;
+  flex: 2;
+  width: 60%;
   display: flex;
   flex-direction: column;
-  gap: 5%;
+  gap: 3%;
   box-sizing: border-box;
 }
 .textBox > * {
   box-sizing: border-box;
 }
 .email {
-  margin: 0;
-  padding: 0;
+  flex: 1;
   display: flex;
   flex-direction: row;
-  height: 7%;
-  width: 100%;
   gap: 0;
 }
 .email:hover {
   box-shadow: 0 0 10px black;
 }
 .email > input {
-  padding: 4%;
-  height: 100%;
-  width: 100%;
+  flex: 1;
+  padding: 2%;
+  padding-left: 5%;
   border: none;
   box-sizing: border-box;
   background-color: rgb(216, 211, 211);
 }
 .emailInput::placeholder {
-  color: rgba(2, 66, 0, 0.47999998927116394);
+  color: rgba(4, 54, 2, 0.48);
   font-family: inter;
-  font-size: 120%;
-  position: relative;
+  font-size: 150%;
+  font-weight: 700;
 }
 .emailIconWhole {
-  padding-top: 3%;
-  padding-left: 3%;
+  padding-top: 4%;
+  padding-left: 2.2%;
   height: 100%;
-  width: 13%;
-  box-sizing: border-box;
+  width: 8%;
   background-color: rgb(216, 211, 211);
 }
 .emailIconWhole > * {
-  height: 50%;
-  width: 50%;
-  box-sizing: border-box;
+  font-size: 120%;
 }
 /* ---pwd text box--- */
 .password {
-  margin: 0;
-  padding: 0;
+  flex: 1;
   display: flex;
   flex-direction: row;
-  height: 7%;
-  width: 100%;
-  gap: 0;
 }
 .password:hover {
   box-shadow: 0 0 10px black;
 }
 .password > input {
-  padding: 5%;
-  height: 100%;
-  width: 77%;
+  flex: 1;
+  padding: 2%;
+  padding-left: 5%;
   border: none;
-  background-color: rgb(216, 211, 211);
   box-sizing: border-box;
+  background-color: rgb(216, 211, 211);
 }
 .pwdInput::placeholder {
-  color: rgba(2, 66, 0, 0.47999998927116394);
+  color: rgba(4, 54, 2, 0.48);
   font-family: inter;
-  font-size: 120%;
+  font-size: 150%;
+  font-weight: 700;
 }
 .pwdIconWhole {
-  padding-top: 3%;
-  padding-left: 3%;
+  padding-top: 4%;
+  padding-left: 2.2%;
   height: 100%;
-  width: 13%;
+  width: 8%;
   background-color: rgb(216, 211, 211);
-  box-sizing: border-box;
 }
 .pwdIconWhole > * {
-  height: 50%;
-  width: 50%;
-  box-sizing: border-box;
+  font-size: 120%;
 }
 /* ---confirm pwd text box---- */
 .confirmPwd {
-  margin: 0;
-  padding: 0;
+  flex: 1;
   display: flex;
   flex-direction: row;
-  height: 7%;
-  width: 100%;
-  gap: 0;
 }
 .confirmPwd:hover {
   box-shadow: 0 0 10px black;
 }
 .confirmPwd > input {
-  padding: 4%;
-  height: 100%;
-  width: 77%;
+  flex: 1;
+  padding: 2%;
+  padding-left: 5%;
   border: none;
-  background-color: rgb(216, 211, 211);
   box-sizing: border-box;
+  background-color: rgb(216, 211, 211);
 }
 .cpwdInput::placeholder {
-  color: rgba(2, 66, 0, 0.47999998927116394);
+  color: rgba(4, 54, 2, 0.48);
   font-family: inter;
-  font-size: 120%;
+  font-size: 150%;
+  font-weight: 700;
 }
 .cpwdIconWhole {
-  padding-top: 3%;
-  padding-left: 3%;
+  padding-top: 4%;
+  padding-left: 2.2%;
   height: 100%;
-  width: 13%;
+  width: 8%;
   background-color: rgb(216, 211, 211);
-  box-sizing: border-box;
 }
 .cpwdIconWhole > * {
-  height: 50%;
-  width: 50%;
-  box-sizing: border-box;
+  font-size:120%;
 }
 /* ----Firstname text box---- */
 .fnameInput {
+  flex: 0.2;
   padding: 5%;
-  padding-left: 17%;
-  height: 7%;
-  width: 100%;
+  padding-left: 12%;
   border: none;
   background-color: rgb(216, 211, 211);
 }
@@ -212,16 +191,16 @@ body {
   box-shadow: 0 0 10px black;
 }
 .fnameInput::placeholder {
-  color: rgba(1, 1, 1, 0.689);
+  color: rgba(4, 54, 2, 0.48);
   font-family: inter;
-  font-size: 120%;
+  font-size: 150%;
+  font-weight: 700;
 }
-/* -- */
+/* -lastname text box- */
 .lnameInput {
+  flex: 0.2;
   padding: 5%;
-  padding-left: 17%;
-  height: 7%;
-  width: 100%;
+  padding-left: 12%;
   border: none;
   background-color: rgb(216, 211, 211);
 }
@@ -229,35 +208,38 @@ body {
   box-shadow: 0 0 10px black;
 }
 .lnameInput::placeholder {
-  color: rgba(1, 1, 1, 0.689);
+  color: rgba(4, 54, 2, 0.48);
   font-family: inter;
-  font-size: 120%;
+  font-size: 150%;
+  font-weight: 700;
 }
 .button {
-  margin-left: 6%;
-  /* margin-top: 3%; */
-  width: 90%;
-  height: 8%;
+  flex: 0.8;
+  margin-left: 10%;
+  width: 80%;
   border: none;
   color: rgba(253, 204, 121, 1);
   background-color: rgba(1, 65, 0, 1);
-  border-radius: 10%;
-  font-size: 140%;
+  border-radius: 5px;
+  font-size: 180%;
   font-family: inter;
 }
 .button:active {
   box-shadow: 0 0 10px black;
 }
 .date {
+  flex: 1.1;
   display: flex;
   flex-direction: column;
 }
 .date > * {
-  font-size: 100%;
+  flex: 1;
+  font-size: 125%;
+  font-weight: 600;
   font-family: inter;
+  color: rgb(75, 74, 74);
 }
 .datePicker {
-  margin-top: 3%;
   color: rgb(57, 55, 55);
   border-radius: 15%;
   border: solid 1px rgb(158, 158, 158);
@@ -266,17 +248,28 @@ body {
   text-shadow: 0 0 10px black;
 }
 .haveAcc {
-  padding-left: 25%;
-  text-decoration: none;
+  flex: 1;
+  padding-left: 35%;
+  text-decoration: underline;
   color: rgb(92, 91, 91);
+  font-size: 120%;
 }
 .haveAcc:hover {
   text-shadow: 0 0 1px black;
 }
+.recom {
+  flex: 1;
+  display: flex;
+  gap: 4%;
+}
 .recom a {
   text-decoration: none;
   color: rgb(92, 91, 91);
+  font-size: 150%;
 }
 .recom a:hover {
   text-shadow: 0 0 1px black;
+}
+.fa-bell{
+  font-size: 150%;
 }

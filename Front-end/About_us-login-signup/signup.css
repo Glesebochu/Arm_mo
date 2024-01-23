@@ -244,12 +244,14 @@ body {
 }
 /* ---date input style--- */
 .datePicker {
+  padding-left: 5%;
+  font-weight: 400;
   color: rgb(57, 55, 55);
   border-radius: 15%;
   border: solid 1px rgb(158, 158, 158);
 }
 .datePicker:hover {
-  text-shadow: 0 0 10px black;
+  text-shadow: 0 0 1px black;
 }
 /* --already have an acount link style-- */
 .haveAcc {

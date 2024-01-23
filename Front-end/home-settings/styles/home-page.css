@@ -400,21 +400,19 @@ input {
 }
 
 p[class$='Text']:hover{
-  transform: scale(1.1);
+  transform: scale(1.5);
+  transition: transform 0.4s;
   
 }
-/* .s1{
-  filter: invert();
 
-}
-.WrapperMain .centerPortion .MeditationStageWrapper .Stage1Text{
-  color: black;
-  
-} */
-
-.selectStage{
+.WrapperMain .centerPortion .MeditationStageWrapper .pizzaPieces .selectStage{
   filter:invert();
+  transform: scale(0.001);
 }
-.WrapperMain .centerPortion .MeditationStageWrapper .selectStageItem{
+.WrapperMain .centerPortion .MeditationStageWrapper .stageTexts .selectStageItem{
   color: black;
+}
+
+.WrapperMain .centerPortion .ellipseShade{
+  filter: invert(100%);
 }

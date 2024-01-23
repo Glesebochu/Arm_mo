@@ -14,68 +14,92 @@
       window.open(link,'_self');
     }
     function selectStage(stage) {
-      var wrapper = document.getElementsByClassName('MeditationStageWrapper');
+      var wrapper = document.getElementsByClassName('pizzaPieces');
       var wrapperItems = wrapper[0].children;
+
+      var textWrapper=document.getElementsByClassName('stageTexts');
+      var textItems = textWrapper[0].children;
+
       for(item of wrapperItems) {
-        console.log(item.tagName)
-        if (item.tagName === 'IMG') {
          item.classList.remove('selectStage');
-          console.log('test')
-        } else {
-          item.classList.remove('selectStageItem')
-        }
-        
+      }
+
+      for(item of textItems) {
+         item.classList.remove('selectStageItem');
       }
       var clickedStage = document.getElementsByClassName(stage);
       clickedStage[0].classList.add('selectStage')
-
-      // var parItemString = 's' + stage;
-      // var parItem = document.getElementsByClassName(parItemString);
-      // parItem[0].classList.add('selectStageItem')
       event.currentTarget.classList.add('selectStageItem');
     }
   
-
+    function shadeEllipses(stage){
+      var ellipseParent = document.getElementsByClassName('ellipses')
+      var ellipses = ellipseParent[0].children;
+      var counter =0;
+      while(counter<stage-1){
+        ellipses[counter].classList.add('ellipseShade');
+        counter++;
+      }
+      while(stage<=9){
+        ellipses[stage-1].classList.remove('ellipseShade');
+        stage++;
+      }
+    }
 
   </script>
 </head>
+
 <body>
-<div class="WrapperMain">
-  <img class="AboutUsIcon" onclick="openPage('./log-in-sign-up-about-us/about-us.html')" src="./assets/el-group.png"/>
-  <img class="appname-ApT" src="./assets/appname.png"/>
-  <img class="SettingsPageIcon" onclick="openPage('./settings-page.html')" src="./assets/vector.png"/>
-  <div class="centerPortion">
-    <img class="ellipse-9" src="./assets/ellipse-9.png"/>
-    <img class="ellipse-8" src="./assets/ellipse-8.png"/>
-    <img class="ellipse-7" src="./assets/ellipse-7-TsR.png"/>
-    <img class="ellipse-6" src="./assets/ellipse-6-sbq.png"/>
-    <img class="ellipse-5" src="./assets/ellipse-5-Fas.png"/>
-    <img class="ellipse-4" src="./assets/ellipse-4.png"/>
-    <img class="ellipse-3" src="./assets/ellipse-3.png"/>
-    <img class="ellipse-2" src="./assets/ellipse-2.png"/>
-    <img class="ellipse-1" src="./assets/ellipse-1-dvK.png"/>
-    <div class="MeditationStageWrapper">
-      <img class="stage-10 s10" src="./assets/stage-10.png"/>
-      <img class="stage-9 s9" src="./assets/stage-9.png"/>
-      <img class="stage-8 s8" src="./assets/stage-8.png"/>
-      <img class="stage-7 s7" src="./assets/stage-7.png"/>
-      <img class="stage-6 s6" src="./assets/stage-6.png"/>
-      <img class="stage-5 s5" src="./assets/stage-5.png"/>
-      <img class="stage-4 s4" src="./assets/stage-4.png"/>
-      <img class="stage-3 s3" src="./assets/stage-3.png"/>
-      <img class="stage-2 s2" src="./assets/stage-2.png"/>
-      <img class="stage-1 s1" src="./assets/output-onlinepngtools.png"/>
-      <p class="ss Stage10Text" onclick="selectStage('s10')">10</p>
-      <p class="ss Stage9Text" onclick="selectStage('s9')">9</p>
-      <p class="ss Stage8Text" onclick="selectStage('s8')">8</p>
-      <p class="ss Stage7Text" onclick="selectStage('s7')">7</p>
-      <p class="ss Stage6Text" onclick="selectStage('s6')">6</p>
-      <p class="ss Stage5Text" onclick="selectStage('s5')">5</p>
-      <p class="ss Stage4Text" onclick="selectStage('s4')">4</p>
-      <p class="ss Stage3Text" onclick="selectStage('s3')">3</p>
-      <p class="ss Stage2Text" onclick="selectStage('s2')">2</p>
-      <p class="ss Stage1Text" onclick="selectStage('s1')">1</p>
-    </div>
-  </div>
-</div>
+  <main class="WrapperMain">
+    <nav>
+      <img class="AboutUsIcon" onclick="openPage('./log-in-sign-up-about-us/about-us.html')" src="./assets/el-group.png"/>
+      <img class="appname-ApT" src="./assets/appname.png"/>
+      <img class="SettingsPageIcon" onclick="openPage('./settings-page.html')" src="./assets/vector.png"/>
+    </nav>
+    <section class="centerPortion">
+
+      <section class="ellipses">
+        <img class="ellipse-1" src="./assets/ellipse-1-dvK.png"/>
+        <img class="ellipse-2" src="./assets/ellipse-2.png"/>
+        <img class="ellipse-3" src="./assets/ellipse-3.png"/>
+        <img class="ellipse-4" src="./assets/ellipse-4.png"/>
+        <img class="ellipse-5" src="./assets/ellipse-5-Fas.png"/>
+        <img class="ellipse-6" src="./assets/ellipse-6-sbq.png"/>
+        <img class="ellipse-7" src="./assets/ellipse-7-TsR.png"/>
+        <img class="ellipse-8" src="./assets/ellipse-8.png"/>
+        <img class="ellipse-9" src="./assets/ellipse-9.png"/>
+      </section>
+
+      <section class="MeditationStageWrapper">
+
+        <section class="pizzaPieces">
+          <img class="stage-10 s10" src="./assets/stage-10.png"/>
+          <img class="stage-9 s9" src="./assets/stage-9.png"/>
+          <img class="stage-8 s8" src="./assets/stage-8.png"/>
+          <img class="stage-7 s7" src="./assets/stage-7.png"/>
+          <img class="stage-6 s6" src="./assets/stage-6.png"/>
+          <img class="stage-5 s5" src="./assets/stage-5.png"/>
+          <img class="stage-4 s4" src="./assets/stage-4.png"/>
+          <img class="stage-3 s3" src="./assets/stage-3.png"/>
+          <img class="stage-2 s2" src="./assets/stage-2.png"/>
+          <img class="stage-1 s1" src="./assets/output-onlinepngtools.png"/>
+        </section>
+
+        <section class="stageTexts">
+          <p class="Stage10Text" onclick="selectStage('s10');shadeEllipses(10)">10</p>
+          <p class="Stage9Text" onclick="selectStage('s9');shadeEllipses(9)">9</p>
+          <p class="Stage8Text" onclick="selectStage('s8');shadeEllipses(8)">8</p>
+          <p class="Stage7Text" onclick="selectStage('s7');shadeEllipses(7)">7</p>
+          <p class="Stage6Text" onclick="selectStage('s6');shadeEllipses(6)">6</p>
+          <p class="Stage5Text" onclick="selectStage('s5');shadeEllipses(5)">5</p>
+          <p class="Stage4Text" onclick="selectStage('s4');shadeEllipses(4)">4</p>
+          <p class="Stage3Text" onclick="selectStage('s3');shadeEllipses(3)">3</p>
+          <p class="Stage2Text" onclick="selectStage('s2');shadeEllipses(2)">2</p>
+          <p class="Stage1Text" onclick="selectStage('s1');shadeEllipses(1)">1</p>
+        </section>
+
+      </section>
+
+    </section>
+  </main>
 </body>

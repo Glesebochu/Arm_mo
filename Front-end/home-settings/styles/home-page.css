@@ -5,7 +5,6 @@ html {
 	margin: 0;
 	padding: 0;
   width: 10%;
-  /* padding-left: 5%; */
 }
 ul, li {
 	list-style: none;
@@ -388,7 +387,60 @@ input {
   white-space: nowrap;
   z-index: 3;
 }
+@media (max-width: 600px) {
+  html {
+    font-size: 10%;
+  }
 
+  body .WrapperMain {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .WrapperMain .navigation {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+  }
+
+  .WrapperMain .centerPortion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    top:250px;
+    left: 25px;
+  }
+
+  .WrapperMain .navigation .AboutUsIcon {
+    top: 30px;
+    left:320px;
+  }
+  .WrapperMain .navigation .SettingsPageIcon {
+    position: absolute;
+    top:30px;
+    z-index: 2;
+    left:16px
+  }
+  .WrapperMain .navigation .appname-ApT {
+    position: absolute;
+    top:600px;
+    z-index: 2;
+    left:140px
+  }
+
+  .ellipses {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    grid-area: b;
+  }
+  p[class$='Text']:hover{
+    transform: scale(1.5);
+    cursor: pointer;
+    transition: transform 0.4s;
+  }
+
+}
 
 /* Animations */
 
@@ -401,8 +453,8 @@ input {
 
 p[class$='Text']:hover{
   transform: scale(1.5);
+  cursor: pointer;
   transition: transform 0.4s;
-  
 }
 
 .WrapperMain .centerPortion .MeditationStageWrapper .pizzaPieces .selectStage{
@@ -415,4 +467,6 @@ p[class$='Text']:hover{
 
 .WrapperMain .centerPortion .ellipseShade{
   filter: invert(100%);
+  transition: filter 2s;
+
 }

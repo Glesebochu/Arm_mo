@@ -28,7 +28,7 @@ body {
   background-color: #ffffff;
 }
 .account-panel--gzF .healthicons-ui-user-profile-Pdm {
-  margin: 0rem 7.4rem 1.975rem 0rem;
+  margin: 3rem 7.4rem 1.975rem 4rem;
   width: 18.3333rem;
   height: 19.7502rem;
   object-fit: contain;
@@ -50,7 +50,7 @@ body {
   color: #000000;
   padding-bottom: 10px;
   padding-top: 15px;
-  padding-left: 20px;
+  padding-left: 30px;
   text-decoration: none;
   font-size: 30px;
 }
@@ -217,7 +217,7 @@ body {
   flex-shrink: 0;
 }
 .account-panel--gzF .dateofbirth-box-RGw {
-  margin-bottom: 10.8rem;
+  margin-bottom: 5rem;
   box-sizing: border-box;
   padding: 3rem 4.375rem 2.2rem 4.6rem;
   width: 100%;
@@ -243,16 +243,14 @@ body {
   color: #575656;
 }
 .datePicker {
+  background-color: rgb(235, 235, 235);
   flex: 1.5;
   font-size: 20px;
-  color: #7d7c7c;
+  color: #706f6f;
   font-weight: bold;
   text-align: center;
   border-radius: 8%;
-  border: solid 1px rgb(158, 158, 158);
-}
-.datePicker:hover {
-  text-shadow: 0 0 2px black;
+  border: solid 0.1px rgb(237, 235, 235);
 }
 .account-panel--gzF .dateofbirth-box-RGw .date-of-birth-8h9 {
   margin-right: 49.675rem;
@@ -263,32 +261,21 @@ body {
   font-family: Linden Hill, "Source Sans Pro";
   white-space: nowrap;
   flex-shrink: 0;
+  margin-bottom: 0;
 }
-.account-panel--gzF .dateofbirth-box-RGw .expanddown-TDd {
-  margin-bottom: 0.9rem;
-  width: 2.35rem;
-  height: 1.4rem;
-  object-fit: contain;
-  vertical-align: top;
-  flex-shrink: 0;
-}
-.account-panel--gzF .edit-button-ap3 {
-  margin: 0 18.6rem;
-  width: calc(100% - 37.2rem);
-  height: 7.2rem;
+.edit-button-ap3 {
+  /* margin: 0 18.6rem; */
+  /* width: calc(100% - 37.2rem); */
+  flex: 1;
+  width: 60rem;
   text-align: center;
-  font-size: 3.5rem;
-  font-weight: 400;
-  line-height: 1.375;
-  color: #ffffff;
-  font-family: Inter, "Source Sans Pro";
-  white-space: nowrap;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #000000;
-  border-radius: 9rem;
-  flex-shrink: 0;
+  font-size: 4rem;
+  font-weight: 300;
+  line-height: 8rem;
+  color: rgba(253, 204, 121, 1);
+  background-color: rgba(1, 65, 0, 1);
+  font-family: inter;
+  border: none;
 }
 .edit-button-ap3:hover {
   box-shadow: 0 0 5px black;

@@ -12,13 +12,23 @@
   <script>
     function hideMenuBar(className){
       var elem=window.document.getElementsByClassName(className);
+      var contentDiv = document.getElementById('contentDiv');
       if(elem[0].style.left!='-200px'){
         elem[0].style.left='-200px';
-        // elem[0].style.backgroundColor='white';
+        elem[0].style.backgroundColor='white';
+        contentDiv.style.left='-200px';
+        var tab = document.getElementsByClassName("activeTab");
+        tab[0].classList.add('tempClass');
+        tab[0].classList.remove('activeTab');
+
+
       }
       else{
-        // elem[0].style.backgroundColor='#f0f0f0';
         elem[0].style.left='0px';
+        contentDiv.style.left='0px';
+        var tab = document.getElementsByClassName('tempClass');
+        tab[0].classList.add('activeTab');
+        tab[0].classList.remove('tempClass');
       }
       
     }

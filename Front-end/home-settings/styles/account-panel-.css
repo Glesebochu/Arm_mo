@@ -13,12 +13,11 @@ input {
   border: none;
 }
 body {
-  width: 238.7rem;
+  width: 100%
 }
 .account-panel--gzF {
-  margin-left: 100rem;
   box-sizing: border-box;
-  padding: 3.275rem 77.3rem 90rem 70rem;
+  padding: 3.275rem 80.3rem 90rem 50rem;
   padding-bottom: 0;
   width: 100%;
   overflow: hidden;

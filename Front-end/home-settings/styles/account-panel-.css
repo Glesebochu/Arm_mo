@@ -244,16 +244,14 @@ body {
   color: #575656;
 }
 .datePicker {
+  background-color: rgb(235, 235, 235);
   flex: 1.5;
   font-size: 20px;
-  color: #7d7c7c;
+  color: #706f6f;
   font-weight: bold;
   text-align: center;
   border-radius: 8%;
-  border: solid 1px rgb(158, 158, 158);
-}
-.datePicker:hover {
-  text-shadow: 0 0 1px black;
+  border: solid 0.1px rgb(237, 235, 235);
 }
 .account-panel--gzF .dateofbirth-box-RGw .date-of-birth-8h9 {
   margin-right: 49.675rem;

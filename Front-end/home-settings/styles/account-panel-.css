@@ -16,8 +16,9 @@ body {
   width: 238.7rem;
 }
 .account-panel--gzF {
+  margin-left: 100rem;
   box-sizing: border-box;
-  padding: 3.275rem 77.3rem 22.6rem 81rem;
+  padding: 3.275rem 77.3rem 90rem 70rem;
   padding-bottom: 0;
   width: 100%;
   overflow: hidden;

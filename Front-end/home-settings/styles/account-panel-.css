@@ -16,7 +16,7 @@ body {
   width: 238.7rem;
 }
 .account-panel--gzF {
-  margin-left: 100rem;
+  /* margin-left: 100rem; */
   box-sizing: border-box;
   padding: 3.275rem 77.3rem 90rem 70rem;
   padding-bottom: 0;
@@ -218,7 +218,7 @@ body {
   flex-shrink: 0;
 }
 .account-panel--gzF .dateofbirth-box-RGw {
-  margin-bottom: 10.8rem;
+  margin-bottom: 5rem;
   box-sizing: border-box;
   padding: 3rem 4.375rem 2.2rem 4.6rem;
   width: 100%;
@@ -253,7 +253,7 @@ body {
   border: solid 1px rgb(158, 158, 158);
 }
 .datePicker:hover {
-  text-shadow: 0 0 2px black;
+  text-shadow: 0 0 1px black;
 }
 .account-panel--gzF .dateofbirth-box-RGw .date-of-birth-8h9 {
   margin-right: 49.675rem;
@@ -264,32 +264,21 @@ body {
   font-family: Linden Hill, "Source Sans Pro";
   white-space: nowrap;
   flex-shrink: 0;
+  margin-bottom: 0;
 }
-.account-panel--gzF .dateofbirth-box-RGw .expanddown-TDd {
-  margin-bottom: 0.9rem;
-  width: 2.35rem;
-  height: 1.4rem;
-  object-fit: contain;
-  vertical-align: top;
-  flex-shrink: 0;
-}
-.account-panel--gzF .edit-button-ap3 {
-  margin: 0 18.6rem;
-  width: calc(100% - 37.2rem);
-  height: 7.2rem;
+.edit-button-ap3 {
+  /* margin: 0 18.6rem; */
+  /* width: calc(100% - 37.2rem); */
+  flex: 1;
+  width: 60rem;
   text-align: center;
-  font-size: 3.5rem;
-  font-weight: 400;
-  line-height: 1.375;
-  color: #ffffff;
-  font-family: Inter, "Source Sans Pro";
-  white-space: nowrap;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #000000;
-  border-radius: 9rem;
-  flex-shrink: 0;
+  font-size: 4rem;
+  font-weight: 300;
+  line-height: 8rem;
+  color: rgba(253, 204, 121, 1);
+  background-color: rgba(1, 65, 0, 1);
+  font-family: inter;
+  border: none;
 }
 .edit-button-ap3:hover {
   box-shadow: 0 0 5px black;

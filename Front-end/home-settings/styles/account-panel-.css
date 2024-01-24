@@ -13,7 +13,7 @@ input {
   border: none;
 }
 body {
-  width: 100%
+  width: 100%;
 }
 .account-panel--gzF {
   box-sizing: border-box;
@@ -115,6 +115,7 @@ body {
 }
 .account-panel--gzF .old-password-Vyd .old-password-rJP {
   box-sizing: border-box;
+
   padding: 3.4rem 3.775rem 1.8rem 2.2rem;
   width: 100%;
   height: 100%;
@@ -148,7 +149,7 @@ body {
   font-size: 15px;
 }
 .account-panel--gzF .old-password-Vyd .old-password-rJP .old-password-hK1 {
-  margin-right: 7rem;
+  margin-right: 20rem;
   margin-left: 4.5rem;
   font-size: 4rem;
   font-weight: 400;
@@ -198,7 +199,7 @@ body {
   flex-shrink: 0;
 }
 .account-panel--gzF .new-password-box-wDM .new-password-N3m {
-  margin-right: 7rem;
+  margin-right: 20rem;
   font-size: 4rem;
   font-weight: 400;
   line-height: 1.375;

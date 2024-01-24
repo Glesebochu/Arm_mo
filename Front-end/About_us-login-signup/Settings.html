@@ -2,10 +2,12 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="signup.css" />
+    <title>Settings</title>
+    <meta charset="utf-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <title>Account panel </title>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Linden+Hill:ital,wght@0,400;1,400&amp;display=swap"
         data-tag="font" />
@@ -64,78 +66,47 @@
         data-tag="font" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Megrim:wght@400&amp;display=swap"
         data-tag="font" />
-    <link rel="stylesheet" href="https://unpkg.com/@teleporthq/teleport-custom-scripts/dist/style.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Linden+Hill%3A400" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro%3A400" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter%3A400" />
+    <link rel="stylesheet" href="settings.css" />
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 </head>
 
 <body>
-    <div class="whole">
-        <div class="logo">
-            <img alt="Writing12217" src="public/external/armimologo215810-q1qp-200w.png" class="logo" />
-            <img alt="armimoLogo" src="public/external/logoText.png" class="armimoLogoText" />
-        </div>
-        <div class="center">
-            <div class="signupText">
-                <span class="signupText1">Sign</span>
-                <span class="signupText2">up</span>
-            </div>
-            <div class="textBox">
-                <div class="email">
-                    <div class="emailIconWhole">
-                        <i class="fas fa-envelope"></i>
-                    </div>
-                    <input type="email" class="emailInput" placeholder="Email or Player Name">
-                </div>
-                <input type="text" class="fnameInput" placeholder="First Name">
-                <input type="text" class="lnameInput" placeholder="Last Name">
-                <div class="password">
-                    <div class="pwdIconWhole">
-                        <i class="fas fa-lock"></i>
-                    </div>
-                    <input type="password" class="pwdInput" placeholder="Password">
-                    <div class="pwdIconWhole">
-                        <i class="eye one fas fa-eye-slash"></i>
-                    </div>
-                </div>
-                <div class="confirmPwd">
-                    <div class="cpwdIconWhole">
-                        <i class="fas fa-lock"></i>
-                    </div>
-                    <input type="password" class="cpwdInput" placeholder="Confirm Password">
-                    <div class="pwdIconWhole">
-                        <i class="eye two fas fa-eye-slash"></i>
-                    </div>
-                </div>
-                <div class="date">
-                    <label>Date of birth</label>
-                    <input type="date" class="datePicker">
-                </div>
-                <button class="button">Sign up</button>
-                <a class="haveAcc" href="login.html">Already have an account</a>
-                <div class="recom">
-                    <i class="fas fa-bell"></i>
-                    <a href="#">Send Tips</a>
-                </div>
-            </div>
-        </div>
+    <div class="settingTxt">
+        <span class="settingTxt1">Settin</span>
+        <span class="settingTxt2">gs</span>
     </div>
-    <script>
-        $('.eye.one').on('click', function () {
-            $('.pwdInput').attr('type', function (index, attr) {
-                return attr === 'password' ? 'text' : 'password';
-            });
-            $('.eye.one').toggleClass('fas fa-eye-slash fas fa-eye');
-        })
-        $('.eye.two').on('click', function () {
-            $('.cpwdInput').attr('type', function (index, attr) {
-                return attr === 'password' ? 'text' : 'password';
-            });
-            $('.eye.two').toggleClass('fas fa-eye-slash fas fa-eye');
-        })
-        $('.fa-bell').on('click', function () {
-        })
-    </script>
+    <div class="options">
+        <ul class="checkbox">
+            <label for="theme">Theme</label>
+            <li>
+                <label class="dark">Dark</label>
+                <input type="checkbox">
+            </li>
+            <li>
+                <label for="light">Light</label>
+                <input type="checkbox">
+            </li>
+            <li class="sound">
+                <label for="sound">Sound</label>
+                <input type="checkbox">
+            </li>
+            <li class="brightness">
+                <label for="brightness">Brightness</label>
+                <input class="dial" type="range" min="0" max="100" value="50">
+            </li>
+            <li class="tips">
+                <label for="tips">Email me meditation tips</label>
+                <input type="checkbox">
+            </li>
+            <button class="reset">Reset Settings</button>
+        </ul>
+    </div>
+
+    <a class="home" href="#">Home</a>
 </body>
 
 </html>

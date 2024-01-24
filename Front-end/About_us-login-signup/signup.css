@@ -244,14 +244,12 @@ body {
 }
 /* ---date input style--- */
 .datePicker {
-  padding-left: 5%;
-  font-weight: 400;
   color: rgb(57, 55, 55);
   border-radius: 15%;
   border: solid 1px rgb(158, 158, 158);
 }
 .datePicker:hover {
-  text-shadow: 0 0 1px black;
+  text-shadow: 0 0 10px black;
 }
 /* --already have an acount link style-- */
 .haveAcc {
@@ -268,15 +266,15 @@ body {
 .recom {
   flex: 1;
   display: flex;
-  gap: 4%;
+  gap: 2%;
 }
 .recom a {
   text-decoration: none;
   color: rgb(92, 91, 91);
   font-size: 150%;
 }
-.recom a:hover {
-  text-shadow: 0 0 1px black;
+.fa-bell:hover {
+  text-shadow: 0 0 10px rgb(5, 126, 11);
 }
 .fa-bell {
   font-size: 150%;

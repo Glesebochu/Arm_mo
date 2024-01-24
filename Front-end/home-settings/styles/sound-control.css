@@ -229,3 +229,12 @@ body {
   object-fit: contain;
   vertical-align: top;
 }
+
+@media (max-width:600px) {
+  .sound-control-h7H{
+    font-size: 1 !important;
+    left: -200px;
+    /* width: 100px; */
+  };
+  
+}

@@ -1,4 +1,3 @@
-
 html {
 	font-size:18.5%;
 }
@@ -14,7 +13,7 @@ input {
 }
 body {
   width: 100%;
-}.settings-page-w2T {
+}.mainWrapper {
   box-sizing: border-box;
   padding: 0rem 5.2rem 0rem 0.3rem;
   width: 100%;
@@ -24,7 +23,7 @@ body {
   align-items: flex-start;
   background-color: #ffffff;
 }
-.settings-page-w2T .side-menu-fDM {
+.mainWrapper .sideMenu {
   box-sizing: border-box;
   padding: 1.842rem 0rem 119.3rem 1.917rem;
   position: relative;
@@ -34,13 +33,13 @@ body {
 
   flex-shrink: 0;
 }
-.settings-page-w2T .side-menu-fDM .auto-group-anzq-yzj {
+.mainWrapper .sideMenu .sideMenuIcons {
   margin-bottom: 12.9415rem;
   width: 100%;
   display: flex;
   align-items: center;
 }
-.settings-page-w2T .side-menu-fDM .auto-group-anzq-yzj .healthicons-ui-user-profile-LKV {
+.mainWrapper .sideMenu .sideMenuIcons .userProfilePic {
   margin-right: 75.25rem;
   width: 12.1667rem;
   height: 12.4168rem;
@@ -48,7 +47,7 @@ body {
   vertical-align: top;
   flex-shrink: 0;
 }
-.settings-page-w2T .side-menu-fDM .auto-group-anzq-yzj .vector-4WP {
+.mainWrapper .sideMenu .sideMenuIcons .minimizeMenuIcon {
   margin-top: 0.0577rem;
   width: 11.1765rem;
   height: 7.3579rem;
@@ -58,8 +57,8 @@ body {
   position: relative;
   left: -50px;
 }
-.settings-page-w2T .side-menu-fDM .account-details-zuq {
-  margin: 0rem 48.15rem 9.4rem 0.516rem;
+.mainWrapper .sideMenu .accountDetailsButton {
+  margin: -4rem 48.15rem 0rem 0.516rem;
   box-sizing: border-box;
   padding-left: 1.233rem;
   width: calc(100%);
@@ -68,7 +67,7 @@ body {
   font-size: 1%;
   align-items: center;
 }
-.settings-page-w2T .side-menu-fDM .account-details-zuq .mdi-account-cog-6hy {
+.mainWrapper .sideMenu .accountDetailsButton .accountDetailsIcon {
   margin: 1.336rem 4.524rem 0rem 0rem;
   width: 12.8605rem;
   height: 11.834rem;
@@ -76,7 +75,7 @@ body {
   vertical-align: top;
   flex-shrink: 0;
 }
-.settings-page-w2T .side-menu-fDM .account-details-zuq .account-bPq {
+.mainWrapper .sideMenu .accountDetailsButton .accountDetailsText {
   margin-bottom: 3.4rem;
   text-align: center;
   font-size: 9rem;
@@ -87,8 +86,8 @@ body {
   white-space: nowrap;
   flex-shrink: 0;
 }
-.settings-page-w2T .side-menu-fDM .theme-5K1 {
-  margin: 0rem 33.45rem 10.7rem 1.783rem;
+.mainWrapper .sideMenu .themeButton {
+  margin: 0rem 33.45rem 1rem 1.783rem;
   box-sizing: border-box;
   padding-left: 1rem;
   width: calc(100%);
@@ -96,7 +95,7 @@ body {
   display: flex;
   align-items: center;
 }
-.settings-page-w2T .side-menu-fDM .theme-5K1 .fluent-dark-theme-24-regular-P4o {
+.mainWrapper .sideMenu .themeButton .themeIcon {
   margin: 4.1rem 6.45rem 0rem 0rem;
   width: 10rem;
   height: 9.25rem;
@@ -104,7 +103,7 @@ body {
   vertical-align: top;
   flex-shrink: 0;
 }
-.settings-page-w2T .side-menu-fDM .theme-5K1 .appearance-6E7 {
+.mainWrapper .sideMenu .themeButton .themeText {
   margin-bottom: 2.8rem;
   text-align: center;
   font-size: 9rem;
@@ -115,20 +114,20 @@ body {
   white-space: nowrap;
   flex-shrink: 0;
 }
-.settings-page-w2T .side-menu-fDM .auto-group-sto5-Cnw {
+.mainWrapper .sideMenu .soundControlButton {
   margin-left: 2.2833rem;
   width: calc(100% - 2.2833rem);
   display: flex;
   align-items: flex-end;
 }
-.settings-page-w2T .side-menu-fDM .auto-group-sto5-Cnw .sound-and-music-YM1 {
+.mainWrapper .sideMenu .soundControlButton .soundControls {
   margin: 0rem 289.55rem 2rem 0rem;
   width: 64.15rem;
   height: 13.1rem;
   position: relative;
   flex-shrink: 0;
 }
-.settings-page-w2T .side-menu-fDM .auto-group-sto5-Cnw .sound-and-music-YM1 .sound-controls-G27 {
+.mainWrapper .sideMenu .soundControlButton .soundControls .sound-controls-G27 {
   width: 59.5rem;
   height: 12.4rem;
   position: absolute;
@@ -142,7 +141,7 @@ body {
   font-family: Mako, 'Source Sans Pro';
   white-space: nowrap;
 }
-.settings-page-w2T .side-menu-fDM .auto-group-sto5-Cnw .sound-and-music-YM1 .lets-icons-sound-max-fill-mDm {
+.mainWrapper .sideMenu .soundControlButton .soundControls .lets-icons-sound-max-fill-mDm {
   width: 8.5436rem;
   height: 6.8797rem;
   /* position: absolute; */
@@ -151,36 +150,35 @@ body {
   object-fit: contain;
   vertical-align: top;
 }
-.settings-page-w2T .side-menu-fDM .auto-group-sto5-Cnw .mdi-hamburger-open-UP5 {
+.mainWrapper .sideMenu .soundControlButton .mdi-hamburger-open-UP5 {
   width: 2.4rem;
   height: 2.4rem;
   overflow: hidden;
   position: relative;
   flex-shrink: 0;
 }
-.settings-page-w2T .settingscontent-C4B {
+.mainWrapper .ContentPanel {
   margin-top: 0.6rem;
   width: 100%;
-  height: 220.5rem;
+  height: 100vh;
   position: relative;
   flex-shrink: 0;
 }
-.settings-page-w2T .settingscontent-C4B .rectangle-2-Y83 {
+.mainWrapper .ContentPanel .IframeBox {
   width: 100%;
   height: 220.5rem;
   position: absolute;
-  left: 0;
   top: 0;
   background-color: #ffffff;
 }
-.settings-page-w2T .settingscontent-C4B .logo-57y {
+.mainWrapper .ContentPanel .logoIcon {
   width: 42.5rem;
   height: 20.3rem;
   position: absolute;
   left: 215.5rem;
   top: 6.3rem;
 }
-.settings-page-w2T .settingscontent-C4B .logo-57y .writing-1-opf {
+.mainWrapper .ContentPanel .logoIcon .writing-1-opf {
   width: 21.25rem;
   height: 6.09rem;
   position: absolute;
@@ -189,7 +187,7 @@ body {
   object-fit: cover;
   vertical-align: top;
 }
-.settings-page-w2T .settingscontent-C4B .logo-57y .armimo-logo-2-1-LJo {
+.mainWrapper .ContentPanel .logoIcon .armimo-logo-2-1-LJo {
   width: 21.25rem;
   height: 20.3rem;
   position: absolute;
@@ -199,7 +197,7 @@ body {
   vertical-align: top;
 }
 
-.vector-4WP:hover{
+.minimizeMenuIcon:hover{
   transform: translateY(-3px);
 }
 
@@ -215,21 +213,22 @@ body {
 }
 .activeTab{
   background-color: #f9f9f9;
+  border-radius: 5%;
 }
 .activeTab img{
   filter: invert(48%) sepia(60%) saturate(222222222222%) hue-rotate(130deg) brightness(95%) contrast(80%);
 }
-.account-details-zuq img{
+.accountDetailsButton img{
   transform: scale(0.7);
   position: relative;
   top:-5px;
 }
-.theme-5K1 img{
+.themeButton img{
   transform: scale(0.7);
   position: relative;
   top:-8px;
 }
-.sound-and-music-YM1 img{
+.soundControls img{
   transform: scale(0.7);
   position: relative;
   top:3px;
@@ -245,7 +244,18 @@ body {
   border: none;
 }
 
-
-
-
-
+@media (max-width:600px) {
+  html {
+    font-size: 15;
+  }
+  .mainWrapper .ContentPanel .logoIcon{
+    position: absolute;
+    left:-190px;
+    top:-1px;
+  }
+ 
+  .mainWrapper .sideMenu .sideMenuIcons .minimizeMenuIcon {
+    position: relative;
+    z-index: 1;
+  }
+ }

@@ -35,24 +35,20 @@ body {
   vertical-align: top;
   flex-shrink: 0;
 }
-.account-panel--gzF .set-new-photo-uc7 {
-  margin: 0rem 9.9rem 1.8rem 0rem;
-  text-align: center;
-  font-size: 3.8rem;
-  font-weight: bold;
-  line-height: 1.375;
-  color: #0b57d0;
-  font-family: Linden Hill, "Source Sans Pro";
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-.set-new-photo-uc7 {
+.set {
   color: #000000;
-  padding-bottom: 10px;
-  padding-top: 15px;
-  padding-left: 30px;
+  padding-bottom: 15px;
+  padding-top: 20px;
   text-decoration: none;
-  font-size: 30px;
+  letter-spacing: 0;
+  font-size: 500%;
+  font-weight: 500;
+  font-style: Regular;
+  font-family: Marcellus SC;
+  box-sizing: border-box;
+}
+.yellow {
+  color: #f5b13c;
 }
 .account-panel--gzF .email-QYs {
   margin-bottom: 5.8rem;

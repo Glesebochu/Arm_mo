@@ -13,22 +13,46 @@
       function hideMenuBar(className){
         var elem=window.document.getElementsByClassName(className);
         var contentDiv = document.getElementById('contentDiv');
-        if(elem[0].style.left!='-200px'){
-          elem[0].style.left='-200px';
-          elem[0].style.backgroundColor='white';
-          contentDiv.style.left='-200px';
-          var tab = document.getElementsByClassName("activeTab");
-          tab[0].classList.add('tempClass');
-          tab[0].classList.remove('activeTab');
+        if(window.innerWidth>600){
+          if(elem[0].style.left!='-200px'){
+            elem[0].style.left='-200px';
+            elem[0].style.backgroundColor='white';
+            contentDiv.style.left='-200px';
+            var tab = document.getElementsByClassName("activeTab");
+            tab[0].classList.add('tempClass');
+            tab[0].classList.remove('activeTab');
 
+
+          }
+          else{
+            elem[0].style.left='0px';
+            contentDiv.style.left='0px';
+            var tab = document.getElementsByClassName('tempClass');
+            tab[0].classList.add('activeTab');
+            tab[0].classList.remove('tempClass');
+          }
 
         }
         else{
-          elem[0].style.left='0px';
-          contentDiv.style.left='0px';
-          var tab = document.getElementsByClassName('tempClass');
-          tab[0].classList.add('activeTab');
-          tab[0].classList.remove('tempClass');
+          if(elem[0].style.left!='-200px'){
+            elem[0].style.left='-200px';
+            elem[0].style.backgroundColor='white';
+            contentDiv.style.left='-280px';
+            contentDiv.style.top='40px';
+            
+            var tab = document.getElementsByClassName("activeTab");
+            tab[0].classList.add('tempClass');
+            tab[0].classList.remove('activeTab');
+
+
+          }
+          else{
+            elem[0].style.left='0px';
+            contentDiv.style.left='80px';
+            var tab = document.getElementsByClassName('tempClass');
+            tab[0].classList.add('activeTab');
+            tab[0].classList.remove('tempClass');
+          }
         }
         
       }
@@ -39,6 +63,9 @@
       function openSideMenu(link){
         var contentDiv = document.getElementById('contentDiv');
         contentDiv.innerHTML='<iframe src="' + link + '"></iframe>';
+        if(window.innerWidth<=600){
+          hideMenuBar('sideMenu');
+        }
       }
 
       

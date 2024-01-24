@@ -131,6 +131,7 @@ body {
   flex-shrink: 0;
 }
 .old-password-hK1 {
+  padding-left: 10px;
   background-color: #d9d9d9;
   width: 60%;
 }
@@ -141,8 +142,12 @@ body {
   font-size: 15px;
 }
 .new-password-N3m {
+  padding-left: 10px;
   background-color: #d9d9d9;
   width: 60%;
+}
+.new-password-box-wDM:hover {
+  box-shadow: 0 0 10px black;
 }
 .eye.two {
   font-size: 15px;

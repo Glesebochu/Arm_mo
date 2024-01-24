@@ -1,393 +1,451 @@
-html {
-	font-size:16.5%;
-}
-* {
-	margin: 0;
-	padding: 0;
-  width: 10%;
-}
-ul, li {
-	list-style: none;
-}
-input {
-	border: none;
-}
-.WrapperMain {
-  width: 100%;
-  height: 100vh;
-  /* position: relative; */
-  overflow: hidden;
-  background-color: #ffffff;
-  display: flex;
-}
-.WrapperMain .AboutUsIcon {
-  width: 22.9rem;
-  height: 16.1176rem;
-  position: absolute; 
-  left: 470.6rem;
-  top: 219.0912rem; 
-  justify-content: center;
-  align-items: center;
-  /* object-fit: contain;
-  vertical-align: top; */
-}
+@media(max-width:1480px){
+  html {
+      font-size:16.5%;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      width: 10%;
+    }
+    ul, li {
+      list-style: none;
+    }
+    input {
+      border: none;
+    }
+    .WrapperMain {
+      width: 100%;
+      height: 100vh;
+      /* position: relative; */
+      overflow: hidden;
+      background-color: #ffffff;
+      display: flex;
+    }
+    .WrapperMain .AboutUsIcon {
+      width: 22.9rem;
+      height: 16.1176rem;
+      position: absolute; 
+      left: 450.6rem;
+      top: 219.0912rem; 
+      justify-content: center;
+      align-items: center;
+      object-fit: contain;
+      vertical-align: top;
+    }
+  
+    .WrapperMain .appname-ApT {
+      width: 64rem;
+      height: 19.2rem;
+      position: absolute;
+      left: 213.1rem;
+      top: 195.2rem;
+      object-fit: cover;
+      vertical-align: top;
+    }
+    .WrapperMain .SettingsPageIcon {
+      width: 14.9rem;
+      height: 15.5rem;
+      position: absolute;
+      left: 20.1rem;
+      top: 219.4rem;
+      object-fit: contain;
+      vertical-align: top;
+    }
+    .WrapperMain .centerPortion {
+  
+      width: 205.3rem;
+      height: 181.1rem;
+      position: absolute;
+      left: 140.1rem;
+      top: 10.5rem;
+  
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-image: url('../assets/ellipse-10.png');
+    }
+    .WrapperMain .centerPortion .ellipse-9 {
+      width: 173.7rem;
+      height: 169rem;
+      position: absolute;
+      left: 20.4rem;
+      top: 7.2rem;
+      object-fit: contain;
+      vertical-align: top;
+    }
+    .WrapperMain .centerPortion .ellipse-8 {
+      width: 160.9rem;
+      height: 159.1rem;
+      position: absolute;
+      left: 27.7rem;
+      top: 12.5rem;
+      object-fit: contain;
+      vertical-align: top;
+    }
+    .WrapperMain .centerPortion .ellipse-7 {
+      width: 147.5rem;
+      height: 149.5rem;
+      position: absolute;
+      left: 36.1rem;
+      top: 17.4rem;
+      object-fit: contain;
+      vertical-align: top;
+    }
+    .WrapperMain .centerPortion .ellipse-6 {
+      width: 137.4rem;
+      height: 137.5rem;
+      position: absolute;
+      left: 40.1rem;
+      top: 23.1rem;
+      object-fit: contain;
+      vertical-align: top;
+    }
+    .WrapperMain .centerPortion .ellipse-5 {
+      width: 128.3rem;
+      height: 127.7rem;
+      position: absolute;
+      left: 44.5rem;
+      top: 28.4rem;
+      object-fit: contain;
+      vertical-align: top;
+    }
+    .WrapperMain .centerPortion .ellipse-4 {
+      width: 120.3rem;
+      height: 117.8rem;
+      position: absolute;
+      left: 48.9rem;
+      top: 32.8rem;
+      object-fit: contain;
+      vertical-align: top;
+    }
+    .WrapperMain .centerPortion .ellipse-3 {
+      width: 113.1rem;
+      height: 109.1rem;
+      position: absolute;
+      left: 52.1rem;
+      top: 37.3rem;
+      object-fit: contain;
+      vertical-align: top;
+    }
+    .WrapperMain .centerPortion .ellipse-2 {
+      width: 104.7rem;
+      height: 101.9rem;
+      position: absolute;
+      left: 56.8rem;
+      top: 40.7rem;
+      object-fit: contain;
+      vertical-align: top;
+    }
+    .WrapperMain .centerPortion .ellipse-1 {
+      width: 95.3rem;
+      height: 93rem;
+      position: absolute;
+      left: 61.3rem;
+      top: 45.7rem;
+      object-fit: contain;
+      vertical-align: top;
+    }
+    .WrapperMain .centerPortion .MeditationStageWrapper {
+      width: 123.5766rem;
+      height: 123.2515rem;
+      position: absolute;
+      left: 45.4rem;
+      top: 32.8rem;
+      /* box-shadow: inset 0 0.4rem 0.4rem rgba(0, 0, 0, 0.25)); */
+      border-radius: 2.5rem;
+    }
+    .WrapperMain .centerPortion .MeditationStageWrapper .stage-10 {
+      width: 84.4826rem;
+      height: 87.0632rem;
+      position: absolute;
+      left: 17.983rem;
+      top: 16.6035rem;
+      object-fit: contain;
+      vertical-align: top;
+    }
+    .WrapperMain .centerPortion .MeditationStageWrapper .stage-9 {
+      width: 86.2868rem;
+      height: 86.6262rem;
+      position: absolute;
+      left: 18.1292rem;
+      top: 16.7432rem;
+      object-fit: contain;
+      vertical-align: top;
+    }
+    .WrapperMain .centerPortion .MeditationStageWrapper .stage-8 {
+      width: 86.2097rem;
+      height: 86.8697rem;
+      position: absolute;
+      left: 18.1677rem;
+      top: 16.7792rem;
+      object-fit: contain;
+      vertical-align: top;
+    }
+    .WrapperMain .centerPortion .MeditationStageWrapper .stage-7 {
+      width: 50.601rem;
+      height: 51.3978rem;
+      position: absolute;
+      left: 43.0118rem;
+      top: 60.25rem;
+      object-fit: contain;
+      vertical-align: top;
+      border-radius: 2.5rem;
+    }
+    .WrapperMain .centerPortion .MeditationStageWrapper .stage-6 {
+      width: 121.1169rem;
+      height: 120.4725rem;
+      position: absolute;
+      left: 2.4596rem;
+      top: 1.3357rem;
+      object-fit: contain;
+      vertical-align: top;
+    }
+    .WrapperMain .centerPortion .MeditationStageWrapper .stage-5 {
+      width: 104.9494rem;
+      height: 102.9214rem;
+      position: absolute;
+      left: 10.3643rem;
+      top: 9.3229rem;
+      object-fit: contain;
+      vertical-align: top;
+    }
+    .WrapperMain .centerPortion .MeditationStageWrapper .stage-4 {
+      width: 115.4989rem;
+      height: 114.6213rem;
+      position: absolute;
+      left: 5.6389rem;
+      top: 4.506rem;
+      object-fit: contain;
+      vertical-align: top;
+    }
+    .WrapperMain .centerPortion .MeditationStageWrapper .stage-3 {
+      width: 122.9902rem;
+      height: 123.2515rem;
+      position: absolute;
+      left: 0rem;
+      top: 0;
+      object-fit: contain;
+      vertical-align: top;
+    }
+    .WrapperMain .centerPortion .MeditationStageWrapper .stage-2 {
+      width: 86.2868rem;
+      height: 86.6262rem;
+      position: absolute;
+      left: 18.1292rem;
+      top: 16.7432rem;
+      object-fit: contain;
+      vertical-align: top;
+    }
+    .WrapperMain .centerPortion .MeditationStageWrapper .stage-1 {
+      width: 86.2868rem;
+      height: 86.6262rem;
+      position: absolute;
+      left: 15.045rem;
+      top: 15.4743rem;
+      object-fit: contain;
+      vertical-align: top;
+      rotate:-13deg;
+      transform: scale(1.2);
+    }
+    .WrapperMain .centerPortion .MeditationStageWrapper .Stage10Text {
+      width: 6.7rem;
+      height: 9.7rem;
+      position: absolute;
+      left: 43.7rem;
+      top: 55.5rem;
+      text-align: center;
+      font-size: 7rem;
+      font-weight: 400;
+      line-height: 1.375;
+      color: #ffffff;
+      font-family: Mako, 'Source Sans Pro';
+      white-space: nowrap;
+    }
+    .WrapperMain .centerPortion .MeditationStageWrapper .Stage9Text {
+      width: 4.1rem;
+      height: 9.7rem;
+      position: absolute;
+      left: 44.9357rem;
+      top: 66.6461rem;
+      text-align: center;
+      font-size: 7rem;
+      font-weight: 400;
+      line-height: 1.375;
+      color: #ffffff;
+      font-family: Mako, 'Source Sans Pro';
+      white-space: nowrap;
+    }
+    .WrapperMain .centerPortion .MeditationStageWrapper .Stage8Text {
+      width: 4rem;
+      height: 9.7rem;
+      position: absolute;
+      left: 53.5327rem;
+      top: 73.5405rem;
+      text-align: center;
+      font-size: 7rem;
+      font-weight: 400;
+      line-height: 1.375;
+      color: #ffffff;
+      font-family: Mako, 'Source Sans Pro';
+      white-space: nowrap;
+    }
+    .WrapperMain .centerPortion .MeditationStageWrapper .Stage7Text {
+      width: 3.2rem;
+      height: 9.7rem;
+      position: absolute;
+      left: 67.9776rem;
+      top: 75.4709rem;
+      text-align: center;
+      font-size: 7rem;
+      font-weight: 400;
+      line-height: 1.375;
+      color: #ffffff;
+      font-family: Mako, 'Source Sans Pro';
+      white-space: nowrap;
+    }
+    .WrapperMain .centerPortion .MeditationStageWrapper .Stage6Text {
+      width: 4.1rem;
+      height: 9.7rem;
+      position: absolute;
+      left: 84.9451rem;
+      top: 71.0585rem;
+      text-align: center;
+      font-size: 7rem;
+      font-weight: 400;
+      line-height: 1.375;
+      color: #ffffff;
+      font-family: Mako, 'Source Sans Pro';
+      white-space: nowrap;
+    }
+    .WrapperMain .centerPortion .MeditationStageWrapper .Stage5Text {
+      width: 3.6rem;
+      height: 9.7rem;
+      position: absolute;
+      left: 91.8017rem;
+      top: 54.8796rem;
+      text-align: center;
+      font-size: 7rem;
+      font-weight: 400;
+      line-height: 1.375;
+      color: #ffffff;
+      font-family: Mako, 'Source Sans Pro';
+      white-space: nowrap;
+    }
+    .WrapperMain .centerPortion .MeditationStageWrapper .Stage4Text {
+      width: 3.7rem;
+      height: 9.7rem;
+      position: absolute;
+      left: 86.8083rem;
+      top: 34.8398rem;
+      text-align: center;
+      font-size: 7rem;
+      font-weight: 400;
+      line-height: 1.375;
+      color: #ffffff;
+      font-family: Mako, 'Source Sans Pro';
+      white-space: nowrap;
+    }
+    .WrapperMain .centerPortion .MeditationStageWrapper .Stage3Text {
+      width: 3.7rem;
+      height: 9.7rem;
+      position: absolute;
+      left: 70.9154rem;
+      top: 23.533rem;
+      text-align: center;
+      font-size: 7rem;
+      font-weight: 400;
+      line-height: 1.375;
+      color: #ffffff;
+      font-family: Mako, 'Source Sans Pro';
+      white-space: nowrap;
+    }
+    .WrapperMain .centerPortion .MeditationStageWrapper .Stage2Text {
+      width: 3.4rem;
+      height: 9.7rem;
+      position: absolute;
+      left: 48.7507rem;
+      top: 20.1317rem;
+      text-align: center;
+      font-size: 7rem;
+      font-weight: 400;
+      line-height: 1.375;
+      color: #ffffff;
+      font-family: Mako, 'Source Sans Pro';
+      white-space: nowrap;
+    }
+    .WrapperMain .centerPortion .MeditationStageWrapper .Stage1Text {
+      width: 2.3rem;
+      height: 9.7rem;
+      position: absolute;
+      left: 30.1738rem;
+      top: 33.9206rem;
+      text-align: center;
+      font-size: 7rem;
+      font-weight: 400;
+      line-height: 1.375;
+      color: white;
+      font-family: Mako, 'Source Sans Pro';
+      white-space: nowrap;
+      z-index: 3;
+    }
 
-.WrapperMain .appname-ApT {
-  width: 64rem;
-  height: 19.2rem;
-  position: absolute;
-  left: 201.1rem;
-  top: 195.2rem;
-  object-fit: cover;
-  vertical-align: top;
-}
-.WrapperMain .SettingsPageIcon {
-  width: 14.9rem;
-  height: 15.5rem;
-  position: absolute;
-  left: 11.1rem;
-  top: 219.4rem;
-  object-fit: contain;
-  vertical-align: top;
-}
-.WrapperMain .centerPortion {
-
-  width: 205.3rem;
-  height: 181.1rem;
-  position: absolute;
-  left: 130.1rem;
-  top: 9.5rem;
-
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-image: url('../assets/ellipse-10.png');
-}
-.WrapperMain .centerPortion .ellipse-9 {
-  width: 173.7rem;
-  height: 169rem;
-  position: absolute;
-  left: 20.4rem;
-  top: 7.2rem;
-  object-fit: contain;
-  vertical-align: top;
-}
-.WrapperMain .centerPortion .ellipse-8 {
-  width: 160.9rem;
-  height: 159.1rem;
-  position: absolute;
-  left: 27.7rem;
-  top: 12.5rem;
-  object-fit: contain;
-  vertical-align: top;
-}
-.WrapperMain .centerPortion .ellipse-7 {
-  width: 147.5rem;
-  height: 149.5rem;
-  position: absolute;
-  left: 36.1rem;
-  top: 17.4rem;
-  object-fit: contain;
-  vertical-align: top;
-}
-.WrapperMain .centerPortion .ellipse-6 {
-  width: 137.4rem;
-  height: 137.5rem;
-  position: absolute;
-  left: 40.1rem;
-  top: 23.1rem;
-  object-fit: contain;
-  vertical-align: top;
-}
-.WrapperMain .centerPortion .ellipse-5 {
-  width: 128.3rem;
-  height: 127.7rem;
-  position: absolute;
-  left: 44.5rem;
-  top: 28.4rem;
-  object-fit: contain;
-  vertical-align: top;
-}
-.WrapperMain .centerPortion .ellipse-4 {
-  width: 120.3rem;
-  height: 117.8rem;
-  position: absolute;
-  left: 48.9rem;
-  top: 32.8rem;
-  object-fit: contain;
-  vertical-align: top;
-}
-.WrapperMain .centerPortion .ellipse-3 {
-  width: 113.1rem;
-  height: 109.1rem;
-  position: absolute;
-  left: 52.1rem;
-  top: 37.3rem;
-  object-fit: contain;
-  vertical-align: top;
-}
-.WrapperMain .centerPortion .ellipse-2 {
-  width: 104.7rem;
-  height: 101.9rem;
-  position: absolute;
-  left: 56.8rem;
-  top: 40.7rem;
-  object-fit: contain;
-  vertical-align: top;
-}
-.WrapperMain .centerPortion .ellipse-1 {
-  width: 95.3rem;
-  height: 93rem;
-  position: absolute;
-  left: 61.3rem;
-  top: 45.7rem;
-  object-fit: contain;
-  vertical-align: top;
-}
-.WrapperMain .centerPortion .MeditationStageWrapper {
-  width: 123.5766rem;
-  height: 123.2515rem;
-  position: absolute;
-  left: 45.4rem;
-  top: 32.8rem;
-  /* box-shadow: inset 0 0.4rem 0.4rem rgba(0, 0, 0, 0.25)); */
-  border-radius: 2.5rem;
-}
-.WrapperMain .centerPortion .MeditationStageWrapper .stage-10 {
-  width: 84.4826rem;
-  height: 87.0632rem;
-  position: absolute;
-  left: 17.983rem;
-  top: 16.6035rem;
-  object-fit: contain;
-  vertical-align: top;
-}
-.WrapperMain .centerPortion .MeditationStageWrapper .stage-9 {
-  width: 86.2868rem;
-  height: 86.6262rem;
-  position: absolute;
-  left: 18.1292rem;
-  top: 16.7432rem;
-  object-fit: contain;
-  vertical-align: top;
-}
-.WrapperMain .centerPortion .MeditationStageWrapper .stage-8 {
-  width: 86.2097rem;
-  height: 86.8697rem;
-  position: absolute;
-  left: 18.1677rem;
-  top: 16.7792rem;
-  object-fit: contain;
-  vertical-align: top;
-}
-.WrapperMain .centerPortion .MeditationStageWrapper .stage-7 {
-  width: 50.601rem;
-  height: 51.3978rem;
-  position: absolute;
-  left: 43.0118rem;
-  top: 60.25rem;
-  object-fit: contain;
-  vertical-align: top;
-  border-radius: 2.5rem;
-}
-.WrapperMain .centerPortion .MeditationStageWrapper .stage-6 {
-  width: 121.1169rem;
-  height: 120.4725rem;
-  position: absolute;
-  left: 2.4596rem;
-  top: 1.3357rem;
-  object-fit: contain;
-  vertical-align: top;
-}
-.WrapperMain .centerPortion .MeditationStageWrapper .stage-5 {
-  width: 104.9494rem;
-  height: 102.9214rem;
-  position: absolute;
-  left: 10.3643rem;
-  top: 9.3229rem;
-  object-fit: contain;
-  vertical-align: top;
-}
-.WrapperMain .centerPortion .MeditationStageWrapper .stage-4 {
-  width: 115.4989rem;
-  height: 114.6213rem;
-  position: absolute;
-  left: 5.6389rem;
-  top: 4.506rem;
-  object-fit: contain;
-  vertical-align: top;
-}
-.WrapperMain .centerPortion .MeditationStageWrapper .stage-3 {
-  width: 122.9902rem;
-  height: 123.2515rem;
-  position: absolute;
-  left: 0rem;
-  top: 0;
-  object-fit: contain;
-  vertical-align: top;
-}
-.WrapperMain .centerPortion .MeditationStageWrapper .stage-2 {
-  width: 86.2868rem;
-  height: 86.6262rem;
-  position: absolute;
-  left: 18.1292rem;
-  top: 16.7432rem;
-  object-fit: contain;
-  vertical-align: top;
-}
-.WrapperMain .centerPortion .MeditationStageWrapper .stage-1 {
-  width: 86.2868rem;
-  height: 86.6262rem;
-  position: absolute;
-  left: 15.045rem;
-  top: 15.4743rem;
-  object-fit: contain;
-  vertical-align: top;
-  rotate:-13deg;
-  transform: scale(1.2);
-}
-.WrapperMain .centerPortion .MeditationStageWrapper .Stage10Text {
-  width: 6.7rem;
-  height: 9.7rem;
-  position: absolute;
-  left: 43.7rem;
-  top: 55.5rem;
-  text-align: center;
-  font-size: 7rem;
-  font-weight: 400;
-  line-height: 1.375;
-  color: #ffffff;
-  font-family: Mako, 'Source Sans Pro';
-  white-space: nowrap;
-}
-.WrapperMain .centerPortion .MeditationStageWrapper .Stage9Text {
-  width: 4.1rem;
-  height: 9.7rem;
-  position: absolute;
-  left: 44.9357rem;
-  top: 66.6461rem;
-  text-align: center;
-  font-size: 7rem;
-  font-weight: 400;
-  line-height: 1.375;
-  color: #ffffff;
-  font-family: Mako, 'Source Sans Pro';
-  white-space: nowrap;
-}
-.WrapperMain .centerPortion .MeditationStageWrapper .Stage8Text {
-  width: 4rem;
-  height: 9.7rem;
-  position: absolute;
-  left: 53.5327rem;
-  top: 73.5405rem;
-  text-align: center;
-  font-size: 7rem;
-  font-weight: 400;
-  line-height: 1.375;
-  color: #ffffff;
-  font-family: Mako, 'Source Sans Pro';
-  white-space: nowrap;
-}
-.WrapperMain .centerPortion .MeditationStageWrapper .Stage7Text {
-  width: 3.2rem;
-  height: 9.7rem;
-  position: absolute;
-  left: 67.9776rem;
-  top: 75.4709rem;
-  text-align: center;
-  font-size: 7rem;
-  font-weight: 400;
-  line-height: 1.375;
-  color: #ffffff;
-  font-family: Mako, 'Source Sans Pro';
-  white-space: nowrap;
-}
-.WrapperMain .centerPortion .MeditationStageWrapper .Stage6Text {
-  width: 4.1rem;
-  height: 9.7rem;
-  position: absolute;
-  left: 84.9451rem;
-  top: 71.0585rem;
-  text-align: center;
-  font-size: 7rem;
-  font-weight: 400;
-  line-height: 1.375;
-  color: #ffffff;
-  font-family: Mako, 'Source Sans Pro';
-  white-space: nowrap;
-}
-.WrapperMain .centerPortion .MeditationStageWrapper .Stage5Text {
-  width: 3.6rem;
-  height: 9.7rem;
-  position: absolute;
-  left: 91.8017rem;
-  top: 54.8796rem;
-  text-align: center;
-  font-size: 7rem;
-  font-weight: 400;
-  line-height: 1.375;
-  color: #ffffff;
-  font-family: Mako, 'Source Sans Pro';
-  white-space: nowrap;
-}
-.WrapperMain .centerPortion .MeditationStageWrapper .Stage4Text {
-  width: 3.7rem;
-  height: 9.7rem;
-  position: absolute;
-  left: 86.8083rem;
-  top: 34.8398rem;
-  text-align: center;
-  font-size: 7rem;
-  font-weight: 400;
-  line-height: 1.375;
-  color: #ffffff;
-  font-family: Mako, 'Source Sans Pro';
-  white-space: nowrap;
-}
-.WrapperMain .centerPortion .MeditationStageWrapper .Stage3Text {
-  width: 3.7rem;
-  height: 9.7rem;
-  position: absolute;
-  left: 70.9154rem;
-  top: 23.533rem;
-  text-align: center;
-  font-size: 7rem;
-  font-weight: 400;
-  line-height: 1.375;
-  color: #ffffff;
-  font-family: Mako, 'Source Sans Pro';
-  white-space: nowrap;
-}
-.WrapperMain .centerPortion .MeditationStageWrapper .Stage2Text {
-  width: 3.4rem;
-  height: 9.7rem;
-  position: absolute;
-  left: 48.7507rem;
-  top: 20.1317rem;
-  text-align: center;
-  font-size: 7rem;
-  font-weight: 400;
-  line-height: 1.375;
-  color: #ffffff;
-  font-family: Mako, 'Source Sans Pro';
-  white-space: nowrap;
-}
-.WrapperMain .centerPortion .MeditationStageWrapper .Stage1Text {
-  width: 2.3rem;
-  height: 9.7rem;
-  position: absolute;
-  left: 30.1738rem;
-  top: 33.9206rem;
-  text-align: center;
-  font-size: 7rem;
-  font-weight: 400;
-  line-height: 1.375;
-  color: white;
-  font-family: Mako, 'Source Sans Pro';
-  white-space: nowrap;
-  z-index: 3;
 }
 @media (max-width: 600px) {
+  html {
+    font-size: 10%;
+  }
+
+  body .WrapperMain {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .WrapperMain .navigation {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+  }
+
+  body .WrapperMain .centerPortion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    top:250px;
+    left: 40px;
+  }
+
+  body .WrapperMain .navigation .AboutUsIcon {
+    position: absolute;
+    top: 30px;
+    left:380px;
+  }
+  .WrapperMain .navigation .SettingsPageIcon {
+    position: absolute;
+    top:30px;
+    z-index: 2;
+    left:16px
+  }
+  body .WrapperMain .navigation .appname-ApT {
+    position: absolute;
+    top:580px;
+    z-index: 2;
+    left:160px
+  }
+
+  .ellipses {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    grid-area: b;
+  }
+  p[class$='Text']:hover{
+    transform: scale(1.5);
+    cursor: pointer;
+    transition: transform 0.4s;
+  }
+
+}
+@media (max-width: 820px) {
   html {
     font-size: 10%;
   }
@@ -407,13 +465,13 @@ input {
     display: flex;
     flex-direction: column;
     align-items: center;
-    top:250px;
-    left: 25px;
+    top:400px;
+    left: 240px;
   }
 
   .WrapperMain .navigation .AboutUsIcon {
     top: 30px;
-    left:320px;
+    left:750px;
   }
   .WrapperMain .navigation .SettingsPageIcon {
     position: absolute;
@@ -423,9 +481,9 @@ input {
   }
   .WrapperMain .navigation .appname-ApT {
     position: absolute;
-    top:600px;
+    top:700px;
     z-index: 2;
-    left:140px
+    left:355px
   }
 
   .ellipses {

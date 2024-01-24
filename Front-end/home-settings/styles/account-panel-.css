@@ -28,7 +28,7 @@ body {
   background-color: #ffffff;
 }
 .account-panel--gzF .healthicons-ui-user-profile-Pdm {
-  margin: 3rem 7.4rem 1.975rem 4rem;
+  margin: 3rem 7.4rem 1rem 7rem;
   width: 18.3333rem;
   height: 19.7502rem;
   object-fit: contain;
@@ -46,6 +46,9 @@ body {
   font-style: Regular;
   font-family: Marcellus SC;
   box-sizing: border-box;
+}
+.set:hover {
+  text-shadow: 0 0 4px rgb(2, 52, 6);
 }
 .yellow {
   color: #f5b13c;

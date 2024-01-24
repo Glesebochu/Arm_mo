@@ -14,17 +14,18 @@ html {
     color: rgba(0, 0, 0, 1);
   }
   .settingTxt2 {
-    color: rgba(245, 177, 60, 1);
+    color: #f5b13c;
   }
 ul {
   background-color: rgb(249, 246, 246);
   width: 50%;
   height: 80%;
-  margin-bottom: 8%;
-  font-size: 200%;
+  margin-bottom: 5%;
+  font-weight:500;
+  font-size: 180%;
   display: flex;
   flex-direction: column;
-  gap: 6%;
+  gap: 4%;
   border: 2px solid rgb(198, 198, 198);
   padding-top: 6%;
   padding-bottom: 7%;
@@ -33,19 +34,20 @@ ul {
 li {
   font-family: inter;
   list-style-type: none;
-  font-size: 80%;
   margin-left: 5%;
+}
+li label {
+    font-size: 70%;
+    font-weight:500;
 }
 .sound {
   margin-left: 0;
-  font-size: 100%;
 }
 .sound input {
-  margin-left: 4.2%;
+  margin-left: 6%;
 }
 .brightness {
   margin-left: 0;
-  font-size: 100%;
 }
 .dial {
   width: 50%;
@@ -54,6 +56,15 @@ li {
   margin: 0;
   width: 100%;
   font-size: 100%;
+}
+.bot {
+    display: flex;
+    gap: 3%;
+    width: 80%;
+    margin-top: 5%;
+}
+.disable {
+    width: 65%;
 }
 li > input {
   margin-left: 3%;
@@ -69,11 +80,11 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 2%;
 }
 /* --div that holds the options--- */
 .options {
   font-family: inter;
-  font-weight: bold;
   width: 70%;
   height: 80%;
   padding: 0;
@@ -90,18 +101,18 @@ body {
   margin-left: 25%;
   margin-top: 10%;
   border: 2px solid rgb(186, 184, 184);
-  color: rgb(0, 58, 22);
+  color: rgb(61, 62, 61);
   background-color: rgb(255, 255, 255);
   border-radius: 5px;
   font-family: inter;
 }
-.reset:hover {
-  box-shadow: 0 0 5px black;
+.reset:active {
+  box-shadow: 0 0 20px rgb(83, 82, 82);
 }
 .home {
   font-size: 200%;
   text-decoration: none;
-  color: rgb(14, 71, 22);
+  color: rgb(61, 62, 61);
   font-family: "Times New Roman", Times, serif;
 }
 .home:hover {

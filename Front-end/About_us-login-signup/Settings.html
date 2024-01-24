@@ -84,29 +84,46 @@
             <label for="theme">Theme</label>
             <li>
                 <label class="dark">Dark</label>
-                <input type="checkbox">
+                <input type="radio" name="theme" class="cb1">
             </li>
             <li>
                 <label for="light">Light</label>
-                <input type="checkbox">
+                <input type="radio" name="theme" class="cb2">
             </li>
             <li class="sound">
                 <label for="sound">Sound</label>
-                <input type="checkbox">
+                <input type="checkbox" class="cb3">
             </li>
             <li class="brightness">
                 <label for="brightness">Brightness</label>
                 <input class="dial" type="range" min="0" max="100" value="50">
             </li>
-            <li class="tips">
-                <label for="tips">Email me meditation tips</label>
-                <input type="checkbox">
+            <label class="bot">Arm'mo Bot<i class="fas fa-robot"></i></label>
+            <li class="enable">
+                <label for="bot">Enable</label>
+                <input type="radio" name="bot" class="cb4">
+            </li>
+            <li class="disable">
+                <label for="bot">Disable</label>
+                <input type="radio" name="bot" class="cb5">
             </li>
             <button class="reset">Reset Settings</button>
         </ul>
     </div>
-
     <a class="home" href="#">Home</a>
+    <script>
+        $('.cb2').prop('checked', true)
+        $('.cb3').prop('checked', true)
+        $('.cb4').prop('checked', true)
+        $('.reset').on('click', function () {
+            $('.cb2').prop('checked', true)
+            $('.cb1').prop('checked', false)
+            $('.cb3').prop('checked', true)
+            $('.cb4').prop('checked', true)
+            $('.cb5').prop('checked', false)
+            $('.dial').val(50)
+        })
+    </script>
 </body>
 
 </html>

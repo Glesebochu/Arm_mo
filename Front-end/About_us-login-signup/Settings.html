@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Settings</title>
+    <meta charset="utf-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <title>Account panel </title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Linden+Hill:ital,wght@0,400;1,400&amp;display=swap"
+        data-tag="font" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Linden+Hill:ital,wght@0,400;1,400&amp;display=swap"
+        data-tag="font" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+        data-tag="font" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+        data-tag="font" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Linden+Hill:ital,wght@0,400;1,400&amp;display=swap"
+        data-tag="font" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+        data-tag="font" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Linden+Hill:ital,wght@0,400;1,400&amp;display=swap"
+        data-tag="font" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus+SC:wght@400&amp;display=swap"
+        data-tag="font" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Linden+Hill:ital,wght@0,400;1,400&amp;display=swap"
+        data-tag="font" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Linden+Hill:ital,wght@0,400;1,400&amp;display=swap"
+        data-tag="font" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+        data-tag="font" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+        data-tag="font" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+        data-tag="font" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+        data-tag="font" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Linden+Hill:ital,wght@0,400;1,400&amp;display=swap"
+        data-tag="font" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Linden+Hill:ital,wght@0,400;1,400&amp;display=swap"
+        data-tag="font" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Linden+Hill:ital,wght@0,400;1,400&amp;display=swap"
+        data-tag="font" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Megrim:wght@400&amp;display=swap"
+        data-tag="font" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Megrim:wght@400&amp;display=swap"
+        data-tag="font" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Megrim:wght@400&amp;display=swap"
+        data-tag="font" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Megrim:wght@400&amp;display=swap"
+        data-tag="font" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Linden+Hill%3A400" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro%3A400" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter%3A400" />
+    <link rel="stylesheet" href="settings.css" />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+</head>
+
+<body>
+    <div class="settingTxt">
+        <span class="settingTxt1">Settin</span>
+        <span class="settingTxt2">gs</span>
+    </div>
+    <div class="options">
+        <ul class="checkbox">
+            <label for="theme">Theme</label>
+            <li>
+                <label class="dark">Dark</label>
+                <input type="radio" name="theme" class="cb1">
+            </li>
+            <li>
+                <label for="light">Light</label>
+                <input type="radio" name="theme" class="cb2">
+            </li>
+            <li class="sound">
+                <label for="sound">Sound</label>
+                <input type="checkbox" class="cb3">
+            </li>
+            <li class="brightness">
+                <label for="brightness">Brightness</label>
+                <input class="dial" type="range" min="0" max="100" value="50">
+            </li>
+            <label class="bot">Arm'mo Bot<i class="fas fa-robot"></i></label>
+            <li class="enable">
+                <label for="bot">Enable</label>
+                <input type="radio" name="bot" class="cb4">
+            </li>
+            <li class="disable">
+                <label for="bot">Disable</label>
+                <input type="radio" name="bot" class="cb5">
+            </li>
+            <button class="reset">Reset Settings</button>
+        </ul>
+    </div>
+    <a class="home" href="#">Home</a>
+    <script>
+        $('.cb2').prop('checked', true)
+        $('.cb3').prop('checked', true)
+        $('.cb4').prop('checked', true)
+        $('.reset').on('click', function () {
+            $('.cb2').prop('checked', true)
+            $('.cb1').prop('checked', false)
+            $('.cb3').prop('checked', true)
+            $('.cb4').prop('checked', true)
+            $('.cb5').prop('checked', false)
+            $('.dial').val(50)
+        })
+    </script>
+</body>
+
+</html>

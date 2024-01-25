@@ -13,7 +13,7 @@ input {
   border: none;
 }
 body {
-  width: 100%
+  width: 100%;
 }
 .account-panel--gzF {
   box-sizing: border-box;
@@ -28,31 +28,30 @@ body {
   background-color: #ffffff;
 }
 .account-panel--gzF .healthicons-ui-user-profile-Pdm {
-  margin: 3rem 7.4rem 1.975rem 4rem;
+  margin: 3rem 7.4rem 1rem 7rem;
   width: 18.3333rem;
   height: 19.7502rem;
   object-fit: contain;
   vertical-align: top;
   flex-shrink: 0;
 }
-.account-panel--gzF .set-new-photo-uc7 {
-  margin: 0rem 9.9rem 1.8rem 0rem;
-  text-align: center;
-  font-size: 3.8rem;
-  font-weight: bold;
-  line-height: 1.375;
-  color: #0b57d0;
-  font-family: Linden Hill, "Source Sans Pro";
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-.set-new-photo-uc7 {
+.set {
   color: #000000;
-  padding-bottom: 10px;
-  padding-top: 15px;
-  padding-left: 30px;
+  padding-bottom: 15px;
+  padding-top: 20px;
   text-decoration: none;
-  font-size: 30px;
+  letter-spacing: 0;
+  font-size: 500%;
+  font-weight: 500;
+  font-style: Regular;
+  font-family: Marcellus SC;
+  box-sizing: border-box;
+}
+.set:hover {
+  text-shadow: 0 0 4px rgb(2, 52, 6);
+}
+.yellow {
+  color: #f5b13c;
 }
 .account-panel--gzF .email-QYs {
   margin-bottom: 5.8rem;
@@ -115,6 +114,7 @@ body {
 }
 .account-panel--gzF .old-password-Vyd .old-password-rJP {
   box-sizing: border-box;
+
   padding: 3.4rem 3.775rem 1.8rem 2.2rem;
   width: 100%;
   height: 100%;
@@ -131,8 +131,9 @@ body {
   flex-shrink: 0;
 }
 .old-password-hK1 {
+  padding-left: 10px;
   background-color: #d9d9d9;
-  width: 70%;
+  width: 60%;
 }
 .old-password-Vyd:hover {
   box-shadow: 0 0 10px black;
@@ -141,14 +142,18 @@ body {
   font-size: 15px;
 }
 .new-password-N3m {
+  padding-left: 10px;
   background-color: #d9d9d9;
-  width: 70%;
+  width: 60%;
+}
+.new-password-box-wDM:hover {
+  box-shadow: 0 0 10px black;
 }
 .eye.two {
   font-size: 15px;
 }
 .account-panel--gzF .old-password-Vyd .old-password-rJP .old-password-hK1 {
-  margin-right: 7rem;
+  margin-right: 20rem;
   margin-left: 4.5rem;
   font-size: 4rem;
   font-weight: 400;
@@ -198,7 +203,7 @@ body {
   flex-shrink: 0;
 }
 .account-panel--gzF .new-password-box-wDM .new-password-N3m {
-  margin-right: 7rem;
+  margin-right: 20rem;
   font-size: 4rem;
   font-weight: 400;
   line-height: 1.375;

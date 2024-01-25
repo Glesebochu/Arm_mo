@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Signup</title>
     <link rel="stylesheet" href="signup.css" />
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Linden+Hill:ital,wght@0,400;1,400&amp;display=swap"
@@ -130,10 +130,6 @@
                 <p id="error-message"></p>
 
                 <a class="haveAcc" href="login.html">Already have an account</a>
-                <div class="recom">
-                    <i class="fas fa-bell"></i>
-                    <a href="#">Send recommendations</a>
-                </div>
             </div>
         </div>
     </div>
@@ -150,6 +146,8 @@
                 return attr === 'password' ? 'text' : 'password';
             });
             $('.eye.two').toggleClass('fas fa-eye-slash fas fa-eye');
+        })
+        $('.fa-bell').on('click', function () {
         })
     </script>
 </body>

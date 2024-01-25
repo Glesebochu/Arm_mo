@@ -37,6 +37,7 @@ body {
   object-fit: contain;
   vertical-align: top;
   flex-shrink: 0;
+  border-radius: 50%;
 }
 .set {
   color: #000000;
@@ -52,6 +53,7 @@ body {
 }
 .set:hover {
   text-shadow: 0 0 4px rgb(2, 52, 6);
+  cursor: pointer;
 }
 .yellow {
   color: #f5b13c;

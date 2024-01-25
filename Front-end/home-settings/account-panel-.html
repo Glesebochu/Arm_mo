@@ -5,70 +5,7 @@
   <link rel="icon" href="/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#000000" />
-  <title>Account panel </title>
-  <link rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=Linden+Hill:ital,wght@0,400;1,400&amp;display=swap"
-  data-tag="font" />
-<link rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=Linden+Hill:ital,wght@0,400;1,400&amp;display=swap"
-  data-tag="font" />
-<link rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
-  data-tag="font" />
-<link rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
-  data-tag="font" />
-<link rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=Linden+Hill:ital,wght@0,400;1,400&amp;display=swap"
-  data-tag="font" />
-<link rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
-  data-tag="font" />
-<link rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=Linden+Hill:ital,wght@0,400;1,400&amp;display=swap"
-  data-tag="font" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus+SC:wght@400&amp;display=swap"
-  data-tag="font" />
-<link rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=Linden+Hill:ital,wght@0,400;1,400&amp;display=swap"
-  data-tag="font" />
-<link rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=Linden+Hill:ital,wght@0,400;1,400&amp;display=swap"
-  data-tag="font" />
-<link rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
-  data-tag="font" />
-<link rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
-  data-tag="font" />
-<link rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
-  data-tag="font" />
-<link rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
-  data-tag="font" />
-<link rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=Linden+Hill:ital,wght@0,400;1,400&amp;display=swap"
-  data-tag="font" />
-<link rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=Linden+Hill:ital,wght@0,400;1,400&amp;display=swap"
-  data-tag="font" />
-<link rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=Linden+Hill:ital,wght@0,400;1,400&amp;display=swap"
-  data-tag="font" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Megrim:wght@400&amp;display=swap"
-  data-tag="font" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Megrim:wght@400&amp;display=swap"
-  data-tag="font" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Megrim:wght@400&amp;display=swap"
-  data-tag="font" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Megrim:wght@400&amp;display=swap"
-  data-tag="font" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Linden+Hill%3A400" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro%3A400" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter%3A400" />
-<link rel="stylesheet" href="settings.css" />
-
+  <title>Account panel</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Linden+Hill%3A400" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro%3A400" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter%3A400" />
@@ -79,34 +16,62 @@
 
 <body>
   <div class="account-panel--gzF">
-    <img class="healthicons-ui-user-profile-Pdm" src="./assets/healthicons-ui-user-profile.png" />
-    <a href="local/pictures" class="set">SET <span class="yellow">NEW</span> PHOTO</a>
-  <form action="">
-    <input type="email" class="email-QYs" placeholder="Email or Player name" />
-    <input type="text" class="firstname-box-hH5" placeholder="John" />
-    <input type="text" class="lastname-box-Pvb" placeholder="Doe" />
-
-    <div class="dateofbirth-box-RGw">
-      <label>Date of birth</label>
-      <input type="date" class="datePicker">
-    </div>
-    <button class="edit-button-ap3">
-      Edit Account
-    </button>
+    <img class="healthicons-ui-user-profile-Pdm" id="profilePic" src="./assets/healthicons-ui-user-profile.png" />
+    <p class="set"onclick="showPictureInput()">SET <span class="yellow">NEW</span> PHOTO</p>
+    <form action="">
+      <input type="email" class="email-QYs" placeholder="Email or Player name" />
+      <input type="text" class="firstname-box-hH5" placeholder="John" />
+      <input type="text" class="lastname-box-Pvb" placeholder="Doe" />
+      <input type="file" id="pictureInput" accept="image/*" style="display: none;" />
+      <div class="dateofbirth-box-RGw">
+        <label>Date of birth</label>
+        <input type="date" class="datePicker">
+      </div>
+      <button class="edit-button-ap3">
+        Edit Account
+      </button>
+    </form>
   </div>
-</form>
+
+  <script>
+    function handlePictureSelection(event) {
+      const selectedFile = event.target.files[0];
+      const imageUrl = URL.createObjectURL(selectedFile);
+
+      // Update the profilePic element with the selected image
+      const profilePic = document.getElementById('profilePic');
+      profilePic.onload = () => {
+        URL.revokeObjectURL(profilePic.src); // Clean up the object URL
+      };
+      profilePic.src = imageUrl;
+
+      // Perform other actions with the selected file or image URL
+      console.log('Selected file:', selectedFile.name);
+      console.log('Image URL:', imageUrl);
+    }
+
+    function showPictureInput() {
+      const pictureInput = document.getElementById('pictureInput');
+      pictureInput.click();
+    }
+
+    document.getElementById('pictureInput').addEventListener('change', handlePictureSelection);
+  </script>
+
   <script>
     $('.eye.one').on('click', function () {
-            $('.old-password-hK1').attr('type', function (index, attr) {
-                return attr === 'password' ? 'text' : 'password';
-            });
-            $('.eye.one').toggleClass('fas fa-eye-slash fas fa-eye');
-        })
-        $('.eye.two').on('click', function () {
-            $('.new-password-N3m').attr('type', function (index, attr) {
-                return attr === 'password' ? 'text' : 'password';
-            });
-            $('.eye.two').toggleClass('fas fa-eye-slash fas fa-eye');
-        })
+      $('.old-password-hK1').attr('type', function (index, attr) {
+        return attr === 'password' ? 'text' : 'password';
+      });
+      $('.eye.one').toggleClass('fas fa-eye-slash fas fa-eye');
+    });
+
+    $('.eye.two').on('click', function () {
+      $('.new-password-N3m').attr('type', function (index, attr) {
+        return attr === 'password' ? 'text' : 'password';
+      });
+      $('.eye.two').toggleClass('fas fa-eye-slash fas fa-eye');
+    });
   </script>
 </body>
+</html>

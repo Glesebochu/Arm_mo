@@ -1,5 +1,6 @@
 html {
   font-size: 30.5%;
+  
 }
 * {
   margin: 0;
@@ -13,7 +14,9 @@ input {
   border: none;
 }
 body {
+  position: relative;
   width: 100%;
+  top:50px;
 }
 .account-panel--gzF {
   box-sizing: border-box;

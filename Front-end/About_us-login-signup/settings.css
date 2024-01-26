@@ -22,10 +22,10 @@ ul {
   height: 80%;
   margin-bottom: 5%;
   font-weight:500;
-  font-size: 180%;
+  font-size: 190%;
   display: flex;
   flex-direction: column;
-  gap: 4%;
+  gap: 10%;
   border: 2px solid rgb(198, 198, 198);
   padding-top: 6%;
   padding-bottom: 7%;
@@ -37,16 +37,18 @@ li {
   margin-left: 5%;
 }
 li label {
-    font-size: 70%;
+    font-size: 90%;
     font-weight:500;
 }
 .sound {
+  font-size: 100%;
   margin-left: 0;
 }
 .sound input {
   margin-left: 6%;
 }
 .brightness {
+  font-size: 100%;
   margin-left: 0;
 }
 .dial {
@@ -99,7 +101,7 @@ body {
   font-size: 80%;
   font-weight: 550;
   margin-left: 25%;
-  margin-top: 10%;
+  margin-top: 30%;
   border: 2px solid rgb(186, 184, 184);
   color: rgb(61, 62, 61);
   background-color: rgb(255, 255, 255);

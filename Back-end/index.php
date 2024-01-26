@@ -505,6 +505,31 @@
         }
     }
 
+    // Creating the procedure to edit passwrod
+    {
+        $queryEditPassword = "CREATE PROCEDURE EditPassword(
+            IN p_username VARCHAR(100),
+            IN p_password VARCHAR(100)
+        )
+        BEGIN
+            UPDATE Meditator
+            SET Password = p_password
+            WHERE username = p_username;
+        END;";
+        $procedureNameEditPassword = 'EditPassword';
+        $checkProcedureEditPassword = "SHOW PROCEDURE STATUS WHERE Name = 'EditPassword'";
+        
+        if ($db->query($checkProcedureEditPassword)->num_rows > 0) {
+            echo "The stored procedure '$procedureNameEditPassword' already exists.";
+        } else {
+            if ($db->query($queryEditPassword) === TRUE) {
+                echo "The stored procedure '$procedureNameEditPassword' has been successfully created.";
+            } else {
+                echo "Error creating stored procedure: " . $db->error;
+            }
+        }
+    }
+
     // Inserting the stage
     {
         // $sqlInsertStage= "INSERT INTO Meditation_Stage(GOAL) VALUES(' Develop a consistent daily meditation practice')";

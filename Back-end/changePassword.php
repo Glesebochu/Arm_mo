@@ -21,8 +21,8 @@ if ($cpassword === $newpassword) {
     $count = $row['@p_exists'];
 
     if ($count == 1) {
-        $queryCheckCredentials = "CALL EditPassword('$username', '$newpassword')";
-        $db->query($queryCheckCredentials);
+        $queryEditPassword = "CALL EditPassword('$username', '$newpassword')";
+        $db->query($queryEditPassword);
         $successMessage = 'Password changed successfully';
         echo "
             <script>

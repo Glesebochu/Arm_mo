@@ -3,8 +3,8 @@
 
 // Retrieve the submitted form data
 $username = $_POST['username'];
-$password = $_POST['password'];
-$cpassword= $_POST['cpassword'];
+$password = $_POST['pwdInput'];
+$cpassword= $_POST['cpwdInput'];
 $firstname = $_POST['firstname'];
 $lastname = $_POST['lastname'];
 $dob = $_POST['dob'];

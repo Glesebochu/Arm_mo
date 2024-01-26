@@ -20,8 +20,11 @@
             elem[0].style.backgroundColor='white';
             contentDiv.style.left='-200px';
             var tab = document.getElementsByClassName("activeTab");
+            var tab2 = document.getElementsByClassName("deletecss");
             tab[0].classList.add('tempClass');
             tab[0].classList.remove('activeTab');
+            tab2[0].classList.add('tempClass2');
+            tab2[0].classList.remove('deletecss');
 
 
           }
@@ -29,8 +32,12 @@
             elem[0].style.left='0px';
             contentDiv.style.left='0px';
             var tab = document.getElementsByClassName('tempClass');
+            var tab2 = document.getElementsByClassName('tempClass2');
+
             tab[0].classList.add('activeTab');
             tab[0].classList.remove('tempClass');
+            tab2[0].classList.add('deletecss');
+            tab2[0].classList.remove('tempClass2');
           }
 
         }
@@ -82,12 +89,31 @@
       function activeTab(tabClicked){
         for(tab of tabs){
           tab.classList.remove('activeTab');
+          tab.classList.remove('deletecss');
         }
         var tabClick= document.getElementsByClassName(tabClicked);
         for(tab of tabClick){
           tab.classList.add('activeTab')
         }
         
+      }
+    </script>
+
+<script>
+  
+  function deletecss(tabClicked){
+    
+    var tabClick= document.getElementsByClassName(tabClicked);
+    for(tab of tabClick){
+      tab.classList.add('deletecss')
+    }
+    
+  }
+</script>
+
+    <script>
+      function deleteAccount(){
+        prompt('Are you sure you want to delete your account?')
       }
     </script>
   </head>
@@ -117,6 +143,11 @@
         <p class="passwordText">Password</p>
       </section>
 
+      <section class="deleteAccountButton sideMenuButtons" onclick="openSideMenu('./deleteAccountPanel.html');deletecss('deleteAccountButton')">
+        <img class="deleteAccountIcon" src="./assets/trash-2.svg"/>
+        <p class="deleteAccountText">Delete Account</p>
+      </section>
+      
       <section class="logoutButton sideMenuButtons" onclick="navigateToPage('../About_us-login-signup/login.html')">
         <img class="logoutIcon" src="./assets/log-out.svg"/>
         <p class="logoutText">Log Out</p>

@@ -530,6 +530,29 @@
         }
     }
 
+    // Creating the procedure to delete account
+    {
+        $queryDeleteAccount = "CREATE PROCEDURE DeleteAccount(
+            IN p_username VARCHAR(100)
+        )
+        BEGIN
+            DELETE FROM Meditator
+            WHERE username = p_username;
+        END;";
+        $procedureNameDeleteAccount = 'DeleteAccount';
+        $checkProcedureDeleteAccount = "SHOW PROCEDURE STATUS WHERE Name = 'DeleteAccount'";
+        
+        if ($db->query($checkProcedureDeleteAccount)->num_rows > 0) {
+            echo "The stored procedure '$procedureNameDeleteAccount' already exists.";
+        } else {
+            if ($db->query($queryDeleteAccount) === TRUE) {
+                echo "The stored procedure '$procedureNameDeleteAccount' has been successfully created.";
+            } else {
+                echo "Error creating stored procedure: " . $db->error;
+            }
+        }
+    }
+
     // Inserting the stage
     {
         // $sqlInsertStage= "INSERT INTO Meditation_Stage(GOAL) VALUES(' Develop a consistent daily meditation practice')";

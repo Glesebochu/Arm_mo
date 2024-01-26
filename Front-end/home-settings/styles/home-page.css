@@ -16,7 +16,6 @@
     .WrapperMain {
       width: 100%;
       height: 100vh;
-      /* position: relative; */
       overflow: hidden;
       background-color: #ffffff;
       display: flex;
@@ -25,7 +24,7 @@
       width: 22.9rem;
       height: 16.1176rem;
       position: absolute; 
-      left: 450.6rem;
+      left: 472.6rem;
       top: 219.0912rem; 
       justify-content: center;
       align-items: center;

@@ -10,6 +10,8 @@ $lastname = $_POST['lastname'];
 $dob = $_POST['dob'];
 
 if ($cpassword === $password) {
+    session_start();
+    $_SESSION['UsernametoEdit']=$username;
     include('Connect.php');
     $con = new Connect;
     $db = $con->__getConnection();

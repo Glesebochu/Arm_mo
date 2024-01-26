@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro%3A400"/>
     <link rel="stylesheet" href="./styles/settings-page.css"/>
     <script>
+      
       function hideMenuBar(className){
         var elem=window.document.getElementsByClassName(className);
         var contentDiv = document.getElementById('contentDiv');
@@ -56,7 +57,7 @@
         }
         
       }
-      function navigateToHome(link){
+      function navigateToPage(link){
         window.open(link,'_self')
       }
 
@@ -67,10 +68,14 @@
           hideMenuBar('sideMenu');
         }
       }
-
-      
     </script>
-
+    <script>
+      // Add this code to trigger the click event for the account panel by default
+      window.addEventListener('DOMContentLoaded', function () {
+        openSideMenu('./account-panel-.html');
+        activeTab('accountDetailsButton');
+      });
+    </script>
     <script>
       var tabs = document.getElementsByClassName("sideMenuButtons");
       
@@ -107,16 +112,14 @@
         <p class="themeText">Appearance</p>
       </section>
 
-      <!-- <section class="soundControlButton sideMenuButtons" >
-        <section class="soundControls"onclick="openSideMenu('./sound-control.html');activeTab('soundControlButton')" >
-          <p class="sound-controls-G27">Sound Controls</p>
-          <img class="lets-icons-sound-max-fill-mDm" src="./assets/lets-icons-sound-max-fill.png"/>
-        </section>
-      </section> -->
-
       <section class="passwordButton sideMenuButtons" onclick="openSideMenu('./changePasswordPanel.html');activeTab('passwordButton')">
         <img class="passwordIcon" src="./assets/key-round.svg"/>
         <p class="passwordText">Password</p>
+      </section>
+
+      <section class="logoutButton sideMenuButtons" onclick="navigateToPage('../About_us-login-signup/login.html')">
+        <img class="logoutIcon" src="./assets/log-out.svg"/>
+        <p class="logoutText">Log Out</p>
       </section>
 
     </nav>
@@ -127,7 +130,7 @@
 
       <div class="logoIcon">
         <img class="writing-1-opf" src="./assets/writing-1-Qcb.png"/>
-        <img class="armimo-logo-2-1-LJo" onclick="navigateToHome('./home-page.html')" src="./assets/armimo-logo-2-1-mPH.png"/>
+        <img class="armimo-logo-2-1-LJo" onclick="navigateToPage('./home-page.html')" src="./assets/armimo-logo-2-1-mPH.png"/>
       </div>
     </section>
 

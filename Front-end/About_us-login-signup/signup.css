@@ -17,7 +17,7 @@ body {
 .whole {
   height: 100%;
   width: 100%;
-  margin: 5%;
+  margin: 2%;
   margin-left: 5%;
   box-sizing: border-box;
 }
@@ -39,18 +39,19 @@ body {
 /* -----The central div------ */
 .center {
   align-items: center;
+  margin-left: 25%;
   margin-top: 5%;
-  margin-left: 10%;
   display: flex;
   align-items: center;
   flex-direction: column;
   height: 100%;
-  width: 70%;
+  width: 50%;
   box-sizing: border-box;
+  gap: 7%;
 }
 /* -------The big sign up text---- */
 .signupText {
-  flex: 0.3;
+  flex: 0.5;
   display: flex;
   gap: 10%;
   box-sizing: border-box;
@@ -69,11 +70,11 @@ body {
 }
 /* ----The whole text box area-- */
 .textBox {
-  flex: 2;
+  flex: 5;
   width: 60%;
   display: flex;
   flex-direction: column;
-  gap: 3%;
+  gap: 4%;
   box-sizing: border-box;
 }
 .textBox > * {
@@ -81,7 +82,7 @@ body {
 }
 /* ----email div that has the input & logo div---- */
 .email {
-  flex: 1;
+  flex: 0.5;
   display: flex;
   flex-direction: row;
   gap: 0;
@@ -105,7 +106,7 @@ body {
 }
 /* --email icon div--- */
 .emailIconWhole {
-  padding-top: 4%;
+  padding-top: 3%;
   padding-left: 2.2%;
   height: 100%;
   width: 8%;
@@ -116,7 +117,7 @@ body {
 }
 /* ---pwd div--- */
 .password {
-  flex: 1;
+  flex: 0.5;
   display: flex;
   flex-direction: row;
 }
@@ -138,18 +139,18 @@ body {
   font-weight: 700;
 }
 .pwdIconWhole {
-  padding-top: 4%;
+  padding-top: 3%;
   padding-left: 2.2%;
   height: 100%;
   width: 8%;
   background-color: rgb(216, 211, 211);
 }
 .pwdIconWhole > * {
-  font-size: 120%;
+  font-size: 110%;
 }
 /* ---confirm pwd div---- */
 .confirmPwd {
-  flex: 1;
+  flex: 0.5;
   display: flex;
   flex-direction: row;
 }
@@ -171,19 +172,37 @@ body {
   font-weight: 700;
 }
 .cpwdIconWhole {
-  padding-top: 4%;
-  padding-left: 2.2%;
+  padding-top: 3%;
+  padding-left: 2%;
   height: 100%;
   width: 8%;
   background-color: rgb(216, 211, 211);
 }
 .cpwdIconWhole > * {
-  font-size: 120%;
+  font-size: 110%;
+}
+.pwdIconeye {
+  padding-top: 3%;
+  height: 100%;
+  width: 8%;
+  background-color: rgb(216, 211, 211);
+}
+.eye.one {
+  font-size: 110%;
+}
+.cpwdIconeye {
+  padding-top: 3%;
+  height: 100%;
+  width: 8%;
+  background-color: rgb(216, 211, 211);
+}
+.eye.two {
+  padding: 0;
+  font-size: 110%;
 }
 /* ----Firstname text box---- */
 .fnameInput {
-  flex: 0.2;
-  padding: 5%;
+  flex: 0.5;
   padding-left: 12%;
   border: none;
   background-color: rgb(216, 211, 211);
@@ -199,8 +218,7 @@ body {
 }
 /* -lastname text box- */
 .lnameInput {
-  flex: 0.2;
-  padding: 5%;
+  flex: 0.5;
   padding-left: 12%;
   border: none;
   background-color: rgb(216, 211, 211);
@@ -216,14 +234,15 @@ body {
 }
 /* -singn up button--- */
 .button {
-  flex: 0.8;
-  margin-left: 10%;
-  width: 80%;
+  flex: 0.5;
+  margin-left: 20%;
+  margin-top: 5%;
+  width: 60%;
   border: none;
   color: rgba(253, 204, 121, 1);
   background-color: rgba(1, 65, 0, 1);
   border-radius: 5px;
-  font-size: 180%;
+  font-size: 160%;
   font-family: inter;
 }
 .button:active {
@@ -231,21 +250,22 @@ body {
 }
 /* ---date div that has the date of birth label & date input-- */
 .date {
-  flex: 1.1;
+  flex: 0.5;
   display: flex;
   flex-direction: column;
+  gap: 30%;
 }
 .date > * {
   flex: 1;
-  font-size: 125%;
-  font-weight: 600;
+  font-size: 120%;
+  font-weight: 500;
   font-family: inter;
-  color: rgb(75, 74, 74);
+  color: rgb(125, 124, 124);
 }
 /* ---date input style--- */
 .datePicker {
-  color: rgb(57, 55, 55);
-  border-radius: 15%;
+  padding-left: 2%;
+  color: rgb(120, 116, 116);
   border: solid 1px rgb(158, 158, 158);
 }
 .datePicker:hover {
@@ -254,7 +274,7 @@ body {
 /* --already have an acount link style-- */
 .haveAcc {
   flex: 1;
-  padding-left: 35%;
+  padding-left: 33%;
   text-decoration: underline;
   color: rgb(92, 91, 91);
   font-size: 120%;

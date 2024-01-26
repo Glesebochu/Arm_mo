@@ -58,6 +58,7 @@
     // Drop tables here
     {
         // $db->query("DROP TABLE Mastery");
+        // $db->query("DROP PROCEDURE AddMeditator");
     }
 
     // Creating the Meditation Stage table
@@ -398,6 +399,80 @@
            }
 
        }
+
+    }
+
+    // Creating the procedure to insert data onto the meditator table
+    {
+        $procedureName = 'AddMeditator';
+        $queryAddMeditator = "CREATE PROCEDURE AddMeditator(
+            IN p_username VARCHAR(50),
+            IN p_firstname VARCHAR(100),
+            IN p_lastname VARCHAR(100),
+            IN p_password VARCHAR(100),
+            IN p_dob DATE,
+            IN p_sid INT
+        )
+        BEGIN
+            INSERT INTO Meditator (Username, Firstname, Lastname, Password, Date_of_birth,Stage_ID)
+            VALUES (p_username, p_firstname, p_lastname, p_password, p_dob,p_sid);
+        END";
+
+        $checkProcedureQuery = "SHOW PROCEDURE STATUS WHERE Name = '$procedureName'";
+        if($db->query($checkProcedureQuery)->num_rows>0){
+        echo "The stored procedure '$procedureName' already exists.";
+        }
+        else{
+        if ($db->query($queryAddMeditator) === TRUE) {
+            echo "The stored procedure '$procedureName' has been successfully created.";
+        } else {
+            echo "Error creating stored procedure: " . $db->error;
+        }
+        }
+    }
+
+    // Creating the procedure to check  login credentials
+    {
+        $queryCheckCredentials="CREATE PROCEDURE CheckCredentials(
+            IN p_username VARCHAR(50),
+            IN p_password VARCHAR(100),
+            OUT p_exists INT
+          )
+          BEGIN
+            DECLARE count INT;
+            
+            SELECT COUNT(*) INTO count
+            FROM Meditator
+            WHERE Username = p_username AND Password = p_password;
+            
+            IF count > 0 THEN
+              SET p_exists = 1;
+            ELSE
+              SET p_exists = 0;
+            END IF;
+          END;";
+        $procedureNameCred='CheckCredentials';
+        $checkProcedureCredQuery = "SHOW PROCEDURE STATUS WHERE Name = 'CheckCredentials'";
+
+        if($db->query($checkProcedureCredQuery)->num_rows>0){
+         echo "The stored procedure '$procedureNameCred' already exists.";
+        }
+
+        else{
+
+            if ($db->query($queryCheckCredentials) === TRUE) {
+                echo "The stored procedure '$procedureNameCred' has been successfully created.";
+            } else {
+                echo "Error creating stored procedure: " . $db->error;
+            }
+
+        }
+    }
+
+    // Inserting the stage
+    {
+        // $sqlInsertStage= "INSERT INTO Meditation_Stage(GOAL) VALUES('having peace of mind')";
+        // $db->query($sqlInsertStage);
 
     }
     

@@ -114,20 +114,49 @@ body {
   white-space: nowrap;
   flex-shrink: 0;
 }
-.mainWrapper .sideMenu .soundControlButton {
+.mainWrapper .sideMenu .passwordButton {
+  margin: 0rem 33.45rem 1rem 1.783rem;
+  box-sizing: border-box;
+  padding-left: 1rem;
+  width: calc(100%);
+  height: 15.2rem;
+  display: flex;
+  align-items: center;
+}
+.mainWrapper .sideMenu .passwordButton .passwordIcon {
+  margin: 0.1rem 6.45rem 0rem 0rem;
+  width: 10rem;
+  height: 9.25rem;
+  object-fit: contain;
+  vertical-align: top;
+  flex-shrink: 0;
+}
+.mainWrapper .sideMenu .passwordButton .passwordText {
+  margin-bottom: 2.8rem;
+  text-align: center;
+  font-size: 9rem;
+  font-weight: 400;
+  line-height: 1.375;
+  color: #000000;
+  font-family: Mako, 'Source Sans Pro';
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.mainWrapper .sideMenu .soundControls {
   margin-left: 2.2833rem;
   width: calc(100% - 2.2833rem);
   display: flex;
   align-items: flex-end;
 }
-.mainWrapper .sideMenu .soundControlButton .soundControls {
-  margin: 0rem 289.55rem 2rem 0rem;
+.mainWrapper .sideMenu  .soundControls {
+  margin: 1rem 289.55rem 2rem 0rem;
+  padding-top:10rem;
   width: 64.15rem;
   height: 13.1rem;
   position: relative;
   flex-shrink: 0;
 }
-.mainWrapper .sideMenu .soundControlButton .soundControls .sound-controls-G27 {
+.mainWrapper .sideMenu  .soundControls .sound-controls-G27 {
   width: 59.5rem;
   height: 12.4rem;
   position: absolute;
@@ -141,7 +170,7 @@ body {
   font-family: Mako, 'Source Sans Pro';
   white-space: nowrap;
 }
-.mainWrapper .sideMenu .soundControlButton .soundControls .lets-icons-sound-max-fill-mDm {
+.mainWrapper .sideMenu .soundControls .lets-icons-sound-max-fill-mDm {
   width: 8.5436rem;
   height: 6.8797rem;
   /* position: absolute; */
@@ -150,7 +179,7 @@ body {
   object-fit: contain;
   vertical-align: top;
 }
-.mainWrapper .sideMenu .soundControlButton .mdi-hamburger-open-UP5 {
+.mainWrapper .sideMenu  .mdi-hamburger-open-UP5 {
   width: 2.4rem;
   height: 2.4rem;
   overflow: hidden;

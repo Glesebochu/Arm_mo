@@ -19,9 +19,9 @@
     <img class="healthicons-ui-user-profile-Pdm" id="profilePic" src="./assets/healthicons-ui-user-profile.png" />
     <p class="set"onclick="showPictureInput()">SET <span class="yellow">NEW</span> PHOTO</p>
     <form id="editAccountForm" action="https://localhost/Arm-mo/Arm-mo-Fork/Back-end/EditAccount.php" method="POST" enctype="multipart/form-data">
-      <input type="email" name="username" class="email-QYs" placeholder="Username" />
-      <input type="text" name="firstname" class="firstname-box-hH5" placeholder="Firstname" />
-      <input type="text" name="lastname" class="lastname-box-Pvb" placeholder="Lastname" />
+      <input type="email" required name="username" class="email-QYs" placeholder="Username" />
+      <input type="text" required name="firstname" class="firstname-box-hH5" placeholder="Firstname" />
+      <input type="text" required name="lastname" class="lastname-box-Pvb" placeholder="Lastname" />
       <input type="file" name="profilepic" id="pictureInput" accept="image/*" style="display: none;" />
       <div class="dateofbirth-box-RGw">
         <label>Date of birth</label>
@@ -34,9 +34,9 @@
   </div>
 
   <script>
-    function submitForm() {
-      document.getElementById('editAccountForm').submit();
-    }
+    // function submitForm() {
+    //   doc  ument.getElementById('editAccountForm').submit();
+    // }
     function handlePictureSelection(event) {
       const selectedFile = event.target.files[0];
       const imageUrl = URL.createObjectURL(selectedFile);

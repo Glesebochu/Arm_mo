@@ -76,14 +76,45 @@
         }
       }
     </script>
-    <script>
-      // Add this code to trigger the click event for the account panel by default
-      window.addEventListener('DOMContentLoaded', function () {
-        openSideMenu('./account-panel-.html');
-        activeTab('accountDetailsButton');
+<script>
+      window.addEventListener('DOMContentLoaded', () => {
+        <?php
+          include_once('../../Back-end/Connect.php');
+          $con = new Connect;
+          $db = $con->__getConnection();
+          $db->query('USE Arm_mo');
+          session_start();
+
+          $UsernametoEdit = $_SESSION['UsernametoEdit'];
+
+          if (isset($_SESSION['UsernametoEdit'])) {
+              // Fetch the profile picture from the database
+              $queryProfilePic = "SELECT Profile_Picture FROM Meditator WHERE Username = '$UsernametoEdit'";
+              $result = $db->query($queryProfilePic);
+              $row = $result->fetch_assoc();
+              $profilePicture = $row['Profile_Picture'];
+
+              if ($profilePicture == null||$profilePicture=="") {
+                  $profilePicture = './assets/healthicons-ui-user-profile-YyH.png';
+                  
+              }
+              else{
+                $profilePicture='../../Back-end'.$profilePicture;
+              }
+          } else {
+              echo 'Could not retrieve your profile picture!';
+          }
+          ?>
+          
+          // Set the profile picture as the src attribute of the img element
+          var profilePictureElement = document.getElementById('profilePicture');
+          profilePictureElement.src = '<?php echo $profilePicture; ?>';
+
+          openSideMenu('./account-panel-.html');
+          activeTab('accountDetailsButton');
       });
     </script>
-    <script>
+<script>
       var tabs = document.getElementsByClassName("sideMenuButtons");
       
       function activeTab(tabClicked){
@@ -124,7 +155,7 @@
     <nav class="sideMenu">
 
       <section class="sideMenuIcons">
-        <img class="userProfilePic" src="./assets/healthicons-ui-user-profile-YyH.png"/>
+        <img class="userProfilePic" id="profilePicture" src="./assets/healthicons-ui-user-profile-YyH.png"/>
         <img class="minimizeMenuIcon" onclick="hideMenuBar('sideMenu')" src="./assets/vector-RtP.png"/>
       </section>
 

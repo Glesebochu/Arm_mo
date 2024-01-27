@@ -24,9 +24,10 @@ if (isset($_SESSION['UsernametoEdit'])) {
     $db->query('USE Arm_mo');
     $queryEditAccount = "CALL EditAccount('$UsernametoEdit', '$username', '$firstname', '$lastname', '$dob', '$profilepic')";
     $_SESSION['UsernametoEdit']=$username;
+    $_SESSION['profilepic']=$profilepic;
     $db->query($queryEditAccount);
-
-    echo "<script>window.location.reload();</script>";
+    echo "<script>alert('You have successfully edited your Account!';</script>";
+    echo "<script>window.top.location.reload();</script>";
     exit;
 } else {
     echo "<script>alert('Username to edit unavailable!');</script>";

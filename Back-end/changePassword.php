@@ -2,7 +2,7 @@
 // process-login.php
 
 // Retrieve the submitted form data
-$oldpassword = $_POST['oldpassword'];
+$oldpassword = $_POST['password'];
 $newpassword = $_POST['newpassword'];
 $cpassword= $_POST['confirmpassword'];
 

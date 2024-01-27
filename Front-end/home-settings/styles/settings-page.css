@@ -46,6 +46,7 @@ body {
   object-fit: contain;
   vertical-align: top;
   flex-shrink: 0;
+  border-radius: 50%;
 }
 .mainWrapper .sideMenu .sideMenuIcons .minimizeMenuIcon {
   margin-top: 0.0577rem;

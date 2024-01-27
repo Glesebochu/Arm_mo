@@ -76,7 +76,7 @@
         }
       }
     </script>
-<script>
+    <script>
       window.addEventListener('DOMContentLoaded', () => {
         <?php
           include_once('../../Back-end/Connect.php');
@@ -110,11 +110,19 @@
           var profilePictureElement = document.getElementById('profilePicture');
           profilePictureElement.src = '<?php echo $profilePicture; ?>';
 
+         // Set the username
+         var userNamePar = document.getElementById('userNameText');
+         userNamePar.innerHTML = '<?php echo $UsernametoEdit; ?>';
+          
+          
+
+
           openSideMenu('./account-panel-.html');
           activeTab('accountDetailsButton');
       });
     </script>
-<script>
+
+    <script>
       var tabs = document.getElementsByClassName("sideMenuButtons");
       
       function activeTab(tabClicked){
@@ -156,6 +164,7 @@
 
       <section class="sideMenuIcons">
         <img class="userProfilePic" id="profilePicture" src="./assets/healthicons-ui-user-profile-YyH.png"/>
+        <p class="userNameText" id='userNameText'></p>
         <img class="minimizeMenuIcon" onclick="hideMenuBar('sideMenu')" src="./assets/vector-RtP.png"/>
       </section>
 
@@ -164,7 +173,7 @@
         <p class="accountDetailsText">Account</p>
       </section>
 
-      <section class="themeButton sideMenuButtons" onclick="openSideMenu('./theme.html');activeTab('themeButton')">
+      <section class="themeButton sideMenuButtons" onclick="openSideMenu('../About_us-login-signup/Theme.html');activeTab('themeButton')">
         <img class="themeIcon" src="./assets/fluent-dark-theme-24-regular.png"/>
         <p class="themeText">Appearance</p>
       </section>

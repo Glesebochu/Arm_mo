@@ -2,6 +2,8 @@ html {
   height: 100%;
   width: 100%;
   align-items: center;
+  position: relative;
+  left:-80px;
 }
 .settingTxt > * {
     letter-spacing: 0;

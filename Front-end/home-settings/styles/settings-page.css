@@ -41,12 +41,27 @@ body {
 }
 .mainWrapper .sideMenu .sideMenuIcons .userProfilePic {
   margin-right: 75.25rem;
-  width: 12.1667rem;
-  height: 12.4168rem;
-  object-fit: contain;
+  width: 15.1667rem;
+  height: 15.4168rem;
+  object-fit: cover;
   vertical-align: top;
   flex-shrink: 0;
   border-radius: 50%;
+}
+.mainWrapper .sideMenu .sideMenuIcons .userNameText {
+  /* background-color: red; */
+  color: #3889cf;
+  margin: 0;
+  z-index: 2;
+  width: 10px;
+  height: 20px;
+  position: relative;
+  font-size: 15px;
+  left: -265px;
+  top: 35px;
+  padding: 30px 10px 20px 0px;
+  margin: 0;
+  border-radius: 5px;
 }
 .mainWrapper .sideMenu .sideMenuIcons .minimizeMenuIcon {
   margin-top: 0.0577rem;
@@ -56,7 +71,7 @@ body {
   vertical-align: top;
   flex-shrink: 0;
   position: relative;
-  left: -50px;
+  left: -70px;
 }
 .mainWrapper .sideMenu .accountDetailsButton {
   margin: -4rem 48.15rem 0rem 0.516rem;

@@ -69,17 +69,17 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
         function getParameterByName(name) {
-        var urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get(name);
-      }
-  
-      document.addEventListener('DOMContentLoaded', function() {
-        var errorMessage = getParameterByName('error');
-        if (errorMessage) {
-          document.getElementById('error-message').textContent = errorMessage;
+            var urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
         }
-      });
-    
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var errorMessage = getParameterByName('error');
+            if (errorMessage) {
+                document.getElementById('error-message').textContent = errorMessage;
+            }
+        });
+
     </script>
 </head>
 
@@ -103,7 +103,7 @@
                     <input type="email" name="username" class="emailInput" required placeholder="Email or Player Name">
                 </div>
                 <input type="text" class="fnameInput" name="firstname" required placeholder="First Name">
-                <input type="text" class="lnameInput" name="lastname" required="Last Name">
+                <input type="text" class="lnameInput" name="lastname" required placeholder="Last Name">
                 <div class="password">
                     <div class="pwdIconWhole">
                         <i class="fas fa-lock"></i>

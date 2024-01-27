@@ -55,65 +55,65 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <script>
-      function getParameterByName(name) {
+    function getParameterByName(name) {
       var urlParams = new URLSearchParams(window.location.search);
       return urlParams.get(name);
     }
 
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       var errorMessage = getParameterByName('error');
       if (errorMessage) {
         document.getElementById('error-message').textContent = errorMessage;
       }
     });
-  
+
   </script>
 </head>
 
 <body>
-  <form action="https://localhost/Arm-mo/Arm-mo-Fork/Back-end/login.php" method="post">
-  <div class="whole">
-    <div class="logo">
-      <img alt="Writing12217" src="public/external/armimologo215810-q1qp-200w.png" class="logoImg" />
-      <img alt="armimoLogo" src="public/external/logoText.png" class="armimoLogoText" />
+  <form action="https://localhost/Arm-mo/Arm-mo-Fork/Back-end/login.php" class="form" method="post">
+    <div class="whole">
+      <div class="logo">
+        <img alt="Writing12217" src="public/external/armimologo215810-q1qp-200w.png" class="logoImg" />
+        <img alt="armimoLogo" src="public/external/logoText.png" class="armimoLogoText" />
+      </div>
+      <div class="center">
+        <div class="loginText">
+          <span class="loginText1">Log</span>
+          <span class="loginText2">in</span>
+        </div>
+        <div class="textBox">
+          <div class="email">
+            <div class="emailIconWhole">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <input type="email" class="emailInput" name='username' placeholder="Email or Player Name">
+          </div>
+          <div class="password">
+            <div class="pwdIconWhole">
+              <i class="fas fa-lock"></i>
+            </div>
+            <input type="password" name='password' class="pwdInput" placeholder="Password">
+            <div class="pwdeyeIconWhole">
+              <i class="eye one fas fa-eye-slash"></i>
+            </div>
+          </div>
+          <button class="button">log in</button>
+          <p id="error-message"></p>
+          <div class="text1">
+            <a href="#">keep me logged in</a>
+            <i class="fas fa-check"></i>
+          </div>
+        </div>
+        <div class="text2">
+          <a href="signup.html">
+            Create an account</a>
+          <a href="#">
+            Forgot password?
+          </a>
+        </div>
+      </div>
     </div>
-    <div class="center">
-      <div class="loginText">
-        <span class="loginText1">Log</span>
-        <span class="loginText2">in</span>
-      </div>
-      <div class="textBox">
-        <div class="email">
-          <div class="emailIconWhole">
-            <i class="fas fa-envelope"></i>
-          </div>
-          <input type="email" class="emailInput" name='username' placeholder="Email or Player Name">
-        </div>
-        <div class="password">
-          <div class="pwdIconWhole">
-            <i class="fas fa-lock"></i>
-          </div>
-          <input type="password" name='password' class="pwdInput" placeholder="Password">
-          <div class="pwdeyeIconWhole">
-            <i class="eye one fas fa-eye-slash"></i>
-          </div>
-        </div>
-        <button class="button">log in</button>
-        <p id="error-message"></p>
-        <div class="text1">
-          <a href="#">keep me logged in</a>
-          <i class="fas fa-check"></i>
-        </div>
-      </div>
-      <div class="text2">
-        <a href="signup.html">
-          Create an account</a>
-        <a href="#">
-          Forgot password?
-        </a>
-      </div>
-    </div>
-  </div>
   </form>
 
   <script>

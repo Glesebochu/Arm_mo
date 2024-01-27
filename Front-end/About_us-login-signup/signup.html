@@ -69,71 +69,70 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
         function getParameterByName(name) {
-        var urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get(name);
-      }
-  
-      document.addEventListener('DOMContentLoaded', function() {
-        var errorMessage = getParameterByName('error');
-        if (errorMessage) {
-          document.getElementById('error-message').textContent = errorMessage;
+            var urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
         }
-      });
-    
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var errorMessage = getParameterByName('error');
+            if (errorMessage) {
+                document.getElementById('error-message').textContent = errorMessage;
+            }
+        });
+
     </script>
 </head>
 
 <body>
-    <form action="https://localhost/Arm-mo/Arm-mo-Fork/Back-end/signup.php" method="post">
-    <div class="whole">
-        <div class="logo">
-            <img alt="Writing12217" src="public/external/armimologo215810-q1qp-200w.png" class="logo" />
-            <img alt="armimoLogo" src="public/external/logoText.png" class="armimoLogoText" />
-        </div>
-        <div class="center">
-            <div class="signupText">
-                <span class="signupText1">Sign</span>
-                <span class="signupText2">up</span>
+    <form action="https://localhost/Arm-mo/Arm-mo-Fork/Back-end/signup.php" class="form" method="post">
+        <div class="whole">
+            <div class="logo">
+                <img alt="Writing12217" src="public/external/armimologo215810-q1qp-200w.png" class="logo" />
+                <img alt="armimoLogo" src="public/external/logoText.png" class="armimoLogoText" />
             </div>
-            <div class="textBox">
-                <div class="email">
-                    <div class="emailIconWhole">
-                        <i class="fas fa-envelope"></i>
-                    </div>
-                    <input type="email" name="username" class="emailInput" placeholder="Email or Player Name">
+            <div class="center">
+                <div class="signupText">
+                    <span class="signupText1">Sign</span>
+                    <span class="signupText2">up</span>
                 </div>
-                <input type="text" class="fnameInput" name="firstname" placeholder="First Name">
-                <input type="text" class="lnameInput" name="lastname" placeholder="Last Name">
-                <div class="password">
-                    <div class="pwdIconWhole">
-                        <i class="fas fa-lock"></i>
+                <div class="textBox">
+                    <div class="email">
+                        <div class="emailIconWhole">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <input type="email" name="username" class="emailInput" placeholder="Email or Player Name">
                     </div>
-                    <input type="password" class="pwdInput" name="pwdInput"placeholder="Password">
-                    <div class="pwdIconWhole">
-                        <i class="eye one fas fa-eye-slash"></i>
+                    <input type="text" class="fnameInput" name="firstname" placeholder="First Name">
+                    <input type="text" class="lnameInput" name="lastname" placeholder="Last Name">
+                    <div class="password">
+                        <div class="pwdIconWhole">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <input type="password" class="pwdInput" name="pwdInput" placeholder="Password">
+                        <div class="pwdIconeye">
+                            <i class="eye one fas fa-eye-slash"></i>
+                        </div>
                     </div>
+                    <div class="confirmPwd">
+                        <div class="cpwdIconWhole">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <input type="password" class="cpwdInput" placeholder="Confirm Password">
+                        <div class="cpwdIconeye">
+                            <i class="eye two fas fa-eye-slash"></i>
+                        </div>
+                    </div>
+                    <div class="date">
+                        <label>Date of birth</label>
+                        <input type="date" name="dob" class="datePicker">
+                    </div>
+                    <button class="button">Sign up</button>
+                    <p id="error-message"></p>
+                    <a class="haveAcc" href="login.html">Already have an account</a>
                 </div>
-                <div class="confirmPwd">
-                    <div class="cpwdIconWhole">
-                        <i class="fas fa-lock"></i>
-                    </div>
-                    <input type="password" class="cpwdInput" placeholder="Confirm Password">
-                    <div class="cpwdIconeye">
-                        <i class="eye two fas fa-eye-slash"></i>
-                    </div>
-                </div>
-                <div class="date">
-                    <label>Date of birth</label>
-                    <input type="date" name="dob" class="datePicker">
-                </div>
-                <button class="button">Sign up</button>
-                <p id="error-message"></p>
-
-                <a class="haveAcc" href="login.html">Already have an account</a>
             </div>
         </div>
-    </div>
-</form>
+    </form>
     <script>
         $('.eye.one').on('click', function () {
             $('.pwdInput').attr('type', function (index, attr) {

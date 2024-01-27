@@ -14,7 +14,9 @@ body {
   width: 100%;
 }
 form {
-  padding: 0;
+  padding-left: 5%;
+  padding-top: 5%;
+
   margin: 0;
   height: 100%;
   width: 100%;
@@ -42,12 +44,12 @@ form {
   margin-top: 25%;
 }
 /* -----The central div------ */
-.center {
-  align-items: center;
-  margin-left: 25%;
+.main {
+  align-items: main;
+  margin-left: 35%;
   margin-top: 5%;
   display: flex;
-  align-items: center;
+  align-items: main;
   flex-direction: column;
   height: 100%;
   width: 50%;
@@ -59,26 +61,28 @@ form {
   padding: 0;
 }
 /* -------The big sign up text---- */
-.signupText {
-  flex: 0.5;
+.header {
+  flex: 0.3;
   display: flex;
-  gap: 10%;
+  gap: 2%;
   box-sizing: border-box;
+  padding-left: 17%;
 }
-.signupText > * {
-  font-size: 400%;
+.header > * {
+  font-size: 450%;
   font-style: Regular;
   font-family: Marcellus SC;
   box-sizing: border-box;
 }
-.signupText1 {
+.header1 {
   color: rgba(0, 0, 0, 1);
 }
-.signupText2 {
+.header2 {
   color: rgba(245, 177, 60, 1);
 }
+
 /* ----The whole text box area-- */
-.textBox {
+.section {
   flex: 5;
   width: 60%;
   display: flex;
@@ -86,7 +90,7 @@ form {
   gap: 4%;
   box-sizing: border-box;
 }
-.textBox > * {
+.section > * {
   box-sizing: border-box;
 }
 /* ----email div that has the input & logo div---- */
@@ -285,13 +289,180 @@ form {
   text-shadow: 0 0 10px black;
 }
 /* --already have an acount link style-- */
-.haveAcc {
+.footer {
   flex: 0.5;
   padding-left: 33%;
   text-decoration: underline;
   color: rgb(92, 91, 91);
   font-size: 120%;
 }
-.haveAcc:hover {
+.footer:hover {
   text-shadow: 0 0 1px black;
+}
+@media(max-width:400px){
+  form {
+    margin: 0;
+    padding-top: 10px;
+    padding-left: 12px;
+  }
+  .logo {
+    width: 50px;
+    height: 10%;
+  }
+   .main {
+    margin-top: 30px;
+    margin-left: 20px;
+    padding: 0;
+    height: 350px;
+    width: 350px;
+    box-sizing: border-box;
+    gap: 30px;
+  }
+  #error-message {
+    margin: 0;
+    padding: 0;
+  }
+  /* -------The big sign up text---- */
+  .header {
+    padding-left: 70px;
+    flex: 0.5;
+    gap: 8px;
+    height: 30px;
+  }
+  .header > * {
+    font-size: 30px;
+  }
+  /* ----The whole text box area-- */
+  .section {
+    flex: 2;
+    height:300px;
+    width: 250px;
+    gap: 20px;
+    padding-left: 20px;
+  }
+  /* ----email div that has the input & logo div---- */
+  .email {
+    flex: 1;
+    height: 30px;
+    width: 210px;
+  }
+  .email > input {
+    height: 30px;
+  }
+  .emailInput::placeholder {
+    font-size: 10px;
+  }
+  /* --email icon div--- */
+  .emailIconWhole {
+    height: 30px;
+    width: 20px;
+  }
+  .emailIconWhole > * {
+    font-size: 12px;
+  }
+  /* ---pwd div--- */
+  .password {
+    flex: 1;
+    height: 30px;
+    width: 200px;
+  }
+  .password > input {
+    height: 30px;
+  }
+  .pwdInput::placeholder {
+    font-size: 10px;
+  }
+  .pwdIconWhole {
+    height: 30px;
+    width: 55px;
+  }
+  .pwdIconWhole > * {
+    font-size: 12px;
+    
+  }
+  /* ---confirm pwd div---- */
+  .confirmPwd {
+    flex: 1;
+    height: 30px;
+    width: 200px;
+  }
+  .confirmPwd > input {
+    height: 30px;
+  }
+  .cpwdInput::placeholder {
+    font-size: 10px;
+  }
+  .cpwdIconWhole {
+    height: 30px;
+    width: 55px;
+  }
+  .cpwdIconWhole > * {
+    font-size: 12px;
+  }
+  .pwdIconeye {
+    height: 30px;
+    width: 50px;
+  }
+  .eye.one {
+    font-size: 12px;
+  }
+  .cpwdIconeye {
+    height: 30px;
+    width: 50px;
+  }
+  .eye.two {
+    font-size: 12px;
+  }
+  /* ----Firstname text box---- */
+  .fnameInput {
+    flex: 1;
+    height: 30px;
+    width: 210px;
+       padding: 10px;
+ padding-left: 35px;
+  }
+  .fnameInput::placeholder {
+    font-size: 10px;
+  }
+  /* -lastname text box- */
+  .lnameInput {
+    flex: 1;
+    height: 30px;
+    width: 210px;
+    padding: 10px;
+    padding-left: 35px;
+  }
+  .lnameInput::placeholder {
+    font-size: 10px;
+  }
+  /* -singn up button--- */
+  .button {
+    flex: 2;
+    margin-left: 60px;
+    margin-top: 5px;
+    width: 100px;
+    height: 50px;
+    font-size: 15px;
+    font-family: inter;
+  }
+   /* ---date div that has the date of birth label & date input-- */
+  .date {
+    flex: 0.5;
+    gap: 6px;
+  }
+  .date > * {
+    flex: 1;
+    font-size: 12px;
+    width: 210px;
+  }
+  /* ---date input style--- */
+  .datePicker {
+    padding-left: 5px;
+  }
+  /* --already have an acount link style-- */
+  .footer {
+    flex: 0.2;
+    padding-left: 60px;
+    font-size: 10px;
+  }
 }

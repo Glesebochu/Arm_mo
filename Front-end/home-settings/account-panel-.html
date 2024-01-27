@@ -18,36 +18,32 @@
   <div class="account-panel--gzF">
     <img class="healthicons-ui-user-profile-Pdm" id="profilePic" src="./assets/healthicons-ui-user-profile.png" />
     <p class="set"onclick="showPictureInput()">SET <span class="yellow">NEW</span> PHOTO</p>
-    <form action="">
-      <input type="email" class="email-QYs" placeholder="Email or Player name" />
-      <input type="text" class="firstname-box-hH5" placeholder="John" />
-      <input type="text" class="lastname-box-Pvb" placeholder="Doe" />
-      <input type="file" id="pictureInput" accept="image/*" style="display: none;" />
+    <form id="editAccountForm" action="https://localhost/Arm-mo/Arm-mo-Fork/Back-end/EditAccount.php" method="POST" enctype="multipart/form-data">
+      <input type="email" required name="username" class="email-QYs" placeholder="Username" />
+      <input type="text" required name="firstname" class="firstname-box-hH5" placeholder="Firstname" />
+      <input type="text" required name="lastname" class="lastname-box-Pvb" placeholder="Lastname" />
+      <input type="file" name="profilepic" id="pictureInput" accept="image/*" style="display: none;" />
       <div class="dateofbirth-box-RGw">
         <label>Date of birth</label>
-        <input type="date" class="datePicker">
+        <input type="date" name="dob" class="datePicker">
       </div>
-      <button class="edit-button-ap3">
+      <button class="edit-button-ap3" onclick="submitForm()">
         Edit Account
       </button>
     </form>
   </div>
 
   <script>
+    // function submitForm() {
+    //   doc  ument.getElementById('editAccountForm').submit();
+    // }
     function handlePictureSelection(event) {
       const selectedFile = event.target.files[0];
       const imageUrl = URL.createObjectURL(selectedFile);
 
       // Update the profilePic element with the selected image
       const profilePic = document.getElementById('profilePic');
-      profilePic.onload = () => {
-        URL.revokeObjectURL(profilePic.src); // Clean up the object URL
-      };
       profilePic.src = imageUrl;
-
-      // Perform other actions with the selected file or image URL
-      console.log('Selected file:', selectedFile.name);
-      console.log('Image URL:', imageUrl);
     }
 
     function showPictureInput() {

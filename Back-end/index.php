@@ -57,8 +57,10 @@
 
     // Drop tables here
     {
-        // $db->query("DROP TABLE Mastery");
-        // $db->query("DROP PROCEDURE AddMeditator");
+        // $db->query('SET FOREIGN_KEY_CHECKS = 0');
+        // $db->query("DROP TABLE Meditator");
+        // $db->query('SET FOREIGN_KEY_CHECKS = 0');
+        // $db->query("DROP PROCEDURE EditAccount");
     }
 
     // Creating the Meditation Stage table
@@ -97,12 +99,13 @@
     // Creating the Meditator table
     {
         $queryCreateMeditator= "CREATE TABLE Meditator(Meditator_ID INT PRIMARY KEY AUTO_INCREMENT,
-                                    Username VARCHAR(20) NOT NULL,
-                                    Password VARCHAR(20)NOT NULL,
-                                    EMAIL VARCHAR(20),
-                                    Firstname VARCHAR(20) NOT NULL,
-                                    Lastname VARCHAR(20) NOT NULL,
+                                    Username VARCHAR(100) NOT NULL,
+                                    Password VARCHAR(100)NOT NULL,
+                                    EMAIL VARCHAR(100),
+                                    Firstname VARCHAR(100) NOT NULL,
+                                    Lastname VARCHAR(100) NOT NULL,
                                     Date_of_birth DATE,
+                                    Profile_Picture VARCHAR(100),
                                     Stage_ID INT NOT NULL,
                                     FOREIGN KEY(Stage_ID) REFERENCES Meditation_Stage(Stage_ID))";
         $queryCheckIfMeditatorExists="SHOW TABLES LIKE 'Meditator'";
@@ -468,10 +471,91 @@
 
         }
     }
+    // Creating the procedure to edit account
+    {
+        $queryEditAccount = "CREATE PROCEDURE EditAccount(
+            IN p_username VARCHAR(100),
+            IN p_newusername VARCHAR(100),
+            IN p_firstname VARCHAR(100),
+            IN p_lastname VARCHAR(100),
+            IN p_dob DATE,
+            IN p_profilePic VARCHAR(8000)
+        )
+        BEGIN
+            UPDATE Meditator
+            SET Username = p_newusername,
+                Firstname = p_firstname,
+                Lastname = p_lastname,
+                Date_of_birth = p_dob,
+                Profile_Picture=p_profilePic
+
+            WHERE username = p_username;
+        END;";
+        $procedureNameEditAccount = 'EditAccount';
+        $checkProcedureEditAccountQuery = "SHOW PROCEDURE STATUS WHERE Name = 'EditAccount'";
+        
+        if ($db->query($checkProcedureEditAccountQuery)->num_rows > 0) {
+            echo "The stored procedure '$procedureNameEditAccount' already exists.";
+        } else {
+            if ($db->query($queryEditAccount) === TRUE) {
+                echo "The stored procedure '$procedureNameEditAccount' has been successfully created.";
+            } else {
+                echo "Error creating stored procedure: " . $db->error;
+            }
+        }
+    }
+
+    // Creating the procedure to edit passwrod
+    {
+        $queryEditPassword = "CREATE PROCEDURE EditPassword(
+            IN p_username VARCHAR(100),
+            IN p_password VARCHAR(100)
+        )
+        BEGIN
+            UPDATE Meditator
+            SET Password = p_password
+            WHERE username = p_username;
+        END;";
+        $procedureNameEditPassword = 'EditPassword';
+        $checkProcedureEditPassword = "SHOW PROCEDURE STATUS WHERE Name = 'EditPassword'";
+        
+        if ($db->query($checkProcedureEditPassword)->num_rows > 0) {
+            echo "The stored procedure '$procedureNameEditPassword' already exists.";
+        } else {
+            if ($db->query($queryEditPassword) === TRUE) {
+                echo "The stored procedure '$procedureNameEditPassword' has been successfully created.";
+            } else {
+                echo "Error creating stored procedure: " . $db->error;
+            }
+        }
+    }
+
+    // Creating the procedure to delete account
+    {
+        $queryDeleteAccount = "CREATE PROCEDURE DeleteAccount(
+            IN p_username VARCHAR(100)
+        )
+        BEGIN
+            DELETE FROM Meditator
+            WHERE username = p_username;
+        END;";
+        $procedureNameDeleteAccount = 'DeleteAccount';
+        $checkProcedureDeleteAccount = "SHOW PROCEDURE STATUS WHERE Name = 'DeleteAccount'";
+        
+        if ($db->query($checkProcedureDeleteAccount)->num_rows > 0) {
+            echo "The stored procedure '$procedureNameDeleteAccount' already exists.";
+        } else {
+            if ($db->query($queryDeleteAccount) === TRUE) {
+                echo "The stored procedure '$procedureNameDeleteAccount' has been successfully created.";
+            } else {
+                echo "Error creating stored procedure: " . $db->error;
+            }
+        }
+    }
 
     // Inserting the stage
     {
-        // $sqlInsertStage= "INSERT INTO Meditation_Stage(GOAL) VALUES('having peace of mind')";
+        // $sqlInsertStage= "INSERT INTO Meditation_Stage(GOAL) VALUES(' Develop a consistent daily meditation practice')";
         // $db->query($sqlInsertStage);
 
     }

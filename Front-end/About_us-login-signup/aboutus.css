@@ -13,7 +13,7 @@ body {
   height: 100%;
   width: 100%;
 }
-.whole {
+.main {
   display: flex;
   flex-direction: row;
   height: 100%;
@@ -64,7 +64,7 @@ body {
 .logoImg {
   flex: 1;
   height: 50%;
-  width: 5%;
+  width: 50%;
 }
 .armimoLogoText {
   flex: 0.7;
@@ -74,7 +74,7 @@ body {
 }
 
 /* ----right margin--- */
-.rightMargin {
+.margin-right {
   flex: 0;
   display: flex;
   flex-direction: row;
@@ -83,7 +83,7 @@ body {
 }
 
 /* -----The central div------ */
-.center {
+.section {
   flex: 6;
   display: flex;
   align-items: center;

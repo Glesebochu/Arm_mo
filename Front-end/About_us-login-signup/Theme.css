@@ -3,7 +3,7 @@ html {
   width: 100%;
   align-items: center;
   position: relative;
-  left:-80px;
+  left:-100px;
 }
 .settingTxt > * {
     letter-spacing: 0;

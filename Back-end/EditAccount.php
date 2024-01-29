@@ -33,12 +33,12 @@
             $_SESSION['UsernametoEdit']=$username;
             $_SESSION['profilepic']=$profilepic;
             $db->query($queryEditAccount);
-            echo "<script>alert('You have successfully edited your Account!';</script>";
+            echo "<script>alert('You have successfully edited your Account!');</script>";
             echo "<script>window.top.location.reload();</script>";
             exit;
         }
         else{
-            echo "<script>alert('Edit was unsucessfull a user with that account already exists!';</script>";
+            echo "<script>alert('Edit was unsucessfull a user with that account already exists!');</script>";
             echo "<script>window.top.location.reload();</script>";
             exit; 
         }

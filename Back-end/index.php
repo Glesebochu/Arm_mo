@@ -471,6 +471,42 @@
 
         }
     }
+    // Creating the procedure to check if a username has been taken
+    {
+        $querycheckDuplicateUsernames="CREATE PROCEDURE checkDuplicateUsernames(
+            IN p_username VARCHAR(100),
+            OUT p_exists INT
+          )
+          BEGIN
+            DECLARE count INT;
+            
+            SELECT COUNT(*) INTO count
+            FROM Meditator
+            WHERE Username = p_username;
+            
+            IF count > 0 THEN
+              SET p_exists = 1;
+            ELSE
+              SET p_exists = 0;
+            END IF;
+          END;";
+        $procedureNameDupUsernames='checkDuplicateUsernames';
+        $checkProcedureDupQuery = "SHOW PROCEDURE STATUS WHERE Name = 'checkDuplicateUsernames'";
+
+        if($db->query($checkProcedureDupQuery)->num_rows>0){
+         echo "The stored procedure '$procedureNameDupUsernames' already exists.";
+        }
+
+        else{
+
+            if ($db->query($querycheckDuplicateUsernames) === TRUE) {
+                echo "The stored procedure '$procedureNameDupUsernames' has been successfully created.";
+            } else {
+                echo "Error creating stored procedure: " . $db->error;
+            }
+
+        }
+    }
     // Creating the procedure to edit account
     {
         $queryEditAccount = "CREATE PROCEDURE EditAccount(

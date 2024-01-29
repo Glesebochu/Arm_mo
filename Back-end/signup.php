@@ -16,13 +16,26 @@ if ($cpassword === $password) {
     $con = new Connect;
     $db = $con->__getConnection();
     $db->query('USE Arm_mo');
-    $queryInsertMeditator = "call AddMeditator('$username','$firstname','$lastname','$password','$dob',1)";
-    $db->query($queryInsertMeditator);
-    header('Location: ../Front-end/home-settings/home-page.html');
+    $querycheckDuplicateUsernames = "CALL checkDuplicateUsernames('$username', @p_exists)";
+    $db->query($querycheckDuplicateUsernames);
+    $result = $db->query("SELECT @p_exists");
+    $row = $result->fetch_assoc();
+    $count = $row['@p_exists'];
+
+    if ($count == 0) {
+        $queryInsertMeditator = "call AddMeditator('$username','$firstname','$lastname','$password','$dob',1)";
+        $db->query($queryInsertMeditator);
+        header('Location: ../Front-end/home-settings/home-page.html');
+        exit;
+    } else {
+        $errorMessage = 'A user with that exact username exists!';  
+        header("Location: ../Front-end/About_us-login-signup/signup.html?error=".urlencode($errorMessage));
+        exit;
+    }
+}
+else {
+    $errorMessage = 'Passwords do not match!';  
+    header("Location: ../Front-end/About_us-login-signup/signup.html?error=".urlencode($errorMessage));
     exit;
-} else {
-   $errorMessage = 'Passwords do not match!';  
-   header("Location: ../Front-end/About_us-login-signup/signup.html?error=".urlencode($errorMessage));
-   exit;
 }
 ?>

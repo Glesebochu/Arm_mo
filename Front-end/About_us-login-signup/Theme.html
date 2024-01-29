@@ -76,12 +76,11 @@
 
 <body>
     <div class="settingTxt">
-        <span class="settingTxt1">Settin</span>
-        <span class="settingTxt2">gs</span>
+        <span class="settingTxt1">The</span>
+        <span class="settingTxt2">me</span>
     </div>
     <div class="options">
         <ul class="checkbox">
-            <label for="theme">Theme</label>
             <li>
                 <label class="dark">Dark</label>
                 <input type="radio" name="theme" class="cb1">
@@ -98,19 +97,11 @@
                 <label for="brightness">Brightness</label>
                 <input class="dial" type="range" min="0" max="100" value="50">
             </li>
-            <!-- <label class="bot">Arm'mo Bot<i class="fas fa-robot"></i></label>
-            <li class="enable">
-                <label for="bot">Enable</label>
-                <input type="radio" name="bot" class="cb4">
-            </li>
-            <li class="disable">
-                <label for="bot">Disable</label>
-                <input type="radio" name="bot" class="cb5">
-            </li> -->
-            <button class="reset">Reset Settings</button>
+          
+            <button class="reset">Reset</button>
         </ul>
     </div>
-    <a class="home" href="#">Home</a>
+   
     <script>
         $('.cb2').prop('checked', true)
         $('.cb3').prop('checked', true)
@@ -124,6 +115,28 @@
             $('.dial').val(50)
         })
     </script>
+
+<script>
+    $('.cb1').on('click', function () {
+        $('body').addClass('dark-theme');
+    });
+
+    $('.cb2').on('click', function () {
+        $('body').removeClass('dark-theme');
+    });
+
+    // Additional code for resetting the theme
+    $('.reset').on('click', function () {
+        $('.cb2').prop('checked', true)
+        $('.cb1').prop('checked', false)
+        $('.cb3').prop('checked', true)
+        $('.cb4').prop('checked', true)
+        $('.cb5').prop('checked', false)
+        $('.dial').val(50)
+
+        $('body').removeClass('dark-theme');
+    });
+</script>
 </body>
 
 </html>

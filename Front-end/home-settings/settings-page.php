@@ -189,7 +189,7 @@
   <nav class="sideMenu">
 
     <section class="sideMenuIcons">
-      <img class="userProfilePic"  id="profilePicture" src="./assets/healthicons-ui-user-profile-YyH.png"onclick="showFullScreen(this.src)"/>
+      <img class="userProfilePic"  id="profilePicture" src="./assets/healthicons-ui-user-profile-YyH.png" onclick="showFullScreen(this.src)"/>
       <p class="userNameText" id='userNameText'></p>
       <img class="minimizeMenuIcon" onclick="hideMenuBar('sideMenu')" src="./assets/vector-RtP.png"/>
     </section>

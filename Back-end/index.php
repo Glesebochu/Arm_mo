@@ -593,7 +593,15 @@
     {
         $Goal = ['Develop a consistent daily meditation practice'
         ,'Shorten the periods of mind-wandering and extend the periods of sustained attention to the meditation object.'
-        ,'Overcome forgetting and falling asleep.'];
+        ,'Overcome forgetting and falling asleep.'
+        ,'Overcome gross distraction and strong dullness.'
+        ,'Overcome subtle dullness and increase the power of mindfulness'
+        ,'Subdue subtle distractions and develop metacognitive introspective awareness.'
+        ,'Effortlessly sustained exclusive attention and powerful mindfulness.'
+        ,'Complete pacification of the senses and the full arising of meditative joy.'
+        ,'The maturation of meditative joy, producing tranquility and equanimity.'
+        ,'The qualities of śamatha persist after you rise from the cushion'
+        ];
 
         foreach ($Goal as $goals) {
             $sqlCheckGoal = "SELECT COUNT(*) FROM Meditation_Stage WHERE Goal = '$goals'";

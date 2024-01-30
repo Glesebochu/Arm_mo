@@ -118,25 +118,33 @@
 
 <script>
     $('.cb1').on('click', function () {
-        $('body').addClass('dark-theme');
+      $('body').addClass('dark-theme');
+      $('<link>', {
+        id: 'themeStylesheet',
+        rel: 'stylesheet',
+        href: './styles/settingsDarkTheme.css'
+      }).appendTo(window.parent.document.head);
     });
-
+  
     $('.cb2').on('click', function () {
-        $('body').removeClass('dark-theme');
+      $('body').removeClass('dark-theme');
+      $('#themeStylesheet', window.parent.document.head).remove();
     });
-
+  
     // Additional code for resetting the theme
     $('.reset').on('click', function () {
-        $('.cb2').prop('checked', true)
-        $('.cb1').prop('checked', false)
-        $('.cb3').prop('checked', true)
-        $('.cb4').prop('checked', true)
-        $('.cb5').prop('checked', false)
-        $('.dial').val(50)
-
-        $('body').removeClass('dark-theme');
+      $('.cb2').prop('checked', true)
+      $('.cb1').prop('checked', false)
+      $('.cb3').prop('checked', true)
+      $('.cb4').prop('checked', true)
+      $('.cb5').prop('checked', false)
+      $('.dial').val(50)
+  
+      $('body').removeClass('dark-theme');
+      $('#themeStylesheet', window.parent.document.head).remove();
     });
-</script>
+  </script>
+  
 </body>
 
 </html>

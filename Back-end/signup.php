@@ -25,7 +25,7 @@ if ($cpassword === $password) {
     if ($count == 0) {
         $queryInsertMeditator = "call AddMeditator('$username','$firstname','$lastname','$password','$dob',1)";
         $db->query($queryInsertMeditator);
-        header('Location: ../Front-end/home-settings/home-page.html');
+        header('Location: ../Front-end/home-settings/home-page.php');
         exit;
     } else {
         $errorMessage = 'A user with that exact username exists!';  

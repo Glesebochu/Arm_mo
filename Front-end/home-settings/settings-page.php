@@ -226,7 +226,7 @@
 
     <div class="logoIcon">
       <img class="writing-1-opf" src="./assets/writing-1-Qcb.png"/>
-      <img class="armimo-logo-2-1-LJo" onclick="navigateToPage('./home-page.html')" src="./assets/armimo-logo-2-1-mPH.png"/>
+      <img class="armimo-logo-2-1-LJo" onclick="navigateToPage('./home-page.php')" src="./assets/armimo-logo-2-1-mPH.png"/>
     </div>
   </section>
 

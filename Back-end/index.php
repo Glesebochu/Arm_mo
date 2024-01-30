@@ -589,11 +589,32 @@
         }
     }
 
-    // Inserting the stage
+  // Populating the Meditation Stage table
     {
-        // $sqlInsertStage= "INSERT INTO Meditation_Stage(GOAL) VALUES(' Develop a consistent daily meditation practice')";
-        // $db->query($sqlInsertStage);
+        $Goal = ['Develop a consistent daily meditation practice'
+        ,'Shorten the periods of mind-wandering and extend the periods of sustained attention to the meditation object.'
+        ,'Overcome forgetting and falling asleep.'];
 
+        foreach ($Goal as $goals) {
+            $sqlCheckGoal = "SELECT COUNT(*) FROM Meditation_Stage WHERE Goal = '$goals'";
+            $result = $db->query($sqlCheckGoal);
+
+            if ($result->fetch_row()[0] == 0) {
+                $sqlInsertStage = "INSERT INTO Meditation_Stage(Goal) VALUES ('$goals')";
+                $db->query($sqlInsertStage);
+                echo "
+                    <script>
+                        console.log('Stage $goals added successfully!')
+                    </script>
+                ";
+            } else {
+                echo "
+                    <script>
+                        console.log('Stage $goals already exists!')
+                    </script>
+                ";
+            }
+        }
     }
     
     // Checking foreign keys

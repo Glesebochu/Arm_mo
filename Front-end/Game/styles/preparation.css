@@ -29,7 +29,7 @@ main{
     outline: 0;
     border-bottom: 2px solid black;
     font-weight: bold;
-    transition: transform 0.7s ease;
+    transition: transform 0.5s ease;
 }
 #preparation-input:hover{
     transform: scale(1.05);
@@ -44,11 +44,12 @@ footer{
     border: 0px;
     border-radius: 10px;
     font-weight: bold;
-    transition: background-color 0.2s ease, transform 0.7s ease;
+    transition: background-color 0.3s ease, transform 0.7s ease;
 }
 .preparation-button:hover{
-    transform: scale(1.1);
+    /* transform: scale(1.1); */
+    background-color: gray;
 }
 .preparation-button:active{
-    background-color: gray;
+    background-color: white;
 }

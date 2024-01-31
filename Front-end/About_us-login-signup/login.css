@@ -58,14 +58,14 @@ form {
 }
 /* -------The big login text---- */
 .header {
-  flex: 0.3;
+  flex: 0.5;
   padding-left: 12%;
   display: flex;
   align-items: main;
   gap: 2%;
 }
 .header > * {
-  font-size: 600%;
+  font-size: 1100%;
   font-style: Regular;
   font-family: Marcellus SC;
 }
@@ -96,14 +96,14 @@ form {
 .email > input {
   flex: 1;
   padding: 2%;
-  padding-left: 5%;
+  padding-left: 2%;
   border: none;
   background-color: rgb(216, 211, 211);
 }
 .emailInput::placeholder {
   color: rgba(4, 54, 2, 0.918);
   font-family: inter;
-  font-size: 250%;
+  font-size: 420%;
   font-weight: 700;
 }
 /* -the div for the email icon--- */
@@ -111,11 +111,11 @@ form {
   padding-top: 4%;
   padding-left: 3%;
   height: 100%;
-  width: 15%;
+  width: 10%;
   background-color: rgb(216, 211, 211);
 }
 .emailIconWhole > * {
-  font-size: 230%;
+  font-size: 400%;
 }
 /* ----password div---- */
 .password {
@@ -128,7 +128,7 @@ form {
 }
 .pwdInput {
   padding: 2%;
-  padding-left: 5%;
+  padding-left: 2%;
   flex: 1;
   border: none;
   background-color: rgb(216, 211, 211);
@@ -136,14 +136,14 @@ form {
 .pwdInput::placeholder {
   color: rgba(4, 54, 2, 0.918);
   font-family: inter;
-  font-size: 250%;
+  font-size: 420%;
   font-weight: 700;
 }
 .pwdIconWhole {
   padding-top: 4%;
   padding-left: 3%;
   height: 100%;
-  width: 15%;
+  width: 10%;
   background-color: rgb(216, 211, 211);
 }
 .pwdeyeIconWhole {
@@ -153,10 +153,10 @@ form {
   background-color: rgb(216, 211, 211);
 }
 .pwdIconWhole > * {
-  font-size: 230%;
+  font-size: 400%;
 }
 .pwdeyeIconWhole > * {
-  font-size: 230%;
+  font-size: 400%;
 }
 /* ------login button---- */
 .button {
@@ -167,7 +167,7 @@ form {
   color: rgba(253, 204, 121, 1);
   background-color: rgba(1, 65, 0, 1);
   border-radius: 5px;
-  font-size: 230%;
+  font-size: 420%;
   font-family: inter;
 }
 .button:active {
@@ -183,14 +183,125 @@ form {
 .footer a {
   text-decoration: none;
   color: rgb(108, 106, 106);
-  font-size: 200%;
+  font-size: 400%;
 }
 .footer a:hover {
   text-shadow: 0 0 1px rgb(24, 72, 35);
 }
 /* Media */
-
-@media (max-width: 2200px) {
+@media (max-width: 4000px) {
+  form {
+    margin: 0;
+    padding-top: 50px;
+    padding-left: 60px;
+  }
+  .logo {
+    width: 300px;
+    height: 150px;
+    overflow: hidden;
+  }
+  .logoImg {
+    width: 160px;
+    height: 150px;
+  }
+  .armimoLogoText {
+    margin-top: 30px;
+    width: 150px;
+    height: 100px;
+  }
+  .main {
+    overflow: hidden;
+    margin-top: 200px;
+    margin-left: 1200px;
+    padding: 0;
+    height: 1000px;
+    width: 1000px;
+    box-sizing: border-box;
+    gap: 20px;
+  }
+  .header {
+    padding-left:200px;
+    flex: 0.5;
+    gap: 40px;
+    height: 30px;
+  }
+  .header > * {
+    font-size: 170px;
+  }
+  .section {
+    flex: 1;
+    height: 1000px;
+    width: 1000px;
+    gap: 30px;
+    padding-left: 15px;
+  }
+  .email {
+    flex: 1;
+    height: 100px;
+    width: 900px;
+  }
+  .email > input {
+    height: 120px;
+  }
+  .emailInput::placeholder {
+    font-size: 45px;
+  }
+  /* --email icon div--- */
+  .emailIconWhole {
+    padding-top: 40px;
+    height: 120px;
+    width: 90px;
+  }
+  .emailIconWhole > * {
+    font-size: 50px;
+  }
+  .password {
+    flex: 1;
+    height: 120px;
+    width: 900px;
+  }
+  .password > input {
+    height: 120px;
+  }
+  .pwdInput::placeholder {
+    font-size: 45px;
+  }
+  .pwdIconWhole {
+    padding-top: 30px;
+    height:120px;
+    width: 90px;
+  }
+  .pwdIconWhole > * {
+    font-size: 50px;
+  }
+  .pwdeyeIconWhole {
+    padding-top: 35px;
+    height: 120px;
+    width: 90px;
+  }
+  .eye.one {
+    padding-left: 10px;
+    font-size: 45px;
+  }
+  .button {
+    flex: 0.7;
+    margin-left: 270px;
+    width: 400px;
+    height: 180px;
+    font-size: 50px;
+    font-family: inter;
+  }
+  .footer {
+    flex: 0.5;
+    padding-left: 320px;
+    padding-top: 0;
+    margin: 0;
+  }
+  .footer a {
+    font-size: 40px;
+  }
+}
+@media (max-width: 2500px) {
   form {
     margin: 0;
     padding-top: 50px;

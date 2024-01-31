@@ -122,3 +122,67 @@ body {
 .home:hover {
   text-shadow: 0 0 2px rgb(40, 37, 37);
 }
+
+/* Styles specific to the dark theme */
+.dark-theme {
+  background-color: #222;
+  color: #fff;
+}
+
+.dark-theme .settingTxt {
+  color: #fff;
+}
+
+.dark-theme .checkbox li label {
+  color: #fff;
+}
+.dark-theme html {
+    background-color: #222;
+}
+
+.dark-theme .settingTxt1 {
+    color: #fff;
+}
+
+.dark-theme .settingTxt2 {
+    color: #f5b13c;
+}
+
+.dark-theme ul {
+    background-color: #222;
+    border-color: #666;
+}
+
+.dark-theme li label {
+    color: #fff;
+}
+
+.dark-theme .sound {
+    color: #fff;
+}
+
+.dark-theme .brightness {
+    color: #fff;
+}
+
+.dark-theme .dial {
+    background-color: #333;
+}
+
+.dark-theme .tips {
+    color: #fff;
+}
+
+.dark-theme .reset {
+    border-color: #bbb;
+    color: #333;
+    background-color: #fff;
+}
+
+.dark-theme .reset:active {
+    box-shadow: 0 0 20px #535252;
+}
+
+.dark-theme .home {
+    color: #333;
+}

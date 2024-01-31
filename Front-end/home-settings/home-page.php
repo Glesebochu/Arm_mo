@@ -9,41 +9,78 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mako%3A400"/>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro%3A400"/>
   <link rel="stylesheet" href="./styles/home-page.css"/>
-  
   <script>
     function openPage(link){
       window.open(link,'_self');
     }
+  </script>
+    
+  <script>
     function selectStage(stage) {
       var wrapper = document.getElementsByClassName('pizzaPieces');
       var wrapperItems = wrapper[0].children;
 
-      var textWrapper=document.getElementsByClassName('stageTexts');
-      var textItems = textWrapper[0].children;
+        var textWrapper=document.getElementsByClassName('stageTexts');
+        var textItems = textWrapper[0].children;
 
-      for(item of wrapperItems) {
-         item.classList.remove('selectStage');
-      }
+        for(item of wrapperItems) {
+          item.classList.remove('selectStage');
+        }
 
-      for(item of textItems) {
-         item.classList.remove('selectStageItem');
+        for(item of textItems) {
+          item.classList.remove('selectStageItem');
+        }
+        var clickedStage = document.getElementsByClassName(stage);
+        clickedStage[0].classList.add('selectStage')
+
+        var clickedStageText = document.getElementsByClassName('Stage'+stage.slice(1)+'Text');
+        clickedStageText[0].classList.add('selectStageItem');
       }
-      var clickedStage = document.getElementsByClassName(stage);
-      clickedStage[0].classList.add('selectStage')
-      event.currentTarget.classList.add('selectStageItem');
-    }
   
-    function shadeEllipses(stage){
-      var ellipseParent = document.getElementsByClassName('ellipses')
+    function shadeEllipses(stage) {
+      var ellipseParent = document.getElementsByClassName('ellipses');
       var ellipses = ellipseParent[0].children;
-      var counter =0;
-      while(counter<stage-1){
-        ellipses[counter].classList.add('ellipseShade');
-        counter++;
-      }
-      while(stage<=9){
-        ellipses[stage-1].classList.remove('ellipseShade');
-        stage++;
+      var counter = 0;
+      var stageID = <?php
+        include_once('../../Back-end/Connect.php');
+        $con = new Connect;
+        $db = $con->__getConnection();
+        $db->query('USE Arm_mo');
+        session_start();
+
+        $UsernametoEdit = $_SESSION['UsernametoEdit'];
+
+        if (isset($_SESSION['UsernametoEdit'])) {
+          $queryStageID = "SELECT Stage_ID FROM Meditator WHERE Username = '$UsernametoEdit'";
+          $result = $db->query($queryStageID);
+          $row = $result->fetch_assoc();
+          echo $row['Stage_ID'];
+        } else {
+          echo '0'; // Default value if the Stage_ID cannot be retrieved
+        }
+      ?>;
+      
+      if (stageID < stage) {
+        stage=stageID;
+        selectStage('s'+stage);
+        while (counter < stage - 1) {
+          ellipses[counter].classList.add('ellipseShade');
+          counter++;
+        }
+        while (stage <= 9) {
+          ellipses[stage - 1].classList.remove('ellipseShade');
+          stage++;
+        }
+      } else {
+        selectStage('s'+stage);
+        while (counter < stage - 1) {
+          ellipses[counter].classList.add('ellipseShade');
+          counter++;
+        }
+        while (stage <= 9) {
+          ellipses[stage - 1].classList.remove('ellipseShade');
+          stage++;
+        }
       }
     }
 
@@ -89,16 +126,16 @@
         </section>
 
         <section class="stageTexts">
-          <p class="Stage10Text" onclick="selectStage('s10');shadeEllipses(10)">10</p>
-          <p class="Stage9Text" onclick="selectStage('s9');shadeEllipses(9)">9</p>
-          <p class="Stage8Text" onclick="selectStage('s8');shadeEllipses(8)">8</p>
-          <p class="Stage7Text" onclick="selectStage('s7');shadeEllipses(7)">7</p>
-          <p class="Stage6Text" onclick="selectStage('s6');shadeEllipses(6)">6</p>
-          <p class="Stage5Text" onclick="selectStage('s5');shadeEllipses(5)">5</p>
-          <p class="Stage4Text" onclick="selectStage('s4');shadeEllipses(4)">4</p>
-          <p class="Stage3Text" onclick="selectStage('s3');shadeEllipses(3)">3</p>
-          <p class="Stage2Text" onclick="selectStage('s2');shadeEllipses(2)">2</p>
-          <p class="Stage1Text" onclick="selectStage('s1');shadeEllipses(1)">1</p>
+          <p class="Stage10Text" onclick="shadeEllipses(10)">10</p>
+          <p class="Stage9Text" onclick="shadeEllipses(9)">9</p>
+          <p class="Stage8Text" onclick="shadeEllipses(8)">8</p>
+          <p class="Stage7Text" onclick="shadeEllipses(7)">7</p>
+          <p class="Stage6Text" onclick="shadeEllipses(6)">6</p>
+          <p class="Stage5Text" onclick="shadeEllipses(5)">5</p>
+          <p class="Stage4Text" onclick="shadeEllipses(4)">4</p>
+          <p class="Stage3Text" onclick="shadeEllipses(3)">3</p>
+          <p class="Stage2Text" onclick="shadeEllipses(2)">2</p>
+          <p class="Stage1Text" onclick="shadeEllipses(1)">1</p>
         </section>
 
       </section>
@@ -106,3 +143,4 @@
     </section>
   </main>
 </body>
+</html>

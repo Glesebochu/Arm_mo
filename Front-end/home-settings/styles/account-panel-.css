@@ -290,3 +290,25 @@ body {
 .edit-button-ap3:hover {
   box-shadow: 0 0 5px black;
 }
+
+.fullscreen-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  background-color: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fullscreen-image img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.healthicons-ui-user-profile-Pdm:hover{
+  cursor:pointer;
+}

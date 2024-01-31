@@ -16,7 +16,7 @@
 
 <body>
   <div class="account-panel--gzF">
-    <img class="healthicons-ui-user-profile-Pdm" id="profilePic" src="./assets/healthicons-ui-user-profile.png" />
+    <img class="healthicons-ui-user-profile-Pdm" id="profilePic" src="./assets/healthicons-ui-user-profile.png" onclick="showFullScreen(this.src)" />
     <p class="set"onclick="showPictureInput()">SET <span class="yellow">NEW</span> PHOTO</p>
     <form id="editAccountForm" action="https://localhost/Arm-mo/Arm-mo-Fork/Back-end/EditAccount.php" method="POST" enctype="multipart/form-data">
       <input type="email" required name="username" class="email-QYs" placeholder="Username" />
@@ -69,5 +69,28 @@
       $('.eye.two').toggleClass('fas fa-eye-slash fas fa-eye');
     });
   </script>
+
+<script>
+  function showFullScreen(source) {
+    // Create a new element to display the fullscreen image
+    var fullscreenImage = document.createElement('div');
+    fullscreenImage.className = 'fullscreen-image';
+
+    // Create an image element inside the fullscreen container
+    var img = document.createElement('img');
+    img.src = source;
+
+    // Add the image element to the fullscreen container
+    fullscreenImage.appendChild(img);
+
+    // Append the fullscreen container to the document body
+    document.body.appendChild(fullscreenImage);
+
+    // Remove the fullscreen container when clicked
+    fullscreenImage.addEventListener('click', function () {
+      document.body.removeChild(fullscreenImage);
+    });
+  }
+</script>
 </body>
 </html>

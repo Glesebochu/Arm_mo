@@ -19,7 +19,7 @@ $count = $row['@p_exists'];
 if ($count == 1) {
   // Set the session variable
   $_SESSION['UsernametoEdit'] = $username;
-  header('Location: ../Front-end/home-settings/home-page.html');
+  header('Location: ../Front-end/home-settings/home-page.php');
   exit;
 } else {
   $errorMessage = 'Invalid username or password';

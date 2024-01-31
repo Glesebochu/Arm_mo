@@ -8,11 +8,13 @@ class StepType{
 }
 
 class Step{
-    constructor(title, description, category, type){
+    constructor(title, description, category, type, startTime=0, endTime=0){
         this.Title = title;
         this.Description = description;
         this.Category = category;
         this.Type = type;
+        this.Start_Time = startTime;
+        this.End_Time = endTime;
     }
     
     static getDummyPreparationSteps(){

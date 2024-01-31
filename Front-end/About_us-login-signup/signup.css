@@ -292,173 +292,8 @@ form {
 .footer:hover {
   text-shadow: 0 0 1px black;
 }
-@media (max-width: 400px) {
-  form {
-    margin: 0;
-    padding-top: 10px;
-    padding-left: 12px;
-  }
-  .logo {
-    width: 50px;
-    height: 10%;
-  }
-  .main {
-    margin-top: 30px;
-    margin-left: 20px;
-    padding: 0;
-    height: 350px;
-    width: 350px;
-    box-sizing: border-box;
-    gap: 30px;
-  }
-  #error-message {
-    margin: 0;
-    padding: 0;
-  }
-  /* -------The big sign up text---- */
-  .header {
-    padding-left: 70px;
-    flex: 0.5;
-    gap: 8px;
-    height: 30px;
-  }
-  .header > * {
-    font-size: 30px;
-  }
-  /* ----The whole text box area-- */
-  .section {
-    flex: 2;
-    height: 300px;
-    width: 250px;
-    gap: 20px;
-    padding-left: 20px;
-  }
-  /* ----email div that has the input & logo div---- */
-  .email {
-    flex: 1;
-    height: 30px;
-    width: 210px;
-  }
-  .email > input {
-    height: 30px;
-  }
-  .emailInput::placeholder {
-    font-size: 10px;
-  }
-  /* --email icon div--- */
-  .emailIconWhole {
-    height: 30px;
-    width: 20px;
-  }
-  .emailIconWhole > * {
-    font-size: 12px;
-  }
-  /* ---pwd div--- */
-  .password {
-    flex: 1;
-    height: 30px;
-    width: 200px;
-  }
-  .password > input {
-    height: 30px;
-  }
-  .pwdInput::placeholder {
-    font-size: 10px;
-  }
-  .pwdIconWhole {
-    height: 30px;
-    width: 55px;
-  }
-  .pwdIconWhole > * {
-    font-size: 12px;
-  }
-  /* ---confirm pwd div---- */
-  .confirmPwd {
-    flex: 1;
-    height: 30px;
-    width: 200px;
-  }
-  .confirmPwd > input {
-    height: 30px;
-  }
-  .cpwdInput::placeholder {
-    font-size: 10px;
-  }
-  .cpwdIconWhole {
-    height: 30px;
-    width: 55px;
-  }
-  .cpwdIconWhole > * {
-    font-size: 12px;
-  }
-  .pwdIconeye {
-    height: 30px;
-    width: 50px;
-  }
-  .eye.one {
-    font-size: 12px;
-  }
-  .cpwdIconeye {
-    height: 30px;
-    width: 50px;
-  }
-  .eye.two {
-    font-size: 12px;
-  }
-  /* ----Firstname text box---- */
-  .fnameInput {
-    flex: 1;
-    height: 30px;
-    width: 210px;
-    padding: 10px;
-    padding-left: 35px;
-  }
-  .fnameInput::placeholder {
-    font-size: 10px;
-  }
-  /* -lastname text box- */
-  .lnameInput {
-    flex: 1;
-    height: 30px;
-    width: 210px;
-    padding: 10px;
-    padding-left: 35px;
-  }
-  .lnameInput::placeholder {
-    font-size: 10px;
-  }
-  /* -singn up button--- */
-  .button {
-    flex: 2;
-    margin-left: 60px;
-    margin-top: 5px;
-    width: 100px;
-    height: 50px;
-    font-size: 15px;
-    font-family: inter;
-  }
-  /* ---date div that has the date of birth label & date input-- */
-  .date {
-    flex: 0.5;
-    gap: 6px;
-  }
-  .date > * {
-    flex: 1;
-    font-size: 12px;
-    width: 210px;
-  }
-  /* ---date input style--- */
-  .datePicker {
-    padding-left: 5px;
-  }
-  /* --already have an acount link style-- */
-  .footer {
-    flex: 0.2;
-    padding-left: 60px;
-    font-size: 10px;
-  }
-}
-@media (max-width: 830px) {
+
+@media (max-width: 1600px) {
   form {
     margin: 0;
     padding-top: 20px;
@@ -470,7 +305,7 @@ form {
   }
   .main {
     margin-top: 40px;
-    margin-left: 150px;
+    margin-left: 500px;
     padding: 0;
     height: 500px;
     width: 500px;
@@ -616,5 +451,695 @@ form {
     flex: 0.2;
     padding-left: 110px;
     font-size: 20px;
+  }
+}
+@media (max-width: 1200px) {
+  form {
+    margin: 0;
+    padding-top: 10px;
+    padding-left: 12px;
+  }
+  .logo {
+    width: 100px;
+    height: 10%;
+  }
+  .main {
+    margin-top: 50px;
+    margin-left: 300px;
+    padding: 0;
+    height: 500px;
+    width: 350px;
+    box-sizing: border-box;
+    gap: 70px;
+  }
+  #error-message {
+    margin: 0;
+    padding: 0;
+  }
+  /* -------The big sign up text---- */
+  .header {
+    padding-left: 90px;
+    flex: 0.5;
+    gap: 8px;
+    height: 30px;
+  }
+  .header > * {
+    font-size: 50px;
+  }
+  /* ----The whole text box area-- */
+  .section {
+    flex: 2;
+    height: 500px;
+    width: 400px;
+    gap: 20px;
+    padding-left: 20px;
+  }
+  /* ----email div that has the input & logo div---- */
+  .email {
+    flex: 1;
+    height: 30px;
+    width: 300px;
+  }
+  .email > input {
+    height: 30px;
+  }
+  .emailInput::placeholder {
+    font-size: 15px;
+  }
+  /* --email icon div--- */
+  .emailIconWhole {
+    padding-top: 5px;
+    height: 30px;
+    width: 20px;
+  }
+  .emailIconWhole > * {
+    font-size: 15px;
+  }
+  /* ---pwd div--- */
+  .password {
+    flex: 1;
+    height: 30px;
+    width: 300px;
+  }
+  .password > input {
+    height: 30px;
+    width: 20px;
+  }
+  .pwdInput::placeholder {
+    font-size: 15px;
+  }
+  .pwdIconWhole {
+    padding-top: 5px;
+    height: 30px;
+    width: 30px;
+  }
+  .pwdIconWhole > * {
+    font-size: 15px;
+  }
+  /* ---confirm pwd div---- */
+  .confirmPwd {
+    flex: 1;
+    height: 30px;
+    width: 300px;
+  }
+  .confirmPwd > input {
+    height: 30px;
+  }
+  .cpwdInput::placeholder {
+    font-size: 15px;
+  }
+  .cpwdIconWhole {
+    padding-top: 5px;
+    height: 30px;
+    width: 20px;
+  }
+  .cpwdIconWhole > * {
+    font-size: 15px;
+  }
+  .pwdIconeye {
+    margin: 0;
+    padding-left: 0;
+    padding-top: 5px;
+    height: 30px;
+    width: 50px;
+  }
+  .eye.one {
+    font-size: 15px;
+  }
+  .cpwdIconeye {
+    padding-top: 5px;
+    height: 30px;
+    width: 30px;
+  }
+  .eye.two {
+    font-size: 15px;
+  }
+  /* ----Firstname text box---- */
+  .fnameInput {
+    flex: 1;
+    height: 30px;
+    width: 300px;
+    padding: 10px;
+    padding-left: 35px;
+  }
+  .fnameInput::placeholder {
+    font-size: 15px;
+  }
+  /* -lastname text box- */
+  .lnameInput {
+    flex: 1;
+    height: 30px;
+    width: 300px;
+    padding: 10px;
+    padding-left: 35px;
+  }
+  .lnameInput::placeholder {
+    font-size: 15px;
+  }
+  /* -singn up button--- */
+  .button {
+    flex: 2;
+    margin-left: 70px;
+    margin-top: 5px;
+    width: 150px;
+    height: 50px;
+    font-size: 20px;
+    font-family: inter;
+  }
+  /* ---date div that has the date of birth label & date input-- */
+  .date {
+    flex: 0.5;
+    gap: 6px;
+  }
+  .date > * {
+    flex: 1;
+    font-size: 15px;
+    width: 300px;
+  }
+  /* ---date input style--- */
+  .datePicker {
+    padding-left: 5px;
+  }
+  /* --already have an acount link style-- */
+  .footer {
+    flex: 0.2;
+    padding-left: 83px;
+    font-size: 13px;
+  }
+}
+@media (max-width: 800px) {
+  form {
+    margin: 0;
+    padding-top: 10px;
+    padding-left: 12px;
+  }
+  .logo {
+    width: 100px;
+    height: 10%;
+  }
+  .main {
+    margin-top: 50px;
+    margin-left: 200px;
+    padding: 0;
+    height: 500px;
+    width: 350px;
+    box-sizing: border-box;
+    gap: 70px;
+  }
+  #error-message {
+    margin: 0;
+    padding: 0;
+  }
+  /* -------The big sign up text---- */
+  .header {
+    padding-left: 90px;
+    flex: 0.5;
+    gap: 8px;
+    height: 30px;
+  }
+  .header > * {
+    font-size: 50px;
+  }
+  /* ----The whole text box area-- */
+  .section {
+    flex: 2;
+    height: 500px;
+    width: 400px;
+    gap: 20px;
+    padding-left: 20px;
+  }
+  /* ----email div that has the input & logo div---- */
+  .email {
+    flex: 1;
+    height: 30px;
+    width: 300px;
+  }
+  .email > input {
+    height: 30px;
+  }
+  .emailInput::placeholder {
+    font-size: 15px;
+  }
+  /* --email icon div--- */
+  .emailIconWhole {
+    padding-top: 5px;
+    height: 30px;
+    width: 20px;
+  }
+  .emailIconWhole > * {
+    font-size: 15px;
+  }
+  /* ---pwd div--- */
+  .password {
+    flex: 1;
+    height: 30px;
+    width: 300px;
+  }
+  .password > input {
+    height: 30px;
+    width: 20px;
+  }
+  .pwdInput::placeholder {
+    font-size: 15px;
+  }
+  .pwdIconWhole {
+    padding-top: 5px;
+    height: 30px;
+    width: 30px;
+  }
+  .pwdIconWhole > * {
+    font-size: 15px;
+  }
+  /* ---confirm pwd div---- */
+  .confirmPwd {
+    flex: 1;
+    height: 30px;
+    width: 300px;
+  }
+  .confirmPwd > input {
+    height: 30px;
+  }
+  .cpwdInput::placeholder {
+    font-size: 15px;
+  }
+  .cpwdIconWhole {
+    padding-top: 5px;
+    height: 30px;
+    width: 20px;
+  }
+  .cpwdIconWhole > * {
+    font-size: 15px;
+  }
+  .pwdIconeye {
+    margin: 0;
+    padding-left: 0;
+    padding-top: 5px;
+    height: 30px;
+    width: 50px;
+  }
+  .eye.one {
+    font-size: 15px;
+  }
+  .cpwdIconeye {
+    padding-top: 5px;
+    height: 30px;
+    width: 30px;
+  }
+  .eye.two {
+    font-size: 15px;
+  }
+  /* ----Firstname text box---- */
+  .fnameInput {
+    flex: 1;
+    height: 30px;
+    width: 300px;
+    padding: 10px;
+    padding-left: 35px;
+  }
+  .fnameInput::placeholder {
+    font-size: 15px;
+  }
+  /* -lastname text box- */
+  .lnameInput {
+    flex: 1;
+    height: 30px;
+    width: 300px;
+    padding: 10px;
+    padding-left: 35px;
+  }
+  .lnameInput::placeholder {
+    font-size: 15px;
+  }
+  /* -singn up button--- */
+  .button {
+    flex: 2;
+    margin-left: 70px;
+    margin-top: 5px;
+    width: 150px;
+    height: 50px;
+    font-size: 20px;
+    font-family: inter;
+  }
+  /* ---date div that has the date of birth label & date input-- */
+  .date {
+    flex: 0.5;
+    gap: 6px;
+  }
+  .date > * {
+    flex: 1;
+    font-size: 15px;
+    width: 300px;
+  }
+  /* ---date input style--- */
+  .datePicker {
+    padding-left: 5px;
+  }
+  /* --already have an acount link style-- */
+  .footer {
+    flex: 0.2;
+    padding-left: 83px;
+    font-size: 13px;
+  }
+}
+@media (max-width: 600px) {
+  form {
+    margin: 0;
+    padding-top: 10px;
+    padding-left: 12px;
+  }
+  .logo {
+    width: 100px;
+    height: 10%;
+  }
+  .main {
+    margin-top: 30px;
+    margin-left: 115px;
+    padding: 0;
+    height: 350px;
+    width: 350px;
+    box-sizing: border-box;
+    gap: 30px;
+  }
+  #error-message {
+    margin: 0;
+    padding: 0;
+  }
+  /* -------The big sign up text---- */
+  .header {
+    padding-left: 70px;
+    flex: 0.5;
+    gap: 8px;
+    height: 30px;
+  }
+  .header > * {
+    font-size: 30px;
+  }
+  /* ----The whole text box area-- */
+  .section {
+    flex: 2;
+    height: 300px;
+    width: 250px;
+    gap: 20px;
+    padding-left: 20px;
+  }
+  /* ----email div that has the input & logo div---- */
+  .email {
+    flex: 1;
+    height: 30px;
+    width: 210px;
+  }
+  .email > input {
+    height: 30px;
+  }
+  .emailInput::placeholder {
+    font-size: 10px;
+  }
+  /* --email icon div--- */
+  .emailIconWhole {
+    padding-top: 5px;
+    height: 30px;
+    width: 20px;
+  }
+  .emailIconWhole > * {
+    font-size: 12px;
+  }
+  /* ---pwd div--- */
+  .password {
+    flex: 1;
+    height: 30px;
+    width: 210px;
+  }
+  .password > input {
+    height: 30px;
+  }
+  .pwdInput::placeholder {
+    font-size: 10px;
+  }
+  .pwdIconWhole {
+    padding-top: 5px;
+    height: 30px;
+    width: 55px;
+  }
+  .pwdIconWhole > * {
+    font-size: 12px;
+  }
+  /* ---confirm pwd div---- */
+  .confirmPwd {
+    flex: 1;
+    height: 30px;
+    width: 210px;
+  }
+  .confirmPwd > input {
+    height: 30px;
+  }
+  .cpwdInput::placeholder {
+    font-size: 10px;
+  }
+  .cpwdIconWhole {
+    padding-top: 5px;
+    height: 30px;
+    width: 55px;
+  }
+  .cpwdIconWhole > * {
+    font-size: 12px;
+  }
+  .pwdIconeye {
+    padding-top: 5px;
+    height: 30px;
+    width: 50px;
+  }
+  .eye.one {
+    font-size: 12px;
+  }
+  .cpwdIconeye {
+    padding-top: 5px;
+    height: 30px;
+    width: 50px;
+  }
+  .eye.two {
+    font-size: 12px;
+  }
+  /* ----Firstname text box---- */
+  .fnameInput {
+    flex: 1;
+    height: 30px;
+    width: 210px;
+    padding: 10px;
+    padding-left: 35px;
+  }
+  .fnameInput::placeholder {
+    font-size: 10px;
+  }
+  /* -lastname text box- */
+  .lnameInput {
+    flex: 1;
+    height: 30px;
+    width: 210px;
+    padding: 10px;
+    padding-left: 35px;
+  }
+  .lnameInput::placeholder {
+    font-size: 10px;
+  }
+  /* -singn up button--- */
+  .button {
+    flex: 2;
+    margin-left: 60px;
+    margin-top: 5px;
+    width: 100px;
+    height: 50px;
+    font-size: 15px;
+    font-family: inter;
+  }
+  /* ---date div that has the date of birth label & date input-- */
+  .date {
+    flex: 0.5;
+    gap: 6px;
+  }
+  .date > * {
+    flex: 1;
+    font-size: 12px;
+    width: 210px;
+  }
+  /* ---date input style--- */
+  .datePicker {
+    padding-left: 5px;
+  }
+  /* --already have an acount link style-- */
+  .footer {
+    flex: 0.2;
+    padding-left: 60px;
+    font-size: 10px;
+  }
+}
+@media (max-width: 400px) {
+  form {
+    margin: 0;
+    padding-top: 10px;
+    padding-left: 12px;
+  }
+  .logo {
+    width: 100px;
+    height: 10%;
+  }
+  .main {
+    margin-top: 30px;
+    margin-left: 40px;
+    padding: 0;
+    height: 350px;
+    width: 350px;
+    box-sizing: border-box;
+    gap: 30px;
+  }
+  #error-message {
+    margin: 0;
+    padding: 0;
+  }
+  /* -------The big sign up text---- */
+  .header {
+    padding-left: 70px;
+    flex: 0.5;
+    gap: 8px;
+    height: 30px;
+  }
+  .header > * {
+    font-size: 30px;
+  }
+  /* ----The whole text box area-- */
+  .section {
+    flex: 2;
+    height: 300px;
+    width: 250px;
+    gap: 20px;
+    padding-left: 20px;
+  }
+  /* ----email div that has the input & logo div---- */
+  .email {
+    flex: 1;
+    height: 30px;
+    width: 210px;
+  }
+  .email > input {
+    height: 30px;
+  }
+  .emailInput::placeholder {
+    font-size: 10px;
+  }
+  /* --email icon div--- */
+  .emailIconWhole {
+    padding-top: 5px;
+    height: 30px;
+    width: 20px;
+  }
+  .emailIconWhole > * {
+    font-size: 12px;
+  }
+  /* ---pwd div--- */
+  .password {
+    flex: 1;
+    height: 30px;
+    width: 210px;
+  }
+  .password > input {
+    height: 30px;
+  }
+  .pwdInput::placeholder {
+    font-size: 10px;
+  }
+  .pwdIconWhole {
+    padding-top: 5px;
+    height: 30px;
+    width: 55px;
+  }
+  .pwdIconWhole > * {
+    font-size: 12px;
+  }
+  /* ---confirm pwd div---- */
+  .confirmPwd {
+    flex: 1;
+    height: 30px;
+    width: 210px;
+  }
+  .confirmPwd > input {
+    height: 30px;
+  }
+  .cpwdInput::placeholder {
+    font-size: 10px;
+  }
+  .cpwdIconWhole {
+    padding-top: 5px;
+    height: 30px;
+    width: 55px;
+  }
+  .cpwdIconWhole > * {
+    font-size: 12px;
+  }
+  .pwdIconeye {
+    padding-top: 5px;
+    height: 30px;
+    width: 50px;
+  }
+  .eye.one {
+    font-size: 12px;
+  }
+  .cpwdIconeye {
+    padding-top: 5px;
+    height: 30px;
+    width: 50px;
+  }
+  .eye.two {
+    font-size: 12px;
+  }
+  /* ----Firstname text box---- */
+  .fnameInput {
+    flex: 1;
+    height: 30px;
+    width: 210px;
+    padding: 10px;
+    padding-left: 35px;
+  }
+  .fnameInput::placeholder {
+    font-size: 10px;
+  }
+  /* -lastname text box- */
+  .lnameInput {
+    flex: 1;
+    height: 30px;
+    width: 210px;
+    padding: 10px;
+    padding-left: 35px;
+  }
+  .lnameInput::placeholder {
+    font-size: 10px;
+  }
+  /* -singn up button--- */
+  .button {
+    flex: 2;
+    margin-left: 60px;
+    margin-top: 5px;
+    width: 100px;
+    height: 50px;
+    font-size: 15px;
+    font-family: inter;
+  }
+  /* ---date div that has the date of birth label & date input-- */
+  .date {
+    flex: 0.5;
+    gap: 6px;
+  }
+  .date > * {
+    flex: 1;
+    font-size: 12px;
+    width: 210px;
+  }
+  /* ---date input style--- */
+  .datePicker {
+    padding-left: 5px;
+  }
+  /* --already have an acount link style-- */
+  .footer {
+    flex: 0.2;
+    padding-left: 60px;
+    font-size: 10px;
   }
 }

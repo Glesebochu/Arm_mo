@@ -1,13 +1,13 @@
-class StepCategory{
+export class StepCategory{
     static Preparation = "Preparation";
     static Transition = "Transition";
 }
-class StepType{
+export class StepType{
     static Instruction = "Instruction";
     static Question = "Question";
 }
 
-class Step{
+export class Step{
     constructor(title, description, category, type, startTime=0, endTime=0){
         this.Title = title;
         this.Description = description;

@@ -1,20 +1,20 @@
 *{
     box-sizing: border-box;
-    font-size: 20px;
+    font-size: 3.5vh;
     font-family: var(--main-font-face);
 }
 body{
-    height: 90vh;
-    padding: 10vmax 10vmax 0 10vmax; 
+    height: 95vh;
+    padding: 10vh 10vw 5vh 10vw; 
     /* border: 2px solid black; */
     display: grid;
-    grid-template-rows: 1fr 3fr 1fr;
+    grid-template-rows: 1fr 4fr 1fr;
     gap: 5vmax;
 }
 header{
 }
 #preparation-title{
-    font-size: 5vmax;
+    font-size: 9.5vh;
     /* border: 2px solid black; */
     margin: 0;
 }
@@ -23,7 +23,6 @@ main{
     /* border: 2px solid black; */
     display: grid;
 }
-
 #preparation-input{
     border: 0;
     outline: 0;
@@ -38,7 +37,7 @@ main{
 footer{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10vmax;
+    gap: 10vw;
 }
 .preparation-button{
     border: 0px;

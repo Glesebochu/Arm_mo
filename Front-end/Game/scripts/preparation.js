@@ -1,7 +1,9 @@
 import { DBAssistant } from "../../../Middle-logic/Utilities/DBAssistant.js";
 import { StepType } from "../../../Middle-logic/Models/Step.js";
+import { Session } from "../../../Middle-logic/Models/Session.js";
+import { Meditator } from "../../../Middle-logic/Models/Meditator.js";
 
-export function prepare(meditator, session, stage){
+export function prepare(session){
 
     // Get the steps from the database.
     var steps = DBAssistant.getRecords("Step", "Category", "Preparation");
@@ -85,7 +87,6 @@ export function prepare(meditator, session, stage){
             // Log the stop time and set the duration of the step.
             currentStepStopTime = Date.now();
             currentStep.Duration += (currentStepStopTime - currentStepStartTime) / 1000;
-            console.log(currentStep.Title, currentStep.Duration);
     
             // Save the response in the current step object.
             currentStep.Response = input.value;
@@ -106,4 +107,19 @@ export function prepare(meditator, session, stage){
 
     }
 }
-prepare();
+
+// Dummy object to be replaced by the object obtained with Gustav's DB -> JS object function.
+var meditator = new Meditator(
+    "Zelalem",
+    "Amare",
+    "fellasfaw@gmail.com",
+    "test",
+    
+);
+
+// Dummy object to be replaced by the object obtained with Gustav's DB -> JS object function.
+var newSession = new Session();
+newSession.Meditator = meditator;
+newSession.Start_Date_Time = Date.now();
+
+prepare(newSession);

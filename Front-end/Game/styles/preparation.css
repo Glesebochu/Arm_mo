@@ -9,7 +9,7 @@ body{
     /* border: 2px solid black; */
     display: grid;
     grid-template-rows: 1fr 4fr 1fr;
-    gap: 5vmax;
+    gap: 5vh;
 }
 
 header{
@@ -23,6 +23,7 @@ header{
 main{
     /* border: 2px solid black; */
     display: grid;
+    /* gap: 4vh; */
 }
 #preparation-input{
     border: 0;
@@ -33,6 +34,11 @@ main{
 }
 #preparation-input:hover{
     transform: scale(1.05);
+}
+#preparation-error-message{
+    font-size: 2vh;
+    color: red;
+    display: none;
 }
 
 footer{

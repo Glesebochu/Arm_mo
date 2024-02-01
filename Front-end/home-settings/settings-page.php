@@ -10,59 +10,53 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro%3A400"/>
   <link rel="stylesheet" href="./styles/settings-page.css"/>
   <script>
-    
-    function hideMenuBar(className){
-      var elem=window.document.getElementsByClassName(className);
+    function hideMenuBar(className) {
+      var elem = window.document.getElementsByClassName(className);
       var contentDiv = document.getElementById('contentDiv');
-      if(window.innerWidth>600){
-        if(elem[0].style.left!='-200px'){
-          elem[0].style.left='-200px';
-          elem[0].style.backgroundColor='white';
-          contentDiv.style.left='-200px';
+      var userNameTextToDisplay = document.querySelector('#userNameText');
+
+      if (window.innerWidth > 600) {
+        if (elem[0].style.left != '-200px') {
+          elem[0].style.left = '-200px';
+          elem[0].style.backgroundColor = 'white';
+          contentDiv.style.left = '-200px';
           var tab = document.getElementsByClassName("activeTab");
           var tab2 = document.getElementsByClassName("deletecss");
           tab[0].classList.add('tempClass');
           tab[0].classList.remove('activeTab');
           tab2[0].classList.add('tempClass2');
           tab2[0].classList.remove('deletecss');
-
-
-        }
-        else{
-          elem[0].style.left='0px';
-          contentDiv.style.left='0px';
+          userNameTextToDisplay.classList.add('removeDisplay');
+        } else {
+          elem[0].style.left = '0px';
+          contentDiv.style.left = '0px';
           var tab = document.getElementsByClassName('tempClass');
           var tab2 = document.getElementsByClassName('tempClass2');
-
           tab[0].classList.add('activeTab');
           tab[0].classList.remove('tempClass');
           tab2[0].classList.add('deletecss');
           tab2[0].classList.remove('tempClass2');
+          userNameTextToDisplay.classList.remove('removeDisplay');
         }
-
-      }
-      else{
-        if(elem[0].style.left!='-200px'){
-          elem[0].style.left='-200px';
-          elem[0].style.backgroundColor='white';
-          contentDiv.style.left='-280px';
-          contentDiv.style.top='40px';
-          
+      } else {
+        if (elem[0].style.left != '-200px') {
+          elem[0].style.left = '-200px';
+          elem[0].style.backgroundColor = 'white';
+          contentDiv.style.left = '-280px';
+          contentDiv.style.top = '40px';
           var tab = document.getElementsByClassName("activeTab");
           tab[0].classList.add('tempClass');
           tab[0].classList.remove('activeTab');
-
-
-        }
-        else{
-          elem[0].style.left='0px';
-          contentDiv.style.left='80px';
+          userNameTextToDisplay.classList.add('removeDisplay');
+        } else {
+          elem[0].style.left = '0px';
+          contentDiv.style.left = '80px';
           var tab = document.getElementsByClassName('tempClass');
           tab[0].classList.add('activeTab');
           tab[0].classList.remove('tempClass');
+          userNameTextToDisplay.classList.remove('removeDisplay');
         }
       }
-      
     }
     function navigateToPage(link){
       window.open(link,'_self')
@@ -114,10 +108,7 @@
         // Set the username
         var userNamePar = document.getElementById('userNameText');
         userNamePar.innerHTML = '<?php echo $UsernametoEdit; ?>';
-        
-        
-
-
+  
         openSideMenu('./account-panel-.html');
         activeTab('accountDetailsButton');
     });

@@ -1,7 +1,8 @@
 <?php
 // process-login.php
 
-session_start(); // Start the session
+// Start the session
+session_start(); 
 
 // Retrieve the submitted form data
 $username = $_POST['username'];

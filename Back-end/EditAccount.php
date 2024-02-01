@@ -28,7 +28,7 @@
         $row = $result->fetch_assoc();
         $count = $row['@p_exists'];
 
-        if ($count == 0) {
+        if ($count == 0||$username==$UsernametoEdit) {
             $queryEditAccount = "CALL EditAccount('$UsernametoEdit', '$username', '$firstname', '$lastname', '$dob', '$profilepic')";
             $_SESSION['UsernametoEdit']=$username;
             $_SESSION['profilepic']=$profilepic;

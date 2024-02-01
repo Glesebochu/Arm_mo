@@ -8,13 +8,13 @@ export class StepType{
 }
 
 export class Step{
-    constructor(title, description, category, type, startTime=0, endTime=0){
+    constructor(title, description, category, type, duration=0, response=null){
         this.Title = title;
         this.Description = description;
         this.Category = category;
         this.Type = type;
-        this.Start_Time = startTime;
-        this.End_Time = endTime;
+        this.Duration = duration;
+        this.Response = response;
     }
     
     static getDummyPreparationSteps(){
@@ -67,21 +67,4 @@ export class Step{
 
     return preparationSteps;
   }
-}
-var current = 0;
-document.getElementById().addEventListener("click", () => {
-  current++;
-});
-document.getElementById().addEventListener("click", () => {
-  if ((step.preparationSteps[current][0] = Step.preparationSteps[0][0]))
-    var startTime = time();
-  else if ((step.transitionSteps[current][0] = Step.transitionSteps[0][0]))
-    var prepDuration = timer.value;
-});
-
-document.getElementById().addEventListener(click, () => {
-  var endTime = timer.value;
-});
-function getTotalTime() {
-  totalDuration = endTime - startTime;
 }

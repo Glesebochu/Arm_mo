@@ -118,6 +118,73 @@
     }
 }
 
+// Populating the Antidote table
+{
+    function checkRecordExistsAntidote($AntidoteType, $Severity,$Antidote) {
+        global $db;
+        $query = "SELECT * FROM Antidote WHERE Type = ? AND Severity = ? AND Antidote = ?";
+        $stmt = $db->prepare($query);
+        $stmt->bind_param("sss", $AntidoteType, $Severity, $Antidote);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return ($result->num_rows > 0);
+    }
+
+    $AntidoteInstances = [
+        ['AntidoteType' => 'Dullness', 'Severity' => 'Mild','Antidote'=>'Engage more fully with the breath'],
+        ['AntidoteType' => 'Dullness', 'Severity' => 'Mild','Antidote'=>'Open up awareness and let external sounds and sensation in'],
+        ['AntidoteType' => 'Dullness', 'Severity' => 'Mild','Antidote'=>'Straighten up sitting position'],
+        ['AntidoteType' => 'Dullness', 'Severity' => 'Mild','Antidote'=>'Open eyes a crack and let light in'],
+        ['AntidoteType' => 'Dullness', 'Severity' => 'Mild','Antidote'=>'Take 3-5 deeper breaths'],
+        ['AntidoteType' => 'Dullness', 'Severity' => 'Mild','Antidote'=>'Do a quick Leisure and fortune meditation - I am so lucky to have a life where I have the spare time and freedom to practice so I am going to make it count!'],
+
+        ['AntidoteType' => 'Dullness', 'Severity' => 'Moderate','Antidote'=>'Open eyes fully and meditate for a while with eyes open'],
+        ['AntidoteType' => 'Dullness', 'Severity' => 'Moderate','Antidote'=>'Release breath with resistance at lips (slight ‘raspberry’)'],
+        ['AntidoteType' => 'Dullness', 'Severity' => 'Moderate','Antidote'=>'Squeeze and release perineum several times'],
+        ['AntidoteType' => 'Dullness', 'Severity' => 'Moderate','Antidote'=>'Clench hands until arms shaking then release'],
+        ['AntidoteType' => 'Dullness', 'Severity' => 'Moderate','Antidote'=>'Clench whole body till shaking and release. Repeat'],
+
+        ['AntidoteType' => 'Dullness', 'Severity' => 'Severe','Antidote'=>'Stand up'],
+        ['AntidoteType' => 'Dullness', 'Severity' => 'Severe','Antidote'=>'Practice walking meditation for a bit'],
+        ['AntidoteType' => 'Dullness', 'Severity' => 'Severe','Antidote'=>'Splash water on your face'],
+        ['AntidoteType' => 'Dullness', 'Severity' => 'Severe','Antidote'=>'Nap and come back']
+    ];
+    
+    foreach ($AntidoteInstances as $AntidoteInstance) {
+        $AntidoteType = $AntidoteInstance['AntidoteType'];
+        $Severity = $AntidoteInstance['Severity'];
+        $Antidote = $AntidoteInstance['Antidote'];
+    
+        if (checkRecordExistsAntidote($AntidoteType, $Severity, $Antidote)) {
+            echo "
+                <script>
+                    console.log('Entry already exists for AntidoteType: $AntidoteType and Severity: $Severity');
+                </script>
+            ";
+        } else {
+            // Insert the new record into the table
+            $queryInsert = "INSERT INTO Antidote (Type, Severity, Antidote) VALUES (?, ?, ?)";
+            $stmtInsert = $db->prepare($queryInsert);
+            $stmtInsert->bind_param("sss", $AntidoteType, $Severity, $Antidote);
+            $stmtInsert->execute();
+    
+            if ($db->affected_rows > 0) {
+                echo "
+                    <script>
+                        console.log('New record inserted for AntidoteType: $AntidoteType and Severity: $Severity');
+                    </script>
+                ";
+            } else {
+                echo "
+                    <script>
+                        console.log('Failed to insert record for AntidoteType: $AntidoteType and Severity: $Severity');
+                    </script>
+                ";
+            }
+        }
+    }
+}
+
 // populating the stage obstacle association relationship table
 {
     function checkRecordExistsStageObstacle($obstacleID, $stageID) {

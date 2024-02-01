@@ -589,7 +589,7 @@
         }
     }
 
-  // Populating the Meditation Stage table
+    // Populating the Meditation Stage table
     {
         $Goal = ['Develop a consistent daily meditation practice'
         ,'Shorten the periods of mind-wandering and extend the periods of sustained attention to the meditation object.'

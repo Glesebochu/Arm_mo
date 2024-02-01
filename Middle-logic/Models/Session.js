@@ -1,4 +1,4 @@
-class Session {
+export class Session {
     constructor(meditator, activity, goal, motivation, distractions = [], startDateTime, endDateTime, stages = [], ahaMoments = []) {
         this.Meditator = meditator;
         this.Activity = activity;

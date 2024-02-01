@@ -28,7 +28,7 @@ body {
   padding: 1.842rem 0rem 119.3rem 1.917rem;
   position: relative;
   width: 85.5rem;
-  font-size: 10%;
+  font-size: 9%;
   /* background-color: rgb(217, 217, 217); */
 
   flex-shrink: 0;
@@ -40,13 +40,15 @@ body {
   align-items: center;
 }
 .mainWrapper .sideMenu .sideMenuIcons .userProfilePic {
-  margin-right: 75.25rem;
+  margin-right: 70.25rem;
   width: 15.1667rem;
   height: 15.4168rem;
   object-fit: cover;
   vertical-align: top;
   flex-shrink: 0;
   border-radius: 50%;
+  position:relative;
+  left:5px;
 }
 .mainWrapper .sideMenu .sideMenuIcons .userProfilePic:hover {
 
@@ -61,11 +63,16 @@ body {
   height: 20px;
   position: relative;
   font-size: 15px;
-  left: -265px;
+  left: -250px;
   top: 35px;
   padding: 30px 10px 20px 0px;
   margin: 0;
   border-radius: 5px;
+  object-fit: contain;
+}
+
+.mainWrapper .sideMenu .sideMenuIcons .removeDisplay{
+  display: none !important;
 }
 .mainWrapper .sideMenu .sideMenuIcons .minimizeMenuIcon {
   margin-top: 0.0577rem;
@@ -389,6 +396,9 @@ body {
     z-index: 1;
   }
  }
+ .mainWrapper .sideMenu .sideMenuIcons .removeDisplay{
+  display: none !important;
+}
 
 .mainWrapper .sideMenu .deleteAccountButton:hover{
   
@@ -401,18 +411,19 @@ body {
  /* Animations */
  @keyframes trashAnimation {
   10%, 90% {
-    transform: translate3d(1px, -2px, 0);
+    rotate: 10deg;
   }
 
   20%, 80% {
-    transform: translate3d(2px, 0, 0);
+    rotate: -10deg;
   }
 
   30%, 50%, 70% {
-    transform: translate3d(3px, -2px, 0);
+    rotate: 10deg;
   }
 
   40%, 60% {
-    transform: translate3d(2px, 0, 0);
+    rotate: -10deg;
   }
 }
+

@@ -1,4 +1,4 @@
-class Meditator{
+export class Meditator{
     constructor(firstName, lastName, username, email, password, currentStage){
         this.First_Name = firstName;
         this.Last_Name = lastName;

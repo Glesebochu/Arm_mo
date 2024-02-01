@@ -34,6 +34,11 @@ main{
 #preparation-input:hover{
     transform: scale(1.05);
 }
+#preparation-error-message{
+    font-size: 2vh;
+    color: red;
+    display: none;
+}
 
 footer{
     display: grid;

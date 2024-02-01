@@ -1,3 +1,6 @@
+import { prepare } from "../../Front-end/Game/scripts/preparation.js";
+import { Session } from "./Session.js";
+
 export class Meditator{
     constructor(firstName, lastName, username, email, password, currentStage){
         this.First_Name = firstName;
@@ -8,18 +11,13 @@ export class Meditator{
         this.Current_Stage = currentStage;
     }
 
-    startMeditation(){
+    startMeditation(stage){
         // Create and initialize a new Session object.
         var newSession = new Session();
         newSession.Meditator = this;
         newSession.Start_Date_Time = Date.now();
 
-        // Call the displayPreparationDialogue() function to display a dialogue for the meditator.
-        InterfaceBuilder.displayPreparationDialogue();
-        
-        // Call the displayTransitionDialogue() function to display a dialogue for the meditator.
-        InterfaceBuilder.displayTransitionDialogue();
-
+        prepare(this, newSession, stage);
     }
 
     stopMeditation(){}

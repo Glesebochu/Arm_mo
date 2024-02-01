@@ -65,6 +65,23 @@ export class Step{
             )
         ];
 
-        return preparationSteps;
-    }
+    return preparationSteps;
+  }
+}
+var current = 0;
+document.getElementById().addEventListener("click", () => {
+  current++;
+});
+document.getElementById().addEventListener("click", () => {
+  if ((step.preparationSteps[current][0] = Step.preparationSteps[0][0]))
+    var startTime = time();
+  else if ((step.transitionSteps[current][0] = Step.transitionSteps[0][0]))
+    var prepDuration = timer.value;
+});
+
+document.getElementById().addEventListener(click, () => {
+  var endTime = timer.value;
+});
+function getTotalTime() {
+  totalDuration = endTime - startTime;
 }

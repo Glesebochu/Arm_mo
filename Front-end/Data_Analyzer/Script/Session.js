@@ -77,3 +77,20 @@ var session = new Session(
   stages
 );
 session.display();
+// attach the aha buttons name here
+// document.getElementById("ahaButton").addEventListener("click", handleClick);
+// document.getElementById("motivationNext").addEventListener("click", handleClickMotivation);
+// document.getElementById("distractionNext").addEventListener("click", handleClickDistractio);
+// document.getElementById("goalNext").addEventListener("click", handleClickGoal);
+// variables that hold the time values from the step class
+var prepDuration=
+var session = new Session(
+  helper.motivations,
+  helper.goal,
+  helper.distractions,
+  activity,
+  helper.countAhas(),
+  helper.counter,
+  stages
+);
+session.display();

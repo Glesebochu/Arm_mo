@@ -293,7 +293,7 @@ form {
   text-shadow: 0 0 1px black;
 }
 
-@media (max-width: 1600px) {
+@media (min-width: 1600px) {
   form {
     margin: 0;
     padding-top: 20px;
@@ -878,7 +878,7 @@ form {
   .pwdIconWhole {
     padding-top: 5px;
     height: 30px;
-    width: 55px;
+    width: 20px;
   }
   .pwdIconWhole > * {
     font-size: 12px;
@@ -1049,7 +1049,7 @@ form {
   .pwdIconWhole {
     padding-top: 5px;
     height: 30px;
-    width: 55px;
+    width: 20px;
   }
   .pwdIconWhole > * {
     font-size: 12px;

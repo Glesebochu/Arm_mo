@@ -10,15 +10,4 @@ export class Meditator{
         this.Password = password;
         this.Current_Stage = currentStage;
     }
-
-    startMeditation(stage){
-        // Create and initialize a new Session object.
-        var newSession = new Session();
-        newSession.Meditator = this;
-        newSession.Start_Date_Time = Date.now();
-
-        prepare(this, newSession, stage);
-    }
-
-    stopMeditation(){}
 }

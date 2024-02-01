@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Session</title>
+    <title>Session</title>
     <link rel="stylesheet" href="..\Style\Session.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus+SC:wght@400&amp;display=swap"
+        data-tag="font" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Linden+Hill:ital,wght@0,400;1,400&amp;display=swap"
+        data-tag="font" />
+<link rel="stylesheet" href="..../Game/Middle-logic/Models/Step.JS">
 </head>
 
 <body>
     <main>
-        <header>Results</header>
+        <header>Player <span class="yellow">Results</span></header>
         <div class="sessionDataContainer">
             <label for="Stage" id="stage"></label>
             <label for="activity" id="activity"></label>
@@ -20,9 +26,24 @@
             <label for="ahaMoments"id="ahaMoments"></label>
             <label for="startDate"id="startDateTime"></label>
             <label for="endDate"id="endDateTime"></label>
+            <div class="left">
+                <label for="Stage" id="stage"></label>
+                <label for="activity" id="activity"></label>
+                <label for="goal" id="goal"></label>
+                <label for="motivations" id="motivations"></label>
+                <label for="distractions" id="distractions"></label>
+                <label for="ahaMoments" id="ahaMoments"></label>
+
+            </div>
+            <div class="right">
+                <label for="prepDuration" id="prepDuration"></label>
+                <label for="transitionDuration" id="transitionDuration"></label>
+                <label for="startDate" id="startDateTime"></label>
+                <label for="endDate" id="endDateTime"></label>
+                <label for="totalTime" id="totalTime"></label>
+
+            </div>
         </div>
     </main>
 </body>
-<script src="..\Script\Session.js"></script>
-
 </html>

@@ -10,10 +10,9 @@ body{
     display: grid;
     grid-template-rows: 1fr 4fr 1fr;
     gap: 5vh;
+    background-color: transparent;
 }
 
-header{
-}
 #preparation-title{
     font-size: 9.5vh;
     /* border: 2px solid black; */
@@ -23,7 +22,7 @@ header{
 main{
     /* border: 2px solid black; */
     display: grid;
-    /* gap: 4vh; */
+    gap: 4vh;
 }
 #preparation-input{
     border: 0;
@@ -31,9 +30,11 @@ main{
     border-bottom: 2px solid black;
     font-weight: bold;
     transition: transform 0.5s ease;
+    background-color: transparent;
+    height: 10vh;
 }
 #preparation-input:hover{
-    transform: scale(1.05);
+    transform: scale(1.03);
 }
 #preparation-error-message{
     font-size: 2vh;
@@ -50,12 +51,12 @@ footer{
     border: 0px;
     border-radius: 10px;
     font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.7s ease;
+    transition: background-color 0.3s ease, transform 0.1s ease;
 }
 .preparation-button:hover{
-    /* transform: scale(1.1); */
     background-color: gray;
 }
 .preparation-button:active{
     background-color: white;
+    transform: scale(0.9);
 }

@@ -1,4 +1,6 @@
-export class SensoryStimulusType{
+import { ObservableObject, ObservableObjectType } from "./ObservableObject";
+
+export class SensoryStimulusType extends ObservableObject{
     static Visual = "Visual";
     static Auditory = "Auditory";
     static Olfactory = "Olfactory";
@@ -6,10 +8,8 @@ export class SensoryStimulusType{
     static Taste = "Taste";
 }
 export class SensoryStimulus{
-    constructor(title, type, description, icon){
-        this.Title = title;
-        this.Type = type;
-        this.Description = description;
-        this.Icon = icon;
+    constructor(title, description, icon, sensoryStimulusType){
+        super(title, ObservableObjectType.SensoryStimuls, description, icon);
+        this.Sensory_Stimulus_Type = sensoryStimulusType;
     }
 }

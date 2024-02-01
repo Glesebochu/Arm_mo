@@ -5,12 +5,13 @@
 }
 body{
     height: 95vh;
-    padding: 10vh 10vw 5vh 10vw; 
+    padding: 15vh 10vw 5vh 10vw; 
     /* border: 2px solid black; */
     display: grid;
     grid-template-rows: 1fr 4fr 1fr;
     gap: 5vmax;
 }
+
 header{
 }
 #preparation-title{

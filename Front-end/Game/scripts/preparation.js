@@ -84,7 +84,8 @@ export function prepare(meditator, session, stage){
     
             // Log the stop time and set the duration of the step.
             currentStepStopTime = Date.now();
-            currentStep.Duration = (currentStepStopTime - currentStepStartTime) / 1000;
+            currentStep.Duration += (currentStepStopTime - currentStepStartTime) / 1000;
+            console.log(currentStep.Title, currentStep.Duration);
     
             // Save the response in the current step object.
             currentStep.Response = input.value;

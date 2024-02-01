@@ -54,11 +54,17 @@ export function prepare(meditator, session, stage){
         if (currentStepIndex > 0)
             currentStepIndex--;
         updatePage();
-    })
+    });
     
     nextButton.addEventListener('click', () => {
         goToNextStep();
-    })
+    });
+
+    input.addEventListener('keydown', (event) => {
+        if(event.key === "Enter"){
+            goToNextStep();
+        }
+    });
 
     function goToNextStep(){
         // If there is an input box and it is empty, tell the meditator to fill it in.

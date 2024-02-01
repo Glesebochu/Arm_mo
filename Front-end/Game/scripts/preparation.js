@@ -44,27 +44,33 @@ export function prepare(meditator, session, stage){
         }else{
             nextButton.textContent = "Next";
         }
+
+        // If the meditator has already responded to the step, show the response in the input box.
+        if (steps[currentStepIndex].Response != ""){
+            input.value = steps[currentStepIndex].Response;
+        }
         
         // Log the start time of the current step.
         currentStepStartTime = Date.now();
     }
     updatePage();
     
-    previousButton.addEventListener('click', () => {
-        if (currentStepIndex > 0)
-            currentStepIndex--;
-        updatePage();
-    });
+    previousButton.addEventListener('click', () => goToPreviousStep());
     
-    nextButton.addEventListener('click', () => {
-        goToNextStep();
-    });
+    nextButton.addEventListener('click', () => goToNextStep());
 
     input.addEventListener('keydown', (event) => {
         if(event.key === "Enter"){
             goToNextStep();
         }
     });
+
+    function goToPreviousStep(){
+        if (currentStepIndex > 0)
+            currentStepIndex--;
+        
+        updatePage();
+    }
 
     function goToNextStep(){
         // If there is an input box and it is empty, tell the meditator to fill it in.

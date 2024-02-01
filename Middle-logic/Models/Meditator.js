@@ -1,6 +1,3 @@
-import { prepare } from "../../Front-end/Game/scripts/preparation.js";
-import { Session } from "./Session.js";
-
 export class Meditator{
     constructor(firstName, lastName, username, password, currentStage){
         this.First_Name = firstName;

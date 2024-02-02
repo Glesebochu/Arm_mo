@@ -71,26 +71,26 @@ export class Stage {
 
     // Stage 3
     static stageThree = new Stage(
-        stageThree.Number = 3,
-        stageThree.Goal = "Overcome forgetting and falling asleep.",
-        stageThree.Intentions = [
+        this.Number = 3,
+        this.Goal = "Overcome forgetting and falling asleep.",
+        this.Intentions = [
             Intention.Invoke_Introspective_Attention,
             Intention.Make_Corrections_Distractions,
             Intention.Engage_Breath_Maintain_Awareness
         ],
-        stageThree.Obstacles = [
+        this.Obstacles = [
             Obstacle.Distractions,
             Obstacle.Mind_Wandering,
             Obstacle.Sleepiness,
             Obstacle.Forgetting
         ],
-        stageThree.Skills = [
+        this.Skills = [
             Skill.Follow_Breath,
             Skill.Connect,
             Skill.Label,
             Skill.Check_In
         ],
-        stageThree.Mastery_Requirements = [
+        this.Mastery_Requirements = [
             "I rarely forget the breath or fall asleep.",
         ]
     );

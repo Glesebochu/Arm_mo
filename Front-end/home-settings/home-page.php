@@ -10,6 +10,12 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro%3A400"/>
   <!-- <link rel="stylesheet" href="./styles/home-page.css"/> -->
   <link rel="stylesheet" href="./styles/home-page.css">
+
+  <script>
+    <?php session_start(); ?>
+    var stageID = <?php echo isset($_SESSION['stage']) ? $_SESSION['stage'] : 1; ?>;
+  </script>
+
   <script>
     function openPage(link){
       window.open(link,'_self');
@@ -21,45 +27,28 @@
       var wrapper = document.getElementsByClassName('pizzaPieces');
       var wrapperItems = wrapper[0].children;
 
-        var textWrapper=document.getElementsByClassName('stageTexts');
-        var textItems = textWrapper[0].children;
+      var textWrapper=document.getElementsByClassName('stageTexts');
+      var textItems = textWrapper[0].children;
 
-        for(item of wrapperItems) {
-          item.classList.remove('selectStage');
-        }
-
-        for(item of textItems) {
-          item.classList.remove('selectStageItem');
-        }
-        var clickedStage = document.getElementsByClassName(stage);
-        clickedStage[0].classList.add('selectStage')
-
-        var clickedStageText = document.getElementsByClassName('Stage'+stage.slice(1)+'Text');
-        clickedStageText[0].classList.add('selectStageItem');
+      for(item of wrapperItems) {
+        item.classList.remove('selectStage');
       }
-  
+
+      for(item of textItems) {
+        item.classList.remove('selectStageItem');
+      }
+      var clickedStage = document.getElementsByClassName(stage);
+      clickedStage[0].classList.add('selectStage')
+
+      var clickedStageText = document.getElementsByClassName('Stage'+stage.slice(1)+'Text');
+      clickedStageText[0].classList.add('selectStageItem');
+    }
     function shadeEllipses(stage) {
       var ellipseParent = document.getElementsByClassName('ellipses');
       var ellipses = ellipseParent[0].children;
       var counter = 0;
-      var stageID = <?php
-        include_once('../../Back-end/Connect.php');
-        $con = new Connect;
-        $db = $con->__getConnection();
-        $db->query('USE Arm_mo');
-        session_start();
-
-        $UsernametoEdit = $_SESSION['UsernametoEdit'];
-
-        if (isset($_SESSION['UsernametoEdit'])) {
-          $queryStageID = "SELECT Stage_ID FROM Meditator WHERE Username = '$UsernametoEdit'";
-          $result = $db->query($queryStageID);
-          $row = $result->fetch_assoc();
-          echo $row['Stage_ID'];
-        } else {
-          echo '0'; // Default value if the Stage_ID cannot be retrieved
-        }
-      ?>;
+      
+      console.log(stageID);
       
       if (stageID < stage) {
         stage=stageID;

@@ -20,7 +20,12 @@ $count = $row['@p_exists'];
 if ($count == 1) {
   // Set the session variable
   $_SESSION['UsernametoEdit'] = $username;
-  header('Location: ../Front-end/home-settings/home-page.php');
+  $queryStageID = "SELECT Stage_ID FROM Meditator WHERE Username = '$username'";
+  $result = $db->query($queryStageID);
+  $row = $result->fetch_assoc();
+  $stage=$row['Stage_ID'];
+  $_SESSION['stage']=$stage;
+  header("Location: ../Front-end/home-settings/home-page.php?stage=" . urlencode($stage));
   exit;
 } else {
   $errorMessage = 'Invalid username or password';

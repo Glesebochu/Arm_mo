@@ -1,6 +1,6 @@
-import { Intention } from "./Intention";
-import { Obstacle } from "./Obstacle";
-import { Skill } from "./Skill";
+import { Intention } from "./Intention.js";
+import { Obstacle } from "./Obstacle.js";
+import { Skill } from "./Skill.js";
 
 export class Stage {
     constructor(number, goal, intentions = [], obstacles = [], skills = [], masteryRequirements = [], nextStage) {
@@ -89,7 +89,7 @@ export class Stage {
             Skill.Check_In
         ];
         stageThree.Mastery_Requirements = [
-            "I earely forgetting the breath or fall asleep.",
+            "I rarely forget the breath or fall asleep.",
         ];
 
         stageOne.NextStage = stageTwo;

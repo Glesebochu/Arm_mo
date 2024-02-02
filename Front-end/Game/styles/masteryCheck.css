@@ -1,0 +1,86 @@
+*{
+    box-sizing: border-box;
+    font-size: 3.5vh;
+    font-family: var(--main-font-face);
+}
+body{
+    height: 100vh;
+    padding: 15vh 10vw 5vh 10vw; 
+    /* border: 2px solid black; */
+    /* background-color: gray; */
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* * The form */
+#masteryCheck-form{
+	width: 100%;
+    height: 100%;
+    /* border: 2px solid black; */
+    display: grid;
+    grid-template-rows: 1fr 3fr 1fr;
+    gap: 11vh;
+	padding: 20px;
+}
+#masteryCheck-title{
+    font-size: 6vmin;
+    margin: 0;
+}
+#masteryCheck-requirements{
+    display: grid;
+    gap: 4vh;
+}
+.masteryCheck-input-label-pair{
+    display: grid;
+    grid-template-columns: 1fr 14fr;
+    align-items: center;
+    gap: 2vw;
+}
+.masteryCheck-checkbox{
+    margin: 0;
+	width: 3vmax;
+	height: 3vmax;
+    justify-self: start;
+    border-radius: var(--default-border-rad);
+}
+
+.masteryCheck-button{
+    border: 0px;
+    border-radius: var(--default-border-rad);
+    font-weight: bold;
+    background-color: lightgray;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.masteryCheck-button:hover{
+    background-color: gray;
+}
+.masteryCheck-button:active{
+    background-color: white;
+    transform: scale(0.9);
+}
+
+/* * Congratulations div */
+#congrats-message{
+    display: none;
+	position: fixed;
+	width: 50vw;
+    height: 60vh;
+    top: 10vw;
+    left: 25vw;
+    /* transform: translate(-50%, -50%); */
+    background-color: white;
+    padding: 30px;
+    box-shadow: 0px 10px 10px 10px rgba(36, 35, 35, 0.5);
+	border-radius: var(--default-border-rad);
+	
+	
+	grid-template-rows: 3fr 1fr;
+	
+}
+#congrats-message h2{
+	justify-content: center;
+	align-self: center;
+	text-align: center;
+
+}

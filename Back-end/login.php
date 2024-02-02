@@ -24,7 +24,7 @@ if ($count == 1) {
   exit;
 } else {
   $errorMessage = 'Invalid username or password';
-  header("Location: ../Front-end/About_us-login-signup/login.html?error=" . urlencode($errorMessage));
+  header("Location: ../Front-end/Login/login.html?error=" . urlencode($errorMessage));
   exit;
 }
 ?>

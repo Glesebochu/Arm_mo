@@ -92,7 +92,7 @@
   <main class="WrapperMain">
 
     <nav class="navigation">
-      <img class="AboutUsIcon" onclick="openPage('../About_us-login-signup/aboutus.html')" src="./assets/el-group.png"/>
+      <img class="AboutUsIcon" onclick="openPage('../Aboutus/aboutus.html')" src="./assets/el-group.png"/>
       <img class="appname-ApT" src="./assets/appname.png"/>
       <img class="SettingsPageIcon" onclick="openPage('./settings-page.php')" src="./assets/vector.png"/>
     </nav>

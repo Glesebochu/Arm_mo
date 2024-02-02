@@ -189,7 +189,7 @@
       <p class="accountDetailsText">Account</p>
     </section>
 
-    <section class="themeButton sideMenuButtons" onclick="openSideMenu('../About_us-login-signup/Theme.html');activeTab('themeButton')">
+    <section class="themeButton sideMenuButtons" onclick="openSideMenu('../ControlPanel/Control_Panel.html');activeTab('themeButton')">
       <img class="themeIcon" src="./assets/fluent-dark-theme-24-regular.png"/>
       <p class="themeText">Appearance</p>
     </section>
@@ -204,7 +204,7 @@
       <p class="deleteAccountText">Delete Account</p>
     </section>
     
-    <section class="logoutButton sideMenuButtons" onclick="navigateToPage('../About_us-login-signup/login.html')">
+    <section class="logoutButton sideMenuButtons" onclick="navigateToPage('../Login/login.html')">
       <img class="logoutIcon" src="./assets/log-out.svg"/>
       <p class="logoutText">Log Out</p>
     </section>

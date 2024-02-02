@@ -91,13 +91,13 @@ export function prepare(session){
             // Save the response in the current step object.
             currentStep.Response = input.value;
     
-            // Increment the currentStepIndex.
+            // If there are steps left in the array, increment the currentStepIndex.
             if (currentStepIndex < steps.length - 1) 
                 currentStepIndex++;
-            // Code for going to the transition phase.
+            // If this is the last step, go to the transition phase.
             else {
                 // session.Steps = steps;
-                console.log(steps);
+                window.location.href = "./transition.html";
             }
     
             // Clear the input box.
@@ -114,12 +114,13 @@ var meditator = new Meditator(
     "Amare",
     "fellasfaw@gmail.com",
     "test",
-    
+    3
 );
 
 // Dummy object to be replaced by the object obtained with Gustav's DB -> JS object function.
 var newSession = new Session();
 newSession.Meditator = meditator;
 newSession.Start_Date_Time = Date.now();
+newSession.Stage_Numbers = meditator.Current_Stage_No;
 
 prepare(newSession);

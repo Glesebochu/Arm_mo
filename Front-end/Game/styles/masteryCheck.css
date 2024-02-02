@@ -70,13 +70,11 @@ body{
     left: 25vw;
     /* transform: translate(-50%, -50%); */
     background-color: white;
-    padding: 30px;
+    padding: 20px;
     box-shadow: 0px 10px 10px 10px rgba(36, 35, 35, 0.5);
 	border-radius: var(--default-border-rad);
 	
-	
 	grid-template-rows: 3fr 1fr;
-	
 }
 #congrats-message h2{
 	justify-content: center;

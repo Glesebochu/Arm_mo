@@ -2,10 +2,9 @@ import { Session } from "../../../Middle-logic/Models/Session.js";
 import { Meditator } from "../../../Middle-logic/Models/Meditator.js";
 import { Stage } from "../../../Middle-logic/Models/Stage.js";
 
-function masteryCheck(session){
+function masteryCheck(session, stage){
     // First, generate as many input boxes as needed for the stage.
-    // Access the stage object. This will be replaced by a database query.
-    var stage = Stage.createStages().filter(stage => stage.Number == session.Ending_Stage_No)[0];
+    
     console.log(stage);
     console.log(session);
 
@@ -39,7 +38,9 @@ function masteryCheck(session){
     // Function for congratulating the meditator for every mastery.
     function congratulate(){
         console.log("Inside Congratulate.");
-        session.Mastered_Stage = true;
+        if(stage.Number >= session.Meditator.Current_Stage_No){
+            session.Newly_Mastered_Stages.add(stage);
+        }
         congrats_div.style.display = 'grid';
         console.log(congrats_div);
     }
@@ -88,13 +89,11 @@ var meditator = new Meditator(
     3
 );
 
+// Access the stage object. This will be replaced by a database query.
+var stage = Stage.stageThree;
 // Dummy object to be replaced by the object obtained with Gustav's DB -> JS object function.
 var newSession = new Session();
 newSession.Meditator = meditator;
 newSession.Start_Date_Time = Date.now();
-newSession.Stage_Numbers = [1, 2, meditator.Current_Stage_No];
-newSession.Ending_Stage_No = 2;
 
-console.log(newSession);
-
-masteryCheck(newSession);
+masteryCheck(newSession, stage);

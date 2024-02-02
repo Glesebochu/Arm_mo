@@ -29,13 +29,13 @@ if ($cpassword === $password) {
         exit;
     } else {
         $errorMessage = 'A user with that exact username exists!';  
-        header("Location: ../Front-end/About_us-login-signup/signup.html?error=".urlencode($errorMessage));
+        header("Location: ../Front-end/Signup/signup.html?error=".urlencode($errorMessage));
         exit;
     }
 }
 else {
     $errorMessage = 'Passwords do not match!';  
-    header("Location: ../Front-end/About_us-login-signup/signup.html?error=".urlencode($errorMessage));
+    header("Location: ../Front-end/Signup/signup.html?error=".urlencode($errorMessage));
     exit;
 }
 ?>

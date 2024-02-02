@@ -27,7 +27,7 @@ if ($cpassword === $newpassword) {
         echo "
             <script>
                 alert('$successMessage');
-                window.top.location.href = '../Front-end/About_us-login-signup/login.html';
+                window.top.location.href = '../Front-end/Login/login.html';
             </script>
         ";
         exit;

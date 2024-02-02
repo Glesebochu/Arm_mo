@@ -22,7 +22,7 @@ if ($count == 1) {
     echo "
         <script>
             alert('$successMessage');
-            window.top.location.href = '../Front-end/About_us-login-signup/signup.html';
+            window.top.location.href = '../Front-end/Signup/signup.html';
         </script>
     ";
     exit;

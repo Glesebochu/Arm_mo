@@ -1,7 +1,9 @@
 import { DBAssistant } from "../../../Middle-logic/Utilities/DBAssistant.js";
 import { StepType } from "../../../Middle-logic/Models/Step.js";
+import { Session } from "../../../Middle-logic/Models/Session.js";
+import { Meditator } from "../../../Middle-logic/Models/Meditator.js";
 
-export function prepare(meditator, session, stage){
+export function prepare(session){
 
     // Get the steps from the database.
     var steps = DBAssistant.getRecords("Step", "Category", "Preparation");
@@ -44,21 +46,33 @@ export function prepare(meditator, session, stage){
         }else{
             nextButton.textContent = "Next";
         }
+
+        // If the meditator has already responded to the step, show the response in the input box.
+        if (steps[currentStepIndex].Response != ""){
+            input.value = steps[currentStepIndex].Response;
+        }
         
         // Log the start time of the current step.
         currentStepStartTime = Date.now();
     }
     updatePage();
     
-    previousButton.addEventListener('click', () => {
+    previousButton.addEventListener('click', () => goToPreviousStep());
+    
+    nextButton.addEventListener('click', () => goToNextStep());
+
+    input.addEventListener('keydown', (event) => {
+        if(event.key === "Enter"){
+            goToNextStep();
+        }
+    });
+
+    function goToPreviousStep(){
         if (currentStepIndex > 0)
             currentStepIndex--;
+        
         updatePage();
-    })
-    
-    nextButton.addEventListener('click', () => {
-        goToNextStep();
-    })
+    }
 
     function goToNextStep(){
         // If there is an input box and it is empty, tell the meditator to fill it in.
@@ -72,18 +86,18 @@ export function prepare(meditator, session, stage){
     
             // Log the stop time and set the duration of the step.
             currentStepStopTime = Date.now();
-            currentStep.Duration = (currentStepStopTime - currentStepStartTime) / 1000;
+            currentStep.Duration += (currentStepStopTime - currentStepStartTime) / 1000;
     
             // Save the response in the current step object.
             currentStep.Response = input.value;
     
-            // Increment the currentStepIndex.
+            // If there are steps left in the array, increment the currentStepIndex.
             if (currentStepIndex < steps.length - 1) 
                 currentStepIndex++;
-            // Code for going to the transition phase.
+            // If this is the last step, go to the transition phase.
             else {
                 // session.Steps = steps;
-                console.log(steps);
+                window.location.href = "./transition.html";
             }
     
             // Clear the input box.
@@ -93,4 +107,20 @@ export function prepare(meditator, session, stage){
 
     }
 }
-prepare();
+
+// Dummy object to be replaced by the object obtained with Gustav's DB -> JS object function.
+var meditator = new Meditator(
+    "Zelalem",
+    "Amare",
+    "fellasfaw@gmail.com",
+    "test",
+    3
+);
+
+// Dummy object to be replaced by the object obtained with Gustav's DB -> JS object function.
+var newSession = new Session();
+newSession.Meditator = meditator;
+newSession.Start_Date_Time = Date.now();
+newSession.Stage_Numbers = meditator.Current_Stage_No;
+
+prepare(newSession);

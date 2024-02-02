@@ -189,7 +189,7 @@ form {
   text-shadow: 0 0 1px rgb(24, 72, 35);
 }
 /* Media */
-@media (max-width: 4000px) {
+@media (min-width: 4000px) {
   form {
     margin: 0;
     padding-top: 50px;

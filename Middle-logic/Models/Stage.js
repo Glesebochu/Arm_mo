@@ -3,7 +3,7 @@ import { Obstacle } from "./Obstacle.js";
 import { Skill } from "./Skill.js";
 
 export class Stage {
-    constructor(number, goal, intentions = [], obstacles = [], skills = [], masteryRequirements = [], nextStage) {
+    constructor(number, goal, intentions = [], obstacles = [], skills = [], masteryRequirements = [], nextStage, isMastered=false) {
         this.Number = number;
         this.Goal = goal;
         this.Intentions = intentions;
@@ -11,7 +11,37 @@ export class Stage {
         this.Skills = skills;
         this.Mastery_Requirements = masteryRequirements;
         this.NextStage = nextStage;
+        this.Is_Mastered = isMastered;
     }
+
+    static stageOne = new Stage(
+        this.Number = 1,
+        this.Goal = "Develop a consistent daily meditation practice.",
+        this.Intentions = [
+            Intention.Sit_Down,
+            Intention.Practice_Diligently
+        ],
+        this.Obstacles = [
+            Obstacle.Resistance,
+            Obstacle.Procrastination,
+            Obstacle.Resistance,
+            Obstacle.Procrastination,
+            Obstacle.Fatigue,
+            Obstacle.Impatience,
+            Obstacle.Boredom,
+            Obstacle.Motivation_Lack
+        ],
+        this.Skills = [
+            Skill.Create_Practice_Routine,
+            Skill.Set_Specific_Goal,
+            Skill.Generate_Strong_Motivation,
+            Skill.Cultivate_Discipline_Diligence
+        ],
+        this.Mastery_Requirements = [
+            "I never miss a daily practice session.",
+            "I do not procastinate while meditating."
+        ]
+    );
 
     static createStages() {
         var stages = [];
@@ -43,6 +73,7 @@ export class Stage {
             "I never miss a daily practice session.",
             "I do not procastinate while meditating."
         ];
+        stageOne.Is_Mastered = true;
 
         // Stage 2
         var stageTwo = new Stage();
@@ -66,6 +97,7 @@ export class Stage {
             "I can sustain attention on the meditation object for 10-15 minutes.",
             "Most periods of mind-wandering last only a few seconds."
         ];
+        stageTwo.Is_Mastered = true;
 
         // Stage 3
         var stageThree = new Stage();
@@ -91,6 +123,7 @@ export class Stage {
         stageThree.Mastery_Requirements = [
             "I rarely forget the breath or fall asleep.",
         ];
+        stageThree.Is_Mastered = true;
 
         stageOne.NextStage = stageTwo;
         stageTwo.NextStage = stageThree;

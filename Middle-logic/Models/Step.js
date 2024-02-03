@@ -59,7 +59,6 @@ export class Step{
             new Step(
                 "Posture",
                 "Make yourself as comfortable as possible.", 
-                "", 
                 StepCategory.Preparation, 
                 StepType.Instruction
             )

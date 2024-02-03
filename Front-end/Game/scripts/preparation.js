@@ -3,6 +3,22 @@ import { StepType } from "../../../Middle-logic/Models/Step.js";
 import { Session } from "../../../Middle-logic/Models/Session.js";
 import { Meditator } from "../../../Middle-logic/Models/Meditator.js";
 
+// Dummy object to be replaced by the object obtained with Gustav's DB -> JS object function.
+var meditator = new Meditator(
+    "Zelalem",
+    "Amare",
+    "fellasfaw@gmail.com",
+    "test",
+    3
+);
+
+// Dummy object to be replaced by the object obtained with Gustav's DB -> JS object function.
+var newSession = new Session();
+newSession.Meditator = meditator;
+newSession.Start_Date_Time = Date.now();
+
+prepare(newSession);
+
 export function prepare(session){
 
     // Get the steps from the database.
@@ -79,7 +95,7 @@ export function prepare(session){
         if(currentStep.Type == StepType.Question && input.value == ""){
             error.style.display = "block";
         }
-        // If the input box if filled...
+        // If the input box is filled...
         else{
             // Remove the error message.
             error.style.display = "none";
@@ -96,8 +112,9 @@ export function prepare(session){
                 currentStepIndex++;
             // If this is the last step, go to the transition phase.
             else {
-                // session.Steps = steps;
-                window.location.href = "./transition.html";
+                session.Steps = steps;
+                // window.location.href = "./transition.html";
+                console.log(session);
             }
     
             // Clear the input box.
@@ -107,20 +124,3 @@ export function prepare(session){
 
     }
 }
-
-// Dummy object to be replaced by the object obtained with Gustav's DB -> JS object function.
-var meditator = new Meditator(
-    "Zelalem",
-    "Amare",
-    "fellasfaw@gmail.com",
-    "test",
-    3
-);
-
-// Dummy object to be replaced by the object obtained with Gustav's DB -> JS object function.
-var newSession = new Session();
-newSession.Meditator = meditator;
-newSession.Start_Date_Time = Date.now();
-newSession.Stage_Numbers = meditator.Current_Stage_No;
-
-prepare(newSession);

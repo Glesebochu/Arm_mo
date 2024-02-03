@@ -22,7 +22,7 @@
     include_once '../../Back-end/Meditator.php';
     $identifier = $_SESSION['UsernametoEdit'];
     $javascriptMeditator = getJavaScriptMeditator($identifier);
-    $javascriptMeditator2 = getJavaScriptMeditator('Zellalem@gmail.com');
+    // $javascriptMeditator2 = getJavaScriptMeditator('Zellalem@gmail.com');
 
   ?>
 
@@ -31,11 +31,13 @@
     import { Meditator } from '../../Middle-logic/Models/Meditator.js';
 
     // Output the JavaScript code to create the Meditator object
-    var meditatorObj = <?php echo $javascriptMeditator; ?>;
-    var meditatorObj2 = <?php echo $javascriptMeditator2; ?>;
+    var meditatorObj = JSON.parse('<?php echo $javascriptMeditator; ?>');
+    
+    // var meditatorObj2 = JSON.parse('<?php // echo $javascriptMeditator2; ?>');
 
     console.log(meditatorObj);
-    console.log(meditatorObj2);
+    console.log(Meditator.getMeditatorFromObject(meditatorObj));
+    // console.log(meditatorObj2);
 
   </script>
 

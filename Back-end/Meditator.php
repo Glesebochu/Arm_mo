@@ -38,7 +38,8 @@ function getJavaScriptMeditator($identifier) {
     $meditatorJson = json_encode($meditator);
 
     // Return the JavaScript code to create the JavaScript Meditator object
-    return "new Meditator($meditatorJson)";
+    // return "new Meditator($meditatorJson)";
+    return $meditatorJson;
 }
     
 ?>

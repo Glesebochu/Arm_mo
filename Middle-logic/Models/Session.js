@@ -9,4 +9,5 @@ export class Session {
         this.Steps = steps;
         this.Newly_Mastered_Stages = newlyMasteredStages;
     }
+
 }

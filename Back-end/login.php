@@ -18,15 +18,20 @@ $row = $result->fetch_assoc();
 $count = $row['@p_exists'];
 
 if ($count == 1) {
-  // Set the session variable
+  // Set the session variables
   $_SESSION['UsernametoEdit'] = $username;
-  $queryStageID = "SELECT Stage_ID FROM Meditator WHERE Username = '$username'";
-  $result = $db->query($queryStageID);
+  // Create a Meditator object and store its attributes in the session array
+  $queryMeditator = "SELECT Firstname, Lastname, Password, Stage_ID FROM Meditator WHERE Username = '$username'";
+  $result = $db->query($queryMeditator);
   $row = $result->fetch_assoc();
-  $stage=$row['Stage_ID'];
-  $_SESSION['stage']=$stage;
-  header("Location: ../Front-end/home-settings/home-page.php?stage=" . urlencode($stage));
+  $_SESSION['First_Name'] = $row['Firstname'];
+  $_SESSION['Last_Name'] = $row['Lastname'];
+  $_SESSION['Password'] = $row['Password'];
+  $_SESSION['stage'] = $row['Stage_ID'];
+
+  header("Location: ../Front-end/home-settings/home-page.php?stage=" . urlencode($_SESSION['stage']));
   exit;
+
 } else {
   $errorMessage = 'Invalid username or password';
   header("Location: ../Front-end/Login/login.html?error=" . urlencode($errorMessage));

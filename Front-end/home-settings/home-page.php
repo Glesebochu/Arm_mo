@@ -8,12 +8,35 @@
   <title>Home Page</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mako%3A400"/>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro%3A400"/>
-  <!-- <link rel="stylesheet" href="./styles/home-page.css"/> -->
   <link rel="stylesheet" href="./styles/home-page.css">
-
+  
   <script>
+
     <?php session_start(); ?>
     var stageID = <?php echo isset($_SESSION['stage']) ? $_SESSION['stage'] : 1; ?>;
+    // <!-- Include the Meditator.js file -->
+  </script>
+
+  <?php
+    // Include the PHP file with the function to retrieve the Meditator object
+    include_once '../../Back-end/Meditator.php';
+    $identifier = $_SESSION['UsernametoEdit'];
+    $javascriptMeditator = getJavaScriptMeditator($identifier);
+    $javascriptMeditator2 = getJavaScriptMeditator('Zellalem@gmail.com');
+
+  ?>
+
+  <script type="module">
+    // Import the Meditator.js module
+    import { Meditator } from '../../Middle-logic/Models/Meditator.js';
+
+    // Output the JavaScript code to create the Meditator object
+    var meditatorObj = <?php echo $javascriptMeditator; ?>;
+    var meditatorObj2 = <?php echo $javascriptMeditator2; ?>;
+
+    console.log(meditatorObj);
+    console.log(meditatorObj2);
+
   </script>
 
   <script>
@@ -75,8 +98,8 @@
     }
 
   </script>
+  
 </head>
-
 <body>
   <main class="WrapperMain">
 

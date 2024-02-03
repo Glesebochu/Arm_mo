@@ -8,7 +8,6 @@
   <title>Home Page</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mako%3A400"/>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro%3A400"/>
-  <!-- <link rel="stylesheet" href="./styles/home-page.css"/> -->
   <link rel="stylesheet" href="./styles/home-page.css">
   
   <script>

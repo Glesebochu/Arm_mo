@@ -19,9 +19,9 @@
 
   <?php
     // Include the PHP file with the function to retrieve the Meditator object
-    include_once '../../Back-end/Meditator.php';
+    include_once '../../Back-end/Models/Meditator.php';
     $identifier = $_SESSION['UsernametoEdit'];
-    $javascriptMeditator = getJavaScriptMeditator($identifier);
+    $javascriptMeditator = Meditator::getJavaScriptMeditator($identifier);
     // $javascriptMeditator2 = getJavaScriptMeditator('Zellalem@gmail.com');
 
   ?>

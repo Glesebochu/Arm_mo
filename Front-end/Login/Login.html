@@ -5,52 +5,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
-  <link href="./Login.css" rel="stylesheet" />
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
     data-tag="font" />
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Linden+Hill:ital,wght@0,400;1,400&amp;display=swap"
     data-tag="font" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus+SC:wght@400&amp;display=swap"
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus+SC:wght@400&amp;display=swap"
     data-tag="font" />
+
   <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Linden+Hill:ital,wght@0,400;1,400&amp;display=swap"
+   href="https://fonts.googleapis.com/css2?family=Marcellus+SC:wght@400&amp;display=swap"
     data-tag="font" />
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Linden+Hill:ital,wght@0,400;1,400&amp;display=swap"
-    data-tag="font" />
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
-    data-tag="font" />
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
-    data-tag="font" />
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
-    data-tag="font" />
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
-    data-tag="font" />
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Linden+Hill:ital,wght@0,400;1,400&amp;display=swap"
-    data-tag="font" />
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Linden+Hill:ital,wght@0,400;1,400&amp;display=swap"
-    data-tag="font" />
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Linden+Hill:ital,wght@0,400;1,400&amp;display=swap"
-    data-tag="font" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Megrim:wght@400&amp;display=swap"
-    data-tag="font" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Megrim:wght@400&amp;display=swap"
-    data-tag="font" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Megrim:wght@400&amp;display=swap"
-    data-tag="font" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Megrim:wght@400&amp;display=swap"
-    data-tag="font" />
-  <link rel="stylesheet" href="https://unpkg.com/@teleporthq/teleport-custom-scripts/dist/style.css" />
-  <link rel="stylesheet" href="./style.css" />
   <link href="./login.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -66,45 +32,31 @@
         document.getElementById('error-message').textContent = errorMessage;
       }
     });
-
   </script>
 </head>
 
 <body>
   <form action="https://localhost/Arm-mo-Fork/Back-end/login.php" class="form" method="post">
     <div class="logo">
-      <img alt="Writing12217" src="../About_us-login-signup/public/external/armimologo215810-q1qp-200w.png" class="logoImg" />
+      <img alt="Writing12217" src="../About_us-login-signup/public/external/armimologo215810-q1qp-200w.png"
+        class="logoImg" />
       <img alt="armimoLogo" src="../About_us-login-signup/public/external/logoText.png" class="armimoLogoText" />
     </div>
-    <main class="main">
-      <header class="header">
-        <span class="header1">Log</span>
-        <span class="header2">in</span>
-      </header>
-      <section class="section">
-        <div class="email">
-          <div class="emailIconWhole">
-            <i class="fas fa-envelope"></i>
-          </div>
-          <input type="email" class="emailInput" name='username' placeholder="Email or Player Name">
-        </div>
-        <div class="password">
-          <div class="pwdIconWhole">
-            <i class="fas fa-lock"></i>
-          </div>
-          <input type="password" name='password' class="pwdInput" placeholder="Password">
-          <div class="pwdeyeIconWhole">
-            <i class="eye one fas fa-eye-slash"></i>
-          </div>
-        </div>
-        <button class="button">Log in</button>
-        <p id="error-message"></p>
-        <footer class="footer">
-          <a href="../Signup/Signup.html">
-            Create an account</a>
-          </footer>
-      </section>
-    </main>
+    <header class="header">
+      <span class="header1">Log</span>
+      <span class="yellow">in</span>
+    </header>
+    <input type="email" class="emailInput" name='username' placeholder="Email or Player Name" required>
+    <div class="pwdIconWhole">
+    </div>
+    <input type="password" name='password' id="password" list="password-toggle"  class="pwdInput" placeholder="Password" required>
+    <datalist id="password-toggle">
+      <option value="text">
+    </datalist>
+    <p id="error-message"></p>
+    <a href="../Signup/Signup.html">
+      Create an account</a>
+    <button class="button" type="submit">Log in</button>
   </form>
 
   <script>

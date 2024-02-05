@@ -1,0 +1,168 @@
+* {
+  font-family: monospace;
+}
+html {
+  height: auto;
+  width: 100vw;
+  padding: 0;
+  margin: 0;
+}
+body {
+  height: auto;
+  width: 100vw;
+  padding-bottom: 6vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: auto;
+}
+header {
+  flex: 0.2;
+  margin: 2vw;
+  color: rgba(15, 18, 17, 0.74);
+  text-align: center;
+  padding: 1vh;
+  font-size: 2.5vw;
+  font-weight: bold;
+}
+main {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 3vw;
+  padding: 2vw;
+  width: 80vw;
+  flex: 3;
+  text-align: justify;
+  font-size: 1.3vw;
+  overflow: hidden;
+}
+.generalIntro1 {
+  width: 30%;
+  background-color: rgba(8, 72, 3, 0.345);
+  padding: 2vw;
+  border-radius: 2vw;
+  transition: transform 1s ease;
+}
+.generalIntro1:hover {
+  transform: scale(1.06);
+}
+.generalIntro2 {
+  width: 60%;
+  margin-left: 25vw;
+  background-color: rgba(8, 72, 3, 0.171);
+  transition: transform 1s ease;
+  border-radius: 2vw;
+  padding: 2vw;
+}
+.generalIntro2:hover {
+    transform: scale(1.08);
+  }
+  
+.generalIntro3 {
+  width: 60%;
+  background-color: rgba(8, 72, 3, 0.345);
+  padding: 2vw;
+  border-radius: 2vw;
+  transition: transform 1s ease;
+  border-radius: 2vw;
+}
+.generalIntro3:hover {
+    transform: scale(1.04);
+  }
+  
+.generalIntro4 {
+  width: 60%;
+  margin-left: 25vw;
+  background-color: rgba(8, 72, 3, 0.171);
+  padding: 2vw;
+  border-radius: 2vw;
+  transition: transform 1s ease;
+}
+.Q {
+    align-self: center;
+    font-size: 2.5vw;
+    scroll-margin-top: 4vh;
+    font-weight: bold;
+}
+span {
+    color: rgba(5, 83, 26, 0.539);
+    font-size: 3vw;
+    transition: font-size 0.5s ease-in-out;
+}
+.generalIntro4:hover {
+    transform: scale(1.08);
+  }
+.tables {
+    display: flex;
+    flex-direction: column;
+    gap: 5vh;
+    background-color: rgba(4, 88, 15, 0.073);
+    border-radius: 2vw;
+    padding: 3vw;
+}
+h2 {
+    margin: 0;
+    padding: 0;
+    color: rgba(15, 18, 17, 0.74);
+}
+.prompts1 {
+  background-color: rgba(216, 216, 216, 0.489);
+  padding: 3vw;
+  border-radius: 2vw;
+  opacity: 0;
+  transition: opacity 1s ease-in;
+}
+.prompts1.visible {
+    opacity: 1;
+}
+.prompts2 {
+    background-color: rgba(235, 232, 232, 0.731);
+    padding: 3vw;
+    border-radius: 2vw;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+  }
+.prompts2.visible {
+    opacity: 1;
+}
+.prompts3 {
+    background-color: rgba(235, 232, 232, 0.731);
+    padding: 3vw;
+    border-radius: 2vw;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+.prompts3.visible {
+    opacity: 1;
+}
+/* table:first-child{
+       transition: transform 1s ease;
+    transform-origin: center;
+ 
+} */
+/* .prompts:hover{
+    transform: scale(1.04);
+ 
+} */
+/* tr {
+
+}
+tr:hover {
+    transform: scale(1.04);
+  
+} */
+  footer {
+    flex: 1;
+}
+button {
+    font-family: monospace;
+    width: 15vw;
+    height: 100%;
+    border: none;
+    border-radius: 2vh;
+    color: rgba(2, 1, 0, 0.651);
+    font-weight: bold;
+    font-size: 3vw;
+    transition: background-color 0.5s ease;
+}

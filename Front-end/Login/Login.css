@@ -1,743 +1,83 @@
-* {
-  box-sizing: border-box;
-}
 html {
-  padding: 0;
-  margin: 0;
   height: 100vh;
   width: 100vw;
+  padding: 0;
+  margin: 0;
 }
 body {
-  margin: 0;
-  padding: 0;
-  height: 100vh;
-  width: 100vw;
+  height: 95vh;
+  width: 96vmax;
+  padding: 2vmin;
+  display: flex;
+  align-items: center;
 }
 form {
-  padding-left: 5%;
-  padding-top: 5%;
-  margin: 0;
-  height: 100%;
+  height: 90vh;
+  width: 100vw;
+  padding-bottom: 1vmin;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3vmin;
 }
-
-/* -----------logo work-------- */
 .logo {
   display: flex;
-  flex-direction: row;
-  width: 10%;
-  height: 10%;
+  flex: 1.5;
+  align-self: flex-start;
+  width: 16vmin;
+  height: 2vw;
   overflow: hidden;
 }
-/* .logo > * {
-  height: 55%;
-  width: 80%;
-} */
-.logImg {
-  width: 30%;
-  height: 30%;
+.logo > * {
+  width: 50%;
+  height: 8vmin;
 }
-.armimoLogoText {
-  height: 30%;
-  margin-top: 25%;
-}
-/* -----The central region------ */
-.main {
-  margin-left: 40%;
-  margin-top: 2%;
-  display: flex;
-  align-items: main;
-  flex-direction: column;
-  height: 60%;
-  width: 70%;
-  gap: 12%;
-}
-#error-message {
-  padding: 0;
-  margin: 0;
-  position: relative;
-}
-/* -------The big login text---- */
-.header {
-  flex: 0.5;
-  padding-left: 12%;
-  display: flex;
-  align-items: main;
-  gap: 2%;
-}
-.header > * {
-  font-size: 1100%;
-  font-style: Regular;
+header {
+  flex: 1;
+  font-size: 8vmin;
   font-family: Marcellus SC;
 }
-.header1 {
-  color: rgba(0, 0, 0, 1);
-}
-.header2 {
+.yellow {
   color: rgba(245, 177, 60, 1);
 }
-/* ------The whole text box area---- */
-.section {
-  flex: 2;
-  height: 60%;
-  width: 40%;
-  display: flex;
-  flex-direction: column;
-  gap: 10%;
+input {
+  flex: 0.5;
+  width: 36vw;
+  height: 5vh;
+  padding-left: 2vmin;
+  border-radius: 1vmin;
+  border: 1px solid rgba(128, 128, 128, 0.578);
+  outline: none;
 }
-/* ----------email section------------ */
-.email {
-  flex: 2;
-  display: flex;
-  flex-direction: row;
+input:hover {
+  box-shadow: 0 0 3px grey;
 }
-.email:hover {
-  box-shadow: 0 0 10px black;
-}
-.email > input {
-  flex: 1;
-  padding: 2%;
-  padding-left: 2%;
-  border: none;
-  background-color: rgb(216, 211, 211);
-}
-.emailInput::placeholder {
-  color: rgba(4, 54, 2, 0.918);
-  font-family: inter;
-  font-size: 420%;
-  font-weight: 700;
-}
-/* -the div for the email icon--- */
-.emailIconWhole {
-  padding-top: 4%;
-  padding-left: 3%;
-  height: 100%;
-  width: 10%;
-  background-color: rgb(216, 211, 211);
-}
-.emailIconWhole > * {
-  font-size: 400%;
-}
-/* ----password div---- */
-.password {
-  flex: 2;
-  display: flex;
-  flex-direction: row;
-}
-.password:hover {
-  box-shadow: 0 0 10px black;
-}
-.pwdInput {
-  padding: 2%;
-  padding-left: 2%;
-  flex: 1;
-  border: none;
-  background-color: rgb(216, 211, 211);
-}
-.pwdInput::placeholder {
-  color: rgba(4, 54, 2, 0.918);
-  font-family: inter;
-  font-size: 420%;
-  font-weight: 700;
-}
-.pwdIconWhole {
-  padding-top: 4%;
-  padding-left: 3%;
-  height: 100%;
-  width: 10%;
-  background-color: rgb(216, 211, 211);
-}
-.pwdeyeIconWhole {
-  padding-top: 4%;
-  height: 100%;
-  width: 10%;
-  background-color: rgb(216, 211, 211);
-}
-.pwdIconWhole > * {
-  font-size: 400%;
-}
-.pwdeyeIconWhole > * {
-  font-size: 400%;
-}
-/* ------login button---- */
-.button {
-  flex: 1.5;
-  margin-left: 20%;
-  width: 60%;
-  border: none;
-  color: rgba(253, 204, 121, 1);
-  background-color: rgba(1, 65, 0, 1);
-  border-radius: 5px;
-  font-size: 420%;
+::placeholder {
+  font-weight: bold;
+  font-size: 3vmin;
   font-family: inter;
 }
-.button:active {
-  box-shadow: 0 0 10px black;
+#error-message{
+  padding: 0;
+  margin: 0;
 }
-/* -----no acc, keep me logged in & forgot pwd links---- */
-/* --kep me logged in style-- */
-.footer {
-  flex: 1;
-  padding-left: 35%;
-  width: 100%;
-}
-.footer a {
+a {
+  flex: 0.3;
   text-decoration: none;
-  color: rgb(108, 106, 106);
-  font-size: 400%;
+  color: black;
+  font-size: 2.5vmin;
+  font-family: inter;
+
 }
-.footer a:hover {
-  text-shadow: 0 0 1px rgb(24, 72, 35);
+a:hover {
+  text-shadow: 0 0 1.5px rgba(128, 128, 128, 0.68);
 }
-/* Media */
-@media (min-width: 4000px) {
-  form {
-    margin: 0;
-    padding-top: 50px;
-    padding-left: 60px;
-  }
-  .logo {
-    width: 300px;
-    height: 150px;
-    overflow: hidden;
-  }
-  .logoImg {
-    width: 160px;
-    height: 150px;
-  }
-  .armimoLogoText {
-    margin-top: 30px;
-    width: 150px;
-    height: 100px;
-  }
-  .main {
-    overflow: hidden;
-    margin-top: 200px;
-    margin-left: 1200px;
-    padding: 0;
-    height: 1000px;
-    width: 1000px;
-    box-sizing: border-box;
-    gap: 20px;
-  }
-  .header {
-    padding-left: 200px;
-    flex: 0.5;
-    gap: 40px;
-    height: 30px;
-  }
-  .header > * {
-    font-size: 170px;
-  }
-  .section {
-    flex: 1;
-    height: 1000px;
-    width: 1000px;
-    gap: 30px;
-    padding-left: 15px;
-  }
-  .email {
-    flex: 1;
-    height: 100px;
-    width: 900px;
-  }
-  .email > input {
-    height: 120px;
-  }
-  .emailInput::placeholder {
-    font-size: 45px;
-  }
-  /* --email icon div--- */
-  .emailIconWhole {
-    padding-top: 40px;
-    height: 120px;
-    width: 90px;
-  }
-  .emailIconWhole > * {
-    font-size: 50px;
-  }
-  .password {
-    flex: 1;
-    height: 120px;
-    width: 900px;
-  }
-  .password > input {
-    height: 120px;
-  }
-  .pwdInput::placeholder {
-    font-size: 45px;
-  }
-  .pwdIconWhole {
-    padding-top: 30px;
-    height: 120px;
-    width: 90px;
-  }
-  .pwdIconWhole > * {
-    font-size: 50px;
-  }
-  .pwdeyeIconWhole {
-    padding-top: 35px;
-    height: 120px;
-    width: 90px;
-  }
-  .eye.one {
-    padding-left: 10px;
-    font-size: 45px;
-  }
-  .button {
-    flex: 0.7;
-    margin-left: 270px;
-    width: 400px;
-    height: 180px;
-    font-size: 50px;
-    font-family: inter;
-  }
-  .footer {
-    flex: 0.5;
-    padding-left: 320px;
-    padding-top: 0;
-    margin: 0;
-  }
-  .footer a {
-    font-size: 40px;
-  }
-}
-@media (max-width: 2500px) {
-  form {
-    margin: 0;
-    padding-top: 50px;
-    padding-left: 60px;
-  }
-  .logo {
-    width: 180px;
-    height: 100px;
-    overflow: hidden;
-  }
-  .logoImg {
-    width: 80px;
-    height: 80px;
-  }
-  .armimoLogoText {
-    margin-top: 30px;
-    width: 80px;
-    height: 50px;
-  }
-  .main {
-    overflow: hidden;
-    margin-top: 130px;
-    margin-left: 600px;
-    padding: 0;
-    height: 500px;
-    width: 800px;
-    box-sizing: border-box;
-    gap: 40px;
-  }
-  .header {
-    padding-left: 150px;
-    flex: 0.4;
-    gap: 20px;
-    height: 30px;
-  }
-  .header > * {
-    font-size: 70px;
-  }
-  .section {
-    flex: 1.5;
-    height: 500px;
-    width: 500px;
-    gap: 15px;
-    padding-left: 15px;
-    overflow: hidden;
-  }
-  .email {
-    flex: 1;
-    height: 100px;
-    width: 500px;
-  }
-  .email > input {
-    height: 60px;
-  }
-  .emailInput::placeholder {
-    font-size: 30px;
-  }
-  /* --email icon div--- */
-  .emailIconWhole {
-    padding-top: 20px;
-    height: 60px;
-    width: 70px;
-  }
-  .emailIconWhole > * {
-    font-size: 25px;
-  }
-  .password {
-    flex: 1;
-    height: 100px;
-    width: 500px;
-  }
-  .password > input {
-    height: 60px;
-  }
-  .pwdInput::placeholder {
-    font-size: 30px;
-  }
-  .pwdIconWhole {
-    padding-top: 20px;
-    height: 60px;
-    width: 70px;
-  }
-  .pwdIconWhole > * {
-    font-size: 25px;
-  }
-  .pwdeyeIconWhole {
-    padding-top: 20px;
-    height: 60px;
-    width: 70px;
-  }
-  .eye.one {
-    padding-left: 10px;
-    font-size: 25px;
-  }
-  .button {
-    flex: 0.7;
-    margin-left: 130px;
-    width: 220px;
-    height: 150px;
-    font-size: 30px;
-    font-family: inter;
-  }
-  .footer {
-    flex: 0.5;
-    padding-left: 150px;
-    padding-top: 0;
-    margin: 0;
-  }
-  .footer a {
-    font-size: 25px;
-  }
-}
-@media (max-width: 1500px) {
-  form {
-    margin: 0;
-    padding-top: 50px;
-    padding-left: 60px;
-  }
-  .logo {
-    width: 150px;
-    height: 100px;
-  }
-  .logoImg {
-    width: 100px;
-    height: 80px;
-  }
-  .armimoLogoText {
-    margin-top: 20px;
-    width: 70px;
-    height: 50px;
-  }
-  .main {
-    margin-top: 200px;
-    margin-left: 400px;
-    padding: 0;
-    height: 450px;
-    width: 500px;
-    box-sizing: border-box;
-    gap: 10px;
-  }
-  .header {
-    padding-left: 120px;
-    flex: 0.4;
-    gap: 20px;
-    height: 30px;
-  }
-  .header > * {
-    font-size: 70px;
-  }
-  .section {
-    flex: 1;
-    height: 300px;
-    width: 600px;
-    gap: 15px;
-    padding-left: 15px;
-  }
-  .email {
-    flex: 1;
-    height: 100px;
-    width: 400px;
-  }
-  .email > input {
-    height: 60px;
-  }
-  .emailInput::placeholder {
-    font-size: 20px;
-  }
-  /* --email icon div--- */
-  .emailIconWhole {
-    padding-top: 15px;
-    height: 60px;
-    width: 40px;
-  }
-  .emailIconWhole > * {
-    font-size: 20px;
-  }
-  .password {
-    flex: 1;
-    height: 100px;
-    width: 400px;
-  }
-  .password > input {
-    height: 60px;
-  }
-  .pwdInput::placeholder {
-    font-size: 20px;
-  }
-  .pwdIconWhole {
-    padding-top: 15px;
-    height: 60px;
-    width: 40px;
-  }
-  .pwdIconWhole > * {
-    font-size: 20px;
-  }
-  .pwdeyeIconWhole {
-    padding-top: 15px;
-    height: 60px;
-    width: 40px;
-  }
-  .eye.one {
-    font-size: 20px;
-  }
-  .button {
-    flex: 0.7;
-    margin-left: 90px;
-    width: 230px;
-    height: 150px;
-    font-size: 25px;
-    font-family: inter;
-  }
-  .footer {
-    flex: 0.5;
-    padding-left: 120px;
-    padding-top: 0;
-    margin: 0;
-  }
-  .footer a {
-    font-size: 23px;
-  }
-}
-@media (max-width: 1000px) {
-  form {
-    margin: 0;
-    padding-top: 50px;
-    padding-left: 60px;
-  }
-  .logo {
-    width: 150px;
-    height: 100px;
-  }
-  .logoImg {
-    width: 100px;
-    height: 80px;
-  }
-  .armimoLogoText {
-    margin-top: 20px;
-    width: 70px;
-    height: 50px;
-  }
-  .main {
-    margin-top: 200px;
-    margin-left: 200px;
-    padding: 0;
-    height: 450px;
-    width: 500px;
-    box-sizing: border-box;
-    gap: 10px;
-  }
-  .header {
-    padding-left: 120px;
-    flex: 0.4;
-    gap: 20px;
-    height: 30px;
-  }
-  .header > * {
-    font-size: 70px;
-  }
-  .section {
-    flex: 1;
-    height: 300px;
-    width: 600px;
-    gap: 15px;
-    padding-left: 15px;
-  }
-  .email {
-    flex: 1;
-    height: 100px;
-    width: 400px;
-  }
-  .email > input {
-    height: 60px;
-  }
-  .emailInput::placeholder {
-    font-size: 20px;
-  }
-  /* --email icon div--- */
-  .emailIconWhole {
-    padding-top: 15px;
-    height: 60px;
-    width: 40px;
-  }
-  .emailIconWhole > * {
-    font-size: 20px;
-  }
-  .password {
-    flex: 1;
-    height: 100px;
-    width: 400px;
-  }
-  .password > input {
-    height: 60px;
-  }
-  .pwdInput::placeholder {
-    font-size: 20px;
-  }
-  .pwdIconWhole {
-    padding-top: 15px;
-    height: 60px;
-    width: 40px;
-  }
-  .pwdIconWhole > * {
-    font-size: 20px;
-  }
-  .pwdeyeIconWhole {
-    padding-top: 15px;
-    height: 60px;
-    width: 40px;
-  }
-  .eye.one {
-    font-size: 20px;
-  }
-  .button {
-    flex: 0.7;
-    margin-left: 90px;
-    width: 230px;
-    height: 150px;
-    font-size: 25px;
-    font-family: inter;
-  }
-  .footer {
-    flex: 0.5;
-    padding-left: 120px;
-    padding-top: 0;
-    margin: 0;
-  }
-  .footer a {
-    font-size: 23px;
-  }
-}
-@media (max-width: 750px) {
-  form {
-    margin: 0;
-    padding-top: 50px;
-    padding-left: 60px;
-  }
-  .logo {
-    width: 150px;
-    height: 100px;
-  }
-  .logoImg {
-    width: 100px;
-    height: 80px;
-  }
-  .armimoLogoText {
-    margin-top: 20px;
-    width: 70px;
-    height: 50px;
-  }
-  .main {
-    margin-top: 200px;
-    margin-left: 20px;
-    padding: 0;
-    height: 450px;
-    width: 500px;
-    box-sizing: border-box;
-    gap: 10px;
-  }
-  .header {
-    padding-left: 120px;
-    flex: 0.4;
-    gap: 20px;
-    height: 30px;
-  }
-  .header > * {
-    font-size: 70px;
-  }
-  .section {
-    flex: 1;
-    height: 300px;
-    width: 600px;
-    gap: 15px;
-    padding-left: 15px;
-  }
-  .email {
-    flex: 1;
-    height: 100px;
-    width: 400px;
-  }
-  .email > input {
-    height: 60px;
-  }
-  .emailInput::placeholder {
-    font-size: 20px;
-  }
-  /* --email icon div--- */
-  .emailIconWhole {
-    padding-top: 15px;
-    height: 60px;
-    width: 40px;
-  }
-  .emailIconWhole > * {
-    font-size: 20px;
-  }
-  .password {
-    flex: 1;
-    height: 100px;
-    width: 400px;
-  }
-  .password > input {
-    height: 60px;
-  }
-  .pwdInput::placeholder {
-    font-size: 20px;
-  }
-  .pwdIconWhole {
-    padding-top: 15px;
-    height: 60px;
-    width: 40px;
-  }
-  .pwdIconWhole > * {
-    font-size: 20px;
-  }
-  .pwdeyeIconWhole {
-    padding-top: 15px;
-    height: 60px;
-    width: 40px;
-  }
-  .eye.one {
-    font-size: 20px;
-  }
-  .button {
-    flex: 0.7;
-    margin-left: 90px;
-    width: 230px;
-    height: 150px;
-    font-size: 25px;
-    font-family: inter;
-  }
-  .footer {
-    flex: 0.5;
-    padding-left: 120px;
-    padding-top: 0;
-    margin: 0;
-  }
-  .footer a {
-    font-size: 23px;
-  }
+button {
+  flex: 0.6; 
+  width: 30vmin;
+  border: none;
+  border-radius: 1vw;
+  transition: background-color 0.5s ease;
+  font-size: 3.8vmin;
+  font-family: inter;
 }

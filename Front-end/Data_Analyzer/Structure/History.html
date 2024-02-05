@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Session</title>
-    <title>Session</title>
+    <title>History</title>
     <link rel="stylesheet" href="..\Style\History.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus+SC:wght@400&amp;display=swap"
         data-tag="font" />
@@ -14,12 +13,46 @@
 </head>
 
 <body>
+    <header>
+        <!-- <img src="leftline8410-obz.svg"/> -->
+        </h1>Session <span class="yellow">Su</span>mmary</h1>
+    </header>
     <main>
-        <header>Sessions <span class="yellow">History</span></header>
-        <section class="sessionDataContainer">
-            
-        </section>
+        <table class="sessionDataContainer">
+            <tr class="grey">
+                <td id="goal"></td>
+                <td id="activity"></td>
+            </tr>
+            <tr>
+                <td id="motivations"></td>
+                <td id="distractions"></td>
+            </tr>
+            <tr>
+                <td id="stagesTraversed"></td>
+                <td id="newlyMastered"></td>
+            </tr>
+            <tr>
+                <td id="meditationObject"></td>
+                <td id="ahaMoments"></td>
+            </tr>
+            <tr>
+                <td id="prepDuration"></td>
+                <td id="transitionDuration"></td>
+            </tr>
+            <tr>
+                <td id="startDateTime"></td>
+                <td id="endDateTime"></td>
+            </tr>
+        </table>
     </main>
+    <footer>
+        <div class="time">
+            <i class="fas fa-clock"></i>
+            <h2 id="totalDuration"></h2>
+
+        </div>
+        <button type="submit">DONE</button>
+    </footer>
 </body>
-<script src="../../../Middle-logic/Models/DataAnalyzer/History.js"></script>
+<script src="../Script/History.js"></script>
 </html>

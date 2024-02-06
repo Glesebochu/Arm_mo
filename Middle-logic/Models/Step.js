@@ -21,7 +21,7 @@ export class Step{
 
         var preparationSteps = [
             new Step(
-                "Selection", 
+                "Activity", 
                 "Write down the activity you choose to do.", 
                 StepCategory.Preparation, 
                 StepType.Question

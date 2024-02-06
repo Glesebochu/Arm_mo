@@ -1,13 +1,13 @@
-import { ObservableObject, ObservableObjectType } from "./ObservableObject";
+import { ObservableObject, ObservableObjectType } from "./ObservableObject.js";
 
-export class SensoryStimulusType extends ObservableObject{
+export class SensoryStimulusType{
     static Visual = "Visual";
     static Auditory = "Auditory";
     static Olfactory = "Olfactory";
     static Kinesthetic = "Kinesthetic";
     static Taste = "Taste";
 }
-export class SensoryStimulus{
+export class SensoryStimulus extends ObservableObject{
     constructor(id, title, description, icon, sensoryStimulusType){
         super(id, title, ObservableObjectType.SensoryStimuls, description, icon);
         this.Sensory_Stimulus_Type = sensoryStimulusType;

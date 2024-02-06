@@ -1,4 +1,4 @@
-import { ObservableObject, ObservableObjectType } from "./ObservableObject";
+import { ObservableObject, ObservableObjectType } from "./ObservableObject.js";
 
 export class MentalObjectType{
     static Thought = "Thought";

@@ -1,4 +1,4 @@
-import { ObservableObject, ObservableObjectType } from "./ObservableObject";
+import { ObservableObject, ObservableObjectType } from "./ObservableObject.js";
 
 export class MentalObjectType{
     static Thought = "Thought";
@@ -6,8 +6,8 @@ export class MentalObjectType{
     static MentalState = "Mental State"
 }
 export class MentalObject extends ObservableObject{
-    constructor(title, description, icon, mentalObjectType){
-        super(title, ObservableObjectType.MentalObject, description, icon)
+    constructor(id, title, description, icon, mentalObjectType, intensity){
+        super(id, title, ObservableObjectType.MentalObject, description, icon, intensity)
         this.Mental_Object_Type = mentalObjectType;
     }
 }

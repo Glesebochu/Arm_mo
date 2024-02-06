@@ -10,7 +10,7 @@ export class Activity{
     static Breathing = new Activity(
         1, 
         "Breathing",
-        new SensoryStimulus(1, "Breath at the nose", "Breathing sensations at the nose", SensoryStimulusType.Kinesthetic)
+        new SensoryStimulus(1, "Breath at the nose", "Breathing sensations at the nose", "icon", SensoryStimulusType.Kinesthetic)
     );
     static Reading = new Activity(
         2,

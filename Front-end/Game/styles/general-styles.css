@@ -1,0 +1,8 @@
+:root{
+    --main-font-face: monospace;
+    --p-font-size: 15;
+    --default-border-rad: 10px;
+}
+*{
+    box-sizing: border-box;
+}

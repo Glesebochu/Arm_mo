@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction</title>
+    <link rel="stylesheet" href="Intro.css">
+</head>
+
+<body>
+    <header>Introduction</header>
+    <main>
+        <section class="generalIntro1">
+            Welcome to Arm’mo!
+        </section>
+        <section class="generalIntro2">
+            This is where we keep track of your meditation history. We understand that a significant
+            challenge faced by many meditators is maintaining a regular and accurate record of their meditative
+            experiences. For this reason, we have implemented functional systems that automatically save and display all
+            your meditation data at the click of a button. In addition to analyzing meditation data, Arm’mo also
+            functions as a meditation guide. To achieve this, we have incorporated the grand meditation principles from
+            "The Mind Illuminated" by Culadasa John, a magnificent book on meditation practice.
+        </section>
+        <section class="generalIntro3">
+            As a result, the game's user interface (UI) features a very intuitive dialogue sequence that players can
+            undertake to represent their conscious experience and focus their minds. This process applies the
+            preparation and transition phases extensively discussed in the book. Players can also progress through
+            the
+            10 stages of the road to mastery, with each stage considered mastered based on the player's performance.
+            For
+            more information on these phases and stages, click on the link below.
+        </section>
+        <section class="generalIntro4">
+            In simple terms, Arm’mo is a digital ledger and meditation guide that enhances the transformative nature of
+            each of your meditation sessions.
+        </section>
+        <section class="Q">
+            For All Your Questions <span id="spans">?</span>
+        </section>
+        <section class="tables">
+            <table class="prompts1">
+                <h2>Before Playing the Game</h2>
+                <tr>
+                    <td>1. </td>
+                    <td>How do I create a player account?
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>hi</td>
+                </tr>
+                <tr>
+                    <td>2. </td>
+                    <td>Where do I find information on the stages?
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>hi</td>
+                </tr>
+                <tr>
+                    <td>3. </td>
+                    <td>Where do I get and initially save my current stage?
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>hi</td>
+                <tr>
+                    <td>4. </td>
+                    <td>How do I delete my account?
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>hi</td>
+                <tr>
+            </table>
+            <br><br>
+            <table class="prompts2">
+                <h2>While Playing the Game</h2>
+                <tr>
+                    <td>1. </td>
+                    <td>How do I choose meditation activities and meditation objects?
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>hi</td>
+                </tr>
+                <tr>
+                    <td>2. </td>
+                    <td>How do I start a meditation session?
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>hi</td>
+                </tr>
+                <tr>
+                    <td>3. </td>
+                    <td>How long does a session last?
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>hi</td>
+                </tr>
+
+                <tr>
+                    <td>4. </td>
+                    <td>How do I time myself?
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>hi</td>
+                </tr>
+
+                <tr>
+                    <td>5. </td>
+                    <td>Are there any tips I can follow?
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>hi</td>
+                </tr>
+
+                <tr>
+                    <td>6. </td>
+                    <td>Can I not move across stages without mastery?
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>hi</td>
+                </tr>
+
+                <tr>
+                    <td>7. </td>
+                    <td>How do I traverse through stages?
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>hi</td>
+                </tr>
+
+                <tr>
+                    <td>8. </td>
+                    <td>How do I know if I mastered a stage?
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>hi</td>
+                </tr>
+            </table>
+            <table class="prompts3">
+                <h2>After Playing The Game</h2>
+                <tr>
+                    <td>1. </td>
+                    <td>Where do I get data on the stages I have mastered?
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>hi</td>
+                </tr>
+
+                <tr>
+                    <td>2. </td>
+                    <td>Where do I get my session summary?
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>hi</td>
+                </tr>
+                <tr>
+                    <td>3. </td>
+                    <td>Are there new features on the way I should know about?
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>hi</td>
+                </tr>
+            </table>
+        </section>
+        <br>
+    </main>
+    <footer>
+        <button type="submit">Home</button>
+    </footer>
+    <script>
+        // Function to handle the intersection observer callback
+        function handleIntersection(entries, observer) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                } else {
+                    entry.target.classList.remove('visible');
+                }
+            });
+        }
+        // Create an Intersection Observer
+        const observer = new IntersectionObserver(handleIntersection, {
+            threshold: 0.5, // Adjust the threshold as needed
+        });
+
+        // Observe the target element
+        const targetElement1 = document.querySelector('.prompts1');
+        observer.observe(targetElement1);
+        const targetElement2 = document.querySelector('.prompts2');
+        observer.observe(targetElement2);
+        const targetElement3 = document.querySelector('.prompts3');
+        observer.observe(targetElement3);
+
+        function handleDynamicIntersection(entries, dynamicObserver) {
+      entries.forEach(entry => {
+        const dynamicSpan = document.getElementById('spans');
+
+        if (entry.isIntersecting) {
+          dynamicSpan.style.fontSize = '65px'; // Set the desired font size when in view
+        } else {
+          dynamicSpan.style.fontSize = '10px'; // Set the default font size when out of view
+        }
+      });
+    }
+
+    // Create an Intersection Observer for the dynamic span
+    const dynamicObserver = new IntersectionObserver(handleDynamicIntersection, {
+      threshold: 0, // Set threshold to 0 for immediate triggering
+    });
+
+    // Observe the target element with the new ID "spans"
+    const dynamicTargetElement = document.getElementById('spans');
+    dynamicObserver.observe(dynamicTargetElement);
+  </script>
+</body>
+
+</html>

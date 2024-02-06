@@ -1,0 +1,188 @@
+html {
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  position: relative;
+  left:-100px;
+}
+.settingTxt > * {
+    letter-spacing: 0;
+    font-size: 400%;
+    font-style: Regular;
+    font-family: Marcellus SC;
+    box-sizing: border-box;
+  }
+  .settingTxt1 {
+    color: rgba(0, 0, 0, 1);
+  }
+  .settingTxt2 {
+    color: #f5b13c;
+  }
+ul {
+  background-color: rgb(249, 246, 246);
+  width: 50%;
+  height: 80%;
+  margin-bottom: 5%;
+  font-weight:500;
+  font-size: 190%;
+  display: flex;
+  flex-direction: column;
+  gap: 10%;
+  border: 2px solid rgb(198, 198, 198);
+  padding-top: 6%;
+  padding-bottom: 7%;
+  padding-left: 10%;
+}
+li {
+  font-family: inter;
+  list-style-type: none;
+  margin-left: 5%;
+}
+li label {
+    font-size: 90%;
+    font-weight:500;
+}
+.sound {
+  font-size: 100%;
+  margin-left: 0;
+}
+.sound input {
+  margin-left: 6%;
+}
+.brightness {
+  font-size: 100%;
+  margin-left: 0;
+}
+.dial {
+  width: 50%;
+}
+.tips {
+  margin: 0;
+  width: 100%;
+  font-size: 100%;
+}
+.bot {
+    display: flex;
+    gap: 3%;
+    width: 80%;
+    margin-top: 5%;
+}
+.disable {
+    width: 65%;
+}
+li > input {
+  margin-left: 3%;
+  padding: 0;
+  height: 1.2rem;
+  width: 1.2rem;
+}
+body {
+  margin-top: 5%;
+  margin-left: 5%;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2%;
+}
+/* --div that holds the options--- */
+.options {
+  font-family: inter;
+  width: 70%;
+  height: 80%;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.reset {
+  height: 10%;
+  width: 30%;
+  font-size: 80%;
+  font-weight: 550;
+  margin-left: 25%;
+  margin-top: 30%;
+  border: 2px solid rgb(186, 184, 184);
+  color: rgb(61, 62, 61);
+  background-color: rgb(255, 255, 255);
+  border-radius: 5px;
+  font-family: inter;
+}
+.reset:active {
+  box-shadow: 0 0 20px rgb(83, 82, 82);
+}
+.home {
+  font-size: 200%;
+  text-decoration: none;
+  color: rgb(61, 62, 61);
+  font-family: "Times New Roman", Times, serif;
+}
+.home:hover {
+  text-shadow: 0 0 2px rgb(40, 37, 37);
+}
+
+/* Styles specific to the dark theme */
+.dark-theme {
+  background-color: #222;
+  color: #fff;
+}
+
+.dark-theme .settingTxt {
+  color: #fff;
+}
+
+.dark-theme .checkbox li label {
+  color: #fff;
+}
+.dark-theme html {
+    background-color: #222;
+}
+
+.dark-theme .settingTxt1 {
+    color: #fff;
+}
+
+.dark-theme .settingTxt2 {
+    color: #f5b13c;
+}
+
+.dark-theme ul {
+    background-color: #222;
+    border-color: #666;
+}
+
+.dark-theme li label {
+    color: #fff;
+}
+
+.dark-theme .sound {
+    color: #fff;
+}
+
+.dark-theme .brightness {
+    color: #fff;
+}
+
+.dark-theme .dial {
+    background-color: #333;
+}
+
+.dark-theme .tips {
+    color: #fff;
+}
+
+.dark-theme .reset {
+    border-color: #bbb;
+    color: #333;
+    background-color: #fff;
+}
+
+.dark-theme .reset:active {
+    box-shadow: 0 0 20px #535252;
+}
+
+.dark-theme .home {
+    color: #333;
+}

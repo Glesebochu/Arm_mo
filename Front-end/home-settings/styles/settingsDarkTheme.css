@@ -1,0 +1,62 @@
+/* Dark mode styles */
+
+body {
+  background-color: #1f1f1f;
+  color: #ffffff;
+}
+
+.sideMenu {
+  background-color: #292929;
+}
+
+.sideMenuIcons {
+  background-color: #292929;
+}
+
+.accountDetailsButton.activeTab,
+.themeButton.activeTab,
+.passwordButton.activeTab,
+.deleteAccountButton.deletecss,
+.logoutButton.activeTab {
+  background-color: #000000;
+}
+
+.accountDetailsButton.activeTab p,
+.themeButton.activeTab p,
+.passwordButton.activeTab p,
+.deleteAccountButton.deletecss p,
+.logoutButton.activeTab p {
+  color: #ffffff;
+}
+
+.accountDetailsIcon,
+.themeIcon,
+.passwordIcon,
+.deleteAccountIcon,
+.logoutIcon {
+  filter: invert(1);
+}
+
+.ContentPanel {
+  background-color: #1f1f1f;
+}
+
+.logoIcon {
+  background-color: #1f1f1f;
+}
+
+.writing-1-opf {
+  filter: invert(1);
+}
+
+.sideMenuButtons p {
+  color: #ffffff !important;
+}
+.minimizeMenuIcon{
+  filter:invert() !important;
+}
+.ContentPanel .IframeBox{
+  background-color: black !important;
+ 
+  color: #ffffff !important;
+}

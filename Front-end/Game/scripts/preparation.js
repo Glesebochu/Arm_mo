@@ -1,5 +1,5 @@
 import { DBAssistant } from "../../../Middle-logic/Utilities/DBAssistant.js";
-import { StepType } from "../../../Middle-logic/Models/Step.js";
+import { Step, StepCategory, StepType } from "../../../Middle-logic/Models/Step.js";
 import { Session } from "../../../Middle-logic/Models/Session.js";
 import { Meditator } from "../../../Middle-logic/Models/Meditator.js";
 import { Activity } from "../../../Middle-logic/Models/Activity.js";
@@ -144,7 +144,9 @@ export function prepare(session){
             else {
                 session.Steps = steps;
                 // window.location.href = "./transition.html";
+                // session.Steps.push(new Step(), new Step(), new Step());
                 console.log(session);
+                // console.log(session.Steps.filter(step => step.Category == StepCategory.Preparation));
             }
     
             // Clear the input box.

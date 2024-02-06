@@ -40,6 +40,27 @@
     // console.log(meditatorObj2);
 
   </script>
+
+  <?php
+    // Include the PHP file with the function to retrieve the Intention object
+    include_once '../../Back-end/Models/Intention.php';
+    $identifier = $_SESSION['stage'];
+    $javascriptIntention = Intention::getJavaScriptIntention($identifier);
+ 
+  ?>
+
+  <script type="module">
+    // Import the Intention.js module
+    import { Intention } from '../../Middle-logic/Models/Intention.js';
+
+    // Output the JavaScript code to create the Intention object
+    var intentionObj = JSON.parse('<?php echo $javascriptIntention; ?>');
+    console.log(intentionObj);
+    console.log(Intention.getIntentionFromObject(intentionObj));
+
+
+  </script>
+
   <?php
     // Include the PHP file with the function to retrieve the Obstacle object
     include_once '../../Back-end/Models/Obstacle.php';

@@ -1,6 +1,7 @@
 export class Intention {
-    constructor(description) {
+    constructor(description,stage) {
         this.Description = description;
+        this.Stage=stage;
     }
     static Sit_Down = "Sit down and meditate for a set period every day.";
     static Practice_Diligently = "Practice diligently for the duration of the sit.";
@@ -11,4 +12,11 @@ export class Intention {
     
     static Invoke_Introspective_Attention = "Invoke introspective attention frequently, before you've forgotten the breath or fallen asleep.";
     static Make_Corrections_Distractions = "Make corrections as soon as you notice distractions or dullness.";
+
+    static getIntentionFromObject(obj) {
+        return new Intention(
+            obj.Description,
+            obj.Stage
+        )
+    }
 }

@@ -40,31 +40,27 @@
     // console.log(meditatorObj2);
 
   </script>
-
   <?php
-    // Include the PHP file with the function to retrieve the Meditator object
+    // Include the PHP file with the function to retrieve the Obstacle object
     include_once '../../Back-end/Models/Obstacle.php';
+    
     $identifier = $_SESSION['stage'];
-    $javascriptObstacle = Obstacle::getJavaScriptObstacleArray($identifier);
-    // $javascriptMeditator2 = getJavaScriptMeditator('Zellalem@gmail.com');
-
+    
+    // Call the function to get the JavaScript obstacle array
+    $javascriptObstacleArray = Obstacle::getJavaScriptObstacleArray(2);
   ?>
-
-
-
-<script type="module">
-    // Import the Meditator.js module
+      
+  <script type="module">
+    // Import the Obstacle.js module
     import { Obstacle } from '../../Middle-logic/Models/Obstacle.js';
 
-    // Output the JavaScript code to create the Meditator object
-    var obstacleObj = JSON.parse('<?php echo $javascriptObstacle; ?>');
+    // Output the JavaScript code to create the Obstacle objects
+    var obstacleArray = <?php echo json_encode($javascriptObstacleArray); ?>;
     
-    // var meditatorObj2 = JSON.parse('<?php // echo $javascriptMeditator2; ?>');
-
-    console.log(obstacleObj);
-    // console.log(Meditator.getMeditatorFromObject(meditatorObj));
-    // console.log(meditatorObj2);
-
+    // Parse each JSON string to create the JavaScript Obstacle objects
+    var obstacleObjects = obstacleArray.map(obstacleJson => JSON.parse(obstacleJson));
+    console.log(obstacleObjects);
+    console.log(Obstacle.convertArrayToObstacleObjects(obstacleObjects));
   </script>
 
   <script>

@@ -1,7 +1,6 @@
 export class Session {
-    constructor(meditator, activity, startDateTime, endDateTime, practicedStages = [], ahaMoments = [], steps = [], newlyMasteredStages) {
+    constructor(meditator, startDateTime, endDateTime, practicedStages = [], ahaMoments = [], steps = [], newlyMasteredStages) {
         this.Meditator = meditator;
-        this.Activity = activity;
         this.Start_Date_Time = startDateTime;
         this.End_Date_Time = endDateTime;
         this.Practiced_Stages = practicedStages;

@@ -1,20 +1,23 @@
+* {
+  font-family: inter;
+}
 html {
-  height: 100vh;
+  height: 80vh;
   width: 100vw;
   padding: 0;
   margin: 0;
 }
 body {
-  height: 95vh;
-  width: 96vmax;
-  padding: 2vmin;
+  height: 80vh;
+  width: 100vmax;
   display: flex;
-  align-items: center;
+  margin: 0;
 }
 form {
-  height: 90vh;
+  align-self: flex-start;
+  height: 70vh;
   width: 100vw;
-  padding-bottom: 1vmin;
+  padding: 2vmin;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -22,32 +25,36 @@ form {
 }
 .logo {
   display: flex;
-  flex: 1.5;
+  flex: 1;
   align-self: flex-start;
-  width: 16vmin;
-  height: 2vw;
+  width: 15vmin;
+  height: 1vw;
   overflow: hidden;
 }
 .logo > * {
   width: 50%;
-  height: 8vmin;
+  height: 6vmin;
 }
 header {
   flex: 1;
   font-size: 8vmin;
-  font-family: Marcellus SC;
+  font-weight: bold;
+  color: black;
 }
 .yellow {
-  color: rgba(245, 177, 60, 1);
+ color: rgba(8, 72, 3, 0.447);
+  border-radius: 100px;
+animation: changeColor 7s infinite;
 }
 input {
   flex: 0.5;
-  width: 36vw;
+  width: 60vmin;
   height: 5vh;
   padding-left: 2vmin;
   border-radius: 1vmin;
   border: 1px solid rgba(128, 128, 128, 0.578);
   outline: none;
+  font-size: 3vmin;
 }
 input:hover {
   box-shadow: 0 0 3px grey;
@@ -73,11 +80,20 @@ a:hover {
   text-shadow: 0 0 1.5px rgba(128, 128, 128, 0.68);
 }
 button {
-  flex: 0.6; 
+  flex: 0.5; 
   width: 30vmin;
   border: none;
   border-radius: 1vw;
   transition: background-color 0.5s ease;
   font-size: 3.8vmin;
   font-family: inter;
+  background-color: rgba(8, 72, 3, 0.263);
+}
+button:hover {
+  background-color: rgba(8, 72, 3, 0.516);
+}
+@keyframes changeColor {
+  0%, 100%  {color: rgba(8, 72, 3, 0.402)}
+  30% {color: rgba(8, 72, 3, 0.441)}
+  50% {color: rgba(8, 72, 3, 0.628)}
 }

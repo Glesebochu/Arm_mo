@@ -1398,7 +1398,7 @@ body {
     position: absolute;
     top: 0;
     width: 100%;
-    height: 77.6%;
+    height: 80%;
     background-color: rgb(82, 151, 50);
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
@@ -1416,23 +1416,28 @@ body {
     opacity: 0.7;
 }
 
+.thought-state label img {
+    position: absolute;
+    top: 20%;
+    left: 25%;
+    transform: translateY(-50%);
+    width: auto; 
+    height: 40%;
+    opacity: 1;
+}
+
     /* Thought State Label Image */
 .thought-state .thought-state-icon {
     grid-area: thought-state-icon;
-    /* position: relative;
-    left: 5.8vmax; */
-    /* display: flex;
-    justify-content: center; */
+    left: 5vmax;
     width: auto; 
-    height: 6.6vmax;
+    height: 8vmax;
     position: relative;
 }
 
         /* Normal Image */
 .thought-state .thought-state-icon .normal-image {
     width: auto;
-    position: absolute;
-    left: 5.7vmax;
     height: 100%;
     opacity: 1;
     transition: opacity 0.5s;
@@ -1444,7 +1449,7 @@ body {
     opacity: 0;
     position: absolute;
     top: 0;
-    left: 5.7vmax;
+    left: 0;
     transition: opacity 0.5s;
 }
         /* Change Hover Image on Hover */
@@ -1458,27 +1463,34 @@ body {
     /* Thought State Inner Div */
 .populate-thought-state{
     grid-area: populate-thought-state;
-    height: 100%;
     width: 100%;
 }
 
 .thought-state .thought-state-button {
-    grid-area: thought-state-button;
-    /* width: 100%; */
-    height: 100%;
+    width: 100%;
+    height: 20%;
     background-color: #b7b7b7;
     border: none;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
     cursor: pointer;
-    /* position: absolute;
+    position: absolute;
     bottom:   0;
-    right:   0; */
+    right:   0;
     transition-duration: 0.5s;
 }
 .thought-state:hover .thought-state-button {
     background-color: rgb(64, 114, 41);
     opacity: 0.7;
+}
+
+.thought-state button img{
+    /* width: 80%; */
+    height: 60%;
+    opacity: 0.3;
+    display: block;
+    margin: auto;
+    transition-duration: 0.5s;
 }
 .thought-state-button:hover {
     box-shadow: 0vw 0vw 0.5vw 0.07vw black;
@@ -1490,15 +1502,6 @@ body {
     transition-duration: 0.1s;
 }
 
-.thought-state button img{
-    /* width: 80%; */
-    height: 60%;
-    opacity: 0.3;
-    display: block;
-    margin: auto;
-    transition-duration: 0.5s;
-}
-
 .thought-state:hover img {
     opacity: 0.8;
 }
@@ -1508,13 +1511,6 @@ body {
     justify-content: center;
     position: relative;
     grid-area: thought-state;
-    display: grid;
-    grid-template-areas:
-        'thought-state-icon' 
-        'populate-thought-state' 
-        'thought-state-button';
-    grid-template-rows: 0.5fr 1fr 0.5fr;
-    grid-template-columns: 1fr;
     background-color: #c9c7c7;
     border-radius: 20px;
     cursor: pointer;
@@ -1590,7 +1586,7 @@ body {
 
 .thought-state .thought-four-step-button:active+.thought-four-step-div,
 .thought-state .thought-four-step-div.active {
-    display: block;
+    display: block; /* show when button is active or has been clicked */
 }
 /* ---------------------------------------------------------------------------------------- */
 /* ---------------------------------------------------------------------------------------- */
@@ -1601,7 +1597,7 @@ body {
     position: absolute;
     top: 0;
     width: 100%;
-    height: 77.6%;
+    height: 80%;
     background-color: rgb(82, 151, 50);
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
@@ -1619,22 +1615,29 @@ body {
     opacity: 0.7;
 }
 
-    /* Thought State Label Image */
+.emotional-state label img {
+    position: absolute;
+    top: 20%;
+    left: 25%;
+    transform: translateY(-50%);
+    width: auto; 
+    height: 40%;
+    opacity: 1.0;
+}
+
+    /* emotional State Label Image */
 .emotional-state .emotional-state-icon {
     grid-area: emotional-state-icon;
-    /* display: flex;
-    justify-content: center; */
+    top: 0.4vmax;
+    left: 5vmax;
     width: auto; 
-    height: 6.6vmax;
+    height: 8vmax;
     position: relative;
 }
 
         /* Normal Image */
 .emotional-state .emotional-state-icon .normal-image {
     width: auto;
-    position: absolute;
-    left: 6.2vmax;
-    top: 0.2vmax;
     height: 100%;
     opacity: 1;
     transition: opacity 0.5s;
@@ -1644,9 +1647,9 @@ body {
     width: auto;
     height: 100%;
     opacity: 0;
-    left: 6.2vmax;
     position: absolute;
-    top: 0.2vmax;
+    top: 0;
+    left: 0;
     transition: opacity 0.5s;
 }
         /* Change Hover Image on Hover */
@@ -1657,30 +1660,37 @@ body {
     opacity: 1;
 }
 
-    /* Thought State Inner Div */
+    /* emotional State Inner Div */
 .populate-emotional-state{
     grid-area: populate-emotional-state;
-    height: 100%;
     width: 100%;
 }
 
 .emotional-state .emotional-state-button {
-    grid-area: emotional-state-button;
-    /* width: 100%; */
-    height: 100%;
+    width: 100%;
+    height: 20%;
     background-color: #b7b7b7;
     border: none;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
     cursor: pointer;
-    /* position: absolute;
+    position: absolute;
     bottom:   0;
-    right:   0; */
+    right:   0;
     transition-duration: 0.5s;
 }
 .emotional-state:hover .emotional-state-button {
     background-color: rgb(64, 114, 41);
     opacity: 0.7;
+}
+
+.emotional-state button img{
+    /* width: 80%; */
+    height: 60%;
+    opacity: 0.3;
+    display: block;
+    margin: auto;
+    transition-duration: 0.5s;
 }
 .emotional-state-button:hover {
     box-shadow: 0vw 0vw 0.5vw 0.07vw black;
@@ -1692,15 +1702,6 @@ body {
     transition-duration: 0.1s;
 }
 
-.emotional-state button img{
-    /* width: 80%; */
-    height: 60%;
-    opacity: 0.3;
-    display: block;
-    margin: auto;
-    transition-duration: 0.5s;
-}
-
 .emotional-state:hover img {
     opacity: 0.8;
 }
@@ -1710,13 +1711,6 @@ body {
     justify-content: center;
     position: relative;
     grid-area: emotional-state;
-    display: grid;
-    grid-template-areas:
-        'emotional-state-icon' 
-        'populate-emotional-state' 
-        'emotional-state-button';
-    grid-template-rows: 0.5fr 1fr 0.5fr;
-    grid-template-columns: 1fr;
     background-color: #c9c7c7;
     border-radius: 20px;
     cursor: pointer;
@@ -1792,7 +1786,7 @@ body {
 
 .emotional-state .emotional-four-step-button:active+.emotional-four-step-div,
 .emotional-state .emotional-four-step-div.active {
-    display: block;
+    display: block; /* show when button is active or has been clicked */
 }
 /* ---------------------------------------------------------------------------------------- */
 /* ---------------------------------------------------------------------------------------- */

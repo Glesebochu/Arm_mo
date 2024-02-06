@@ -8,8 +8,8 @@ export class SensoryStimulusType{
     static Taste = "Taste";
 }
 export class SensoryStimulus extends ObservableObject{
-    constructor(id, title, description, icon, sensoryStimulusType){
-        super(id, title, ObservableObjectType.SensoryStimuls, description, icon);
+    constructor(id, title, description, icon, sensoryStimulusType, intensity){
+        super(id, title, ObservableObjectType.SensoryStimuls, description, icon, intensity);
         this.Sensory_Stimulus_Type = sensoryStimulusType;
     }
 }

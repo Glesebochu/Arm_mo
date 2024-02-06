@@ -6,8 +6,8 @@ export class MentalObjectType{
     static MentalState = "Mental State"
 }
 export class MentalObject extends ObservableObject{
-    constructor(id, title, description, icon, mentalObjectType){
-        super(id, title, ObservableObjectType.MentalObject, description, icon)
+    constructor(id, title, description, icon, mentalObjectType, intensity){
+        super(id, title, ObservableObjectType.MentalObject, description, icon, intensity)
         this.Mental_Object_Type = mentalObjectType;
     }
 }

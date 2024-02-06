@@ -41,6 +41,32 @@
 
   </script>
 
+  <?php
+    // Include the PHP file with the function to retrieve the Meditator object
+    include_once '../../Back-end/Models/Obstacle.php';
+    $identifier = $_SESSION['stage'];
+    $javascriptObstacle = Obstacle::getJavaScriptObstacleArray($identifier);
+    // $javascriptMeditator2 = getJavaScriptMeditator('Zellalem@gmail.com');
+
+  ?>
+
+
+
+<script type="module">
+    // Import the Meditator.js module
+    import { Obstacle } from '../../Middle-logic/Models/Obstacle.js';
+
+    // Output the JavaScript code to create the Meditator object
+    var obstacleObj = JSON.parse('<?php echo $javascriptObstacle; ?>');
+    
+    // var meditatorObj2 = JSON.parse('<?php // echo $javascriptMeditator2; ?>');
+
+    console.log(obstacleObj);
+    // console.log(Meditator.getMeditatorFromObject(meditatorObj));
+    // console.log(meditatorObj2);
+
+  </script>
+
   <script>
     function openPage(link){
       window.open(link,'_self');

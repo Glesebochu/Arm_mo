@@ -71,7 +71,7 @@ h1 {
   margin-left: 2vw;
   padding-top: 2vh;
   font-family: monospace;
-  background-color: rgba(8, 72, 3, 0.171);
+  background-color: rgba(8, 72, 3, 0.263);
   transition: transform 1s ease;
 }
 /* @keyframes bounce{
@@ -95,6 +95,7 @@ table {
   box-sizing: border-box;
   overflow: hidden;
   font-family: monospace;
+  border-radius: 10px;
   /* border: 2px solid black; */
 }
 td {
@@ -104,11 +105,14 @@ td {
   width: 10vw;
   padding-right: 0;
 }
-.grey, #goal, #activity {
-  background-color: rgba(2, 67, 24, 0.208);
-  border-radius: 20px;
+#goal,
+#activity {
+  background-color: rgba(8, 72, 3, 0.263);
+  border-radius: 30px;
 }
-
+.boldText{
+  font-weight: bold;
+}
 td:hover {
   transform: scale(1.1);
 }
@@ -127,7 +131,7 @@ footer {
   margin: 0;
   box-sizing: border-box;
   align-items: center;
-  gap: 1vh;
+  gap: 0.8vh;
 }
 footer > * {
   margin: 0;
@@ -152,6 +156,8 @@ footer > * {
   font-size: 3vmin;
 }
 button {
+  padding: 0;
+  margin: 0;
   flex: 0.8;
   font-family: monospace;
   width: 15vw;
@@ -161,10 +167,11 @@ button {
   color: rgb(2, 1, 0);
   font-weight: bolder;
   font-size: 3vmin;
-  background-color: rgba(2, 67, 24, 0.208);
+  background-color: rgba(8, 72, 3, 0.263);
   transition: background-color 0.5s ease;
 }
 button:hover {
+  background-color: rgba(2, 67, 24, 0.386);
 }
 li {
   transition: transform 1s ease;
@@ -173,11 +180,6 @@ li {
 li:hover {
   transform: scale(1.1);
 }
-footer > *:hover {
+.time:hover {
   transform: scale(1.1);
-}
-@media (max-width: 500px) {
-  main {
-    overflow: auto;
-  }
 }

@@ -1,5 +1,6 @@
 export class Activity{
-    constructor(title, meditationObject){
+    constructor(id, title, meditationObject){
+        this.Id = id;
         this.Title = title;
         this.Meditation_Object = meditationObject;
     }

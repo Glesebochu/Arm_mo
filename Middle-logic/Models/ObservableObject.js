@@ -3,7 +3,8 @@ export class ObservableObjectType{
     static MentalObject = "Mental Object";
 }
 export class ObservableObject{
-    constructor(title, type, description, icon){
+    constructor(id, title, type, description, icon){
+        this.Id = id;
         this.Title = title;
         this.Type = type;
         this.Description = description;

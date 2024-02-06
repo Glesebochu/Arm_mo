@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive:wght@400&amp;display=swap"data-tag="font"/>
     <title>Introduction</title>
     <link rel="stylesheet" href="Intro.css">
 </head>
@@ -12,28 +13,34 @@
     <header>Introduction</header>
     <main>
         <section class="generalIntro1">
-            Welcome to Arm’mo!
+            Welcome to Armmo!
+            <br><br>
+            It's intuitive to assume you're interested in meditation, which is why you're here. Whether you're a
+            beginner, a master, or an intermediate practitioner, being here means you've encountered or will encounter
+            common challenges.
+
         </section>
         <section class="generalIntro2">
-            This is where we keep track of your meditation history. We understand that a significant
-            challenge faced by many meditators is maintaining a regular and accurate record of their meditative
-            experiences. For this reason, we have implemented functional systems that automatically save and display all
-            your meditation data at the click of a button. In addition to analyzing meditation data, Arm’mo also
-            functions as a meditation guide. To achieve this, we have incorporated the grand meditation principles from
-            "The Mind Illuminated" by Culadasa John, a magnificent book on meditation practice.
+            Have you ever asked yourself, "Am I truly progressing?" </section>
+        <section class="generalIntro1">
+            If so, you're not alone—I've asked myself this question too. I attempted to answer it by keeping a ledger of
+            what I considered important meditative experiences during and after my meditation sessions. However, this
+            approach didn't last long; I eventually found myself unable to maintain it. Interrupting my meditation to
+            log experiences and calculate how long my mind wandered proved unappealing.
         </section>
-        <section class="generalIntro3">
-            As a result, the game's user interface (UI) features a very intuitive dialogue sequence that players can
-            undertake to represent their conscious experience and focus their minds. This process applies the
-            preparation and transition phases extensively discussed in the book. Players can also progress through
-            the
-            10 stages of the road to mastery, with each stage considered mastered based on the player's performance.
-            For
-            more information on these phases and stages, click on the link below.
+        <section class="generalIntro2">
+            Can you imagine a much easier, better way to do this? One that doesn't require constant attention?
         </section>
-        <section class="generalIntro4">
-            In simple terms, Arm’mo is a digital ledger and meditation guide that enhances the transformative nature of
-            each of your meditation sessions.
+        <section class="generalIntro1">
+            Without a doubt, it's thanks to this question that we remembered to build Armmo. Now, you can save all your
+            data while meditating, without needing to shift your focus. You can achieve this level of efficiency while
+            only realizing you've been playing a fun game.
+        </section>
+        <section class="generalIntro2">
+            Do you want to learn more about how to play?
+        </section>
+        <section class="generalIntro1">
+            Check out our notes under the <a href="../Aboutus/Aboutus.html">'About Game'</a> section.
         </section>
         <section class="Q">
             For All Your Questions <span id="spans">?</span>
@@ -220,26 +227,26 @@
         observer.observe(targetElement3);
 
         function handleDynamicIntersection(entries, dynamicObserver) {
-      entries.forEach(entry => {
-        const dynamicSpan = document.getElementById('spans');
+            entries.forEach(entry => {
+                const dynamicSpan = document.getElementById('spans');
 
-        if (entry.isIntersecting) {
-          dynamicSpan.style.fontSize = '65px'; // Set the desired font size when in view
-        } else {
-          dynamicSpan.style.fontSize = '10px'; // Set the default font size when out of view
+                if (entry.isIntersecting) {
+                    dynamicSpan.style.fontSize = '65px'; // Set the desired font size when in view
+                } else {
+                    dynamicSpan.style.fontSize = '10px'; // Set the default font size when out of view
+                }
+            });
         }
-      });
-    }
 
-    // Create an Intersection Observer for the dynamic span
-    const dynamicObserver = new IntersectionObserver(handleDynamicIntersection, {
-      threshold: 0, // Set threshold to 0 for immediate triggering
-    });
+        // Create an Intersection Observer for the dynamic span
+        const dynamicObserver = new IntersectionObserver(handleDynamicIntersection, {
+            threshold: 0, // Set threshold to 0 for immediate triggering
+        });
 
-    // Observe the target element with the new ID "spans"
-    const dynamicTargetElement = document.getElementById('spans');
-    dynamicObserver.observe(dynamicTargetElement);
-  </script>
+        // Observe the target element with the new ID "spans"
+        const dynamicTargetElement = document.getElementById('spans');
+        dynamicObserver.observe(dynamicTargetElement);
+    </script>
 </body>
 
 </html>

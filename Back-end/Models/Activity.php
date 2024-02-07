@@ -1,7 +1,7 @@
 <?php
 
 class Activity{
-    public $ID;
+    public $Activity_ID;
     public $Title;
     public $Meditation_Object;
 
@@ -13,13 +13,13 @@ class Activity{
         $db->query('USE Arm_mo');
 
         /// Query the database based on the identifier
-        $query = "SELECT * FROM Activity WHERE ID = '$identifier'";
+        $query = "SELECT * FROM Activity WHERE Activity_ID = '$identifier'";
         $result = $db->query($query);
         $row = $result->fetch_assoc();
 
         // Create a new object and assign values from the query result
         $activity = new Activity();
-        $activity->ID = $row['ID'];
+        $activity->Activity_ID = $row['Activity_ID'];
         $activity->Title = $row['Title'];
         $activity->Meditation_Object = ObservableObject::getObservableObject($row['Meditation_Object_ID']);
 

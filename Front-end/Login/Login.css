@@ -27,17 +27,17 @@ form {
   display: flex;
   flex: 1;
   align-self: flex-start;
-  width: 20vmin;
-  height: 1vmin;
+  width: 20.3vmin;
   overflow: hidden;
+  gap: 0.3vmin;
 }
 .logo > * {
   width: 50%;
-  height: 9vmin;
+  height: 10vmin;
 }
 .armimoLogoText {
-  padding-top: 2vmin;
-  height:5vmin;
+  padding-top: 3vmin;
+  height:6vmin;
 }
 header {
   flex: 1;

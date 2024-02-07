@@ -1,5 +1,5 @@
 * {
-  font-family: monospace;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 html {
   height: auto;
@@ -80,7 +80,7 @@ a {
 a:hover {
   color: black;
   animation: none; 
-   text-shadow: 0 0 10px rgb(0, 0, 0);
+   text-shadow: 0 0 1px rgb(0, 0, 0);
 
 }
 a:visited {
@@ -90,15 +90,24 @@ a:visited {
 .tables {
   display: flex;
   flex-direction: column;
+  height: auto;
   gap: 5vh;
   background-color: rgba(4, 88, 15, 0.073);
   border-radius: 2vw;
   padding: 3vw;
+  font-size: 1.3vw;
 }
 h2 {
   margin: 0;
   padding: 0;
   color: rgba(15, 18, 17, 0.74);
+}
+
+#green {
+  color: rgba(2, 54, 2, 0.842);
+}
+#bold {
+  font-weight: bolder;
 }
 .prompts1 {
   background-color: rgba(216, 216, 216, 0.489);

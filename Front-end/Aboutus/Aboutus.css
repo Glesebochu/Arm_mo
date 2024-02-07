@@ -8,130 +8,138 @@ html {
   width: 100vw;
 }
 body {
-  margin: 0;
+  height: 100vh;
+  width: 100vw;
   padding: 0;
-  height: 100%;
-  width: 100%;
-}
-.main {
+  margin: 0;
   display: flex;
   flex-direction: row;
-  height: 100%;
-  width: 100%;
-}
-/* ----nav--- */
-.nav {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  padding: 2%;
-  gap: 60%;
-}
-.icon {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 50%;
-}
-.fa-cog {
-  font-size: 200%;
-  text-decoration: none;
-  color: black;
-  width: 10%;
-  height: 10%;
-}
-.fa-cog:hover {
-  text-shadow: 0 0 10px rgb(4, 33, 77);
-}
-.fa-home {
-  font-size: 200%;
-  text-decoration: none;
-  color: black;
-  width: 10%;
-  height: 10%;
-}
-.fa-home:hover {
-  text-shadow: 0 0 2px black;
+  gap: 3vmin;
+  overflow: hidden;
+  margin-left: 3vmin;
 }
 /* -----------logo work-------- */
 .logo {
-  flex: 1;
   display: flex;
-  flex-direction: row;
-  gap: 5%;
-  width: 80%;
+  margin-top: 3vmin;
+  flex: 0.4;
+  width: 20vmin;
+  height: 10vmin;
+  overflow: hidden;
+  gap: 0;
 }
-.logoImg {
-  flex: 1;
-  height: 50%;
+.logo > * {
   width: 50%;
+  height: 10vmin;
 }
 .armimoLogoText {
-  flex: 0.7;
-  margin-top: 15%;
-  height: 20%;
-  width: 100%;
+  padding-top: 2vmin;
+  height: 5vmin;
+}
+#green {
+  padding: 3vmin;
+  background-color: rgba(0, 128, 0, 0.491);
+  border-radius: 7vmin;
+  width: 30vmin;
+  height: 10vmin;
+  padding-top: 2vmin;
+  background: linear-gradient(to right,lightgreen, lightblue); 
+  background-size: 200% 100%;
+  transition: background-position 1s ease;
+  transition: padding-left 1s ease;
+}
+#green:hover {
+  background-position: right;
+  padding-left: 20vmin;
+  width: 59vmin;
+}
+a {
+  flex: 0.5;
+  font-size: 6vmin;
+  text-decoration: none;
+  color: black;
+  width: 4vmin;
+  height: 4vmin;
+  align-self: start;
+}
+a:hover {
+  transform: scale(1.1);
 }
 
 /* ----right margin--- */
 .margin-right {
-  flex: 0;
+  flex: 2;
   display: flex;
   flex-direction: row;
-  height: 100%;
-  width: 35%;
+  height: 100vh;
+  width: 20vmin;
+  align-self: right;
 }
-
-/* -----The central div------ */
-.section {
-  flex: 6;
+section {
+  flex: 2;
+  width: 40vmin;
   display: flex;
-  align-items: center;
   flex-direction: column;
-  gap: 2%;
+  align-items: center;
+  gap: 5vmin;
 }
 /* ----Heading-- */
-.aboutusText {
+header {
+  flex: 0.7;
   display: flex;
   flex-direction: row;
-  gap: 5%;
+  gap: 0;
   font-family: Megrim;
+  height: 15vmin;
 }
 .aboutusText1 {
-  font-size: 700%;
+  font-size: 15vmin;
+  font-weight: bolder;
 }
 .aboutusText2 {
-  padding-top: 30%;
   color: rgba(4, 61, 3, 1);
-  font-size: 300%;
+  font-size: 10vmin;
+  padding-top: 4vmin;
+  padding-right: 2vmin;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 .aboutusText3 {
-  color: rgba(245, 177, 60, 1);
-  font-size: 200%;
-  padding-top: 36%;
+  font-size: 11vmin;
+  padding-top: 3vmin;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  animation: changeColor 7s infinite;
+  background: linear-gradient(to right,lightgreen, lightblue); 
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: textGradient 2s infinite;
 }
-/* ---texts---- */
-.question1 {
-  font-size: 200%;
-  letter-spacing: 2.5px;
-  font-family: Linden Hill;
-  color: rgba(56, 101, 38, 1);
-}
-.text1 {
-  padding-right: 9%;
-  font-size: 200%;
-  font-family: Linden Hill;
-  color: rgba(0, 0, 0, 1);
+.text {
+  flex: 4;
+  display: flex;
+  flex-direction: column;
+  gap: 4vmin;
+  font-size: 3vmin;
   text-align: justify;
 }
-.question2 {
-  font-size: 220%;
-  font-family: Linden Hill;
-  color: rgba(245, 177, 60, 1);
-  padding-top: 5%;
+.text span {
+  font-size: 4vmin;
+  align-self: center;
 }
-.text2 {
-  font-family: linden hill;
-  font-size: 200%;
-  text-align: justify;
+nav {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  gap: 5vmin;
+}
+@keyframes changeColor {
+  0%,
+  100% {
+    color: rgba(8, 72, 3, 0.402);
+  }
+  30% {
+    color: rgba(8, 72, 3, 0.441);
+  }
+  50% {
+    color: rgba(8, 72, 3, 0.628);
+  }
 }

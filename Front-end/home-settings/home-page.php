@@ -17,6 +17,7 @@
     // <!-- Include the Meditator.js file -->
   </script>
 
+  <!-- Meditator Object Retreival test -->
   <?php
     // Include the PHP file with the function to retrieve the Meditator object
     include_once '../../Back-end/Models/Meditator.php';
@@ -25,7 +26,7 @@
     // $javascriptMeditator2 = getJavaScriptMeditator('Zellalem@gmail.com');
 
   ?>
-  <!-- Meditator Object Retreival test -->
+
   <script type="module">
     // Import the Meditator.js module
     import { Meditator } from '../../Middle-logic/Models/Meditator.js';
@@ -41,6 +42,7 @@
 
   </script>
 
+  <!-- Intention Object Retreival test -->
   <?php
     // Include the PHP file with the function to retrieve the Intention object
     include_once '../../Back-end/Models/Intention.php';
@@ -49,7 +51,6 @@
  
   ?>
 
-  <!-- Intention Object Retreival test -->
   <script type="module">
     // Import the Intention.js module
     import { Intention } from '../../Middle-logic/Models/Intention.js';
@@ -58,6 +59,27 @@
     var intentionObj = JSON.parse('<?php echo $javascriptIntention; ?>');
     console.log(intentionObj);
     console.log(Intention.getIntentionFromObject(intentionObj));
+
+
+  </script>
+
+  <!-- Stage Object Retreival test -->
+  <?php
+    // Include the PHP file with the function to retrieve the Stage object
+    include_once '../../Back-end/Models/Stage.php';
+    $identifier = $_SESSION['stage'];
+    $javascriptStage = Stage::getJavaScriptStage($identifier);
+ 
+  ?>
+
+  <script type="module">
+    // Import the Stage.js module
+    import { Stage } from '../../Middle-logic/Models/Stage.js';
+
+    // Output the JavaScript code to create the Stage object
+    var StageObj = JSON.parse('<?php echo $javascriptStage; ?>');
+    console.log(StageObj);
+    console.log(Stage.getStageFromObject(StageObj));
 
 
   </script>

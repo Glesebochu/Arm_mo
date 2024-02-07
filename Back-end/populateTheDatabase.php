@@ -6,9 +6,9 @@
     include_once('Connect.php');
     $con = new Connect();
     $db = $con->__getConnection();
-    $databaseName = 'Arm_mo';
-    $queryUseArm_mo ="USE  $databaseName";
-    if($db->query($queryUseArm_mo)){
+    $databaseName = 'Arm_mo_v2';
+    $queryUseArm_mo_v2 ="USE  $databaseName";
+    if($db->query($queryUseArm_mo_v2)){
         echo"
             <script>
                 alert('Currently using the database $databaseName!')

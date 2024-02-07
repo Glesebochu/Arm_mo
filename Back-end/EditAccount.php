@@ -8,8 +8,8 @@
         $UsernametoEdit = $_SESSION['UsernametoEdit'];
         // Retrieve the submitted form data
         $username = $_POST['username'];
-        $firstname = $_POST['firstname'];
-        $lastname = $_POST['lastname'];
+        $First_Name = $_POST['First_Name'];
+        $Last_Name = $_POST['Last_Name'];
         $dob = $_POST['dob'];
         
         // handling the profile picture
@@ -21,7 +21,7 @@
             move_uploaded_file($tempFilePath, $profilepic);
         }
 
-        $db->query('USE Arm_mo');
+        $db->query('USE Arm_mo_v2');
         $querycheckDuplicateUsernames = "CALL checkDuplicateUsernames('$username', @p_exists)";
         $db->query($querycheckDuplicateUsernames);
         $result = $db->query("SELECT @p_exists");
@@ -29,7 +29,7 @@
         $count = $row['@p_exists'];
 
         if ($count == 0||$username==$UsernametoEdit) {
-            $queryEditAccount = "CALL EditAccount('$UsernametoEdit', '$username', '$firstname', '$lastname', '$dob', '$profilepic')";
+            $queryEditAccount = "CALL EditAccount('$UsernametoEdit', '$username', '$First_Name', '$Last_Name', '$dob', '$profilepic')";
             $_SESSION['UsernametoEdit']=$username;
             $_SESSION['profilepic']=$profilepic;
             $db->query($queryEditAccount);

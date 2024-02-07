@@ -13,6 +13,11 @@ export class Stage {
         this.NextStage = nextStage;
         this.Is_Mastered = isMastered;
     }
+    static getStageFromObject(obj) {
+        return new Stage(
+            obj.Description,
+        )
+    }
 
     static stageOne = new Stage(
         this.Number = 1,

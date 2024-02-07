@@ -210,7 +210,7 @@ form {
   padding: 0;
   font-size: 110%;
 }
-/* ----Firstname text box---- */
+/* ----First_Name text box---- */
 .fnameInput {
   flex: 0.5;
   padding-left: 13%;
@@ -226,7 +226,7 @@ form {
   font-size: 150%;
   font-weight: 700;
 }
-/* -lastname text box- */
+/* -Last_Name text box- */
 .lnameInput {
   flex: 0.5;
   padding-left: 13%;
@@ -348,7 +348,7 @@ form {
   .emailIconWhole > * {
     font-size: 20px;
   }
-  /* ----Firstname text box---- */
+  /* ----First_Name text box---- */
   .fnameInput {
     flex: 1;
     height: 400px;
@@ -359,7 +359,7 @@ form {
   .fnameInput::placeholder {
     font-size: 20px;
   }
-  /* -lastname text box- */
+  /* -Last_Name text box- */
   .lnameInput {
     flex: 1;
     height: 400px;
@@ -574,7 +574,7 @@ form {
   .eye.two {
     font-size: 15px;
   }
-  /* ----Firstname text box---- */
+  /* ----First_Name text box---- */
   .fnameInput {
     flex: 1;
     height: 30px;
@@ -585,7 +585,7 @@ form {
   .fnameInput::placeholder {
     font-size: 15px;
   }
-  /* -lastname text box- */
+  /* -Last_Name text box- */
   .lnameInput {
     flex: 1;
     height: 30px;
@@ -748,7 +748,7 @@ form {
   .eye.two {
     font-size: 15px;
   }
-  /* ----Firstname text box---- */
+  /* ----First_Name text box---- */
   .fnameInput {
     flex: 1;
     height: 30px;
@@ -759,7 +759,7 @@ form {
   .fnameInput::placeholder {
     font-size: 15px;
   }
-  /* -lastname text box- */
+  /* -Last_Name text box- */
   .lnameInput {
     flex: 1;
     height: 30px;
@@ -919,7 +919,7 @@ form {
   .eye.two {
     font-size: 12px;
   }
-  /* ----Firstname text box---- */
+  /* ----First_Name text box---- */
   .fnameInput {
     flex: 1;
     height: 30px;
@@ -930,7 +930,7 @@ form {
   .fnameInput::placeholder {
     font-size: 10px;
   }
-  /* -lastname text box- */
+  /* -Last_Name text box- */
   .lnameInput {
     flex: 1;
     height: 30px;
@@ -1090,7 +1090,7 @@ form {
   .eye.two {
     font-size: 12px;
   }
-  /* ----Firstname text box---- */
+  /* ----First_Name text box---- */
   .fnameInput {
     flex: 1;
     height: 30px;
@@ -1101,7 +1101,7 @@ form {
   .fnameInput::placeholder {
     font-size: 10px;
   }
-  /* -lastname text box- */
+  /* -Last_Name text box- */
   .lnameInput {
     flex: 1;
     height: 30px;

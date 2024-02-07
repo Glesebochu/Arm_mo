@@ -77,7 +77,7 @@ body {
 .email-QYs:hover {
   box-shadow: 0 0 10px black;
 }
-.account-panel--gzF .firstname-box-hH5 {
+.account-panel--gzF .First_Name-box-hH5 {
   margin-bottom: 5.5rem;
   box-sizing: border-box;
   padding: 3.1rem 6.35rem 2.2rem 6.35rem;
@@ -91,10 +91,10 @@ body {
   background-color: #d9d9d9;
   flex-shrink: 0;
 }
-.firstname-box-hH5:hover {
+.First_Name-box-hH5:hover {
   box-shadow: 0 0 10px black;
 }
-.account-panel--gzF .lastname-box-Pvb {
+.account-panel--gzF .Last_Name-box-Pvb {
   margin-bottom: 7.4rem;
   box-sizing: border-box;
   padding: 2.7rem 5.9rem 2.5rem 5.9rem;
@@ -108,7 +108,7 @@ body {
   background-color: #d9d9d9;
   flex-shrink: 0;
 }
-.lastname-box-Pvb:hover {
+.Last_Name-box-Pvb:hover {
   box-shadow: 0 0 10px black;
 }
 .account-panel--gzF .old-password-Vyd {

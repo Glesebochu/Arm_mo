@@ -11,7 +11,7 @@ enum ObservableObjectIntensity : string{
 }
 
 class ObservableObject{
-    public $Id;
+    public $ID;
     public $Title;
     public $Type;
     public $Description;
@@ -26,7 +26,7 @@ class ObservableObject{
         $db->query('USE Arm_mo');
 
         /// Query the database based on the identifier
-        $query = "SELECT * FROM ObservableObject WHERE Id = '$identifier'";
+        $query = "SELECT * FROM ObservableObject WHERE ID = '$identifier'";
         $result = $db->query($query);
         $row = $result->fetch_assoc();
 
@@ -41,7 +41,7 @@ class ObservableObject{
             $observableObject->Sensory_Stimulus_Type = $row['Sensory_Stimulus_Type'];
         }
         
-        $observableObject->Id = $row['Id'];
+        $observableObject->ID = $row['ID'];
         $observableObject->Title = $row['Title'];
         $observableObject->Type = $row['Type'];
         $observableObject->Description = $row['Description'];

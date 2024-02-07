@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8" />
   <link rel="icon" href="/favicon.ico" />
@@ -16,121 +17,152 @@
     var stageID = <?php echo isset($_SESSION['stage']) ? $_SESSION['stage'] : 1; ?>;
     // <!-- Include the Meditator.js file -->
   </script>
+  <!-- Object Retrieval test zone -->
+  
+    <!-- Meditator Object Retreival test -->
+    <?php
+      // Include the PHP file with the function to retrieve the Meditator object
+      include_once '../../Back-end/Models/Meditator.php';
+      $identifier = $_SESSION['UsernametoEdit'];
+      $javascriptMeditator = Meditator::getJavaScriptMeditator($identifier);
+      // $javascriptMeditator2 = getJavaScriptMeditator('Zellalem@gmail.com');
 
-  <!-- Meditator Object Retreival test -->
-  <?php
-    // Include the PHP file with the function to retrieve the Meditator object
-    include_once '../../Back-end/Models/Meditator.php';
-    $identifier = $_SESSION['UsernametoEdit'];
-    $javascriptMeditator = Meditator::getJavaScriptMeditator($identifier);
-    // $javascriptMeditator2 = getJavaScriptMeditator('Zellalem@gmail.com');
+    ?>
 
-  ?>
+    <script type="module">
+      // Import the Meditator.js module
+      import { Meditator } from '../../Middle-logic/Models/Meditator.js';
 
-  <script type="module">
-    // Import the Meditator.js module
-    import { Meditator } from '../../Middle-logic/Models/Meditator.js';
-
-    // Output the JavaScript code to create the Meditator object
-    var meditatorObj = JSON.parse('<?php echo $javascriptMeditator; ?>');
-    
-    // var meditatorObj2 = JSON.parse('<?php // echo $javascriptMeditator2; ?>');
-
-    console.log(meditatorObj);
-    console.log(Meditator.getMeditatorFromObject(meditatorObj));
-    // console.log(meditatorObj2);
-
-  </script>
-
-  <!-- Intention Object Retreival test -->
-  <?php
-    // Include the PHP file with the function to retrieve the Intention object
-    include_once '../../Back-end/Models/Intention.php';
-    $identifier = $_SESSION['stage'];
-    $javascriptIntention = Intention::getJavaScriptIntention($identifier);
- 
-  ?>
-
-  <script type="module">
-    // Import the Intention.js module
-    import { Intention } from '../../Middle-logic/Models/Intention.js';
-
-    // Output the JavaScript code to create the Intention object
-    var intentionObj = JSON.parse('<?php echo $javascriptIntention; ?>');
-    console.log(intentionObj);
-    console.log(Intention.getIntentionFromObject(intentionObj));
-
-
-  </script>
-
-  <!-- Stage Object Retreival test -->
-  <?php
-    // Include the PHP file with the function to retrieve the Stage object
-    include_once '../../Back-end/Models/Stage.php';
-    $identifier = $_SESSION['stage'];
-    $javascriptStage = Stage::getJavaScriptStage($identifier);
- 
-  ?>
-
-  <script type="module">
-    // Import the Stage.js module
-    import { Stage } from '../../Middle-logic/Models/Stage.js';
-
-    // Output the JavaScript code to create the Stage object
-    var StageObj = JSON.parse('<?php echo $javascriptStage; ?>');
-    console.log(StageObj);
-    console.log(Stage.getStageFromObject(StageObj));
-
-
-  </script>
-
-  <!-- Obstacle Object Retreival test -->
-  <?php
-    // Include the PHP file with the function to retrieve the Obstacle object
-    include_once '../../Back-end/Models/Obstacle.php';
-    
-    $identifier = $_SESSION['stage'];
-    
-    // Call the function to get the JavaScript obstacle array
-    $javascriptObstacleArray = Obstacle::getJavaScriptObstacleArray(2);
-  ?>
+      // Output the JavaScript code to create the Meditator object
+      var meditatorObj = JSON.parse('<?php echo $javascriptMeditator; ?>');
       
-  <script type="module">
-    // Import the Obstacle.js module
-    import { Obstacle } from '../../Middle-logic/Models/Obstacle.js';
+      // var meditatorObj2 = JSON.parse('<?php // echo $javascriptMeditator2; ?>');
 
-    // Output the JavaScript code to create the Obstacle objects
-    var obstacleArray = <?php echo json_encode($javascriptObstacleArray); ?>;
-    
-    // Parse each JSON string to create the JavaScript Obstacle objects
-    var obstacleObjects = obstacleArray.map(obstacleJson => JSON.parse(obstacleJson));
-    console.log(obstacleObjects);
-    console.log(Obstacle.convertArrayToObstacleObjects(obstacleObjects));
-  </script>
+      console.log(meditatorObj);
+      console.log(Meditator.getMeditatorFromObject(meditatorObj));
+      // console.log(meditatorObj2);
 
-   <!-- Skill Object Retreival test -->
-   <?php
-    // Include the PHP file with the function to retrieve the Skill object
-    include_once '../../Back-end/Models/Skill.php';
-    
-    $identifier = $_SESSION['stage'];
-    
-    // Call the function to get the JavaScript Skill array
-    $javascriptSkillArray = Skill::getJavaScriptSkillArray($identifier);
-  ?>
+    </script>
+
+    <!-- Intention Object Retreival test -->
+    <?php
+      // Include the PHP file with the function to retrieve the Intention object
+      include_once '../../Back-end/Models/Intention.php';
+      $identifier = $_SESSION['stage'];
+      $javascriptIntention = Intention::getJavaScriptIntention($identifier);
+  
+    ?>
+
+    <script type="module">
+      // Import the Intention.js module
+      import { Intention } from '../../Middle-logic/Models/Intention.js';
+
+      // Output the JavaScript code to create the Intention object
+      var intentionObj = JSON.parse('<?php echo $javascriptIntention; ?>');
+      console.log(intentionObj);
+      console.log(Intention.getIntentionFromObject(intentionObj));
+
+
+    </script>
+
+    <!-- Obstacle Object Retreival test -->
+    <?php
+      // Include the PHP file with the function to retrieve the Obstacle object
+      include_once '../../Back-end/Models/Obstacle.php';
       
-  <script type="module">
-    // Import the Skill.js module
-    import { Skill } from '../../Middle-logic/Models/Skill.js';
+      $identifier = $_SESSION['stage'];
+      
+      // Call the function to get the JavaScript obstacle array
+      $javascriptObstacleArray = Obstacle::getJavaScriptObstacleArray(2);
+    ?>
+        
+    <script type="module">
+      // Import the Obstacle.js module
+      import { Obstacle } from '../../Middle-logic/Models/Obstacle.js';
 
-    // Output the JavaScript code to create the Skill objects
-    var SkillArray = <?php echo json_encode($javascriptSkillArray); ?>;
-    
-    // Parse each JSON string to create the JavaScript Skill objects
-    var SkillObjects = SkillArray.map(SkillJson => JSON.parse(SkillJson));
-    console.log(SkillObjects);
-    console.log(Skill.convertArrayToSkillObjects(SkillObjects));
-  </script>
+      // Output the JavaScript code to create the Obstacle objects
+      var obstacleArray = <?php echo json_encode($javascriptObstacleArray); ?>;
+      
+      // Parse each JSON string to create the JavaScript Obstacle objects
+      var obstacleObjects = obstacleArray.map(obstacleJson => JSON.parse(obstacleJson));
+      console.log(obstacleObjects);
+      console.log(Obstacle.convertArrayToObstacleObjects(obstacleObjects));
+    </script>
+
+    <!-- Skill Object Retreival test -->
+    <?php
+      // Include the PHP file with the function to retrieve the Skill object
+      include_once '../../Back-end/Models/Skill.php';
+      
+      $identifier = $_SESSION['stage'];
+      
+      // Call the function to get the JavaScript Skill array
+      $javascriptSkillArray = Skill::getJavaScriptSkillArray($identifier);
+    ?>
+        
+    <script type="module">
+      // Import the Skill.js module
+      import { Skill } from '../../Middle-logic/Models/Skill.js';
+
+      // Output the JavaScript code to create the Skill objects
+      var SkillArray = <?php echo json_encode($javascriptSkillArray); ?>;
+      
+      // Parse each JSON string to create the JavaScript Skill objects
+      var SkillObjects = SkillArray.map(SkillJson => JSON.parse(SkillJson));
+      console.log(SkillObjects);
+      console.log(Skill.convertArrayToSkillObjects(SkillObjects));
+    </script>
+
+    <!-- Stage Object Retrieval -->
+    <?php
+      // Include the PHP files with the function to retrieve the Stage object
+      include_once '../../Back-end/Models/Stage.php';
+
+      $identifier = $_SESSION['stage'];
+
+      // Call the function to get the JavaScript stage object
+      $javascriptStage = Stage::getJavaScriptStage($identifier);
+
+      // Retrieve the skills, intentions, and obstacles for the specific stage
+      $skills = Skill::getJavaScriptSkillArray($identifier);
+      $intention = Intention::getJavaScriptIntention($identifier);
+      $obstacles = Obstacle::getJavaScriptObstacleArray($identifier);
+    ?>
+
+    <script type="module">
+      // Import the necessary modules
+      import { Stage } from '../../Middle-logic/Models/Stage.js';
+      import { Skill } from '../../Middle-logic/Models/Skill.js';
+      import { Intention } from '../../Middle-logic/Models/Intention.js';
+      import { Obstacle } from '../../Middle-logic/Models/Obstacle.js';
+
+      // Output the JavaScript code to create the Stage object
+      var stageObj = JSON.parse('<?php echo $javascriptStage; ?>');
+      // Create an array of skill objects
+      var skillsArray = <?php echo json_encode($skills); ?>;
+      var skillObjects = skillsArray.map(skillJson => JSON.parse(skillJson));
+      skillObjects=Skill.convertArrayToSkillObjects(skillObjects)
+
+      // Return the intention object
+      var intentionObj = JSON.parse('<?php echo $intention; ?>');
+      intentionObj=Intention.getIntentionFromObject(intentionObj)
+
+      // Create an array of obstacle objects
+      var obstaclesArray = <?php echo json_encode($obstacles); ?>;
+      var obstacleObjects = obstaclesArray.map(obstacleJson => JSON.parse(obstacleJson));
+      obstacleObjects= Obstacle.convertArrayToObstacleObjects(obstacleObjects)
+
+      // Update the stage object with the retrieved skills, intentions, and obstacles
+      stageObj.Skills = skillObjects;
+      stageObj.Intentions = intentionObj;
+      stageObj.Obstacles = obstacleObjects;
+
+      console.log(stageObj);
+      console.log(Stage.getStageFromObject(stageObj));
+    </script>
+
+  
+
 
   <script>
     function openPage(link){
@@ -193,6 +225,7 @@
   </script>
   
 </head>
+
 <body>
   <main class="WrapperMain">
 
@@ -249,4 +282,5 @@
     </section>
   </main>
 </body>
+
 </html>

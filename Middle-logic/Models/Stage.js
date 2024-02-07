@@ -15,8 +15,15 @@ export class Stage {
     }
     static getStageFromObject(obj) {
         return new Stage(
-            obj.Description,
-        )
+            obj.Stage_ID,
+            obj.Goal,
+            obj.Intentions,
+            obj.Obstacles,
+            obj.Skills,
+            obj.Mastery_Requirements,
+            obj.NextStage,
+            obj.Is_Mastered
+        );
     }
 
     static stageOne = new Stage(

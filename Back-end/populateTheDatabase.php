@@ -62,6 +62,55 @@
     }
 }
 
+// Populating the mastery requirement table
+{
+    function checkRecordExistsStageMasteryRequirement($masteryRequirementDescription, $stageID) {
+        global $db;
+        $query = "SELECT * FROM mastery_requirement WHERE Description = '$masteryRequirementDescription' AND Stage_ID = $stageID";
+        $result = $db->query($query);
+        return ($result->num_rows > 0);
+    }
+
+    $associations = [
+        ['masteryRequirementDescription' => "I never miss a daily practice session.", 'stageID' => 1],
+        ['masteryRequirementDescription' => "I do not procastinate while meditating.", 'stageID' => 1],
+        ['masteryRequirementDescription' => "I can sustain attention on the meditation object for 10-15 minutes.", 'stageID' => 2],
+        ['masteryRequirementDescription' => "Most periods of mind-wandering last only a few seconds.", 'stageID' => 2],
+        ['masteryRequirementDescription' => "I rarely forget the breath or fall asleep.", 'stageID' => 3]
+    ];
+    
+    foreach ($associations as $association) {
+        $masteryRequirementDescription = $association['masteryRequirementDescription'];
+        $stageID = $association['stageID'];
+    
+        if (checkRecordExistsStageMasteryRequirement($masteryRequirementDescription, $stageID)) {
+            echo "
+                <script>
+                    console.log('Entry already exists for Description: $masteryRequirementDescription and Stage_ID: $stageID');
+                </script>
+            ";
+        } else {
+            // Insert the new record into the table
+            $queryInsert = "INSERT INTO mastery_requirement (Description, Stage_ID) VALUES ('$masteryRequirementDescription', $stageID)";
+            $db->query($queryInsert);
+    
+            if ($db->affected_rows > 0) {
+                echo "
+                    <script>
+                        console.log('New record inserted for Mastery Requirement Description: $masteryRequirementDescription and Stage_ID: $stageID');
+                    </script>
+                ";
+            } else {
+                echo "
+                    <script>
+                        console.log('Failed to insert record for Mastery Requirement Description: $masteryRequirementDescription and Stage_ID: $stageID');
+                    </script>
+                ";
+            }
+        }
+    }
+}
+
 // Populating the Skills table
 {
     $Skills = ['Creating practice routines', 'setting specific practice goals','generating strong motivation','cultivating discipline and diligence'

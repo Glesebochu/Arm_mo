@@ -18,7 +18,7 @@ class Activity{
         $row = $result->fetch_assoc();
 
         // Create a new object and assign values from the query result
-        
+        $activity = new Activity();
         $activity->ID = $row['ID'];
         $activity->Title = $row['Title'];
         $activity->Meditation_Object = ObservableObject::getObservableObject($row['Meditation_Object_ID']);

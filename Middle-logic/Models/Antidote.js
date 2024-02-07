@@ -9,7 +9,7 @@ export class SeverityType{
 }
 export class Antidote{
     constructor(id, type=AntidoteType.Agitation, severity=SeverityType.Moderate, description){
-        this.ID = id;
+        this.Antidote_ID = id;
         this.Type = type;
         this.Severity = severity;
         this.Description = description;

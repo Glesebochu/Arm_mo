@@ -2,7 +2,7 @@ import { SensoryStimulus, SensoryStimulusType } from "./SensoryStimulus.js";
 
 export class Activity{
     constructor(id, title, meditationObject){
-        this.ID = id;
+        this.Activity_ID = id;
         this.Title = title;
         this.Meditation_Object = meditationObject;
     }

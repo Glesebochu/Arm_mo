@@ -2,6 +2,7 @@
 // meditator.php
 
 class Meditator {
+    public $ID;
     public $First_Name;
     public $Last_Name;
     public $Username;
@@ -21,6 +22,7 @@ class Meditator {
         
         // Create a new Meditator object and assign values from the query result
         $meditator = new Meditator();
+        $meditator->ID = $row['ID'];
         $meditator->First_Name = $row['First_Name'];
         $meditator->Last_Name = $row['Last_Name'];
         $meditator->Username = $row['Username'];

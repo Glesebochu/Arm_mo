@@ -8,13 +8,14 @@ export class StepType{
 }
 
 export class Step{
-    constructor(title, description, category, type, duration=0, response=null){
+    constructor(title, description, category, type, duration=0, response=null, activity){
         this.Title = title;
         this.Description = description;
         this.Category = category;
         this.Type = type;
         this.Duration = duration;
         this.Response = response;
+        this.Activity = activity;
     }
     
     static getDummyPreparationSteps(){

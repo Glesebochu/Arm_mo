@@ -25,7 +25,7 @@
     // $javascriptMeditator2 = getJavaScriptMeditator('Zellalem@gmail.com');
 
   ?>
-
+  <!-- Meditator Object Retreival test -->
   <script type="module">
     // Import the Meditator.js module
     import { Meditator } from '../../Middle-logic/Models/Meditator.js';
@@ -49,6 +49,7 @@
  
   ?>
 
+  <!-- Intention Object Retreival test -->
   <script type="module">
     // Import the Intention.js module
     import { Intention } from '../../Middle-logic/Models/Intention.js';
@@ -61,6 +62,7 @@
 
   </script>
 
+  <!-- Obstacle Object Retreival test -->
   <?php
     // Include the PHP file with the function to retrieve the Obstacle object
     include_once '../../Back-end/Models/Obstacle.php';
@@ -82,6 +84,30 @@
     var obstacleObjects = obstacleArray.map(obstacleJson => JSON.parse(obstacleJson));
     console.log(obstacleObjects);
     console.log(Obstacle.convertArrayToObstacleObjects(obstacleObjects));
+  </script>
+
+   <!-- Skill Object Retreival test -->
+   <?php
+    // Include the PHP file with the function to retrieve the Skill object
+    include_once '../../Back-end/Models/Skill.php';
+    
+    $identifier = $_SESSION['stage'];
+    
+    // Call the function to get the JavaScript Skill array
+    $javascriptSkillArray = Skill::getJavaScriptSkillArray($identifier);
+  ?>
+      
+  <script type="module">
+    // Import the Skill.js module
+    import { Skill } from '../../Middle-logic/Models/Skill.js';
+
+    // Output the JavaScript code to create the Skill objects
+    var SkillArray = <?php echo json_encode($javascriptSkillArray); ?>;
+    
+    // Parse each JSON string to create the JavaScript Skill objects
+    var SkillObjects = SkillArray.map(SkillJson => JSON.parse(SkillJson));
+    console.log(SkillObjects);
+    console.log(Skill.convertArrayToSkillObjects(SkillObjects));
   </script>
 
   <script>

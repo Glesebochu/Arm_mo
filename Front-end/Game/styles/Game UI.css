@@ -498,6 +498,9 @@ body {
         grid-area: populate-auditory-stimulus;
         width: 100%;
     }
+    .populate-auditory-stimulus p{
+        border: 1px solid black;
+    }
 
         /* Auditory Stimulus Text Area */
     .auditory-stimulus-input-div{
@@ -1498,7 +1501,7 @@ body {
     }
     .pleasant-feeling button:active,
     .pleasant-feeling button:active {
-        border-radius: 20px;
+        border-radius: 10px;
         transform: scaleX(2.8);
     }
     /* ---------------------------------------------------------------------------------------- */  

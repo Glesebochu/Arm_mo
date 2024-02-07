@@ -5,8 +5,8 @@
 $username = $_POST['username'];
 $password = $_POST['pwdInput'];
 $cpassword= $_POST['cpwdInput'];
-$firstname = $_POST['firstname'];
-$lastname = $_POST['lastname'];
+$First_Name = $_POST['First_Name'];
+$Last_Name = $_POST['Last_Name'];
 $dob = $_POST['dob'];
 
 if ($cpassword === $password) {
@@ -15,7 +15,7 @@ if ($cpassword === $password) {
     include('Connect.php');
     $con = new Connect;
     $db = $con->__getConnection();
-    $db->query('USE Arm_mo');
+    $db->query('USE Arm_mo_v2');
     $querycheckDuplicateUsernames = "CALL checkDuplicateUsernames('$username', @p_exists)";
     $db->query($querycheckDuplicateUsernames);
     $result = $db->query("SELECT @p_exists");
@@ -23,7 +23,7 @@ if ($cpassword === $password) {
     $count = $row['@p_exists'];
 
     if ($count == 0) {
-        $queryInsertMeditator = "call AddMeditator('$username','$firstname','$lastname','$password','$dob',1)";
+        $queryInsertMeditator = "call AddMeditator('$username','$First_Name','$Last_Name','$password','$dob',1)";
         $db->query($queryInsertMeditator);
         header('Location: ../Front-end/home-settings/home-page.php');
         $_SESSION['stage']=1;

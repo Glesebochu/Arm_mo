@@ -2,6 +2,7 @@
 // meditator.php
 
 class Meditator {
+    public $ID;
     public $First_Name;
     public $Last_Name;
     public $Username;
@@ -9,20 +10,21 @@ class Meditator {
     public $Current_Stage_No;
 
     public static function getMeditator($identifier) {
-        include_once('Connect.php');
+        include_once('../../Back-end/Connect.php');
         $con = new Connect;
         $db = $con->__getConnection();
-        $db->query('USE Arm_mo');
+        $db->query('USE Arm_mo_v2');
         
         // Query the database based on the identifier
-        $query = "SELECT Firstname, Lastname, Username, Password, Stage_ID FROM Meditator WHERE Username = '$identifier'";
+        $query = "SELECT First_Name, Last_Name, Username, Password, Stage_ID FROM Meditator WHERE Username = '$identifier'";
         $result = $db->query($query);
         $row = $result->fetch_assoc();
         
         // Create a new Meditator object and assign values from the query result
         $meditator = new Meditator();
-        $meditator->First_Name = $row['Firstname'];
-        $meditator->Last_Name = $row['Lastname'];
+        $meditator->ID = $row['ID'];
+        $meditator->First_Name = $row['First_Name'];
+        $meditator->Last_Name = $row['Last_Name'];
         $meditator->Username = $row['Username'];
         $meditator->Password = $row['Password'];
         $meditator->Current_Stage_No = $row['Stage_ID'];

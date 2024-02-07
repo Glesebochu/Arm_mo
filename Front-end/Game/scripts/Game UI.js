@@ -75,7 +75,7 @@ function setupStimulusButton(buttonClass, inputDivClass, populateStimulusClass) 
     var populateStimulus = document.querySelector(populateStimulusClass);
 
     var clickCounter = 0;
-    var spacingBetweenElements = 0.5; // Set your desired spacing in vmax
+    var spacingBetweenElements = 1; // Set your desired spacing in vmax
 
     button.addEventListener("click", function () {
         clickCounter++;

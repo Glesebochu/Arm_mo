@@ -24,7 +24,7 @@ main{
     display: grid;
     gap: 4vh;
 }
-#preparation-input{
+#preparation-input, #preparation-activity-select, option{
     border: 0;
     outline: 0;
     border-bottom: 2px solid black;
@@ -32,8 +32,12 @@ main{
     transition: transform 0.5s ease;
     background-color: transparent;
     height: 10vh;
+    display: none;
 }
-#preparation-input:hover{
+option{
+    font-weight: normal;
+}
+#preparation-input:hover, #preparation-activity-select:hover{
     transform: scale(1.03);
 }
 #preparation-error-message{

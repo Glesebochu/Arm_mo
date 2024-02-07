@@ -1,5 +1,6 @@
 export class AhaMoment{
-    constructor(label){
+    constructor(id, label){
+        this.Aha_Moment_ID = id;
         this.Label = label;
     }
 }

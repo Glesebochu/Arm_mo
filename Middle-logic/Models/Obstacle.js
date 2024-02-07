@@ -17,5 +17,9 @@ export class Obstacle {
     static Distractions = "Distractions";
     static Forgetting = "Forgetting";
     static Sleepiness = "Sleepiness";
-
+    
+    static convertArrayToObstacleObjects(array) {
+        var obstacleObjects = array.map(obstacle => new Obstacle(obstacle.Description));
+        return obstacleObjects;
+      }
 }

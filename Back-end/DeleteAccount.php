@@ -8,7 +8,7 @@ $username = $_SESSION['UsernametoEdit'];
 include('Connect.php');
 $con = new Connect;
 $db = $con->__getConnection();
-$db->query('USE Arm_mo');
+$db->query('USE Arm_mo_v2');
 $queryCheckCredentials = "CALL CheckCredentials('$username', '$password', @p_exists)";
 $db->query($queryCheckCredentials);
 $result = $db->query("SELECT @p_exists");

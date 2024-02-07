@@ -10,7 +10,7 @@ $password = $_POST['password'];
 include_once('Connect.php');
 $con = new Connect;
 $db = $con->__getConnection();
-$db->query('USE Arm_mo');
+$db->query('USE Arm_mo_v2');
 $queryCheckCredentials = "CALL CheckCredentials('$username', '$password', @p_exists)";
 $db->query($queryCheckCredentials);
 $result = $db->query("SELECT @p_exists");
@@ -21,11 +21,11 @@ if ($count == 1) {
   // Set the session variables
   $_SESSION['UsernametoEdit'] = $username;
   // Create a Meditator object and store its attributes in the session array
-  $queryMeditator = "SELECT Firstname, Lastname, Password, Stage_ID FROM Meditator WHERE Username = '$username'";
+  $queryMeditator = "SELECT First_Name, Last_Name, Password, Stage_ID FROM Meditator WHERE Username = '$username'";
   $result = $db->query($queryMeditator);
   $row = $result->fetch_assoc();
-  $_SESSION['First_Name'] = $row['Firstname'];
-  $_SESSION['Last_Name'] = $row['Lastname'];
+  $_SESSION['First_Name'] = $row['First_Name'];
+  $_SESSION['Last_Name'] = $row['Last_Name'];
   $_SESSION['Password'] = $row['Password'];
   $_SESSION['stage'] = $row['Stage_ID'];
 

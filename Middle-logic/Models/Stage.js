@@ -13,6 +13,18 @@ export class Stage {
         this.NextStage = nextStage;
         this.Is_Mastered = isMastered;
     }
+    static getStageFromObject(obj) {
+        return new Stage(
+            obj.Stage_ID,
+            obj.Goal,
+            obj.Intentions,
+            obj.Obstacles,
+            obj.Skills,
+            obj.Mastery_Requirements,
+            obj.NextStage,
+            obj.Is_Mastered
+        );
+    }
 
     static stageOne = new Stage(
         this.Number = 1,

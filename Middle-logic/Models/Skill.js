@@ -14,4 +14,9 @@ export class Skill {
     static Connect = "Connecting";
     static Label = "Labeling";
     static Check_In = "Checking in";
+
+    static convertArrayToSkillObjects(arr) {
+        var SkillObjects = arr.map(obj => new Skill(obj.Description));
+        return SkillObjects;
+      }
 }

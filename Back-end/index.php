@@ -3,10 +3,43 @@
     include_once('Connect.php');
     $con = new Connect();
     $db = $con->__getConnection();
-    
-    // Creating the Arm_mo database
+
+    // Dropping the old database
     {
-        $databaseName = 'Arm_mo';
+        $olddatabaseName = 'Arm_mo';
+
+        // Check if the database exists
+        $queryDbExists = "SHOW DATABASES LIKE '$olddatabaseName'";
+        $resCheckDBExists = $db->query($queryDbExists);
+
+        if ($resCheckDBExists->num_rows > 0) {
+            // Drop the database
+            $dropDbQuery = "DROP DATABASE $olddatabaseName";
+
+            if ($db->query($dropDbQuery)) {
+                echo "
+                    <script>
+                        alert('Dropped database $olddatabaseName successfully');
+                    </script>
+                ";
+            } else {
+                echo "
+                    <script>
+                        alert('Dropping database $olddatabaseName failed');
+                    </script>
+                ";
+            }
+        } else {
+            echo "
+                <script>
+                    alert('Database $olddatabaseName does not exist');
+                </script>
+            ";
+        }
+    }
+    // Creating the Arm_mo_v2 database
+    {
+        $databaseName = 'Arm_mo_v2';
         $queryDbExists = "SHOW DATABASES LIKE '$databaseName'";
         $resCheckDBExists = $db->query($queryDbExists);
 
@@ -20,6 +53,7 @@
             $createDbQuery = "CREATE DATABASE $databaseName";
 
             if ($db->query($createDbQuery)) {
+                $db->select_db($databaseName);
                 echo "
                 <script>
                     alert('Created database $databaseName successfully');
@@ -35,10 +69,11 @@
         }
     }   
 
-    // Making arm_mo the current database
+    // Making Arm_mo_v2 the current database
     {
-        $queryUseArm_mo ="USE  $databaseName";
-        if($db->query($queryUseArm_mo)){
+        $queryUseArm_mo_v2 ="USE  $databaseName";
+        if($db->query($queryUseArm_mo_v2)){
+            
             echo"
                 <script>
                     alert('Currently using the database $databaseName!')
@@ -101,9 +136,8 @@
         $queryCreateMeditator= "CREATE TABLE Meditator(Meditator_ID INT PRIMARY KEY AUTO_INCREMENT,
                                     Username VARCHAR(100) NOT NULL,
                                     Password VARCHAR(100)NOT NULL,
-                                    EMAIL VARCHAR(100),
-                                    Firstname VARCHAR(100) NOT NULL,
-                                    Lastname VARCHAR(100) NOT NULL,
+                                    First_Name VARCHAR(100) NOT NULL,
+                                    Last_Name VARCHAR(100) NOT NULL,
                                     Date_of_birth DATE,
                                     Profile_Picture VARCHAR(100),
                                     Stage_ID INT NOT NULL,
@@ -170,8 +204,7 @@
     {
          $queryCreateMastery_Requirement= "CREATE TABLE Mastery_Requirement(Mastery_ID INT PRIMARY KEY AUTO_INCREMENT,
                                                                     Stage_ID INT NOT NULL,
-                                                                    Prompt VARCHAR(8000),
-                                                                    Correct_Value VARCHAR(8000),
+                                                                    Description VARCHAR(8000),
                                                                     FOREIGN KEY (Stage_ID) REFERENCES Meditation_Stage(Stage_ID))";
         if(($db->query("SHOW TABLES LIKE 'Mastery_Requirement'"))->num_rows>0){
             echo"
@@ -268,11 +301,9 @@
     // Creating the Session table
     {
          $queryCreateSession= "CREATE TABLE Session(Session_ID INT PRIMARY KEY AUTO_INCREMENT,
-                                                                    Stage_ID INT NOT NULL,
                                                                     Meditator_ID INT NOT NULL,
                                                                     Start_Time DATETIME NOT NULL,
                                                                     End_Time DATETIME NOT NULL,
-                                                                    FOREIGN KEY (Stage_ID) REFERENCES Meditation_Stage(Stage_ID),
                                                                     FOREIGN KEY (Meditator_ID) REFERENCES Meditator(Meditator_ID))";
 
         if(($db->query("SHOW TABLES LIKE 'Session'"))->num_rows>0){
@@ -333,6 +364,186 @@
             }
 
         } 
+    }
+
+    // Creating the Aha_Moment table
+    {
+        $queryCreateAha_Moment= "CREATE TABLE Aha_Moment(Aha_Moment_ID INT PRIMARY KEY AUTO_INCREMENT,
+                                                                     Session_ID INT NOT NULL,
+                                                                     Label VARCHAR(8000) NOT NULL,
+                                                                     FOREIGN KEY (Session_ID) REFERENCES Session(Session_ID))";
+ 
+         if(($db->query("SHOW TABLES LIKE 'Aha_Moment'"))->num_rows>0){
+             echo"
+                 <script>
+                     alert('Table Aha_Moment already exists')
+                 </script>
+             ";
+         }
+         else{
+             if($db->query($queryCreateAha_Moment)){
+                 echo"
+                     <script>
+                         alert('Created the table Aha_Moment succesfully!')
+                     </script>
+                 ";
+             }
+             else{
+                 echo"
+                     <script>
+                         alert('Creation of the table Aha_Moment failed!')
+                     </script>
+                 ";
+            }
+ 
+        } 
+    }
+
+    // Creating the Observable_Object table
+    {
+        $queryCreateObservable_Object= "CREATE TABLE Observable_Object(Observable_Object_ID INT PRIMARY KEY AUTO_INCREMENT,
+                                                                        Session_ID INT NOT NULL,
+                                                                        Title VARCHAR(100) NOT NULL,
+                                                                        Description VARCHAR(255),
+                                                                        Icon VARCHAR(255),
+                                                                        Discriminator VARCHAR(100) NOT NULL,
+                                                                        Sensory_Stimulus_Type VARCHAR(100),
+                                                                        Mental_Object_Type VARCHAR(100),
+                                                                        Intensity VARCHAR(100),
+                                                                        FOREIGN KEY (Session_ID) REFERENCES Session(Session_ID))";
+    
+            if(($db->query("SHOW TABLES LIKE 'Observable_Object'"))->num_rows>0){
+                echo"
+                    <script>
+                        alert('Table Observable_Object already exists')
+                    </script>
+                ";
+            }
+            else{
+                if($db->query($queryCreateObservable_Object)){
+                    echo"
+                        <script>
+                            alert('Created the table Observable_Object succesfully!')
+                        </script>
+                    ";
+                }
+                else{
+                    echo"
+                        <script>
+                            alert('Creation of the table Observable_Object failed!')
+                        </script>
+                    ";
+            }
+    
+        } 
+    }
+
+    // Creating the Activity table
+    {
+        $queryCreateActivity= "CREATE TABLE Activity(Activity_ID INT PRIMARY KEY AUTO_INCREMENT,
+                                                                        Title VARCHAR(8000) NOT NULL,
+                                                                        Meditation_Object_ID INT,
+                                                                        FOREIGN KEY (Meditation_Object_ID) REFERENCES Observable_Object(Observable_Object_ID))";
+    
+            if(($db->query("SHOW TABLES LIKE 'Activity'"))->num_rows>0){
+                echo"
+                    <script>
+                        alert('Table Activity already exists')
+                    </script>
+                ";
+            }
+            else{
+                if($db->query($queryCreateActivity)){
+                    echo"
+                        <script>
+                            alert('Created the table Activity succesfully!')
+                        </script>
+                    ";
+                }
+                else{
+                    echo"
+                        <script>
+                            alert('Creation of the table Activity failed!')
+                        </script>
+                    ";
+            }
+    
+        } 
+    }
+
+    // Creating the Step table
+    {
+        $queryCreateStep= "CREATE TABLE Step(Step_ID INT PRIMARY KEY AUTO_INCREMENT,
+                                                                        Session_ID INT NOT NULL,
+                                                                        Title VARCHAR(255) NOT NULL,
+                                                                        Description VARCHAR(255) NOT NULL,
+                                                                        Type VARCHAR(255) NOT NULL,
+                                                                        Category VARCHAR(255) NOT NULL,
+                                                                        Duration VARCHAR(255) NOT NULL,
+                                                                        Response VARCHAR(255) NOT NULL,
+                                                                        Activity_ID INT,
+                                                                        FOREIGN KEY (Session_ID) REFERENCES Session(Session_ID),
+                                                                        FOREIGN KEY (Activity_ID) REFERENCES Activity(Activity_ID))";
+    
+            if(($db->query("SHOW TABLES LIKE 'Step'"))->num_rows>0){
+                echo"
+                    <script>
+                        alert('Table Step already exists')
+                    </script>
+                ";
+            }
+            else{
+                if($db->query($queryCreateStep)){
+                    echo"
+                        <script>
+                            alert('Created the table Step succesfully!')
+                        </script>
+                    ";
+                }
+                else{
+                    echo"
+                        <script>
+                            alert('Creation of the table Step failed!')
+                        </script>
+                    ";
+            }
+    
+        } 
+    }
+
+    // Creating the Stage Session association (Practiced Session) table
+    {
+        $queryPracticed_Stages= "CREATE TABLE Practiced_Stages(Session_ID INT NOT NULL,
+                                                                Stage_ID INT NOT NULL,
+                                                                PRIMARY KEY (Stage_ID,Session_ID),
+                                                                FOREIGN KEY (Stage_ID) REFERENCES Meditation_Stage(Stage_ID),
+                                                                FOREIGN KEY (Session_ID) REFERENCES Session(Session_ID))";
+
+        if(($db->query("SHOW TABLES LIKE 'Practiced_Stages'"))->num_rows>0){
+            echo"
+                <script>
+                    alert('Table Practiced_Stages already exists')
+                </script>
+            ";
+        }
+        else{
+            if($db->query($queryPracticed_Stages)){
+                echo"
+                    <script>
+                        alert('Created the table Practiced_Stages succesfully!')
+                    </script>
+                ";
+            }
+            else{
+                echo"
+                    <script>
+                        alert('Creation of the table Practiced_Stages failed!')
+                    </script>
+                ";
+            }
+
+        }
+
     }
 
     // Creating the Stage obstacle association table
@@ -410,15 +621,15 @@
         $procedureName = 'AddMeditator';
         $queryAddMeditator = "CREATE PROCEDURE AddMeditator(
             IN p_username VARCHAR(50),
-            IN p_firstname VARCHAR(100),
-            IN p_lastname VARCHAR(100),
+            IN p_First_Name VARCHAR(100),
+            IN p_Last_Name VARCHAR(100),
             IN p_password VARCHAR(100),
             IN p_dob DATE,
             IN p_sid INT
         )
         BEGIN
-            INSERT INTO Meditator (Username, Firstname, Lastname, Password, Date_of_birth,Stage_ID)
-            VALUES (p_username, p_firstname, p_lastname, p_password, p_dob,p_sid);
+            INSERT INTO Meditator (Username, First_Name, Last_Name, Password, Date_of_birth,Stage_ID)
+            VALUES (p_username, p_First_Name, p_Last_Name, p_password, p_dob,p_sid);
         END";
 
         $checkProcedureQuery = "SHOW PROCEDURE STATUS WHERE Name = '$procedureName'";
@@ -512,16 +723,16 @@
         $queryEditAccount = "CREATE PROCEDURE EditAccount(
             IN p_username VARCHAR(100),
             IN p_newusername VARCHAR(100),
-            IN p_firstname VARCHAR(100),
-            IN p_lastname VARCHAR(100),
+            IN p_First_Name VARCHAR(100),
+            IN p_Last_Name VARCHAR(100),
             IN p_dob DATE,
             IN p_profilePic VARCHAR(8000)
         )
         BEGIN
             UPDATE Meditator
             SET Username = p_newusername,
-                Firstname = p_firstname,
-                Lastname = p_lastname,
+                First_Name = p_First_Name,
+                Last_Name = p_Last_Name,
                 Date_of_birth = p_dob,
                 Profile_Picture=p_profilePic
 
@@ -629,7 +840,7 @@
     {
         
         $tableName = 'Stage_Skill_Association';  // The table name you want to check
-        $databaseName = 'Arm_mo';  // The name of the database
+        $databaseName = 'Arm_mo_v2';  // The name of the database
 
         // Query to retrieve foreign key information for the specified table
         $query = "SELECT COLUMN_NAME, CONSTRAINT_NAME, REFERENCED_TABLE_NAME, REFERENCED_COLUMN_NAME

@@ -77,7 +77,7 @@
         include_once('../../Back-end/Connect.php');
         $con = new Connect;
         $db = $con->__getConnection();
-        $db->query('USE Arm_mo');
+        $db->query('USE Arm_mo_v2');
         session_start();
 
         $UsernametoEdit = $_SESSION['UsernametoEdit'];

@@ -1,7 +1,7 @@
 export class Meditator{
-    constructor(firstName, lastName, username, password, currentStageNo){
-        this.First_Name = firstName;
-        this.Last_Name = lastName;
+    constructor(First_Name, Last_Name, username, password, currentStageNo){
+        this.First_Name = First_Name;
+        this.Last_Name = Last_Name;
         this.Username = username;
         this.Password = password;
         this.Current_Stage_No = currentStageNo;

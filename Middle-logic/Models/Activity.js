@@ -10,17 +10,17 @@ export class Activity{
     static Breathing = new Activity(
         1, 
         "Breathing",
-        new SensoryStimulus(1, "Breath at the nose", "Breathing sensations at the nose", "icon", SensoryStimulusType.Kinesthetic)
+        new SensoryStimulus(1, "Breath at the nose.", "Breathing sensations at the nose", "icon", SensoryStimulusType.Kinesthetic)
     );
     static Reading = new Activity(
         2,
         "Reading",
-        "The current sentence."
+        new SensoryStimulus(2, "The current sentence.", "The sentence you are currently reading.", "icon", SensoryStimulusType.Visual)
     );
     static Talking = new Activity(
         3,
         "Talking",
-        "The current sentence."
+        new SensoryStimulus(3, "The current sentence.", "The sentence you are currently reading.", "icon", SensoryStimulusType.Auditory)
     );
     static getAllActivities(){
         return [Activity.Breathing, Activity.Reading, Activity.Talking];

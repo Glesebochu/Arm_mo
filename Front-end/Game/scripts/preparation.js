@@ -132,7 +132,7 @@ export function prepare(session){
             if(currentStep.Title == "Activity"){
                 let chosenIndex = select_input.selectedIndex;
                 let chosenActivity = Activity.getAllActivities().filter(a => a.Title == select_input[chosenIndex].textContent)[0];
-                currentStep.Response = chosenActivity;
+                currentStep.Activity = chosenActivity;
             }else{
                 currentStep.Response = text_input.value;
             }

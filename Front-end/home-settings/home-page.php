@@ -119,6 +119,8 @@
       include_once '../../Back-end/Models/Stage.php';
 
       $identifier = $_SESSION['stage'];
+      // $identifier = 2;
+
 
       // Call the function to get the JavaScript stage object
       $javascriptStage = Stage::getJavaScriptStage($identifier);
@@ -161,8 +163,27 @@
       console.log(Stage.getStageFromObject(stageObj));
     </script>
 
-  
+    <!-- Step Object Retrieval test -->
+    <?php
+      // Include the PHP file with the Step class definition
+      include_once '../../Back-end/Models/Step.php';
+      // $sessionID = $_SESSION['session_id'];
+      $stepArray = Step::getStepArray('1');
+      $javascriptStepArray = json_encode($stepArray);
+    ?>
 
+    <script type="module">
+      // Import the Step.js module
+      import { Step } from '../../Middle-logic/Models/Step.js';
+
+      // Output the JavaScript code to create the Step objects
+
+      var stepArray = <?php echo $javascriptStepArray ?>;
+      console.log(stepArray);
+     // Convert the stepArray to Step objects
+      var stepObjects = Step.convertArrayToStepObjects(stepArray);
+      console.log(stepObjects);
+    </script>
 
   <script>
     function openPage(link){

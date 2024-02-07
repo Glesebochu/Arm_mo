@@ -185,6 +185,146 @@
     }
 }
 
+// Creating a dummy session
+{
+   // Check if the dummy session already exists
+    $sqlCheckDummySession = "SELECT * FROM Session WHERE Meditator_ID = 1";
+    $resultCheckDummySession = $db->query($sqlCheckDummySession);
+
+    if ($resultCheckDummySession->num_rows > 0) {
+        echo "
+            <script>
+                console.log('Dummy session already exists. Skipping insertion.')
+            </script>
+        ";
+    } else {
+        // Get the current date and time
+        $currentTime = date('Y-m-d H:i:s');
+
+        // Set the dummy session start and end times
+        $startTime = $currentTime;
+        $endTime = date('Y-m-d H:i:s', strtotime('+1 hour', strtotime($startTime)));
+
+        // Insert the dummy session into the Session table
+        $sqlInsertSession = "INSERT INTO Session (Meditator_ID, Start_Time, End_Time)
+                            VALUES (1, '$startTime', '$endTime')";
+        if ($db->query($sqlInsertSession)) {
+            echo "
+                <script>
+                    console.log('Dummy session created successfully!')
+                </script>
+            ";
+        } else {
+            echo "
+                <script>
+                    console.log('Failed to create dummy session!')
+                </script>
+            ";
+        }
+    }
+}
+// Populating the Step table
+{
+    // Get the session ID of the dummy session
+    $sqlGetDummySessionID = "SELECT Session_ID FROM Session WHERE Meditator_ID = 1";
+    $resultGetDummySessionID = $db->query($sqlGetDummySessionID);
+
+    if ($resultGetDummySessionID->num_rows > 0) {
+        $row = $resultGetDummySessionID->fetch_assoc();
+        $dummySessionID = $row['Session_ID'];
+
+        // Populating the Step table
+        {
+            // Define the JavaScript data array
+            $preparationSteps = [
+                [
+                    "Activity",
+                    "Write down the activity you choose to do.",
+                    "Preparation",
+                    "Question"
+                ],
+                [
+                    "Motivation",
+                    "Review your purpose for doing this activity. Don't judge your reasons. Be aware and accept them.",
+                    "Preparation",
+                    "Question"
+                ],
+                [
+                    "Goal",
+                    "Decide on what you hope to work on in this session. Keep it simple and small.",
+                    "Preparation",
+                    "Question"
+                ],
+                [
+                    "Expectations",
+                    "Remember the dangers of expecting unreasonably and too highly. Be gentle with yourself.",
+                    "Preparation",
+                    "Instruction"
+                ],
+                [
+                    "Diligence",
+                    "Resolve to practice diligently for the entire session no matter how it goes. Write it down.",
+                    "Preparation",
+                    "Question"
+                ],
+                [
+                    "Distractions",
+                    "Write down thoughts, emotions, ideas, plans, worries or any other distractions that may arise. Resolve to set them aside if they arise in the middle of the activity.",
+                    "Preparation",
+                    "Question"
+                ],
+                [
+                    "Posture",
+                    "Make yourself as comfortable as possible.",
+                    "Preparation",
+                    "Instruction"
+                ]
+            ];
+
+            // Prepare and execute INSERT statements for each step
+            foreach ($preparationSteps as $step) {
+                $title = $step[0];
+                $description = $step[1];
+                $category = $step[2];
+                $type = $step[3];
+
+                // Check if the step already exists
+                $sqlCheckStep = "SELECT * FROM Step WHERE Title = ? AND Session_ID = ?";
+                $stmtCheckStep = $db->prepare($sqlCheckStep);
+                $stmtCheckStep->bind_param("si", $title, $dummySessionID);
+                $stmtCheckStep->execute();
+                $resultCheckStep = $stmtCheckStep->get_result();
+
+                if ($resultCheckStep->num_rows > 0) {
+                    echo "
+                        <script>
+                            console.log('Step $title for dummy session already exists. Skipping insertion.')
+                        </script>
+                    ";
+                } else {
+                    $sqlInsertStep = "INSERT INTO Step (Session_ID, Title, Description, Type, Category, Duration, Response)
+                                    VALUES (?, ?, ?, ?, ?, '', '')";
+                    $stmtInsertStep = $db->prepare($sqlInsertStep);
+                    $stmtInsertStep->bind_param("issss", $dummySessionID, $title, $description, $type, $category);
+                    $stmtInsertStep->execute();
+
+                    echo "
+                        <script>
+                            console.log('Step $title for dummy session added successfully!')
+                        </script>
+                    ";
+                }
+            }
+        }
+    } else {
+        echo "
+            <script>
+                console.log('Dummy session does not exist. Cannot populate steps.')
+            </script>
+        ";
+    }
+}
+
 // populating the stage obstacle association relationship table
 {
     function checkRecordExistsStageObstacle($obstacleID, $stageID) {

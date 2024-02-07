@@ -17,6 +17,19 @@ export class Step{
         this.Response = response;
         this.Activity = activity;
     }
+
+    static convertArrayToStepObjects(array) {
+        var StepObjects = array.map(step => new Step(
+            step.Title,
+            step.Description,
+            step.Category,
+            step.Type,
+            step.Duration,
+            step.Response,
+            step.Activity
+        ));
+        return StepObjects;
+    }
     
     static getDummyPreparationSteps(){
 

@@ -276,7 +276,7 @@
 
       var sensoryStimulusArray = <?php echo $javascriptSensoryStimulusArray;?>;
       console.log(sensoryStimulusArray);
-      console.log(SensoryStimulus.convertArrayToSensoryStimulusObjects(sensoryStimulusArray));
+      console.log(SensoryStimulus.getSensoryStimuliFromArrayObject(sensoryStimulusArray));
     </script>
     
     <!-- MentalObject Object Retreival test -->
@@ -297,7 +297,7 @@
 
       var mentalObjectArray = <?php echo $javascriptMentalObjectArray;?>;
       console.log(mentalObjectArray);
-      console.log(MentalObject.convertArrayToMentalObjectObjects(mentalObjectArray));
+      console.log(MentalObject.getMentalObjectsFromArrayObject(mentalObjectArray));
     </script>
     
     <!-- Activity Object Retreival test -->
@@ -321,6 +321,7 @@
       // Include the PHP file with the AhaMoment class definition
       include_once '../../Back-end/Models/AhaMoment.php';
       $javascriptAhaMoment = AhaMoment::getJavaScriptAhaMoment('1');
+      $javascriptAhaMomentArray = AhaMoment::getJavaScriptAhaMomentArray('1');
     ?>
     <script type="module">
       // Import the ObservableObject.js module
@@ -330,6 +331,10 @@
       var ahaMoment = <?php echo $javascriptAhaMoment;?>;
       console.log(ahaMoment);
       console.log(AhaMoment.getAhaMomentFromObject(ahaMoment));
+
+      var ahaMomentArray = <?php echo $javascriptAhaMomentArray;?>;
+      console.log(ahaMomentArray);
+      console.log(AhaMoment.getAhaMomentsFromArrayObject(ahaMomentArray));
     </script>
 
     <!-- Antidote Object Retreival test -->
@@ -337,6 +342,7 @@
       // Include the PHP file with the Antidote class definition
       include_once '../../Back-end/Models/Antidote.php';
       $javascriptAntidote = Antidote::getJavaScriptAntidote('1');
+      $javascriptAntidoteArray = Antidote::getJavaScriptAntidoteArray(AntidoteType::Dullness);
     ?>
     <script type="module">
       // Import the ObservableObject.js module
@@ -346,6 +352,11 @@
       var antidote = <?php echo $javascriptAntidote;?>;
       console.log(antidote);
       console.log(Antidote.getAntidoteFromObject(antidote));
+      
+      var antidoteArray = <?php echo $javascriptAntidoteArray;?>;
+      console.log(antidoteArray);
+      console.log(Antidote.getAntidotesFromArrayObject(antidoteArray));
+
     </script>
 
   <script>

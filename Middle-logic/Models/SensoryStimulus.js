@@ -22,7 +22,7 @@ export class SensoryStimulus extends ObservableObject{
             obj.Intensity
         );
     }
-    static convertArrayToSensoryStimulusObjects(arr){
+    static getSensoryStimuliFromArrayObject(arr){
         var SensoryStimuli= arr.map(SensoryStimulus.getSensoryStimulusFromObject);
         return SensoryStimuli;
     }

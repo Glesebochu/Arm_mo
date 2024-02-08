@@ -89,16 +89,7 @@ class ObservableObject{
 
     public static function getJavaScriptObservableObjectArray($Session_ID , $discriminator){
         $ObservableObjectArray = ObservableObject::getObservableObjectArray($Session_ID, $discriminator);
-
-        // Convert each Step object to a JSON string
-        $ObservableObjectJsonArray = array();
-        foreach ($ObservableObjectArray as $ObservableObject) {
-            $ObservableObjectJson = json_encode($ObservableObject);
-            $ObservableObjectJsonArray[] = $ObservableObjectJson;
-        }
-
-        // Return the JavaScript code to create the JavaScript ObservableObject array
-        return json_encode($ObservableObjectJsonArray);
+        return json_encode($ObservableObjectArray);
     }
 }
 ?>

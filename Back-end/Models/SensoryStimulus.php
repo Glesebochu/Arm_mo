@@ -9,7 +9,7 @@ enum SensoryStimulusType : string{
 }
 
 class SensoryStimulus extends ObservableObject{
-    public $Type = ObservableObjectType::SensoryStimulus;
+    public $Discriminator = ObservableObjectType::SensoryStimulus;
     public $Sensory_Stimulus_Type;
 }
 ?>

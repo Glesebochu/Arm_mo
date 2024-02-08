@@ -11,10 +11,10 @@ export class ObservableObjectIntensity{
     static Intense = "Intense";
 }
 export class ObservableObject{
-    constructor(id, title, type, description, icon, intensity){
+    constructor(id, title, discriminator, description, icon, intensity){
         this.Observable_Object_ID = id;
         this.Title = title;
-        this.Type = type;
+        this.Discriminator = discriminator;
         this.Description = description;
         this.Icon = icon;
         this.Intensity = intensity;
@@ -31,7 +31,7 @@ export class ObservableObject{
 
         observableObject.Observable_Object_ID = obj.Observable_Object_ID;
         observableObject.Title = obj.Title;
-        observableObject.Type = obj.Type;
+        observableObject.Discriminator = obj.Type;
         observableObject.Description = obj.Description;
         observableObject.Icon = obj.Icon;
         observableObject.Intensity = obj.Intensity;

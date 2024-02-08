@@ -7,7 +7,7 @@ enum MentalObjectType : string{
 }
 
 class MentalObject extends ObservableObject{
-    public $Type = ObservableObjectType::MentalObject;
+    public $Discriminator = ObservableObjectType::MentalObject;
     public $Mental_Object_Type;
 }
 ?>

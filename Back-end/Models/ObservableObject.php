@@ -13,7 +13,7 @@ enum ObservableObjectIntensity : string{
 class ObservableObject{
     public $Observable_Object_ID;
     public $Title;
-    public $Type;
+    public $Discriminator;
     public $Description;
     public $Icon;
     public $Intensity;
@@ -33,7 +33,7 @@ class ObservableObject{
         // Create a new object and assign values from the query result
         
         // Create different types depending on the discriminator.
-        if ($row['Discriminator'] == "MentalObject" || $row['Type'] == ObservableObjectType::MentalObject) {
+        if ($row['Discriminator'] == ObservableObjectType::MentalObject) {
             $observableObject = new MentalObject();
             $observableObject->Mental_Object_Type = $row['Mental_Object_Type'];
         } else {
@@ -43,7 +43,7 @@ class ObservableObject{
         
         $observableObject->Observable_Object_ID = $row['Observable_Object_ID'];
         $observableObject->Title = $row['Title'];
-        $observableObject->Type = $row['Type'];
+        $observableObject->Discriminator = $row['Discriminator'];
         $observableObject->Description = $row['Description'];
         $observableObject->Icon = $row['Icon'];
         $observableObject->Intensity = $row['Intensity'];

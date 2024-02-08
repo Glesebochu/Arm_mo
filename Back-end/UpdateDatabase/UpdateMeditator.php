@@ -1,6 +1,5 @@
 <?php
 // Include the PHP file with the function to update the Meditator object
-include_once '../../Back-end/Connect.php';
 include_once('../../Back-end/Connect.php');
 
 // Create a database connection

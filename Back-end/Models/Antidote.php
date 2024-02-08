@@ -47,5 +47,30 @@ class Antidote{
         // Return the JavaScript code to create the JavaScript obser$antidote object
         return $antidoteJson;
     }
+
+    public static function getAntidoteArray($type){
+        include_once('../../Back-end/Connect.php');
+        $con = new Connect;
+        $db = $con->__getConnection();
+        $db->query('USE Arm_mo_v2');
+
+        // Query the database based on the type
+        $query = "SELECT * FROM Antidote WHERE Type = '$type'";
+        $result = $db->query($query);
+
+        // Create an array to store the Antidotes
+        $antidoteArray = array();
+        while($row = $result->fetch_assoc()){
+            // Add the object to the array
+            $antidoteArray[] = Antidote::getAntidote($row['Antidote_ID']);
+        }
+
+        return $antidoteArray;
+    }
+
+    public static function getJavaScriptAntidoteArray($type){
+        $antidoteArray = Antidote::getAntidoteArray($type);
+        return json_encode($antidoteArray);
+    }
 }
 ?>

@@ -33,5 +33,30 @@ class AhaMoment{
         // Return the JavaScript code to create the JavaScript obser$ahaMoment object
         return $ahaMomentJson;
     }
+
+    public static function getAhaMomentArray($Session_ID){
+        include_once('../../Back-end/Connect.php');
+        $con = new Connect;
+        $db = $con->__getConnection();
+        $db->query('USE Arm_mo_v2');
+
+        // Query the database based on the type
+        $query = "SELECT * FROM AhaMoment WHERE Session_ID = '$Session_ID'";
+        $result = $db->query($query);
+
+        // Create an array to store the AhaMoments
+        $ahaMomentArray = array();
+        while($row = $result->fetch_assoc()){
+            // Add the object to the array
+            $ahaMomentArray[] = AhaMoment::getAhaMoment($row['AhaMoment_ID']);
+        }
+
+        return $ahaMomentArray;
+    }
+
+    public static function getJavaScriptAhaMomentArray($Session_ID){
+        $ahaMomentArray = AhaMoment::getAhaMomentArray($Session_ID);
+        return json_encode($ahaMomentArray);
+    }
 }
 ?>

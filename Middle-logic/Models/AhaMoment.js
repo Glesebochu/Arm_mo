@@ -9,4 +9,8 @@ export class AhaMoment{
             obj.Label,
         );
     }
+    static getAhaMomentsFromArrayObject(arr){
+        var AhaMoments= arr.map(AhaMoment.getAhaMomentFromObject);
+        return AhaMoments;
+    }
 }

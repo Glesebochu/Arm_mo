@@ -413,6 +413,84 @@
     }
 }
 
+
+// Creating dummy observable objects
+{
+    // Get the session ID of the dummy session
+    $sqlGetDummySessionID = "SELECT Session_ID FROM Session WHERE Meditator_ID = 1";
+    $resultGetDummySessionID = $db->query($sqlGetDummySessionID);
+
+    if ($resultGetDummySessionID->num_rows > 0) {
+        $row = $resultGetDummySessionID->fetch_assoc();
+        $dummySessionID = $row['Session_ID'];
+
+        // Populating the ObservableObject table
+        {
+            // Define the JavaScript data array
+            $observableObjects = [
+                [
+                    "Laptop",
+                    "SensoryStimulus"
+                ],
+                [
+                    "Dream",
+                    "MentalObject"
+                ],
+                [
+                    "Music",
+                    "SensoryStimulus"
+                ],
+                [
+                    "Pain",
+                    "MentalObject"
+                ],
+            ];
+
+            // Prepare and execute INSERT statements for each observableObject
+            foreach ($observableObjects as $observableObject) {
+                $title = $observableObject[0];
+                $discriminator = $observableObject[1];
+
+                // Check if the observableObject already exists
+                $sqlCheckObservableObject = "SELECT * FROM ObservableObject WHERE Title = ? AND Session_ID = ?";
+                $stmtCheckObservableObject = $db->prepare($sqlCheckObservableObject);
+                $stmtCheckObservableObject->bind_param("si", $title, $dummySessionID);
+                $stmtCheckObservableObject->execute();
+                $resultCheckObservableObject = $stmtCheckObservableObject->get_result();
+
+                if ($resultCheckObservableObject->num_rows > 0) {
+                    echo "
+                        <script>
+                            console.log('ObservableObject $title for dummy session already exists. Skipping insertion.')
+                        </script>
+                    ";
+                } else {
+                    $sqlInsertObservableObject = "INSERT INTO ObservableObject (Session_ID, Title, Description, Icon, Discriminator, SensoryStimulus_Type, MentalObject_Type, Intensity)
+                                    VALUES (?, ?, '', '', ?, '', '', '')";
+                    $stmtInsertObservableObject = $db->prepare($sqlInsertObservableObject);
+                    $stmtInsertObservableObject->bind_param("iss", $dummySessionID, $title, $discriminator);
+                    $stmtInsertObservableObject->execute();
+
+                    echo "
+                        <script>
+                            console.log('ObservableObject $title for dummy session added successfully!')
+                        </script>
+                    ";
+                }
+            }
+        }
+    } else {
+        echo "
+            <script>
+                console.log('Dummy session does not exist. Cannot populate observableObjects.')
+            </script>
+        ";
+    }
+}
+
+// Creating a dummy activity
+
+
 // populating the stage obstacle association relationship table
 {
     function checkRecordExistsStageObstacle($obstacleID, $stageID) {

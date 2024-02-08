@@ -17,7 +17,7 @@ class SensoryStimulus extends ObservableObject{
         return ObservableObject::getJavaScriptObservableObject($identifier);
     }
     public static function getJavaScriptSensoryStimulusArray($identifier){
-        return ObservableObject::getJavaScriptObservableObjectArray($identifier);
+        return ObservableObject::getJavaScriptObservableObjectArray($identifier, ObservableObjectType::SensoryStimulus);
     }
 }
 ?>

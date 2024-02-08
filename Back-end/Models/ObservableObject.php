@@ -1,8 +1,8 @@
 <?php
 
 enum ObservableObjectType: string{
-    case SensoryStimulus = "Sensory Stimulus";
-    case MentalObject = "Mental Object";
+    case SensoryStimulus = "SensoryStimulus";
+    case MentalObject = "MentalObject";
 }
 enum ObservableObjectIntensity : string{
     case Mild = "Mild";
@@ -65,7 +65,7 @@ class ObservableObject{
         return $observableObjectJson;
     }
 
-    public static function getObservableObjectArray($Session_ID){
+    public static function getObservableObjectArray($Session_ID, $discriminator){
         include_once('../../Back-end/Connect.php');
         $con = new Connect;
         $db = $con->__getConnection();
@@ -73,7 +73,7 @@ class ObservableObject{
 
         // Query the database based on the Session ID
         $query = "SELECT * FROM ObservableObject
-                  WHERE Session_ID = '$Session_ID'";
+                  WHERE Session_ID = '$Session_ID' AND Discriminator = '$discriminator'";
         $result = $db->query($query);
 
         // Create an array to store the ObservableObjects
@@ -87,8 +87,8 @@ class ObservableObject{
         return $ObservableObjectArray;
     }
 
-    public static function getJavaScriptObservableObjectArray($Session_ID){
-        $ObservableObjectArray = ObservableObject::getObservableObjectArray($Session_ID);
+    public static function getJavaScriptObservableObjectArray($Session_ID , $discriminator){
+        $ObservableObjectArray = ObservableObject::getObservableObjectArray($Session_ID, $discriminator);
 
         // Convert each Step object to a JSON string
         $ObservableObjectJsonArray = array();
@@ -98,7 +98,7 @@ class ObservableObject{
         }
 
         // Return the JavaScript code to create the JavaScript ObservableObject array
-        return $ObservableObjectJsonArray;
+        return json_encode($ObservableObjectJsonArray);
     }
 }
 ?>

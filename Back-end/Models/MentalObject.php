@@ -15,7 +15,7 @@ class MentalObject extends ObservableObject{
         return ObservableObject::getJavaScriptObservableObject($identifier);
     }
     public static function getJavaScriptMentalObjectArray($identifier){
-        return ObservableObject::getJavaScriptObservableObjectArray($identifier);
+        return ObservableObject::getJavaScriptObservableObjectArray($identifier, ObservableObjectType::MentalObject);
     }
 }
 ?>

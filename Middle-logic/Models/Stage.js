@@ -9,7 +9,7 @@ export class Stage {
         this.Intentions = intentions;
         this.Obstacles = obstacles;
         this.Skills = skills;
-        this.Mastery_Requirements = masteryRequirements;
+        this.MasteryRequirements = masteryRequirements;
         this.NextStage = nextStage;
         this.Is_Mastered = isMastered;
     }
@@ -20,7 +20,7 @@ export class Stage {
             obj.Intentions,
             obj.Obstacles,
             obj.Skills,
-            obj.Mastery_Requirements,
+            obj.MasteryRequirements,
             obj.NextStage,
             obj.Is_Mastered
         );
@@ -49,7 +49,7 @@ export class Stage {
             Skill.Generate_Strong_Motivation,
             Skill.Cultivate_Discipline_Diligence
         ],
-        this.Mastery_Requirements = [
+        this.MasteryRequirements = [
             "I never miss a daily practice session.",
             "I do not procastinate while meditating."
         ],
@@ -74,7 +74,7 @@ export class Stage {
             Skill.Reinforce_Spontaneous_Introspective_Awareness,
             Skill.Sustain_Attention
         ],
-        this.Mastery_Requirements = [
+        this.MasteryRequirements = [
             "I can sustain attention on the meditation object for 10-15 minutes.",
             "Most periods of mind-wandering last only a few seconds."
         ],
@@ -102,7 +102,7 @@ export class Stage {
             Skill.Label,
             Skill.Check_In
         ],
-        this.Mastery_Requirements = [
+        this.MasteryRequirements = [
             "I rarely forget the breath or fall asleep.",
         ]
     );

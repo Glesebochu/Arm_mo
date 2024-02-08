@@ -202,29 +202,29 @@
 
     // Creating the mastery requirement table
     {
-         $queryCreateMastery_Requirement= "CREATE TABLE Mastery_Requirement(Mastery_ID INT PRIMARY KEY AUTO_INCREMENT,
+         $queryCreateMasteryRequirement= "CREATE TABLE MasteryRequirement(Mastery_ID INT PRIMARY KEY AUTO_INCREMENT,
                                                                     Stage_ID INT NOT NULL,
                                                                     Description VARCHAR(8000),
                                                                     FOREIGN KEY (Stage_ID) REFERENCES Meditation_Stage(Stage_ID))";
-        if(($db->query("SHOW TABLES LIKE 'Mastery_Requirement'"))->num_rows>0){
+        if(($db->query("SHOW TABLES LIKE 'MasteryRequirement'"))->num_rows>0){
             echo"
                 <script>
-                    console.log('Table Mastery_Requirement already exists')
+                    console.log('Table MasteryRequirement already exists')
                 </script>
             ";
         }
         else{
-            if($db->query($queryCreateMastery_Requirement)){
+            if($db->query($queryCreateMasteryRequirement)){
                 echo"
                     <script>
-                        console.log('Created the table Mastery_Requirement succesfully!')
+                        console.log('Created the table MasteryRequirement succesfully!')
                     </script>
                 ";
             }
             else{
                 echo"
                     <script>
-                        console.log('Creation of the table Mastery_Requirement failed!')
+                        console.log('Creation of the table MasteryRequirement failed!')
                     </script>
                 ";
             }

@@ -17,6 +17,7 @@ document.getElementById("rad1").addEventListener("click", function () {
 document.getElementById("rad2").addEventListener("click", function () {
   document.getElementById("rad1").checked = false;
   document.getElementById("dropDownMenu").style.display = "none";
+  Current_Stage_No=1;
 });
 
 // Gives the selected stage to the variable when the done button is clicked

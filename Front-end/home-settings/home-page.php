@@ -50,7 +50,7 @@
       import { Meditator } from '../../Middle-logic/Models/Meditator.js';
 
       // Create a sample Meditator object
-      var meditatorTest = new Meditator('1', 'Finhas', 'Yohannes', 'FinhasGustavo@gmail.com', 'test', '5');
+      var meditatorTest = new Meditator('1', 'Finhas', 'Yohannes', 'FinhasGustavo@gmail.com', 'test', '3');
 
       // Function to send the JavaScript object to the PHP script
       function updateMeditator(meditator) {
@@ -284,6 +284,78 @@
 
 
       console.log(sessionObjects);
+    </script>
+
+    <!-- Session Object send test -->
+    <script type="module">
+      // Import the Session.js module
+      import { Session } from '../../Middle-logic/Models/Session.js';
+      import { Meditator } from '../../Middle-logic/Models/Meditator.js';
+
+
+      // Function to send the Session object to the PHP script
+      function updateSession(session) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '../../Back-end/UpdateDatabase/UpdateSession.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+              console.log(xhr.responseText);
+            } else {
+              console.error('Error:', xhr.status);
+            }
+          }
+        };
+
+        var params = "session=" + encodeURIComponent(JSON.stringify(session));
+        xhr.send(params);
+      }
+      function createSession(session) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '../../Back-end/UpdateDatabase/CreateSession.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+              console.log(xhr.responseText);
+            } else {
+              console.error('Error:', xhr.status);
+            }
+          }
+        };
+
+        var params = "session=" + encodeURIComponent(JSON.stringify(session));
+        xhr.send(params);
+      }
+
+      // Example usage:
+      // Retrieve the session data from somewhere (e.g., localStorage, API response, etc.)
+      var meditatorTest = new Meditator('1', 'Finhas', 'Yohannes', 'FinhasGustavo@gmail.com', 'test', '5');
+      var sessionData = {
+        Meditator: meditatorTest,
+        Start_Date_Time: '<?php echo date("Y-m-d H:i:s"); ?>',
+        End_Date_Time: '<?php echo date("Y-m-d H:i:s"); ?>',
+        Practiced_Stages: [1, 2, 3],
+        Steps: [4, 5, 6],
+        AhaMoments: ['Aha1', 'Aha2'],
+        Newly_Mastered_Stages: [7, 8, 9]
+      };
+
+      // Create a new Session object using the retrieved session data
+      var sessionObject = new Session(
+        '1',
+        sessionData.Meditator.Meditator_ID,
+        sessionData.Start_Date_Time,
+        sessionData.End_Date_Time,
+        sessionData.Practiced_Stages,
+        sessionData.Steps,
+        sessionData.AhaMoments,
+        sessionData.Newly_Mastered_Stages
+      );
+
+      // Call the updateSession function and pass the Session object
+      // updateSessionSession(sessionObject);
     </script>
 
     <!-- ObservableObject Object Retreival test -->

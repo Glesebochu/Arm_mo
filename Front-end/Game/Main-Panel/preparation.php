@@ -7,6 +7,7 @@
     <title>Preparation</title>
     <link rel="stylesheet" href="../styles/general-styles.css">
     <link rel="stylesheet" href="../styles/preparation.css">
+    <link rel="stylesheet" href="../../Font.css"/>
     <script src="../scripts/preparation.js" type="module"></script>
 
     <!-- Session Object Retreival test -->

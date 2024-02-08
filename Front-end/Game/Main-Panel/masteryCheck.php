@@ -6,6 +6,7 @@
     <title>Mastery Check</title>
     <link rel="stylesheet" href="../styles/general-styles.css">
     <link rel="stylesheet" href="../styles/masteryCheck.css">
+    <link rel="stylesheet" href="../../Font.css"/>
 
     <!-- Meditator Object Retreival test -->
     <?php

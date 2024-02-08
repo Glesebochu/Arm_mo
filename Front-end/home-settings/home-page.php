@@ -44,6 +44,37 @@
 
     </script>
 
+    <!-- Meditator Oject Sending test -->
+    <script type="module">
+      // Import the Meditator.js module
+      import { Meditator } from '../../Middle-logic/Models/Meditator.js';
+
+      // Create a sample Meditator object
+      var meditatorTest = new Meditator('1', 'Finhas', 'Yohannes', 'FinhasGustavo@gmail.com', 'test', '5');
+
+      // Function to send the JavaScript object to the PHP script
+      function updateMeditator(meditator) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '../../Back-end/UpdateDatabase/UpdateMeditator.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+              console.log(xhr.responseText);
+            } else {
+              console.error('Error:', xhr.status);
+            }
+          }
+        };
+        
+        var params = "meditator=" + encodeURIComponent(JSON.stringify(meditator));
+        xhr.send(params);
+      }
+
+      // Call the updateMeditator function and pass the JavaScript object
+      updateMeditator(meditatorTest);
+    </script>
+
     <!-- Intention Object Retreival test -->
     <?php
       // Include the PHP file with the function to retrieve the Intention object

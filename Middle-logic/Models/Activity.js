@@ -4,7 +4,7 @@ export class Activity{
     constructor(id, title, meditationObject){
         this.Activity_ID = id;
         this.Title = title;
-        this.Meditation_Object = meditationObject;
+        this.MeditationObject = meditationObject;
     }
 
     static Breathing = new Activity(
@@ -30,7 +30,7 @@ export class Activity{
         return new Activity(
             obj.Activity_ID,
             obj.Title,
-            obj.Meditation_Object
+            obj.MeditationObject
         );
     }
 }

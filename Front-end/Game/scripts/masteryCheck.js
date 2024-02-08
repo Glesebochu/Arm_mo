@@ -46,7 +46,7 @@ function masteryCheck(session, stage){
     }
 
     // Add requirements to the div.
-    var requirements = stage.Mastery_Requirements;
+    var requirements = stage.MasteryRequirements;
     for (let i = 0; i < requirements.length; i++) {
         const req = requirements[i];
         addRequirementToList(req, i+1);

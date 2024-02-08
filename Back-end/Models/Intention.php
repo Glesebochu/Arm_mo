@@ -2,30 +2,36 @@
 // Intention.php
 
 class Intention {
+    public $Intention_ID;
     public $Description;
     public $Stage;
    
 
-    public static function getIntention($identifier) {
+    public static function getIntention_Array($identifier) {
         include_once('../../Back-end/Connect.php');
         $con = new Connect;
         $db = $con->__getConnection();
         $db->query('USE Arm_mo_v2');
         
         // Query the database based on the identifier
-        $query = "SELECT Description,Stage_ID FROM Intention WHERE Stage_ID = '$identifier'";
+        $query = "SELECT * FROM Intention WHERE Stage_ID = '$identifier'";
         $result = $db->query($query);
-        $row = $result->fetch_assoc();
+        $Intention_Array= Array();
+        while($row = $result->fetch_assoc()){
+            // Create a new Intention object and assign values from the query result
+            $Intention = new Intention();
+            $Intention->Intention_ID = $row['Intention_ID'];
+            $Intention->Description = $row['Description'];
+            $Intention->Stage = $row['Stage_ID'];
+            $Intention_Array[]=$Intention;
+            
+        }
+        return $Intention_Array;
         
-        // Create a new Intention object and assign values from the query result
-        $Intention = new Intention();
-        $Intention->Description = $row['Description'];
-        $Intention->Stage = $row['Stage_ID'];
-        return $Intention;
     }
     
-    public static function getJavaScriptIntention($identifier) {
-        $Intention = Intention::getIntention($identifier);
+    public static function getJavaScriptIntentionArray($identifier) {
+        $Intention = Intention::getIntention_Array($identifier);
     
         // Convert the Intention object to a JSON string
         $IntentionJson = json_encode($Intention);

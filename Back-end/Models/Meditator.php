@@ -16,7 +16,7 @@ class Meditator {
         $db->query('USE Arm_mo_v2');
         
         // Query the database based on the identifier
-        $query = "SELECT * FROM Meditator WHERE Username = '$identifier'";
+        // $query = "SELECT * FROM Meditator WHERE Username = '$identifier'";
         $query = "SELECT * FROM Meditator WHERE Username = '$identifier'";
         $result = $db->query($query);
         $row = $result->fetch_assoc();

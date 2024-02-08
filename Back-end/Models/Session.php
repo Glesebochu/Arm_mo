@@ -1,7 +1,7 @@
 <?php
 // Session.php
 
-include_once('../../Back-end/Connect.php'); // Include the Connect.php file
+include_once(__DIR__ . '/../Connect.php'); // Include the Connect.php file
 include_once('Stage.php'); // Include the stage.php file
 
 class Session {
@@ -23,6 +23,7 @@ class Session {
         
         // Create a new Session object and assign values from the query result
         $Session = new Session();
+        $Session->Session_ID = $row['Session_ID'];
         $Session->Meditator_ID = $row['Meditator_ID'];
         $Session->Session_ID = $row['Session_ID'];
         $Session->Start_Time = $row['Start_Time'];
@@ -83,6 +84,7 @@ class Session {
         // Iterate over the query results and create Session objects
         while ($row = $result->fetch_assoc()) {
             $Session = new Session();
+            $Session->Session_ID = $row['Session_ID'];
             $Session->Meditator_ID = $row['Meditator_ID'];
             $Session->Session_ID = $row['Session_ID'];
             $Session->Start_Time = $row['Start_Time'];

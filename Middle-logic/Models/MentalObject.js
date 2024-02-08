@@ -24,4 +24,15 @@ export class MentalObject extends ObservableObject{
         var MentalObjects= arr.map(this.getMentalObjectFromObject);
         return MentalObjects;
     }
+    static getMentalObjectsFromArray(arr) {
+        const MentalObjectArray = arr.map(obj =>
+            new MentalObject(obj.ObservableObject_ID,
+                obj.Title,
+                obj.Description,
+                obj.Icon,
+                obj.MentalObject_Type,
+                obj.Intensity)
+        );
+        return MentalObjectArray;
+    }
 }

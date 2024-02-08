@@ -279,7 +279,7 @@
       // Include the PHP file with the ObservableObject class definition
       include_once '../../Back-end/Models/MentalObject.php';
       $javascriptMentalObject = MentalObject::getJavaScriptMentalObject('2');
-      // $javascriptMentalObjectArray = MentalObject::getJavaScriptMentalObjectArray('1');
+      $javascriptMentalObjectArray = MentalObject::getJavaScriptMentalObjectArray('1');
     ?>
     <script type="module">
       // Import the ObservableObject.js module
@@ -290,9 +290,9 @@
       console.log(mentalObject);
       console.log(MentalObject.getMentalObjectFromObject(mentalObject));
 
-      // var mentalObjectArray = <?php //echo $javascriptMentalObjectArray;?>;
-      // console.log(mentalObjectArray);
-      // console.log(MentalObject.convertArrayToMentalObjectObjects(mentalObjectArray));
+      var mentalObjectArray = <?php echo $javascriptMentalObjectArray;?>;
+      console.log(mentalObjectArray);
+      console.log(MentalObject.convertArrayToMentalObjectObjects(mentalObjectArray));
     </script>
     
     <!-- Activity Object Retreival test -->

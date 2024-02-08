@@ -492,8 +492,53 @@
     }
 }
 
-// Creating a dummy activity
+// Creating dummy activities
+{
+    // Define the JavaScript data array
+    $activities = [
+        [
+            "Breathing",
+            2
+        ],
+        [
+            "Talking",
+            5
+        ]
+    ];
 
+    // Prepare and execute INSERT statements for each activity
+    foreach ($activities as $activity) {
+        $title = $activity[0];
+        $meditationObject_ID = $activity[1];
+
+        // Check if the activity already exists
+        $sqlCheckActivity = "SELECT * FROM Activity WHERE Title = ? AND MeditationObject_ID = ?";
+        $stmtCheckActivity = $db->prepare($sqlCheckActivity);
+        $stmtCheckActivity->bind_param("si", $title, $meditationObject_ID);
+        $stmtCheckActivity->execute();
+        $resultCheckActivity = $stmtCheckActivity->get_result();
+
+        if ($resultCheckActivity->num_rows > 0) {
+            echo "
+                <script>
+                    console.log('Activity $title for dummy session already exists. Skipping insertion.')
+                </script>
+            ";
+        } else {
+            $sqlInsertActivity = "INSERT INTO Activity (Title, MeditationObject_ID)
+                            VALUES (?, ?)";
+            $stmtInsertActivity = $db->prepare($sqlInsertActivity);
+            $stmtInsertActivity->bind_param("ss", $title, $meditationObject_ID);
+            $stmtInsertActivity->execute();
+
+            echo "
+                <script>
+                    console.log('Activity $title for dummy session added successfully!')
+                </script>
+            ";
+        }
+    }
+}
 
 // populating the stage obstacle association relationship table
 {

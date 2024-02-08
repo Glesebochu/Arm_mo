@@ -1,4 +1,4 @@
-import { Session } from "../../../Middle-logic/Models/Session.js";
+// import { Session } from "../../../Middle-logic/Models/Session.js";
 
 document.addEventListener("DOMContentLoaded", function () {
     const timerElement = document.getElementById("timer");
@@ -12,17 +12,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const minutes = Math.floor(elapsedTime / (60 * 1000));
         const seconds = Math.floor((elapsedTime % (60 * 1000)) / 1000);
-        const microseconds = elapsedTime % 1000;
+        const milliseconds = elapsedTime % 1000; // Changed to milliseconds
 
-        const formattedTime = `${padZero(minutes)}:${padZero(seconds)}:${padZeroMicro(microseconds)}`;
+        const formattedTime = `${padZero(minutes)}:${padZero(seconds)}:${padZero(milliseconds, 3)}`;
         timerElement.textContent = formattedTime;
     }, 1); // Update every millisecond
 
-    function padZero(num) {
-        return num.toString().padStart(2, '0');
-    }
-
-    function padZeroMicro(num) {
-        return num.toString().padStart(3, '0');
+    function padZero(num, length = 2) {
+        return num.toString().padStart(length, '0');
     }
 });

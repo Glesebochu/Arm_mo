@@ -93,32 +93,43 @@ function setupStimulusButton(buttonClass, inputDivClass, populateStimulusClass) 
 
             if (inputArray.length > 0 && inputArray[0].trim() !== "") {
                 var currentLeft = 6; // Initial left position
+                var currentTop = 6; // Initial top position
 
                 inputArray.forEach(function (inputElement) {
                     var newParagraph = document.createElement("p");
-                    newParagraph.textContent = inputElement.toLowerCase(); // Convert to lowercase
+                    newParagraph.textContent = inputElement;
 
                     var vmaxUnit = Math.min(window.innerWidth, window.innerHeight) / 100; // 1 vmax unit
 
                     newParagraph.style.position = "absolute";
 
-                    // Check and limit the maximum left position based on the width of the "populate" div
-                    var maxWidth = populateStimulus.offsetWidth / vmaxUnit;
-                    newParagraph.style.left = Math.min(currentLeft, maxWidth) + "vmax";
+                    if (buttonClass.includes("thought-state-button") || buttonClass.includes("emotional-state-button")) {
+                        // Check and limit the maximum top position based on the height of the "populate" div
+                        var maxHeight = populateStimulus.offsetHeight / vmaxUnit;
+                        newParagraph.style.top = Math.min(currentTop, maxHeight) + "vmax";
+                    } else {
+                        // Check and limit the maximum left position based on the width of the "populate" div
+                        var maxWidth = populateStimulus.offsetWidth / vmaxUnit;
+                        newParagraph.style.left = Math.min(currentLeft, maxWidth) + "vmax";
+                    }
 
-                    newParagraph.style.top = 0; // Align vertically
                     newParagraph.style.fontSize = "0.8vmax";
                     newParagraph.style.opacity = 1;
 
                     populateStimulus.appendChild(newParagraph);
 
-                    // Update the left position for the next element with spacing
-                    currentLeft += (newParagraph.offsetWidth / vmaxUnit) + spacingBetweenElements;
+                    // Update the positions for the next element with spacing
+                    if (buttonClass.includes("thought-state-button") || buttonClass.includes("emotional-state-button")) {
+                        currentTop += newParagraph.offsetHeight / vmaxUnit;
+                    } else {
+                        currentLeft += (newParagraph.offsetWidth / vmaxUnit) + spacingBetweenElements;
+                    }
                 });
             }
         }
     });
 }
+
 document.addEventListener("DOMContentLoaded", function () {
     setupStimulusButton(".visual-stimulus-button", ".visual-stimulus-input-div", ".populate-visual-stimulus");
     setupStimulusButton(".auditory-stimulus-button", ".auditory-stimulus-input-div", ".populate-auditory-stimulus");
@@ -130,6 +141,33 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+
+// Initialize counter value
+var counterValue = 110;
+
+// Function to toggle active state and increment the counter
+function toggleActiveState() {
+    var buttonElement = document.querySelector(".aha-moment");
+    
+    // Check if the button is currently active
+    var isActive = buttonElement.classList.contains("active");
+
+    if (isActive) {
+        // If active, increment the counter
+        counterValue++;
+
+        // Update the counter value and display it
+        var counterElement = document.getElementById("counter");
+        counterElement.innerText = counterValue;
+
+        // Update the button text
+        var buttonText = "AHA! (" + counterValue + ")";
+        document.querySelector(".aha-moment .aha-text").innerText = buttonText;
+    }
+
+    // Toggle the active state
+    buttonElement.classList.toggle("active");
+}
 // #region Original and Incomplete codes
 
 

@@ -38,32 +38,43 @@
         height: calc(100vh - 1.6vmax); /* Adjusted height to consider margins on both top and bottom */
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: space-between;
         background-color: #EDEBEB;
         border-radius: 20px;
         position: relative;
     }
 
-    .center-container {
-        background-color: #e5e5e5;
-        border: 2vmax solid rgba(97, 97, 97, 0.1);
-        border-radius: 50px;
-        padding: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 70vmax;
-        height: 16vmax;
-        /* display: block; */
+    .restart-button, .resume-button, .main-menu-button{
+        font-family: 'Major Mono Display', monospace;
+        border: none;
+        margin: 4vmax;
+        font-size: 3vmax;
+        margin-bottom: 4vmax;
+        height: 6vmax;
+        cursor: pointer;
+        padding: 1vmax;
+        opacity: 0.4;
+        transition-duration: 0.5s;
     }
 
-    #timer {
-        /* font-family: monospace; */
-        font-size: 7vmax;
-        margin: 0;
-        font-weight: 100;
-        color: #646464;
-        user-select: none;
+    .restart-button:hover,
+    .resume-button:hover,
+    .main-menu-button:hover
+    {
+        background: transparent;
+        transform: scale(1.05);
+        opacity: 1;
+        transition-duration: 0.5s;
+    }
+
+    .restart-button:active,
+    .resume-button:active,
+    .main-menu-button:active
+    {
+        background: transparent;
+        transform: scale(1.0);
+        opacity: 1;
+        transition-duration: 0.1s;
     }
 
     .triangle-button {
@@ -71,18 +82,18 @@
         bottom: 20px;
         right: 20px; */
         right: 0.2vmax;
-        bottom: 0.2vmax;
+        top: 0.2vmax;
         position: absolute;
         width: 8vmax;
         height: 10vmax;
         background-color: #e5e5e5;
         /* border: 1vmax solid rgba(128, 128, 128, 0.2); */
         border: none;
-        border-bottom-right-radius: 20px;
-        clip-path: polygon(0% 100%, 100% 0%, 100% 100%);
+        border-top-right-radius: 20px;
+        clip-path: polygon(0% 0%, 100% 0%, 100% 100%);
         cursor: pointer;
         display: flex;
-        align-items: flex-end;
+        align-items: flex-start;
         justify-content: flex-end;
         padding: 0.4vmax;
         transition-duration: 0.5s;

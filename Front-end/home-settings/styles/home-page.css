@@ -43,7 +43,7 @@ body .WrapperMain #copyright{
   margin: 0;
   padding: 0;
   width: 100% !important;
-  z-index: 1111;
+  /* z-index: 1111; */
 }
 
 .WrapperMain .appname-ApT {

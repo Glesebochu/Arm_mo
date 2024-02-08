@@ -44,7 +44,7 @@ if ($cpassword === $password) {
         $db->query($queryInsertMeditator);
         $_SESSION['stage'] = 1;
         require_once 'populateTheDatabase.php';
-        header('Location: ../Front-end/home-settings/home-page.php');
+        header('Location: ../Front-end/Login/login.html');
         exit;
     } else {
         $errorMessage = 'A user with that exact username exists!';

@@ -16,4 +16,26 @@ export class ObservableObject{
         this.Icon = icon;
         this.Intensity = intensity;
     }
+    static getMentalObjectFromObject(obj){
+        return new MentalObject(
+            obj.Observable_Object_ID,
+            obj.Title,
+            obj.Type,
+            obj.Description,
+            obj.Icon,
+            obj.Mental_Object_Type,
+            obj.Intensity
+        );
+    }
+    static getSensoryStimulusFromObject(obj){
+        return new SensoryStimulus(
+            obj.Observable_Object_ID,
+            obj.Title,
+            obj.Type,
+            obj.Description,
+            obj.Icon,
+            obj.Sensory_Stimulus_Type,
+            obj.Intensity
+        );
+    }
 }

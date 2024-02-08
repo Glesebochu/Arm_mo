@@ -14,4 +14,13 @@ export class Antidote{
         this.Severity = severity;
         this.Description = description;
     }
+
+    static getAntidoteFromObject(obj){
+        return new Antidote(
+            obj.Antidote_ID,
+            obj.Type,
+            obj.Severity,
+            obj.Description
+        );
+    }
 }

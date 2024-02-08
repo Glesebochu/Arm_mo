@@ -25,4 +25,12 @@ export class Activity{
     static getAllActivities(){
         return [Activity.Breathing, Activity.Reading, Activity.Talking];
     }
+
+    static getActivityFromObject(obj){
+        return new Activity(
+            obj.Activity_ID,
+            obj.Title,
+            obj.Meditation_Object
+        );
+    }
 }

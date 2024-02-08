@@ -5,7 +5,7 @@ export class MasteryRequirement {
         this.Stage = stage;
     }
     
-    static getMastery_RequirementFromObject(arr) {
+    static getMasteryRequirementFromArray(arr) {
         const MasteryRequirementArray = arr.map(obj =>
             new MasteryRequirement(obj.Mastery_ID, obj.Description, obj.Stage)
         );

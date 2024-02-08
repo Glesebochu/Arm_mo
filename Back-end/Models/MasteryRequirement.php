@@ -7,7 +7,7 @@ class MasteryRequirement {
     public $Stage;
    
 
-    public static function getMasteryRequirement_Array($identifier) {
+    public static function getMasteryRequirementArray($identifier) {
         include_once('../../Back-end/Connect.php');
         $con = new Connect;
         $db = $con->__getConnection();
@@ -16,22 +16,22 @@ class MasteryRequirement {
         // Query the database based on the identifier
         $query = "SELECT * FROM Mastery_Requirement WHERE Stage_ID = '$identifier'";
         $result = $db->query($query);
-        $MasteryRequirement_Array= Array();
+        $MasteryRequirementArray= Array();
         while($row = $result->fetch_assoc()){
             // Create a new MasteryRequirement object and assign values from the query result
             $MasteryRequirement = new MasteryRequirement();
             $MasteryRequirement->Mastery_ID = $row['Mastery_ID'];
             $MasteryRequirement->Description = $row['Description'];
             $MasteryRequirement->Stage = $row['Stage_ID'];
-            $MasteryRequirement_Array[]=$MasteryRequirement;
+            $MasteryRequirementArray[]=$MasteryRequirement;
             
         }
-        return $MasteryRequirement_Array;
+        return $MasteryRequirementArray;
         
     }
     
-    public static function getJavaScriptMasteryRequirement_Array($identifier) {
-        $MasteryRequirement = MasteryRequirement::getMasteryRequirement_Array($identifier);
+    public static function getJavaScriptMasteryRequirementArray($identifier) {
+        $MasteryRequirement = MasteryRequirement::getMasteryRequirementArray($identifier);
     
         // Convert the MasteryRequirement object to a JSON string
         $MasteryRequirementJson = json_encode($MasteryRequirement);

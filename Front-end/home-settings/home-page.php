@@ -49,7 +49,7 @@
       // Include the PHP file with the function to retrieve the Intention object
       include_once '../../Back-end/Models/Intention.php';
       $identifier = $_SESSION['stage'];
-      $javascriptIntention = Intention::getJavaScriptIntention($identifier);
+      $javascriptIntention = Intention::getJavaScriptIntentionArray($identifier);
   
     ?>
 
@@ -60,7 +60,7 @@
       // Output the JavaScript code to create the Intention object
       var intentionObj = JSON.parse('<?php echo $javascriptIntention; ?>');
       console.log(intentionObj);
-      console.log(Intention.getIntentionFromObject(intentionObj));
+      console.log(Intention.getIntentionFromArray(intentionObj));
 
 
     </script>
@@ -147,7 +147,7 @@
 
       // Retrieve the skills, intentions, and obstacles for the specific stage
       $skills = Skill::getJavaScriptSkillArray($identifier);
-      $intention = Intention::getJavaScriptIntention($identifier);
+      $intention = Intention::getJavaScriptIntentionArray($identifier);
       $obstacles = Obstacle::getJavaScriptObstacleArray($identifier);
     ?>
 
@@ -167,7 +167,7 @@
 
       // Return the intention object
       var intentionObj = JSON.parse('<?php echo $intention; ?>');
-      intentionObj=Intention.getIntentionFromObject(intentionObj)
+      intentionObj=Intention.getIntentionFromArray(intentionObj)
 
       // Create an array of obstacle objects
       var obstaclesArray = <?php echo json_encode($obstacles); ?>;

@@ -1,3 +1,6 @@
+import { SensoryStimulus } from "./SensoryStimulus.js";
+import { MentalObject } from "./MentalObject.js";
+
 export class ObservableObjectType{
     static SensoryStimuls = "Sensory Stimulus";
     static MentalObject = "Mental Object";
@@ -16,26 +19,23 @@ export class ObservableObject{
         this.Icon = icon;
         this.Intensity = intensity;
     }
-    static getMentalObjectFromObject(obj){
-        return new MentalObject(
-            obj.Observable_Object_ID,
-            obj.Title,
-            obj.Type,
-            obj.Description,
-            obj.Icon,
-            obj.Mental_Object_Type,
-            obj.Intensity
-        );
-    }
-    static getSensoryStimulusFromObject(obj){
-        return new SensoryStimulus(
-            obj.Observable_Object_ID,
-            obj.Title,
-            obj.Type,
-            obj.Description,
-            obj.Icon,
-            obj.Sensory_Stimulus_Type,
-            obj.Intensity
-        );
+    static getObservableObjectFromObject(obj){
+        var observableObject;
+        if (obj.Type == ObservableObjectType.MentalObject) {
+            observableObject = new MentalObject();
+            observableObject.Mental_Object_Type = obj.Mental_Object_Type;
+        } else {
+            observableObject = new SensoryStimulus();
+            observableObject.Sensory_Stimulus_Type = obj.Sensory_Stimulus_Type;
+        }
+
+        observableObject.Observable_Object_ID = obj.Observable_Object_ID;
+        observableObject.Title = obj.Title;
+        observableObject.Type = obj.Type;
+        observableObject.Description = obj.Description;
+        observableObject.Icon = obj.Icon;
+        observableObject.Intensity = obj.Intensity;
+
+        return observableObject;
     }
 }

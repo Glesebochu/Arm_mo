@@ -23,10 +23,10 @@ class ObservableObject{
         include_once('../../Back-end/Connect.php');
         $con = new Connect;
         $db = $con->__getConnection();
-        $db->query('USE Arm_mo');
+        $db->query('USE Arm_mo_v2');
 
         /// Query the database based on the identifier
-        $query = "SELECT * FROM ObservableObject WHERE Observable_Object_ID = '$identifier'";
+        $query = "SELECT * FROM Observable_Object WHERE Observable_Object_ID = '$identifier'";
         $result = $db->query($query);
         $row = $result->fetch_assoc();
 
@@ -59,6 +59,42 @@ class ObservableObject{
     
         // Return the JavaScript code to create the JavaScript obser$observableObject object
         return $observableObjectJson;
+    }
+
+    public static function getObservableObjectArray($Session_ID){
+        include_once('../../Back-end/Connect.php');
+        $con = new Connect;
+        $db = $con->__getConnection();
+        $db->query('USE Arm_mo_v2');
+
+        // Query the database based on the Session ID
+        $query = "SELECT * FROM Observable_Object
+                  WHERE Session_ID = '$Session_ID'";
+        $result = $db->query($query);
+
+        // Create an array to store the ObservableObjects
+        $ObservableObjectArray = array();
+
+        while ($row = $result->fetch_assoc()){
+            // Add the observable object to the array
+            $ObservableObjectArray[] = ObservableObject::getObservableObject($row['Observable_Object_ID']);
+        }
+
+        return $ObservableObjectArray;
+    }
+
+    public static function getJavaScriptObservableObjectArray($Session_ID){
+        $ObservableObjectArray = ObservableObject::getObservableObjectArray($Session_ID);
+
+        // Convert each Step object to a JSON string
+        $ObservableObjectJsonArray = array();
+        foreach ($ObservableObjectArray as $ObservableObject) {
+            $ObservableObjectJson = json_encode($ObservableObject);
+            $ObservableObjectJsonArray[] = $ObservableObjectJson;
+        }
+
+        // Return the JavaScript code to create the JavaScript ObservableObject array
+        return $ObservableObjectJsonArray;
     }
 }
 ?>

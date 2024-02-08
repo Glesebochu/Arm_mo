@@ -177,10 +177,9 @@
       import { Step } from '../../Middle-logic/Models/Step.js';
 
       // Output the JavaScript code to create the Step objects
-
       var stepArray = <?php echo $javascriptStepArray ?>;
       console.log(stepArray);
-     // Convert the stepArray to Step objects
+      // Convert the stepArray to Step objects
       var stepObjects = Step.convertArrayToStepObjects(stepArray);
       console.log(stepObjects);
     </script>
@@ -208,6 +207,34 @@
       console.log(SessionObjects);
       console.log(Session.convertArrayToSessionObjects(SessionObjects));
     </script>
+
+    <!-- ObservableObject Object Retreival test -->
+
+    <!-- Single ObservableObject Retreival test -->
+    <?php
+      // Include the PHP file with the ObservableObject class definition
+      include_once '../../Back-end/Models/ObservableObject.php';
+      $javascriptObservableObject = ObservableObject::getJavaScriptObservableObject('1');
+    ?>
+    <script type="module">
+      // Import the ObservableObject.js module
+      import { ObservableObject } from '../../Middle-logic/Models/ObservableObject.js';
+
+      // Output the JavaScript code to create the Step objects
+      var observableObject = <?php echo $javascriptObservableObject;?>;
+      console.log(observableObject);
+      console.log(ObservableObject.getObservableObjectFromObject(observableObject));
+    </script>
+
+    <!-- Multiple ObservableObjects Retreival test -->
+    
+    <!-- MentalObject Object Retreival test -->
+
+    <!-- SensoryStimulus Object Retreival test -->
+
+    <!-- Activity Object Retreival test -->
+    <!-- AhaMoment Object Retreival test -->
+    <!-- Antidote Object Retreival test -->
 
   <script>
     function openPage(link){

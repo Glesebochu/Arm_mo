@@ -8,5 +8,11 @@ export class Session {
         this.Newly_Mastered_Stages = newlyMasteredStages;
         this.Steps = steps;
     }
+    static convertArrayToSessionObjects(arr){
+        var SessionObjects= arr.map(session=>
+            new Session(session.Meditator_ID,session.Start_Time,session.End_Time,session.Practiced_Stages)
+        )
+        return SessionObjects;
+    }
 
 }

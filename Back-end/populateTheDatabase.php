@@ -223,6 +223,45 @@
         }
     }
 }
+
+//creating dummy entries for practiced stages
+{
+    $sessionID = 1;
+    $stages = [1, 2, 3];
+
+    foreach ($stages as $stageID) {
+        // Check if the record already exists
+        $query = "SELECT * FROM practiced_stages WHERE Stage_ID = $stageID AND Session_ID = $sessionID";
+        $result = $db->query($query);
+
+        if ($result->num_rows > 0) {
+            echo "
+                <script>
+                    console.log('Entry already exists for Stage_ID: $stageID and Session_ID: $sessionID');
+                </script>
+            ";
+        } else {
+            // Insert the new record into the table
+            $queryInsert = "INSERT INTO practiced_stages (Stage_ID, Session_ID) VALUES ($stageID, $sessionID)";
+            $db->query($queryInsert);
+
+            if ($db->affected_rows > 0) {
+                echo "
+                    <script>
+                        console.log('New record inserted for Stage_ID: $stageID and Session_ID: $sessionID');
+                    </script>
+                ";
+            } else {
+                echo "
+                    <script>
+                        console.log('Failed to insert record for Stage_ID: $stageID and Session_ID: $sessionID');
+                    </script>
+                ";
+            }
+        }
+    }
+} 
+
 // Populating the Step table
 {
     // Get the session ID of the dummy session

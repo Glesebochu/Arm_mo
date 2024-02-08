@@ -185,6 +185,30 @@
       console.log(stepObjects);
     </script>
 
+    <!-- Session Object Retreival test -->
+    <?php
+      // Include the PHP file with the function to retrieve the Session object
+      include_once '../../Back-end/Models/Session.php';
+      
+      //$identifier = $_SESSION['session'];
+      
+      // Call the function to get the JavaScript Session array
+      $javascriptSessionArray = Session::getJavaScriptSessionArray(1);
+    ?>
+        
+    <script type="module">
+      // Import the Session.js module
+      import { Session } from '../../Middle-logic/Models/Session.js';
+
+      // Output the JavaScript code to create the Session objects
+      var SessionArray = <?php echo json_encode($javascriptSessionArray); ?>;
+      
+      // Parse each JSON string to create the JavaScript Session objects
+      var SessionObjects = SessionArray.map(SessionJson => JSON.parse(SessionJson));
+      console.log(SessionObjects);
+      console.log(Session.convertArrayToSessionObjects(SessionObjects));
+    </script>
+
   <script>
     function openPage(link){
       window.open(link,'_self');

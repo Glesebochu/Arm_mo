@@ -263,15 +263,20 @@
       // Include the PHP file with the ObservableObject class definition
       include_once '../../Back-end/Models/SensoryStimulus.php';
       $javascriptSensoryStimulus = SensoryStimulus::getJavaScriptSensoryStimulus('1');
+      $javascriptSensoryStimulusArray = SensoryStimulus::getJavaScriptSensoryStimulusArray('1');
     ?>
     <script type="module">
       // Import the ObservableObject.js module
       import { SensoryStimulus } from '../../Middle-logic/Models/SensoryStimulus.js';
       
-      // Output the JavaScript code to create the Step objects
+      // Output the JavaScript code to create the SensoryStimulus objects
       var sensoryStimulus = <?php echo $javascriptSensoryStimulus;?>;
       console.log(sensoryStimulus);
       console.log(SensoryStimulus.getSensoryStimulusFromObject(sensoryStimulus));
+
+      var sensoryStimulusArray = <?php echo $javascriptSensoryStimulusArray;?>;
+      console.log(sensoryStimulusArray);
+      console.log(SensoryStimulus.convertArrayToSensoryStimulusObjects(sensoryStimulusArray));
     </script>
     
     <!-- MentalObject Object Retreival test -->
@@ -285,7 +290,7 @@
       // Import the ObservableObject.js module
       import { MentalObject } from '../../Middle-logic/Models/MentalObject.js';
       
-      // Output the JavaScript code to create the Step objects
+      // Output the JavaScript code to create the MentalObject objects
       var mentalObject = <?php echo $javascriptMentalObject;?>;
       console.log(mentalObject);
       console.log(MentalObject.getMentalObjectFromObject(mentalObject));

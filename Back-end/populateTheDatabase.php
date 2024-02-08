@@ -540,6 +540,66 @@
     }
 }
 
+// Creating dummy AhaMoment objects
+{
+    // Get the session ID of the dummy session
+    $sqlGetDummySessionID = "SELECT Session_ID FROM Session WHERE Meditator_ID = 1";
+    $resultGetDummySessionID = $db->query($sqlGetDummySessionID);
+
+    if ($resultGetDummySessionID->num_rows > 0) {
+        $row = $resultGetDummySessionID->fetch_assoc();
+        $dummySessionID = $row['Session_ID'];
+
+        // Populating the AhaMoment table
+        {
+            // Define the JavaScript data array
+            $ahaMoments = [
+                "Forgetting",
+                "Planning",
+                "Remembering"
+            ];
+
+            // Prepare and execute INSERT statements for each ahaMoment
+            foreach ($ahaMoments as $ahaMoment) {
+                $label = $ahaMoment;
+
+                // Check if the ahaMoment already exists
+                $sqlCheckAhaMoment = "SELECT * FROM AhaMoment WHERE Label = ? AND Session_ID = ?";
+                $stmtCheckAhaMoment = $db->prepare($sqlCheckAhaMoment);
+                $stmtCheckAhaMoment->bind_param("si", $label, $dummySessionID);
+                $stmtCheckAhaMoment->execute();
+                $resultCheckAhaMoment = $stmtCheckAhaMoment->get_result();
+
+                if ($resultCheckAhaMoment->num_rows > 0) {
+                    echo "
+                        <script>
+                            console.log('AhaMoment $label for dummy session already exists. Skipping insertion.')
+                        </script>
+                    ";
+                } else {
+                    $sqlInsertAhaMoment = "INSERT INTO AhaMoment (Session_ID, Label)
+                                    VALUES (?, ?)";
+                    $stmtInsertAhaMoment = $db->prepare($sqlInsertAhaMoment);
+                    $stmtInsertAhaMoment->bind_param("is", $dummySessionID, $label);
+                    $stmtInsertAhaMoment->execute();
+
+                    echo "
+                        <script>
+                            console.log('AhaMoment $label for dummy session added successfully!')
+                        </script>
+                    ";
+                }
+            }
+        }
+    } else {
+        echo "
+            <script>
+                console.log('Dummy session does not exist. Cannot populate ahaMoments.')
+            </script>
+        ";
+    }
+}
+
 // populating the stage obstacle association relationship table
 {
     function checkRecordExistsStageObstacle($obstacleID, $stageID) {

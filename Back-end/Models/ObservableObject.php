@@ -30,6 +30,10 @@ class ObservableObject{
         $result = $db->query($query);
         $row = $result->fetch_assoc();
 
+        // Include necessary files
+        require_once 'MentalObject.php';
+        require_once 'SensoryStimulus.php';
+
         // Create a new object and assign values from the query result
         
         // Create different types depending on the discriminator.

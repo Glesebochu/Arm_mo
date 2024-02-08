@@ -1,4 +1,5 @@
 <?php
+require_once 'ObservableObject.php';
 
 enum SensoryStimulusType : string{
     case Visual = "Visual";

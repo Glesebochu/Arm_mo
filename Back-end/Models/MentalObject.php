@@ -1,4 +1,5 @@
 <?php
+require_once 'ObservableObject.php';
 
 enum MentalObjectType : string{
     case Thought = "Thought";

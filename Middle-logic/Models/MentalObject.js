@@ -20,7 +20,7 @@ export class MentalObject extends ObservableObject{
             obj.Intensity
         );
     }
-    static convertArrayToMentalObjectObjects(arr){
+    static getMentalObjectsFromArrayObject(arr){
         var MentalObjects= arr.map(MentalObject.getMentalObjectFromObject);
         return MentalObjects;
     }

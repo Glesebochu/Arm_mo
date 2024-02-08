@@ -23,4 +23,8 @@ export class Antidote{
             obj.Description
         );
     }
+    static getAntidotesFromArrayObject(arr){
+        var Antidotes= arr.map(Antidote.getAntidoteFromObject);
+        return Antidotes;
+    }
 }

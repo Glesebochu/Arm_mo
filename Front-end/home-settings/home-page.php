@@ -218,12 +218,12 @@
     ?>
     <script type="module">
       // Import the ObservableObject.js module
-      import { ObservableObject } from '../../Middle-logic/Models/ObservableObject.js';
-
+      import { SensoryStimulus } from '../../Middle-logic/Models/SensoryStimulus.js';
+      
       // Output the JavaScript code to create the Step objects
       var observableObject = <?php echo $javascriptObservableObject;?>;
       console.log(observableObject);
-      console.log(ObservableObject.getObservableObjectFromObject(observableObject));
+      console.log(SensoryStimulus.getSensoryStimulusFromObject(observableObject));
     </script>
 
     <!-- Multiple ObservableObjects Retreival test -->

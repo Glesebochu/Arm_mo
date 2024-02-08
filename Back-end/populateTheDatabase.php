@@ -437,13 +437,17 @@
                     "MentalObject"
                 ],
                 [
-                    "Music",
+                    "Breath at the nose",
                     "SensoryStimulus"
                 ],
                 [
                     "Pain",
                     "MentalObject"
                 ],
+                [
+                    "Current Sentence",
+                    "SensoryStimulus"
+                ]
             ];
 
             // Prepare and execute INSERT statements for each observableObject

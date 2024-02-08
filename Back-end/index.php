@@ -442,8 +442,8 @@
     {
         $queryCreateActivity= "CREATE TABLE Activity(Activity_ID INT PRIMARY KEY AUTO_INCREMENT,
                                                                         Title VARCHAR(8000) NOT NULL,
-                                                                        Meditation_Object_ID INT,
-                                                                        FOREIGN KEY (Meditation_Object_ID) REFERENCES ObservableObject(ObservableObject_ID))";
+                                                                        MeditationObject_ID INT,
+                                                                        FOREIGN KEY (MeditationObject_ID) REFERENCES ObservableObject(ObservableObject_ID))";
     
             if(($db->query("SHOW TABLES LIKE 'Activity'"))->num_rows>0){
                 echo"

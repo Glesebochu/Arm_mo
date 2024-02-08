@@ -1,7 +1,7 @@
 <?php
 
 class AhaMoment{
-    public $Aha_Moment_ID;
+    public $AhaMoment_ID;
     public $Label;
 
     public static function getAhaMoment($identifier){
@@ -12,13 +12,13 @@ class AhaMoment{
         $db->query('USE Arm_mo_v2');
 
         /// Query the database based on the identifier
-        $query = "SELECT * FROM AhaMoment WHERE Aha_Moment_ID = '$identifier'";
+        $query = "SELECT * FROM AhaMoment WHERE AhaMoment_ID = '$identifier'";
         $result = $db->query($query);
         $row = $result->fetch_assoc();
 
         // Create a new object and assign values from the query result
         $ahaMoment = new AhaMoment();
-        $ahaMoment->Aha_Moment_ID = $row['Aha_Moment_ID'];
+        $ahaMoment->AhaMoment_ID = $row['AhaMoment_ID'];
         $ahaMoment->Label = $row['Label'];
 
         return $ahaMoment;

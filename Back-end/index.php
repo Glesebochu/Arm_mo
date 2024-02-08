@@ -366,32 +366,32 @@
         } 
     }
 
-    // Creating the Aha_Moment table
+    // Creating the AhaMoment table
     {
-        $queryCreateAha_Moment= "CREATE TABLE Aha_Moment(Aha_Moment_ID INT PRIMARY KEY AUTO_INCREMENT,
+        $queryCreateAhaMoment= "CREATE TABLE AhaMoment(AhaMoment_ID INT PRIMARY KEY AUTO_INCREMENT,
                                                                      Session_ID INT NOT NULL,
                                                                      Label VARCHAR(8000) NOT NULL,
                                                                      FOREIGN KEY (Session_ID) REFERENCES Session(Session_ID))";
  
-         if(($db->query("SHOW TABLES LIKE 'Aha_Moment'"))->num_rows>0){
+         if(($db->query("SHOW TABLES LIKE 'AhaMoment'"))->num_rows>0){
              echo"
                  <script>
-                     console.log('Table Aha_Moment already exists')
+                     console.log('Table AhaMoment already exists')
                  </script>
              ";
          }
          else{
-             if($db->query($queryCreateAha_Moment)){
+             if($db->query($queryCreateAhaMoment)){
                  echo"
                      <script>
-                         console.log('Created the table Aha_Moment succesfully!')
+                         console.log('Created the table AhaMoment succesfully!')
                      </script>
                  ";
              }
              else{
                  echo"
                      <script>
-                         console.log('Creation of the table Aha_Moment failed!')
+                         console.log('Creation of the table AhaMoment failed!')
                      </script>
                  ";
             }
@@ -399,38 +399,38 @@
         } 
     }
 
-    // Creating the Observable_Object table
+    // Creating the ObservableObject table
     {
-        $queryCreateObservable_Object= "CREATE TABLE Observable_Object(Observable_Object_ID INT PRIMARY KEY AUTO_INCREMENT,
+        $queryCreateObservableObject= "CREATE TABLE ObservableObject(ObservableObject_ID INT PRIMARY KEY AUTO_INCREMENT,
                                                                         Session_ID INT NOT NULL,
                                                                         Title VARCHAR(100) NOT NULL,
                                                                         Description VARCHAR(255),
                                                                         Icon VARCHAR(255),
                                                                         Discriminator VARCHAR(100) NOT NULL,
-                                                                        Sensory_Stimulus_Type VARCHAR(100),
-                                                                        Mental_Object_Type VARCHAR(100),
+                                                                        SensoryStimulus_Type VARCHAR(100),
+                                                                        MentalObject_Type VARCHAR(100),
                                                                         Intensity VARCHAR(100),
                                                                         FOREIGN KEY (Session_ID) REFERENCES Session(Session_ID))";
     
-            if(($db->query("SHOW TABLES LIKE 'Observable_Object'"))->num_rows>0){
+            if(($db->query("SHOW TABLES LIKE 'ObservableObject'"))->num_rows>0){
                 echo"
                     <script>
-                        console.log('Table Observable_Object already exists')
+                        console.log('Table ObservableObject already exists')
                     </script>
                 ";
             }
             else{
-                if($db->query($queryCreateObservable_Object)){
+                if($db->query($queryCreateObservableObject)){
                     echo"
                         <script>
-                            console.log('Created the table Observable_Object succesfully!')
+                            console.log('Created the table ObservableObject succesfully!')
                         </script>
                     ";
                 }
                 else{
                     echo"
                         <script>
-                            console.log('Creation of the table Observable_Object failed!')
+                            console.log('Creation of the table ObservableObject failed!')
                         </script>
                     ";
             }
@@ -443,7 +443,7 @@
         $queryCreateActivity= "CREATE TABLE Activity(Activity_ID INT PRIMARY KEY AUTO_INCREMENT,
                                                                         Title VARCHAR(8000) NOT NULL,
                                                                         Meditation_Object_ID INT,
-                                                                        FOREIGN KEY (Meditation_Object_ID) REFERENCES Observable_Object(Observable_Object_ID))";
+                                                                        FOREIGN KEY (Meditation_Object_ID) REFERENCES ObservableObject(ObservableObject_ID))";
     
             if(($db->query("SHOW TABLES LIKE 'Activity'"))->num_rows>0){
                 echo"

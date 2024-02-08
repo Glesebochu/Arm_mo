@@ -9,7 +9,7 @@ enum MentalObjectType : string{
 
 class MentalObject extends ObservableObject{
     public $Discriminator = ObservableObjectType::MentalObject;
-    public $Mental_Object_Type;
+    public $MentalObject_Type;
 
     public static function getJavaScriptMentalObject($identifier) {
         return ObservableObject::getJavaScriptObservableObject($identifier);

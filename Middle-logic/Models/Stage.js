@@ -61,7 +61,7 @@ export class Stage {
         this.Number = 2,
         this.Goal = "Shorten the periods of mind-wandering and extend the periods of sustained attention to the meditation object.",
         this.Intentions = [
-            Intention.Appreciate_Aha_Moment,
+            Intention.Appreciate_AhaMoment,
             Intention.Redirect_Attention,
             Intention.Engage_Breath_Maintain_Awareness
         ],

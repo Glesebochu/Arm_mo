@@ -251,6 +251,7 @@
       // Include the PHP file with the ObservableObject class definition
       include_once '../../Back-end/Models/MentalObject.php';
       $javascriptMentalObject = MentalObject::getJavaScriptMentalObject('2');
+      // $javascriptMentalObjectArray = MentalObject::getJavaScriptMentalObjectArray('1');
     ?>
     <script type="module">
       // Import the ObservableObject.js module
@@ -260,14 +261,59 @@
       var mentalObject = <?php echo $javascriptMentalObject;?>;
       console.log(mentalObject);
       console.log(MentalObject.getMentalObjectFromObject(mentalObject));
+
+      // var mentalObjectArray = <?php //echo $javascriptMentalObjectArray;?>;
+      // console.log(mentalObjectArray);
+      // console.log(MentalObject.convertArrayToMentalObjectObjects(mentalObjectArray));
     </script>
     
-
-    <!-- Multiple -->
-
     <!-- Activity Object Retreival test -->
+    <?php
+      // Include the PHP file with the Activity class definition
+      include_once '../../Back-end/Models/Activity.php';
+      $javascriptActivity = Activity::getJavaScriptActivity('1');
+    ?>
+    <script type="module">
+      // Import the ObservableObject.js module
+      import { Activity } from '../../Middle-logic/Models/Activity.js';
+      
+      // Output the JavaScript code to create the Step objects
+      var activity = <?php echo $javascriptActivity;?>;
+      console.log(activity);
+      console.log(Activity.getActivityFromObject(activity));
+    </script>
+
     <!-- AhaMoment Object Retreival test -->
+    <?php
+      // Include the PHP file with the AhaMoment class definition
+      include_once '../../Back-end/Models/AhaMoment.php';
+      $javascriptAhaMoment = AhaMoment::getJavaScriptAhaMoment('1');
+    ?>
+    <script type="module">
+      // Import the ObservableObject.js module
+      import { AhaMoment } from '../../Middle-logic/Models/AhaMoment.js';
+      
+      // Output the JavaScript code to create the Step objects
+      var ahaMoment = <?php echo $javascriptAhaMoment;?>;
+      console.log(ahaMoment);
+      console.log(AhaMoment.getAhaMomentFromObject(ahaMoment));
+    </script>
+
     <!-- Antidote Object Retreival test -->
+    <?php
+      // Include the PHP file with the Antidote class definition
+      include_once '../../Back-end/Models/Antidote.php';
+      $javascriptAntidote = Antidote::getJavaScriptAntidote('1');
+    ?>
+    <script type="module">
+      // Import the ObservableObject.js module
+      import { Antidote } from '../../Middle-logic/Models/Antidote.js';
+      
+      // Output the JavaScript code to create the Step objects
+      var antidote = <?php echo $javascriptAntidote;?>;
+      console.log(antidote);
+      console.log(Antidote.getAntidoteFromObject(antidote));
+    </script>
 
   <script>
     function openPage(link){

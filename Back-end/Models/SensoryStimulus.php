@@ -11,7 +11,7 @@ enum SensoryStimulusType : string{
 
 class SensoryStimulus extends ObservableObject{
     public $Discriminator = ObservableObjectType::SensoryStimulus;
-    public $Sensory_Stimulus_Type;
+    public $SensoryStimulus_Type;
 
     public static function getJavaScriptSensoryStimulus($identifier) {
         return ObservableObject::getJavaScriptObservableObject($identifier);

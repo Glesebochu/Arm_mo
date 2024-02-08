@@ -6,7 +6,7 @@ export class Intention {
     static Sit_Down = "Sit down and meditate for a set period every day.";
     static Practice_Diligently = "Practice diligently for the duration of the sit.";
     
-    static Appreciate_Aha_Moment = "Appreciate the aha moment that recognizes mind-wandering.";
+    static Appreciate_AhaMoment = "Appreciate the aha moment that recognizes mind-wandering.";
     static Redirect_Attention = "Gently but firmly redirect attention back to the breath.";
     static Engage_Breath_Maintain_Awareness = "Engage with the breath as fully as possible without losing peripheral awareness.";
     

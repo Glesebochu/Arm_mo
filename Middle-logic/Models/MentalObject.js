@@ -8,16 +8,20 @@ export class MentalObjectType{
 export class MentalObject extends ObservableObject{
     constructor(id, title, description, icon, mentalObjectType, intensity){
         super(id, title, ObservableObjectType.MentalObject, description, icon, intensity)
-        this.Mental_Object_Type = mentalObjectType;
+        this.MentalObject_Type = mentalObjectType;
     }
     static getMentalObjectFromObject(obj){
         return new MentalObject(
-            obj.Observable_Object_ID,
+            obj.ObservableObject_ID,
             obj.Title,
             obj.Description,
             obj.Icon,
-            obj.Mental_Object_Type,
+            obj.MentalObject_Type,
             obj.Intensity
         );
+    }
+    static convertArrayToMentalObjectObjects(arr){
+        var MentalObjects= arr.map(this.getMentalObjectFromObject);
+        return MentalObjects;
     }
 }

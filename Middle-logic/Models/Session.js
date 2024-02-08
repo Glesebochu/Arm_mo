@@ -4,7 +4,7 @@ export class Session {
         this.Start_Date_Time = startDateTime;
         this.End_Date_Time = endDateTime;
         this.Practiced_Stages = practicedStages;
-        this.Aha_Moments = ahaMoments;
+        this.AhaMoments = ahaMoments;
         this.Newly_Mastered_Stages = newlyMasteredStages;
         this.Steps = steps;
     }

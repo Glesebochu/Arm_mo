@@ -11,7 +11,7 @@ enum ObservableObjectIntensity : string{
 }
 
 class ObservableObject{
-    public $Observable_Object_ID;
+    public $ObservableObject_ID;
     public $Title;
     public $Discriminator;
     public $Description;
@@ -26,7 +26,7 @@ class ObservableObject{
         $db->query('USE Arm_mo_v2');
 
         /// Query the database based on the identifier
-        $query = "SELECT * FROM Observable_Object WHERE Observable_Object_ID = '$identifier'";
+        $query = "SELECT * FROM ObservableObject WHERE ObservableObject_ID = '$identifier'";
         $result = $db->query($query);
         $row = $result->fetch_assoc();
 
@@ -39,13 +39,13 @@ class ObservableObject{
         // Create different types depending on the discriminator.
         if ($row['Discriminator'] == ObservableObjectType::MentalObject) {
             $observableObject = new MentalObject();
-            $observableObject->Mental_Object_Type = $row['Mental_Object_Type'];
+            $observableObject->MentalObject_Type = $row['MentalObject_Type'];
         } else {
             $observableObject = new SensoryStimulus();
-            $observableObject->Sensory_Stimulus_Type = $row['Sensory_Stimulus_Type'];
+            $observableObject->SensoryStimulus_Type = $row['SensoryStimulus_Type'];
         }
         
-        $observableObject->Observable_Object_ID = $row['Observable_Object_ID'];
+        $observableObject->ObservableObject_ID = $row['ObservableObject_ID'];
         $observableObject->Title = $row['Title'];
         $observableObject->Discriminator = $row['Discriminator'];
         $observableObject->Description = $row['Description'];
@@ -72,7 +72,7 @@ class ObservableObject{
         $db->query('USE Arm_mo_v2');
 
         // Query the database based on the Session ID
-        $query = "SELECT * FROM Observable_Object
+        $query = "SELECT * FROM ObservableObject
                   WHERE Session_ID = '$Session_ID'";
         $result = $db->query($query);
 
@@ -81,7 +81,7 @@ class ObservableObject{
 
         while ($row = $result->fetch_assoc()){
             // Add the observable object to the array
-            $ObservableObjectArray[] = ObservableObject::getObservableObject($row['Observable_Object_ID']);
+            $ObservableObjectArray[] = ObservableObject::getObservableObject($row['ObservableObject_ID']);
         }
 
         return $ObservableObjectArray;

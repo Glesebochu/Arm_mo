@@ -1,5 +1,5 @@
 * {
-  font-family: monospace;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 html {
   height: auto;
@@ -38,7 +38,8 @@ main {
   overflow: hidden;
 }
 .generalIntro1 {
-  width: 30%;
+  width: 60%;
+  margin-left: 25vw;
   background-color: rgba(8, 72, 3, 0.345);
   padding: 2vw;
   border-radius: 2vw;
@@ -49,62 +50,64 @@ main {
 }
 .generalIntro2 {
   width: 60%;
-  margin-left: 25vw;
   background-color: rgba(8, 72, 3, 0.171);
   transition: transform 1s ease;
   border-radius: 2vw;
   padding: 2vw;
 }
 .generalIntro2:hover {
-    transform: scale(1.08);
-  }
-  
-.generalIntro3 {
-  width: 60%;
-  background-color: rgba(8, 72, 3, 0.345);
-  padding: 2vw;
-  border-radius: 2vw;
-  transition: transform 1s ease;
-  border-radius: 2vw;
-}
-.generalIntro3:hover {
-    transform: scale(1.04);
-  }
-  
-.generalIntro4 {
-  width: 60%;
-  margin-left: 25vw;
-  background-color: rgba(8, 72, 3, 0.171);
-  padding: 2vw;
-  border-radius: 2vw;
-  transition: transform 1s ease;
+  transform: scale(1.08);
 }
 .Q {
-    align-self: center;
-    font-size: 2.5vw;
-    scroll-margin-top: 4vh;
-    font-weight: bold;
+  align-self: center;
+  font-size: 2.5vw;
+  scroll-margin-top: 4vh;
+  font-weight: bold;
 }
 span {
-    color: rgba(5, 83, 26, 0.539);
-    font-size: 3vw;
-    transition: font-size 0.5s ease-in-out;
+  color: rgba(5, 83, 26, 0.539);
+  font-size: 3vw;
+  transition: font-size 0.5s ease-in-out;
 }
 .generalIntro4:hover {
-    transform: scale(1.08);
-  }
+  transform: scale(1.08);
+}
+a {
+  color: rgba(2, 21, 1, 0.982);
+  text-decoration: none;
+  animation: changeColor 2s ease infinite;
+}
+a:hover {
+  color: black;
+  animation: none; 
+   text-shadow: 0 0 1px rgb(0, 0, 0);
+
+}
+a:visited {
+  color: inherit;
+  text-decoration: none;
+}
 .tables {
-    display: flex;
-    flex-direction: column;
-    gap: 5vh;
-    background-color: rgba(4, 88, 15, 0.073);
-    border-radius: 2vw;
-    padding: 3vw;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  gap: 5vh;
+  background-color: rgba(4, 88, 15, 0.073);
+  border-radius: 2vw;
+  padding: 3vw;
+  font-size: 1.3vw;
 }
 h2 {
-    margin: 0;
-    padding: 0;
-    color: rgba(15, 18, 17, 0.74);
+  margin: 0;
+  padding: 0;
+  color: rgba(15, 18, 17, 0.74);
+}
+
+#green {
+  color: rgba(2, 54, 2, 0.842);
+}
+#bold {
+  font-weight: bolder;
 }
 .prompts1 {
   background-color: rgba(216, 216, 216, 0.489);
@@ -114,27 +117,27 @@ h2 {
   transition: opacity 1s ease-in;
 }
 .prompts1.visible {
-    opacity: 1;
+  opacity: 1;
 }
 .prompts2 {
-    background-color: rgba(235, 232, 232, 0.731);
-    padding: 3vw;
-    border-radius: 2vw;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-  }
+  background-color: rgba(235, 232, 232, 0.731);
+  padding: 3vw;
+  border-radius: 2vw;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
 .prompts2.visible {
-    opacity: 1;
+  opacity: 1;
 }
 .prompts3 {
-    background-color: rgba(235, 232, 232, 0.731);
-    padding: 3vw;
-    border-radius: 2vw;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
+  background-color: rgba(235, 232, 232, 0.731);
+  padding: 3vw;
+  border-radius: 2vw;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
 }
 .prompts3.visible {
-    opacity: 1;
+  opacity: 1;
 }
 /* table:first-child{
        transition: transform 1s ease;
@@ -152,17 +155,26 @@ tr:hover {
     transform: scale(1.04);
   
 } */
-  footer {
-    flex: 1;
+footer {
+  flex: 1;
 }
 button {
-    font-family: monospace;
-    width: 15vw;
-    height: 100%;
-    border: none;
-    border-radius: 2vh;
-    color: rgba(2, 1, 0, 0.651);
-    font-weight: bold;
-    font-size: 3vw;
-    transition: background-color 0.5s ease;
+  font-family: monospace;
+  width: 15vw;
+  height: 100%;
+  border: none;
+  border-radius: 2vh;
+  color: rgba(2, 1, 0, 0.651);
+  font-weight: bold;
+  font-size: 3vw;
+  transition: background-color 0.5s ease;
+}
+@keyframes changeColor {
+  0%,
+  100% {
+    color: rgba(2, 21, 1, 0.982);
+  }
+  50% {
+    color: rgba(8, 72, 3, 0.696);
+  }
 }

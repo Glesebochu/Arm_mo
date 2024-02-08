@@ -17,7 +17,7 @@ form {
   align-self: flex-start;
   height: 70vh;
   width: 100vw;
-  padding: 2vmin;
+  padding: 3vmin;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,12 +27,16 @@ form {
   display: flex;
   flex: 1;
   align-self: flex-start;
-  width: 15vmin;
-  height: 1vw;
+  width: 20.3vmin;
   overflow: hidden;
+  gap: 0.3vmin;
 }
 .logo > * {
   width: 50%;
+  height: 10vmin;
+}
+.armimoLogoText {
+  padding-top: 3vmin;
   height: 6vmin;
 }
 header {
@@ -42,9 +46,9 @@ header {
   color: black;
 }
 .yellow {
- color: rgba(8, 72, 3, 0.447);
+  color: rgba(8, 72, 3, 0.447);
   border-radius: 100px;
-animation: changeColor 7s infinite;
+  animation: changeColor 7s infinite;
 }
 input {
   flex: 0.5;
@@ -55,6 +59,7 @@ input {
   border: 1px solid rgba(128, 128, 128, 0.578);
   outline: none;
   font-size: 3vmin;
+  font-weight: 500;
 }
 input:hover {
   box-shadow: 0 0 3px grey;
@@ -64,7 +69,7 @@ input:hover {
   font-size: 3vmin;
   font-family: inter;
 }
-#error-message{
+#error-message {
   padding: 0;
   margin: 0;
 }
@@ -72,15 +77,17 @@ a {
   flex: 0.3;
   text-decoration: none;
   color: black;
-  font-size: 2.5vmin;
+  font-size: 2.4vmin;
   font-family: inter;
-
+  animation: changeColor 2s ease infinite;
 }
 a:hover {
-  text-shadow: 0 0 1.5px rgba(128, 128, 128, 0.68);
+  text-shadow: 0 0 2px rgb(0, 0, 0);
+  color: black;
+  animation: none;
 }
 button {
-  flex: 0.5; 
+  flex: 0.5;
   width: 30vmin;
   border: none;
   border-radius: 1vw;
@@ -93,7 +100,14 @@ button:hover {
   background-color: rgba(8, 72, 3, 0.516);
 }
 @keyframes changeColor {
-  0%, 100%  {color: rgba(8, 72, 3, 0.402)}
-  30% {color: rgba(8, 72, 3, 0.441)}
-  50% {color: rgba(8, 72, 3, 0.628)}
+  0%,
+  100% {
+    color: rgba(8, 72, 3, 0.402);
+  }
+  30% {
+    color: rgba(8, 72, 3, 0.441);
+  }
+  50% {
+    color: rgba(8, 72, 3, 0.628);
+  }
 }

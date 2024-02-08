@@ -39,8 +39,8 @@
       // var meditatorObj2 = JSON.parse('<?php // echo $javascriptMeditator2; ?>');
 
       console.log(meditatorObj);
-      console.log(Meditator.getMeditatorFromObject(meditatorObj));
-      // console.log(meditatorObj2);
+      var meditator1=Meditator.getMeditatorFromObject(meditatorObj);
+      console.log(meditator1);
 
     </script>
 
@@ -301,6 +301,11 @@
       </section>
 
     </section>
+
+    <fotter id="copyright">
+      <p>Copyright © ግለሠቦቹ 2021-2024</p>
+    </fotter>
+
   </main>
 </body>
 

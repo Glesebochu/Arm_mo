@@ -19,20 +19,20 @@
             if ($db->query($dropDbQuery)) {
                 echo "
                     <script>
-                        alert('Dropped database $olddatabaseName successfully');
+                        console.log('Dropped database $olddatabaseName successfully');
                     </script>
                 ";
             } else {
                 echo "
                     <script>
-                        alert('Dropping database $olddatabaseName failed');
+                        console.log('Dropping database $olddatabaseName failed');
                     </script>
                 ";
             }
         } else {
             echo "
                 <script>
-                    alert('Database $olddatabaseName does not exist');
+                    console.log('Database $olddatabaseName does not exist');
                 </script>
             ";
         }
@@ -46,7 +46,7 @@
         if ($resCheckDBExists->num_rows > 0) {
             echo "
                 <script>
-                    alert('Database $databaseName already exists');
+                    console.log('Database $databaseName already exists');
                 </script>
             ";
         } else {
@@ -56,13 +56,13 @@
                 $db->select_db($databaseName);
                 echo "
                 <script>
-                    alert('Created database $databaseName successfully');
+                    console.log('Created database $databaseName successfully');
                 </script>
             ";
             } else {
                 echo "
                 <script>
-                    alert('Creating database failed');
+                    console.log('Creating database failed');
                 </script>
             ";
             }
@@ -76,14 +76,14 @@
             
             echo"
                 <script>
-                    alert('Currently using the database $databaseName!')
+                    console.log('Currently using the database $databaseName!')
                 </script>
             ";
         }
         else{
             echo"
                 <script>
-                    alert('$databaseName not in use!')
+                    console.log('$databaseName not in use!')
                 </script>
             ";
 
@@ -106,7 +106,7 @@
         if(($db->query("SHOW TABLES LIKE 'Meditation_Stage'"))->num_rows>0){
             echo"
                 <script>
-                    alert('Table Meditation_Stage already exists')
+                    console.log('Table Meditation_Stage already exists')
                 </script>
             ";
         }
@@ -114,14 +114,14 @@
             if($db->query($queryCreateMeditationStage)){
                 echo"
                     <script>
-                        alert('Created the table Meditation Stage succesfully!')
+                        console.log('Created the table Meditation Stage succesfully!')
                     </script>
                 ";
             }
             else{
                 echo"
                     <script>
-                        alert('Creation of the table meditation stage failed!')
+                        console.log('Creation of the table meditation stage failed!')
                     </script>
                 ";
             }
@@ -146,7 +146,7 @@
         if(($db->query($queryCheckIfMeditatorExists))->num_rows>0){
             echo"
             <script>
-                alert('Table Meditator already exists!')
+                console.log('Table Meditator already exists!')
             </script>
         ";
         }
@@ -154,14 +154,14 @@
             if($db->query($queryCreateMeditator)){
                 echo"
                     <script>
-                        alert('Created the table Meditator successfully!')
+                        console.log('Created the table Meditator successfully!')
                     </script>
                 ";
             }
             else{
                 echo"
                 <script>
-                    alert('Creating Meditator failed!')
+                    console.log('Creating Meditator failed!')
                 </script>
             ";
             }
@@ -176,7 +176,7 @@
         if(($db->query("SHOW TABLES LIKE 'Obstacle'"))->num_rows>0){
             echo"
                 <script>
-                    alert('Table Obstacle already exists')
+                    console.log('Table Obstacle already exists')
                 </script>
             ";
         }
@@ -184,14 +184,14 @@
             if($db->query($queryCreateObstacle)){
                 echo"
                     <script>
-                        alert('Created the table Obstacle succesfully!')
+                        console.log('Created the table Obstacle succesfully!')
                     </script>
                 ";
             }
             else{
                 echo"
                     <script>
-                        alert('Creation of the table Obstacle failed!')
+                        console.log('Creation of the table Obstacle failed!')
                     </script>
                 ";
             }
@@ -209,7 +209,7 @@
         if(($db->query("SHOW TABLES LIKE 'Mastery_Requirement'"))->num_rows>0){
             echo"
                 <script>
-                    alert('Table Mastery_Requirement already exists')
+                    console.log('Table Mastery_Requirement already exists')
                 </script>
             ";
         }
@@ -217,14 +217,14 @@
             if($db->query($queryCreateMastery_Requirement)){
                 echo"
                     <script>
-                        alert('Created the table Mastery_Requirement succesfully!')
+                        console.log('Created the table Mastery_Requirement succesfully!')
                     </script>
                 ";
             }
             else{
                 echo"
                     <script>
-                        alert('Creation of the table Mastery_Requirement failed!')
+                        console.log('Creation of the table Mastery_Requirement failed!')
                     </script>
                 ";
             }
@@ -241,7 +241,7 @@
         if(($db->query("SHOW TABLES LIKE 'Skill'"))->num_rows>0){
             echo"
                 <script>
-                    alert('Table Skill already exists')
+                    console.log('Table Skill already exists')
                 </script>
             ";
         }
@@ -249,14 +249,14 @@
             if($db->query($queryCreateSkill)){
                 echo"
                     <script>
-                        alert('Created the table Skill succesfully!')
+                        console.log('Created the table Skill succesfully!')
                     </script>
                 ";
             }
             else{
                 echo"
                     <script>
-                        alert('Creation of the table Skill failed!')
+                        console.log('Creation of the table Skill failed!')
                     </script>
                 ";
             }
@@ -274,7 +274,7 @@
         if(($db->query("SHOW TABLES LIKE 'Intention'"))->num_rows>0){
             echo"
                 <script>
-                    alert('Table Intention already exists')
+                    console.log('Table Intention already exists')
                 </script>
             ";
         }
@@ -282,14 +282,14 @@
             if($db->query($queryCreateIntention)){
                 echo"
                     <script>
-                        alert('Created the table Intention succesfully!')
+                        console.log('Created the table Intention succesfully!')
                     </script>
                 ";
             }
             else{
                 echo"
                     <script>
-                        alert('Creation of the table Intention failed!')
+                        console.log('Creation of the table Intention failed!')
                     </script>
                 ";
             }
@@ -309,7 +309,7 @@
         if(($db->query("SHOW TABLES LIKE 'Session'"))->num_rows>0){
             echo"
                 <script>
-                    alert('Table Session already exists')
+                    console.log('Table Session already exists')
                 </script>
             ";
         }
@@ -317,14 +317,14 @@
             if($db->query($queryCreateSession)){
                 echo"
                     <script>
-                        alert('Created the table Session succesfully!')
+                        console.log('Created the table Session succesfully!')
                     </script>
                 ";
             }
             else{
                 echo"
                     <script>
-                        alert('Creation of the table Session failed!')
+                        console.log('Creation of the table Session failed!')
                     </script>
                 ";
             }
@@ -343,7 +343,7 @@
         if(($db->query("SHOW TABLES LIKE 'Antidote'"))->num_rows>0){
             echo"
                 <script>
-                    alert('Table Antidote already exists')
+                    console.log('Table Antidote already exists')
                 </script>
             ";
         }
@@ -351,14 +351,14 @@
             if($db->query($queryCreateAntidote)){
                 echo"
                     <script>
-                        alert('Created the table Antidote succesfully!')
+                        console.log('Created the table Antidote succesfully!')
                     </script>
                 ";
             }
             else{
                 echo"
                     <script>
-                        alert('Creation of the table Antidote failed!')
+                        console.log('Creation of the table Antidote failed!')
                     </script>
                 ";
             }
@@ -376,7 +376,7 @@
          if(($db->query("SHOW TABLES LIKE 'Aha_Moment'"))->num_rows>0){
              echo"
                  <script>
-                     alert('Table Aha_Moment already exists')
+                     console.log('Table Aha_Moment already exists')
                  </script>
              ";
          }
@@ -384,14 +384,14 @@
              if($db->query($queryCreateAha_Moment)){
                  echo"
                      <script>
-                         alert('Created the table Aha_Moment succesfully!')
+                         console.log('Created the table Aha_Moment succesfully!')
                      </script>
                  ";
              }
              else{
                  echo"
                      <script>
-                         alert('Creation of the table Aha_Moment failed!')
+                         console.log('Creation of the table Aha_Moment failed!')
                      </script>
                  ";
             }
@@ -415,7 +415,7 @@
             if(($db->query("SHOW TABLES LIKE 'Observable_Object'"))->num_rows>0){
                 echo"
                     <script>
-                        alert('Table Observable_Object already exists')
+                        console.log('Table Observable_Object already exists')
                     </script>
                 ";
             }
@@ -423,14 +423,14 @@
                 if($db->query($queryCreateObservable_Object)){
                     echo"
                         <script>
-                            alert('Created the table Observable_Object succesfully!')
+                            console.log('Created the table Observable_Object succesfully!')
                         </script>
                     ";
                 }
                 else{
                     echo"
                         <script>
-                            alert('Creation of the table Observable_Object failed!')
+                            console.log('Creation of the table Observable_Object failed!')
                         </script>
                     ";
             }
@@ -448,7 +448,7 @@
             if(($db->query("SHOW TABLES LIKE 'Activity'"))->num_rows>0){
                 echo"
                     <script>
-                        alert('Table Activity already exists')
+                        console.log('Table Activity already exists')
                     </script>
                 ";
             }
@@ -456,14 +456,14 @@
                 if($db->query($queryCreateActivity)){
                     echo"
                         <script>
-                            alert('Created the table Activity succesfully!')
+                            console.log('Created the table Activity succesfully!')
                         </script>
                     ";
                 }
                 else{
                     echo"
                         <script>
-                            alert('Creation of the table Activity failed!')
+                            console.log('Creation of the table Activity failed!')
                         </script>
                     ";
             }
@@ -488,7 +488,7 @@
             if(($db->query("SHOW TABLES LIKE 'Step'"))->num_rows>0){
                 echo"
                     <script>
-                        alert('Table Step already exists')
+                        console.log('Table Step already exists')
                     </script>
                 ";
             }
@@ -496,14 +496,14 @@
                 if($db->query($queryCreateStep)){
                     echo"
                         <script>
-                            alert('Created the table Step succesfully!')
+                            console.log('Created the table Step succesfully!')
                         </script>
                     ";
                 }
                 else{
                     echo"
                         <script>
-                            alert('Creation of the table Step failed!')
+                            console.log('Creation of the table Step failed!')
                         </script>
                     ";
             }
@@ -522,7 +522,7 @@
         if(($db->query("SHOW TABLES LIKE 'Practiced_Stages'"))->num_rows>0){
             echo"
                 <script>
-                    alert('Table Practiced_Stages already exists')
+                    console.log('Table Practiced_Stages already exists')
                 </script>
             ";
         }
@@ -530,14 +530,14 @@
             if($db->query($queryPracticed_Stages)){
                 echo"
                     <script>
-                        alert('Created the table Practiced_Stages succesfully!')
+                        console.log('Created the table Practiced_Stages succesfully!')
                     </script>
                 ";
             }
             else{
                 echo"
                     <script>
-                        alert('Creation of the table Practiced_Stages failed!')
+                        console.log('Creation of the table Practiced_Stages failed!')
                     </script>
                 ";
             }
@@ -557,7 +557,7 @@
         if(($db->query("SHOW TABLES LIKE 'Stage_Obstacle_Association'"))->num_rows>0){
             echo"
                 <script>
-                    alert('Table Stage_Obstacle_Association already exists')
+                    console.log('Table Stage_Obstacle_Association already exists')
                 </script>
             ";
         }
@@ -565,14 +565,14 @@
             if($db->query($queryStage_Obstacle_Association)){
                 echo"
                     <script>
-                        alert('Created the table Stage_Obstacle_Association succesfully!')
+                        console.log('Created the table Stage_Obstacle_Association succesfully!')
                     </script>
                 ";
             }
             else{
                 echo"
                     <script>
-                        alert('Creation of the table Stage_Obstacle_Association failed!')
+                        console.log('Creation of the table Stage_Obstacle_Association failed!')
                     </script>
                 ";
             }
@@ -592,7 +592,7 @@
        if(($db->query("SHOW TABLES LIKE 'Stage_Skill_Association'"))->num_rows>0){
            echo"
                <script>
-                   alert('Table Stage_Skill_Association already exists')
+                   console.log('Table Stage_Skill_Association already exists')
                </script>
            ";
        }
@@ -600,14 +600,14 @@
            if($db->query($queryStage_Skill_Association)){
                echo"
                    <script>
-                       alert('Created the table Stage_Skill_Association succesfully!')
+                       console.log('Created the table Stage_Skill_Association succesfully!')
                    </script>
                ";
            }
            else{
                echo"
                    <script>
-                       alert('Creation of the table Stage_Skill_Association failed!')
+                       console.log('Creation of the table Stage_Skill_Association failed!')
                    </script>
                ";
            }

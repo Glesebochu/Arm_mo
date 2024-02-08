@@ -14,7 +14,7 @@ class MasteryRequirement {
         $db->query('USE Arm_mo_v2');
         
         // Query the database based on the identifier
-        $query = "SELECT * FROM Mastery_Requirement WHERE Stage_ID = '$identifier'";
+        $query = "SELECT * FROM MasteryRequirement WHERE Stage_ID = '$identifier'";
         $result = $db->query($query);
         $MasteryRequirementArray= Array();
         while($row = $result->fetch_assoc()){

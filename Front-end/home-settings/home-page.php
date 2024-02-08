@@ -185,7 +185,7 @@
       stageObj.Skills = skillObjects;
       stageObj.Intentions = intentionObj;
       stageObj.Obstacles = obstacleObjects;
-      stageObj.Mastery_Requirements=masteryRequirement;
+      stageObj.MasteryRequirements=masteryRequirement;
 
       console.log(stageObj);
       console.log(Stage.getStageFromObject(stageObj));

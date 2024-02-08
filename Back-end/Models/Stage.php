@@ -6,7 +6,7 @@ class Stage {
     public $Goal;
        
     public static function getStage($identifier) {
-        include_once('../../Back-end/Connect.php');
+        include_once(__DIR__ . '/../Connect.php');
         $con = new Connect;
         $db = $con->__getConnection();
         $db->query('USE Arm_mo_v2');

@@ -1,7 +1,8 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Major Mono Display', monospace;
+    /* font-family: 'Major Mono Display', monospace; */
+    font-family: monospace;
 }
 
 @media screen and (orientation:portrait) {
@@ -15,6 +16,7 @@ body {
         margin-top: 46vmax;
         padding-left: 2vmax;
         padding-right: 2vmax;
+        font-family: 'Major Mono Display', monospace;
     }
     .portrait-div .portrait-icon{
         width: auto;
@@ -252,6 +254,12 @@ body {
     .populate-visual-stimulus{
         grid-area: populate-visual-stimulus;
         width: 100%;
+    }
+    .populate-visual-stimulus p{
+        /* border: 1px solid black; */
+        background-color: rgb(121, 193, 216);
+        padding: 0.2vmax;
+        border-radius: 20px;
     }
     /* ---------------------------------------------------------------------------------------- */
     /* ---------------------------------------------------------------------------------------- */
@@ -499,8 +507,13 @@ body {
         width: 100%;
     }
     .populate-auditory-stimulus p{
-        border: 1px solid black;
+        /* border: 1px solid black; */
+        background-color: rgb(121, 193, 216);
+        padding: 0.2vmax;
+        border-radius: 20px;
     }
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
 
         /* Auditory Stimulus Text Area */
     .auditory-stimulus-input-div{
@@ -743,6 +756,14 @@ body {
         grid-area: populate-kinesthetic-stimulus;
         width: 100%;
     }
+    .populate-kinesthetic-stimulus p{
+        /* border: 1px solid black; */
+        background-color: rgb(121, 193, 216);
+        padding: 0.2vmax;
+        border-radius: 20px;
+    }
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
 
         /* Kinesthetic Stimulus Text Area */
     .kinesthetic-stimulus-input-div{
@@ -984,6 +1005,14 @@ body {
         grid-area: populate-taste-stimulus;
         width: 100%;
     }
+    .populate-taste-stimulus p{
+        /* border: 1px solid black; */
+        background-color: rgb(121, 193, 216);
+        padding: 0.2vmax;
+        border-radius: 20px;
+    }
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
 
         /* Taste Stimulus Text Area */
     .taste-stimulus-input-div{
@@ -1222,6 +1251,14 @@ body {
         grid-area: populate-olifactory-stimulus;
         width: 100%;
     }
+    .populate-olifactory-stimulus p{
+        /* border: 1px solid black; */
+        background-color: rgb(121, 193, 216);
+        padding: 0.2vmax;
+        border-radius: 20px;
+    }
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
 
         /* Olifactory Stimulus Text Area */
     .olifactory-stimulus-input-div{
@@ -1699,6 +1736,7 @@ body {
     .thought-state .thought-state-icon .normal-image {
         width: auto;
         position: absolute;
+        top: 0.6vmax;
         left: 5.7vmax;
         height: 100%;
         opacity: 1;
@@ -1710,7 +1748,7 @@ body {
         height: 100%;
         opacity: 0;
         position: absolute;
-        top: 0;
+        top: 0.6vmax;
         left: 5.7vmax;
         transition: opacity 0.5s;
     }
@@ -1728,6 +1766,14 @@ body {
         height: 100%;
         width: 100%;
     }
+    .populate-thought-state p{
+        /* border: 1px solid black; */
+        background-color: rgb(131, 179, 108);
+        padding: 0.2vmax;
+        border-radius: 20px;
+    }
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
 
         /* Thought State Text Area */
     .thought-state-input-div{
@@ -1938,7 +1984,7 @@ body {
         width: auto;
         position: absolute;
         left: 6.2vmax;
-        top: 0.2vmax;
+        top: 0.8vmax;
         height: 100%;
         opacity: 1;
         transition: opacity 0.5s;
@@ -1950,7 +1996,7 @@ body {
         opacity: 0;
         left: 6.2vmax;
         position: absolute;
-        top: 0.2vmax;
+        top: 0.8vmax;
         transition: opacity 0.5s;
     }
             /* Change Hover Image on Hover */
@@ -1967,6 +2013,14 @@ body {
         height: 100%;
         width: 100%;
     }
+    .populate-emotional-state p{
+        /* border: 1px solid black; */
+        background-color: rgb(131, 179, 108);
+        padding: 0.2vmax;
+        border-radius: 20px;
+    }
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
 
         /* Emotional State Text Area */
     .emotional-state-input-div{
@@ -2168,7 +2222,7 @@ body {
         background-color: #d8d8d8;
         border-radius: 20px;
         cursor: pointer;
-        font-family: 'Major Mono Display', monospace;
+        /* font-family: 'Major Mono Display', monospace; */
         font-size: 1.6vmax;
         transition: transform 0.5s;
         /* height: 100%; */

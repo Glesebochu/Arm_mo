@@ -275,11 +275,11 @@ body {
 }
 .edit-button-ap3 {
   /* margin: 0 18.6rem; */
-  /* width: calc(100% - 37.2rem); */
+  width: calc(100%);
   /* flex: 2; */
-  position:relative;
-  left :130px;
-  width: 60vmin;
+  /* position:relative; */
+  /* left :130px; */
+  /* width: 60vmin; */
   border: none;
   border-radius: 1vw;
   transition: background-color 0.5s ease;

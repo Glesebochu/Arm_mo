@@ -16,7 +16,6 @@ export class SensoryStimulus extends ObservableObject{
         return new SensoryStimulus(
             obj.Observable_Object_ID,
             obj.Title,
-            obj.Discriminator,
             obj.Description,
             obj.Icon,
             obj.Sensory_Stimulus_Type,

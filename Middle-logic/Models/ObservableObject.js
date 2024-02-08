@@ -1,6 +1,6 @@
 export class ObservableObjectType{
-    static SensoryStimuls = "Sensory Stimulus";
-    static MentalObject = "Mental Object";
+    static SensoryStimuls = "SensoryStimulus";
+    static MentalObject = "MentalObject";
 }
 export class ObservableObjectIntensity{
     static Mild = "Mild";

@@ -210,27 +210,41 @@
 
     <!-- ObservableObject Object Retreival test -->
 
-    <!-- Single ObservableObject Retreival test -->
+    <!-- Single -->
+    <!-- SensoryStimulus Object Retreival test -->
     <?php
       // Include the PHP file with the ObservableObject class definition
-      include_once '../../Back-end/Models/ObservableObject.php';
-      $javascriptObservableObject = ObservableObject::getJavaScriptObservableObject('1');
+      include_once '../../Back-end/Models/SensoryStimulus.php';
+      $javascriptSensoryStimulus = SensoryStimulus::getJavaScriptSensoryStimulus('1');
     ?>
     <script type="module">
       // Import the ObservableObject.js module
       import { SensoryStimulus } from '../../Middle-logic/Models/SensoryStimulus.js';
       
       // Output the JavaScript code to create the Step objects
-      var observableObject = <?php echo $javascriptObservableObject;?>;
-      console.log(observableObject);
-      console.log(SensoryStimulus.getSensoryStimulusFromObject(observableObject));
+      var sensoryStimulus = <?php echo $javascriptSensoryStimulus;?>;
+      console.log(sensoryStimulus);
+      console.log(SensoryStimulus.getSensoryStimulusFromObject(sensoryStimulus));
     </script>
-
-    <!-- Multiple ObservableObjects Retreival test -->
     
     <!-- MentalObject Object Retreival test -->
+    <?php
+      // Include the PHP file with the ObservableObject class definition
+      include_once '../../Back-end/Models/MentalObject.php';
+      $javascriptMentalObject = MentalObject::getJavaScriptMentalObject('2');
+    ?>
+    <script type="module">
+      // Import the ObservableObject.js module
+      import { MentalObject } from '../../Middle-logic/Models/MentalObject.js';
+      
+      // Output the JavaScript code to create the Step objects
+      var mentalObject = <?php echo $javascriptMentalObject;?>;
+      console.log(mentalObject);
+      console.log(MentalObject.getMentalObjectFromObject(mentalObject));
+    </script>
+    
 
-    <!-- SensoryStimulus Object Retreival test -->
+    <!-- Multiple -->
 
     <!-- Activity Object Retreival test -->
     <!-- AhaMoment Object Retreival test -->

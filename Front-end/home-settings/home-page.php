@@ -49,7 +49,7 @@
       // Include the PHP file with the function to retrieve the Intention object
       include_once '../../Back-end/Models/Intention.php';
       $identifier = $_SESSION['stage'];
-      $javascriptIntention = Intention::getJavaScriptIntention($identifier);
+      $javascriptIntention = Intention::getJavaScriptIntentionArray($identifier);
   
     ?>
 
@@ -60,8 +60,28 @@
       // Output the JavaScript code to create the Intention object
       var intentionObj = JSON.parse('<?php echo $javascriptIntention; ?>');
       console.log(intentionObj);
-      console.log(Intention.getIntentionFromObject(intentionObj));
+      console.log(Intention.getIntentionFromArray(intentionObj));
 
+
+    </script>
+
+    <!-- MasteryRequirement Object Retreival test -->
+    <?php
+      // Include the PHP file with the function to retrieve the MasteryRequirement object
+      include_once '../../Back-end/Models/MasteryRequirement.php';
+      $identifier = $_SESSION['stage'];
+      $javascriptMasteryRequirement = MasteryRequirement::getJavaScriptMasteryRequirementArray($identifier);
+  
+    ?>
+
+    <script type="module">
+      import { MasteryRequirement } from '../../Middle-logic/Models/MasteryRequirement.js';
+
+      // Output the JavaScript code to create the MasteryRequirement object
+      var MasteryRequirementObj = JSON.parse('<?php echo $javascriptMasteryRequirement; ?>');
+      console.log(MasteryRequirementObj);
+      var masteryRequirements = MasteryRequirement.getMasteryRequirementFromArray(MasteryRequirementObj);
+      console.log(masteryRequirements);
 
     </script>
 
@@ -127,7 +147,8 @@
 
       // Retrieve the skills, intentions, and obstacles for the specific stage
       $skills = Skill::getJavaScriptSkillArray($identifier);
-      $intention = Intention::getJavaScriptIntention($identifier);
+      $intention = Intention::getJavaScriptIntentionArray($identifier);
+      $masteryRequirement = MasteryRequirement::getJavaScriptMasteryRequirementArray($identifier);
       $obstacles = Obstacle::getJavaScriptObstacleArray($identifier);
     ?>
 
@@ -136,6 +157,8 @@
       import { Stage } from '../../Middle-logic/Models/Stage.js';
       import { Skill } from '../../Middle-logic/Models/Skill.js';
       import { Intention } from '../../Middle-logic/Models/Intention.js';
+      import { MasteryRequirement } from '../../Middle-logic/Models/MasteryRequirement.js';
+
       import { Obstacle } from '../../Middle-logic/Models/Obstacle.js';
 
       // Output the JavaScript code to create the Stage object
@@ -147,7 +170,11 @@
 
       // Return the intention object
       var intentionObj = JSON.parse('<?php echo $intention; ?>');
-      intentionObj=Intention.getIntentionFromObject(intentionObj)
+      intentionObj=Intention.getIntentionFromArray(intentionObj)
+
+      // Return the Mastery Requirement object
+      var masteryRequirement = JSON.parse('<?php echo $masteryRequirement; ?>');
+      masteryRequirement=MasteryRequirement.getMasteryRequirementFromArray(masteryRequirement)
 
       // Create an array of obstacle objects
       var obstaclesArray = <?php echo json_encode($obstacles); ?>;
@@ -158,6 +185,7 @@
       stageObj.Skills = skillObjects;
       stageObj.Intentions = intentionObj;
       stageObj.Obstacles = obstacleObjects;
+      stageObj.Mastery_Requirements=masteryRequirement;
 
       console.log(stageObj);
       console.log(Stage.getStageFromObject(stageObj));

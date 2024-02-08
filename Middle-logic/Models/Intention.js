@@ -1,5 +1,6 @@
 export class Intention {
-    constructor(description,stage) {
+    constructor(Intention_ID,description,stage) {
+        this.Intention_ID = Intention_ID
         this.Description = description;
         this.Stage=stage;
     }
@@ -13,10 +14,10 @@ export class Intention {
     static Invoke_Introspective_Attention = "Invoke introspective attention frequently, before you've forgotten the breath or fallen asleep.";
     static Make_Corrections_Distractions = "Make corrections as soon as you notice distractions or dullness.";
 
-    static getIntentionFromObject(obj) {
-        return new Intention(
-            obj.Description,
-            obj.Stage
-        )
+    static getIntentionFromArray(arr) {
+        const IntentionArray = arr.map(obj =>
+            new Intention(obj.Intention_ID, obj.Description, obj.Stage)
+        );
+        return IntentionArray;
     }
 }

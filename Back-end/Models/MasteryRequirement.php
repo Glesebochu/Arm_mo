@@ -1,13 +1,13 @@
 <?php
-// Mastery_Requirement.php
+// MasteryRequirement.php
 
-class Mastery_Requirement {
+class MasteryRequirement {
     public $Mastery_ID;
     public $Description;
     public $Stage;
    
 
-    public static function getMastery_Requirement_Array($identifier) {
+    public static function getMasteryRequirement_Array($identifier) {
         include_once('../../Back-end/Connect.php');
         $con = new Connect;
         $db = $con->__getConnection();
@@ -16,27 +16,28 @@ class Mastery_Requirement {
         // Query the database based on the identifier
         $query = "SELECT * FROM Mastery_Requirement WHERE Stage_ID = '$identifier'";
         $result = $db->query($query);
-        $Mastery_Requirement_Array= Array();
+        $MasteryRequirement_Array= Array();
         while($row = $result->fetch_assoc()){
-            // Create a new Mastery_Requirement object and assign values from the query result
-            $Mastery_Requirement = new Mastery_Requirement();
-            $Mastery_Requirement->Description = $row['Description'];
-            $Mastery_Requirement->Stage = $row['Stage_ID'];
-            $Mastery_Requirement_Array[]=$Mastery_Requirement;
+            // Create a new MasteryRequirement object and assign values from the query result
+            $MasteryRequirement = new MasteryRequirement();
+            $MasteryRequirement->Mastery_ID = $row['Mastery_ID'];
+            $MasteryRequirement->Description = $row['Description'];
+            $MasteryRequirement->Stage = $row['Stage_ID'];
+            $MasteryRequirement_Array[]=$MasteryRequirement;
             
         }
-        return $Mastery_Requirement_Array;
+        return $MasteryRequirement_Array;
         
     }
     
-    public static function getJavaScriptMastery_Requirement_Array($identifier) {
-        $Mastery_Requirement = Mastery_Requirement::getMastery_Requirement_Array($identifier);
+    public static function getJavaScriptMasteryRequirement_Array($identifier) {
+        $MasteryRequirement = MasteryRequirement::getMasteryRequirement_Array($identifier);
     
-        // Convert the Mastery_Requirement object to a JSON string
-        $Mastery_RequirementJson = json_encode($Mastery_Requirement);
+        // Convert the MasteryRequirement object to a JSON string
+        $MasteryRequirementJson = json_encode($MasteryRequirement);
     
-        // Return the JavaScript code to create the JavaScript Mastery_Requirement object
-        return $Mastery_RequirementJson;
+        // Return the JavaScript code to create the JavaScript MasteryRequirement object
+        return $MasteryRequirementJson;
     }
 }
 

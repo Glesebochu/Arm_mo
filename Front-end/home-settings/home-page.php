@@ -65,6 +65,26 @@
 
     </script>
 
+    <!-- MasteryRequirement Object Retreival test -->
+    <?php
+      // Include the PHP file with the function to retrieve the MasteryRequirement object
+      include_once '../../Back-end/Models/MasteryRequirement.php';
+      $identifier = $_SESSION['stage'];
+      $javascriptMasteryRequirement = MasteryRequirement::getJavaScriptMasteryRequirement_Array($identifier);
+  
+    ?>
+
+    <script type="module">
+      import { MasteryRequirement } from '../../Middle-logic/Models/MasteryRequirement.js';
+
+      // Output the JavaScript code to create the MasteryRequirement object
+      var MasteryRequirementObj = JSON.parse('<?php echo $javascriptMasteryRequirement; ?>');
+      console.log(MasteryRequirementObj);
+      var masteryRequirements = MasteryRequirement.getMastery_RequirementFromObject(MasteryRequirementObj);
+      console.log(masteryRequirements);
+
+    </script>
+
     <!-- Obstacle Object Retreival test -->
     <?php
       // Include the PHP file with the function to retrieve the Obstacle object

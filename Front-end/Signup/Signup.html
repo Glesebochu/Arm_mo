@@ -29,11 +29,11 @@
 </head>
 
 <body>
+    <div class="logo">
+        <img alt="Writing12217" src="../About_us-login-signup/public/external/Armimo Logo.svg" class="logoImg" />
+        <img alt="armimoLogo" src="../About_us-login-signup/public/external/logoText.png" class="armimoLogoText" />
+    </div>
     <form action="https://localhost/Arm-mo/Back-end/signup.php" method="post">
-        <div class="logo">
-            <img alt="Writing12217" src="../About_us-login-signup/public/external/Armimo Logo.svg" class="logoImg" />
-            <img alt="armimoLogo" src="../About_us-login-signup/public/external/logoText.png" class="armimoLogoText" />
-        </div>
         <header>
             <span class="header1">Sign</span>
             <span class="yellow">Up</span>
@@ -43,27 +43,35 @@
         <input type="text" class="lnameInput" name="lastname" placeholder="Last Name">
         <input type="password" class="pwdInput" name="pwdInput" placeholder="Password" required>
         <input type="password" name="cpwdInput" class="cpwdInput" placeholder="Confirm Password" required>
-        <input type="date" name="dob" class="datePicker">
-               <p id="error-message"></p>
- <button class="button" type="submit">Sign up</button>
+        <input type="date" name="dob" id="datePicker">
+        <label for="radio">Are you familiar with Culadasa John's "The Mind Illuminated"?</label>
+        <div class="radio">
+            <div id="radDiv1">Yes I am<input type="radio" id="rad1" value="none"></div>
+            <div id="radDiv2">No I'm not<input type="radio" id="rad2"></div>
+        </div>
+        <div id="dropDownMenu" style="display: none;">
+            <div id="text">
+                <label for="dDM">Select your current meditation stage</label>
+                <select name="dropDown Menu" id="dDM">
+                    <option value="option1">Stage 1</option>
+                    <option value="option2">Stage 2</option>
+                    <option value="option3">Stage 3</option>
+                    <option value="option4">Stage 4</option>
+                    <option value="option5">Stage 5</option>
+                    <option value="option6">Stage 6</option>
+                    <option value="option7">Stage 7</option>
+                    <option value="option8">Stage 8</option>
+                    <option value="option9">Stage 9</option>
+                    <option value="option10">Stage 10</option>
+                </select>
+                <button id="dDButton">Done</button>
+            </div>
+        </div>
+        <p id="error-message"></p>
+        <button id="button" type="submit">Sign up</button>
         <a href="../Login/login.html">Already have an account</a>
     </form>
-    <script>
-        $('.eye.one').on('click', function () {
-            $('.pwdInput').attr('type', function (index, attr) {
-                return attr === 'password' ? 'text' : 'password';
-            });
-            $('.eye.one').toggleClass('fas fa-eye-slash fas fa-eye');
-        })
-        $('.eye.two').on('click', function () {
-            $('.cpwdInput').attr('type', function (index, attr) {
-                return attr === 'password' ? 'text' : 'password';
-            });
-            $('.eye.two').toggleClass('fas fa-eye-slash fas fa-eye');
-        })
-        $('.fa-bell').on('click', function () {
-        })
-    </script>
 </body>
+<script src="./Signup.js"></script>
 
 </html>

@@ -2,37 +2,43 @@
   font-family: inter;
 }
 html {
-  height: 80vh;
+  height: 100vh;
   width: 100vw;
   padding: 0;
   margin: 0;
 }
 body {
-  height: 80vh;
+  height: 100vh;
   width: 100vmax;
   display: flex;
   margin: 0;
-}
-form {
-  align-self: flex-start;
-  height: 90vh;
-  width: 100vw;
-  padding: 3vmin;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3vmin;
+  overflow: hidden;
+}
+form {
+  flex: 6.5;
+  width: 100%;
+  padding: 3vmin;
+  padding-top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.3vmin;
 }
 .logo {
+  align-self: start;
+  padding: 1vmin;
   display: flex;
-  flex: 1.2;
-  align-self: flex-start;
-  width: 20.3vmin;
+  flex: 0.7;
+  width: 20vmin;
+  height: 90vmin;
   overflow: hidden;
   gap: 0.3vmin;
 }
 .logo > * {
-  width: 50%;
+  width: 10vmin;
   height: 10vmin;
 }
 .armimoLogoText {
@@ -40,12 +46,12 @@ form {
   height: 6vmin;
 }
 header {
-  flex: 0.4;
+  flex: 0.2;
   font-size: 6.5vmin;
   font-weight: bold;
   color: black;
   font-family: inter;
-  margin-bottom: 2vmin;
+  margin-bottom: 3vmin;
 }
 .yellow {
   color: rgba(8, 72, 3, 0.447);
@@ -53,8 +59,8 @@ header {
   animation: changeColor 7s infinite;
 }
 input {
-  flex: 0.5;
-  width: 60vmin;
+  flex: 0.7;
+  width: 50vmin;
   height: 2vh;
   padding-left: 2vmin;
   border-radius: 1vmin;
@@ -70,14 +76,104 @@ input:hover {
   font-weight: bold;
   font-size: 2.5vmin;
 }
+#datePicker {
+  font-size: 2.5vmin;
+  color: grey;
+  font-weight: bold;
+}
+label {
+  flex: 0.3;
+  width: 50vmin;
+  font-size: 2.5vmin;
+  padding: 0;
+  margin: 0;
+}
+.radio {
+  width: 40vmin;
+  font-size: 2.5vmin;
+  display: flex;
+  flex-direction: row;
+}
+.radio > * {
+  width: 50%;
+}
+#radDiv2 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+#radDiv1 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+#rad1 {
+  flex: 0.4;
+  width: 4vmin;
+}
+#rad2 {
+  flex: 0.4;
+  width: 4vmin;
+}
+#dropDownMenu {
+  height: 30vmin;
+  width: 55vmin;
+  background-color: rgb(220, 220, 220);
+  border-radius: 40px;
+  padding: 2vmin;
+  padding-top: 6vmin;
+  padding-bottom: 5vmin;
+  position: absolute;
+  top: 280px;
+  right: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-family: inter;
+  font-weight: 450;
+  overflow: hidden;
+}
+
+#text {
+  display: flex;
+  flex-direction: column;
+  gap: 4vmin;
+  width: 95%;
+  align-items: center;
+}
+#dDM {
+  align-self: center;
+  width: 85%;
+  height: 6vmin;
+  font-weight: 550;
+  padding-left: 3vmin;
+  font-size: 2.5vmin;
+  border: none;
+  border-radius: 15px;
+  background-color: rgba(252, 252, 252, 0.845);
+}
+#dropDownMenu label {
+  width: 100%;
+  font-size: 2.6vmin;
+  color: rgb(0, 0, 0);
+}
+#dropDownMenu button {
+  margin-top: 10vmin;
+  width: 40%;
+  background-color: rgba(255, 255, 255, 0.781);
+}
+#dropDownMenu button:hover {
+  background-color: rgba(2, 79, 15, 0.235);
+}
 #error-message {
   margin: 0;
 }
 a {
-  flex: 0.3;
+  flex: 0.2;
   text-decoration: none;
   color: black;
-  font-size: 2.4vmin;
+  font-size: 2vmin;
   font-family: inter;
   animation: changeColor 2s ease infinite;
 }
@@ -87,13 +183,13 @@ a:hover {
   animation: none;
 }
 button {
-  flex: 0.2;
-  width: 30vmin;
+  flex: 0.1;
+  width: 35vmin;
   border: none;
   border-radius: 1vw;
   transition: background-color 0.5s ease;
   padding: 1vmin;
-  font-size: 3.2vmin;
+  font-size: 3vmin;
   font-family: inter;
   background-color: rgba(8, 72, 3, 0.263);
   /* margin-bottom: 2vmin; */

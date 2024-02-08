@@ -2,37 +2,42 @@
   font-family: inter;
 }
 html {
-  height: 80vh;
+  height: 100vh;
   width: 100vw;
   padding: 0;
   margin: 0;
 }
 body {
-  height: 80vh;
+  height: 100vh;
   width: 100vmax;
   display: flex;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
 }
 form {
-  align-self: flex-start;
-  height: 70vh;
+  flex: 2;
   width: 100vw;
-  padding: 3vmin;
+  padding: 10vmin;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 3vmin;
 }
 .logo {
-  display: flex;
-  flex: 1;
   align-self: flex-start;
-  width: 20.3vmin;
+  padding: 1vmin;
+  display: flex;
+  flex: 0.6;
+  width: 20vmin;
+  height: 90vmin;
   overflow: hidden;
   gap: 0.3vmin;
 }
 .logo > * {
-  width: 50%;
+  width: 10vmin;
   height: 10vmin;
 }
 .armimoLogoText {
@@ -40,7 +45,7 @@ form {
   height: 6vmin;
 }
 header {
-  flex: 1;
+  flex: 0.6;
   font-size: 8vmin;
   font-weight: bold;
   color: black;
@@ -51,7 +56,7 @@ header {
   animation: changeColor 7s infinite;
 }
 input {
-  flex: 0.5;
+  flex: 0.4;
   width: 60vmin;
   height: 5vh;
   padding-left: 2vmin;
@@ -74,7 +79,7 @@ input:hover {
   margin: 0;
 }
 a {
-  flex: 0.3;
+  flex: 0.2;
   text-decoration: none;
   color: black;
   font-size: 2.4vmin;
@@ -87,12 +92,13 @@ a:hover {
   animation: none;
 }
 button {
-  flex: 0.5;
+  flex: 0.2;
   width: 30vmin;
   border: none;
   border-radius: 1vw;
   transition: background-color 0.5s ease;
-  font-size: 3.8vmin;
+  padding: 1vmin;
+  font-size: 3.2vmin;
   font-family: inter;
   background-color: rgba(8, 72, 3, 0.263);
 }

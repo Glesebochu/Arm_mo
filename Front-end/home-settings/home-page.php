@@ -188,24 +188,43 @@
     <?php
       // Include the PHP file with the function to retrieve the Session object
       include_once '../../Back-end/Models/Session.php';
-      
+
       //$identifier = $_SESSION['session'];
-      
+      $stepArray = Step::getStepArray(1);
+      $javascriptStepArray = json_encode($stepArray);
       // Call the function to get the JavaScript Session array
       $javascriptSessionArray = Session::getJavaScriptSessionArray(1);
     ?>
-        
+
     <script type="module">
+      // Import the Step.js module
+      import { Step } from '../../Middle-logic/Models/Step.js';
+      var stepArray = <?php echo $javascriptStepArray ?>;
+     
+     // Convert the stepArray to Step objects
+      var stepObjects = Step.convertArrayToStepObjects(stepArray);
+
       // Import the Session.js module
       import { Session } from '../../Middle-logic/Models/Session.js';
 
       // Output the JavaScript code to create the Session objects
-      var SessionArray = <?php echo json_encode($javascriptSessionArray); ?>;
-      
+      var sessionArray = <?php echo json_encode($javascriptSessionArray); ?>;
+      // console.log(sessionArray);
+
       // Parse each JSON string to create the JavaScript Session objects
-      var SessionObjects = SessionArray.map(SessionJson => JSON.parse(SessionJson));
-      console.log(SessionObjects);
-      console.log(Session.convertArrayToSessionObjects(SessionObjects));
+      var sessionObjects = sessionArray.map(sessionJson => JSON.parse(sessionJson));
+      console.log(sessionObjects);
+
+
+      // Iterate through session objects and add corresponding steps
+      sessionObjects.forEach(session => {
+        var matchingSteps = stepObjects.filter(step => step.Session_ID === session.Session_ID);
+        session.Steps = matchingSteps;
+      });
+      sessionObjects=Session.convertArrayToSessionObjects(sessionObjects);
+
+
+      console.log(sessionObjects);
     </script>
 
     <!-- ObservableObject Object Retreival test -->

@@ -98,8 +98,8 @@ class Session {
         return $SessionArray;
     }
     
-    public static function getJavaScriptSessionArray($Session_ID) {
-        $SessionArray = self::getSessionArray($Session_ID);
+    public static function getJavaScriptSessionArray($Meditator_ID) {
+        $SessionArray = self::getSessionArray($Meditator_ID);
         
         // Convert each Session object to a JSON string
         $SessionJsonArray = array();

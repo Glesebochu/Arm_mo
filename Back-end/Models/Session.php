@@ -1,7 +1,7 @@
 <?php
 // Session.php
 
-include_once('../../Back-end/Connect.php'); // Include the Connect.php file
+include_once(__DIR__ . '/../Connect.php'); // Include the Connect.php file
 include_once('Stage.php'); // Include the stage.php file
 
 class Session {

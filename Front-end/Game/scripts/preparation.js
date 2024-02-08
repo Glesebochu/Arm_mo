@@ -4,26 +4,10 @@ import { Session } from "../../../Middle-logic/Models/Session.js";
 import { Meditator } from "../../../Middle-logic/Models/Meditator.js";
 import { Activity } from "../../../Middle-logic/Models/Activity.js";
 
-// Dummy object to be replaced by the object obtained with Gustav's DB -> JS object function.
-var meditator = new Meditator(
-    "Zelalem",
-    "Amare",
-    "fellasfaw@gmail.com",
-    "test",
-    3
-);
-
-// Dummy object to be replaced by the object obtained with Gustav's DB -> JS object function.
-var newSession = new Session();
-newSession.Meditator = meditator;
-newSession.Start_Date_Time = Date.now();
-
-prepare(newSession);
-
 export function prepare(session){
 
     // Get the steps from the database.
-    var steps = DBAssistant.getRecords("Step", "Category", "Preparation");
+    var steps = Step.getDummyPreparationSteps();
 
     // Declare variables for traversal and calculations.
     var currentStepIndex = 0;

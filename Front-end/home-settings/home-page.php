@@ -39,8 +39,8 @@
       // var meditatorObj2 = JSON.parse('<?php // echo $javascriptMeditator2; ?>');
 
       console.log(meditatorObj);
-      console.log(Meditator.getMeditatorFromObject(meditatorObj));
-      // console.log(meditatorObj2);
+      var meditator1=Meditator.getMeditatorFromObject(meditatorObj);
+      console.log(meditator1);
 
     </script>
 
@@ -49,7 +49,7 @@
       // Include the PHP file with the function to retrieve the Intention object
       include_once '../../Back-end/Models/Intention.php';
       $identifier = $_SESSION['stage'];
-      $javascriptIntention = Intention::getJavaScriptIntention($identifier);
+      $javascriptIntention = Intention::getJavaScriptIntentionArray($identifier);
   
     ?>
 
@@ -60,8 +60,28 @@
       // Output the JavaScript code to create the Intention object
       var intentionObj = JSON.parse('<?php echo $javascriptIntention; ?>');
       console.log(intentionObj);
-      console.log(Intention.getIntentionFromObject(intentionObj));
+      console.log(Intention.getIntentionFromArray(intentionObj));
 
+
+    </script>
+
+    <!-- MasteryRequirement Object Retreival test -->
+    <?php
+      // Include the PHP file with the function to retrieve the MasteryRequirement object
+      include_once '../../Back-end/Models/MasteryRequirement.php';
+      $identifier = $_SESSION['stage'];
+      $javascriptMasteryRequirement = MasteryRequirement::getJavaScriptMasteryRequirement_Array($identifier);
+  
+    ?>
+
+    <script type="module">
+      import { MasteryRequirement } from '../../Middle-logic/Models/MasteryRequirement.js';
+
+      // Output the JavaScript code to create the MasteryRequirement object
+      var MasteryRequirementObj = JSON.parse('<?php echo $javascriptMasteryRequirement; ?>');
+      console.log(MasteryRequirementObj);
+      var masteryRequirements = MasteryRequirement.getMastery_RequirementFromObject(MasteryRequirementObj);
+      console.log(masteryRequirements);
 
     </script>
 
@@ -127,7 +147,7 @@
 
       // Retrieve the skills, intentions, and obstacles for the specific stage
       $skills = Skill::getJavaScriptSkillArray($identifier);
-      $intention = Intention::getJavaScriptIntention($identifier);
+      $intention = Intention::getJavaScriptIntentionArray($identifier);
       $obstacles = Obstacle::getJavaScriptObstacleArray($identifier);
     ?>
 
@@ -147,7 +167,7 @@
 
       // Return the intention object
       var intentionObj = JSON.parse('<?php echo $intention; ?>');
-      intentionObj=Intention.getIntentionFromObject(intentionObj)
+      intentionObj=Intention.getIntentionFromArray(intentionObj)
 
       // Create an array of obstacle objects
       var obstaclesArray = <?php echo json_encode($obstacles); ?>;
@@ -177,13 +197,97 @@
       import { Step } from '../../Middle-logic/Models/Step.js';
 
       // Output the JavaScript code to create the Step objects
-
       var stepArray = <?php echo $javascriptStepArray ?>;
       console.log(stepArray);
-     // Convert the stepArray to Step objects
+      // Convert the stepArray to Step objects
       var stepObjects = Step.convertArrayToStepObjects(stepArray);
       console.log(stepObjects);
     </script>
+
+    <!-- Session Object Retreival test -->
+    <?php
+      // Include the PHP file with the function to retrieve the Session object
+      include_once '../../Back-end/Models/Session.php';
+
+      //$identifier = $_SESSION['session'];
+      $stepArray = Step::getStepArray(1);
+      $javascriptStepArray = json_encode($stepArray);
+      // Call the function to get the JavaScript Session array
+      $javascriptSessionArray = Session::getJavaScriptSessionArray(1);
+    ?>
+
+    <script type="module">
+      // Import the Step.js module
+      import { Step } from '../../Middle-logic/Models/Step.js';
+      var stepArray = <?php echo $javascriptStepArray ?>;
+     
+     // Convert the stepArray to Step objects
+      var stepObjects = Step.convertArrayToStepObjects(stepArray);
+
+      // Import the Session.js module
+      import { Session } from '../../Middle-logic/Models/Session.js';
+
+      // Output the JavaScript code to create the Session objects
+      var sessionArray = <?php echo json_encode($javascriptSessionArray); ?>;
+      // console.log(sessionArray);
+
+      // Parse each JSON string to create the JavaScript Session objects
+      var sessionObjects = sessionArray.map(sessionJson => JSON.parse(sessionJson));
+      console.log(sessionObjects);
+
+
+      // Iterate through session objects and add corresponding steps
+      sessionObjects.forEach(session => {
+        var matchingSteps = stepObjects.filter(step => step.Session_ID === session.Session_ID);
+        session.Steps = matchingSteps;
+      });
+      sessionObjects=Session.convertArrayToSessionObjects(sessionObjects);
+
+
+      console.log(sessionObjects);
+    </script>
+
+    <!-- ObservableObject Object Retreival test -->
+
+    <!-- Single -->
+    <!-- SensoryStimulus Object Retreival test -->
+    <?php
+      // Include the PHP file with the ObservableObject class definition
+      include_once '../../Back-end/Models/SensoryStimulus.php';
+      $javascriptSensoryStimulus = SensoryStimulus::getJavaScriptSensoryStimulus('1');
+    ?>
+    <script type="module">
+      // Import the ObservableObject.js module
+      import { SensoryStimulus } from '../../Middle-logic/Models/SensoryStimulus.js';
+      
+      // Output the JavaScript code to create the Step objects
+      var sensoryStimulus = <?php echo $javascriptSensoryStimulus;?>;
+      console.log(sensoryStimulus);
+      console.log(SensoryStimulus.getSensoryStimulusFromObject(sensoryStimulus));
+    </script>
+    
+    <!-- MentalObject Object Retreival test -->
+    <?php
+      // Include the PHP file with the ObservableObject class definition
+      include_once '../../Back-end/Models/MentalObject.php';
+      $javascriptMentalObject = MentalObject::getJavaScriptMentalObject('2');
+    ?>
+    <script type="module">
+      // Import the ObservableObject.js module
+      import { MentalObject } from '../../Middle-logic/Models/MentalObject.js';
+      
+      // Output the JavaScript code to create the Step objects
+      var mentalObject = <?php echo $javascriptMentalObject;?>;
+      console.log(mentalObject);
+      console.log(MentalObject.getMentalObjectFromObject(mentalObject));
+    </script>
+    
+
+    <!-- Multiple -->
+
+    <!-- Activity Object Retreival test -->
+    <!-- AhaMoment Object Retreival test -->
+    <!-- Antidote Object Retreival test -->
 
   <script>
     function openPage(link){
@@ -301,6 +405,11 @@
       </section>
 
     </section>
+
+    <fotter id="copyright">
+      <p>Copyright © ግለሠቦቹ 2021-2024</p>
+    </fotter>
+
   </main>
 </body>
 

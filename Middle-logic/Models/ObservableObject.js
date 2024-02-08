@@ -1,6 +1,6 @@
 export class ObservableObjectType{
-    static SensoryStimuls = "Sensory Stimulus";
-    static MentalObject = "Mental Object";
+    static SensoryStimuls = "SensoryStimulus";
+    static MentalObject = "MentalObject";
 }
 export class ObservableObjectIntensity{
     static Mild = "Mild";
@@ -8,12 +8,13 @@ export class ObservableObjectIntensity{
     static Intense = "Intense";
 }
 export class ObservableObject{
-    constructor(id, title, type, description, icon, intensity){
+    constructor(id, title, discriminator, description, icon, intensity){
         this.Observable_Object_ID = id;
         this.Title = title;
-        this.Type = type;
+        this.Discriminator = discriminator;
         this.Description = description;
         this.Icon = icon;
         this.Intensity = intensity;
     }
+    
 }

@@ -26,3 +26,4 @@ document.getElementById("dDButton").addEventListener("click", function () {
   Current_Stage_No = document.getElementById("dDM").selectedIndex + 1;
   document.getElementById("dropDownMenu").style.display = "none";
 });
+  console.log(Current_Stage_No);

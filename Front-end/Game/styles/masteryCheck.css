@@ -1,7 +1,6 @@
 *{
     box-sizing: border-box;
     font-size: 3.5vh;
-    font-family: var(--main-font-face);
 }
 body{
     height: 100vh;

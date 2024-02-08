@@ -1,8 +1,6 @@
 body {
     margin: 0;
     padding: 0;
-    /* font-family: 'Major Mono Display', monospace; */
-    font-family: monospace;
 }
 
 @media screen and (orientation:portrait) {
@@ -98,7 +96,6 @@ body {
     }
 
     .side-panel button p{
-        font-family: 'Major Mono Display', monospace;
         font-weight: 500;
         font-size: 3vw;
     }
@@ -411,7 +408,6 @@ body {
         border: 1px black solid;
         background-color: rgb(141, 185, 200); 
         z-index: 100; 
-        font-family: monospace;
         overflow: hidden;
         overflow-y: scroll; 
         scrollbar-color: #5a99d4 rgb(119, 172, 222);
@@ -661,7 +657,6 @@ body {
         border: 1px black solid;
         background-color: rgb(141, 185, 200); 
         z-index: 100; 
-        font-family: monospace;
         overflow: hidden;
         overflow-y: scroll; 
         scrollbar-color: #5a99d4 rgb(119, 172, 222);
@@ -910,7 +905,6 @@ body {
         border: 1px black solid;
         background-color: rgb(141, 185, 200); 
         z-index: 100; 
-        font-family: monospace;
         overflow: hidden;
         overflow-y: scroll; 
         scrollbar-color: #5a99d4 rgb(119, 172, 222);
@@ -1156,7 +1150,6 @@ body {
         border: 1px black solid;
         background-color: rgb(141, 185, 200); 
         z-index: 100; 
-        font-family: monospace;
         overflow: hidden;
         overflow-y: scroll; 
         scrollbar-color: #5a99d4 rgb(119, 172, 222);
@@ -1402,7 +1395,6 @@ body {
         border: 1px black solid;
         background-color: rgb(141, 185, 200); 
         z-index: 100; 
-        font-family: monospace;
         overflow: hidden;
         overflow-y: scroll; 
         scrollbar-color: #5a99d4 rgb(119, 172, 222);
@@ -1588,7 +1580,6 @@ body {
 
     .feeling-state button p {
         color: #FFFFFF;
-        font-family: 'Major Mono Display', monospace;
         font-size: 0.3vmax;
         font-weight: 800;
         display: none;
@@ -1670,7 +1661,6 @@ body {
         border: 1px black solid;
         background-color: #95ce7b; 
         z-index: 100; 
-        font-family: monospace;
         overflow: hidden;
         overflow-y: scroll; 
         scrollbar-color: #4a8e2b #80b766;
@@ -1919,7 +1909,6 @@ body {
         border: 1px black solid;
         background-color: #95ce7b; 
         z-index: 100; 
-        font-family: monospace;
         overflow: hidden;
         overflow-y: scroll; 
         scrollbar-color: #4a8e2b #80b766;
@@ -2165,7 +2154,6 @@ body {
         border: 1px black solid;
         background-color: #95ce7b; 
         z-index: 100; 
-        font-family: monospace;
         overflow: hidden;
         overflow-y: scroll; 
         scrollbar-color: #4a8e2b #80b766;
@@ -2222,7 +2210,6 @@ body {
         background-color: #d8d8d8;
         border-radius: 20px;
         cursor: pointer;
-        /* font-family: 'Major Mono Display', monospace; */
         font-size: 1.6vmax;
         transition: transform 0.5s;
         /* height: 100%; */

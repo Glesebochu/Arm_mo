@@ -1,145 +1,43 @@
-* {
-  box-sizing: border-box;
-}
 html {
-  padding: 0;
-  margin: 0;
   height: 100vh;
   width: 100vw;
+  padding: 0;
+  margin: 0;
 }
 body {
   height: 100vh;
-  width: 100vw;
-  padding: 0;
+  width: 100vmax;
+  display: flex;
   margin: 0;
-  display: flex;
-  flex-direction: row;
-  gap: 3vmin;
-  overflow: hidden;
-  margin-left: 3vmin;
-}
-/* -----------logo work-------- */
-.logo {
-  display: flex;
-  margin-top: 3vmin;
-  flex: 0.4;
-  width: 20vmin;
-  height: 10vmin;
-  overflow: hidden;
-  gap: 0;
-}
-.logo > * {
-  width: 50%;
-  height: 10vmin;
-}
-.armimoLogoText {
-  padding-top: 2vmin;
-  height: 5vmin;
-}
-#green {
-  padding: 3vmin;
-  background-color: rgba(0, 128, 0, 0.491);
-  border-radius: 7vmin;
-  width: 30vmin;
-  height: 10vmin;
-  padding-top: 2vmin;
-  background: linear-gradient(to right,lightgreen, lightblue); 
-  background-size: 200% 100%;
-  transition: background-position 1s ease;
-  transition: padding-left 1s ease;
-}
-#green:hover {
-  background-position: right;
-  padding-left: 20vmin;
-  width: 59vmin;
-}
-a {
-  flex: 0.5;
-  font-size: 6vmin;
-  text-decoration: none;
-  color: black;
-  width: 4vmin;
-  height: 4vmin;
-  align-self: start;
-}
-a:hover {
-  transform: scale(1.1);
-}
-
-/* ----right margin--- */
-.margin-right {
-  flex: 2;
-  display: flex;
-  flex-direction: row;
-  height: 100vh;
-  width: 20vmin;
-  align-self: right;
-}
-section {
-  flex: 2;
-  width: 40vmin;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5vmin;
+  overflow: hidden;
 }
-/* ----Heading-- */
-header {
-  flex: 0.7;
-  display: flex;
-  flex-direction: row;
-  gap: 0;
-  font-family: Megrim;
-  height: 15vmin;
-}
-.aboutusText1 {
-  font-size: 15vmin;
-  font-weight: bolder;
-}
-.aboutusText2 {
-  color: rgba(4, 61, 3, 1);
-  font-size: 10vmin;
-  padding-top: 4vmin;
-  padding-right: 2vmin;
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-}
-.aboutusText3 {
-  font-size: 11vmin;
-  padding-top: 3vmin;
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  animation: changeColor 7s infinite;
-  background: linear-gradient(to right,lightgreen, lightblue); 
-  -webkit-background-clip: text;
-  color: transparent;
-  animation: textGradient 2s infinite;
-}
-.text {
-  flex: 4;
+main {
+  flex: 2;
+  width: 100vw;
+  padding: 10vmin;
   display: flex;
   flex-direction: column;
-  gap: 4vmin;
-  font-size: 3vmin;
-  text-align: justify;
+  align-items: center;
+  gap: 3vmin;
 }
-.text span {
-  font-size: 4vmin;
-  align-self: center;
-}
-nav {
+.logo {
+  align-self: flex-start;
+  padding: 1vmin;
   display: flex;
-  flex-direction: row;
-  height: 100vh;
-  gap: 5vmin;
+  flex: 0.6;
+  width: 20vmin;
+  height: 90vmin;
+  overflow: hidden;
+  gap: 0.3vmin;
 }
-@keyframes changeColor {
-  0%,
-  100% {
-    color: rgba(8, 72, 3, 0.402);
-  }
-  30% {
-    color: rgba(8, 72, 3, 0.441);
-  }
-  50% {
-    color: rgba(8, 72, 3, 0.628);
-  }
+.logo > * {
+  width: 10vmin;
+  height: 10vmin;
+}
+.armimoLogoText {
+  padding-top: 3vmin;
+  height: 6vmin;
 }

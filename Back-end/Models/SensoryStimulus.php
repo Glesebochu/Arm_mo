@@ -1,12 +1,12 @@
 <?php
 require_once 'ObservableObject.php';
 
-enum SensoryStimulusType : string{
-    case Visual = "Visual";
-    case Auditory = "Auditory";
-    case Olfactory = "Olfactory";
-    case Kinesthetic = "Kinesthetic";
-    case Taste = "Taste";
+class SensoryStimulusType{
+    const Visual = "Visual";
+    const Auditory = "Auditory";
+    const Olfactory = "Olfactory";
+    const Kinesthetic = "Kinesthetic";
+    const Taste = "Taste";
 }
 
 class SensoryStimulus extends ObservableObject{

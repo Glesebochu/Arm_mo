@@ -1,13 +1,13 @@
 <?php
 
-enum ObservableObjectType: string{
-    case SensoryStimulus = "SensoryStimulus";
-    case MentalObject = "MentalObject";
+class ObservableObjectType{
+    const SensoryStimulus = "SensoryStimulus";
+    const MentalObject = "MentalObject";
 }
-enum ObservableObjectIntensity : string{
-    case Mild = "Mild";
-    case Moderate = "Moderate";
-    case Intense = "Intense";
+class ObservableObjectIntensity{
+    const Mild = "Mild";
+    const Moderate = "Moderate";
+    const Intense = "Intense";
 }
 
 class ObservableObject{

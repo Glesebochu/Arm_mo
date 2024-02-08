@@ -1,10 +1,10 @@
 <?php
 require_once 'ObservableObject.php';
 
-enum MentalObjectType : string{
-    case Thought = "Thought";
-    case FeelingTone = "Feeling Tone";
-    case MentalState = "Mental State";
+class MentalObjectType{
+    const Thought = "Thought";
+    const FeelingTone = "Feeling Tone";
+    const MentalState = "Mental State";
 }
 
 class MentalObject extends ObservableObject{

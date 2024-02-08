@@ -1,13 +1,13 @@
 <?php
 
-enum AntidoteType : string{
-    case Dullness = "Dullness";
-    case Agitation = "Agitation"; 
+class AntidoteType{
+    const Dullness = "Dullness";
+    const Agitation = "Agitation"; 
 }
-enum SeverityType : string{
-    case Mild = "Mild";
-    case Moderate = "Moderate";
-    case Severe = "Severe";
+class SeverityType{
+    const Mild = "Mild";
+    const Moderate = "Moderate";
+    const Severe = "Severe";
 }
 
 class Antidote{

@@ -1,4 +1,5 @@
 <?php
+require_once 'ObservableObject.php';
 
 enum SensoryStimulusType : string{
     case Visual = "Visual";
@@ -9,7 +10,14 @@ enum SensoryStimulusType : string{
 }
 
 class SensoryStimulus extends ObservableObject{
-    public $Type = ObservableObjectType::SensoryStimulus;
+    public $Discriminator = ObservableObjectType::SensoryStimulus;
     public $Sensory_Stimulus_Type;
+
+    public static function getJavaScriptSensoryStimulus($identifier) {
+        return ObservableObject::getJavaScriptObservableObject($identifier);
+    }
+    public static function getJavaScriptSensoryStimulusArray($identifier){
+        return ObservableObject::getJavaScriptObservableObjectArray($identifier);
+    }
 }
 ?>

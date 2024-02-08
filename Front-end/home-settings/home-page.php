@@ -177,10 +177,9 @@
       import { Step } from '../../Middle-logic/Models/Step.js';
 
       // Output the JavaScript code to create the Step objects
-
       var stepArray = <?php echo $javascriptStepArray ?>;
       console.log(stepArray);
-     // Convert the stepArray to Step objects
+      // Convert the stepArray to Step objects
       var stepObjects = Step.convertArrayToStepObjects(stepArray);
       console.log(stepObjects);
     </script>
@@ -227,6 +226,48 @@
 
       console.log(sessionObjects);
     </script>
+
+    <!-- ObservableObject Object Retreival test -->
+
+    <!-- Single -->
+    <!-- SensoryStimulus Object Retreival test -->
+    <?php
+      // Include the PHP file with the ObservableObject class definition
+      include_once '../../Back-end/Models/SensoryStimulus.php';
+      $javascriptSensoryStimulus = SensoryStimulus::getJavaScriptSensoryStimulus('1');
+    ?>
+    <script type="module">
+      // Import the ObservableObject.js module
+      import { SensoryStimulus } from '../../Middle-logic/Models/SensoryStimulus.js';
+      
+      // Output the JavaScript code to create the Step objects
+      var sensoryStimulus = <?php echo $javascriptSensoryStimulus;?>;
+      console.log(sensoryStimulus);
+      console.log(SensoryStimulus.getSensoryStimulusFromObject(sensoryStimulus));
+    </script>
+    
+    <!-- MentalObject Object Retreival test -->
+    <?php
+      // Include the PHP file with the ObservableObject class definition
+      include_once '../../Back-end/Models/MentalObject.php';
+      $javascriptMentalObject = MentalObject::getJavaScriptMentalObject('2');
+    ?>
+    <script type="module">
+      // Import the ObservableObject.js module
+      import { MentalObject } from '../../Middle-logic/Models/MentalObject.js';
+      
+      // Output the JavaScript code to create the Step objects
+      var mentalObject = <?php echo $javascriptMentalObject;?>;
+      console.log(mentalObject);
+      console.log(MentalObject.getMentalObjectFromObject(mentalObject));
+    </script>
+    
+
+    <!-- Multiple -->
+
+    <!-- Activity Object Retreival test -->
+    <!-- AhaMoment Object Retreival test -->
+    <!-- Antidote Object Retreival test -->
 
   <script>
     function openPage(link){

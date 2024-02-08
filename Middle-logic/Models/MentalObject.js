@@ -10,4 +10,14 @@ export class MentalObject extends ObservableObject{
         super(id, title, ObservableObjectType.MentalObject, description, icon, intensity)
         this.Mental_Object_Type = mentalObjectType;
     }
+    static getMentalObjectFromObject(obj){
+        return new MentalObject(
+            obj.Observable_Object_ID,
+            obj.Title,
+            obj.Description,
+            obj.Icon,
+            obj.Mental_Object_Type,
+            obj.Intensity
+        );
+    }
 }

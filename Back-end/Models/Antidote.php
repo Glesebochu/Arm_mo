@@ -21,7 +21,7 @@ class Antidote{
         include_once('../../Back-end/Connect.php');
         $con = new Connect;
         $db = $con->__getConnection();
-        $db->query('USE Arm_mo');
+        $db->query('USE Arm_mo_v2');
 
         /// Query the database based on the identifier
         $query = "SELECT * FROM Antidote WHERE Antidote_ID = '$identifier'";

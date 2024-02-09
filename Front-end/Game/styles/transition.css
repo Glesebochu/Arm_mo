@@ -19,6 +19,7 @@ body {
     gap: 1vmax;
     padding: 1.3vmax;
     height: 95vh;
+    overflow: hidden;
 }
 
 
@@ -147,13 +148,19 @@ body {
     /* Visual Stimulus Inner Div */
 .populate-visual-stimulus{
     grid-area: populate-visual-stimulus;
-    width: 100%;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
 }
 .populate-visual-stimulus p{
     /* border: 1px solid black; */
     background-color: rgb(121, 193, 216);
     padding: 0.2vmax;
-    border-radius: 20px;
+    border-radius: 5px;
+    display: inline;
+    margin: 0.5vmax;
+    font-size: 0.8vmax;
+    opacity: 1;
 }
 /* ---------------------------------------------------------------------------------------- */
 /* ---------------------------------------------------------------------------------------- */
@@ -398,13 +405,19 @@ body {
     /* Auditory Stimulus Inner Div */
 .populate-auditory-stimulus{
     grid-area: populate-auditory-stimulus;
-    width: 100%;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
 }
 .populate-auditory-stimulus p{
     /* border: 1px solid black; */
     background-color: rgb(121, 193, 216);
     padding: 0.2vmax;
-    border-radius: 20px;
+    border-radius: 5px;
+    display: inline;
+    margin: 0.5vmax;
+    font-size: 0.8vmax;
+    opacity: 1;
 }
 /* ---------------------------------------------------------------------------------------- */
 /* ---------------------------------------------------------------------------------------- */
@@ -648,13 +661,19 @@ body {
     /* Kinesthetic Stimulus Inner Div */
 .populate-kinesthetic-stimulus{
     grid-area: populate-kinesthetic-stimulus;
-    width: 100%;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
 }
 .populate-kinesthetic-stimulus p{
     /* border: 1px solid black; */
     background-color: rgb(121, 193, 216);
     padding: 0.2vmax;
-    border-radius: 20px;
+    border-radius: 5px;
+    display: inline;
+    margin: 0.5vmax;
+    font-size: 0.8vmax;
+    opacity: 1;
 }
 /* ---------------------------------------------------------------------------------------- */
 /* ---------------------------------------------------------------------------------------- */
@@ -897,13 +916,19 @@ body {
     /* Taste Stimulus Inner Div */
 .populate-taste-stimulus{
     grid-area: populate-taste-stimulus;
-    width: 100%;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
 }
 .populate-taste-stimulus p{
     /* border: 1px solid black; */
     background-color: rgb(121, 193, 216);
     padding: 0.2vmax;
-    border-radius: 20px;
+    border-radius: 5px;
+    display: inline;
+    margin: 0.5vmax;
+    font-size: 0.8vmax;
+    opacity: 1;
 }
 /* ---------------------------------------------------------------------------------------- */
 /* ---------------------------------------------------------------------------------------- */
@@ -1143,13 +1168,19 @@ body {
     /* Olifactory Stimulus Inner Div */
 .populate-olifactory-stimulus{
     grid-area: populate-olifactory-stimulus;
-    width: 100%;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
 }
 .populate-olifactory-stimulus p{
     /* border: 1px solid black; */
     background-color: rgb(121, 193, 216);
     padding: 0.2vmax;
-    border-radius: 20px;
+    border-radius: 5px;
+    display: inline;
+    margin: 0.5vmax;
+    font-size: 0.8vmax;
+    opacity: 1;
 }
 /* ---------------------------------------------------------------------------------------- */
 /* ---------------------------------------------------------------------------------------- */
@@ -1657,14 +1688,22 @@ body {
     /* Thought State Inner Div */
 .populate-thought-state{
     grid-area: populate-thought-state;
-    height: 100%;
-    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    /* position: relative;  */
 }
 .populate-thought-state p{
     /* border: 1px solid black; */
     background-color: rgb(131, 179, 108);
+    height: auto;
     padding: 0.2vmax;
-    border-radius: 20px;
+    border-radius: 5px;
+    display: inline;
+    margin: 0.5vmax;
+    font-size: 0.8vmax;
+    opacity: 1;
+    /* padding-bottom: 0; */
 }
 /* ---------------------------------------------------------------------------------------- */
 /* ---------------------------------------------------------------------------------------- */
@@ -1901,17 +1940,25 @@ body {
     opacity: 1;
 }
 
-    /* Thought State Inner Div */
+    /* Emotional State Inner Div */
 .populate-emotional-state{
     grid-area: populate-emotional-state;
-    height: 100%;
-    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    /* position: relative;  */
 }
 .populate-emotional-state p{
     /* border: 1px solid black; */
     background-color: rgb(131, 179, 108);
+    height: auto;
     padding: 0.2vmax;
-    border-radius: 20px;
+    border-radius: 5px;
+    display: inline;
+    margin: 0.5vmax;
+    font-size: 0.8vmax;
+    opacity: 1;
+    /* padding-bottom: 0; */
 }
 /* ---------------------------------------------------------------------------------------- */
 /* ---------------------------------------------------------------------------------------- */

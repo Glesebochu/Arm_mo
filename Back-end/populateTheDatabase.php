@@ -169,7 +169,7 @@
 
 // Populating the Antidote table
 {
-    function checkRecordExistsAntidote($AntidoteType, $Severity,$Antidote) {
+    function checkRecordExistsAntidote($AntidoteType, $Severity,$Description) {
         global $db;
         $query = "SELECT * FROM Antidote WHERE Type = ? AND Severity = ? AND Description = ?";
         $stmt = $db->prepare($query);

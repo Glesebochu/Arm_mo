@@ -515,6 +515,7 @@
     {
         $queryPracticed_Stages= "CREATE TABLE Practiced_Stages(Session_ID INT NOT NULL,
                                                                 Stage_ID INT NOT NULL,
+                                                                Is_Mastered BOOLEAN NOT NULL DEFAULT 0,
                                                                 PRIMARY KEY (Stage_ID,Session_ID),
                                                                 FOREIGN KEY (Stage_ID) REFERENCES Stage(Stage_ID),
                                                                 FOREIGN KEY (Session_ID) REFERENCES Session(Session_ID))";
@@ -802,7 +803,7 @@
 
     // Populating the Meditation Stage table
     {
-        $Goal = ['Develop a consistent daily meditation practice'
+        $Goals = ['Develop a consistent daily meditation practice'
         ,'Shorten the periods of mind-wandering and extend the periods of sustained attention to the meditation object.'
         ,'Overcome forgetting and falling asleep.'
         ,'Overcome gross distraction and strong dullness.'
@@ -814,22 +815,22 @@
         ,'The qualities of śamatha persist after you rise from the cushion'
         ];
 
-        foreach ($Goal as $goals) {
-            $sqlCheckGoal = "SELECT COUNT(*) FROM Stage WHERE Goal = '$goals'";
+        foreach ($Goals as $goal) {
+            $sqlCheckGoal = "SELECT COUNT(*) FROM Stage WHERE Goal = '$goal'";
             $result = $db->query($sqlCheckGoal);
 
             if ($result->fetch_row()[0] == 0) {
-                $sqlInsertStage = "INSERT INTO Stage(Goal) VALUES ('$goals')";
+                $sqlInsertStage = "INSERT INTO Stage(Goal) VALUES ('$goal')";
                 $db->query($sqlInsertStage);
                 echo "
                     <script>
-                        console.log('Stage $goals added successfully!')
+                        console.log('Stage $goal added successfully!')
                     </script>
                 ";
             } else {
                 echo "
                     <script>
-                        console.log('Stage $goals already exists!')
+                        console.log('Stage $goal already exists!')
                     </script>
                 ";
             }

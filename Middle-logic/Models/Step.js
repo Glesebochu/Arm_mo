@@ -8,8 +8,8 @@ export class StepType{
 }
 
 export class Step{
-    constructor(Step_ID,title, description, category, type, duration=0, response, activity){
-        this.Step_ID=Step_ID;
+    constructor(id, title, description, category, type, duration=0, response, activity){
+        this.Step_ID=id;
         this.Title = title;
         this.Description = description;
         this.Category = category;
@@ -88,6 +88,13 @@ export class Step{
                 "Make yourself as comfortable as possible.", 
                 StepCategory.Preparation, 
                 StepType.Instruction
+            ),
+            new Step(
+                undefined,
+                "Duration", 
+                "For how lond would you like to do your chosen activity?", 
+                StepCategory.Preparation, 
+                StepType.Question
             )
         ];
 

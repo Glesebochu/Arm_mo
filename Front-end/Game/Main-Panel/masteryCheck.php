@@ -34,19 +34,16 @@
 
     <script type="module">
       // --------------------------------------------------------------------------
-
-      // Import the Session.js module
-      import { Session } from '../../../Middle-logic/Models/Session.js';
-      import { Stage } from '../../../Middle-logic/Models/Stage.js';
-
-      // Output the JavaScript code to create the Session objects
-      var obj = <?php echo $javascriptSession;?>;
-      var sessionObj = Session.getSessionFromObject(obj);
-
-      // --------------------------------------------------------------------------
       // Output the JavaScript code to create the Stage object
+      import { Stage } from '../../../Middle-logic/Models/Stage.js';
       var obj = <?php echo $javascriptStage; ?>;
       var stageObj = Stage.getStageFromObject(obj);
+      
+      // --------------------------------------------------------------------------
+      // Output the JavaScript code to create the Session objects
+      import { Session } from '../../../Middle-logic/Models/Session.js';
+      var obj = <?php echo $javascriptSession;?>;
+      var sessionObj = Session.getSessionFromObject(obj);
 
       // Call the masteryCheck function
       import { masteryCheck } from '../scripts/masteryCheck.js';

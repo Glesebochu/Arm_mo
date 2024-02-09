@@ -13,7 +13,7 @@ export class Intention {
     static Invoke_Introspective_Attention = "Invoke introspective attention frequently, before you've forgotten the breath or fallen asleep.";
     static Make_Corrections_Distractions = "Make corrections as soon as you notice distractions or dullness.";
 
-    static getIntentionFromArray(arr) {
+    static getIntentionsFromArrayObjects(arr) {
         const IntentionArray = arr.map(obj =>
             new Intention(obj.Intention_ID, obj.Description)
         );

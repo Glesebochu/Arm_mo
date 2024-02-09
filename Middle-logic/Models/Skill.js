@@ -16,8 +16,11 @@ export class Skill {
     static Label = "Labeling";
     static Check_In = "Checking in";
 
-    static convertArrayToSkillObjects(arr) {
-        var SkillObjects = arr.map(obj => new Skill(obj.Skill_ID, obj.Description));
-        return SkillObjects;
+    static getSkillFromObject(obj){
+        return new Skill(obj.Skill_ID, obj.Description);
+    }
+
+    static getSkillsFromArrayObject(arr) {
+        return arr.map(this.getSkillFromObject);
       }
 }

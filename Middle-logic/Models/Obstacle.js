@@ -19,8 +19,8 @@ export class Obstacle {
     static Forgetting = "Forgetting";
     static Sleepiness = "Sleepiness";
     
-    static convertArrayToObstacleObjects(array) {
+    static getObstaclesFromArrayObject(array) {
         var obstacleObjects = array.map(obstacle => new Obstacle(obstacle.Obstacle_ID, obstacle.Description));
         return obstacleObjects;
-      }
+    }
 }

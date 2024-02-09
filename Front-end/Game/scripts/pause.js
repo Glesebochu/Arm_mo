@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // After a delay, navigate to the Dummy Game UI.html page
         setTimeout(function () {
-            window.location.href = "../../home-settings/home-page.php";
+            window.location.href = "https://localhost/Arm-mo/Front-end/home-settings/home-page.php";
         }, 500); // Adjust the delay (in milliseconds) as needed
     });
 });

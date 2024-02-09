@@ -15,7 +15,7 @@ if (isset($_POST['session'])) {
     $meditator = $session['Meditator'];
     $startDateTime = $session['Start_Date_Time'];
     $endDateTime = $session['End_Date_Time'];
-    $practicedStages = $session['Practiced_Stages'];
+    $practicedStages = $session['PracticedStages'];
     $steps = $session['Steps'];
     $ahaMoments = $session['AhaMoments'];
     $newlyMasteredStages = $session['Newly_Mastered_Stages'];

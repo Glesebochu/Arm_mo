@@ -33,7 +33,7 @@ export class Session {
     // Function to send the Session object to the PHP script
     static updateSession(session) {
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', '../../Back-end/UpdateDatabase/UpdateSession.php', true);
+        xhr.open('POST', 'https://localhost/Arm-mo/Back-end/UpdateDatabase/UpdateSession.php', true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.onreadystatechange = function () {
             if (xhr.readyState === XMLHttpRequest.DONE) {
@@ -50,7 +50,7 @@ export class Session {
     }
     static createSession(session) {
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', '../../Back-end/UpdateDatabase/CreateSession.php', true);
+        xhr.open('POST', 'https://localhost/Arm-mo/Back-end/UpdateDatabase/CreateSession.php', true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.onreadystatechange = function () {
             if (xhr.readyState === XMLHttpRequest.DONE) {

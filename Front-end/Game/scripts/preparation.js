@@ -4,7 +4,7 @@ import { Session } from "../../../Middle-logic/Models/Session.js";
 import { Meditator } from "../../../Middle-logic/Models/Meditator.js";
 import { Activity } from "../../../Middle-logic/Models/Activity.js";
 
-export function prepare(session){
+export function prepare(session, activityList){
 
     // Get the steps from the database.
     var steps = Step.getDummyPreparationSteps();
@@ -25,7 +25,6 @@ export function prepare(session){
     var nextButton = document.getElementById("preparation-next");
 
     function addOptionsToActivityDropDown(){
-        var activityList = Activity.getAllActivities();
         activityList.forEach(activity => {
             var newActivity = document.createElement('option');
             newActivity.textContent = activity.Title;
@@ -115,7 +114,7 @@ export function prepare(session){
             // Save the response with an object for the "Activity" step.
             if(currentStep.Title == "Activity"){
                 let chosenIndex = select_input.selectedIndex;
-                let chosenActivity = Activity.getAllActivities().filter(a => a.Title == select_input[chosenIndex].textContent)[0];
+                let chosenActivity = activityList.filter(a => a.Title == select_input[chosenIndex].textContent)[0];
                 currentStep.Activity = chosenActivity;
             }else{
                 currentStep.Response = text_input.value;
@@ -127,10 +126,9 @@ export function prepare(session){
             // If this is the last step, go to the transition phase.
             else {
                 session.Steps = steps;
+                Session.updateSession(session);
                 // window.location.href = "./transition.html";
-                // session.Steps.push(new Step(), new Step(), new Step());
                 console.log(session);
-                // console.log(session.Steps.filter(step => step.Category == StepCategory.Preparation));
             }
     
             // Clear the input box.

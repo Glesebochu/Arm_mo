@@ -30,35 +30,49 @@ if (isset($_POST['session'])) {
     $result = $db->query($sql);
 
     if ($result) {
-        // Delete existing steps for the session
-        $deleteStepsSql = "DELETE FROM Step WHERE Session_ID = '$session_ID'";
-        $deleteStepsResult = $db->query($deleteStepsSql);
+        // Update existing steps for the session
+        foreach ($steps as $step) {
+            $step_ID = $step['Step_ID'];
+            $title = $db->real_escape_string($step['Title']);
+            $description = $db->real_escape_string($step['Description']);
+            $type = $db->real_escape_string($step['Type']);
+            $category = $db->real_escape_string($step['Category']);
+            $duration = $db->real_escape_string($step['Duration']);
+            $response = $db->real_escape_string($step['Response']);
 
-        if ($deleteStepsResult) {
-            // Insert new steps for the session
-            foreach ($steps as $step) {
-                $title = $db->real_escape_string($step['Title']);
-                $description = $db->real_escape_string($step['Description']);
-                $type = $db->real_escape_string($step['Type']);
-                $category = $db->real_escape_string($step['Category']);
-                $duration = $db->real_escape_string($step['Duration']);
-                $response = $db->real_escape_string($step['Response']);
-                // $activity_ID = $db->real_escape_string($step['Activity']);
+            $updateStepSql = "UPDATE Step SET
+                              Title = '$title',
+                              Description = '$description',
+                              Type = '$type',
+                              Category = '$category',
+                              Duration = '$duration',
+                              Response = 'test1'
+                              WHERE Step_ID = '$step_ID' AND Session_ID = '$session_ID'";
+            $updateStepResult = $db->query($updateStepSql);
 
-                $insertStepSql = "INSERT INTO Step (Session_ID, Title, Description, Type, Category, Duration, Response)
-                                  VALUES ('$session_ID', '$title', '$description', '$type', '$category', '$duration', '$response')";
-                $insertStepResult = $db->query($insertStepSql);
-
-                if (!$insertStepResult) {
-                    echo 'Failed to insert steps for the session.';
-                    exit;
-                }
+            if (!$updateStepResult) {
+                echo 'Failed to update steps for the session.';
+                exit;
             }
-
-            echo 'Session updated successfully.';
-        } else {
-            echo 'Failed to delete existing steps for the session.';
         }
+
+        // Update existing AhaMoments for the session
+        foreach ($ahaMoments as $ahaMoment) {
+            $ahaMoment_ID = $ahaMoment['AhaMoment_ID'];
+            $label = $db->real_escape_string($ahaMoment['Label']);
+
+            $updateAhaMomentSql = "UPDATE AhaMoment SET
+                                   Label = '$label'
+                                   WHERE AhaMoment_ID = '$ahaMoment_ID' AND Session_ID = '$session_ID'";
+            $updateAhaMomentResult = $db->query($updateAhaMomentSql);
+
+            if (!$updateAhaMomentResult) {
+                echo 'Failed to update AhaMoments for the session.';
+                exit;
+            }
+        }
+
+        echo 'Session updated successfully.';
     } else {
         echo 'Failed to update session.';
     }

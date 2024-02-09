@@ -1,0 +1,116 @@
+body {
+    margin: 0;
+    padding: 0;
+    /* font-family: 'Major Mono Display', monospace; */
+    font-family: monospace;
+}
+
+/* Inside the Side Panel */
+.stage {
+    grid-area: stage;
+    /* background-color: #9ce8b4; */
+    border-radius: 2%;
+    /* height: 100%; */
+}
+
+.timer {
+    /* width: 100%;  */
+    grid-area: timer;
+    /* background-color: #9ce8b4; */
+    border-radius: 2%;
+    /* height: 100%; */
+}
+
+.settings {
+    grid-area: settings;
+    /* background-color: #9ce8b4; */
+    border-radius: 2%;
+    /* height: 100%; */
+}
+
+.how-to-play {
+    grid-area: how-to-play;
+    /* background-color: #9ce8b4; */
+    border-radius: 2%;
+    /* height: 100%; */
+}
+/* ---------------------------------------------------------------------------------------- */
+
+
+.side-panel {
+    grid-area: side-panel;
+    background-color: #D9D9D9;
+    /* border-radius: 2%; */
+    display: grid;
+    grid-template-areas:
+        'stage'
+        'timer'
+        'settings'
+        'how-to-play';
+    grid-template-rows: repeat(4, 1fr);
+    /* grid-template-columns: 1fr; */
+    justify-content: center;
+    align-items: center;
+    gap: 1vmax;
+    /* width: 14vmax; */
+    height: 100vh;
+    /* overflow: hidden; */
+}
+
+.side-panel button {
+    width: 10vmax;
+    height: 10vmax;
+    background-color: #D9D9D9;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    /* margin-top: 56%; */
+    left: 0;
+    transition: transform 0.5s;
+}
+
+.side-panel button:hover {
+    transform: scale(1.1);
+}
+
+.side-panel button:active {
+    transform: scale(1);
+    transition-duration: 0.1s;
+}
+
+.side-panel button img{
+    width: 80%;
+    height: 80%;
+    opacity: 0.7;  
+}
+
+.side-panel button p{
+    font-family: 'Major Mono Display', monospace;
+    font-weight: 500;
+    font-size: 7vmax;
+}
+
+/* Additional styling for button content alignment */
+.side-panel button p,
+.side-panel button img {
+    display: block;
+    margin: auto;
+}
+
+
+
+.second-page {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: white; /* Set your desired background color */
+    transition: transform 0.5s ease-out;
+}
+
+/* Add styles to move the second page up when it's shown */
+.second-page.active {
+    transform: translateY(-100%);
+}

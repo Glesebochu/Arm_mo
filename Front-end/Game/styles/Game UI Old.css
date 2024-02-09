@@ -1,0 +1,2284 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+@media screen and (orientation:portrait) {
+    
+    .inner-container{
+        display: none;
+    }
+    .portrait-div{
+        font-size: 2vmax;
+        text-align: center;
+        margin-top: 46vmax;
+        padding-left: 2vmax;
+        padding-right: 2vmax;
+        font-family: 'Major Mono Display', monospace;
+    }
+    .portrait-div .portrait-icon{
+        width: auto;
+        height: 3vmax;
+    }
+}
+
+@media screen and (orientation:landscape) {
+
+    .portrait-div{
+        display: none;
+    }
+    /* Inside the Side Panel */
+    .stage {
+        grid-area: stage;
+        /* background-color: #9ce8b4; */
+        border-radius: 2%;
+        /* height: 100%; */
+    }
+
+    .timer {
+        grid-area: timer;
+        /* background-color: #9ce8b4; */
+        border-radius: 2%;
+        /* height: 100%; */
+    }
+
+    .settings {
+        grid-area: settings;
+        /* background-color: #9ce8b4; */
+        border-radius: 2%;
+        /* height: 100%; */
+    }
+
+    .how-to-play {
+        grid-area: how-to-play;
+        /* background-color: #9ce8b4; */
+        border-radius: 2%;
+        /* height: 100%; */
+    }
+    /* ---------------------------------------------------------------------------------------- */
+
+
+    .side-panel {
+        grid-area: side-panel;
+        background-color: #D9D9D9;
+        /* border-radius: 2%; */
+        display: grid;
+        grid-template-areas:
+            'stage'
+            'timer'
+            'settings'
+            'how-to-play';
+        grid-template-rows: repeat(4, 1fr);
+        gap: 1.3vw;
+        /* padding: 1.3vw; */
+    }
+
+    .side-panel button {
+        width: 4.5vw;
+        height: 4.5vw;
+        background-color: #D9D9D9;
+        border: none;
+        border-radius: 0;
+        cursor: pointer;
+        margin-top: 50%;
+        margin-left: 15%;
+        transition: transform 0.5s;
+    }
+
+    .side-panel button:hover {
+        transform: scale(1.2);
+    }
+
+    .side-panel button img{
+        width: 80%;
+        height: 80%;
+        opacity: 0.7;  
+    }
+
+    .side-panel button p{
+        font-weight: 500;
+        font-size: 3vw;
+    }
+
+    /* Additional styling for button content alignment */
+    .side-panel button p,
+    .side-panel button img {
+        display: block;
+        margin: auto;
+    }
+    /* ---------------------------------------------------------------------------------------- */
+
+
+    .main-panel {
+        grid-area: main-panel;
+        background-color: #EDEBEB;
+        border-radius: 2%;
+        display: grid;
+        grid-template-areas:
+            'previous-stage meditation-object meditation-object next-stage'
+            'previous-stage sensory-stimulus mental-object next-stage'
+            'previous-stage sensory-stimulus aha-moment next-stage';
+        grid-template-columns: 1fr 8fr 8fr 1fr;
+        grid-template-rows: 1fr 6fr 1fr;
+        gap: 1vmax;
+        padding: 1.3vmax;
+    }
+
+
+    /* Inside the main panel */
+    .meditation-object p {
+        text-align: center;
+        font-weight: 500;
+        font-size: 1.2vmax;
+        user-select: none; 
+    }
+
+    .meditation-object {
+        grid-area: meditation-object;
+        background-color: #f8f397;
+        box-shadow: 0vw 0vw 0.8vw 0.2vw #968e00;
+        border-radius: 20px;
+        opacity: 0.6;
+        cursor: pointer;
+        transition-duration: 0.5s;
+        /* border: 0.5vw rgb(176, 193, 176) solid;  */
+        /* height: 100%; */
+    }
+    .meditation-object:hover{
+        transform: scale(1.05);
+    }
+    /* ---------------------------------------------------------------------------------------- */
+
+
+    /* Inside the previous stage */
+    .previous-stage button {
+        width: 100%;
+        height: 80%;
+        background-color: #EDEBEB;
+        border: none;
+        border-radius: 0;
+        cursor: pointer;
+        transition: transform 0.5s;
+        margin-top: 100%;
+    }
+
+    .previous-stage button:hover {
+        transform: scale(1.3);
+    }
+
+    .previous-stage button img{
+        width: 80%;
+        height: 100%;
+        opacity: 0.3;
+        display: block;
+        margin: auto;
+    }
+    .previous-stage {
+        grid-area: previous-stage;
+        /* background-color: #D9D9D9; */
+        border-radius: 2%;
+        /* height: 100%; */
+    }
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+
+
+    /* Visual Stimulus */
+        /* Visual Stimulus Label */
+    .visual-stimulus label {
+        position: absolute;
+        left: 0;
+        width: 91%;
+        height: 100%;
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+        background-color: rgb(66, 168, 202);
+        float: left;
+        opacity: 0;
+        cursor: pointer;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.5s, opacity 0.5s;
+    }
+    .visual-stimulus:hover label {
+        transform: scaleX(1);
+        opacity: 0.4;
+    }
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+
+        /* Visual Stimulus Icon */
+    .visual-stimulus .visual-stimulus-icon {
+        grid-area: visual-stimulus-icon;
+        left: 0.8vmax;
+        width: auto; 
+        height: 6.3vmax;
+        position: relative;
+    }
+
+            /* Normal Image */
+    .visual-stimulus .visual-stimulus-icon .normal-image {
+        width: auto;
+        height: 100%;
+        opacity: 1;
+        transition: opacity 0.5s;
+    }
+            /* Hover Image */
+    .visual-stimulus .visual-stimulus-icon .hover-image {
+        width: auto;
+        height: 100%;
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: opacity 0.5s;
+    }
+            /* Change Hover Image on Hover */
+    .visual-stimulus:hover .visual-stimulus-icon .normal-image {
+        opacity: 0;
+    }
+    .visual-stimulus:hover .visual-stimulus-icon .hover-image {
+        opacity: 1;
+    }
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+
+
+        /* Visual Stimulus Inner Div */
+    .populate-visual-stimulus{
+        grid-area: populate-visual-stimulus;
+        width: 100%;
+    }
+    .populate-visual-stimulus p{
+        /* border: 1px solid black; */
+        background-color: rgb(121, 193, 216);
+        padding: 0.2vmax;
+        border-radius: 20px;
+    }
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+
+
+        /* Visual Stimulus Text Area */
+    .visual-stimulus-input-div{
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        position: absolute;
+        left: 7.2vmax;
+        width: 71.8%;
+        height: 100%;
+        float: left;
+        cursor: pointer;
+        z-index: 100;
+        position: absolute;
+        transition: right 0.5s, opacity 0.5s;
+        pointer-events: none;
+    }
+    
+    .visual-stimulus-input-div .visual-stimulus-input{
+        width: 100%;
+        height: 95%;
+        resize: none;
+        border: none;
+        background-color: rgb(213, 213, 213);
+        opacity: 1;
+        font-size: 1vmax;
+    }
+    .visual-stimulus-input-div.active{
+        max-height: 1000px;
+        opacity: 1;
+        pointer-events: auto;
+    }
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+
+        /* Visual Stimulus Button */
+    .visual-stimulus .visual-stimulus-button {
+        grid-area: visual-stimulus-button;
+        /* width: 10%; */
+        height: 100%;
+        /* float: right; */
+        background-color: #b7b6b6;
+        border: none;
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+        cursor: pointer;
+        transition-duration: 0.5s;
+    }
+    .visual-stimulus:hover .visual-stimulus-button {
+        background-color: rgb(29, 137, 172);
+        opacity: 0.5;
+    }
+    .visual-stimulus-button:hover {
+        box-shadow: 0vw 0vw 0.5vw 0.07vw black;
+    }
+    .visual-stimulus-button:active {
+        box-shadow: 0vw 0vw 0vw 0.0vw black;
+        transition-duration: 0.1s;
+    }
+
+        /* Visual Stimulus Button Image */
+    .visual-stimulus button img{
+        width: 80%;
+        height: 100%;
+        opacity: 0.3;
+        display: block;
+        margin: auto;
+        transition-duration: 0.5s;
+    }
+    .visual-stimulus:hover button img{
+        opacity: 0.8;
+    }
+
+    .visual-stimulus .visual-stimulus-button.active img {
+        transform: rotate(45deg);
+        transition: transform 0.5s;
+    }
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+
+        /* Visual Stimulus Div */
+    .visual-stimulus {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        grid-area: visual-stimulus;
+        display: grid;
+        grid-template-areas:
+            'visual-stimulus-icon populate-visual-stimulus visual-stimulus-button';
+        grid-template-columns: 1fr 3fr 0.4fr;
+        background-color: #D9D9D9;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: transform 0.5s;
+    }
+    .visual-stimulus:hover {
+        transform: scale(1.03);
+    }
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+
+        /* Visual Four Step */
+    .visual-stimulus .visual-four-step-button{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1vmax;
+        height: 1vmax;
+        border-radius: 50px;
+        border: none;
+        background-color: rgb(29, 137, 172); 
+        z-index: 1; 
+        /* opacity: 0.5; */
+        box-shadow: 0 0 0 0 rgba(#5a99d4, .5);
+        animation: pulse 1.5s infinite;
+        /* transition-duration: 0.5s; */
+    }
+    .visual-stimulus .visual-four-step-button:hover {
+        animation: none;
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: scale(0.9);
+        }
+        70% {
+            transform: scale(1.2);
+            box-shadow: 0 0 0 50px rgba(#d4995a, 0);
+        }
+        100% {
+            transform: scale(0.9);
+            box-shadow: 0 0 0 0 rgba(#d4c45a, 0);
+        }
+    }
+
+    .visual-stimulus .visual-four-step-div {
+        display: none;
+        position: absolute;
+        top: 1vw;
+        left: 1vw;
+        width: 26vmax;
+        height: 6vmax;
+        border-radius: 5px;
+        border: 1px black solid;
+        background-color: rgb(141, 185, 200); 
+        z-index: 100; 
+        overflow: hidden;
+        overflow-y: scroll; 
+        scrollbar-color: #5a99d4 rgb(119, 172, 222);
+        scrollbar-width: thin;
+        cursor: default;
+    }
+
+    .visual-stimulus .visual-four-step-div .visual-four-step-heading{
+        font-weight: bold;
+        font-size: 1vmax;
+        line-height: 0;
+    }
+
+    .visual-stimulus .visual-four-step-div .visual-four-step-description{
+        font-size: 0.8vmax;
+        margin-left: 0.3vmax;
+    }
+
+    .visual-stimulus .visual-four-step-button:active+.visual-four-step-div,
+    .visual-stimulus .visual-four-step-div.active {
+        display: block;
+    }
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+
+
+    /* Auditory Stimulus */
+        /* Auditory Stimulus Label */
+    .auditory-stimulus label {
+        position: absolute;
+        left: 0;
+        width: 91%;
+        height: 100%;
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+        background-color: rgb(66, 168, 202);
+        float: left;
+        opacity: 0;
+        cursor: pointer;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.5s, opacity 0.5s;
+    }
+    .auditory-stimulus:hover label {
+        transform: scaleX(1);
+        opacity: 0.5;
+    }
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+
+        /* Auditory Stimulus Icon */
+    .auditory-stimulus .auditory-stimulus-icon {
+        grid-area: auditory-stimulus-icon;
+        left: 0.8vmax;
+        width: auto; 
+        height: 5.4vmax;
+        position: relative;
+    }
+
+            /* Normal Image */
+    .auditory-stimulus .auditory-stimulus-icon .normal-image {
+        width: auto;
+        height: 100%;
+        opacity: 1;
+        transition: opacity 0.5s;
+    }
+            /* Hover Image */
+    .auditory-stimulus .auditory-stimulus-icon .hover-image {
+        width: auto;
+        height: 100%;
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: opacity 0.5s;
+    }
+            /* Change Hover Image on Hover */
+    .auditory-stimulus:hover .auditory-stimulus-icon .normal-image {
+        opacity: 0;
+    }
+    .auditory-stimulus:hover .auditory-stimulus-icon .hover-image {
+        opacity: 1;
+    }
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+
+        /* Auditory Stimulus Inner Div */
+    .populate-auditory-stimulus{
+        grid-area: populate-auditory-stimulus;
+        width: 100%;
+    }
+    .populate-auditory-stimulus p{
+        /* border: 1px solid black; */
+        background-color: rgb(121, 193, 216);
+        padding: 0.2vmax;
+        border-radius: 20px;
+    }
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+
+        /* Auditory Stimulus Text Area */
+    .auditory-stimulus-input-div{
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        position: absolute;
+        left: 7.2vmax;
+        width: 71.8%;
+        height: 100%;
+        float: left;
+        cursor: pointer;
+        z-index: 100;
+        position: absolute;
+        transition: right 0.5s, opacity 0.5s;
+        pointer-events: none;
+    }
+    
+    .auditory-stimulus-input-div .auditory-stimulus-input{
+        width: 100%;
+        height: 95%;
+        resize: none;
+        border: none;
+        background-color: rgb(213, 213, 213);
+        opacity: 1;
+        font-size: 1vmax;
+    }
+    .auditory-stimulus-input-div.active{
+        max-height: 1000px;
+        opacity: 1;
+        pointer-events: auto;
+    }
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+
+        /* Auditory Stimulus Button */
+    .auditory-stimulus .auditory-stimulus-button {
+        grid-area: auditory-stimulus-button;
+        /* width: 10%; */
+        height: 100%;
+        /* float: right; */
+        background-color: #b7b6b6;
+        border: none;
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+        cursor: pointer;
+        transition-duration: 0.5s;
+    }
+    .auditory-stimulus:hover .auditory-stimulus-button {
+        background-color: rgb(29, 137, 172);
+        opacity: 0.6;
+    }
+    .auditory-stimulus-button:hover {
+        box-shadow: 0vw 0vw 0.5vw 0.07vw black;
+    }
+    .auditory-stimulus-button:active {
+        box-shadow: 0vw 0vw 0vw 0.0vw black;
+        transition-duration: 0.1s;
+    }
+
+        /* Auditory Stimulus Button Image */
+    .auditory-stimulus button img{
+        width: 80%;
+        height: 100%;
+        opacity: 0.3;
+        display: block;
+        margin: auto;
+        transition-duration: 0.5s;
+    }
+    .auditory-stimulus:hover button img{
+        opacity: 0.8;
+    }
+    .auditory-stimulus .auditory-stimulus-button.active img {
+        transform: rotate(45deg);
+        transition: transform 0.5s;
+    }
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+
+        
+        /* Auditory Stimulus Div */
+    .auditory-stimulus {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        grid-area: auditory-stimulus;
+        display: grid;
+        grid-template-areas:
+            'auditory-stimulus-icon populate-auditory-stimulus auditory-stimulus-button';
+        grid-template-columns: 1fr 3fr 0.4fr;
+        background-color: #D9D9D9;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: transform 0.5s;
+    }
+    .auditory-stimulus:hover {
+        transform: scale(1.03);
+    }
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+
+        /* Auditory Four Step */
+    .auditory-stimulus .auditory-four-step-button{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1vmax;
+        height: 1vmax;
+        border-radius: 50px;
+        border: none;
+        background-color: rgb(29, 137, 172); 
+        z-index: 1; 
+        /* opacity: 0.5; */
+        box-shadow: 0 0 0 0 rgba(#5a99d4, .5);
+        animation: pulse 1.5s infinite;
+        /* transition-duration: 0.5s; */
+    }
+    .auditory-stimulus .auditory-four-step-button:hover {
+        animation: none;
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: scale(0.9);
+        }
+        70% {
+            transform: scale(1.2);
+            box-shadow: 0 0 0 50px rgba(#d4995a, 0);
+        }
+        100% {
+            transform: scale(0.9);
+            box-shadow: 0 0 0 0 rgba(#d4c45a, 0);
+        }
+    }
+
+    .auditory-stimulus .auditory-four-step-div {
+        display: none;
+        position: absolute;
+        top: 1vw;
+        left: 1vw;
+        width: 26vmax;
+        height: 6vmax;
+        border-radius: 5px;
+        border: 1px black solid;
+        background-color: rgb(141, 185, 200); 
+        z-index: 100; 
+        overflow: hidden;
+        overflow-y: scroll; 
+        scrollbar-color: #5a99d4 rgb(119, 172, 222);
+        scrollbar-width: thin;
+        cursor: default;
+    }
+
+    .auditory-stimulus .auditory-four-step-div .auditory-four-step-heading{
+        font-weight: bold;
+        font-size: 1vmax;
+        line-height: 0;
+    }
+
+    .auditory-stimulus .auditory-four-step-div .auditory-four-step-description{
+        font-size: 0.8vmax;
+        margin-left: 0.3vmax;
+    }
+
+    .auditory-stimulus .auditory-four-step-button:active+.auditory-four-step-div,
+    .auditory-stimulus .auditory-four-step-div.active {
+        display: block; /* show when button is active or has been clicked */
+    }        
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+
+
+    /* kinesthetic Stimulus */
+        /* kinesthetic Stimulus Label */
+        .kinesthetic-stimulus label {
+        position: absolute;
+        left: 0;
+        width: 91%;
+        height: 100%;
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+        background-color: rgb(66, 168, 202);
+        float: left;
+        opacity: 0;
+        cursor: pointer;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.5s, opacity 0.5s;
+    }
+    .kinesthetic-stimulus:hover label {
+        transform: scaleX(1);
+        opacity: 0.6;
+    }
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+
+        /* kinesthetic Stimulus Icon */
+    .kinesthetic-stimulus .kinesthetic-stimulus-icon {
+        grid-area: kinesthetic-stimulus-icon;
+        left: 0.8vmax;
+        width: auto; 
+        height: 5.4vmax;
+        position: relative;
+    }
+
+            /* Normal Image */
+    .kinesthetic-stimulus .kinesthetic-stimulus-icon .normal-image {
+        width: auto;
+        height: 100%;
+        opacity: 1;
+        transition: opacity 0.5s;
+    }
+            /* Hover Image */
+    .kinesthetic-stimulus .kinesthetic-stimulus-icon .hover-image {
+        width: auto;
+        height: 100%;
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: opacity 0.5s;
+    }
+            /* Change Hover Image on Hover */
+    .kinesthetic-stimulus:hover .kinesthetic-stimulus-icon .normal-image {
+        opacity: 0;
+    }
+    .kinesthetic-stimulus:hover .kinesthetic-stimulus-icon .hover-image {
+        opacity: 1;
+    }
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+
+        /* Kinesthetic Stimulus Inner Div */
+    .populate-kinesthetic-stimulus{
+        grid-area: populate-kinesthetic-stimulus;
+        width: 100%;
+    }
+    .populate-kinesthetic-stimulus p{
+        /* border: 1px solid black; */
+        background-color: rgb(121, 193, 216);
+        padding: 0.2vmax;
+        border-radius: 20px;
+    }
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+
+        /* Kinesthetic Stimulus Text Area */
+    .kinesthetic-stimulus-input-div{
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        position: absolute;
+        left: 7.2vmax;
+        width: 71.8%;
+        height: 100%;
+        float: left;
+        cursor: pointer;
+        z-index: 100;
+        position: absolute;
+        transition: right 0.5s, opacity 0.5s;
+        pointer-events: none;
+    }
+    
+    .kinesthetic-stimulus-input-div .kinesthetic-stimulus-input{
+        width: 100%;
+        height: 95%;
+        resize: none;
+        border: none;
+        background-color: rgb(213, 213, 213);
+        opacity: 1;
+        font-size: 1vmax;
+    }
+    .kinesthetic-stimulus-input-div.active{
+        max-height: 1000px;
+        opacity: 1;
+        pointer-events: auto;
+    }
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+
+        /* kinesthetic Stimulus Button */
+    .kinesthetic-stimulus .kinesthetic-stimulus-button {
+        grid-area: kinesthetic-stimulus-button;
+        /* width: 10%; */
+        height: 100%;
+        /* float: right; */
+        background-color: #b7b6b6;
+        border: none;
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+        cursor: pointer;
+        transition-duration: 0.5s;
+    }
+    .kinesthetic-stimulus:hover .kinesthetic-stimulus-button {
+        background-color: rgb(29, 137, 172);
+        opacity: 0.7;
+    }
+    .kinesthetic-stimulus-button:hover {
+        box-shadow: 0vw 0vw 0.5vw 0.07vw black;
+    }
+    .kinesthetic-stimulus-button:active {
+        box-shadow: 0vw 0vw 0vw 0.0vw black;
+        transition-duration: 0.1s;
+    }
+
+        /* kinesthetic Stimulus Button Image */
+    .kinesthetic-stimulus button img{
+        width: 80%;
+        height: 100%;
+        opacity: 0.3;
+        display: block;
+        margin: auto;
+        transition-duration: 0.5s;
+    }
+    .kinesthetic-stimulus:hover button img{
+        opacity: 0.8;
+    }
+    .kinesthetic-stimulus .kinesthetic-stimulus-button.active img {
+        transform: rotate(45deg);
+        transition: transform 0.5s;
+    }
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+        
+        /* kinesthetic Stimulus Div */
+    .kinesthetic-stimulus {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        grid-area: kinesthetic-stimulus;
+        display: grid;
+        grid-template-areas:
+            'kinesthetic-stimulus-icon populate-kinesthetic-stimulus kinesthetic-stimulus-button';
+        grid-template-columns: 1fr 3fr 0.4fr;
+        background-color: #D9D9D9;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: transform 0.5s;
+    }
+    .kinesthetic-stimulus:hover {
+        transform: scale(1.03);
+    }
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+
+        /* Kinesthetic Four Step */
+    .kinesthetic-stimulus .kinesthetic-four-step-button{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1vmax;
+        height: 1vmax;
+        border-radius: 50px;
+        border: none;
+        background-color: rgb(29, 137, 172); 
+        z-index: 1; 
+        /* opacity: 0.5; */
+        box-shadow: 0 0 0 0 rgba(#5a99d4, .5);
+        animation: pulse 1.5s infinite;
+        /* transition-duration: 0.5s; */
+    }
+    .kinesthetic-stimulus .kinesthetic-four-step-button:hover {
+        animation: none;
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: scale(0.9);
+        }
+        70% {
+            transform: scale(1.2);
+            box-shadow: 0 0 0 50px rgba(#d4995a, 0);
+        }
+        100% {
+            transform: scale(0.9);
+            box-shadow: 0 0 0 0 rgba(#d4c45a, 0);
+        }
+    }
+
+    .kinesthetic-stimulus .kinesthetic-four-step-div {
+        display: none;
+        position: absolute;
+        top: 1vw;
+        left: 1vw;
+        width: 26vmax;
+        height: 6vmax;
+        border-radius: 5px;
+        border: 1px black solid;
+        background-color: rgb(141, 185, 200); 
+        z-index: 100; 
+        overflow: hidden;
+        overflow-y: scroll; 
+        scrollbar-color: #5a99d4 rgb(119, 172, 222);
+        scrollbar-width: thin;
+        cursor: default;
+    }
+
+    .kinesthetic-stimulus .kinesthetic-four-step-div .kinesthetic-four-step-heading{
+        font-weight: bold;
+        font-size: 1vmax;
+        line-height: 0;
+    }
+
+    .kinesthetic-stimulus .kinesthetic-four-step-div .kinesthetic-four-step-description{
+        font-size: 0.8vmax;
+        margin-left: 0.3vmax;
+    }
+
+    .kinesthetic-stimulus .kinesthetic-four-step-button:active+.kinesthetic-four-step-div,
+    .kinesthetic-stimulus .kinesthetic-four-step-div.active {
+        display: block; /* show when button is active or has been clicked */
+    }        
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+
+
+    /* Taste Stimulus */
+        /* Taste Stimulus Label */
+        .taste-stimulus label {
+        position: absolute;
+        left: 0;
+        width: 91%;
+        height: 100%;
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+        background-color: rgb(66, 168, 202);
+        float: left;
+        opacity: 0;
+        cursor: pointer;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.5s, opacity 0.5s;
+    }
+    .taste-stimulus:hover label {
+        transform: scaleX(1);
+        opacity: 0.7;
+    }
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+
+        /* Taste Stimulus Icon */
+    .taste-stimulus .taste-stimulus-icon {
+        grid-area: taste-stimulus-icon;
+        left: 0.8vmax;
+        width: auto; 
+        height: 5.4vmax;
+        position: relative;
+    }
+
+            /* Normal Image */
+    .taste-stimulus .taste-stimulus-icon .normal-image {
+        width: auto;
+        height: 100%;
+        opacity: 1;
+        transition: opacity 0.5s;
+    }
+            /* Hover Image */
+    .taste-stimulus .taste-stimulus-icon .hover-image {
+        width: auto;
+        height: 100%;
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: opacity 0.5s;
+    }
+            /* Change Hover Image on Hover */
+    .taste-stimulus:hover .taste-stimulus-icon .normal-image {
+        opacity: 0;
+    }
+    .taste-stimulus:hover .taste-stimulus-icon .hover-image {
+        opacity: 1;
+    }
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+
+        /* Taste Stimulus Inner Div */
+    .populate-taste-stimulus{
+        grid-area: populate-taste-stimulus;
+        width: 100%;
+    }
+    .populate-taste-stimulus p{
+        /* border: 1px solid black; */
+        background-color: rgb(121, 193, 216);
+        padding: 0.2vmax;
+        border-radius: 20px;
+    }
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+
+        /* Taste Stimulus Text Area */
+    .taste-stimulus-input-div{
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        position: absolute;
+        left: 7.2vmax;
+        width: 71.8%;
+        height: 100%;
+        float: left;
+        cursor: pointer;
+        z-index: 100;
+        position: absolute;
+        transition: right 0.5s, opacity 0.5s;
+        pointer-events: none;
+    }
+    
+    .taste-stimulus-input-div .taste-stimulus-input{
+        width: 100%;
+        height: 95%;
+        resize: none;
+        border: none;
+        background-color: rgb(213, 213, 213);
+        opacity: 1;
+        font-size: 1vmax;
+    }
+    .taste-stimulus-input-div.active{
+        max-height: 1000px;
+        opacity: 1;
+        pointer-events: auto;
+    }
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+
+        /* Taste Stimulus Button */
+    .taste-stimulus .taste-stimulus-button {
+        grid-area: taste-stimulus-button;
+        /* width: 10%; */
+        height: 100%;
+        /* float: right; */
+        background-color: #b7b6b6;
+        border: none;
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+        cursor: pointer;
+        transition-duration: 0.5s;
+    }
+    .taste-stimulus:hover .taste-stimulus-button {
+        background-color: rgb(29, 137, 172);
+        opacity: 0.8;
+    }
+    .taste-stimulus-button:hover {
+        box-shadow: 0vw 0vw 0.5vw 0.07vw black;
+    }
+    .taste-stimulus-button:active {
+        box-shadow: 0vw 0vw 0vw 0.0vw black;
+        transition-duration: 0.1s;
+    }
+
+        /* Taste Stimulus Button Image */
+    .taste-stimulus button img{
+        width: 80%;
+        height: 100%;
+        opacity: 0.3;
+        display: block;
+        margin: auto;
+        transition-duration: 0.5s;
+    }
+    .taste-stimulus:hover button img{
+        opacity: 0.8;
+    }
+    .taste-stimulus .taste-stimulus-button.active img {
+        transform: rotate(45deg);
+        transition: transform 0.5s;
+    }
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+        
+        /* Taste Stimulus Div */
+    .taste-stimulus {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        grid-area: taste-stimulus;
+        display: grid;
+        grid-template-areas:
+            'taste-stimulus-icon populate-taste-stimulus taste-stimulus-button';
+        grid-template-columns: 1fr 3fr 0.4fr;
+        background-color: #D9D9D9;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: transform 0.5s;
+    }
+    .taste-stimulus:hover {
+        transform: scale(1.03);
+    }
+
+    .taste-stimulus .taste-four-step-button{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1vmax;
+        height: 1vmax;
+        border-radius: 50px;
+        border: none;
+        background-color: rgb(29, 137, 172); 
+        z-index: 1; 
+        /* opacity: 0.5; */
+        box-shadow: 0 0 0 0 rgba(#5a99d4, .5);
+        animation: pulse 1.5s infinite;
+        /* transition-duration: 0.5s; */
+    }
+    .taste-stimulus .taste-four-step-button:hover {
+        animation: none;
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: scale(0.9);
+        }
+        70% {
+            transform: scale(1.2);
+            box-shadow: 0 0 0 50px rgba(#d4995a, 0);
+        }
+        100% {
+            transform: scale(0.9);
+            box-shadow: 0 0 0 0 rgba(#d4c45a, 0);
+        }
+    }
+
+    .taste-stimulus .taste-four-step-div {
+        display: none;
+        position: absolute;
+        top: 1vw;
+        left: 1vw;
+        width: 26vmax;
+        height: 6vmax;
+        border-radius: 5px;
+        border: 1px black solid;
+        background-color: rgb(141, 185, 200); 
+        z-index: 100; 
+        overflow: hidden;
+        overflow-y: scroll; 
+        scrollbar-color: #5a99d4 rgb(119, 172, 222);
+        scrollbar-width: thin;
+        cursor: default;
+    }
+
+    .taste-stimulus .taste-four-step-div .taste-four-step-heading{
+        font-weight: bold;
+        font-size: 1vmax;
+        line-height: 0;
+    }
+
+    .taste-stimulus .taste-four-step-div .taste-four-step-description{
+        font-size: 0.8vmax;
+        margin-left: 0.3vmax;
+    }
+
+    .taste-stimulus .taste-four-step-button:active+.taste-four-step-div,
+    .taste-stimulus .taste-four-step-div.active {
+        display: block; /* show when button is active or has been clicked */
+    }        
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+
+
+    /* Olifactory Stimulus */
+        /* Olifactory Stimulus Label */
+        .olifactory-stimulus label {
+        position: absolute;
+        left: 0;
+        width: 91%;
+        height: 100%;
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+        background-color: rgb(66, 168, 202);
+        float: left;
+        opacity: 0;
+        cursor: pointer;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.5s, opacity 0.5s;
+    }
+    .olifactory-stimulus:hover label {
+        transform: scaleX(1);
+        opacity: 0.8;
+    }
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+
+        /* Olifactory Stimulus Icon */
+    .olifactory-stimulus .olifactory-stimulus-icon {
+        grid-area: olifactory-stimulus-icon;
+        left: 0.8vmax;
+        width: auto; 
+        height: 5.7vmax;
+        position: relative;
+    }
+
+            /* Normal Image */
+    .olifactory-stimulus .olifactory-stimulus-icon .normal-image {
+        width: auto;
+        height: 100%;
+        opacity: 1;
+        transition: opacity 0.5s;
+    }
+            /* Hover Image */
+    .olifactory-stimulus .olifactory-stimulus-icon .hover-image {
+        width: auto;
+        height: 100%;
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: opacity 0.5s;
+    }
+            /* Change Hover Image on Hover */
+    .olifactory-stimulus:hover .olifactory-stimulus-icon .normal-image {
+        opacity: 0;
+    }
+    .olifactory-stimulus:hover .olifactory-stimulus-icon .hover-image {
+        opacity: 1;
+    }
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+
+        /* Olifactory Stimulus Inner Div */
+    .populate-olifactory-stimulus{
+        grid-area: populate-olifactory-stimulus;
+        width: 100%;
+    }
+    .populate-olifactory-stimulus p{
+        /* border: 1px solid black; */
+        background-color: rgb(121, 193, 216);
+        padding: 0.2vmax;
+        border-radius: 20px;
+    }
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+
+        /* Olifactory Stimulus Text Area */
+    .olifactory-stimulus-input-div{
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        position: absolute;
+        left: 7.2vmax;
+        width: 71.8%;
+        height: 100%;
+        float: left;
+        cursor: pointer;
+        z-index: 100;
+        position: absolute;
+        transition: right 0.5s, opacity 0.5s;
+        pointer-events: none;
+    }
+    
+    .olifactory-stimulus-input-div .olifactory-stimulus-input{
+        width: 100%;
+        height: 95%;
+        resize: none;
+        border: none;
+        background-color: rgb(213, 213, 213);
+        opacity: 1;
+        font-size: 1vmax;
+    }
+    .olifactory-stimulus-input-div.active{
+        max-height: 1000px;
+        opacity: 1;
+        pointer-events: auto;
+    }
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+
+        /* Olifactory Stimulus Button */
+    .olifactory-stimulus .olifactory-stimulus-button {
+        grid-area: olifactory-stimulus-button;
+        /* width: 10%; */
+        height: 100%;
+        /* float: right; */
+        background-color: #b7b6b6;
+        border: none;
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+        cursor: pointer;
+        transition-duration: 0.5s;
+    }
+    .olifactory-stimulus:hover .olifactory-stimulus-button {
+        background-color: rgb(29, 137, 172);
+        opacity: 0.9;
+    }
+    .olifactory-stimulus-button:hover {
+        box-shadow: 0vw 0vw 0.5vw 0.07vw black;
+    }
+    .olifactory-stimulus-button:active {
+        box-shadow: 0vw 0vw 0vw 0.0vw black;
+        transition-duration: 0.1s;
+    }
+
+        /* Olifactory Stimulus Button Image */
+    .olifactory-stimulus button img{
+        width: 80%;
+        height: 100%;
+        opacity: 0.3;
+        display: block;
+        margin: auto;
+        transition-duration: 0.5s;
+    }
+    .olifactory-stimulus:hover button img{
+        opacity: 0.8;
+    }
+    .olifactory-stimulus .olifactory-stimulus-button.active img {
+        transform: rotate(45deg);
+        transition: transform 0.5s;
+    }
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+        
+        /* Olifactory Stimulus Div */
+    .olifactory-stimulus {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        grid-area: olifactory-stimulus;
+        display: grid;
+        grid-template-areas:
+            'olifactory-stimulus-icon populate-olifactory-stimulus olifactory-stimulus-button';
+        grid-template-columns: 1fr 3fr 0.4fr;
+        background-color: #D9D9D9;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: transform 0.5s;
+    }
+    .olifactory-stimulus:hover {
+        transform: scale(1.03);
+    }
+
+    .olifactory-stimulus .olifactory-four-step-button{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1vmax;
+        height: 1vmax;
+        border-radius: 50px;
+        border: none;
+        background-color: rgb(29, 137, 172); 
+        z-index: 1; 
+        /* opacity: 0.5; */
+        box-shadow: 0 0 0 0 rgba(#5a99d4, .5);
+        animation: pulse 1.5s infinite;
+        /* transition-duration: 0.5s; */
+    }
+    .olifactory-stimulus .olifactory-four-step-button:hover {
+        animation: none;
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: scale(0.9);
+        }
+        70% {
+            transform: scale(1.2);
+            box-shadow: 0 0 0 50px rgba(#d4995a, 0);
+        }
+        100% {
+            transform: scale(0.9);
+            box-shadow: 0 0 0 0 rgba(#d4c45a, 0);
+        }
+    }
+
+    .olifactory-stimulus .olifactory-four-step-div {
+        display: none;
+        position: absolute;
+        top: 1vw;
+        left: 1vw;
+        width: 26vmax;
+        height: 6vmax;
+        border-radius: 5px;
+        border: 1px black solid;
+        background-color: rgb(141, 185, 200); 
+        z-index: 100; 
+        overflow: hidden;
+        overflow-y: scroll; 
+        scrollbar-color: #5a99d4 rgb(119, 172, 222);
+        scrollbar-width: thin;
+        cursor: default;
+    }
+
+    .olifactory-stimulus .olifactory-four-step-div .olifactory-four-step-heading{
+        font-weight: bold;
+        font-size: 1vmax;
+        line-height: 0;
+    }
+
+    .olifactory-stimulus .olifactory-four-step-div .olifactory-four-step-description{
+        font-size: 0.8vmax;
+        margin-left: 0.3vmax;
+    }
+
+    .olifactory-stimulus .olifactory-four-step-button:active+.olifactory-four-step-div,
+    .olifactory-stimulus .olifactory-four-step-div.active {
+        display: block; /* show when button is active or has been clicked */
+    }        
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+
+
+    /* Inside the main panel */
+    .sensory-stimulus {
+        grid-area: sensory-stimulus;
+        /* background-color: #D9D9D9; */
+        border-radius: 2%;
+        /* height: 100%; */
+        display: grid;
+        grid-template-areas:
+            'visual-stimulus'
+            'auditory-stimulus' 
+            'kinesthetic-stimulus'
+            'taste-stimulus'
+            'olifactory-stimulus'; 
+        grid-template-rows: repeat(5, 1fr);
+        gap: 1vmax;
+        /* padding: 1.3vw; */
+    }
+    /* ---------------------------------------------------------------------------------------- */
+
+
+    .unpleasant-feeling {
+        grid-area: unpleasant-feeling;
+        /* background-color: #9ce8b4; */
+        /* border-radius: 2%; */
+        /* height: 100%; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .unpleasant-feeling button{
+        width: 3vmax;
+        height: 3vmax;
+        background-color: #b7b7b7;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        transition-duration: 0.5s;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .unpleasant-feeling button:hover {
+        transform: scale(1.1);
+    }
+    .unpleasant-feeling button:active,
+    .unpleasant-feeling button:active {
+        border-radius: 5px;
+        transform: scaleX(2.8);
+    }
+    /* ---------------------------------------------------------------------------------------- */
+    .neutral-feeling {
+        grid-area: neutral-feeling;
+        /* background-color: #9ce8b4; */
+        /* border-radius: 2%; */
+        /* height: 100%; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .neutral-feeling button{
+        width: 3vmax;
+        height: 3vmax;
+        background-color: #b7b7b7;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        transition-duration: 0.5s;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .neutral-feeling button:hover {
+        transform: scale(1.1);
+    }
+    .neutral-feeling button:active,
+    .neutral-feeling button:active {
+        border-radius: 20px;
+        transform: scaleX(2.8);
+    }
+    /* ---------------------------------------------------------------------------------------- */
+    .pleasant-feeling {
+        grid-area: pleasant-feeling;
+        /* background-color: #9ce8b4; */
+        /* border-radius: 2%; */
+        /* height: 100%; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .pleasant-feeling button{
+        width: 3vmax;
+        height: 3vmax;
+        background-color: #b7b7b7;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        transition-duration: 0.5s;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .pleasant-feeling button:hover {
+        transform: scale(1.1);
+    }
+    .pleasant-feeling button:active,
+    .pleasant-feeling button:active {
+        border-radius: 10px;
+        transform: scaleX(2.8);
+    }
+    /* ---------------------------------------------------------------------------------------- */  
+
+    .feeling-state label {
+        width: 100%;
+        height: 100%;
+        border-radius: 20px;
+        background-color: rgb(82, 151, 50);
+        /* float: left; */
+        opacity: 0;
+        cursor: pointer;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.5s, opacity 0.5s;
+        position: absolute;
+        left: 0;
+    }
+
+    .feeling-state:hover label {
+        transform: scaleX(1);
+        opacity: 0.5;
+    }
+    .feeling-state:hover .unpleasant-button,
+    .feeling-state:hover .neutral-button,
+    .feeling-state:hover .pleasant-button {
+        background-color: rgb(82, 151, 50);
+        opacity: 0.8;
+    }
+
+    .feeling-state:hover img {
+        opacity: 0.7;
+    }
+
+    .feeling-state button img {
+        display: block;
+        width: 86%;
+        height: 86%;
+        opacity: 0.3;
+        transition-duration: 0.5s;
+    }
+
+    /* Updated styles for active state */
+    .feeling-state button.active img {
+        display: none;
+    }
+
+    .feeling-state button p {
+        color: #FFFFFF;
+        font-size: 0.3vmax;
+        font-weight: 800;
+        display: none;
+        transition: transform 0.3s;
+    }
+
+    .feeling-state:hover .unpleasant-button:hover,
+    .feeling-state:hover .neutral-button:hover,
+    .feeling-state:hover .pleasant-button:hover {
+        transform: scale(1.08);
+    }
+
+    /* Updated styles for active state */
+    .feeling-state button.active p {
+        display: block;
+        transform: scaleY(2);
+    }
+
+    .feeling-state:hover {
+        transform: scale(1.03);
+    }
+    .feeling-state {
+        position: relative;
+        grid-area: feeling-state;
+        background-color: #c9c7c7;
+        border-radius: 20px;
+        display: grid;
+        grid-template-areas:
+            'unpleasant-feeling neutral-feeling pleasant-feeling';
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.3vw;
+        /* padding: 1.3vw; */
+        cursor: pointer;
+        transition: transform 0.5s;
+        /* height: 100%; */
+    }
+
+    .feeling-state .feeling-four-step-button{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1vmax;
+        height: 1vmax;
+        border-radius: 50px;
+        border: none;
+        background-color: #35920a; 
+        z-index: 1; 
+        /* opacity: 0.5; */
+        box-shadow: 0 0 0 0 rgba(#35920a, .5);
+        animation: pulse 1.5s infinite;
+        /* transition-duration: 0.5s; */
+    }
+    .feeling-state .feeling-four-step-button:hover {
+        animation: none;
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: scale(0.9);
+        }
+        70% {
+            transform: scale(1.2);
+            box-shadow: 0 0 0 50px rgba(#35920a, 0);
+        }
+        100% {
+            transform: scale(0.9);
+            box-shadow: 0 0 0 0 rgba(#35920a, 0);
+        }
+    }
+
+    .feeling-state .feeling-four-step-div {
+        display: none;
+        position: absolute;
+        top: 1vw;
+        left: 1vw;
+        width: 26vmax;
+        height: 8vmax;
+        border-radius: 5px;
+        border: 1px black solid;
+        background-color: #95ce7b; 
+        z-index: 100; 
+        overflow: hidden;
+        overflow-y: scroll; 
+        scrollbar-color: #4a8e2b #80b766;
+        scrollbar-width: thin;
+        cursor: default;
+    }
+
+    .feeling-state .feeling-four-step-div .feeling-four-step-heading{
+        font-weight: bold;
+        font-size: 1vmax;
+        line-height: 0;
+    }
+
+    .feeling-state .feeling-four-step-div .feeling-four-step-description{
+        font-size: 0.8vmax;
+        margin-left: 0.3vmax;
+    }
+
+    .feeling-state .feeling-four-step-button:active+.feeling-four-step-div,
+    .feeling-state .feeling-four-step-div.active {
+        display: block; /* show when button is active or has been clicked */
+    }
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+
+
+    .thought-state label {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 77.6%;
+        background-color: rgb(82, 151, 50);
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        float: left;
+        opacity: 0;
+        cursor: pointer;
+        /* display: none; */
+        transform: scaleY(0);
+        transform-origin: top;
+        transition: transform 0.5s, opacity 0.5s;
+    }
+    .thought-state:hover label {
+        /* display: block; */
+        transform: scaleY(1);
+        opacity: 0.7;
+    }
+
+        /* Thought State Label Image */
+    .thought-state .thought-state-icon {
+        grid-area: thought-state-icon;
+        /* position: relative;
+        left: 5.8vmax; */
+        /* display: flex;
+        justify-content: center; */
+        width: auto; 
+        height: 6.6vmax;
+        position: relative;
+    }
+
+            /* Normal Image */
+    .thought-state .thought-state-icon .normal-image {
+        width: auto;
+        position: absolute;
+        top: 0.6vmax;
+        left: 5.7vmax;
+        height: 100%;
+        opacity: 1;
+        transition: opacity 0.5s;
+    }
+            /* Hover Image */
+    .thought-state .thought-state-icon .hover-image {
+        width: auto;
+        height: 100%;
+        opacity: 0;
+        position: absolute;
+        top: 0.6vmax;
+        left: 5.7vmax;
+        transition: opacity 0.5s;
+    }
+            /* Change Hover Image on Hover */
+    .thought-state:hover .thought-state-icon .normal-image {
+        opacity: 0;
+    }
+    .thought-state:hover .thought-state-icon .hover-image {
+        opacity: 1;
+    }
+
+        /* Thought State Inner Div */
+    .populate-thought-state{
+        grid-area: populate-thought-state;
+        height: 100%;
+        width: 100%;
+    }
+    .populate-thought-state p{
+        /* border: 1px solid black; */
+        background-color: rgb(131, 179, 108);
+        padding: 0.2vmax;
+        border-radius: 20px;
+    }
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+
+        /* Thought State Text Area */
+    .thought-state-input-div{
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        position: absolute;
+        top: 6.8vmax;
+        width: 100%;
+        height: 44.8%;
+        float: left;
+        cursor: pointer;
+        z-index: 100;
+        position: absolute;
+        transition: right 0.5s, opacity 0.5s;
+        pointer-events: none;
+    }
+    
+    .thought-state-input-div .thought-state-input{
+        width: 100%;
+        height: 95%;
+        resize: none;
+        border: none;
+        background-color: rgb(213, 213, 213);
+        opacity: 1;
+        font-size: 1vmax;
+    }
+    .thought-state-input-div.active{
+        max-height: 1000px;
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+
+    .thought-state .thought-state-button {
+        grid-area: thought-state-button;
+        /* width: 100%; */
+        height: 100%;
+        background-color: #b7b7b7;
+        border: none;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        cursor: pointer;
+        /* position: absolute;
+        bottom:   0;
+        right:   0; */
+        transition-duration: 0.5s;
+    }
+    .thought-state:hover .thought-state-button {
+        background-color: rgb(64, 114, 41);
+        opacity: 0.7;
+    }
+    .thought-state-button:hover {
+        box-shadow: 0vw 0vw 0.5vw 0.07vw black;
+    }
+    .thought-state-button:active {
+        box-shadow: 0vw 0vw 0vw 0.0vw black;
+        background-color: rgb(78, 139, 50);
+        opacity: 0.7;
+        transition-duration: 0.1s;
+    }
+
+    .thought-state button img{
+        /* width: 80%; */
+        height: 60%;
+        opacity: 0.3;
+        display: block;
+        margin: auto;
+        transition-duration: 0.5s;
+    }
+    .thought-state .thought-state-button.active img {
+        transform: rotate(45deg);
+        transition: transform 0.5s;
+    }
+
+    .thought-state:hover img {
+        opacity: 0.8;
+    }
+
+    .thought-state {
+        display: flex;
+        justify-content: center;
+        position: relative;
+        grid-area: thought-state;
+        display: grid;
+        grid-template-areas:
+            'thought-state-icon' 
+            'populate-thought-state' 
+            'thought-state-button';
+        grid-template-rows: 0.5fr 1fr 0.5fr;
+        grid-template-columns: 1fr;
+        background-color: #c9c7c7;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: transform 0.5s;
+        /* height: 100%; */
+    }
+    .thought-state:hover {
+        transform: scale(1.03);
+    }
+
+    .thought-state .thought-four-step-button{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1vmax;
+        height: 1vmax;
+        border-radius: 50px;
+        border: none;
+        background-color: #35920a; 
+        z-index: 1; 
+        /* opacity: 0.5; */
+        box-shadow: 0 0 0 0 rgba(#35920a, .5);
+        animation: pulse 1.5s infinite;
+        /* transition-duration: 0.5s; */
+    }
+    .thought-state .thought-four-step-button:hover {
+        animation: none;
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: scale(0.9);
+        }
+        70% {
+            transform: scale(1.2);
+            box-shadow: 0 0 0 50px rgba(#35920a, 0);
+        }
+        100% {
+            transform: scale(0.9);
+            box-shadow: 0 0 0 0 rgba(#35920a, 0);
+        }
+    }
+
+    .thought-state .thought-four-step-div {
+        display: none;
+        position: absolute;
+        top: 1vw;
+        left: 1vw;
+        width: 15vmax;
+        height: 14vmax;
+        border-radius: 5px;
+        border: 1px black solid;
+        background-color: #95ce7b; 
+        z-index: 100; 
+        overflow: hidden;
+        overflow-y: scroll; 
+        scrollbar-color: #4a8e2b #80b766;
+        scrollbar-width: thin;
+        cursor: default;
+    }
+
+    .thought-state .thought-four-step-div .thought-four-step-heading{
+        font-weight: bold;
+        font-size: 1vmax;
+        line-height: 0;
+    }
+
+    .thought-state .thought-four-step-div .thought-four-step-description{
+        font-size: 0.8vmax;
+        margin-left: 0.3vmax;
+    }
+
+    .thought-state .thought-four-step-button:active+.thought-four-step-div,
+    .thought-state .thought-four-step-div.active {
+        display: block;
+    }
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+
+
+    .emotional-state label {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 77.6%;
+        background-color: rgb(82, 151, 50);
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        float: left;
+        opacity: 0;
+        cursor: pointer;
+        /* display: none; */
+        transform: scaleY(0);
+        transform-origin: top;
+        transition: transform 0.5s, opacity 0.5s;
+    }
+    .emotional-state:hover label {
+        /* display: block; */
+        transform: scaleY(1);
+        opacity: 0.7;
+    }
+
+        /* Thought State Label Image */
+    .emotional-state .emotional-state-icon {
+        grid-area: emotional-state-icon;
+        /* display: flex;
+        justify-content: center; */
+        width: auto; 
+        height: 6.6vmax;
+        position: relative;
+    }
+
+            /* Normal Image */
+    .emotional-state .emotional-state-icon .normal-image {
+        width: auto;
+        position: absolute;
+        left: 6.2vmax;
+        top: 0.8vmax;
+        height: 100%;
+        opacity: 1;
+        transition: opacity 0.5s;
+    }
+            /* Hover Image */
+    .emotional-state .emotional-state-icon .hover-image {
+        width: auto;
+        height: 100%;
+        opacity: 0;
+        left: 6.2vmax;
+        position: absolute;
+        top: 0.8vmax;
+        transition: opacity 0.5s;
+    }
+            /* Change Hover Image on Hover */
+    .emotional-state:hover .emotional-state-icon .normal-image {
+        opacity: 0;
+    }
+    .emotional-state:hover .emotional-state-icon .hover-image {
+        opacity: 1;
+    }
+
+        /* Thought State Inner Div */
+    .populate-emotional-state{
+        grid-area: populate-emotional-state;
+        height: 100%;
+        width: 100%;
+    }
+    .populate-emotional-state p{
+        /* border: 1px solid black; */
+        background-color: rgb(131, 179, 108);
+        padding: 0.2vmax;
+        border-radius: 20px;
+    }
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+
+        /* Emotional State Text Area */
+    .emotional-state-input-div{
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        position: absolute;
+        top: 6.8vmax;
+        width: 100%;
+        height: 44.8%;
+        float: left;
+        cursor: pointer;
+        z-index: 100;
+        position: absolute;
+        transition: right 0.5s, opacity 0.5s;
+        pointer-events: none;
+    }
+    
+    .emotional-state-input-div .emotional-state-input{
+        width: 100%;
+        height: 95%;
+        resize: none;
+        border: none;
+        background-color: rgb(213, 213, 213);
+        opacity: 1;
+        font-size: 1vmax;
+    }
+    .emotional-state-input-div.active{
+        max-height: 1000px;
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .emotional-state .emotional-state-button {
+        grid-area: emotional-state-button;
+        /* width: 100%; */
+        height: 100%;
+        background-color: #b7b7b7;
+        border: none;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        cursor: pointer;
+        /* position: absolute;
+        bottom:   0;
+        right:   0; */
+        transition-duration: 0.5s;
+    }
+    .emotional-state:hover .emotional-state-button {
+        background-color: rgb(64, 114, 41);
+        opacity: 0.7;
+    }
+    .emotional-state-button:hover {
+        box-shadow: 0vw 0vw 0.5vw 0.07vw black;
+    }
+    .emotional-state-button:active {
+        box-shadow: 0vw 0vw 0vw 0.0vw black;
+        background-color: rgb(78, 139, 50);
+        opacity: 0.7;
+        transition-duration: 0.1s;
+    }
+
+    .emotional-state button img{
+        /* width: 80%; */
+        height: 60%;
+        opacity: 0.3;
+        display: block;
+        margin: auto;
+        transition-duration: 0.5s;
+    }
+    .emotional-state .emotional-state-button.active img {
+        transform: rotate(45deg);
+        transition: transform 0.5s;
+    }
+
+    .emotional-state:hover img {
+        opacity: 0.8;
+    }
+
+    .emotional-state {
+        display: flex;
+        justify-content: center;
+        position: relative;
+        grid-area: emotional-state;
+        display: grid;
+        grid-template-areas:
+            'emotional-state-icon' 
+            'populate-emotional-state' 
+            'emotional-state-button';
+        grid-template-rows: 0.5fr 1fr 0.5fr;
+        grid-template-columns: 1fr;
+        background-color: #c9c7c7;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: transform 0.5s;
+        /* height: 100%; */
+    }
+    .emotional-state:hover {
+        transform: scale(1.03);
+    }
+
+    .emotional-state .emotional-four-step-button{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1vmax;
+        height: 1vmax;
+        border-radius: 50px;
+        border: none;
+        background-color: #35920a; 
+        z-index: 1; 
+        /* opacity: 0.5; */
+        box-shadow: 0 0 0 0 rgba(#35920a, .5);
+        animation: pulse 1.5s infinite;
+        /* transition-duration: 0.5s; */
+    }
+    .emotional-state .emotional-four-step-button:hover {
+        animation: none;
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: scale(0.9);
+        }
+        70% {
+            transform: scale(1.2);
+            box-shadow: 0 0 0 50px rgba(#35920a, 0);
+        }
+        100% {
+            transform: scale(0.9);
+            box-shadow: 0 0 0 0 rgba(#35920a, 0);
+        }
+    }
+
+    .emotional-state .emotional-four-step-div {
+        display: none;
+        position: absolute;
+        top: 1vw;
+        left: 1vw;
+        width: 15vmax;
+        height: 14vmax;
+        border-radius: 5px;
+        border: 1px black solid;
+        background-color: #95ce7b; 
+        z-index: 100; 
+        overflow: hidden;
+        overflow-y: scroll; 
+        scrollbar-color: #4a8e2b #80b766;
+        scrollbar-width: thin;
+        cursor: default;
+    }
+
+    .emotional-state .emotional-four-step-div .emotional-four-step-heading{
+        font-weight: bold;
+        font-size: 1vmax;
+        line-height: 0;
+    }
+
+    .emotional-state .emotional-four-step-div .emotional-four-step-description{
+        font-size: 0.8vmax;
+        margin-left: 0.3vmax;
+    }
+
+    .emotional-state .emotional-four-step-button:active+.emotional-four-step-div,
+    .emotional-state .emotional-four-step-div.active {
+        display: block;
+    }
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+
+
+    /* Inside the main panel */
+    .mental-object {
+        grid-area: mental-object;
+        /* background-color: #D9D9D9; */
+        border-radius: 2%;
+        /* height: 100%; */
+        display: grid;
+        grid-template-areas:
+            'feeling-state feeling-state' 
+            'thought-state emotional-state';
+        grid-template-rows: 1fr 2fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1vmax;
+        /* padding: 1.3vw; */
+    }
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+
+    /* AHA Moment */
+    .aha-moment {
+        display: flex;
+        justify-content: center;
+        position: relative;
+        grid-area: aha-moment;
+        border: none;
+        background-color: #d8d8d8;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 1.6vmax;
+        transition: transform 0.5s;
+        /* height: 100%; */
+    }
+
+    .aha-moment .aha-text{
+        display: flex;
+        justify-content: center;
+    }
+    .aha-moment .aha-counter{
+        margin-left: 6vmax;
+
+    }
+    .aha-moment:hover{
+        background-color: #c9c7c7;
+        transform: scale(1.02);
+    }
+    .aha-moment:active{
+        transform: scale(1);
+        transition-duration: 0.1s;
+    }
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------------------------- */
+
+
+    /* Inside the next stage */
+    .next-stage button {
+        width: 100%;
+        height: 80%;
+        background-color: #EDEBEB;
+        border: none;
+        border-radius: 0;
+        cursor: pointer;
+        transition: transform 0.5s;
+        margin-top: 100%;
+    }
+
+    .next-stage button:hover {
+        transform: scale(1.3);
+    }
+
+    .next-stage button img{
+        width: 80%;
+        height: 100%;
+        opacity: 0.3;
+        display: block;
+        margin: auto;
+    }
+    .next-stage {
+        grid-area: next-stage;
+        /* background-color: #D9D9D9; */
+        border-radius: 2%;
+        /* height: 100%; */
+    }
+    /* ---------------------------------------------------------------------------------------- */
+
+
+    .inner-container {
+        margin: 1vw;
+        width: 98vw;
+        height: 95.9vh;
+        background-color: #EDEBEB;
+        opacity: 1.0;
+        /* border-radius: 2%; */
+        position: relative;
+        display: grid;
+        grid-template-areas: 'side-panel main-panel';
+        grid-template-columns: 1fr 14fr;
+        gap: 0.5vw;
+    }
+}

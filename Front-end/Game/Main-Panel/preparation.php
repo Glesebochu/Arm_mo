@@ -21,7 +21,22 @@
       $javascriptSession = Session::getJavaScriptSession($identifier);
     ?>
 
+    <!-- Activity Object Retreival test -->
+    <?php
+      // Include the PHP file with the Activity class definition
+      include_once '../../../Back-end/Models/Activity.php';
+      $javascriptActivityArray = Activity::getJavaScriptActivityArray();
+    ?>
     <script type="module">
+      // Import the Activity.js module
+      import { Activity } from '../../../Middle-logic/Models/Activity.js';
+      
+      var activityArrayObj = <?php echo $javascriptActivityArray;?>;
+      var jsActivityArray = Activity.getActivitiesFromArrayObject(activityArrayObj);
+    //   console.log(jsActivityArray);
+
+      // -------------------------------------------------
+
       // Import the Session.js module
       import { Session } from '../../../Middle-logic/Models/Session.js';
       import { prepare } from '../scripts/preparation.js';
@@ -31,8 +46,8 @@
       var jsSession = Session.getSessionFromObject(session);
       jsSession.Start_Date_Time = Date.now();
 
-      console.log(jsSession);
-      prepare(jsSession);
+    //   console.log(jsSession, jsActivityArray);
+      prepare(jsSession, jsActivityArray);
 
     </script>
 </head>

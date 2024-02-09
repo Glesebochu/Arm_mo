@@ -22,7 +22,7 @@ export class Meditator{
     // Function to send the JavaScript object to the PHP script
     static updateMeditator(meditator) {
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', '../../Back-end/UpdateDatabase/UpdateMeditator.php', true);
+        xhr.open('POST', 'https://localhost/Arm-mo/Back-end/UpdateDatabase/UpdateMeditator.php', true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.onreadystatechange = function() {
           if (xhr.readyState === XMLHttpRequest.DONE) {

@@ -13,7 +13,7 @@ class Activity{
         $db = $con->__getConnection();
         $db->query('USE Arm_mo_v2');
 
-        /// Query the database based on the identifier
+        // Query the database based on the identifier
         $query = "SELECT * FROM Activity WHERE Activity_ID = '$identifier'";
         $result = $db->query($query);
         $row = $result->fetch_assoc();
@@ -35,6 +35,32 @@ class Activity{
     
         // Return the JavaScript code to create the JavaScript obser$activity object
         return $activityJson;
+    }
+
+    public static function getActivityArray(){
+        // Connect to the database
+        include_once(__DIR__ . '/../Connect.php');
+        $con = new Connect;
+        $db = $con->__getConnection();
+        $db->query('USE Arm_mo_v2');
+
+        // Query the database based on the identifier
+        $query = "SELECT * FROM Activity";
+        $result = $db->query($query);
+
+        // Create an array to store the AhaMoments
+        $activityArray = array();
+        while($row = $result->fetch_assoc()){
+            // Add the object to the array
+            $activityArray[] = Activity::getActivity($row['Activity_ID']);
+        }
+
+        return $activityArray;
+    }
+
+    public static function getJavaScriptActivityArray(){
+        $ahaMomentArray = Activity::getActivityArray();
+        return json_encode($ahaMomentArray);
     }
 }
 ?>

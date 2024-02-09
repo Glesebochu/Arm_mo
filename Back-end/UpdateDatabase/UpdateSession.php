@@ -118,7 +118,7 @@ if (isset($_POST['session'])) {
                 } else {
                     // Activity does not exist, insert the activity
                     $insertActivitySql = "INSERT INTO Activity (Activity_ID, Title, MeditationObject_ID) 
-                                        VALUES ('$activity_ID', '$title', '$observableObject_ID')";
+                                        VALUES ('$activity_ID', '$activityTitle', '$observableObject_ID')";
                     $insertActivityResult = $db->query($insertActivitySql);
     
                     if (!$insertActivityResult) {
@@ -153,7 +153,7 @@ if (isset($_POST['session'])) {
             } else {
                 // Step does not exist, insert the step
                 $insertStepSql = "INSERT INTO Step (Session_ID, Title, Description, Type, Category, Duration, Response) 
-                                  VALUES ('$session_ID', '$title', '$description', '$type', '$category', '$duration', '$response')";
+                                  VALUES ('$session_ID', '$stepTitle', '$description', '$type', '$category', '$duration', '$response')";
                 $insertStepResult = $db->query($insertStepSql);
 
                 if (!$insertStepResult) {

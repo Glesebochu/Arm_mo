@@ -10,7 +10,7 @@ export function displayStageInformation() {
     // Create HTML elements dynamically
     const stageIDElement = document.createElement('h1');
     stageIDElement.textContent = `Stage ${stageOne.Stage_ID}`;
-    const goalElement = document.createElement('p');
+    const goalElement = document.createElement('h2');
     goalElement.textContent = `Goal: ${stageOne.Goal}`;
 
     const intentionsList = document.createElement('ul');
@@ -35,19 +35,23 @@ export function displayStageInformation() {
     });
 
     innerContainer.appendChild(stageIDElement);
-    innerContainer.appendChild(document.createElement('hr'));
+    // innerContainer.appendChild(document.createElement('hr'));
     innerContainer.appendChild(goalElement);
-    innerContainer.appendChild(document.createElement('hr'));
+    // innerContainer.appendChild(document.createElement('hr'));
     innerContainer.appendChild(document.createElement('h3')).textContent = 'Intentions:';
     innerContainer.appendChild(intentionsList);
-    innerContainer.appendChild(document.createElement('hr'));
+    // innerContainer.appendChild(document.createElement('hr'));
     innerContainer.appendChild(document.createElement('h3')).textContent = 'Obstacles:';
     innerContainer.appendChild(obstaclesList);
-    innerContainer.appendChild(document.createElement('hr'));
+    // innerContainer.appendChild(document.createElement('hr'));
     innerContainer.appendChild(document.createElement('h3')).textContent = 'Skills:';
     innerContainer.appendChild(skillsList);
 
+    
+
     console.log("Script is executing!");
+
+
 
     document.addEventListener('DOMContentLoaded', function () {
         const innerContainer = document.getElementById('stageInfoContainer');

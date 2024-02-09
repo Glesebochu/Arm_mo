@@ -6,32 +6,24 @@ html {
 }
 body {
   height: 100vh;
-  width: 100vmax;
+  width: 100vw;
   display: flex;
   margin: 0;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  overflow: hidden;
-}
-main {
-  flex: 2;
-  width: 100vw;
-  padding: 10vmin;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3vmin;
+  flex-direction: row;
+  overflow: auto;
 }
 .logo {
+  flex: 1;
   align-self: flex-start;
-  padding: 1vmin;
+  padding-top: 3vmin;
+  padding-left: 3vmin;
+  height: 100vh;
   display: flex;
-  flex: 0.6;
-  width: 20vmin;
-  height: 90vmin;
   overflow: hidden;
-  gap: 0.3vmin;
+  gap: 0.3vmin;  
+  background-color: rgba(245, 245, 245, 0.201);
+
 }
 .logo > * {
   width: 10vmin;
@@ -40,4 +32,32 @@ main {
 .armimoLogoText {
   padding-top: 3vmin;
   height: 6vmin;
+}
+main {
+  flex: 3;
+  box-shadow: 0 0 90px rgb(0, 0, 0);
+  border: none;
+  height: 100vh;
+  border-radius:600px;
+  background-color: rgba(58, 36, 2, 0.559);
+ background-image: url('../About_us-login-signup/public/external/forestBrick.jpg');
+ background-size: contain;
+ background-position: center;
+ background-attachment: fixed;
+ background-repeat: repeat-x;
+ animation: floatAnimation 5s infinite alternate; /* Apply animation */
+ /* transition: transform 1s ease-out; */
+}
+main:hover {
+  /* transform: scale(1.8); */
+}
+.tobe {
+  flex: 1;
+  background-color: rgba(245, 245, 245, 0.201);
+
+}
+@keyframes floatAnimation {
+  0% { transform: translatex(0); }
+  50% { transform: translatex(20px); }
+  100% { transform: translatex(0); }
 }

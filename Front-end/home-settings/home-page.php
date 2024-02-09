@@ -45,7 +45,7 @@
       import { Meditator } from '../../Middle-logic/Models/Meditator.js';
 
       // Create a sample Meditator object
-      var meditatorTest = new Meditator('1', 'Finhas', 'Yohannes', 'FinhasGustavo@gmail.com', 'test', '3');
+      var meditatorTest = new Meditator('1', 'Finhas', 'Yohannes', 'FinhasGustavo@gmail.com', 'test', '2');
 
       // Function to send the JavaScript object to the PHP script
       function updateMeditator(meditator) {

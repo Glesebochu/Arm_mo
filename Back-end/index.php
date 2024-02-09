@@ -306,7 +306,7 @@
                                                                     Meditator_ID INT NOT NULL,
                                                                     Start_Date_Time DATETIME NOT NULL,
                                                                     End_Date_Time DATETIME NOT NULL,
-                                                                    FOREIGN KEY (Meditator_ID) REFERENCES Meditator(Meditator_ID))";
+                                                                    FOREIGN KEY (Meditator_ID) REFERENCES Meditator(Meditator_ID) ON DELETE CASCADE)";
 
         if(($db->query("SHOW TABLES LIKE 'Session'"))->num_rows>0){
             echo"
@@ -373,7 +373,7 @@
         $queryCreateAhaMoment= "CREATE TABLE AhaMoment(AhaMoment_ID INT PRIMARY KEY AUTO_INCREMENT,
                                                                      Session_ID INT NOT NULL,
                                                                      Label VARCHAR(8000) NOT NULL,
-                                                                     FOREIGN KEY (Session_ID) REFERENCES Session(Session_ID))";
+                                                                     FOREIGN KEY (Session_ID) REFERENCES Session(Session_ID) ON DELETE CASCADE)";
  
          if(($db->query("SHOW TABLES LIKE 'AhaMoment'"))->num_rows>0){
              echo"
@@ -412,7 +412,7 @@
                                                                         SensoryStimulus_Type VARCHAR(100),
                                                                         MentalObject_Type VARCHAR(100),
                                                                         Intensity VARCHAR(100),
-                                                                        FOREIGN KEY (Session_ID) REFERENCES Session(Session_ID))";
+                                                                        FOREIGN KEY (Session_ID) REFERENCES Session(Session_ID) ON DELETE CASCADE)";
     
             if(($db->query("SHOW TABLES LIKE 'ObservableObject'"))->num_rows>0){
                 echo"
@@ -445,7 +445,7 @@
         $queryCreateActivity= "CREATE TABLE Activity(Activity_ID INT PRIMARY KEY AUTO_INCREMENT,
                                                                         Title VARCHAR(8000) NOT NULL,
                                                                         MeditationObject_ID INT,
-                                                                        FOREIGN KEY (MeditationObject_ID) REFERENCES ObservableObject(ObservableObject_ID))";
+                                                                        FOREIGN KEY (MeditationObject_ID) REFERENCES ObservableObject(ObservableObject_ID) ON DELETE CASCADE)";
     
             if(($db->query("SHOW TABLES LIKE 'Activity'"))->num_rows>0){
                 echo"
@@ -484,8 +484,8 @@
                                                                         Duration VARCHAR(255) NOT NULL,
                                                                         Response VARCHAR(255) NOT NULL,
                                                                         Activity_ID INT,
-                                                                        FOREIGN KEY (Session_ID) REFERENCES Session(Session_ID),
-                                                                        FOREIGN KEY (Activity_ID) REFERENCES Activity(Activity_ID))";
+                                                                        FOREIGN KEY (Session_ID) REFERENCES Session(Session_ID) ON DELETE CASCADE,
+                                                                        FOREIGN KEY (Activity_ID) REFERENCES Activity(Activity_ID) ON DELETE CASCADE)";
     
             if(($db->query("SHOW TABLES LIKE 'Step'"))->num_rows>0){
                 echo"
@@ -519,7 +519,7 @@
                                                                 Stage_ID INT NOT NULL,
                                                                 PRIMARY KEY (Stage_ID,Session_ID),
                                                                 FOREIGN KEY (Stage_ID) REFERENCES Stage(Stage_ID),
-                                                                FOREIGN KEY (Session_ID) REFERENCES Session(Session_ID))";
+                                                                FOREIGN KEY (Session_ID) REFERENCES Session(Session_ID) ON DELETE CASCADE)";
 
         if(($db->query("SHOW TABLES LIKE 'PracticedStages'"))->num_rows>0){
             echo"

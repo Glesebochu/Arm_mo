@@ -460,9 +460,10 @@
       var ahaMomentArray = <?php echo $javascriptAhaMomentArray ?>;
       var ahaMomentObjects=AhaMoment.getAhaMomentsFromArrayObject(ahaMomentArray);
       ahaMomentObjects = ahaMomentObjects.map(obj => {
-        obj.Label += ' test';
+        obj.Label += 'boop';
         return obj;
       });
+      console.log('check', ahaMomentObjects)
       var matchingAhaMoments = ahaMomentObjects.filter(AhaMoment => AhaMoment.Session_ID === '1');
 
       var sessionData = {

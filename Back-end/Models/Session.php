@@ -73,7 +73,7 @@ class Session {
         $db = $con->__getConnection();
         $db->query('USE Arm_mo_v2');
         
-        // Query the database based on the stage ID
+        // Query the database based on the Meditator ID
         $query = "SELECT * FROM Session
                   WHERE Meditator_ID = '$Meditator_ID'";
         $result = $db->query($query);

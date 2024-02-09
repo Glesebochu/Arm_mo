@@ -1,11 +1,13 @@
 export class AhaMoment{
-    constructor(id, label){
+    constructor(id,Session_ID, label){
         this.AhaMoment_ID = id;
+        this.Session_ID=Session_ID;
         this.Label = label;
     }
     static getAhaMomentFromObject(obj){
         return new AhaMoment(
             obj.AhaMoment_ID,
+            obj.Session_ID,
             obj.Label,
         );
     }

@@ -244,124 +244,6 @@
       console.log(stepObjects);
     </script>
 
-    <!-- Session Object Retreival test -->
-    <?php
-      // Include the PHP file with the function to retrieve the Session object
-      include_once '../../Back-end/Models/Session.php';
-
-      //$identifier = $_SESSION['session'];
-      $stepArray = Step::getStepArray(1);
-      $javascriptStepArray = json_encode($stepArray);
-      // Call the function to get the JavaScript Session array
-      $javascriptSessionArray = Session::getJavaScriptSessionArray(1);
-    ?>
-
-    <script type="module">
-      // Import the Step.js module
-      import { Step } from '../../Middle-logic/Models/Step.js';
-      var stepArray = <?php echo $javascriptStepArray ?>;
-     
-     // Convert the stepArray to Step objects
-      var stepObjects = Step.convertArrayToStepObjects(stepArray);
-
-      // Import the Session.js module
-      import { Session } from '../../Middle-logic/Models/Session.js';
-
-      // Output the JavaScript code to create the Session objects
-      var sessionArray = <?php echo json_encode($javascriptSessionArray); ?>;
-      // console.log(sessionArray);
-
-      // Parse each JSON string to create the JavaScript Session objects
-      var sessionObjects = sessionArray.map(sessionJson => JSON.parse(sessionJson));
-      console.log(sessionObjects);
-
-
-      // Iterate through session objects and add corresponding steps
-      sessionObjects.forEach(session => {
-        var matchingSteps = stepObjects.filter(step => step.Session_ID === session.Session_ID);
-        session.Steps = matchingSteps;
-      });
-      sessionObjects=Session.convertArrayToSessionObjects(sessionObjects);
-
-
-      console.log(sessionObjects);
-    </script>
-
-    <!-- Session Object send test -->
-    <script type="module">
-      // Import the Session.js module
-      import { Session } from '../../Middle-logic/Models/Session.js';
-      import { Meditator } from '../../Middle-logic/Models/Meditator.js';
-      import { Step } from '../../Middle-logic/Models/Step.js';
-
-      // Function to send the Session object to the PHP script
-      function updateSession(session) {
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', '../../Back-end/UpdateDatabase/UpdateSession.php', true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.onreadystatechange = function() {
-          if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-              console.log(xhr.responseText);
-            } else {
-              console.error('Error:', xhr.status);
-            }
-          }
-        };
-
-        var params = "session=" + encodeURIComponent(JSON.stringify(session));
-        xhr.send(params);
-      }
-      function createSession(session) {
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', '../../Back-end/UpdateDatabase/CreateSession.php', true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.onreadystatechange = function() {
-          if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-              console.log(xhr.responseText);
-            } else {
-              console.error('Error:', xhr.status);
-            }
-          }
-        };
-
-        var params = "session=" + encodeURIComponent(JSON.stringify(session));
-        xhr.send(params);
-      }
-
-      // Example usage:
-      // Retrieve the session data from somewhere (e.g., localStorage, API response, etc.)
-      var meditatorTest = new Meditator('1', 'Finhas', 'Yohannes', 'FinhasGustavo@gmail.com', 'test', '5');
-      var stepArray = <?php echo $javascriptStepArray ?>;
-      var stepObjects = Step.convertArrayToStepObjects(stepArray);
-      var sessionData = {
-        Meditator: meditatorTest,
-        Start_Date_Time: '<?php echo date("Y-m-d H:i:s"); ?>',
-        End_Date_Time: '<?php echo date("Y-m-d H:i:s"); ?>',
-        Practiced_Stages: [1, 2, 3],
-        Steps: stepObjects,
-        AhaMoments: ['Aha1', 'Aha2'],
-        Newly_Mastered_Stages: [7, 8, 9]
-      };
-
-      // Create a new Session object using the retrieved session data
-      var sessionObject = new Session(
-        '1',
-        sessionData.Meditator.Meditator_ID,
-        sessionData.Start_Date_Time,
-        sessionData.End_Date_Time,
-        sessionData.Practiced_Stages,
-        sessionData.Steps,
-        sessionData.AhaMoments,
-        sessionData.Newly_Mastered_Stages
-      );
-      // console.log('test',sessionObject);
-
-      // Call the updateSession function and pass the Session object
-      updateSession(sessionObject);
-    </script>
-
     <!-- ObservableObject Object Retreival test -->
 
     <!-- Single -->
@@ -464,6 +346,137 @@
       console.log(antidoteArray);
       console.log(Antidote.getAntidotesFromArrayObject(antidoteArray));
 
+    </script>
+
+        <!-- Session Object Retreival test -->
+        <?php
+      // Include the PHP file with the function to retrieve the Session object
+      include_once '../../Back-end/Models/Session.php';
+
+      //$identifier = $_SESSION['session'];
+      $stepArray = Step::getStepArray(1);
+      $javascriptStepArray = json_encode($stepArray);
+      // Call the function to get the JavaScript Session array
+      $javascriptSessionArray = Session::getJavaScriptSessionArray(1);
+    ?>
+
+    <script type="module">
+      // Import the Step.js module
+      // Import the Session.js module
+      import { Step } from '../../Middle-logic/Models/Step.js';
+      import { AhaMoment } from '../../Middle-logic/Models/AhaMoment.js';
+      import { Session } from '../../Middle-logic/Models/Session.js';
+
+      var stepArray = <?php echo $javascriptStepArray ?>;
+      // Convert the stepArray to Step objects
+      var stepObjects = Step.convertArrayToStepObjects(stepArray);
+
+      var ahaMomentArray = <?php echo $javascriptAhaMomentArray ?>;
+      var ahaMomentObjects=AhaMoment.getAhaMomentsFromArrayObject(ahaMomentArray);
+      console.log('test',ahaMomentObjects);
+
+
+      // Output the JavaScript code to create the Session objects
+      var sessionArray = <?php echo json_encode($javascriptSessionArray); ?>;
+      // console.log(sessionArray);
+
+      // Parse each JSON string to create the JavaScript Session objects
+      var sessionObjects = sessionArray.map(sessionJson => JSON.parse(sessionJson));
+      console.log(sessionObjects);
+
+
+      // Iterate through session objects and add corresponding steps
+      sessionObjects.forEach(session => {
+        var matchingSteps = stepObjects.filter(step => step.Session_ID === session.Session_ID);
+        session.Steps = matchingSteps;
+      });
+
+      // Iterate through session objects and add corresponding AhaMoment
+      sessionObjects.forEach(session => {
+        var matchingAhaMoment = ahaMomentObjects.filter(AhaMoment => AhaMoment.Session_ID === session.Session_ID);
+        session.AhaMoments = matchingAhaMoment;
+      });
+
+
+      sessionObjects=Session.convertArrayToSessionObjects(sessionObjects);
+
+
+      console.log(sessionObjects);
+    </script>
+
+    <!-- Session Object send test -->
+    <script type="module">
+      // Import the Session.js module
+      import { Session } from '../../Middle-logic/Models/Session.js';
+      import { Meditator } from '../../Middle-logic/Models/Meditator.js';
+      import { Step } from '../../Middle-logic/Models/Step.js';
+
+      // Function to send the Session object to the PHP script
+      function updateSession(session) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '../../Back-end/UpdateDatabase/UpdateSession.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+              console.log(xhr.responseText);
+            } else {
+              console.error('Error:', xhr.status);
+            }
+          }
+        };
+
+        var params = "session=" + encodeURIComponent(JSON.stringify(session));
+        xhr.send(params);
+      }
+      function createSession(session) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '../../Back-end/UpdateDatabase/CreateSession.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+              console.log(xhr.responseText);
+            } else {
+              console.error('Error:', xhr.status);
+            }
+          }
+        };
+
+        var params = "session=" + encodeURIComponent(JSON.stringify(session));
+        xhr.send(params);
+      }
+
+      // Example usage:
+      // Retrieve the session data from somewhere (e.g., localStorage, API response, etc.)
+      var meditatorTest = new Meditator('1', 'Finhas', 'Yohannes', 'FinhasGustavo@gmail.com', 'test', '5');
+      var stepArray = <?php echo $javascriptStepArray ?>;
+      var stepObjects = Step.convertArrayToStepObjects(stepArray);
+      var sessionData = {
+        Meditator: meditatorTest,
+        Start_Date_Time: '<?php echo date("Y-m-d H:i:s"); ?>',
+        End_Date_Time: '<?php echo date("Y-m-d H:i:s"); ?>',
+        Practiced_Stages: [1, 2, 3],
+        Steps: stepObjects,
+        AhaMoments: ['Aha1', 'Aha2'],
+        Newly_Mastered_Stages: [7, 8, 9]
+      };
+
+      // Create a new Session object using the retrieved session data
+      var sessionObject = new Session(
+        '1',
+        sessionData.Meditator.Meditator_ID,
+        sessionData.Start_Date_Time,
+        sessionData.End_Date_Time,
+        sessionData.Practiced_Stages,
+        sessionData.Steps,
+        sessionData.AhaMoments,
+        sessionData.Newly_Mastered_Stages
+      );
+      // console.log('test',sessionObject);
+
+      // Call the updateSession function and pass the Session object
+      // updateSession(sessionObject);
     </script>
 
   <script>

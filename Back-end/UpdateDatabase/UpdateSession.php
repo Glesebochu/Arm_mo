@@ -22,12 +22,12 @@ if (isset($_POST['session'])) {
     $newlyMasteredStages = $session['Newly_Mastered_Stages'];
 
     // Check if the session already exists
-    $sql = "SELECT COUNT(*) as count FROM Session WHERE Session_ID = '$session_ID'";
-    $result = $db->query($sql);
-    $row = $result->fetch_assoc();
-    $sessionExists = ($row['count'] > 0);
+    // $sql = "SELECT COUNT(*) as count FROM Session WHERE Session_ID = '$session_ID'";
+    // $result = $db->query($sql);
+    // $row = $result->fetch_assoc();
+    // $sessionExists = ($row['count'] > 0);
 
-    if ($sessionExists) {
+    if ($isset($session_ID)) {
         // Update the existing session
         $sql = "UPDATE Session SET
         Meditator_ID = '{$meditator['Meditator_ID']}',
@@ -69,10 +69,10 @@ if (isset($_POST['session'])) {
                 $intensity = $meditationObject['Intensity'];
             
                 // Check if the MeditationObject exists
-                $checkMeditationObjectSql = "SELECT * FROM ObservableObject WHERE ObservableObject_ID = '$observableObject_ID'";
-                $checkMeditationObjectResult = $db->query($checkMeditationObjectSql);
+                // $checkMeditationObjectSql = "SELECT * FROM ObservableObject WHERE ObservableObject_ID = '$observableObject_ID'";
+                // $checkMeditationObjectResult = $db->query($checkMeditationObjectSql);
             
-                if ($checkMeditationObjectResult->num_rows > 0) {
+                if (isset($observableObject_ID)) {
                     // MeditationObject exists, update the MeditationObject
                     $updateMeditationObjectSql = "UPDATE ObservableObject SET
                                                   Title = '$observableObjectTitle',
@@ -131,10 +131,10 @@ if (isset($_POST['session'])) {
 
 
             // Check if the step exists for the session
-            $checkStepSql = "SELECT * FROM Step WHERE Step_ID = '$step_ID' AND Session_ID = '$session_ID'";
-            $checkStepResult = $db->query($checkStepSql);
+            // $checkStepSql = "SELECT * FROM Step WHERE Step_ID = '$step_ID' AND Session_ID = '$session_ID'";
+            // $checkStepResult = $db->query($checkStepSql);
 
-            if ($checkStepResult->num_rows > 0) {
+            if (isset($step_ID)) {
                 // Step exists, update the step
                 $updateStepSql = "UPDATE Step SET
                                   Title = '$stepTitle',
@@ -169,10 +169,10 @@ if (isset($_POST['session'])) {
             $label = $db->real_escape_string($ahaMoment['Label']);
 
             // Check if the AhaMoment exists for the session
-            $checkAhaMomentSql = "SELECT * FROM AhaMoment WHERE AhaMoment_ID = '$ahaMoment_ID' AND Session_ID = '$session_ID'";
-            $checkAhaMomentResult = $db->query($checkAhaMomentSql);
+            // $checkAhaMomentSql = "SELECT * FROM AhaMoment WHERE AhaMoment_ID = '$ahaMoment_ID' AND Session_ID = '$session_ID'";
+            // $checkAhaMomentResult = $db->query($checkAhaMomentSql);
 
-            if ($checkAhaMomentResult->num_rows > 0) {
+            if (isset($ahaMoment_ID)) {
                 // AhaMoment exists, update the AhaMoment
                 $updateAhaMomentSql = "UPDATE AhaMoment SET
                                        Label = '$label'

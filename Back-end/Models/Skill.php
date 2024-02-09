@@ -2,6 +2,7 @@
 // Skill.php
 
 class Skill {
+    public $Skill_ID;
     public $Description;
    
     public static function getSkill($identifier) {
@@ -16,10 +17,11 @@ class Skill {
         $row = $result->fetch_assoc();
         
         // Create a new Skill object and assign values from the query result
-        $Skill = new Skill();
-        $Skill->Description = $row['Description'];
+        $skill = new Skill();
+        $skill->Skill_ID = $row['Skill_ID'];
+        $skill->Description = $row['Description'];
             
-        return $Skill;
+        return $skill;
     }
     
     public static function getJavaScriptSkill($identifier) {
@@ -38,37 +40,31 @@ class Skill {
         $db->query('USE Arm_mo_v2');
         
         // Query the database based on the stage ID
-        $query = "SELECT s.Description FROM Skill AS s
+        $query = "SELECT * FROM Skill AS s
                   INNER JOIN stage_Skill_association AS ssa ON s.Skill_ID = ssa.Skill_ID
                   WHERE ssa.Stage_ID = '$stageID'";
         $result = $db->query($query);
         
         // Create an array to store the Skill objects
-        $SkillArray = array();
+        $skillArray = array();
         
         // Iterate over the query results and create Skill objects
         while ($row = $result->fetch_assoc()) {
-            $Skill = new Skill();
-            $Skill->Description = $row['Description'];
+            $skill = new Skill();
+            $skill->Skill_ID = $row['Skill_ID'];
+            $skill->Description = $row['Description'];
             
             // Add the Skill object to the array
-            $SkillArray[] = $Skill;
+            $skillArray[] = $skill;
         }
         
-        return $SkillArray;
+        return $skillArray;
     }
     public static function getJavaScriptSkillArray($stageID) {
         $SkillArray = Skill::getSkillArray($stageID);
         
-        // Convert each Skill object to a JSON string
-        $SkillJsonArray = array();
-        foreach ($SkillArray as $Skill) {
-            $SkillJson = json_encode($Skill);
-            $SkillJsonArray[] = $SkillJson;
-        }
-        
         // Return the JavaScript code to create the JavaScript Skill array
-        return $SkillJsonArray;
+        return json_encode($SkillArray);
     }
 }
 

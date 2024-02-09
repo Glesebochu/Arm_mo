@@ -1596,7 +1596,7 @@ body {
     position: absolute;
     top: 0;
     width: 100%;
-    height: 77.6%;
+    height: 77%;
     background-color: rgb(82, 151, 50);
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
@@ -1677,7 +1677,7 @@ body {
     position: absolute;
     top: 6.8vmax;
     width: 100%;
-    height: 44.8%;
+    height: 47%;
     float: left;
     cursor: pointer;
     z-index: 100;
@@ -1845,7 +1845,7 @@ body {
     position: absolute;
     top: 0;
     width: 100%;
-    height: 77.6%;
+    height: 77%;
     background-color: rgb(82, 151, 50);
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
@@ -1924,7 +1924,7 @@ body {
     position: absolute;
     top: 6.8vmax;
     width: 100%;
-    height: 44.8%;
+    height: 47%;
     float: left;
     cursor: pointer;
     z-index: 100;

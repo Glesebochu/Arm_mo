@@ -1,7 +1,6 @@
 <?php
 
 class AhaMoment{
-    public $Session_ID;
     public $AhaMoment_ID;
     public $Label;
 
@@ -19,7 +18,6 @@ class AhaMoment{
 
         // Create a new object and assign values from the query result
         $ahaMoment = new AhaMoment();
-        $ahaMoment->Session_ID = $row['Session_ID'];
         $ahaMoment->AhaMoment_ID = $row['AhaMoment_ID'];
         $ahaMoment->Label = $row['Label'];
 

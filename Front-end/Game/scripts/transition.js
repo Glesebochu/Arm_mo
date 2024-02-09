@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+export function displayTransition() {
     var buttons = document.querySelectorAll('.feeling-state .unpleasant-button, .feeling-state .neutral-button, .feeling-state .pleasant-button');
 
     buttons.forEach(function(button) {
@@ -18,43 +18,38 @@ document.addEventListener("DOMContentLoaded", function () {
             button.style.transform = 'scaleX(2.8)';
         });
     });
-});
 
-// ------------------------------------------------------------------------------------------------------------------------
-// ------------------------------------------------------------------------------------------------------------------------
+    function setupToggleButton(buttonClass, divClass) {
+        var button = document.querySelector(buttonClass);
+        var div = document.querySelector(divClass);
 
-function setupToggleButton(buttonClass, divClass) {
-    var button = document.querySelector(buttonClass);
-    var div = document.querySelector(divClass);
+        button.addEventListener("click", function (event) {
+            // Toggle the "active" class on the div
+            div.classList.toggle("active");
 
-    button.addEventListener("click", function (event) {
-        // Toggle the "active" class on the div
-        div.classList.toggle("active");
+            // Check if the div has the "active" class
+            if (div.classList.contains("active")) {
+                // Completely hide the button if the div is active
+                button.style.display = "none";
+            }
 
-        // Check if the div has the "active" class
-        if (div.classList.contains("active")) {
-            // Completely hide the button if the div is active
-            button.style.display = "none";
-        }
+            // Stop the click event propagation to prevent it from reaching the document
+            event.stopPropagation();
+        });
 
-        // Stop the click event propagation to prevent it from reaching the document
-        event.stopPropagation();
-    });
+        // Add click event listener to the document
+        document.addEventListener("click", function () {
+            // Check if the div has the "active" class
+            if (div.classList.contains("active")) {
+                // Remove the "active" class from the div
+                div.classList.remove("active");
 
-    // Add click event listener to the document
-    document.addEventListener("click", function () {
-        // Check if the div has the "active" class
-        if (div.classList.contains("active")) {
-            // Remove the "active" class from the div
-            div.classList.remove("active");
+                // Ensure the button is visible again
+                button.style.display = "none";
+            }
+        });
+    }
 
-            // Ensure the button is visible again
-            button.style.display = "none";
-        }
-    });
-}
-
-document.addEventListener("DOMContentLoaded", function () {
     setupToggleButton(".visual-four-step-button", ".visual-four-step-div");
     setupToggleButton(".auditory-four-step-button", ".auditory-four-step-div");
     setupToggleButton(".kinesthetic-four-step-button", ".kinesthetic-four-step-div");
@@ -63,45 +58,42 @@ document.addEventListener("DOMContentLoaded", function () {
     setupToggleButton(".feeling-four-step-button", ".feeling-four-step-div");
     setupToggleButton(".thought-four-step-button", ".thought-four-step-div");
     setupToggleButton(".emotional-four-step-button", ".emotional-four-step-div");
-});
 
+    function setupStimulusButton(buttonClass, inputDivClass, populateStimulusClass) {
+        var button = document.querySelector(buttonClass);
+        var inputDiv = document.querySelector(inputDivClass);
+        var populateStimulus = document.querySelector(populateStimulusClass);
 
-function setupStimulusButton(buttonClass, inputDivClass, populateStimulusClass) {
-    var button = document.querySelector(buttonClass);
-    var inputDiv = document.querySelector(inputDivClass);
-    var populateStimulus = document.querySelector(populateStimulusClass);
+        var clickCounter = 0;
+        var spacingBetweenElements = 1; // Set your desired spacing in vmax
 
-    var clickCounter = 0;
-    var spacingBetweenElements = 1; // Set your desired spacing in vmax
+        button.addEventListener("click", function () {
+            clickCounter++;
 
-    button.addEventListener("click", function () {
-        clickCounter++;
+            button.classList.toggle("active");
+            inputDiv.classList.toggle("active");
+            inputDiv.classList.toggle("inactive", !button.classList.contains("active"));
 
-        button.classList.toggle("active");
-        inputDiv.classList.toggle("active");
-        inputDiv.classList.toggle("inactive", !button.classList.contains("active"));
+            if (clickCounter % 2 === 0) {
+                var textareaInput = document.querySelector(inputDivClass + " textarea").value;
 
-        if (clickCounter % 2 === 0) {
-            var textareaInput = document.querySelector(inputDivClass + " textarea").value;
+                var inputArray = textareaInput.split(' ');
 
-            var inputArray = textareaInput.split(' ');
+                populateStimulus.innerHTML = '';
 
-            populateStimulus.innerHTML = '';
+                if (inputArray.length > 0 && inputArray[0].trim() !== "") {
 
-            if (inputArray.length > 0 && inputArray[0].trim() !== "") {
+                    inputArray.forEach(function (inputElement) {
+                        var newParagraph = document.createElement("p");
+                        newParagraph.textContent = inputElement;
 
-                inputArray.forEach(function (inputElement) {
-                    var newParagraph = document.createElement("p");
-                    newParagraph.textContent = inputElement;
-
-                    populateStimulus.appendChild(newParagraph);
-                });
+                        populateStimulus.appendChild(newParagraph);
+                    });
+                }
             }
-        }
-    });
-}
+        });
+    }
 
-document.addEventListener("DOMContentLoaded", function () {
     setupStimulusButton(".visual-stimulus-button", ".visual-stimulus-input-div", ".populate-visual-stimulus");
     setupStimulusButton(".auditory-stimulus-button", ".auditory-stimulus-input-div", ".populate-auditory-stimulus");
     setupStimulusButton(".kinesthetic-stimulus-button", ".kinesthetic-stimulus-input-div", ".populate-kinesthetic-stimulus");
@@ -109,9 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
     setupStimulusButton(".olifactory-stimulus-button", ".olifactory-stimulus-input-div", ".populate-olifactory-stimulus");
     setupStimulusButton(".thought-state-button", ".thought-state-input-div", ".populate-thought-state");
     setupStimulusButton(".emotional-state-button", ".emotional-state-input-div", ".populate-emotional-state");
-});
 
-document.addEventListener('DOMContentLoaded', function () {
     // Get references to the aha-moment button and counter elements
     const ahaButton = document.querySelector('.aha-moment');
     const counterElement = document.getElementById('counter');
@@ -135,9 +125,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Initial setup
     updateCounter();
+}
 
-    // Rest of the code...
-});
+document.addEventListener("DOMContentLoaded", displayTransition);
 
 // #region Original and Incomplete codes
 

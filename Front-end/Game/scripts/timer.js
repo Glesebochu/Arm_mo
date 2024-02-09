@@ -1,24 +1,19 @@
 // import { Session } from "../../../Middle-logic/Models/Session.js";
 
-document.addEventListener("DOMContentLoaded", function () {
+export function timeCountdown() {
     const timerElement = document.getElementById("timer");
 
     const initialDuration = 45 * 60 * 1000; // 45 minutes in milliseconds
     let remainingTime = initialDuration;
 
     setInterval(() => {
-  
         remainingTime -= 100; // Update every 100 milliseconds for better performance
-
-        // Ensure the timer doesn't go below 0
         remainingTime = Math.max(0, remainingTime);
 
-        // Calculate minutes, seconds, and milliseconds
         const minutes = Math.floor(remainingTime / (60 * 1000));
         const seconds = Math.floor((remainingTime % (60 * 1000)) / 1000);
         const milliseconds = remainingTime % 1000;
 
-        // Format and display the time
         const formattedTime = `${padZero(minutes)}:${padZero(seconds)}:${padZero(milliseconds, 3)}`;
         timerElement.textContent = formattedTime;
     }, 100);
@@ -26,9 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function padZero(num, length = 2) {
         return num.toString().padStart(length, '0');
     }
-});
 
-document.addEventListener("DOMContentLoaded", function () {
     // Get the triangle button
     var triangleButton = document.querySelector(".triangle-button");
 
@@ -42,7 +35,9 @@ document.addEventListener("DOMContentLoaded", function () {
             window.location.href = "../Game UI.html";
         }, 500); // Adjust the delay (in milliseconds) as needed
     });
-});
+}
+
+document.addEventListener("DOMContentLoaded", timeCountdown);
 
 
 

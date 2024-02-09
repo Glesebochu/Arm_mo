@@ -1,0 +1,116 @@
+@media screen and (orientation:portrait) {
+    
+    .timer-inner-container{
+        display: none;
+    }
+    .portrait-div{
+        font-size: 2vmax;
+        text-align: center;
+        margin-top: 46vmax;
+        padding-left: 2vmax;
+        padding-right: 2vmax;
+        font-family: 'Major Mono Display', monospace;
+    }
+    .portrait-div .portrait-icon{
+        width: auto;
+        height: 3vmax;
+    }
+}
+
+@media screen and (orientation:landscape) {
+    .portrait-div{
+        display: none;
+    }
+
+    body {
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background-color: #f0f0f0;
+        font-family: 'Major Mono Display', monospace;
+        /* opacity: 0; */
+        transition: opacity 0.5s ease-in-out;
+    }
+
+    .container-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .inner-container {
+        margin-left: 0.8vmax;
+        margin-right: 0.8vmax;
+        margin-top: 0.2vmax;
+        margin-bottom: 1.2vmax;
+        width: calc(100vw - 1.6vmax); /* Adjusted width to consider margins on both sides */
+        height: calc(100vh - 8.6vmax); /* Adjusted height to consider margins on both top and bottom */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* background-color: #b02121; */
+        background-color: #d9d9d9;
+        border-radius: 20px;
+        position: relative;
+    }
+}
+
+.page-button {
+    display: flex;
+    justify-content: center;
+    /* background-color: #b02121; */
+    width: calc(100vw - 1.6vmax);
+    /* margin-top: 1vmax; */
+}
+
+.previous-stage,
+.stage-button,
+.next-stage {
+    margin-left: 0.5vmax;
+    margin-right: 0.5vmax;
+    width: 5vmax;
+    height: 5vmax;
+    cursor: pointer;
+    transition-duration: 0.5s;
+    border: none;
+    border-radius: 20px;
+    background-color: #f0f0f0;
+}
+
+.page-button img {
+    width: 60%;
+    height: 60%;
+    opacity: 0.2;
+    transition-duration: 0.5s;
+}
+
+.stage-button{
+    font-size: 2vmax;
+    font-weight: 100;
+    opacity: 0.2;
+    transition-duration: 0.5s;
+}
+
+.previous-stage:hover, .stage-button:hover, .next-stage:hover{
+    background-color: #d8d8da;
+    opacity: 0.7;
+    font-size: 3vmax;
+}
+.previous-stage:active, .stage-button:active, .next-stage:active{
+    background-color: #cacaca;
+}
+
+.previous-stage:hover img, .next-stage:hover img{
+    width: 80%;
+    height: 80%;
+    opacity: 0.7;
+    transition-duration: 0.5s;
+}
+
+.previous-stage:active img, .next-stage:active img{
+    width: 70%;
+    height: 70%;
+    transition-duration: 0.1s;
+}

@@ -22,5 +22,5 @@ export class Obstacle {
     static getObstaclesFromArrayObject(array) {
         var obstacleObjects = array.map(obstacle => new Obstacle(obstacle.Obstacle_ID, obstacle.Description));
         return obstacleObjects;
-      }
+    }
 }

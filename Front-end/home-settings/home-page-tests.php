@@ -67,7 +67,7 @@
       // Output the JavaScript code to create the Intention object
       var intentionObj = JSON.parse('<?php echo $javascriptIntention; ?>');
       console.log(intentionObj);
-      console.log(Intention.getIntentionFromArray(intentionObj));
+      console.log(Intention.getIntentionsFromArrayObjects(intentionObj));
 
 
     </script>
@@ -177,7 +177,7 @@
 
       // // Return the intention object
       // var intentionObj = JSON.parse('<?php echo $intention; ?>');
-      // intentionObj=Intention.getIntentionFromArray(intentionObj)
+      // intentionObj=Intention.getIntentionsFromArrayObjects(intentionObj)
 
       // // Return the Mastery Requirement object
       // var masteryRequirement = JSON.parse('<?php echo $masteryRequirement; ?>');

@@ -98,7 +98,7 @@
 
       // Return the intention object
       var intentionObj = JSON.parse('<?php echo $intention; ?>');
-      intentionObj=Intention.getIntentionFromArray(intentionObj)
+      intentionObj=Intention.getIntentionsFromArrayObjects(intentionObj)
 
       // Return the Mastery Requirement object
       var masteryRequirement = JSON.parse('<?php echo $masteryRequirement; ?>');

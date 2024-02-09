@@ -1,3 +1,8 @@
+import { AhaMoment } from "./AhaMoment.js";
+import { Meditator } from "./Meditator.js";
+import { Stage } from "./Stage.js";
+import { Step } from "./Step.js";
+
 export class Session {
     constructor(Session_ID,meditator, startDateTime, endDateTime, practicedStages = [],  ahaMoments = [], steps = [],newlyMasteredStages = []) {
         this.Session_ID = Session_ID;
@@ -12,20 +17,17 @@ export class Session {
     static getSessionFromObject(obj){
         return new Session(
             obj.Session_ID,
-            obj.Meditator,
+            Meditator.getMeditatorFromObject(obj.Meditator),
             obj.Start_Date_Time,
             obj.End_Date_Time,
-            obj.Practiced_Stages,
-            obj.AhaMoments,
-            obj.Steps,
+            Stage.getStagesFromArrayObject(obj.Practiced_Stages),
+            AhaMoment.getAhaMomentsFromArrayObject(obj.AhaMoments),
+            Step.getStepsFromArrayObject(obj.Steps),
             [],
         );
     }
-    static convertArrayToSessionObjects(arr){
-        var SessionObjects= arr.map(session=>
-            new Session(session.Session_ID,session.Meditator,session.Start_Date_Time,session.End_Date_Time,session.Practiced_Stages,session.AhaMoments,session.Steps)
-        )
-        return SessionObjects;
+    static getSessionsFromArrayObject(arr){
+        return arr.map(this.getSessionFromObject);
     }
 
 }

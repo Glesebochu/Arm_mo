@@ -16,9 +16,9 @@ export class Stage {
         return new Stage(
             obj.Stage_ID,
             obj.Goal,
-            obj.Intentions,
-            obj.Obstacles,
-            obj.Skills,
+            Intention.getIntentionsFromArrayObjects(obj.Intentions),
+            Obstacle.getObstaclesFromArrayObject(obj.Obstacles),
+            Skill.getSkillsFromArrayObject(obj.Skills),
             obj.MasteryRequirements,
             obj.Is_Mastered
         );

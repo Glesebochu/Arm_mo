@@ -10,7 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../Font.css">
     <script src="../scripts/stageInformation.js" type="module"></script>
-    <title>Arm-mo</title>
+    <link rel="icon" href="../Icons/Arm-mo Title Icon 2.png" type="image/x-icon">
+    <title>Arm'mo: Stages</title>
 
     <!-- Stage Object Retreival -->
     <?php

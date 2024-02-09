@@ -302,8 +302,8 @@
     {
          $queryCreateSession= "CREATE TABLE Session(Session_ID INT PRIMARY KEY AUTO_INCREMENT,
                                                                     Meditator_ID INT NOT NULL,
-                                                                    Start_Time DATETIME NOT NULL,
-                                                                    End_Time DATETIME NOT NULL,
+                                                                    Start_Date_Time DATETIME NOT NULL,
+                                                                    End_Date_Time DATETIME NOT NULL,
                                                                     FOREIGN KEY (Meditator_ID) REFERENCES Meditator(Meditator_ID))";
 
         if(($db->query("SHOW TABLES LIKE 'Session'"))->num_rows>0){

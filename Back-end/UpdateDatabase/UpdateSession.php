@@ -24,8 +24,8 @@ if (isset($_POST['session'])) {
     // Update the Session table
     $sql = "UPDATE Session SET
             Meditator_ID = '$meditator',
-            Start_Time = '$startDateTime',
-            End_Time = '$endDateTime'
+            Start_Date_Time = '$startDateTime',
+            End_Date_Time = '$endDateTime'
             WHERE Session_ID = '$session_ID'";
     $result = $db->query($sql);
 

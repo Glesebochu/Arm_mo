@@ -21,7 +21,7 @@ if (isset($_POST['session'])) {
     $newlyMasteredStages = $session['Newly_Mastered_Stages'];
 
     // Insert the new session into the Session table
-    $sql = "INSERT INTO Session (Meditator_ID, Start_Time, End_Time)
+    $sql = "INSERT INTO Session (Meditator_ID, Start_Date_Time, End_Date_Time)
             VALUES ('$meditator', '$startDateTime', '$endDateTime')";
     $result = $db->query($sql);
 

@@ -255,7 +255,7 @@
         $endTime = date('Y-m-d H:i:s', strtotime('+1 hour', strtotime($startTime)));
 
         // Insert the dummy session into the Session table
-        $sqlInsertSession = "INSERT INTO Session (Meditator_ID, Start_Time, End_Time)
+        $sqlInsertSession = "INSERT INTO Session (Meditator_ID, Start_Date_Time, End_Date_Time)
                             VALUES (1, '$startTime', '$endTime')";
         if ($db->query($sqlInsertSession)) {
             echo "

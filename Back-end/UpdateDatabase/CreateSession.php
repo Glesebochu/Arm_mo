@@ -1,6 +1,6 @@
 <?php
 // Include the PHP file with the function to create a new Session object
-include_once('../../Back-end/Connect.php');
+include_once(__DIR__ . '/../Connect.php');
 
 // Create a database connection
 $con = new Connect;
@@ -15,13 +15,13 @@ if (isset($_POST['session'])) {
     $meditator = $session['Meditator'];
     $startDateTime = $session['Start_Date_Time'];
     $endDateTime = $session['End_Date_Time'];
-    $practicedStages = $session['Practiced_Stages'];
+    $practicedStages = $session['PracticedStages'];
     $steps = $session['Steps'];
     $ahaMoments = $session['AhaMoments'];
     $newlyMasteredStages = $session['Newly_Mastered_Stages'];
 
     // Insert the new session into the Session table
-    $sql = "INSERT INTO Session (Meditator_ID, Start_Time, End_Time)
+    $sql = "INSERT INTO Session (Meditator_ID, Start_Date_Time, End_Date_Time)
             VALUES ('$meditator', '$startDateTime', '$endDateTime')";
     $result = $db->query($sql);
 

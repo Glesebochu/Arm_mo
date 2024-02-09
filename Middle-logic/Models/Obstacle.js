@@ -1,5 +1,6 @@
 export class Obstacle {
-    constructor(description) {
+    constructor(id, description) {
+        this.Obstacle_ID = id;
         this.Description = description;
     }
 
@@ -18,8 +19,8 @@ export class Obstacle {
     static Forgetting = "Forgetting";
     static Sleepiness = "Sleepiness";
     
-    static convertArrayToObstacleObjects(array) {
-        var obstacleObjects = array.map(obstacle => new Obstacle(obstacle.Description));
+    static getObstaclesFromArrayObject(array) {
+        var obstacleObjects = array.map(obstacle => new Obstacle(obstacle.Obstacle_ID, obstacle.Description));
         return obstacleObjects;
-      }
+    }
 }

@@ -4,11 +4,9 @@
 class MasteryRequirement {
     public $Mastery_ID;
     public $Description;
-    public $Stage;
-   
 
     public static function getMasteryRequirementArray($identifier) {
-        include_once('../../Back-end/Connect.php');
+        include_once(__DIR__ . '/../Connect.php');
         $con = new Connect;
         $db = $con->__getConnection();
         $db->query('USE Arm_mo_v2');
@@ -22,7 +20,6 @@ class MasteryRequirement {
             $MasteryRequirement = new MasteryRequirement();
             $MasteryRequirement->Mastery_ID = $row['Mastery_ID'];
             $MasteryRequirement->Description = $row['Description'];
-            $MasteryRequirement->Stage = $row['Stage_ID'];
             $MasteryRequirementArray[]=$MasteryRequirement;
             
         }

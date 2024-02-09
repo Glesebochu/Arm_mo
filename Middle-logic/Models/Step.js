@@ -8,8 +8,8 @@ export class StepType{
 }
 
 export class Step{
-    constructor(Session_ID,title, description, category, type, duration=0, response=null, activity){
-        this.Session_ID=Session_ID;
+    constructor(Step_ID,title, description, category, type, duration=0, response, activity){
+        this.Step_ID=Step_ID;
         this.Title = title;
         this.Description = description;
         this.Category = category;
@@ -19,17 +19,21 @@ export class Step{
         this.Activity = activity;
     }
 
-    static convertArrayToStepObjects(array) {
-        var StepObjects = array.map(step => new Step(
-            step.Session_ID,
-            step.Title,
-            step.Description,
-            step.Category,
-            step.Type,
-            step.Duration,
-            step.Response,
-            step.Activity
-        ));
+    static getStepFromObject(obj){
+        return new Step(
+            obj.Step_ID,
+            obj.Title,
+            obj.Description,
+            obj.Category,
+            obj.Type,
+            obj.Duration,
+            obj.Response,
+            obj.Activity
+        );
+    }
+
+    static getStepsFromArrayObject(array) {
+        var StepObjects = array.map(Step.getStepFromObject);
         return StepObjects;
     }
     

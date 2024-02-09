@@ -10,7 +10,7 @@ class Meditator {
     public $Current_Stage_No;
 
     public static function getMeditator($identifier) {
-        include_once('../../Back-end/Connect.php');
+        include_once(__DIR__ . '/../Connect.php');
         $con = new Connect;
         $db = $con->__getConnection();
         $db->query('USE Arm_mo_v2');
@@ -21,6 +21,29 @@ class Meditator {
         $result = $db->query($query);
         $row = $result->fetch_assoc();
         
+        // Create a new Meditator object and assign values from the query result
+        $meditator = new Meditator();
+        $meditator->Meditator_ID = $row['Meditator_ID'];
+        $meditator->First_Name = $row['First_Name'];
+        $meditator->Last_Name = $row['Last_Name'];
+        $meditator->Username = $row['Username'];
+        $meditator->Password = $row['Password'];
+        $meditator->Current_Stage_No = $row['Stage_ID'];
+        
+        return $meditator;
+    }
+
+    public static function getMeditatorById($meditator_ID){
+        include_once(__DIR__ . '/../Connect.php');
+        $con = new Connect;
+        $db = $con->__getConnection();
+        $db->query('USE Arm_mo_v2');
+        
+        // Query the database based on the identifier
+        $query = "SELECT * FROM Meditator WHERE Meditator_ID = '$meditator_ID'";
+        $result = $db->query($query);
+        $row = $result->fetch_assoc();
+
         // Create a new Meditator object and assign values from the query result
         $meditator = new Meditator();
         $meditator->Meditator_ID = $row['Meditator_ID'];

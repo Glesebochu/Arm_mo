@@ -1,30 +1,33 @@
+import { AhaMoment } from "./AhaMoment.js";
+import { Meditator } from "./Meditator.js";
+import { Stage } from "./Stage.js";
+import { Step } from "./Step.js";
+
 export class Session {
-    constructor(Session_ID,meditator, startDateTime, endDateTime, practicedStages = [], steps = [], ahaMoments = [], newlyMasteredStages = []) {
+    constructor(Session_ID,meditator, startDateTime, endDateTime, practicedStages = [],  ahaMoments = [], steps = [],newlyMasteredStages = []) {
         this.Session_ID = Session_ID;
         this.Meditator = meditator;
         this.Start_Date_Time = startDateTime;
         this.End_Date_Time = endDateTime;
-        this.Practiced_Stages = practicedStages;
+        this.PracticedStages = practicedStages;
         this.AhaMoments = ahaMoments;
-        this.Newly_Mastered_Stages = newlyMasteredStages;
         this.Steps = steps;
+        this.Newly_Mastered_Stages = newlyMasteredStages;
     }
     static getSessionFromObject(obj){
         return new Session(
-            obj.Meditator_ID,
-            obj.Start_Time,
-            obj.End_Time,
-            obj.Practiced_Stages,
+            obj.Session_ID,
+            Meditator.getMeditatorFromObject(obj.Meditator),
+            obj.Start_Date_Time,
+            obj.End_Date_Time,
+            Stage.getStagesFromArrayObject(obj.PracticedStages),
+            AhaMoment.getAhaMomentsFromArrayObject(obj.AhaMoments),
+            Step.getStepsFromArrayObject(obj.Steps),
             [],
-            [],
-            obj.Steps
         );
     }
-    static convertArrayToSessionObjects(arr){
-        var SessionObjects= arr.map(session=>
-            new Session(session.Session_ID,session.Meditator_ID,session.Start_Time,session.End_Time,session.Practiced_Stages,session.Steps)
-        )
-        return SessionObjects;
+    static getSessionsFromArrayObject(arr){
+        return arr.map(this.getSessionFromObject);
     }
 
 }

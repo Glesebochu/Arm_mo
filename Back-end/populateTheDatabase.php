@@ -169,7 +169,7 @@
 
 // Populating the Antidote table
 {
-    function checkRecordExistsAntidote($AntidoteType, $Severity,$Antidote) {
+    function checkRecordExistsAntidote($AntidoteType, $Severity,$Description) {
         global $db;
         $query = "SELECT * FROM Antidote WHERE Type = ? AND Severity = ? AND Description = ?";
         $stmt = $db->prepare($query);
@@ -255,7 +255,7 @@
         $endTime = date('Y-m-d H:i:s', strtotime('+1 hour', strtotime($startTime)));
 
         // Insert the dummy session into the Session table
-        $sqlInsertSession = "INSERT INTO Session (Meditator_ID, Start_Time, End_Time)
+        $sqlInsertSession = "INSERT INTO Session (Meditator_ID, Start_Date_Time, End_Date_Time)
                             VALUES (1, '$startTime', '$endTime')";
         if ($db->query($sqlInsertSession)) {
             echo "
@@ -280,7 +280,7 @@
 
     foreach ($stages as $stageID) {
         // Check if the record already exists
-        $query = "SELECT * FROM practiced_stages WHERE Stage_ID = $stageID AND Session_ID = $sessionID";
+        $query = "SELECT * FROM PracticedStages WHERE Stage_ID = $stageID AND Session_ID = $sessionID";
         $result = $db->query($query);
 
         if ($result->num_rows > 0) {
@@ -291,7 +291,7 @@
             ";
         } else {
             // Insert the new record into the table
-            $queryInsert = "INSERT INTO practiced_stages (Stage_ID, Session_ID) VALUES ($stageID, $sessionID)";
+            $queryInsert = "INSERT INTO PracticedStages (Stage_ID, Session_ID) VALUES ($stageID, $sessionID)";
             $db->query($queryInsert);
 
             if ($db->affected_rows > 0) {

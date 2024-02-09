@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // After a delay, navigate to the Dummy Game UI.html page
         setTimeout(function () {
-            window.location.href = "../Dummy Game UI.html";
+            window.location.href = "../Game UI.html";
         }, 500); // Adjust the delay (in milliseconds) as needed
     });
 
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // After a delay, navigate to the Dummy Game UI.html page
         setTimeout(function () {
-            window.location.href = "../Dummy Game UI.html";
+            window.location.href = "../Game UI.html";
         }, 500); // Adjust the delay (in milliseconds) as needed
     });
 

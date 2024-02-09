@@ -100,6 +100,91 @@
       console.log('NEW', Session.getSessionFromObject(session));
     </script>
 
+    <!-- Session Object send test -->
+    <script type="module">
+      // Import the Session.js module
+      import { Session } from '../../Middle-logic/Models/Session.js';
+      import { Meditator } from '../../Middle-logic/Models/Meditator.js';
+      import { Step } from '../../Middle-logic/Models/Step.js';
+      import { AhaMoment } from '../../Middle-logic/Models/AhaMoment.js';
+
+
+      // Function to send the Session object to the PHP script
+      function updateSession(session) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '../../Back-end/UpdateDatabase/UpdateSession.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+              console.log(xhr.responseText);
+            } else {
+              console.error('Error:', xhr.status);
+            }
+          }
+        };
+
+        var params = "session=" + encodeURIComponent(JSON.stringify(session));
+        xhr.send(params);
+      }
+      function createSession(session) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '../../Back-end/UpdateDatabase/CreateSession.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+              console.log(xhr.responseText);
+            } else {
+              console.error('Error:', xhr.status);
+            }
+          }
+        };
+
+        var params = "session=" + encodeURIComponent(JSON.stringify(session));
+        xhr.send(params);
+      }
+
+      
+      var meditatorTest = new Meditator('1', 'Finhas', 'Yohannes', 'FinhasGustavo@gmail.com', 'test', '5');
+
+      var stepArray = <?php echo $javascriptStepArray ?>;
+      var stepObjects = Step.convertArrayToStepObjects(stepArray);
+      var matchingSteps = stepObjects.filter(step => step.Session_ID === '1');
+
+      // Retrieve Aha Moments
+      var ahaMomentArray = <?php echo $javascriptAhaMomentArray ?>;
+      var ahaMomentObjects=AhaMoment.getAhaMomentsFromArrayObject(ahaMomentArray);
+      ahaMomentObjects = ahaMomentObjects.map(obj => {
+        obj.Label += 'boop';
+        return obj;
+      });
+      console.log('check', ahaMomentObjects)
+      var matchingAhaMoments = ahaMomentObjects.filter(AhaMoment => AhaMoment.Session_ID === '1');
+
+      var sessionData = {
+        Start_Date_Time: '<?php echo date("Y-m-d H:i:s"); ?>',
+        End_Date_Time: '<?php echo date("Y-m-d H:i:s"); ?>',
+        Practiced_Stages: [1, 2, 3],
+        Newly_Mastered_Stages: [7, 8, 9]
+      };
+
+      // Create a new Session object using the retrieved session data
+      var sessionObject = new Session(
+        '1',
+        meditatorTest.Meditator_ID,
+        sessionData.Start_Date_Time,
+        sessionData.End_Date_Time,
+        sessionData.Practiced_Stages,
+        matchingAhaMoments,
+        matchingSteps,
+        sessionData.Newly_Mastered_Stages
+      );
+      console.log('test',sessionObject);
+
+      // Call the updateSession function and pass the Session object
+      updateSession(sessionObject);
+    </script>
 
   <script>
     function openPage(link){

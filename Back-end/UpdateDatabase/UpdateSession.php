@@ -30,7 +30,7 @@ if (isset($_POST['session'])) {
     $result = $db->query($sql);
 
     if ($result) {
-        // Update existing steps for the session
+        // Update or insert steps for the session
         foreach ($steps as $step) {
             $step_ID = $step['Step_ID'];
             $title = $db->real_escape_string($step['Title']);
@@ -40,35 +40,89 @@ if (isset($_POST['session'])) {
             $duration = $db->real_escape_string($step['Duration']);
             $response = $db->real_escape_string($step['Response']);
 
-            $updateStepSql = "UPDATE Step SET
-                              Title = '$title',
-                              Description = '$description',
-                              Type = '$type',
-                              Category = '$category',
-                              Duration = '$duration',
-                              Response = 'test1'
-                              WHERE Step_ID = '$step_ID' AND Session_ID = '$session_ID'";
-            $updateStepResult = $db->query($updateStepSql);
+            // Check if the step exists for the session
+            $checkStepSql = "SELECT * FROM Step WHERE Step_ID = '$step_ID' AND Session_ID = '$session_ID'";
+            $checkStepResult = $db->query($checkStepSql);
 
-            if (!$updateStepResult) {
-                echo 'Failed to update steps for the session.';
-                exit;
+            if ($checkStepResult->num_rows > 0) {
+                // Step exists, update the step
+                $updateStepSql = "UPDATE Step SET
+                                  Title = '$title',
+                                  Description = '$description',
+                                  Type = '$type',
+                                  Category = '$category',
+                                  Duration = '$duration',
+                                  Response = '$response'
+                                  WHERE Step_ID = '$step_ID' AND Session_ID = '$session_ID'";
+                $updateStepResult = $db->query($updateStepSql);
+
+                if (!$updateStepResult) {
+                    echo 'Failed to update steps for the session.';
+                    exit;
+                }
+            } else {
+                // Step does not exist, insert the step
+                $insertStepSql = "INSERT INTO Step (Step_ID, Session_ID, Title, Description, Type, Category, Duration, Response) 
+                                  VALUES ('$step_ID', '$session_ID', '$title', '$description', '$type', '$category', '$duration', '$response')";
+                $insertStepResult = $db->query($insertStepSql);
+
+                if (!$insertStepResult) {
+                    echo 'Failed to insert steps for the session.';
+                    exit;
+                }
             }
         }
 
-        // Update existing AhaMoments for the session
+        // Update or insert AhaMoments for the session
         foreach ($ahaMoments as $ahaMoment) {
             $ahaMoment_ID = $ahaMoment['AhaMoment_ID'];
             $label = $db->real_escape_string($ahaMoment['Label']);
 
-            $updateAhaMomentSql = "UPDATE AhaMoment SET
-                                   Label = '$label'
-                                   WHERE AhaMoment_ID = '$ahaMoment_ID' AND Session_ID = '$session_ID'";
-            $updateAhaMomentResult = $db->query($updateAhaMomentSql);
+            // Check if the AhaMoment exists for the session
+            $checkAhaMomentSql = "SELECT * FROM AhaMoment WHERE AhaMoment_ID = '$ahaMoment_ID' AND Session_ID = '$session_ID'";
+            $checkAhaMomentResult = $db->query($checkAhaMomentSql);
 
-            if (!$updateAhaMomentResult) {
-                echo 'Failed to update AhaMoments for the session.';
-                exit;
+            if ($checkAhaMomentResult->num_rows > 0) {
+                // AhaMoment exists, update the AhaMoment
+                $updateAhaMomentSql = "UPDATE AhaMoment SET
+                                       Label = '$label'
+                                       WHERE AhaMoment_ID = '$ahaMoment_ID' AND Session_ID = '$session_ID'";
+                $updateAhaMomentResult = $db->query($updateAhaMomentSql);
+
+                if (!$updateAhaMomentResult) {
+                    echo 'Failed to update AhaMoments for the session.';
+                    exit;
+                }
+            } else {
+                // AhaMoment does not exist, insert the AhaMoment
+                $insertAhaMomentSql = "INSERT INTO AhaMoment (AhaMoment_ID, Session_ID, Label) 
+                                       VALUES ('$ahaMoment_ID', '$session_ID', '$label')";
+                $insertAhaMomentResult = $db->query($insertAhaMomentSql);
+
+                if (!$insertAhaMomentResult) {
+                    echo 'Failed to insert AhaMoments for the session.';
+                    exit;
+                }
+            }
+        }
+        // Update or insert PracticedStages for the session
+        foreach ($practicedStages as $practicedStage) {
+            $stage_ID = $practicedStage['Stage_ID'];
+
+            // Check if the PracticedStage exists for the session
+            $checkPracticedStageSql = "SELECT * FROM PracticedStage WHERE Stage_ID = '$stage_ID' AND Session_ID = '$session_ID'";
+            $checkPracticedStageResult = $db->query($checkPracticedStageSql);
+
+            if ($checkPracticedStageResult->num_rows === 0) {
+                // PracticedStage does not exist, insert the PracticedStage
+                $insertPracticedStageSql = "INSERT INTO PracticedStage (Stage_ID, Session_ID) 
+                                            VALUES ('$stage_ID', '$session_ID')";
+                $insertPracticedStageResult = $db->query($insertPracticedStageSql);
+
+                if (!$insertPracticedStageResult) {
+                    echo 'Failed to insert PracticedStages for the session.';
+                    exit;
+                }
             }
         }
 

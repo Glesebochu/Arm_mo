@@ -169,7 +169,7 @@
 
 // Populating the Antidote table
 {
-    function checkRecordExistsAntidote($AntidoteType, $Severity,$Description) {
+    function checkRecordExistsAntidote($AntidoteType, $Severity, $Description) {
         global $db;
         $query = "SELECT * FROM Antidote WHERE Type = ? AND Severity = ? AND Description = ?";
         $stmt = $db->prepare($query);
@@ -198,13 +198,13 @@
         ['AntidoteType' => 'Dullness', 'Severity' => 'Severe','Description'=>'Splash water on your face'],
         ['AntidoteType' => 'Dullness', 'Severity' => 'Severe','Description'=>'Nap and come back']
     ];
-    
+
     foreach ($AntidoteInstances as $AntidoteInstance) {
         $AntidoteType = $AntidoteInstance['AntidoteType'];
         $Severity = $AntidoteInstance['Severity'];
         $Description = $AntidoteInstance['Description'];
-    
-        if (checkRecordExistsAntidote($AntidoteType, $Severity, $Antidote)) {
+
+        if (checkRecordExistsAntidote($AntidoteType, $Severity, $Description)) {
             echo "
                 <script>
                     console.log('Entry already exists for AntidoteType: $AntidoteType and Severity: $Severity');
@@ -216,7 +216,7 @@
             $stmtInsert = $db->prepare($queryInsert);
             $stmtInsert->bind_param("sss", $AntidoteType, $Severity, $Description);
             $stmtInsert->execute();
-    
+
             if ($db->affected_rows > 0) {
                 echo "
                     <script>

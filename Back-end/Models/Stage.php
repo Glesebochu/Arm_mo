@@ -8,7 +8,6 @@ class Stage {
     public $Obstacles;
     public $Skills;
     public $MasteryRequirements;
-    public $NextStage;
     public $Is_Mastered;
        
     public static function getStage($identifier) {
@@ -24,8 +23,13 @@ class Stage {
         
         // Create a new Stage object and assign values from the query result
         $Stage = new Stage();
-        $Stage->Goal = $row['Goal'];
         $Stage->Stage_ID = $row['Stage_ID'];
+        $Stage->Goal = $row['Goal'];
+        $Stage->Intentions = Intention::getIntentionArray($identifier);
+        $Stage->Obstacles = Obstacle::getObstacleArray($identifier);
+        $Stage->Skills = Skill::getSkillArray($identifier);
+        $Stage->MasteryRequirements = MasteryRequirement::getMasteryRequirementArray($identifier);
+        $Stage->Is_Mastered = $row['Is_Mastered'];
         return $Stage;
     }
     

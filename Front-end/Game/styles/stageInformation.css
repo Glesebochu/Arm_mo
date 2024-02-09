@@ -1,3 +1,7 @@
+*{
+    box-sizing: border-box;
+}
+
 @media screen and (orientation:portrait) {
     
     .timer-inner-container{
@@ -18,6 +22,8 @@
 }
 
 @media screen and (orientation:landscape) {
+    
+
     .portrait-div{
         display: none;
     }
@@ -55,7 +61,32 @@
         background-color: #d9d9d9;
         border-radius: 20px;
         position: relative;
+        overflow-y: scroll;
+        /* scrollbar-width: 0.2vmax; */
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 3vmax;
     }
+
+    .inner-container h1{
+        font-size: 5vmax;
+        /* margin-left: 3vmax; */
+    }
+    .inner-container h2{
+        font-size: 2vmax;
+        /* margin-left: 8vmax; */
+    }
+    .inner-container h3{
+        font-size: 1.5vmax;
+        /* margin-left: 10vmax; */
+    }
+    .inner-container ul{
+        font-size: 1.2vmax;
+        margin-left: 2vmax;
+    }
+    /* --------------------------------------------------------------------------------------------------------------------------- */
+    /* --------------------------------------------------------------------------------------------------------------------------- */
+    /* --------------------------------------------------------------------------------------------------------------------------- */
 
     .page-button {
         display: flex;

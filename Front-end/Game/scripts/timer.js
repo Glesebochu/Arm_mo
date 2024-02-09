@@ -3,20 +3,25 @@
 document.addEventListener("DOMContentLoaded", function () {
     const timerElement = document.getElementById("timer");
 
-    // Example session start time
-    const sessionStartTime = new Date();
+    const initialDuration = 45 * 60 * 1000; // 45 minutes in milliseconds
+    let remainingTime = initialDuration;
 
     setInterval(() => {
-        const currentTime = new Date();
-        const elapsedTime = currentTime - sessionStartTime;
+  
+        remainingTime -= 100; // Update every 100 milliseconds for better performance
 
-        const minutes = Math.floor(elapsedTime / (60 * 1000));
-        const seconds = Math.floor((elapsedTime % (60 * 1000)) / 1000);
-        const milliseconds = elapsedTime % 1000; // Changed to milliseconds
+        // Ensure the timer doesn't go below 0
+        remainingTime = Math.max(0, remainingTime);
 
+        // Calculate minutes, seconds, and milliseconds
+        const minutes = Math.floor(remainingTime / (60 * 1000));
+        const seconds = Math.floor((remainingTime % (60 * 1000)) / 1000);
+        const milliseconds = remainingTime % 1000;
+
+        // Format and display the time
         const formattedTime = `${padZero(minutes)}:${padZero(seconds)}:${padZero(milliseconds, 3)}`;
         timerElement.textContent = formattedTime;
-    }, 1); // Update every millisecond
+    }, 100);
 
     function padZero(num, length = 2) {
         return num.toString().padStart(length, '0');
@@ -38,3 +43,34 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 500); // Adjust the delay (in milliseconds) as needed
     });
 });
+
+
+
+
+// #region
+
+// timer original funciton to count from 0 up
+// document.addEventListener("DOMContentLoaded", function () {
+//     const timerElement = document.getElementById("timer");
+
+//     // Example session start time
+//     const sessionStartTime = new Date();
+
+//     setInterval(() => {
+//         const currentTime = new Date();
+//         const elapsedTime = currentTime - sessionStartTime;
+
+//         const minutes = Math.floor(elapsedTime / (60 * 1000));
+//         const seconds = Math.floor((elapsedTime % (60 * 1000)) / 1000);
+//         const milliseconds = elapsedTime % 1000; // Changed to milliseconds
+
+//         const formattedTime = `${padZero(minutes)}:${padZero(seconds)}:${padZero(milliseconds, 3)}`;
+//         timerElement.textContent = formattedTime;
+//     }, 1); // Update every millisecond
+
+//     function padZero(num, length = 2) {
+//         return num.toString().padStart(length, '0');
+//     }
+// });
+
+// #endregion

@@ -37,11 +37,11 @@ export function masteryCheck(session, stage){
     // Function for congratulating the meditator for every mastery.
     function congratulate(){
         console.log("Inside Congratulate.");
-        if(stage.Number >= session.Meditator.Current_Stage_No){
-            session.Newly_Mastered_Stages.add(stage);
+        if(stage.Stage_ID >= session.Meditator.Current_Stage_No){
+            session.Newly_Mastered_Stages.push(stage);
+            session.Meditator.Current_Stage_No = stage.Stage_ID;
         }
         congrats_div.style.display = 'grid';
-        console.log(congrats_div);
     }
 
     // Add requirements to the div.

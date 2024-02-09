@@ -45,29 +45,10 @@
       import { Meditator } from '../../Middle-logic/Models/Meditator.js';
 
       // Create a sample Meditator object
-      var meditatorTest = new Meditator('1', 'Finhas', 'Yohannes', 'FinhasGustavo@gmail.com', 'test', '3');
-
-      // Function to send the JavaScript object to the PHP script
-      function updateMeditator(meditator) {
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', '../../Back-end/UpdateDatabase/UpdateMeditator.php', true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.onreadystatechange = function() {
-          if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-              console.log(xhr.responseText);
-            } else {
-              console.error('Error:', xhr.status);
-            }
-          }
-        };
-        
-        var params = "meditator=" + encodeURIComponent(JSON.stringify(meditator));
-        xhr.send(params);
-      }
+      var meditatorTest = new Meditator('1', 'Finhas', 'Yohannes', 'FinhasGustavo@gmail.com', 'test', '2');
 
       // Call the updateMeditator function and pass the JavaScript object
-      updateMeditator(meditatorTest);
+      Meditator.updateMeditator(meditatorTest);
     </script>
 
     <!-- NEW Stage Object Retreival test -->
@@ -95,49 +76,13 @@
       // Import the Session.js module
       import { Session } from '../../Middle-logic/Models/Session.js';
 
-      // Function to send the Session object to the PHP script
-      function updateSession(session) {
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', '../../Back-end/UpdateDatabase/UpdateSession.php', true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.onreadystatechange = function() {
-          if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-              console.log(xhr.responseText);
-            } else {
-              console.error('Error:', xhr.status);
-            }
-          }
-        };
-
-        var params = "session=" + encodeURIComponent(JSON.stringify(session));
-        xhr.send(params);
-      }
-      function createSession(session) {
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', '../../Back-end/UpdateDatabase/CreateSession.php', true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.onreadystatechange = function() {
-          if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-              console.log(xhr.responseText);
-            } else {
-              console.error('Error:', xhr.status);
-            }
-          }
-        };
-
-        var params = "session=" + encodeURIComponent(JSON.stringify(session));
-        xhr.send(params);
-      }
-      
       // Output the JavaScript code to create the Step objects
       var session = <?php echo $javascriptSession;?>;
       var sessionObject = Session.getSessionFromObject(session)
       console.log('NEW', sessionObject);
       
       // Call the updateSession function and pass the Session object
-      updateSession(sessionObject);
+      Session.updateSession(sessionObject);
     </script>
 
   <script>

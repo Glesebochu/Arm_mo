@@ -16,8 +16,9 @@
       include_once '../../../Back-end/Models/Session.php';
 
       // $identifier = $_SESSION['session'];
+      $identifier = 1;
       // Call the function to get the JavaScript Session array
-      $javascriptSession = Session::getJavaScriptSession(1);
+      $javascriptSession = Session::getJavaScriptSession($identifier);
     ?>
 
     <script type="module">

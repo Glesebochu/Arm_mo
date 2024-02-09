@@ -67,7 +67,7 @@
       var stepArray = <?php echo $javascriptStepArray ?>;
      
       // Convert the stepArray to Step objects
-      var stepObjects = Step.convertArrayToStepObjects(stepArray);
+      var stepObjects = Step.getStepsFromArrayObject(stepArray);
 
       // Import the Session.js module
       import { Session } from '../../../Middle-logic/Models/Session.js';
@@ -94,7 +94,7 @@
       // Create an array of skill objects
       var skillsArray = <?php echo json_encode($skills); ?>;
       var skillObjects = skillsArray.map(skillJson => JSON.parse(skillJson));
-      skillObjects=Skill.convertArrayToSkillObjects(skillObjects)
+      skillObjects=Skill.getSkillsFromArrayObject(skillObjects)
 
       // Return the intention object
       var intentionObj = JSON.parse('<?php echo $intention; ?>');
@@ -107,7 +107,7 @@
       // Create an array of obstacle objects
       var obstaclesArray = <?php echo json_encode($obstacles); ?>;
       var obstacleObjects = obstaclesArray.map(obstacleJson => JSON.parse(obstacleJson));
-      obstacleObjects= Obstacle.convertArrayToObstacleObjects(obstacleObjects)
+      obstacleObjects= Obstacle.getObstaclesFromArrayObject(obstacleObjects)
 
       // Update the stage object with the retrieved skills, intentions, and obstacles
       obj.Skills = skillObjects;

@@ -35,7 +35,6 @@
       // Output the JavaScript code to create the Meditator object
       var meditatorObj = JSON.parse('<?php echo $javascriptMeditator; ?>');
       
-      console.log(meditatorObj);
       console.log(Meditator.getMeditatorFromObject(meditatorObj));
 
     </script>
@@ -83,24 +82,22 @@
       
       // Output the JavaScript code to create the Step objects
       var stage = <?php echo $javascriptStage;?>;
-      console.log('NEW', stage);
       console.log('NEW', Stage.getStageFromObject(stage));
     </script>
 
     <!-- NEW Session Object Retreival test -->
     <?php
-      // // Include the PHP file with the Session class definition
-      // include_once '../../Back-end/Models/Session.php';
-      // $javascriptSession = Session::getJavaScriptSession(1);
+      // Include the PHP file with the Session class definition
+      include_once '../../Back-end/Models/Session.php';
+      $javascriptSession = Session::getJavaScriptSession(1);
     ?>
     <script type="module">
-      // // Import the ObservableObject.js module
-      // import { Session } from '../../Middle-logic/Models/Session.js';
+      // Import the ObservableObject.js module
+      import { Session } from '../../Middle-logic/Models/Session.js';
       
-      // // Output the JavaScript code to create the Step objects
-      // var session = <?php //echo $javascriptSession;?>;
-      // console.log('NEW', session);
-      // console.log('NEW', Session.getSessionFromObject(session));
+      // Output the JavaScript code to create the Step objects
+      var session = <?php echo $javascriptSession;?>;
+      console.log('NEW', Session.getSessionFromObject(session));
     </script>
 
 

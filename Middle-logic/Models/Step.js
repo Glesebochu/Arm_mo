@@ -19,17 +19,21 @@ export class Step{
         this.Activity = activity;
     }
 
-    static convertArrayToStepObjects(array) {
-        var StepObjects = array.map(step => new Step(
-            step.Step_ID,
-            step.Title,
-            step.Description,
-            step.Category,
-            step.Type,
-            step.Duration,
-            step.Response,
-            step.Activity
-        ));
+    static getStepFromObject(obj){
+        return new Step(
+            obj.Step_ID,
+            obj.Title,
+            obj.Description,
+            obj.Category,
+            obj.Type,
+            obj.Duration,
+            obj.Response,
+            obj.Activity
+        );
+    }
+
+    static getStepsFromArrayObject(array) {
+        var StepObjects = array.map(Step.getStepFromObject);
         return StepObjects;
     }
     

@@ -113,7 +113,7 @@
       // Parse each JSON string to create the JavaScript Obstacle objects
       // var obstacleObjects = obstacleArray.map(obstacleJson => JSON.parse(obstacleJson));
       // console.log(obstacleObjects);
-      console.log(Obstacle.convertArrayToObstacleObjects(obstacleArray));
+      console.log(Obstacle.getObstaclesFromArrayObject(obstacleArray));
     </script>
 
     <!-- Skill Object Retreival test -->
@@ -137,7 +137,7 @@
       // Parse each JSON string to create the JavaScript Skill objects
       // var SkillObjects = SkillArray.map(SkillJson => JSON.parse(SkillJson));
       // console.log(SkillObjects);
-      console.log(Skill.convertArrayToSkillObjects(SkillArray));
+      console.log(Skill.getSkillsFromArrayObject(SkillArray));
     </script>
 
     <!-- Stage Object Retrieval -->
@@ -173,7 +173,7 @@
       // // Create an array of skill objects
       // var skillsArray = <?php echo $skills; ?>;
       // var skillObjects = skillsArray.map(skillJson => JSON.parse(skillJson));
-      // skillObjects=Skill.convertArrayToSkillObjects(skillObjects)
+      // skillObjects=Skill.getSkillsFromArrayObject(skillObjects)
 
       // // Return the intention object
       // var intentionObj = JSON.parse('<?php echo $intention; ?>');
@@ -186,7 +186,7 @@
       // // Create an array of obstacle objects
       // var obstaclesArray = <?php echo json_encode($obstacles); ?>;
       // var obstacleObjects = obstaclesArray.map(obstacleJson => JSON.parse(obstacleJson));
-      // obstacleObjects= Obstacle.convertArrayToObstacleObjects(obstacleObjects)
+      // obstacleObjects= Obstacle.getObstaclesFromArrayObject(obstacleObjects)
 
       // // Update the stage object with the retrieved skills, intentions, and obstacles
       // stageObj.Skills = skillObjects;
@@ -215,7 +215,7 @@
       var stepArray = <?php echo $javascriptStepArray ?>;
       console.log(stepArray);
       // Convert the stepArray to Step objects
-      var stepObjects = Step.convertArrayToStepObjects(stepArray);
+      var stepObjects = Step.getStepsFromArrayObject(stepArray);
       console.log(stepObjects);
     </script>
 
@@ -360,7 +360,7 @@
 
       // var stepArray = <?php echo $javascriptStepArray ?>;
       // // Convert the stepArray to Step objects
-      // var stepObjects = Step.convertArrayToStepObjects(stepArray);
+      // var stepObjects = Step.getStepsFromArrayObject(stepArray);
 
       // var ahaMomentArray = <?php echo $javascriptAhaMomentArray ?>;
       // var ahaMomentObjects=AhaMoment.getAhaMomentsFromArrayObject(ahaMomentArray);
@@ -389,7 +389,7 @@
       // });
 
 
-      // sessionObjects=Session.convertArrayToSessionObjects(sessionObjects);
+      // sessionObjects=Session.getSessionsFromArrayObject(sessionObjects);
 
 
       // console.log(sessionObjects);
@@ -444,7 +444,7 @@
       var meditatorTest = new Meditator('1', 'Finhas', 'Yohannes', 'FinhasGustavo@gmail.com', 'test', '5');
 
       var stepArray = <?php echo $javascriptStepArray ?>;
-      var stepObjects = Step.convertArrayToStepObjects(stepArray);
+      var stepObjects = Step.getStepsFromArrayObject(stepArray);
       var matchingSteps = stepObjects.filter(step => step.Session_ID === '1');
 
       // Retrieve Aha Moments

@@ -23,6 +23,10 @@ export class Stage {
             obj.Is_Mastered
         );
     }
+    static getStagesFromArrayObject(arr){
+        var Stages= arr.map(Stage.getStageFromObject);
+        return Stages;
+    }
 
     static stageOne = new Stage(
         this.Stage_ID = 1,

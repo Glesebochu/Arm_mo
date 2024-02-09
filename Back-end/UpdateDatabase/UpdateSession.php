@@ -14,7 +14,6 @@ if (isset($_POST['session'])) {
     // Extract the properties from the session object
     $session_ID = $session['Session_ID'];
     $meditator = $session['Meditator'];
-    // echo $meditator;
     $startDateTime = $session['Start_Date_Time'];
     $endDateTime = $session['End_Date_Time'];
     $practicedStages = $session['PracticedStages'];
@@ -40,6 +39,46 @@ if (isset($_POST['session'])) {
             $category = $db->real_escape_string($step['Category']);
             $duration = $db->real_escape_string($step['Duration']);
             $response = $db->real_escape_string($step['Response']);
+            $activity = $step['Activity'];
+
+            // Update or insert activity for the session
+            if($activity){
+                $activity_ID = $activity['Activity_ID'];
+                $title = $db->real_escape_string($activity['Title']);
+                // $meditationObject = $db->real_escape_string($activity['MeditationObject']);
+                $meditationObject = $activity['MeditationObject'];
+                $observableObject_ID =$meditationObject['ObservableObject_ID'];
+    
+                // Check if the activity exists for the session
+                $checkActivitySql = "SELECT * FROM Activity WHERE Activity_ID = '$activity_ID'";
+                $checkActivityResult = $db->query($checkActivitySql);
+    
+                if ($checkActivityResult->num_rows > 0) {
+                    // Activity exists, update the activity
+                    $updateActivitySql = "UPDATE Activity SET
+                                        Title = 'tester on test',
+                                        MeditationObject_ID = '$observableObject_ID'
+                                        WHERE Activity_ID = '$activity_ID'";
+                    $updateActivityResult = $db->query($updateActivitySql);
+    
+                    if (!$updateActivityResult) {
+                        echo 'Failed to update activity for the session.';
+                        exit;
+                    }
+                } else {
+                    // Activity does not exist, insert the activity
+                    $insertActivitySql = "INSERT INTO Activity (Activity_ID, Session_ID, Title, MeditationObject) 
+                                        VALUES ('$activity_ID', '$session_ID', '$title', '$meditationObject')";
+                    $insertActivityResult = $db->query($insertActivitySql);
+    
+                    if (!$insertActivityResult) {
+                        echo 'Failed to insert activity for the session.';
+                        exit;
+                    }
+                }
+
+            }
+
 
             // Check if the step exists for the session
             $checkStepSql = "SELECT * FROM Step WHERE Step_ID = '$step_ID' AND Session_ID = '$session_ID'";

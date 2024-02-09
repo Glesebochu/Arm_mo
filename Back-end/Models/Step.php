@@ -3,43 +3,45 @@
 
 class Step {
     public $Step_ID;
-    public $Session_ID;
     public $Title;
     public $Description;
     public $Type;
     public $Category;
     public $Duration;
     public $Response;
-    public $Activity_ID;
+    public $Activity;
    
-    public static function getStep($identifier) {
+    public static function getStep($step_ID) {
         include_once(__DIR__ . '/../Connect.php');
         $con = new Connect;
         $db = $con->__getConnection();
         $db->query('USE Arm_mo_v2');
         
         // Query the database based on the identifier
-        $query = "SELECT * FROM Step WHERE Step_ID = '$identifier'";
+        $query = "SELECT * FROM Step WHERE Step_ID = '$step_ID'";
         $result = $db->query($query);
         $row = $result->fetch_assoc();
         
         // Create a new Step object and assign values from the query result
         $Step = new Step();
         $Step->Step_ID = $row['Step_ID'];
-        $Step->Session_ID = $row['Session_ID'];
         $Step->Title = $row['Title'];
         $Step->Description = $row['Description'];
         $Step->Type = $row['Type'];
         $Step->Category = $row['Category'];
         $Step->Duration = $row['Duration'];
         $Step->Response = $row['Response'];
-        $Step->Activity_ID = $row['Activity_ID'];
+
+        // Associate the activity object if it is set.
+        if (isset($row['Activity_ID'])) {
+            $Step->Activity = Activity::getActivity($row['Activity_ID']);
+        }
             
         return $Step;
     }
     
-    public static function getJavaScriptStep($identifier) {
-        $Step = Step::getStep($identifier);
+    public static function getJavaScriptStep($step_ID) {
+        $Step = Step::getStep($step_ID);
     
         // Convert the Step object to a JSON string
         $StepJson = json_encode($Step);
@@ -64,19 +66,8 @@ class Step {
         
         // Iterate over the query results and create Step objects
         while ($row = $result->fetch_assoc()) {
-            $Step = new Step();
-            $Step->Step_ID = $row['Step_ID'];
-            $Step->Session_ID = $row['Session_ID'];
-            $Step->Title = $row['Title'];
-            $Step->Description = $row['Description'];
-            $Step->Type = $row['Type'];
-            $Step->Category = $row['Category'];
-            $Step->Duration = $row['Duration'];
-            $Step->Response = $row['Response'];
-            $Step->Activity_ID = $row['Activity_ID'];
-            
             // Add the Step object to the array
-            $StepArray[] = $Step;
+            $StepArray[] = self::getStep($row['Step_ID']);
         }
         
         return $StepArray;

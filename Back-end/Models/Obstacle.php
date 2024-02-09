@@ -2,6 +2,7 @@
 // Obstacle.php
 
 class Obstacle {
+    public $Obstacle_ID;
     public $Description;
    
     public static function getObstacle($identifier) {
@@ -16,10 +17,11 @@ class Obstacle {
         $row = $result->fetch_assoc();
         
         // Create a new Obstacle object and assign values from the query result
-        $Obstacle = new Obstacle();
-        $Obstacle->Description = $row['Description'];
+        $obstacle = new Obstacle();
+        $obstacle->Obstacle_ID = $row['Obstacle_ID'];
+        $obstacle->Description = $row['Description'];
             
-        return $Obstacle;
+        return $obstacle;
     }
     
     public static function getJavaScriptObstacle($identifier) {
@@ -49,6 +51,7 @@ class Obstacle {
         // Iterate over the query results and create Obstacle objects
         while ($row = $result->fetch_assoc()) {
             $obstacle = new Obstacle();
+            $obstacle->Obstacle_ID = $row['Obstacle_ID'];
             $obstacle->Description = $row['Description'];
             
             // Add the Obstacle object to the array
@@ -60,15 +63,8 @@ class Obstacle {
     public static function getJavaScriptObstacleArray($stageID) {
         $obstacleArray = Obstacle::getObstacleArray($stageID);
         
-        // Convert each Obstacle object to a JSON string
-        $obstacleJsonArray = array();
-        foreach ($obstacleArray as $obstacle) {
-            $obstacleJson = json_encode($obstacle);
-            $obstacleJsonArray[] = $obstacleJson;
-        }
-        
         // Return the JavaScript code to create the JavaScript obstacle array
-        return $obstacleJsonArray;
+        return json_encode($obstacleArray);
     }
 }
 

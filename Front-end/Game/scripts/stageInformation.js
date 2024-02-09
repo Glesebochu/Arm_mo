@@ -2,33 +2,32 @@ import { Stage } from "../../../Middle-logic/Models/Stage.js";
 
 console.log("Script is executing!");
 
-export function displayStageInformation() {
+export function displayStageInformation(stage) {
     
     const innerContainer = document.getElementById('stageInfoContainer');
-    const stageOne = Stage.stageOne;
 
     // Create HTML elements dynamically
     const stageIDElement = document.createElement('h1');
-    stageIDElement.textContent = `Stage ${stageOne.Stage_ID}`;
+    stageIDElement.textContent = `Stage ${stage.Stage_ID}`;
     const goalElement = document.createElement('h2');
-    goalElement.textContent = `Goal: ${stageOne.Goal}`;
+    goalElement.textContent = `Goal: ${stage.Goal}`;
 
     const intentionsList = document.createElement('ul');
-    stageOne.Intentions.forEach((intention) => {
+    stage.Intentions.forEach((intention) => {
         const intentionItem = document.createElement('li');
         intentionItem.textContent = intention;
         intentionsList.appendChild(intentionItem);
     });
 
     const obstaclesList = document.createElement('ul');
-    stageOne.Obstacles.forEach((obstacle) => {
+    stage.Obstacles.forEach((obstacle) => {
         const obstacleItem = document.createElement('li');
         obstacleItem.textContent = obstacle;
         obstaclesList.appendChild(obstacleItem);
     });
 
     const skillsList = document.createElement('ul');
-    stageOne.Skills.forEach((skill) => {
+    stage.Skills.forEach((skill) => {
         const skillItem = document.createElement('li');
         skillItem.textContent = skill;
         skillsList.appendChild(skillItem);

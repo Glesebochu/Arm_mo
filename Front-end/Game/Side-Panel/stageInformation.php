@@ -11,6 +11,25 @@
     <link rel="stylesheet" href="../../Font.css">
     <script src="../scripts/stageInformation.js" type="module"></script>
     <title>Arm-mo</title>
+
+    <!-- Stage Object Retreival -->
+    <?php
+      // Include the PHP file with the Stage class definition
+      include_once '../../Back-end/Models/Stage.php';
+      $javascriptStage = Stage::getJavaScriptStage($_SESSION['stage']);
+    ?>
+    <script type="module">
+      // Import the ObservableObject.js module
+      import { Stage } from '../../Middle-logic/Models/Stage.js';
+      
+      // Output the JavaScript code to create the Step objects
+      var obj = <?php echo $javascriptStage;?>;
+      var stage = Stage.getStageFromObject(obj);
+      console.log(stage);
+
+      import { displayStageInformation } from '../scripts/stageInformation.js';
+      displayStageInformation(stage);
+    </script>
 </head>
 <body>
     <div class="portrait-div">

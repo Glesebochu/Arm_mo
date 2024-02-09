@@ -6,8 +6,8 @@ export class Session {
         this.End_Date_Time = endDateTime;
         this.Practiced_Stages = practicedStages;
         this.AhaMoments = ahaMoments;
-        this.Newly_Mastered_Stages = newlyMasteredStages;
         this.Steps = steps;
+        this.Newly_Mastered_Stages = newlyMasteredStages;
     }
     static getSessionFromObject(obj){
         return new Session(

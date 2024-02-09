@@ -410,6 +410,8 @@
       import { Session } from '../../Middle-logic/Models/Session.js';
       import { Meditator } from '../../Middle-logic/Models/Meditator.js';
       import { Step } from '../../Middle-logic/Models/Step.js';
+      import { AhaMoment } from '../../Middle-logic/Models/AhaMoment.js';
+
 
       // Function to send the Session object to the PHP script
       function updateSession(session) {
@@ -447,36 +449,44 @@
         xhr.send(params);
       }
 
-      // Example usage:
-      // Retrieve the session data from somewhere (e.g., localStorage, API response, etc.)
+      
       var meditatorTest = new Meditator('1', 'Finhas', 'Yohannes', 'FinhasGustavo@gmail.com', 'test', '5');
+
       var stepArray = <?php echo $javascriptStepArray ?>;
       var stepObjects = Step.convertArrayToStepObjects(stepArray);
+      var matchingSteps = stepObjects.filter(step => step.Session_ID === '1');
+
+      // Retrieve Aha Moments
+      var ahaMomentArray = <?php echo $javascriptAhaMomentArray ?>;
+      var ahaMomentObjects=AhaMoment.getAhaMomentsFromArrayObject(ahaMomentArray);
+      ahaMomentObjects = ahaMomentObjects.map(obj => {
+        obj.Label += ' test';
+        return obj;
+      });
+      var matchingAhaMoments = ahaMomentObjects.filter(AhaMoment => AhaMoment.Session_ID === '1');
+
       var sessionData = {
-        Meditator: meditatorTest,
         Start_Date_Time: '<?php echo date("Y-m-d H:i:s"); ?>',
         End_Date_Time: '<?php echo date("Y-m-d H:i:s"); ?>',
         Practiced_Stages: [1, 2, 3],
-        Steps: stepObjects,
-        AhaMoments: ['Aha1', 'Aha2'],
         Newly_Mastered_Stages: [7, 8, 9]
       };
 
       // Create a new Session object using the retrieved session data
       var sessionObject = new Session(
         '1',
-        sessionData.Meditator.Meditator_ID,
+        meditatorTest.Meditator_ID,
         sessionData.Start_Date_Time,
         sessionData.End_Date_Time,
         sessionData.Practiced_Stages,
-        sessionData.Steps,
-        sessionData.AhaMoments,
+        matchingAhaMoments,
+        matchingSteps,
         sessionData.Newly_Mastered_Stages
       );
-      // console.log('test',sessionObject);
+      console.log('test',sessionObject);
 
       // Call the updateSession function and pass the Session object
-      // updateSession(sessionObject);
+      updateSession(sessionObject);
     </script>
 
   <script>

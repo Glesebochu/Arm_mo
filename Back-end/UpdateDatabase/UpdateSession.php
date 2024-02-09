@@ -23,14 +23,42 @@ if (isset($_POST['session'])) {
 
     // Update the Session table
     $sql = "UPDATE Session SET
-            Meditator_ID='$meditator', 
+            Meditator_ID = '$meditator',
             Start_Time = '$startDateTime',
-            End_Time = '$endDateTime',
+            End_Time = '$endDateTime'
             WHERE Session_ID = '$session_ID'";
     $result = $db->query($sql);
 
     if ($result) {
-        echo 'Session updated successfully.';
+        // Delete existing steps for the session
+        $deleteStepsSql = "DELETE FROM Step WHERE Session_ID = '$session_ID'";
+        $deleteStepsResult = $db->query($deleteStepsSql);
+
+        if ($deleteStepsResult) {
+            // Insert new steps for the session
+            foreach ($steps as $step) {
+                $title = $db->real_escape_string($step['Title']);
+                $description = $db->real_escape_string($step['Description']);
+                $type = $db->real_escape_string($step['Type']);
+                $category = $db->real_escape_string($step['Category']);
+                $duration = $db->real_escape_string($step['Duration']);
+                $response = $db->real_escape_string($step['Response']);
+                // $activity_ID = $db->real_escape_string($step['Activity']);
+
+                $insertStepSql = "INSERT INTO Step (Session_ID, Title, Description, Type, Category, Duration, Response)
+                                  VALUES ('$session_ID', '$title', '$description', '$type', '$category', '$duration', '$response')";
+                $insertStepResult = $db->query($insertStepSql);
+
+                if (!$insertStepResult) {
+                    echo 'Failed to insert steps for the session.';
+                    exit;
+                }
+            }
+
+            echo 'Session updated successfully.';
+        } else {
+            echo 'Failed to delete existing steps for the session.';
+        }
     } else {
         echo 'Failed to update session.';
     }

@@ -292,7 +292,7 @@
       // Import the Session.js module
       import { Session } from '../../Middle-logic/Models/Session.js';
       import { Meditator } from '../../Middle-logic/Models/Meditator.js';
-
+      import { Step } from '../../Middle-logic/Models/Step.js';
 
       // Function to send the Session object to the PHP script
       function updateSession(session) {
@@ -333,12 +333,14 @@
       // Example usage:
       // Retrieve the session data from somewhere (e.g., localStorage, API response, etc.)
       var meditatorTest = new Meditator('1', 'Finhas', 'Yohannes', 'FinhasGustavo@gmail.com', 'test', '5');
+      var stepArray = <?php echo $javascriptStepArray ?>;
+      var stepObjects = Step.convertArrayToStepObjects(stepArray);
       var sessionData = {
         Meditator: meditatorTest,
         Start_Date_Time: '<?php echo date("Y-m-d H:i:s"); ?>',
         End_Date_Time: '<?php echo date("Y-m-d H:i:s"); ?>',
         Practiced_Stages: [1, 2, 3],
-        Steps: [4, 5, 6],
+        Steps: stepObjects,
         AhaMoments: ['Aha1', 'Aha2'],
         Newly_Mastered_Stages: [7, 8, 9]
       };
@@ -354,9 +356,10 @@
         sessionData.AhaMoments,
         sessionData.Newly_Mastered_Stages
       );
+      // console.log('test',sessionObject);
 
       // Call the updateSession function and pass the Session object
-      // updateSessionSession(sessionObject);
+      updateSession(sessionObject);
     </script>
 
     <!-- ObservableObject Object Retreival test -->

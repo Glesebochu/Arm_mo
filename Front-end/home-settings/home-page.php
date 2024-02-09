@@ -92,22 +92,8 @@
       $javascriptSession = Session::getJavaScriptSession(1);
     ?>
     <script type="module">
-      // Import the ObservableObject.js module
-      import { Session } from '../../Middle-logic/Models/Session.js';
-      
-      // Output the JavaScript code to create the Step objects
-      var session = <?php echo $javascriptSession;?>;
-      console.log('NEW', Session.getSessionFromObject(session));
-    </script>
-
-    <!-- Session Object send test -->
-    <script type="module">
       // Import the Session.js module
       import { Session } from '../../Middle-logic/Models/Session.js';
-      import { Meditator } from '../../Middle-logic/Models/Meditator.js';
-      import { Step } from '../../Middle-logic/Models/Step.js';
-      import { AhaMoment } from '../../Middle-logic/Models/AhaMoment.js';
-
 
       // Function to send the Session object to the PHP script
       function updateSession(session) {
@@ -144,44 +130,12 @@
         var params = "session=" + encodeURIComponent(JSON.stringify(session));
         xhr.send(params);
       }
-
       
-      var meditatorTest = new Meditator('1', 'Finhas', 'Yohannes', 'FinhasGustavo@gmail.com', 'test', '5');
-
-      var stepArray = <?php echo $javascriptStepArray ?>;
-      var stepObjects = Step.convertArrayToStepObjects(stepArray);
-      var matchingSteps = stepObjects.filter(step => step.Session_ID === '1');
-
-      // Retrieve Aha Moments
-      var ahaMomentArray = <?php echo $javascriptAhaMomentArray ?>;
-      var ahaMomentObjects=AhaMoment.getAhaMomentsFromArrayObject(ahaMomentArray);
-      ahaMomentObjects = ahaMomentObjects.map(obj => {
-        obj.Label += 'boop';
-        return obj;
-      });
-      console.log('check', ahaMomentObjects)
-      var matchingAhaMoments = ahaMomentObjects.filter(AhaMoment => AhaMoment.Session_ID === '1');
-
-      var sessionData = {
-        Start_Date_Time: '<?php echo date("Y-m-d H:i:s"); ?>',
-        End_Date_Time: '<?php echo date("Y-m-d H:i:s"); ?>',
-        Practiced_Stages: [1, 2, 3],
-        Newly_Mastered_Stages: [7, 8, 9]
-      };
-
-      // Create a new Session object using the retrieved session data
-      var sessionObject = new Session(
-        '1',
-        meditatorTest.Meditator_ID,
-        sessionData.Start_Date_Time,
-        sessionData.End_Date_Time,
-        sessionData.Practiced_Stages,
-        matchingAhaMoments,
-        matchingSteps,
-        sessionData.Newly_Mastered_Stages
-      );
-      console.log('test',sessionObject);
-
+      // Output the JavaScript code to create the Step objects
+      var session = <?php echo $javascriptSession;?>;
+      var sessionObject = Session.getSessionFromObject(session)
+      console.log('NEW', sessionObject);
+      
       // Call the updateSession function and pass the Session object
       updateSession(sessionObject);
     </script>

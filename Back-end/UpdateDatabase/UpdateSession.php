@@ -14,6 +14,7 @@ if (isset($_POST['session'])) {
     // Extract the properties from the session object
     $session_ID = $session['Session_ID'];
     $meditator = $session['Meditator'];
+    // echo $meditator;
     $startDateTime = $session['Start_Date_Time'];
     $endDateTime = $session['End_Date_Time'];
     $practicedStages = $session['Practiced_Stages'];
@@ -23,7 +24,7 @@ if (isset($_POST['session'])) {
 
     // Update the Session table
     $sql = "UPDATE Session SET
-            Meditator_ID = '$meditator',
+            Meditator_ID = '$meditator.Meditator_ID',
             Start_Date_Time = '$startDateTime',
             End_Date_Time = '$endDateTime'
             WHERE Session_ID = '$session_ID'";
@@ -76,7 +77,7 @@ if (isset($_POST['session'])) {
         // Update or insert AhaMoments for the session
         foreach ($ahaMoments as $ahaMoment) {
             $ahaMoment_ID = $ahaMoment['AhaMoment_ID'];
-            $label = $db->real_escape_string($ahaMoment['Label']);
+            $label = $db->real_escape_string($ahaMoment['Label']) . 'update test';
 
             // Check if the AhaMoment exists for the session
             $checkAhaMomentSql = "SELECT * FROM AhaMoment WHERE AhaMoment_ID = '$ahaMoment_ID' AND Session_ID = '$session_ID'";

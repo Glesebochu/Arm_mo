@@ -341,58 +341,58 @@
 
     <!-- Session Object Retreival test -->
     <?php
-      // // Include the PHP file with the function to retrieve the Session object
-      // include_once '../../Back-end/Models/Session.php';
+      // Include the PHP file with the function to retrieve the Session object
+      include_once '../../Back-end/Models/Session.php';
 
-      // //$identifier = $_SESSION['session'];
-      // $stepArray = Step::getStepArray(1);
-      // $javascriptStepArray = json_encode($stepArray);
-      // // Call the function to get the JavaScript Session array
-      // $javascriptSessionArray = Session::getJavaScriptSessionArray(1);
+      //$identifier = $_SESSION['session'];
+      $stepArray = Step::getStepArray(1);
+      $javascriptStepArray = json_encode($stepArray);
+      // Call the function to get the JavaScript Session array
+      $javascriptSessionArray = Session::getJavaScriptSessionArray(1);
     ?>
 
     <script type="module">
-      // // Import the Step.js module
-      // // Import the Session.js module
-      // import { Step } from '../../Middle-logic/Models/Step.js';
-      // import { AhaMoment } from '../../Middle-logic/Models/AhaMoment.js';
-      // import { Session } from '../../Middle-logic/Models/Session.js';
+      // Import the Step.js module
+      // Import the Session.js module
+      import { Step } from '../../Middle-logic/Models/Step.js';
+      import { AhaMoment } from '../../Middle-logic/Models/AhaMoment.js';
+      import { Session } from '../../Middle-logic/Models/Session.js';
 
-      // var stepArray = <?php echo $javascriptStepArray ?>;
-      // // Convert the stepArray to Step objects
-      // var stepObjects = Step.getStepsFromArrayObject(stepArray);
+      var stepArray = <?php echo $javascriptStepArray ?>;
+      // Convert the stepArray to Step objects
+      var stepObjects = Step.getStepsFromArrayObject(stepArray);
 
-      // var ahaMomentArray = <?php echo $javascriptAhaMomentArray ?>;
-      // var ahaMomentObjects=AhaMoment.getAhaMomentsFromArrayObject(ahaMomentArray);
-      // console.log('test',ahaMomentObjects);
-
-
-      // // Output the JavaScript code to create the Session objects
-      // var sessionArray = <?php echo json_encode($javascriptSessionArray); ?>;
-      // // console.log(sessionArray);
-
-      // // Parse each JSON string to create the JavaScript Session objects
-      // var sessionObjects = sessionArray.map(sessionJson => JSON.parse(sessionJson));
-      // console.log(sessionObjects);
+      var ahaMomentArray = <?php echo $javascriptAhaMomentArray ?>;
+      var ahaMomentObjects=AhaMoment.getAhaMomentsFromArrayObject(ahaMomentArray);
+      console.log('test',ahaMomentObjects);
 
 
-      // // Iterate through session objects and add corresponding steps
-      // sessionObjects.forEach(session => {
-      //   var matchingSteps = stepObjects.filter(step => step.Session_ID === session.Session_ID);
-      //   session.Steps = matchingSteps;
-      // });
+      // Output the JavaScript code to create the Session objects
+      var sessionArray = <?php echo json_encode($javascriptSessionArray); ?>;
+      // console.log(sessionArray);
 
-      // // Iterate through session objects and add corresponding AhaMoment
-      // sessionObjects.forEach(session => {
-      //   var matchingAhaMoment = ahaMomentObjects.filter(AhaMoment => AhaMoment.Session_ID === session.Session_ID);
-      //   session.AhaMoments = matchingAhaMoment;
-      // });
+      // Parse each JSON string to create the JavaScript Session objects
+      var sessionObjects = sessionArray.map(sessionJson => JSON.parse(sessionJson));
+      console.log(sessionObjects);
 
 
-      // sessionObjects=Session.getSessionsFromArrayObject(sessionObjects);
+      // Iterate through session objects and add corresponding steps
+      sessionObjects.forEach(session => {
+        var matchingSteps = stepObjects.filter(step => step.Session_ID === session.Session_ID);
+        session.Steps = matchingSteps;
+      });
+
+      // Iterate through session objects and add corresponding AhaMoment
+      sessionObjects.forEach(session => {
+        var matchingAhaMoment = ahaMomentObjects.filter(AhaMoment => AhaMoment.Session_ID === session.Session_ID);
+        session.AhaMoments = matchingAhaMoment;
+      });
 
 
-      // console.log(sessionObjects);
+      sessionObjects=Session.getSessionsFromArrayObject(sessionObjects);
+
+
+      console.log(sessionObjects);
     </script>
 
     <!-- Session Object send test -->
@@ -480,4 +480,54 @@
       updateSession(sessionObject);
     </script>
 
-  
+    <!-- Meditator Oject Sending test -->
+    <script type="module">
+      // Import the Meditator.js module
+      import { Meditator } from '../../Middle-logic/Models/Meditator.js';
+
+      // Create a sample Meditator object
+      var meditatorTest = new Meditator('1', 'Finhas', 'Yohannes', 'FinhasGustavo@gmail.com', 'test', '2');
+
+      // Call the updateMeditator function and pass the JavaScript object
+      Meditator.updateMeditator(meditatorTest);
+    </script>
+
+    <!-- NEW Stage Object Retreival test -->
+    <?php
+      // Include the PHP file with the Stage class definition
+      include_once '../../Back-end/Models/Stage.php';
+      $javascriptStage = Stage::getJavaScriptStage(1);
+    ?>
+    <script type="module">
+      // Import the ObservableObject.js module
+      import { Stage } from '../../Middle-logic/Models/Stage.js';
+      
+      // Output the JavaScript code to create the Step objects
+      var stage = <?php echo $javascriptStage;?>;
+      console.log('NEW', Stage.getStageFromObject(stage));
+    </script>
+
+    <!-- NEW Session Object Retreival test -->
+    <?php
+      // Include the PHP file with the Session class definition
+      include_once '../../Back-end/Models/Session.php';
+      $javascriptSession = Session::getJavaScriptSession(1);
+    ?>
+    <script type="module">
+      // Import the Session.js module
+      import { Session } from '../../Middle-logic/Models/Session.js';
+
+      // Output the JavaScript code to create the Step objects
+      var session = <?php echo $javascriptSession;?>;
+      var sessionObject = Session.getSessionFromObject(session)
+      console.log('NEW', sessionObject);
+      
+      // Call the updateSession function and pass the Session object
+      sessionObject.Steps[0].Title='Does it even work';
+      sessionObject.Steps[0].Activity.Title='doodling activity title';
+      sessionObject.Steps[0].Activity.MeditationObject.Intensity='Intense';
+      console.log('newer',sessionObject)
+      
+      Session.createSession(sessionObject);
+      Session.updateSession(sessionObject);
+    </script>

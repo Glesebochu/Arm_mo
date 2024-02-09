@@ -66,9 +66,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-
-
-
 function setupStimulusButton(buttonClass, inputDivClass, populateStimulusClass) {
     var button = document.querySelector(buttonClass);
     var inputDiv = document.querySelector(inputDivClass);
@@ -92,38 +89,12 @@ function setupStimulusButton(buttonClass, inputDivClass, populateStimulusClass) 
             populateStimulus.innerHTML = '';
 
             if (inputArray.length > 0 && inputArray[0].trim() !== "") {
-                var currentLeft = 6; // Initial left position
-                var currentTop = 6; // Initial top position
 
                 inputArray.forEach(function (inputElement) {
                     var newParagraph = document.createElement("p");
                     newParagraph.textContent = inputElement;
 
-                    var vmaxUnit = Math.min(window.innerWidth, window.innerHeight) / 100; // 1 vmax unit
-
-                    newParagraph.style.position = "absolute";
-
-                    if (buttonClass.includes("thought-state-button") || buttonClass.includes("emotional-state-button")) {
-                        // Check and limit the maximum top position based on the height of the "populate" div
-                        var maxHeight = populateStimulus.offsetHeight / vmaxUnit;
-                        newParagraph.style.top = Math.min(currentTop, maxHeight) + "vmax";
-                    } else {
-                        // Check and limit the maximum left position based on the width of the "populate" div
-                        var maxWidth = populateStimulus.offsetWidth / vmaxUnit;
-                        newParagraph.style.left = Math.min(currentLeft, maxWidth) + "vmax";
-                    }
-
-                    newParagraph.style.fontSize = "0.8vmax";
-                    newParagraph.style.opacity = 1;
-
                     populateStimulus.appendChild(newParagraph);
-
-                    // Update the positions for the next element with spacing
-                    if (buttonClass.includes("thought-state-button") || buttonClass.includes("emotional-state-button")) {
-                        currentTop += newParagraph.offsetHeight / vmaxUnit;
-                    } else {
-                        currentLeft += (newParagraph.offsetWidth / vmaxUnit) + spacingBetweenElements;
-                    }
                 });
             }
         }
@@ -140,34 +111,34 @@ document.addEventListener("DOMContentLoaded", function () {
     setupStimulusButton(".emotional-state-button", ".emotional-state-input-div", ".populate-emotional-state");
 });
 
+document.addEventListener('DOMContentLoaded', function () {
+    // Get references to the aha-moment button and counter elements
+    const ahaButton = document.querySelector('.aha-moment');
+    const counterElement = document.getElementById('counter');
 
+    // Initialize the counter value
+    let counterValue = 0;
 
-// Initialize counter value
-var counterValue = 110;
+    // Function to update the counter content
+    const updateCounter = () => {
+        counterElement.textContent = counterValue;
+    };
 
-// Function to toggle active state and increment the counter
-function toggleActiveState() {
-    var buttonElement = document.querySelector(".aha-moment");
-    
-    // Check if the button is currently active
-    var isActive = buttonElement.classList.contains("active");
-
-    if (isActive) {
-        // If active, increment the counter
+    // Event listener for the aha-moment button
+    ahaButton.addEventListener('click', () => {
+        // Increment the counter value
         counterValue++;
 
-        // Update the counter value and display it
-        var counterElement = document.getElementById("counter");
-        counterElement.innerText = counterValue;
+        // Update the counter content
+        updateCounter();
+    });
 
-        // Update the button text
-        var buttonText = "AHA! (" + counterValue + ")";
-        document.querySelector(".aha-moment .aha-text").innerText = buttonText;
-    }
+    // Initial setup
+    updateCounter();
 
-    // Toggle the active state
-    buttonElement.classList.toggle("active");
-}
+    // Rest of the code...
+});
+
 // #region Original and Incomplete codes
 
 

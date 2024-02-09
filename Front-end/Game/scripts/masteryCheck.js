@@ -4,7 +4,6 @@ import { Stage } from "../../../Middle-logic/Models/Stage.js";
 
 export function masteryCheck(session, stage){
     // First, generate as many input boxes as needed for the stage.
-    
     console.log(stage);
     console.log(session);
 

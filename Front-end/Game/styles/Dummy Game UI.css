@@ -32,11 +32,85 @@ body {
         display: none;
     }
 
-    .side-panel{
-        background-color: gray;
-        height: 100%;
-        width: 100%;
-        border-radius: var(--default-border-rad);
+    /* Inside the Side Panel */
+    .stage {
+        grid-area: stage;
+        /* background-color: #9ce8b4; */
+        border-radius: 2%;
+        /* height: 100%; */
+    }
+
+    .timer {
+        grid-area: timer;
+        /* background-color: #9ce8b4; */
+        border-radius: 2%;
+        /* height: 100%; */
+    }
+
+    .settings {
+        grid-area: settings;
+        /* background-color: #9ce8b4; */
+        border-radius: 2%;
+        /* height: 100%; */
+    }
+
+    .how-to-play {
+        grid-area: how-to-play;
+        /* background-color: #9ce8b4; */
+        border-radius: 2%;
+        /* height: 100%; */
+    }
+    /* ---------------------------------------------------------------------------------------- */
+
+
+    .side-panel {
+        grid-area: side-panel;
+        background-color: #D9D9D9;
+        /* border-radius: 2%; */
+        display: grid;
+        grid-template-areas:
+            'stage'
+            'timer'
+            'settings'
+            'how-to-play';
+        grid-template-rows: repeat(4, 1fr);
+        gap: 1.3vw;
+        /* padding: 1.3vw; */
+    }
+
+    .side-panel button {
+        width: 4.5vw;
+        height: 4.5vw;
+        background-color: #D9D9D9;
+        border: none;
+        border-radius: 0;
+        cursor: pointer;
+        margin-top: 50%;
+        margin-left: 15%;
+        transition: transform 0.5s;
+    }
+
+    .side-panel button:hover {
+        transform: scale(1.2);
+    }
+
+    .side-panel button img{
+        width: 80%;
+        height: 80%;
+        opacity: 0.7;  
+    }
+
+    .side-panel button p{
+        font-family: 'Major Mono Display', monospace;
+        font-weight: 500;
+        font-size: 3vw;
+    }
+
+    /* Additional styling for button content alignment */
+    .side-panel button p,
+    .side-panel button img {
+        display: block;
+        margin: auto;
     }
 
     .main-panel{

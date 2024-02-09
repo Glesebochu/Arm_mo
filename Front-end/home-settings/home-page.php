@@ -82,9 +82,9 @@
       console.log('NEW', sessionObject);
       
       // Call the updateSession function and pass the Session object
-      sessionObject.Steps[0].Title='This is the step we need';
-      sessionObject.Steps[0].Activity.Title='Some random activity';
-      sessionObject.Steps[0].Activity.MeditationObject.Intensity='Medium';
+      sessionObject.Steps[0].Title='Dummy doodle do step';
+      sessionObject.Steps[0].Activity.Title='doodling activity title';
+      sessionObject.Steps[0].Activity.MeditationObject.Intensity='Intense';
       console.log('newer',sessionObject)
       Session.updateSession(sessionObject);
     </script>

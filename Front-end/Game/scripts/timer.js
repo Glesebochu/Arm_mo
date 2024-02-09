@@ -22,3 +22,19 @@ document.addEventListener("DOMContentLoaded", function () {
         return num.toString().padStart(length, '0');
     }
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Get the triangle button
+    var triangleButton = document.querySelector(".triangle-button");
+
+    // Add a click event listener to the triangle button
+    triangleButton.addEventListener("click", function () {
+        // Fade out the body
+        document.body.style.opacity = 0;
+
+        // After a delay, navigate to the Dummy Game UI.html page
+        setTimeout(function () {
+            window.location.href = "../Dummy Game UI.html";
+        }, 500); // Adjust the delay (in milliseconds) as needed
+    });
+});

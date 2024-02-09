@@ -30,6 +30,8 @@
         height: 100vh;
         background-color: #f0f0f0;
         font-family: 'Major Mono Display', monospace;
+        /* opacity: 0; */
+        transition: opacity 0.5s ease-in-out;
     }
 
     .timer-inner-container {

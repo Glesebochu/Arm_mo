@@ -27,7 +27,7 @@ if (isset($_POST['session'])) {
     // $row = $result->fetch_assoc();
     // $sessionExists = ($row['count'] > 0);
 
-    if ($isset($session_ID)) {
+    if (isset($session_ID)) {
         // Update the existing session
         $sql = "UPDATE Session SET
         Meditator_ID = '{$meditator['Meditator_ID']}',

@@ -19,9 +19,9 @@
 //                 // Fade out the body
 //                 document.body.style.opacity = 0;
 
-//                 // After a delay, navigate to the timer.html page
+//                 // After a delay, navigate to the timer.php page
 //                 setTimeout(function () {
-//                     window.location.href = "side-Panel/timer.html";
+//                     window.location.href = "side-Panel/timer.php";
 //                 }, 500); // Adjust the delay (in milliseconds) as needed
 //             });
 
@@ -47,9 +47,9 @@ document.addEventListener("DOMContentLoaded", function () {
         // Fade out the body
         document.body.style.opacity = 0;
 
-        // After a delay, navigate to the timer.html page
+        // After a delay, navigate to the timer.php page
         setTimeout(function () {
-            window.location.href = "Side-Panel/timer.html";
+            window.location.href = "Side-Panel/timer.php";
         }, 500); // Adjust the delay (in milliseconds) as needed
     });
 });
@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.body.style.opacity = 0;
 
         setTimeout(function () {
-            window.location.href = "Side-Panel/stageInformation.html";
+            window.location.href = "Side-Panel/stageInformation.php";
         }, 500);
     });
 });

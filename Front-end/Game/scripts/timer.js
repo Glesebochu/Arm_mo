@@ -30,9 +30,9 @@ export function timeCountdown() {
         // Fade out the body
         document.body.style.opacity = 0;
 
-        // After a delay, navigate to the Dummy Game UI.html page
+        // After a delay, navigate to the Game UI.php page
         setTimeout(function () {
-            window.location.href = "../Game UI.html";
+            window.location.href = "../Game UI.php";
         }, 500); // Adjust the delay (in milliseconds) as needed
     });
 }

@@ -17,23 +17,45 @@ export function displayPausePage() {
 
     // Add a click event listener to the triangle button
     triangleButton.addEventListener("click", function () {
-        navigateWithFadeOut("../Dummy Game UI.html");
+        // Fade out the body
+        document.body.style.opacity = 0;
+
+        // After a delay, navigate to the Game UI.php page
+        setTimeout(function () {
+            window.location.href = "../Game UI.php";
+        }, 500); // Adjust the delay (in milliseconds) as needed
     });
 
     // Add a click event listener to the resume button
     resumeButton.addEventListener("click", function () {
-        navigateWithFadeOut("../Game UI.html");
+        // Fade out the body
+        document.body.style.opacity = 0;
+
+        // After a delay, navigate to the Game UI.php page
+        setTimeout(function () {
+            window.location.href = "../Game UI.php";
+        }, 500); // Adjust the delay (in milliseconds) as needed
     });
 
     // Add a click event listener to the restart button
     restartButton.addEventListener("click", function () {
-        navigateWithFadeOut("../Main-Panel/preparation.php");
+        // Fade out the body
+        document.body.style.opacity = 0;
+
+        // After a delay, navigate to the Game UI.php page
+        setTimeout(function () {
+            window.location.href = "../Game UI.php";
+        }, 500); // Adjust the delay (in milliseconds) as needed
     });
 
     // Add a click event listener to the main menu button
     mainMenuButton.addEventListener("click", function () {
-        navigateWithFadeOut("https://localhost/Arm-mo/Front-end/home-settings/home-page.php");
-    });
-}
+        // Fade out the body
+        document.body.style.opacity = 0;
 
-document.addEventListener("DOMContentLoaded", displayPausePage);
+        // After a delay, navigate to the Game UI.php page
+        setTimeout(function () {
+            window.location.href = "https://localhost/Arm-mo/Front-end/home-settings/home-page.php";
+        }, 500); // Adjust the delay (in milliseconds) as needed
+    });
+});

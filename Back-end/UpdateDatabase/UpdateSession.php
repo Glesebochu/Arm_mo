@@ -21,13 +21,26 @@ if (isset($_POST['session'])) {
     $ahaMoments = $session['AhaMoments'];
     $newlyMasteredStages = $session['Newly_Mastered_Stages'];
 
-    // Update the Session table
-    $sql = "UPDATE Session SET
-    Meditator_ID = '{$meditator['Meditator_ID']}',
-    Start_Date_Time = '$startDateTime',
-    End_Date_Time = '$endDateTime'
-    WHERE Session_ID = '$session_ID'";
+    // Check if the session already exists
+    $sql = "SELECT COUNT(*) as count FROM Session WHERE Session_ID = '$session_ID'";
     $result = $db->query($sql);
+    $row = $result->fetch_assoc();
+    $sessionExists = ($row['count'] > 0);
+
+    if ($sessionExists) {
+        // Update the existing session
+        $sql = "UPDATE Session SET
+        Meditator_ID = '{$meditator['Meditator_ID']}',
+        Start_Date_Time = '$startDateTime',
+        End_Date_Time = '$endDateTime'
+        WHERE Session_ID = '$session_ID'";
+        $result = $db->query($sql);
+    } else {
+        // Insert a new session
+        $sql = "INSERT INTO Session (Session_ID, Meditator_ID, Start_Date_Time, End_Date_Time)
+        VALUES ('$session_ID', '{$meditator['Meditator_ID']}', '$startDateTime', '$endDateTime')";
+        $result = $db->query($sql);
+    }
 
     if ($result) {
         // Update or insert steps for the session

@@ -100,13 +100,13 @@
 
     // Creating the Meditation Stage table
     {
-        $queryCreateMeditationStage= "CREATE TABLE Meditation_Stage(Stage_ID INT PRIMARY KEY AUTO_INCREMENT,
+        $queryCreateMeditationStage= "CREATE TABLE Stage(Stage_ID INT PRIMARY KEY AUTO_INCREMENT,
                                                                     GOAL VARCHAR(8000) NOT NULL)
                                     ";
-        if(($db->query("SHOW TABLES LIKE 'Meditation_Stage'"))->num_rows>0){
+        if(($db->query("SHOW TABLES LIKE 'Stage'"))->num_rows>0){
             echo"
                 <script>
-                    console.log('Table Meditation_Stage already exists')
+                    console.log('Table Stage already exists')
                 </script>
             ";
         }
@@ -141,7 +141,7 @@
                                     Date_of_birth DATE,
                                     Profile_Picture VARCHAR(100),
                                     Stage_ID INT NOT NULL,
-                                    FOREIGN KEY(Stage_ID) REFERENCES Meditation_Stage(Stage_ID))";
+                                    FOREIGN KEY(Stage_ID) REFERENCES Stage(Stage_ID))";
         $queryCheckIfMeditatorExists="SHOW TABLES LIKE 'Meditator'";
         if(($db->query($queryCheckIfMeditatorExists))->num_rows>0){
             echo"
@@ -205,7 +205,7 @@
          $queryCreateMasteryRequirement= "CREATE TABLE MasteryRequirement(Mastery_ID INT PRIMARY KEY AUTO_INCREMENT,
                                                                     Stage_ID INT NOT NULL,
                                                                     Description VARCHAR(8000),
-                                                                    FOREIGN KEY (Stage_ID) REFERENCES Meditation_Stage(Stage_ID))";
+                                                                    FOREIGN KEY (Stage_ID) REFERENCES Stage(Stage_ID))";
         if(($db->query("SHOW TABLES LIKE 'MasteryRequirement'"))->num_rows>0){
             echo"
                 <script>
@@ -270,7 +270,7 @@
          $queryCreateIntention= "CREATE TABLE Intention(Intention_ID INT PRIMARY KEY AUTO_INCREMENT,
                                                                     Stage_ID INT NOT NULL,
                                                                     Description VARCHAR(8000) NOT NULL,
-                                                                    FOREIGN KEY (Stage_ID) REFERENCES Meditation_Stage(Stage_ID))";
+                                                                    FOREIGN KEY (Stage_ID) REFERENCES Stage(Stage_ID))";
         if(($db->query("SHOW TABLES LIKE 'Intention'"))->num_rows>0){
             echo"
                 <script>
@@ -516,7 +516,7 @@
         $queryPracticed_Stages= "CREATE TABLE Practiced_Stages(Session_ID INT NOT NULL,
                                                                 Stage_ID INT NOT NULL,
                                                                 PRIMARY KEY (Stage_ID,Session_ID),
-                                                                FOREIGN KEY (Stage_ID) REFERENCES Meditation_Stage(Stage_ID),
+                                                                FOREIGN KEY (Stage_ID) REFERENCES Stage(Stage_ID),
                                                                 FOREIGN KEY (Session_ID) REFERENCES Session(Session_ID))";
 
         if(($db->query("SHOW TABLES LIKE 'Practiced_Stages'"))->num_rows>0){
@@ -551,7 +551,7 @@
          $queryStage_Obstacle_Association= "CREATE TABLE Stage_Obstacle_Association(Obstacle_ID INT NOT NULL,
                                                                     Stage_ID INT NOT NULL,
                                                                     PRIMARY KEY (Stage_ID,Obstacle_ID),
-                                                                    FOREIGN KEY (Stage_ID) REFERENCES Meditation_Stage(Stage_ID),
+                                                                    FOREIGN KEY (Stage_ID) REFERENCES Stage(Stage_ID),
                                                                     FOREIGN KEY (Obstacle_ID) REFERENCES Obstacle(Obstacle_ID))";
 
         if(($db->query("SHOW TABLES LIKE 'Stage_Obstacle_Association'"))->num_rows>0){
@@ -586,7 +586,7 @@
         $queryStage_Skill_Association= "CREATE TABLE Stage_Skill_Association(Skill_ID INT NOT NULL,
                                                                    Stage_ID INT NOT NULL,
                                                                    PRIMARY KEY (Stage_ID,Skill_ID),
-                                                                   FOREIGN KEY (Stage_ID) REFERENCES Meditation_Stage(Stage_ID),
+                                                                   FOREIGN KEY (Stage_ID) REFERENCES Stage(Stage_ID),
                                                                    FOREIGN KEY (Skill_ID) REFERENCES Skill(Skill_ID))";
 
        if(($db->query("SHOW TABLES LIKE 'Stage_Skill_Association'"))->num_rows>0){
@@ -815,11 +815,11 @@
         ];
 
         foreach ($Goal as $goals) {
-            $sqlCheckGoal = "SELECT COUNT(*) FROM Meditation_Stage WHERE Goal = '$goals'";
+            $sqlCheckGoal = "SELECT COUNT(*) FROM Stage WHERE Goal = '$goals'";
             $result = $db->query($sqlCheckGoal);
 
             if ($result->fetch_row()[0] == 0) {
-                $sqlInsertStage = "INSERT INTO Meditation_Stage(Goal) VALUES ('$goals')";
+                $sqlInsertStage = "INSERT INTO Stage(Goal) VALUES ('$goals')";
                 $db->query($sqlInsertStage);
                 echo "
                     <script>

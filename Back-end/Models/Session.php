@@ -51,21 +51,21 @@ class Session {
         $db->query('USE Arm_mo_v2');
         
         // Query the database based on the stage ID
-        $query = "SELECT s.Stage_ID FROM Meditation_Stage AS s
+        $query = "SELECT s.Stage_ID FROM Stage AS s
                   INNER JOIN Practiced_Stages AS ps ON s.Stage_ID = ps.Stage_ID
                   WHERE ps.Session_ID = '$Session_ID'";
         $result = $db->query($query);
         
         // Create an array to store the stage IDs
-        $stageIDs = array();
+        $stages = array();
         
         // Iterate over the query results and add stage IDs to the array
         while ($row = $result->fetch_assoc()) {
-            $stageID = $row['Stage_ID'];
-            $stageIDs[] = $stageID;
+            $stage = Stage::getStage($row['Stage_ID']);
+            $stages[] = $stage;
         }
         
-        return $stageIDs;
+        return $stages;
     }
     
     public static function getSessionArray($Meditator_ID) {

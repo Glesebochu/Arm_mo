@@ -4,6 +4,12 @@
 class Stage {
     public $Stage_ID;
     public $Goal;
+    public $Intentions;
+    public $Obstacles;
+    public $Skills;
+    public $MasteryRequirements;
+    public $NextStage;
+    public $Is_Mastered;
        
     public static function getStage($identifier) {
         include_once(__DIR__ . '/../Connect.php');
@@ -12,7 +18,7 @@ class Stage {
         $db->query('USE Arm_mo_v2');
         
         // Query the database based on the identifier
-        $query = "SELECT Stage_ID,Goal FROM Meditation_Stage WHERE Stage_ID = '$identifier'";
+        $query = "SELECT Stage_ID,Goal FROM Stage WHERE Stage_ID = '$identifier'";
         $result = $db->query($query);
         $row = $result->fetch_assoc();
         

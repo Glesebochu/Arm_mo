@@ -6,7 +6,8 @@
   <link rel="icon" href="/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#000000" />
-  <title>Home Page</title>
+  <link rel="icon" href="../Game/Icons/Arm-mo Title Icon 2.png" type="image/x-icon">
+  <title>Arm'mo</title>
   <link href=".././Font.css"/>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mako%3A400"/>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro%3A400"/>

@@ -2,7 +2,7 @@ import { Session } from "../../../Middle-logic/Models/Session.js";
 import { Meditator } from "../../../Middle-logic/Models/Meditator.js";
 import { Stage } from "../../../Middle-logic/Models/Stage.js";
 
-function masteryCheck(session, stage){
+export function masteryCheck(session, stage){
     // First, generate as many input boxes as needed for the stage.
     
     console.log(stage);
@@ -14,7 +14,6 @@ function masteryCheck(session, stage){
     var congrats_div = document.getElementById('congrats-message');
     var checkboxes = document.getElementsByClassName('masteryCheck-checkbox');
     var glad_button = document.getElementById("masteryCheck-gladButton");
-    console.log(glad_button);
 
     // Function for converting a requirement into a list item in the appropriate div.
     function addRequirementToList(req, index){
@@ -46,9 +45,9 @@ function masteryCheck(session, stage){
     }
 
     // Add requirements to the div.
-    var requirements = stage.Mastery_Requirements;
+    var requirements = stage.MasteryRequirements;
     for (let i = 0; i < requirements.length; i++) {
-        const req = requirements[i];
+        const req = requirements[i].Description;
         addRequirementToList(req, i+1);
     }
 
@@ -79,21 +78,3 @@ function masteryCheck(session, stage){
     }
 
 }
-
-// Dummy object to be replaced by the object obtained with Gustav's DB -> JS object function.
-var meditator = new Meditator(
-    "Zelalem",
-    "Amare",
-    "fellasfaw@gmail.com",
-    "test",
-    3
-);
-
-// Access the stage object. This will be replaced by a database query.
-var stage = Stage.stageThree;
-// Dummy object to be replaced by the object obtained with Gustav's DB -> JS object function.
-var newSession = new Session();
-newSession.Meditator = meditator;
-newSession.Start_Date_Time = Date.now();
-
-masteryCheck(newSession, stage);

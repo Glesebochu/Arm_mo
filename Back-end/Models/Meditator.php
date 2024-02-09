@@ -10,13 +10,13 @@ class Meditator {
     public $Current_Stage_No;
 
     public static function getMeditator($identifier) {
-        include_once('../../Back-end/Connect.php');
+        include_once(__DIR__ . '/../Connect.php');
         $con = new Connect;
         $db = $con->__getConnection();
         $db->query('USE Arm_mo_v2');
         
         // Query the database based on the identifier
-        $query = "SELECT * FROM Meditator WHERE Username = '$identifier'";
+        // $query = "SELECT * FROM Meditator WHERE Username = '$identifier'";
         $query = "SELECT * FROM Meditator WHERE Username = '$identifier'";
         $result = $db->query($query);
         $row = $result->fetch_assoc();

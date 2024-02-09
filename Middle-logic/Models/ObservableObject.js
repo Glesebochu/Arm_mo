@@ -9,7 +9,7 @@ export class ObservableObjectIntensity{
 }
 export class ObservableObject{
     constructor(id, title, discriminator, description, icon, intensity){
-        this.Observable_Object_ID = id;
+        this.ObservableObject_ID = id;
         this.Title = title;
         this.Discriminator = discriminator;
         this.Description = description;

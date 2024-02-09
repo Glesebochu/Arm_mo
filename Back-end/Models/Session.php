@@ -1,7 +1,7 @@
 <?php
 // Session.php
 
-include_once('../../Back-end/Connect.php'); // Include the Connect.php file
+include_once(__DIR__ . '/../Connect.php'); // Include the Connect.php file
 include_once('Stage.php'); // Include the stage.php file
 
 class Session {
@@ -23,6 +23,7 @@ class Session {
         
         // Create a new Session object and assign values from the query result
         $Session = new Session();
+        $Session->Session_ID = $row['Session_ID'];
         $Session->Meditator_ID = $row['Meditator_ID'];
         $Session->Session_ID = $row['Session_ID'];
         $Session->Start_Time = $row['Start_Time'];
@@ -72,7 +73,7 @@ class Session {
         $db = $con->__getConnection();
         $db->query('USE Arm_mo_v2');
         
-        // Query the database based on the stage ID
+        // Query the database based on the Meditator ID
         $query = "SELECT * FROM Session
                   WHERE Meditator_ID = '$Meditator_ID'";
         $result = $db->query($query);
@@ -83,6 +84,7 @@ class Session {
         // Iterate over the query results and create Session objects
         while ($row = $result->fetch_assoc()) {
             $Session = new Session();
+            $Session->Session_ID = $row['Session_ID'];
             $Session->Meditator_ID = $row['Meditator_ID'];
             $Session->Session_ID = $row['Session_ID'];
             $Session->Start_Time = $row['Start_Time'];

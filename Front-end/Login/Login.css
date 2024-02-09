@@ -1,6 +1,3 @@
-* {
-  font-family: inter;
-}
 html {
   height: 100vh;
   width: 100vw;
@@ -72,7 +69,6 @@ input:hover {
 ::placeholder {
   font-weight: bold;
   font-size: 3vmin;
-  font-family: inter;
 }
 #error-message {
   padding: 0;
@@ -83,7 +79,6 @@ a {
   text-decoration: none;
   color: black;
   font-size: 2.4vmin;
-  font-family: inter;
   animation: changeColor 2s ease infinite;
 }
 a:hover {
@@ -99,7 +94,7 @@ button {
   transition: background-color 0.5s ease;
   padding: 1vmin;
   font-size: 3.2vmin;
-  font-family: inter;
+  font-weight: 550;
   background-color: rgba(8, 72, 3, 0.263);
 }
 button:hover {

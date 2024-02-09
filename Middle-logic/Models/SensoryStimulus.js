@@ -10,16 +10,20 @@ export class SensoryStimulusType{
 export class SensoryStimulus extends ObservableObject{
     constructor(id, title, description, icon, sensoryStimulusType, intensity){
         super(id, title, ObservableObjectType.SensoryStimuls, description, icon, intensity);
-        this.Sensory_Stimulus_Type = sensoryStimulusType;
+        this.SensoryStimulus_Type = sensoryStimulusType;
     }
     static getSensoryStimulusFromObject(obj){
         return new SensoryStimulus(
-            obj.Observable_Object_ID,
+            obj.ObservableObject_ID,
             obj.Title,
             obj.Description,
             obj.Icon,
-            obj.Sensory_Stimulus_Type,
+            obj.SensoryStimulus_Type,
             obj.Intensity
         );
+    }
+    static getSensoryStimuliFromArrayObject(arr){
+        var SensoryStimuli= arr.map(SensoryStimulus.getSensoryStimulusFromObject);
+        return SensoryStimuli;
     }
 }

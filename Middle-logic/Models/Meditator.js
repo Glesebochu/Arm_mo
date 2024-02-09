@@ -1,5 +1,6 @@
 export class Meditator{
-    constructor(First_Name, Last_Name, username, password, currentStageNo){
+    constructor(Meditator_ID,First_Name, Last_Name, username, password, currentStageNo){
+        this.Meditator_ID=Meditator_ID;
         this.First_Name = First_Name;
         this.Last_Name = Last_Name;
         this.Username = username;
@@ -9,6 +10,7 @@ export class Meditator{
 
     static getMeditatorFromObject(obj) {
         return new Meditator(
+            obj.Meditator_ID,
             obj.First_Name,
             obj.Last_Name,
             obj.Username,

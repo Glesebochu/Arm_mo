@@ -1,6 +1,6 @@
 <?php
 // We need to create the database if it already exists, do not create it
-include_once('../../Back-end/Connect.php');
+include_once('./Connect.php');
 $con = new Connect();
 $db = $con->__getConnection();
 

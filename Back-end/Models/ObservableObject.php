@@ -1,17 +1,17 @@
 <?php
 
-enum ObservableObjectType: string{
-    case SensoryStimulus = "Sensory Stimulus";
-    case MentalObject = "Mental Object";
+class ObservableObjectType{
+    const SensoryStimulus = "SensoryStimulus";
+    const MentalObject = "MentalObject";
 }
-enum ObservableObjectIntensity : string{
-    case Mild = "Mild";
-    case Moderate = "Moderate";
-    case Intense = "Intense";
+class ObservableObjectIntensity{
+    const Mild = "Mild";
+    const Moderate = "Moderate";
+    const Intense = "Intense";
 }
 
 class ObservableObject{
-    public $Observable_Object_ID;
+    public $ObservableObject_ID;
     public $Title;
     public $Discriminator;
     public $Description;
@@ -20,13 +20,13 @@ class ObservableObject{
 
     public static function getObservableObject($identifier){
         // Connect to the database
-        include_once('../../Back-end/Connect.php');
+        include_once(__DIR__ . '/../Connect.php');
         $con = new Connect;
         $db = $con->__getConnection();
         $db->query('USE Arm_mo_v2');
 
         /// Query the database based on the identifier
-        $query = "SELECT * FROM Observable_Object WHERE Observable_Object_ID = '$identifier'";
+        $query = "SELECT * FROM ObservableObject WHERE ObservableObject_ID = '$identifier'";
         $result = $db->query($query);
         $row = $result->fetch_assoc();
 
@@ -39,13 +39,13 @@ class ObservableObject{
         // Create different types depending on the discriminator.
         if ($row['Discriminator'] == ObservableObjectType::MentalObject) {
             $observableObject = new MentalObject();
-            $observableObject->Mental_Object_Type = $row['Mental_Object_Type'];
+            $observableObject->MentalObject_Type = $row['MentalObject_Type'];
         } else {
             $observableObject = new SensoryStimulus();
-            $observableObject->Sensory_Stimulus_Type = $row['Sensory_Stimulus_Type'];
+            $observableObject->SensoryStimulus_Type = $row['SensoryStimulus_Type'];
         }
         
-        $observableObject->Observable_Object_ID = $row['Observable_Object_ID'];
+        $observableObject->ObservableObject_ID = $row['ObservableObject_ID'];
         $observableObject->Title = $row['Title'];
         $observableObject->Discriminator = $row['Discriminator'];
         $observableObject->Description = $row['Description'];
@@ -65,15 +65,15 @@ class ObservableObject{
         return $observableObjectJson;
     }
 
-    public static function getObservableObjectArray($Session_ID){
-        include_once('../../Back-end/Connect.php');
+    public static function getObservableObjectArray($Session_ID, $discriminator){
+        include_once(__DIR__ . '/../Connect.php');
         $con = new Connect;
         $db = $con->__getConnection();
         $db->query('USE Arm_mo_v2');
 
         // Query the database based on the Session ID
-        $query = "SELECT * FROM Observable_Object
-                  WHERE Session_ID = '$Session_ID'";
+        $query = "SELECT * FROM ObservableObject
+                  WHERE Session_ID = '$Session_ID' AND Discriminator = '$discriminator'";
         $result = $db->query($query);
 
         // Create an array to store the ObservableObjects
@@ -81,24 +81,15 @@ class ObservableObject{
 
         while ($row = $result->fetch_assoc()){
             // Add the observable object to the array
-            $ObservableObjectArray[] = ObservableObject::getObservableObject($row['Observable_Object_ID']);
+            $ObservableObjectArray[] = ObservableObject::getObservableObject($row['ObservableObject_ID']);
         }
 
         return $ObservableObjectArray;
     }
 
-    public static function getJavaScriptObservableObjectArray($Session_ID){
-        $ObservableObjectArray = ObservableObject::getObservableObjectArray($Session_ID);
-
-        // Convert each Step object to a JSON string
-        $ObservableObjectJsonArray = array();
-        foreach ($ObservableObjectArray as $ObservableObject) {
-            $ObservableObjectJson = json_encode($ObservableObject);
-            $ObservableObjectJsonArray[] = $ObservableObjectJson;
-        }
-
-        // Return the JavaScript code to create the JavaScript ObservableObject array
-        return $ObservableObjectJsonArray;
+    public static function getJavaScriptObservableObjectArray($Session_ID , $discriminator){
+        $ObservableObjectArray = ObservableObject::getObservableObjectArray($Session_ID, $discriminator);
+        return json_encode($ObservableObjectArray);
     }
 }
 ?>

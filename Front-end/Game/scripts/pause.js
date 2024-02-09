@@ -58,4 +58,4 @@ export function displayPausePage() {
             window.location.href = "https://localhost/Arm-mo/Front-end/home-settings/home-page.php";
         }, 500); // Adjust the delay (in milliseconds) as needed
     });
-});
+};

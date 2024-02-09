@@ -9,7 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
     <script src="../scripts/timer.js"></script>
-    <title>Session Timer</title>
+    <link rel="icon" href="../Icons/Arm-mo Title Icon 2.png" type="image/x-icon">
+    <title>Arm'mo: Timer</title>
 
     <!-- Session Object Retreival -->
     <?php

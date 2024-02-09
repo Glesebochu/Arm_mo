@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Preparation</title>
+    <link rel="icon" href="../Icons/Arm-mo Title Icon 2.png" type="image/x-icon">
+    <title>Arm'mo</title>
     <link rel="stylesheet" href="../styles/general-styles.css">
     <link rel="stylesheet" href="../styles/preparation.css">
     <link rel="stylesheet" href="../../Font.css"/>

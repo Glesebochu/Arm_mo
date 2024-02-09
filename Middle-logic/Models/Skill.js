@@ -1,5 +1,6 @@
 export class Skill {
-    constructor(description) {
+    constructor(id, description) {
+        this.Skill_ID = id;
         this.Description = description;
     }
     static Create_Practice_Routine = "Creating practice routines";
@@ -16,7 +17,7 @@ export class Skill {
     static Check_In = "Checking in";
 
     static convertArrayToSkillObjects(arr) {
-        var SkillObjects = arr.map(obj => new Skill(obj.Description));
+        var SkillObjects = arr.map(obj => new Skill(obj.Skill_ID, obj.Description));
         return SkillObjects;
       }
 }

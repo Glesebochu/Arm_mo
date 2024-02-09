@@ -6,15 +6,15 @@ export class Session {
         this.End_Date_Time = endDateTime;
         this.Practiced_Stages = practicedStages;
         this.AhaMoments = ahaMoments;
-        this.Newly_Mastered_Stages = newlyMasteredStages;
         this.Steps = steps;
+        this.Newly_Mastered_Stages = newlyMasteredStages;
     }
     static getSessionFromObject(obj){
         return new Session(
             obj.Session_ID,
-            obj.Meditator_ID,
-            obj.Start_Time,
-            obj.End_Time,
+            obj.Meditator,
+            obj.Start_Date_Time,
+            obj.End_Date_Time,
             obj.Practiced_Stages,
             obj.AhaMoments,
             obj.Steps,
@@ -23,7 +23,7 @@ export class Session {
     }
     static convertArrayToSessionObjects(arr){
         var SessionObjects= arr.map(session=>
-            new Session(session.Session_ID,session.Meditator_ID,session.Start_Time,session.End_Time,session.Practiced_Stages,session.AhaMoments,session.Steps)
+            new Session(session.Session_ID,session.Meditator,session.Start_Date_Time,session.End_Date_Time,session.Practiced_Stages,session.AhaMoments,session.Steps)
         )
         return SessionObjects;
     }

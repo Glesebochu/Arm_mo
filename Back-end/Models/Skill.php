@@ -40,7 +40,7 @@ class Skill {
         $db->query('USE Arm_mo_v2');
         
         // Query the database based on the stage ID
-        $query = "SELECT s.Description FROM Skill AS s
+        $query = "SELECT * FROM Skill AS s
                   INNER JOIN stage_Skill_association AS ssa ON s.Skill_ID = ssa.Skill_ID
                   WHERE ssa.Stage_ID = '$stageID'";
         $result = $db->query($query);
@@ -64,7 +64,7 @@ class Skill {
         $SkillArray = Skill::getSkillArray($stageID);
         
         // Return the JavaScript code to create the JavaScript Skill array
-        return $SkillArray;
+        return json_encode($SkillArray);
     }
 }
 

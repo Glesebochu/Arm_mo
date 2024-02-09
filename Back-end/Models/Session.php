@@ -3,6 +3,9 @@
 
 include_once(__DIR__ . '/../Connect.php'); // Include the Connect.php file
 include_once('Stage.php'); // Include the stage.php file
+include_once('Meditator.php');
+include_once('AhaMoment.php');
+include_once('Step.php');
 
 class Session {
     public $Session_ID;
@@ -27,10 +30,10 @@ class Session {
         // Create a new Session object and assign values from the query result
         $Session = new Session();
         $Session->Session_ID = $row['Session_ID'];
-        $Session->Meditator = Meditator::getMeditator($row['Meditator_ID']);
+        $Session->Meditator = Meditator::getMeditatorByID($row['Meditator_ID']);
         $Session->Start_Date_Time = $row['Start_Date_Time'];
         $Session->End_Date_Time = $row['End_Date_Time'];
-        $Session->Practiced_Stages = self::getPracticedStages($Session->Session_ID);
+        $Session->Practiced_Stages = self::getPracticedStages($row['Session_ID']);
         $Session->AhaMoments = AhaMoment::getAhaMomentArray($session_ID);
         $Session->Steps = Step::getStepArray($session_ID);
         

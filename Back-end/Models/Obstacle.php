@@ -40,7 +40,7 @@ class Obstacle {
         $db->query('USE Arm_mo_v2');
         
         // Query the database based on the stage ID
-        $query = "SELECT o.Description FROM Obstacle AS o
+        $query = "SELECT * FROM Obstacle AS o
                   INNER JOIN stage_obstacle_association AS soa ON o.Obstacle_ID = soa.Obstacle_ID
                   WHERE soa.Stage_ID = '$stageID'";
         $result = $db->query($query);

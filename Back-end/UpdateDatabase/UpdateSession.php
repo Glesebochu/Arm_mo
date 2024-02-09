@@ -152,8 +152,8 @@ if (isset($_POST['session'])) {
                 }
             } else {
                 // Step does not exist, insert the step
-                $insertStepSql = "INSERT INTO Step (Step_ID, Session_ID, Title, Description, Type, Category, Duration, Response) 
-                                  VALUES ('$step_ID', '$session_ID', '$title', '$description', '$type', '$category', '$duration', '$response')";
+                $insertStepSql = "INSERT INTO Step (Session_ID, Title, Description, Type, Category, Duration, Response) 
+                                  VALUES ('$session_ID', '$title', '$description', '$type', '$category', '$duration', '$response')";
                 $insertStepResult = $db->query($insertStepSql);
 
                 if (!$insertStepResult) {
@@ -185,8 +185,8 @@ if (isset($_POST['session'])) {
                 }
             } else {
                 // AhaMoment does not exist, insert the AhaMoment
-                $insertAhaMomentSql = "INSERT INTO AhaMoment (AhaMoment_ID, Session_ID, Label) 
-                                       VALUES ('$ahaMoment_ID', '$session_ID', '$label')";
+                $insertAhaMomentSql = "INSERT INTO AhaMoment (Session_ID, Label) 
+                                       VALUES ('$session_ID', '$label')";
                 $insertAhaMomentResult = $db->query($insertAhaMomentSql);
 
                 if (!$insertAhaMomentResult) {

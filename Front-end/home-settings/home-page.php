@@ -86,8 +86,11 @@
       sessionObject.Steps[0].Activity.Title='doodling activity title';
       sessionObject.Steps[0].Activity.MeditationObject.Intensity='Intense';
       console.log('newer',sessionObject)
+      
+      Session.createSession(sessionObject);
       Session.updateSession(sessionObject);
     </script>
+  
 
   <script>
     function openPage(link){

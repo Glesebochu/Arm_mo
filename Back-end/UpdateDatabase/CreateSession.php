@@ -6,6 +6,7 @@ include_once(__DIR__ . '/../Connect.php');
 $con = new Connect;
 $db = $con->__getConnection();
 $db->query('USE Arm_mo_v2');
+session_start();
 
 // Check if the request contains the session object
 if (isset($_POST['session'])) {
@@ -22,11 +23,17 @@ if (isset($_POST['session'])) {
 
     // Insert the new session into the Session table
     $sql = "INSERT INTO Session (Meditator_ID, Start_Date_Time, End_Date_Time)
-            VALUES ('$meditator', '$startDateTime', '$endDateTime')";
+            VALUES ('{$meditator['Meditator_ID']}', '$startDateTime', '$endDateTime')";
     $result = $db->query($sql);
 
     if ($result) {
-        echo 'Session created successfully.';
+        // Get the session ID of the created session
+        $session_ID = $db->insert_id;
+
+        // Populate the session superglobal array
+        $_SESSION['session'] = $session_ID;
+
+        echo 'Session created successfully. With ID '.$_SESSION['session'];
     } else {
         echo 'Failed to create session.';
     }

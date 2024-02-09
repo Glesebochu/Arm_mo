@@ -8,8 +8,8 @@ export function displayStageInformation() {
     const stageOne = Stage.stageOne;
 
     // Create HTML elements dynamically
-    const stageIDElement = document.createElement('h3');
-    stageIDElement.textContent = `Goal: ${stageOne.Stage_ID}`;
+    const stageIDElement = document.createElement('h1');
+    stageIDElement.textContent = `Stage ${stageOne.Stage_ID}`;
     const goalElement = document.createElement('p');
     goalElement.textContent = `Goal: ${stageOne.Goal}`;
 
@@ -35,6 +35,7 @@ export function displayStageInformation() {
     });
 
     innerContainer.appendChild(stageIDElement);
+    innerContainer.appendChild(document.createElement('hr'));
     innerContainer.appendChild(goalElement);
     innerContainer.appendChild(document.createElement('hr'));
     innerContainer.appendChild(document.createElement('h3')).textContent = 'Intentions:';
@@ -49,31 +50,31 @@ export function displayStageInformation() {
     console.log("Script is executing!");
 
     document.addEventListener('DOMContentLoaded', function () {
-    
         const innerContainer = document.getElementById('stageInfoContainer');
-        // const stageOne = Stage.stageOne;
-
         const stageButton = document.querySelector('.stage-button');
         const nextStageButton = document.querySelector('.next-stage');
         const previousStageButton = document.querySelector('.previous-stage');
-
+    
         let currentStage = 1;
-
+    
         const updateStageButton = () => {
+            // Ensure currentStage stays within the range of 1 to 10
+            currentStage = Math.max(1, Math.min(10, currentStage));
             stageButton.textContent = currentStage;
         };
-
+    
         previousStageButton.addEventListener('click', () => {
             currentStage--;
-
+    
             updateStageButton();
         });
+    
         nextStageButton.addEventListener('click', () => {
             currentStage++;
-
+    
             updateStageButton();
         });
-
+    
         updateStageButton();
     });
 }

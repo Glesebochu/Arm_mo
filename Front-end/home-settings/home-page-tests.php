@@ -459,7 +459,7 @@
       var sessionData = {
         Start_Date_Time: '<?php echo date("Y-m-d H:i:s"); ?>',
         End_Date_Time: '<?php echo date("Y-m-d H:i:s"); ?>',
-        Practiced_Stages: [1, 2, 3],
+        PracticedStages: [1, 2, 3],
         Newly_Mastered_Stages: [7, 8, 9]
       };
 
@@ -469,7 +469,7 @@
         meditatorTest.Meditator_ID,
         sessionData.Start_Date_Time,
         sessionData.End_Date_Time,
-        sessionData.Practiced_Stages,
+        sessionData.PracticedStages,
         matchingAhaMoments,
         matchingSteps,
         sessionData.Newly_Mastered_Stages

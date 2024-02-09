@@ -12,7 +12,7 @@ class Session {
     public $Meditator;
     public $Start_Date_Time;
     public $End_Date_Time;
-    public $Practiced_Stages; 
+    public $PracticedStages; 
     public $AhaMoments;
     public $Steps;
     public $Newly_Mastered_Stages;
@@ -33,7 +33,7 @@ class Session {
         $Session->Meditator = Meditator::getMeditatorByID($row['Meditator_ID']);
         $Session->Start_Date_Time = $row['Start_Date_Time'];
         $Session->End_Date_Time = $row['End_Date_Time'];
-        $Session->Practiced_Stages = self::getPracticedStages($row['Session_ID']);
+        $Session->PracticedStages = self::getPracticedStages($row['Session_ID']);
         $Session->AhaMoments = AhaMoment::getAhaMomentArray($session_ID);
         $Session->Steps = Step::getStepArray($session_ID);
         
@@ -57,7 +57,7 @@ class Session {
         
         // Query the database based on the stage ID
         $query = "SELECT s.Stage_ID FROM Stage AS s
-                  INNER JOIN Practiced_Stages AS ps ON s.Stage_ID = ps.Stage_ID
+                  INNER JOIN PracticedStages AS ps ON s.Stage_ID = ps.Stage_ID
                   WHERE ps.Session_ID = '$Session_ID'";
         $result = $db->query($query);
         

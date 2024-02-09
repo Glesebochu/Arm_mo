@@ -280,7 +280,7 @@
 
     foreach ($stages as $stageID) {
         // Check if the record already exists
-        $query = "SELECT * FROM practiced_stages WHERE Stage_ID = $stageID AND Session_ID = $sessionID";
+        $query = "SELECT * FROM PracticedStages WHERE Stage_ID = $stageID AND Session_ID = $sessionID";
         $result = $db->query($query);
 
         if ($result->num_rows > 0) {
@@ -291,7 +291,7 @@
             ";
         } else {
             // Insert the new record into the table
-            $queryInsert = "INSERT INTO practiced_stages (Stage_ID, Session_ID) VALUES ($stageID, $sessionID)";
+            $queryInsert = "INSERT INTO PracticedStages (Stage_ID, Session_ID) VALUES ($stageID, $sessionID)";
             $db->query($queryInsert);
 
             if ($db->affected_rows > 0) {

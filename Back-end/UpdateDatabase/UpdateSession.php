@@ -17,17 +17,17 @@ if (isset($_POST['session'])) {
     // echo $meditator;
     $startDateTime = $session['Start_Date_Time'];
     $endDateTime = $session['End_Date_Time'];
-    $practicedStages = $session['Practiced_Stages'];
+    $practicedStages = $session['PracticedStages'];
     $steps = $session['Steps'];
     $ahaMoments = $session['AhaMoments'];
     $newlyMasteredStages = $session['Newly_Mastered_Stages'];
 
     // Update the Session table
     $sql = "UPDATE Session SET
-            Meditator_ID = '$meditator.Meditator_ID',
-            Start_Date_Time = '$startDateTime',
-            End_Date_Time = '$endDateTime'
-            WHERE Session_ID = '$session_ID'";
+    Meditator_ID = '{$meditator['Meditator_ID']}',
+    Start_Date_Time = '$startDateTime',
+    End_Date_Time = '$endDateTime'
+    WHERE Session_ID = '$session_ID'";
     $result = $db->query($sql);
 
     if ($result) {
@@ -77,7 +77,7 @@ if (isset($_POST['session'])) {
         // Update or insert AhaMoments for the session
         foreach ($ahaMoments as $ahaMoment) {
             $ahaMoment_ID = $ahaMoment['AhaMoment_ID'];
-            $label = $db->real_escape_string($ahaMoment['Label']) . 'update test';
+            $label = $db->real_escape_string($ahaMoment['Label']);
 
             // Check if the AhaMoment exists for the session
             $checkAhaMomentSql = "SELECT * FROM AhaMoment WHERE AhaMoment_ID = '$ahaMoment_ID' AND Session_ID = '$session_ID'";
@@ -111,12 +111,12 @@ if (isset($_POST['session'])) {
             $stage_ID = $practicedStage['Stage_ID'];
 
             // Check if the PracticedStage exists for the session
-            $checkPracticedStageSql = "SELECT * FROM PracticedStage WHERE Stage_ID = '$stage_ID' AND Session_ID = '$session_ID'";
+            $checkPracticedStageSql = "SELECT * FROM PracticedStages WHERE Stage_ID = '$stage_ID' AND Session_ID = '$session_ID'";
             $checkPracticedStageResult = $db->query($checkPracticedStageSql);
 
             if ($checkPracticedStageResult->num_rows === 0) {
                 // PracticedStage does not exist, insert the PracticedStage
-                $insertPracticedStageSql = "INSERT INTO PracticedStage (Stage_ID, Session_ID) 
+                $insertPracticedStageSql = "INSERT INTO PracticedStages (Stage_ID, Session_ID) 
                                             VALUES ('$stage_ID', '$session_ID')";
                 $insertPracticedStageResult = $db->query($insertPracticedStageSql);
 

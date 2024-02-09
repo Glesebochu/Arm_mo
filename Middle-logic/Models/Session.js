@@ -9,7 +9,7 @@ export class Session {
         this.Meditator = meditator;
         this.Start_Date_Time = startDateTime;
         this.End_Date_Time = endDateTime;
-        this.Practiced_Stages = practicedStages;
+        this.PracticedStages = practicedStages;
         this.AhaMoments = ahaMoments;
         this.Steps = steps;
         this.Newly_Mastered_Stages = newlyMasteredStages;
@@ -20,7 +20,7 @@ export class Session {
             Meditator.getMeditatorFromObject(obj.Meditator),
             obj.Start_Date_Time,
             obj.End_Date_Time,
-            Stage.getStagesFromArrayObject(obj.Practiced_Stages),
+            Stage.getStagesFromArrayObject(obj.PracticedStages),
             AhaMoment.getAhaMomentsFromArrayObject(obj.AhaMoments),
             Step.getStepsFromArrayObject(obj.Steps),
             [],

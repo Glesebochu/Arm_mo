@@ -515,31 +515,31 @@
 
     // Creating the Stage Session association (Practiced Session) table
     {
-        $queryPracticed_Stages= "CREATE TABLE Practiced_Stages(Session_ID INT NOT NULL,
+        $queryPracticedStages= "CREATE TABLE PracticedStages(Session_ID INT NOT NULL,
                                                                 Stage_ID INT NOT NULL,
                                                                 PRIMARY KEY (Stage_ID,Session_ID),
                                                                 FOREIGN KEY (Stage_ID) REFERENCES Stage(Stage_ID),
                                                                 FOREIGN KEY (Session_ID) REFERENCES Session(Session_ID))";
 
-        if(($db->query("SHOW TABLES LIKE 'Practiced_Stages'"))->num_rows>0){
+        if(($db->query("SHOW TABLES LIKE 'PracticedStages'"))->num_rows>0){
             echo"
                 <script>
-                    console.log('Table Practiced_Stages already exists')
+                    console.log('Table PracticedStages already exists')
                 </script>
             ";
         }
         else{
-            if($db->query($queryPracticed_Stages)){
+            if($db->query($queryPracticedStages)){
                 echo"
                     <script>
-                        console.log('Created the table Practiced_Stages succesfully!')
+                        console.log('Created the table PracticedStages succesfully!')
                     </script>
                 ";
             }
             else{
                 echo"
                     <script>
-                        console.log('Creation of the table Practiced_Stages failed!')
+                        console.log('Creation of the table PracticedStages failed!')
                     </script>
                 ";
             }

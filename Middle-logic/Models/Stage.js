@@ -3,14 +3,13 @@ import { Obstacle } from "./Obstacle.js";
 import { Skill } from "./Skill.js";
 
 export class Stage {
-    constructor(number, goal, intentions = [], obstacles = [], skills = [], masteryRequirements = [], nextStage, isMastered = false) {
-        this.Number = number;
+    constructor(id, goal, intentions = [], obstacles = [], skills = [], masteryRequirements = [], isMastered = false) {
+        this.Stage_ID = id;
         this.Goal = goal;
         this.Intentions = intentions;
         this.Obstacles = obstacles;
         this.Skills = skills;
         this.MasteryRequirements = masteryRequirements;
-        this.NextStage = nextStage;
         this.Is_Mastered = isMastered;
     }
     static getStageFromObject(obj) {
@@ -21,7 +20,6 @@ export class Stage {
             Obstacle.getObstaclesFromArrayObject(obj.Obstacles),
             Skill.getSkillsFromArrayObject(obj.Skills),
             obj.MasteryRequirements,
-            obj.NextStage,
             obj.Is_Mastered
         );
     }
@@ -31,7 +29,7 @@ export class Stage {
     }
 
     static stageOne = new Stage(
-        this.Number = 1,
+        this.Stage_ID = 1,
         this.Goal = "Develop a consistent daily meditation practice.",
         this.Intentions = [
             Intention.Sit_Down,
@@ -56,13 +54,12 @@ export class Stage {
         this.MasteryRequirements = [
             "I never miss a daily practice session.",
             "I do not procastinate while meditating."
-        ],
-        this.NextStage = Stage.stageTwo
+        ]
     );
 
     // Stage 2
     static stageTwo = new Stage(
-        this.Number = 2,
+        this.Stage_ID = 2,
         this.Goal = "Shorten the periods of mind-wandering and extend the periods of sustained attention to the meditation object.",
         this.Intentions = [
             Intention.Appreciate_AhaMoment,
@@ -81,13 +78,12 @@ export class Stage {
         this.MasteryRequirements = [
             "I can sustain attention on the meditation object for 10-15 minutes.",
             "Most periods of mind-wandering last only a few seconds."
-        ],
-        this.NextStage = Stage.stageThree
+        ]
     );
 
     // Stage 3
     static stageThree = new Stage(
-        this.Number = 3,
+        this.Stage_ID = 3,
         this.Goal = "Overcome forgetting and falling asleep.",
         this.Intentions = [
             Intention.Invoke_Introspective_Attention,

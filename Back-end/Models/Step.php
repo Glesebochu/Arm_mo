@@ -13,6 +13,7 @@ class Step {
    
     public static function getStep($step_ID) {
         include_once(__DIR__ . '/../Connect.php');
+        include_once('Activity.php');
         $con = new Connect;
         $db = $con->__getConnection();
         $db->query('USE Arm_mo_v2');

@@ -163,7 +163,13 @@ button {
   color: rgba(2, 1, 0, 0.651);
   font-weight: bold;
   font-size: 2.5vw;
-  transition: background-color 0.5s ease;
+  transition: background-color 0.5s ease, transform 0.1s ease;
+}
+button:hover{
+  background-color: gray;
+}
+button:active{
+  transform: scale(0.9);
 }
 @keyframes changeColor {
   0%,

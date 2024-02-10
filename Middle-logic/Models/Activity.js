@@ -1,4 +1,4 @@
-import { SensoryStimulus, SensoryStimulusType } from "./SensoryStimulus.js";
+// import { SensoryStimulus, SensoryStimulusType } from "./SensoryStimulus.js";
 
 export class Activity{
     constructor(id, title, meditationObject){
@@ -7,24 +7,24 @@ export class Activity{
         this.MeditationObject = meditationObject;
     }
 
-    static Breathing = new Activity(
-        1, 
-        "Breathing",
-        new SensoryStimulus(1, "Breath at the nose.", "Breathing sensations at the nose", "icon", SensoryStimulusType.Kinesthetic)
-    );
-    static Reading = new Activity(
-        2,
-        "Reading",
-        new SensoryStimulus(2, "The current sentence.", "The sentence you are currently reading.", "icon", SensoryStimulusType.Visual)
-    );
-    static Talking = new Activity(
-        3,
-        "Talking",
-        new SensoryStimulus(3, "The current sentence.", "The sentence you are currently reading.", "icon", SensoryStimulusType.Auditory)
-    );
-    static getAllActivities(){
-        return [Activity.Breathing, Activity.Reading, Activity.Talking];
-    }
+    // static Breathing = new Activity(
+    //     undefined, 
+    //     "Breathing",
+    //     new SensoryStimulus(undefined, "Breath at the nose.", "Breathing sensations at the nose", "icon", SensoryStimulusType.Kinesthetic)
+    // );
+    // static Reading = new Activity(
+    //     undefined,
+    //     "Reading",
+    //     new SensoryStimulus(undefined, "The current sentence.", "The sentence you are currently reading.", "icon", SensoryStimulusType.Visual)
+    // );
+    // static Talking = new Activity(
+    //     undefined,
+    //     "Talking",
+    //     new SensoryStimulus(undefined, "The current sentence.", "The sentence you are currently reading.", "icon", SensoryStimulusType.Auditory)
+    // );
+    // static getAllActivities(){
+    //     return [Activity.Breathing, Activity.Reading, Activity.Talking];
+    // }
 
     static getActivityFromObject(obj){
         return new Activity(
@@ -32,5 +32,10 @@ export class Activity{
             obj.Title,
             obj.MeditationObject
         );
+    }
+
+    static getActivitiesFromArrayObject(arr){
+        var Activities= arr.map(Activity.getActivityFromObject);
+        return Activities;
     }
 }

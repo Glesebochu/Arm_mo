@@ -169,7 +169,7 @@
 
 // Populating the Antidote table
 {
-    function checkRecordExistsAntidote($AntidoteType, $Severity,$Description) {
+    function checkRecordExistsAntidote($AntidoteType, $Severity, $Description) {
         global $db;
         $query = "SELECT * FROM Antidote WHERE Type = ? AND Severity = ? AND Description = ?";
         $stmt = $db->prepare($query);
@@ -198,13 +198,13 @@
         ['AntidoteType' => 'Dullness', 'Severity' => 'Severe','Description'=>'Splash water on your face'],
         ['AntidoteType' => 'Dullness', 'Severity' => 'Severe','Description'=>'Nap and come back']
     ];
-    
+
     foreach ($AntidoteInstances as $AntidoteInstance) {
         $AntidoteType = $AntidoteInstance['AntidoteType'];
         $Severity = $AntidoteInstance['Severity'];
         $Description = $AntidoteInstance['Description'];
-    
-        if (checkRecordExistsAntidote($AntidoteType, $Severity, $Antidote)) {
+
+        if (checkRecordExistsAntidote($AntidoteType, $Severity, $Description)) {
             echo "
                 <script>
                     console.log('Entry already exists for AntidoteType: $AntidoteType and Severity: $Severity');
@@ -216,7 +216,7 @@
             $stmtInsert = $db->prepare($queryInsert);
             $stmtInsert->bind_param("sss", $AntidoteType, $Severity, $Description);
             $stmtInsert->execute();
-    
+
             if ($db->affected_rows > 0) {
                 echo "
                     <script>
@@ -236,85 +236,114 @@
 
 // Creating a dummy session
 {
-   // Check if the dummy session already exists
-    $sqlCheckDummySession = "SELECT * FROM Session WHERE Meditator_ID = 1";
-    $resultCheckDummySession = $db->query($sqlCheckDummySession);
+    // Query the lowest Meditator_ID from the Meditator table
+    $sqlGetLowestMeditatorID = "SELECT MIN(Meditator_ID) AS LowestID FROM Meditator";
+    $resultLowestMeditatorID = $db->query($sqlGetLowestMeditatorID);
 
-    if ($resultCheckDummySession->num_rows > 0) {
-        echo "
-            <script>
-                console.log('Dummy session already exists. Skipping insertion.')
-            </script>
-        ";
-    } else {
-        // Get the current date and time
-        $currentTime = date('Y-m-d H:i:s');
+    if ($resultLowestMeditatorID && $resultLowestMeditatorID->num_rows > 0) {
+        $row = $resultLowestMeditatorID->fetch_assoc();
+        $lowestMeditatorID = $row['LowestID'];
 
-        // Set the dummy session start and end times
-        $startTime = $currentTime;
-        $endTime = date('Y-m-d H:i:s', strtotime('+1 hour', strtotime($startTime)));
+        // Check if the dummy session already exists
+        $sqlCheckDummySession = "SELECT * FROM Session WHERE Meditator_ID = $lowestMeditatorID";
+        $resultCheckDummySession = $db->query($sqlCheckDummySession);
 
-        // Insert the dummy session into the Session table
-        $sqlInsertSession = "INSERT INTO Session (Meditator_ID, Start_Date_Time, End_Date_Time)
-                            VALUES (1, '$startTime', '$endTime')";
-        if ($db->query($sqlInsertSession)) {
+        if ($resultCheckDummySession->num_rows > 0) {
             echo "
                 <script>
-                    console.log('Dummy session created successfully!')
+                    console.log('Dummy session already exists. Skipping insertion.')
                 </script>
             ";
         } else {
-            echo "
-                <script>
-                    console.log('Failed to create dummy session!')
-                </script>
-            ";
-        }
-    }
-}
+            // Get the current date and time
+            $currentTime = date('Y-m-d H:i:s');
 
-//creating dummy entries for practiced stages
-{
-    $sessionID = 1;
-    $stages = [1, 2, 3];
+            // Set the dummy session start and end times
+            $startTime = $currentTime;
+            $endTime = date('Y-m-d H:i:s', strtotime('+1 hour', strtotime($startTime)));
 
-    foreach ($stages as $stageID) {
-        // Check if the record already exists
-        $query = "SELECT * FROM PracticedStages WHERE Stage_ID = $stageID AND Session_ID = $sessionID";
-        $result = $db->query($query);
-
-        if ($result->num_rows > 0) {
-            echo "
-                <script>
-                    console.log('Entry already exists for Stage_ID: $stageID and Session_ID: $sessionID');
-                </script>
-            ";
-        } else {
-            // Insert the new record into the table
-            $queryInsert = "INSERT INTO PracticedStages (Stage_ID, Session_ID) VALUES ($stageID, $sessionID)";
-            $db->query($queryInsert);
-
-            if ($db->affected_rows > 0) {
+            // Insert the dummy session into the Session table
+            $sqlInsertSession = "INSERT INTO Session (Meditator_ID, Start_Date_Time, End_Date_Time)
+                                VALUES ($lowestMeditatorID, '$startTime', '$endTime')";
+            if ($db->query($sqlInsertSession)) {
                 echo "
                     <script>
-                        console.log('New record inserted for Stage_ID: $stageID and Session_ID: $sessionID');
+                        console.log('Dummy session created successfully!')
                     </script>
                 ";
             } else {
                 echo "
                     <script>
-                        console.log('Failed to insert record for Stage_ID: $stageID and Session_ID: $sessionID');
+                        console.log('Failed to create dummy session!')
                     </script>
                 ";
             }
         }
+    } else {
+        echo "
+            <script>
+                console.log('No Meditator record found. Unable to create dummy session.')
+            </script>
+        ";
+    }
+}
+
+//creating dummy entries for practiced stages
+{
+    // Query the lowest Session_ID from the Session table
+    $sqlGetLowestSessionID = "SELECT MIN(Session_ID) AS LowestID FROM Session";
+    $resultLowestSessionID = $db->query($sqlGetLowestSessionID);
+
+    if ($resultLowestSessionID && $resultLowestSessionID->num_rows > 0) {
+        $row = $resultLowestSessionID->fetch_assoc();
+        $lowestSessionID = $row['LowestID'];
+
+        $stages = [1, 2, 3];
+
+        foreach ($stages as $stageID) {
+            // Check if the record already exists
+            $query = "SELECT * FROM PracticedStages WHERE Stage_ID = $stageID AND Session_ID = $lowestSessionID";
+            $result = $db->query($query);
+
+            if ($result->num_rows > 0) {
+                echo "
+                    <script>
+                        console.log('Entry already exists for Stage_ID: $stageID and Session_ID: $lowestSessionID');
+                    </script>
+                ";
+            } else {
+                // Insert the new record into the table
+                $queryInsert = "INSERT INTO PracticedStages (Stage_ID, Session_ID) VALUES ($stageID, $lowestSessionID)";
+                $db->query($queryInsert);
+
+                if ($db->affected_rows > 0) {
+                    echo "
+                        <script>
+                            console.log('New record inserted for Stage_ID: $stageID and Session_ID: $lowestSessionID');
+                        </script>
+                    ";
+                } else {
+                    echo "
+                        <script>
+                            console.log('Failed to insert record for Stage_ID: $stageID and Session_ID: $lowestSessionID');
+                        </script>
+                    ";
+                }
+            }
+        }
+    } else {
+        echo "
+            <script>
+                console.log('No Session record found. Unable to populate PracticedStages table.')
+            </script>
+        ";
     }
 } 
 
 // Populating the Step table
 {
     // Get the session ID of the dummy session
-    $sqlGetDummySessionID = "SELECT Session_ID FROM Session WHERE Meditator_ID = 1";
+    $sqlGetDummySessionID = "SELECT Session_ID FROM Session WHERE Meditator_ID = $lowestMeditatorID";
     $resultGetDummySessionID = $db->query($sqlGetDummySessionID);
 
     if ($resultGetDummySessionID->num_rows > 0) {
@@ -417,7 +446,7 @@
 // Creating dummy observable objects
 {
     // Get the session ID of the dummy session
-    $sqlGetDummySessionID = "SELECT Session_ID FROM Session WHERE Meditator_ID = 1";
+    $sqlGetDummySessionID = "SELECT Session_ID FROM Session WHERE Meditator_ID = $lowestMeditatorID";
     $resultGetDummySessionID = $db->query($sqlGetDummySessionID);
 
     if ($resultGetDummySessionID->num_rows > 0) {
@@ -498,42 +527,60 @@
     $activities = [
         [
             "Breathing",
-            2
+            "Breath at the nose"
         ],
         [
             "Talking",
-            5
+            "Current Sentence"
         ]
     ];
 
     // Prepare and execute INSERT statements for each activity
     foreach ($activities as $activity) {
         $title = $activity[0];
-        $meditationObject_ID = $activity[1];
+        $observableObjectTitle = $activity[1];
 
-        // Check if the activity already exists
-        $sqlCheckActivity = "SELECT * FROM Activity WHERE Title = ? AND MeditationObject_ID = ?";
-        $stmtCheckActivity = $db->prepare($sqlCheckActivity);
-        $stmtCheckActivity->bind_param("si", $title, $meditationObject_ID);
-        $stmtCheckActivity->execute();
-        $resultCheckActivity = $stmtCheckActivity->get_result();
+        // Retrieve the ObservableObject_ID based on the observableObjectTitle
+        $sqlGetObservableObjectID = "SELECT ObservableObject_ID FROM ObservableObject WHERE Title = ?";
+        $stmtGetObservableObjectID = $db->prepare($sqlGetObservableObjectID);
+        $stmtGetObservableObjectID->bind_param("s", $observableObjectTitle);
+        $stmtGetObservableObjectID->execute();
+        $resultGetObservableObjectID = $stmtGetObservableObjectID->get_result();
 
-        if ($resultCheckActivity->num_rows > 0) {
-            echo "
-                <script>
-                    console.log('Activity $title for dummy session already exists. Skipping insertion.')
-                </script>
-            ";
+        if ($resultGetObservableObjectID->num_rows > 0) {
+            $row = $resultGetObservableObjectID->fetch_assoc();
+            $observableObjectID = $row['ObservableObject_ID'];
+
+            // Check if the activity already exists
+            $sqlCheckActivity = "SELECT * FROM Activity WHERE Title = ? AND MeditationObject_ID = ?";
+            $stmtCheckActivity = $db->prepare($sqlCheckActivity);
+            $stmtCheckActivity->bind_param("si", $title, $observableObjectID);
+            $stmtCheckActivity->execute();
+            $resultCheckActivity = $stmtCheckActivity->get_result();
+
+            if ($resultCheckActivity->num_rows > 0) {
+                echo "
+                    <script>
+                        console.log('Activity $title for dummy session already exists. Skipping insertion.')
+                    </script>
+                ";
+            } else {
+                $sqlInsertActivity = "INSERT INTO Activity (Title, MeditationObject_ID)
+                                      VALUES (?, ?)";
+                $stmtInsertActivity = $db->prepare($sqlInsertActivity);
+                $stmtInsertActivity->bind_param("si", $title, $observableObjectID);
+                $stmtInsertActivity->execute();
+
+                echo "
+                    <script>
+                        console.log('Activity $title for dummy session added successfully!')
+                    </script>
+                ";
+            }
         } else {
-            $sqlInsertActivity = "INSERT INTO Activity (Title, MeditationObject_ID)
-                            VALUES (?, ?)";
-            $stmtInsertActivity = $db->prepare($sqlInsertActivity);
-            $stmtInsertActivity->bind_param("ss", $title, $meditationObject_ID);
-            $stmtInsertActivity->execute();
-
             echo "
                 <script>
-                    console.log('Activity $title for dummy session added successfully!')
+                    console.log('ObservableObject $observableObjectTitle does not exist. Skipping activity $title insertion.')
                 </script>
             ";
         }
@@ -543,7 +590,7 @@
 // Creating dummy AhaMoment objects
 {
     // Get the session ID of the dummy session
-    $sqlGetDummySessionID = "SELECT Session_ID FROM Session WHERE Meditator_ID = 1";
+    $sqlGetDummySessionID = "SELECT Session_ID FROM Session WHERE Meditator_ID = $lowestMeditatorID";
     $resultGetDummySessionID = $db->query($sqlGetDummySessionID);
 
     if ($resultGetDummySessionID->num_rows > 0) {

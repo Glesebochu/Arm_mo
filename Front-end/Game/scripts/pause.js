@@ -1,4 +1,14 @@
-document.addEventListener("DOMContentLoaded", function () {
+export function displayPausePage() {
+    function navigateWithFadeOut(destination) {
+        // Fade out the body
+        document.body.style.opacity = 0;
+
+        // After a delay, navigate to the specified destination
+        setTimeout(function () {
+            window.location.href = destination;
+        }, 500); // Adjust the delay (in milliseconds) as needed
+    }
+
     // Get the triangle button
     var triangleButton = document.querySelector(".triangle-button");
     var resumeButton = document.querySelector(".resume-button");
@@ -10,9 +20,9 @@ document.addEventListener("DOMContentLoaded", function () {
         // Fade out the body
         document.body.style.opacity = 0;
 
-        // After a delay, navigate to the Dummy Game UI.html page
+        // After a delay, navigate to the Game UI.php page
         setTimeout(function () {
-            window.location.href = "../Dummy Game UI.html";
+            window.history.back();
         }, 500); // Adjust the delay (in milliseconds) as needed
     });
 
@@ -21,31 +31,32 @@ document.addEventListener("DOMContentLoaded", function () {
         // Fade out the body
         document.body.style.opacity = 0;
 
-        // After a delay, navigate to the Dummy Game UI.html page
+        // After a delay, navigate to the Game UI.php page
         setTimeout(function () {
-            window.location.href = "../Dummy Game UI.html";
+            window.history.back();
         }, 500); // Adjust the delay (in milliseconds) as needed
     });
 
-    // Add a click event listener to the resume button
+    // Add a click event listener to the restart button
     restartButton.addEventListener("click", function () {
         // Fade out the body
         document.body.style.opacity = 0;
 
-        // After a delay, navigate to the Dummy Game UI.html page
+        // After a delay, navigate to the Game UI.php page
         setTimeout(function () {
-            window.location.href = "../Dummy Game UI.html";
+            window.history.back();
         }, 500); // Adjust the delay (in milliseconds) as needed
     });
 
-    // Add a click event listener to the resume button
+    // Add a click event listener to the main menu button
     mainMenuButton.addEventListener("click", function () {
         // Fade out the body
         document.body.style.opacity = 0;
 
-        // After a delay, navigate to the Dummy Game UI.html page
+        // After a delay, navigate to the Game UI.php page
         setTimeout(function () {
             window.location.href = "https://localhost/Arm-mo/Front-end/home-settings/home-page.php";
         }, 500); // Adjust the delay (in milliseconds) as needed
     });
-});
+};
+displayPausePage();

@@ -8,10 +8,47 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../styles/transition.css" />
+    <link rel="icon" href="../Icons/Arm-mo Title Icon 2.png" type="image/x-icon">
     <title>Arm'mo</title>
     <script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="../scripts/transition.js" defer></script>
+    
+
+    <!-- Session Object Retreival -->
+    <?php
+      session_start();
+      // Include the PHP file with the Session class definition
+      include_once '../../../Back-end/Models/Session.php';
+      $javascriptSession = Session::getJavaScriptSession($_SESSION['session']-1);
+    ?>
+    <!-- Stage Object Retreival -->
+    <?php
+      // Include the PHP file with the Stage class definition
+      include_once '../../../Back-end/Models/Stage.php';
+      $javascriptStage = Stage::getJavaScriptStage($_SESSION['stage']);
+    ?>
+    <script type="module">
+      // Import the ObservableObject.js module
+      import { Stage } from '../../../Middle-logic/Models/Stage.js';
+      
+      // Output the JavaScript code to create the Step objects
+      var obj = <?php echo $javascriptStage;?>;
+      var stage = Stage.getStageFromObject(obj);
+      console.log(stage);
+
+      // Import the Session.js module
+      import { Session } from '../../../Middle-logic/Models/Session.js';
+
+      // Output the JavaScript code to create the Step objects
+      var session = <?php echo $javascriptSession;?>;
+      var sessionObject = Session.getSessionFromObject(session);
+      console.log(sessionObject);
+      
+      import { displayTransition } from '../scripts/transition.js';
+      displayTransition(sessionObject);
+    </script>
+
+    <script src="../scripts/transition.js" type="module"></script>
 
 </head>
 <body>

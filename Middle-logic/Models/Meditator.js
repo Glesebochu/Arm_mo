@@ -18,4 +18,23 @@ export class Meditator{
             obj.Current_Stage_No
         )
     }
+
+    // Function to send the JavaScript object to the PHP script
+    static updateMeditator(meditator) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'https://localhost/Arm-mo/Back-end/UpdateDatabase/UpdateMeditator.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+              console.log(xhr.responseText);
+            } else {
+              console.error('Error:', xhr.status);
+            }
+          }
+        };
+        
+        var params = "meditator=" + encodeURIComponent(JSON.stringify(meditator));
+        xhr.send(params);
+      }
 }

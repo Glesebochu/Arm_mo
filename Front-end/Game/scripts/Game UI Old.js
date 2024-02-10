@@ -1,15 +1,5 @@
-export function displayTransition(session) {
+document.addEventListener("DOMContentLoaded", function () {
     var buttons = document.querySelectorAll('.feeling-state .unpleasant-button, .feeling-state .neutral-button, .feeling-state .pleasant-button');
-
-    var meditationObject = document.querySelector('.meditation-object-text');
-    var activityStep = session.Steps.filter(step => step.Title = "Activity")[0];
-    console.log(activityStep);
-    // meditationObject.textContent = activityStep.Activity.Title;
-
-    var nextButton = document.querySelector('.next-stage-button');
-    nextButton.addEventListener('click', () => {
-        window.location.href = './masteryCheck.php';
-    })
 
     buttons.forEach(function(button) {
         button.addEventListener('click', function() {
@@ -28,38 +18,43 @@ export function displayTransition(session) {
             button.style.transform = 'scaleX(2.8)';
         });
     });
+});
 
-    function setupToggleButton(buttonClass, divClass) {
-        var button = document.querySelector(buttonClass);
-        var div = document.querySelector(divClass);
+// ------------------------------------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------------------------------------
 
-        button.addEventListener("click", function (event) {
-            // Toggle the "active" class on the div
-            div.classList.toggle("active");
+function setupToggleButton(buttonClass, divClass) {
+    var button = document.querySelector(buttonClass);
+    var div = document.querySelector(divClass);
 
-            // Check if the div has the "active" class
-            if (div.classList.contains("active")) {
-                // Completely hide the button if the div is active
-                button.style.display = "none";
-            }
+    button.addEventListener("click", function (event) {
+        // Toggle the "active" class on the div
+        div.classList.toggle("active");
 
-            // Stop the click event propagation to prevent it from reaching the document
-            event.stopPropagation();
-        });
+        // Check if the div has the "active" class
+        if (div.classList.contains("active")) {
+            // Completely hide the button if the div is active
+            button.style.display = "none";
+        }
 
-        // Add click event listener to the document
-        document.addEventListener("click", function () {
-            // Check if the div has the "active" class
-            if (div.classList.contains("active")) {
-                // Remove the "active" class from the div
-                div.classList.remove("active");
+        // Stop the click event propagation to prevent it from reaching the document
+        event.stopPropagation();
+    });
 
-                // Ensure the button is visible again
-                button.style.display = "none";
-            }
-        });
-    }
+    // Add click event listener to the document
+    document.addEventListener("click", function () {
+        // Check if the div has the "active" class
+        if (div.classList.contains("active")) {
+            // Remove the "active" class from the div
+            div.classList.remove("active");
 
+            // Ensure the button is visible again
+            button.style.display = "none";
+        }
+    });
+}
+
+document.addEventListener("DOMContentLoaded", function () {
     setupToggleButton(".visual-four-step-button", ".visual-four-step-div");
     setupToggleButton(".auditory-four-step-button", ".auditory-four-step-div");
     setupToggleButton(".kinesthetic-four-step-button", ".kinesthetic-four-step-div");
@@ -68,42 +63,74 @@ export function displayTransition(session) {
     setupToggleButton(".feeling-four-step-button", ".feeling-four-step-div");
     setupToggleButton(".thought-four-step-button", ".thought-four-step-div");
     setupToggleButton(".emotional-four-step-button", ".emotional-four-step-div");
+});
 
-    function setupStimulusButton(buttonClass, inputDivClass, populateStimulusClass) {
-        var button = document.querySelector(buttonClass);
-        var inputDiv = document.querySelector(inputDivClass);
-        var populateStimulus = document.querySelector(populateStimulusClass);
 
-        var clickCounter = 0;
-        var spacingBetweenElements = 1; // Set your desired spacing in vmax
 
-        button.addEventListener("click", function () {
-            clickCounter++;
 
-            button.classList.toggle("active");
-            inputDiv.classList.toggle("active");
-            inputDiv.classList.toggle("inactive", !button.classList.contains("active"));
 
-            if (clickCounter % 2 === 0) {
-                var textareaInput = document.querySelector(inputDivClass + " textarea").value;
+function setupStimulusButton(buttonClass, inputDivClass, populateStimulusClass) {
+    var button = document.querySelector(buttonClass);
+    var inputDiv = document.querySelector(inputDivClass);
+    var populateStimulus = document.querySelector(populateStimulusClass);
 
-                var inputArray = textareaInput.split(' ');
+    var clickCounter = 0;
+    var spacingBetweenElements = 1; // Set your desired spacing in vmax
 
-                populateStimulus.innerHTML = '';
+    button.addEventListener("click", function () {
+        clickCounter++;
 
-                if (inputArray.length > 0 && inputArray[0].trim() !== "") {
+        button.classList.toggle("active");
+        inputDiv.classList.toggle("active");
+        inputDiv.classList.toggle("inactive", !button.classList.contains("active"));
 
-                    inputArray.forEach(function (inputElement) {
-                        var newParagraph = document.createElement("p");
-                        newParagraph.textContent = inputElement;
+        if (clickCounter % 2 === 0) {
+            var textareaInput = document.querySelector(inputDivClass + " textarea").value;
 
-                        populateStimulus.appendChild(newParagraph);
-                    });
-                }
+            var inputArray = textareaInput.split(' ');
+
+            populateStimulus.innerHTML = '';
+
+            if (inputArray.length > 0 && inputArray[0].trim() !== "") {
+                var currentLeft = 6; // Initial left position
+                var currentTop = 6; // Initial top position
+
+                inputArray.forEach(function (inputElement) {
+                    var newParagraph = document.createElement("p");
+                    newParagraph.textContent = inputElement;
+
+                    var vmaxUnit = Math.min(window.innerWidth, window.innerHeight) / 100; // 1 vmax unit
+
+                    newParagraph.style.position = "absolute";
+
+                    if (buttonClass.includes("thought-state-button") || buttonClass.includes("emotional-state-button")) {
+                        // Check and limit the maximum top position based on the height of the "populate" div
+                        var maxHeight = populateStimulus.offsetHeight / vmaxUnit;
+                        newParagraph.style.top = Math.min(currentTop, maxHeight) + "vmax";
+                    } else {
+                        // Check and limit the maximum left position based on the width of the "populate" div
+                        var maxWidth = populateStimulus.offsetWidth / vmaxUnit;
+                        newParagraph.style.left = Math.min(currentLeft, maxWidth) + "vmax";
+                    }
+
+                    newParagraph.style.fontSize = "0.8vmax";
+                    newParagraph.style.opacity = 1;
+
+                    populateStimulus.appendChild(newParagraph);
+
+                    // Update the positions for the next element with spacing
+                    if (buttonClass.includes("thought-state-button") || buttonClass.includes("emotional-state-button")) {
+                        currentTop += newParagraph.offsetHeight / vmaxUnit;
+                    } else {
+                        currentLeft += (newParagraph.offsetWidth / vmaxUnit) + spacingBetweenElements;
+                    }
+                });
             }
-        });
-    }
+        }
+    });
+}
 
+document.addEventListener("DOMContentLoaded", function () {
     setupStimulusButton(".visual-stimulus-button", ".visual-stimulus-input-div", ".populate-visual-stimulus");
     setupStimulusButton(".auditory-stimulus-button", ".auditory-stimulus-input-div", ".populate-auditory-stimulus");
     setupStimulusButton(".kinesthetic-stimulus-button", ".kinesthetic-stimulus-input-div", ".populate-kinesthetic-stimulus");
@@ -111,34 +138,36 @@ export function displayTransition(session) {
     setupStimulusButton(".olifactory-stimulus-button", ".olifactory-stimulus-input-div", ".populate-olifactory-stimulus");
     setupStimulusButton(".thought-state-button", ".thought-state-input-div", ".populate-thought-state");
     setupStimulusButton(".emotional-state-button", ".emotional-state-input-div", ".populate-emotional-state");
+});
 
-    // Get references to the aha-moment button and counter elements
-    const ahaButton = document.querySelector('.aha-moment');
-    const counterElement = document.getElementById('counter');
 
-    // Initialize the counter value
-    let counterValue = 0;
 
-    // Function to update the counter content
-    const updateCounter = () => {
-        counterElement.textContent = counterValue;
-    };
+// Initialize counter value
+var counterValue = 110;
 
-    // Event listener for the aha-moment button
-    ahaButton.addEventListener('click', () => {
-        // Increment the counter value
+// Function to toggle active state and increment the counter
+function toggleActiveState() {
+    var buttonElement = document.querySelector(".aha-moment");
+    
+    // Check if the button is currently active
+    var isActive = buttonElement.classList.contains("active");
+
+    if (isActive) {
+        // If active, increment the counter
         counterValue++;
 
-        // Update the counter content
-        updateCounter();
-    });
+        // Update the counter value and display it
+        var counterElement = document.getElementById("counter");
+        counterElement.innerText = counterValue;
 
-    // Initial setup
-    updateCounter();
+        // Update the button text
+        var buttonText = "AHA! (" + counterValue + ")";
+        document.querySelector(".aha-moment .aha-text").innerText = buttonText;
+    }
+
+    // Toggle the active state
+    buttonElement.classList.toggle("active");
 }
-
-// document.addEventListener("DOMContentLoaded", displayTransition);
-
 // #region Original and Incomplete codes
 
 

@@ -1,91 +1,94 @@
-// import { Stage } from "../../../Middle-logic/Models/Stage.js";
-
 console.log("Script is executing!");
 
-// // Access the inner-container and stageOne object
-// const innerContainer = document.getElementById('stageInfoContainer');
-// const stageOne = Stage.stageOne;
-
-// // Create HTML elements dynamically
-// const goalElement = document.createElement('p');
-// goalElement.textContent = `Goal: ${stageOne.Goal}`;
-
-// const intentionsList = document.createElement('ul');
-// stageOne.Intentions.forEach((intention) => {
-//     const intentionItem = document.createElement('li');
-//     intentionItem.textContent = intention;
-//     intentionsList.appendChild(intentionItem);
-// });
-
-// const obstaclesList = document.createElement('ul');
-// stageOne.Obstacles.forEach((obstacle) => {
-//     const obstacleItem = document.createElement('li');
-//     obstacleItem.textContent = obstacle;
-//     obstaclesList.appendChild(obstacleItem);
-// });
-
-// const skillsList = document.createElement('ul');
-// stageOne.Skills.forEach((skill) => {
-//     const skillItem = document.createElement('li');
-//     skillItem.textContent = skill;
-//     skillsList.appendChild(skillItem);
-// });
-
-// // Append elements to the inner-container
-// innerContainer.appendChild(goalElement);
-// innerContainer.appendChild(document.createElement('hr'));
-// innerContainer.appendChild(document.createElement('h3')).textContent = 'Intentions:';
-// innerContainer.appendChild(intentionsList);
-// innerContainer.appendChild(document.createElement('hr'));
-// innerContainer.appendChild(document.createElement('h3')).textContent = 'Obstacles:';
-// innerContainer.appendChild(obstaclesList);
-// innerContainer.appendChild(document.createElement('hr'));
-// innerContainer.appendChild(document.createElement('h3')).textContent = 'Skills:';
-// innerContainer.appendChild(skillsList);
-
-// console.log("Script is executing!");
-
-
-
-// Game/scripts/stageInformation.js
-// import { Stage } from "../../../Middle-logic/Models/Stage.js";
-
-document.addEventListener('DOMContentLoaded', function () {
-    // Access the inner-container and stageOne object
+export function displayStageInformation(stage) {
+    
     const innerContainer = document.getElementById('stageInfoContainer');
-    // const stageOne = Stage.stageOne;
 
-    // Get references to the stage-button and next-stage elements
-    const stageButton = document.querySelector('.stage-button');
-    const nextStageButton = document.querySelector('.next-stage');
-    const previousStageButton = document.querySelector('.previous-stage');
+    // Create HTML elements dynamically
+    const stageIDElement = document.createElement('h1');
+    stageIDElement.textContent = `Stage ${stage.Stage_ID}`;
+    const goalElement = document.createElement('h2');
+    goalElement.textContent = `Goal: ${stage.Goal}`;
 
-    // Set initial stage number
-    let currentStage = 1;
-
-    // Function to update the stage button content
-    const updateStageButton = () => {
-        stageButton.textContent = currentStage;
-    };
-
-    // Event listener for the next-stage button
-    previousStageButton.addEventListener('click', () => {
-        // Increment the current stage number
-        currentStage--;
-
-        // Update the stage button content
-        updateStageButton();
-    });
-    nextStageButton.addEventListener('click', () => {
-        // Increment the current stage number
-        currentStage++;
-
-        // Update the stage button content
-        updateStageButton();
+    const intentionsList = document.createElement('ul');
+    stage.Intentions.forEach((intention) => {
+        const intentionItem = document.createElement('li');
+        intentionItem.textContent = intention.Description;
+        intentionsList.appendChild(intentionItem);
     });
 
-    // Initial setup
-    updateStageButton();
+    const obstaclesList = document.createElement('ul');
+    stage.Obstacles.forEach((obstacle) => {
+        const obstacleItem = document.createElement('li');
+        obstacleItem.textContent = obstacle.Description;
+        obstaclesList.appendChild(obstacleItem);
+    });
 
-    // Rest of the code...
-});
+    const skillsList = document.createElement('ul');
+    stage.Skills.forEach((skill) => {
+        const skillItem = document.createElement('li');
+        skillItem.textContent = skill.Description;
+        skillsList.appendChild(skillItem);
+    });
+
+    innerContainer.appendChild(stageIDElement);
+    // innerContainer.appendChild(document.createElement('hr'));
+    innerContainer.appendChild(goalElement);
+    // innerContainer.appendChild(document.createElement('hr'));
+    innerContainer.appendChild(document.createElement('h3')).textContent = 'Intentions:';
+    innerContainer.appendChild(intentionsList);
+    // innerContainer.appendChild(document.createElement('hr'));
+    innerContainer.appendChild(document.createElement('h3')).textContent = 'Obstacles:';
+    innerContainer.appendChild(obstaclesList);
+    // innerContainer.appendChild(document.createElement('hr'));
+    innerContainer.appendChild(document.createElement('h3')).textContent = 'Skills:';
+    innerContainer.appendChild(skillsList);
+
+    
+
+    console.log("Script is executing!");
+
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const innerContainer = document.getElementById('stageInfoContainer');
+        const stageButton = document.querySelector('.stage-button');
+        const nextStageButton = document.querySelector('.next-stage');
+        const previousStageButton = document.querySelector('.previous-stage');
+    
+        let currentStage = stage.Stage_ID;
+    
+        const updateStageButton = () => {
+            // Ensure currentStage stays within the range of 1 to 10
+            currentStage = Math.max(1, Math.min(10, currentStage));
+            stageButton.textContent = currentStage;
+        };
+    
+        previousStageButton.addEventListener('click', () => {
+            currentStage--;
+    
+            updateStageButton();
+        });
+    
+        nextStageButton.addEventListener('click', () => {
+            currentStage++;
+    
+            updateStageButton();
+        });
+    
+        updateStageButton();
+    });
+    // Get the triangle button
+    var triangleButton = document.querySelector(".triangle-button");
+
+    // Add a click event listener to the triangle button
+    triangleButton.addEventListener("click", function () {
+        // Fade out the body
+        document.body.style.opacity = 0;
+
+        // After a delay, navigate to the Game UI.php page
+        setTimeout(function () {
+            window.history.back();
+        }, 500); // Adjust the delay (in milliseconds) as needed
+    });
+}

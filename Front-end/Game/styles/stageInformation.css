@@ -145,4 +145,46 @@
         height: 70%;
         transition-duration: 0.1s;
     }
+    .triangle-button {
+        /* position: fixed;
+        bottom: 20px;
+        right: 20px; */
+        right: 0.2vmax;
+        bottom: 0.2vmax;
+        position: absolute;
+        width: 6vmax;
+        height: 8vmax;
+        background-color: #e5e5e5;
+        /* border: 1vmax solid rgba(128, 128, 128, 0.2); */
+        border: none;
+        border-bottom-right-radius: 20px;
+        clip-path: polygon(0% 100%, 100% 0%, 100% 100%);
+        cursor: pointer;
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+        padding: 0.4vmax;
+        transition-duration: 0.5s;
+    }
+
+    .triangle-button:hover {
+        transform: scale(1.06);
+    }
+
+    .triangle-button:active {
+        transform: scale(1.0);
+        transition-duration: 0.1s;
+    }
+
+    .triangle-button img{
+        width: 60%;
+        height: 60%;
+        opacity: 0.3;
+        transition-duration: 0.5s;
+        user-select: none;
+    }
+
+    .triangle-button:hover img{
+        opacity: 0.8;
+    }
 }

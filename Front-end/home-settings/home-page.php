@@ -38,6 +38,11 @@
     var meditator = Meditator.getMeditatorFromObject(meditatorObj);
     console.log(meditator);
 
+    
+
+  </script>
+
+  <script>
     // --------------------------------------------------------------
 
     function openPage(link) {
@@ -45,22 +50,6 @@
     }
 
     // --------------------------------------------------------------
-
-    import {
-      Session
-    } from '../../Middle-logic/Models/Session.js';
-
-    function createSession(stageId) {
-
-      var newSession = new Session();
-      newSession.Start_Date_Time = Date.now();
-      newSession.Meditator = meditator;
-      Session.createSession(newSession);
-
-    }
-  </script>
-
-  <script>
     function selectStage(stage) {
       var wrapper = document.getElementsByClassName('pizzaPieces');
       var wrapperItems = wrapper[0].children;

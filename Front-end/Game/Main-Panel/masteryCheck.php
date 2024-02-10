@@ -13,9 +13,8 @@
     <?php
       // Include the PHP files with the function to retrieve the Stage object
       include_once '../../../Back-end/Models/Stage.php';
-
-      // $identifier = $_SESSION['stage'];
-      $identifier = 3;
+      session_start();
+      $identifier = $_SESSION['stage'];
 
       // Call the function to get the JavaScript stage object
       $javascriptStage = Stage::getJavaScriptStage($identifier);
@@ -25,9 +24,7 @@
     <?php
       // Include the PHP file with the function to retrieve the Session object
       include_once '../../../Back-end/Models/Session.php';
-
-      //$identifier = $_SESSION['session'];
-      $identifier = 1;
+      $identifier = $_SESSION['session'];
 
       // Call the function to get the JavaScript Session array
       $javascriptSession = Session::getJavaScriptSession($identifier);

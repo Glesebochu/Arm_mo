@@ -126,7 +126,7 @@ export function prepare(session, activityList){
             // If this is the last step, go to the transition phase.
             else {
                 session.Steps = steps;
-                // Session.updateSession(session);
+                Session.updateSession(session);
                 window.location.href = "./transition.php";
                 console.log(session);
             }

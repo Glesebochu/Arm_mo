@@ -15,15 +15,15 @@ if (isset($_POST['session'])) {
     // Extract the properties from the session object
     $meditator = $session['Meditator'];
     $startDateTime = $session['Start_Date_Time'];
-    $endDateTime = $session['End_Date_Time'];
+    // $endDateTime = $session['End_Date_Time'];
     $practicedStages = $session['PracticedStages'];
     $steps = $session['Steps'];
     $ahaMoments = $session['AhaMoments'];
     $newlyMasteredStages = $session['Newly_Mastered_Stages'];
 
     // Insert the new session into the Session table
-    $sql = "INSERT INTO Session (Meditator_ID, Start_Date_Time, End_Date_Time)
-            VALUES ('{$meditator['Meditator_ID']}', '$startDateTime', '$endDateTime')";
+    $sql = "INSERT INTO Session (Meditator_ID, Start_Date_Time)
+            VALUES ('{$meditator['Meditator_ID']}', '$startDateTime')";
     $result = $db->query($sql);
 
     if ($result) {

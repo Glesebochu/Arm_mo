@@ -74,6 +74,7 @@ export function masteryCheck(session, stage){
     function continueToNextPage(){
         // Open the summary page.
         console.log("Open the summary page.");
+        window.top.location.href = '../../home-settings/home-page.php';
     }
 
 }

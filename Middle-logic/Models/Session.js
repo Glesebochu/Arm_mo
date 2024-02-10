@@ -65,5 +65,14 @@ export class Session {
         var params = "session=" + encodeURIComponent(JSON.stringify(session));
         xhr.send(params);
     }
+    static getSQLDate(date) {
+        // Create a Date object from the timestamp
+        var dateObject = new Date(date);
+
+        // Format the date as a SQL date string
+        var sqlDate = dateObject.toISOString().slice(0, 19).replace("T", " ");
+
+        return sqlDate;
+    }
 
 }

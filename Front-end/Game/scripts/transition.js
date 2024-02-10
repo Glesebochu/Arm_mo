@@ -1,5 +1,15 @@
-export function displayTransition() {
+export function displayTransition(session) {
     var buttons = document.querySelectorAll('.feeling-state .unpleasant-button, .feeling-state .neutral-button, .feeling-state .pleasant-button');
+
+    var meditationObject = document.querySelector('.meditation-object-text');
+    var activityStep = session.Steps.filter(step => step.Title = "Activity")[0];
+    console.log(activityStep);
+    // meditationObject.textContent = activityStep.Activity.Title;
+
+    var nextButton = document.querySelector('.next-stage-button');
+    nextButton.addEventListener('click', () => {
+        window.location.href = './masteryCheck.php';
+    })
 
     buttons.forEach(function(button) {
         button.addEventListener('click', function() {
@@ -127,7 +137,7 @@ export function displayTransition() {
     updateCounter();
 }
 
-document.addEventListener("DOMContentLoaded", displayTransition);
+// document.addEventListener("DOMContentLoaded", displayTransition);
 
 // #region Original and Incomplete codes
 

@@ -8,32 +8,34 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
-    <script src="../scripts/timer.js"></script>
+    
     <link rel="icon" href="../Icons/Arm-mo Title Icon 2.png" type="image/x-icon">
     <title>Arm'mo: Timer</title>
 
     <!-- Session Object Retreival -->
     <?php
       // Include the PHP file with the Session class definition
-      include_once '../../Back-end/Models/Session.php';
+      include_once '../../../Back-end/Models/Session.php';
       session_start();
-      $javascriptSession = Session::getJavaScriptSession($_SESSION['session']);
+      $javascriptSession = Session::getJavaScriptSession($_SESSION['session']-1);
     ?>
     <script type="module">
       // Import the Session.js module
-      import { Session } from '../../Middle-logic/Models/Session.js';
+      import { Session } from '../../../Middle-logic/Models/Session.js';
 
       // Output the JavaScript code to create the Step objects
       var session = <?php echo $javascriptSession;?>;
       var sessionObject = Session.getSessionFromObject(session);
-      var durationStep = sessionObject.Steps.filter(step => step.Title == "Duration");
+      var durationStep = sessionObject.Steps.filter(step => step.Title == "Duration")[0];
       var duration = parseInt(durationStep.Response);
       console.log(sessionObject);
       console.log(durationStep);
+      console.log(duration);
       
-      import { functionName } from '../scripts/timer.js';
-      functionName(duration);
+      import { timeCountdown } from '../scripts/timer.js';
+      timeCountdown(duration);
     </script>
+    <script src="../scripts/timer.js" type="module"></script>
 </head>
 <body>
     <div class="portrait-div">

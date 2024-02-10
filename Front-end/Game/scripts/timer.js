@@ -1,9 +1,9 @@
 // import { Session } from "../../../Middle-logic/Models/Session.js";
 
-export function timeCountdown() {
+export function timeCountdown(duration) {
     const timerElement = document.getElementById("timer");
 
-    const initialDuration = 45 * 60 * 1000; // 45 minutes in milliseconds
+    const initialDuration = duration * 60 * 1000; // 45 minutes in milliseconds
     let remainingTime = initialDuration;
 
     setInterval(() => {
@@ -32,12 +32,12 @@ export function timeCountdown() {
 
         // After a delay, navigate to the Game UI.php page
         setTimeout(function () {
-            window.location.href = "../Game UI.php";
+            window.history.back();
         }, 500); // Adjust the delay (in milliseconds) as needed
     });
 }
 
-document.addEventListener("DOMContentLoaded", timeCountdown);
+// document.addEventListener("DOMContentLoaded", timeCountdown);
 
 
 

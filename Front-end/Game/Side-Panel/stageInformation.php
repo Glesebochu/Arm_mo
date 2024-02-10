@@ -16,12 +16,13 @@
     <!-- Stage Object Retreival -->
     <?php
       // Include the PHP file with the Stage class definition
-      include_once '../../Back-end/Models/Stage.php';
+      include_once '../../../Back-end/Models/Stage.php';
+      session_start();
       $javascriptStage = Stage::getJavaScriptStage($_SESSION['stage']);
     ?>
     <script type="module">
       // Import the ObservableObject.js module
-      import { Stage } from '../../Middle-logic/Models/Stage.js';
+      import { Stage } from '../../../Middle-logic/Models/Stage.js';
       
       // Output the JavaScript code to create the Step objects
       var obj = <?php echo $javascriptStage;?>;
@@ -48,6 +49,11 @@
             <button class="stage-button">1</button>
             <button class="next-stage"><img src="../Icons/chevron-right.svg" alt="" class="next-stage-icon"></button>
         </div>
+
+        <!-- <button class="triangle-button" onclick="toggleSettings()"> -->
+        <button class="triangle-button">
+            <img class="close-icon" src="../Icons/Close.svg">
+        </button>
     </div>
 </body>
 </html>

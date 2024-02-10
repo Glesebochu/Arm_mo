@@ -12,14 +12,14 @@
     <title>Arm'mo</title>
     <script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="../scripts/transition.js" defer></script>
+    
 
     <!-- Session Object Retreival -->
     <?php
       session_start();
       // Include the PHP file with the Session class definition
       include_once '../../../Back-end/Models/Session.php';
-      $javascriptSession = Session::getJavaScriptSession($_SESSION['session']);
+      $javascriptSession = Session::getJavaScriptSession($_SESSION['session']-1);
     ?>
     <!-- Stage Object Retreival -->
     <?php
@@ -44,9 +44,11 @@
       var sessionObject = Session.getSessionFromObject(session);
       console.log(sessionObject);
       
-      import { functionName } from '../scripts/transition.js';
-      functionName(session, stage);
+      import { displayTransition } from '../scripts/transition.js';
+      displayTransition(sessionObject);
     </script>
+
+    <script src="../scripts/transition.js" type="module"></script>
 
 </head>
 <body>

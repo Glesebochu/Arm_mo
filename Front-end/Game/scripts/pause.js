@@ -22,7 +22,7 @@ export function displayPausePage() {
 
         // After a delay, navigate to the Game UI.php page
         setTimeout(function () {
-            window.location.href = "../Game UI.php";
+            window.history.back();
         }, 500); // Adjust the delay (in milliseconds) as needed
     });
 
@@ -33,7 +33,7 @@ export function displayPausePage() {
 
         // After a delay, navigate to the Game UI.php page
         setTimeout(function () {
-            window.location.href = "../Game UI.php";
+            window.history.back();
         }, 500); // Adjust the delay (in milliseconds) as needed
     });
 
@@ -44,7 +44,7 @@ export function displayPausePage() {
 
         // After a delay, navigate to the Game UI.php page
         setTimeout(function () {
-            window.location.href = "../Game UI.php";
+            window.history.back();
         }, 500); // Adjust the delay (in milliseconds) as needed
     });
 
@@ -59,3 +59,4 @@ export function displayPausePage() {
         }, 500); // Adjust the delay (in milliseconds) as needed
     });
 };
+displayPausePage();

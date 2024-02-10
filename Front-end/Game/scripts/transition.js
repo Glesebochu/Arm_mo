@@ -4,7 +4,8 @@ export function displayTransition(session) {
     var meditationObject = document.querySelector('.meditation-object-text');
     var activityStep = session.Steps.filter(step => step.Title = "Activity")[0];
     console.log(activityStep);
-    // meditationObject.textContent = activityStep.Activity.Title;
+    // meditationObject.textContent = activityStep.Activity.MeditationObject.Title;
+    meditationObject.textContent = activityStep.Activity.Title;
 
     var nextButton = document.querySelector('.next-stage-button');
     nextButton.addEventListener('click', () => {

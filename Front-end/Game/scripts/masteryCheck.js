@@ -39,6 +39,7 @@ export function masteryCheck(session, stage){
         if(stage.Stage_ID >= session.Meditator.Current_Stage_No){
             session.Newly_Mastered_Stages.push(stage);
             session.Meditator.Current_Stage_No = stage.Stage_ID;
+            Session.updateSession(session);
         }
         congrats_div.style.display = 'grid';
     }

@@ -158,8 +158,8 @@ if (isset($_POST['session'])) {
                         }
                     } else {
                         // Step does not exist, insert the step
-                        $insertStepSql = "INSERT INTO Step (Session_ID, Title, Description, Type, Category, Duration, Response) 
-                                          VALUES ('$session_ID', '$stepTitle', '$description', '$type', '$category', '$duration', '$response')";
+                        $insertStepSql = "INSERT INTO Step (Session_ID, Title, Description, Type, Category, Duration, Response,Activity_ID) 
+                                          VALUES ('$session_ID', '$stepTitle', '$description', '$type', '$category', '$duration', '$response','$activity_ID')";
                         $insertStepResult = $db->query($insertStepSql);
                         echo 'INSERTING NEW STEPS';
         

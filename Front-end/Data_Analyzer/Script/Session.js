@@ -151,7 +151,7 @@ steps = [
   },
   {
     Title: "Motivation",
-    Response: "Moma",
+    Response: "grades",
     Catagory: "Transition",
     Duration: 10
 

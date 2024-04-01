@@ -1,10 +1,10 @@
-﻿using Arm_mo_2.Models;
-using Arm_mo_2.Models.Templates;
-using Arm_mo_2.Models.ViewModels;
+﻿using Arm_mo.Models;
+using Arm_mo.Models.Templates;
+using Arm_mo.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Arm_mo_2.Controllers
+namespace Arm_mo.Controllers
 {
     public class MeditatorController : Controller
     {

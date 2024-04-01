@@ -45,7 +45,10 @@
                 @meditator.CurrentStage
             </td>
             <td>
-                @meditator.profilePictureFormFile.FileName
+                @if (meditator.profilePictureFormFile.FileName != null)
+                {
+                    @meditator.profilePictureFormFile.FileName;
+                }
             </td>
         </tr>
         }

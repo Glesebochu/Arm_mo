@@ -1,4 +1,4 @@
-﻿namespace Arm_mo_2.Models
+﻿namespace Arm_mo.Models
 {
     public class Stage
     {

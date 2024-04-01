@@ -1,4 +1,4 @@
-﻿namespace Arm_mo_2.Models.ViewModels
+﻿namespace Arm_mo.Models.ViewModels
 {
     public class VMMeditatorProfilePictures
     {

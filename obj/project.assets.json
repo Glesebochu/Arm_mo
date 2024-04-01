@@ -1,11 +1,11 @@
 {
   "version": 3,
   "targets": {
-    "net6.0": {}
+    "net7.0": {}
   },
   "libraries": {},
   "projectFileDependencyGroups": {
-    "net6.0": []
+    "net7.0": []
   },
   "packageFolders": {
     "C:\\Users\\zelal\\.nuget\\packages\\": {}
@@ -13,26 +13,26 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\zelal\\source\\repos\\Arm-mo\\Arm-mo.csproj",
-      "projectName": "Arm-mo",
-      "projectPath": "C:\\Users\\zelal\\source\\repos\\Arm-mo\\Arm-mo.csproj",
+      "projectUniqueName": "C:\\Users\\zelal\\source\\repos\\Arm_mo\\Arm_mo.csproj",
+      "projectName": "Arm_mo",
+      "projectPath": "C:\\Users\\zelal\\source\\repos\\Arm_mo\\Arm_mo.csproj",
       "packagesPath": "C:\\Users\\zelal\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\zelal\\source\\repos\\Arm-mo\\obj\\",
+      "outputPath": "C:\\Users\\zelal\\source\\repos\\Arm_mo\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\zelal\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
-        "net6.0"
+        "net7.0"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
+        "net7.0": {
+          "targetAlias": "net7.0",
           "projectReferences": {}
         }
       },
@@ -43,8 +43,8 @@
       }
     },
     "frameworks": {
-      "net6.0": {
-        "targetAlias": "net6.0",
+      "net7.0": {
+        "targetAlias": "net7.0",
         "imports": [
           "net461",
           "net462",

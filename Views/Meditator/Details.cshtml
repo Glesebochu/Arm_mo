@@ -1,0 +1,47 @@
+﻿@using Arm_mo_2.Models.ViewModels;
+@model VMMeditatorProfilePictures;
+
+<h2>@ViewBag.title</h2>
+<div>
+    <div class="form-group">
+        <label for="meditatorID">meditatorID</label>
+        <input disabled class="form-control" type="text" name="meditatorID" value="@Model.meditator.MeditatorID">
+    </div>
+
+    <div class="form-group">
+        <label for="firstName">firstName</label>
+        <input disabled class="form-control" type="text" name="firstName" value="@Model.meditator.FirstName">
+    </div>
+
+    <div class="form-group">
+        <label for="lastName">lastName</label>
+        <input disabled class="form-control" type="text" name="lastName" value="@Model.meditator.LastName">
+    </div>
+
+    <div class="form-group">
+        <label for="username">username</label>
+        <input disabled class="form-control" type="text" name="username" value="@Model.meditator.Username">
+    </div>
+
+    <div class="form-group">
+        <label for="password">password</label>
+        <input disabled class="form-control" type="text" name="password" value="@Model.meditator._password">
+    </div>
+
+    <div class="form-group">
+        <label for="currentStage">currentStage</label>
+        <input disabled class="form-control" type="text" name="currentStage" value="@Model.meditator.CurrentStage">
+    </div>
+    <div class="form-group">
+        <label for="profilePicture">profilePicture</label>
+        <input disabled class="form-control" type="text" name="profilePicture" value="@Model.meditator.profilePictureFormFile.FileName">
+    </div>
+    <div class="form-group">
+        <label for="profilePicture">Multiple Profile Pictures</label>
+        @foreach (var pp in @Model.meditator.profilePicturesFormFile)
+        {
+            <input disabled class="form-control" type="text" name="profilePicture" value="@pp.FileName">
+        }
+    </div>
+</div>
+

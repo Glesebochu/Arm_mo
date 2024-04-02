@@ -7,8 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="data-analytics\" />
-    <Folder Include="NewFolder\" />
+    <Compile Remove="data-analytics\**" />
+    <Compile Remove="NewFolder\**" />
+    <Content Remove="data-analytics\**" />
+    <Content Remove="NewFolder\**" />
+    <EmbeddedResource Remove="data-analytics\**" />
+    <EmbeddedResource Remove="NewFolder\**" />
+    <None Remove="data-analytics\**" />
+    <None Remove="NewFolder\**" />
   </ItemGroup>
 
 </Project>

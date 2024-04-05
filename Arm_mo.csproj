@@ -8,17 +8,15 @@
 
   <ItemGroup>
     <Compile Remove="data-analytics\**" />
-    <Compile Remove="NewFolder\**" />
     <Content Remove="data-analytics\**" />
-    <Content Remove="NewFolder\**" />
     <EmbeddedResource Remove="data-analytics\**" />
-    <EmbeddedResource Remove="NewFolder\**" />
     <None Remove="data-analytics\**" />
-    <None Remove="NewFolder\**" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

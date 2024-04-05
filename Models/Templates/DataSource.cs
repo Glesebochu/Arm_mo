@@ -8,38 +8,34 @@
             {
                 new Meditator()
                 {
-                    MeditatorID = 1,
+                    MeditatorId = 1,
                     FirstName = "Zelalem",
                     LastName = "Amare",
                     Username = "Fellasfaw",
-                    _password = "test",
                     CurrentStage = "3"
                 },
                 new Meditator()
                 {
-                    MeditatorID = 2,
+                    MeditatorId = 2,
                     FirstName = "Yanet",
                     LastName = "Abhram",
                     Username = "Yan8i",
-                    _password = "test",
                     CurrentStage = "3"
                 },
                 new Meditator()
                 {
-                    MeditatorID = 3,
+                    MeditatorId = 3,
                     FirstName = "Edomiyas",
                     LastName = "Wendwosen",
                     Username = "Yanetawi",
-                    _password = "test",
                     CurrentStage = "3"
                 },
                 new Meditator()
                 {
-                    MeditatorID = 4,
+                    MeditatorId = 4,
                     FirstName = "Finhas",
                     LastName = "Yohannes",
                     Username = "Gustavo",
-                    _password = "test",
                     CurrentStage = "3"
                 }
         };

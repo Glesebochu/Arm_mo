@@ -2,8 +2,8 @@
 {
     public class ProfilePicture
     {
-        public int ProfilePictureID { get; set; }
+        public int ProfilePictureId { get; set; }
         public string ImgPath { get; set; }
-        public int MeditatorID { get; set; }
+        public int MeditatorId { get; set; }
     }
 }

@@ -1,5 +1,5 @@
-﻿using Arm_mo.Models;
-using Arm_mo.Models.Templates;
+﻿using Arm_mo.Data.Templates;
+using Arm_mo.Models;
 using Arm_mo.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -59,7 +59,7 @@ namespace Arm_mo.Controllers
         //{
         //    Meditator meditator = new Meditator()
         //    {
-        //        MeditatorID = int.Parse(Request.Form["MeditatorID"]),
+        //        MeditatorId = int.Parse(Request.Form["MeditatorId"]),
         //        FirstName = Request.Form["FirstName"],
         //        LastName = Request.Form["LastName"],
         //        Username = Request.Form["Username"],
@@ -75,11 +75,11 @@ namespace Arm_mo.Controllers
 
         // POST: MeditatorController/Create
         //[HttpPost]
-        //public ActionResult Create(int MeditatorID, string FirstName, string LastName, string Username, string _password, string CurrentStage)
+        //public ActionResult Create(int MeditatorId, string FirstName, string LastName, string Username, string _password, string CurrentStage)
         //{
         //    Meditator meditator = new Meditator()
         //    {
-        //        MeditatorID = MeditatorID,
+        //        MeditatorId = MeditatorId,
         //        FirstName = FirstName,
         //        LastName = LastName,
         //        Username = Username,
@@ -102,7 +102,7 @@ namespace Arm_mo.Controllers
                 "-" +
                 meditator.profilePictureFormFile.FileName; // +
                                                            //Path.GetExtension(meditator.profilePictureFormFile.FileName);
-            picture.MeditatorID = meditator.MeditatorID;
+            picture.MeditatorId = meditator.MeditatorId;
 
             string serverPath = Path.Combine(webHostEnvironment.WebRootPath, picture.ImgPath);
 
@@ -118,7 +118,7 @@ namespace Arm_mo.Controllers
                     Guid.NewGuid().ToString() +
                     "-" +
                     meditator.profilePicturesFormFile[i].FileName;
-                pic.MeditatorID = meditator.MeditatorID;
+                pic.MeditatorId = meditator.MeditatorId;
 
                 string currentServerPath = Path.Combine(webHostEnvironment.WebRootPath, pic.ImgPath);
                 meditator.profilePicturesFormFile[i].CopyTo(new FileStream(currentServerPath, FileMode.Create));

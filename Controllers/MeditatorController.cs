@@ -1,4 +1,4 @@
-﻿using Arm_mo.Data.Templates;
+﻿using Arm_mo.Models.Templates;
 using Arm_mo.Models;
 using Arm_mo.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
@@ -95,19 +95,19 @@ namespace Arm_mo.Controllers
         [HttpPost]
         public IActionResult Create(Meditator meditator)
         {
-            // Get the single profile picture
-            ProfilePicture picture = new ProfilePicture();
-            picture.ImgPath = "ProfilePictures/" +
-                Guid.NewGuid().ToString() +
-                "-" +
-                meditator.profilePictureFormFile.FileName; // +
-                                                           //Path.GetExtension(meditator.profilePictureFormFile.FileName);
-            picture.MeditatorId = meditator.MeditatorId;
+            //// Get the single profile picture
+            //ProfilePicture picture = new ProfilePicture();
+            //picture.ImgPath = "ProfilePictures/" +
+            //    Guid.NewGuid().ToString() +
+            //    "-" +
+            //    meditator.profilePictureFormFile.FileName; // +
+            //                                               //Path.GetExtension(meditator.profilePictureFormFile.FileName);
+            //picture.MeditatorId = meditator.MeditatorId;
 
-            string serverPath = Path.Combine(webHostEnvironment.WebRootPath, picture.ImgPath);
+            //string serverPath = Path.Combine(webHostEnvironment.WebRootPath, picture.ImgPath);
 
-            meditator.profilePictureFormFile.CopyTo(new FileStream(serverPath, FileMode.Create));
-            meditator.profilePicture = picture;
+            //meditator.profilePictureFormFile.CopyTo(new FileStream(serverPath, FileMode.Create));
+            //meditator.profilePicture = picture;
 
             // Get the list of profile pictures
             meditator.profilePictures = new List<ProfilePicture>();

@@ -13,9 +13,9 @@ namespace Arm_mo.Models
         public Address Address { get; set; }
 
         // Main profile picture
-        [NotMapped]
-        public IFormFile profilePictureFormFile { get; set; }
-        public ProfilePicture profilePicture { get; set; }
+        //[NotMapped]
+        //public IFormFile profilePictureFormFile { get; set; }
+        //public ProfilePicture profilePicture { get; set; }
 
         // Old Profile Pictures
         [NotMapped]

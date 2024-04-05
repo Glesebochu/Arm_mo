@@ -1,4 +1,6 @@
-﻿namespace Arm_mo.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Arm_mo.Models
 {
     public class Stage
     {
@@ -9,5 +11,10 @@
         public List<string> Skills { get; set; }
         public List<string> MasteryRequirements { get; set; }
         public bool IsMastered { get; set; }
+
+        // Main picture
+        [NotMapped]
+        public IFormFile pictureFormFile { get; set; }
+        public StagePicture picture { get; set; }
     }
 }

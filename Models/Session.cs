@@ -6,8 +6,10 @@
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public Meditator Meditator { get; set; }
-        public List<AhaMoment> ahaMoments { get; set; }
-        public List<Stage> pracitcedStages { get; set; }
+        public List<AhaMoment> AhaMoments { get; set; }
+        public List<Stage> PracitcedStages { get; set; }
+        public List<Stage> NewlyMasterdStages {  get; set; }
+        public List<ObservableObject> ObservableObjects { get; set; }
 
     }
 }

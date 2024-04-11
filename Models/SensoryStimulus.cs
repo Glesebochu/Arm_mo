@@ -10,6 +10,6 @@
             Kinesthetic,
             Taste
         }
-        public SensoryStimulusType sensoryStimulustype { get; set; }
+        public SensoryStimulusType SensoryStimulustype { get; set; }
     }
 }

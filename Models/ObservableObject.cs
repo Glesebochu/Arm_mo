@@ -2,7 +2,7 @@
 {
     public class ObservableObject
     {
-        public enum Intensity
+        public enum IntensityType
         {
             Mild,
             Moderate,
@@ -12,6 +12,6 @@
         public string Title { get; set; }
         public string Description { get; set; }
         public string Icon { get; set; }
-        public Intensity intensity { get; set; }
+        public IntensityType Intensity { get; set; }
     }
 }

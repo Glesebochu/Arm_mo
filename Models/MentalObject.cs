@@ -21,11 +21,11 @@
             FeelingTone
         }
         public MentalObjectType mentalObjectType { get; set; }
-        public Enum value { get; set; }
+        public Enum Value { get; set; }
         public MentalObject(MentalObjectType mentalObjectType,Enum value)
         {
             this.mentalObjectType= mentalObjectType;
-            this.value = value;
+            this.Value = value;
         }
         public static MentalObject CreateThought()
         {
@@ -41,6 +41,17 @@
         {
             return new MentalObject(MentalObjectType.MentalState,mentalState);
         }
+
+        //Examples of how they may be used
+
+        // Creating a mental object of type Thought
+        MentalObject thought = MentalObject.CreateThought();
+
+        // Creating a mental object of type FeelingTone
+        MentalObject feelingTone = MentalObject.CreateFeelingTone(FeelingTone.Pleasant);
+
+        // Creating a mental object of type MentalState
+        MentalObject mentalState = MentalObject.CreateMentalState(MentalState.Clear);
 
     }
 }

@@ -3,7 +3,10 @@
     public class AhaMoment
     {
         public int Id { get; set; }
-        public Session Session { get; set; }
         public String Label { get; set; }
+        public AhaMoment(String label)
+        {
+            this.Label = label;
+        }
     }
 }

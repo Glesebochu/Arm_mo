@@ -19,6 +19,22 @@
         public String Response { get; set; }
         public Activity ? Activity { get; set; }
 
+        public Step(StepType type, double duration,StepCategory stepCategory,String response)
+        {
+            this.Type = type;
+            this.Duration = duration;
+            this.Category= stepCategory;
+            this.Response = response;
+        }
+        public Step(StepType type, double duration, StepCategory stepCategory, String response,Activity activity)
+        {
+            this.Type = type;
+            this.Duration = duration;
+            this.Category = stepCategory;
+            this.Response = response;
+            this.Activity= activity;
+        }
+
     }
 
 }

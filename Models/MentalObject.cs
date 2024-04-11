@@ -24,18 +24,28 @@ namespace Arm_mo.Models
             FeelingTone
         }
         public MentalObjects MentalObjectType { get; set; }
-        public Enum? ValueOfMentalObjectType { get; set; }
+        public FeelingTone? FeelingToneValue { get; set; }
+        public MentalState? MentalStateValue { get; set; }
         public MentalObject(string title,string description,string icon, IntensityType intensity) 
             : base(title, description, icon, intensity)
         {   
 
 
         }
-        protected MentalObject(MentalObjects mentalObjectType,Enum valueOfMentalObjectType, String title, 
+        //If the created object is a feeling tone
+        protected MentalObject(MentalObjects mentalObjectType,FeelingTone valueOfMentalObjectType, String title, 
             string description, string icon, IntensityType intensity) : base(title, description, icon, intensity)
         {
             this.MentalObjectType= mentalObjectType;
-            this.ValueOfMentalObjectType = valueOfMentalObjectType;
+            this.FeelingToneValue = valueOfMentalObjectType;
+
+        }
+        //If the created object is a mental state
+        protected MentalObject(MentalObjects mentalObjectType, MentalState valueOfMentalObjectType, String title,
+           string description, string icon, IntensityType intensity) : base(title, description, icon, intensity)
+        {
+            this.MentalObjectType = mentalObjectType;
+            this.MentalStateValue = valueOfMentalObjectType;
 
         }
 

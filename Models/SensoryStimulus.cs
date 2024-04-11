@@ -11,5 +11,13 @@
             Taste
         }
         public SensoryStimulusType SensoryStimulustype { get; set; }
+
+        protected SensoryStimulus(SensoryStimulusType sensoryStimulusType,String title, string description, string icon, IntensityType intensity):base(title, description, icon, intensity)
+        {
+            SensoryStimulustype = sensoryStimulusType;
+
+        }
+        
+
     }
 }

@@ -11,6 +11,10 @@
         public List<Stage> NewlyMasterdStages {  get; set; }
         public List<ObservableObject> ObservableObjects { get; set; }
 
+        public Session()
+        {
+
+        }
         public Session(DateTime startTime,DateTime endTime, Meditator meditator,List<AhaMoment> ahaMoments,
             List<Stage> practicedStages,List<Stage> newlyMasteredStages,List<ObservableObject> observableObjects)
         {

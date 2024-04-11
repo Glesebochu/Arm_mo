@@ -11,6 +11,7 @@ namespace Arm_mo.Context
         {
         }
         public DbSet<Meditator> Meditators { get; set; }
+        public DbSet<ProfilePicture> ProfilePictures { get; set; }
         public DbSet<Stage> Stages { get; set; }
         public DbSet<Session> Sessions { get; set; }
         public DbSet<AhaMoment> AhaMoments { get; set; }

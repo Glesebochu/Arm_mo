@@ -1,4 +1,5 @@
-﻿using static Arm_mo.Models.SensoryStimulus;
+﻿using System.Reflection;
+using static Arm_mo.Models.SensoryStimulus;
 
 namespace Arm_mo.Models
 {
@@ -23,8 +24,13 @@ namespace Arm_mo.Models
             FeelingTone
         }
         public MentalObjects MentalObjectType { get; set; }
-        public Enum ValueOfMentalObjectType { get; set; }
-       
+        public Enum? ValueOfMentalObjectType { get; set; }
+        public MentalObject(string title,string description,string icon, IntensityType intensity) 
+            : base(title, description, icon, intensity)
+        {   
+
+
+        }
         protected MentalObject(MentalObjects mentalObjectType,Enum valueOfMentalObjectType, String title, 
             string description, string icon, IntensityType intensity) : base(title, description, icon, intensity)
         {

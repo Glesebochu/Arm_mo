@@ -19,6 +19,7 @@ namespace Arm_mo.Models
         // Old Profile Pictures
         [NotMapped]
         public List<IFormFile> profilePicturesFormFile { get; set; }
+        [NotMapped]
         public List<ProfilePicture> profilePictures { get; set; }
 
         public Meditator() { }

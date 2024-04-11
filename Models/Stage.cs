@@ -9,5 +9,9 @@
         public List<string> Skills { get; set; }
         public List<string> MasteryRequirements { get; set; }
         public bool IsMastered { get; set; }
+        public Stage()
+        {
+
+        }
     }
 }

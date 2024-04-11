@@ -18,7 +18,10 @@
         public double Duration { get; set; }
         public String Response { get; set; }
         public Activity ? Activity { get; set; }
+        public Step()
+        {
 
+        }
         public Step(StepType type, double duration,StepCategory stepCategory,String response)
         {
             this.Type = type;

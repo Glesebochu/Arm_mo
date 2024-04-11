@@ -5,6 +5,11 @@ namespace Arm_mo.Context
 {
     public class Arm_moContext : DbContext
     {
+        //This constructor is used for dependency injection 
+        //Doing this allows configuration options to be passed from outside the class
+        public Arm_moContext(DbContextOptions<Arm_moContext> options) : base(options)
+        {
+        }
         public DbSet<Meditator> Meditators { get; set; }
         public DbSet<Stage> Stages { get; set; }
         public DbSet<Session> Sessions { get; set; }

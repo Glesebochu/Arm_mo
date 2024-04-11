@@ -7,8 +7,8 @@
         public DateTime EndTime { get; set; }
         public Meditator Meditator { get; set; }
         public List<AhaMoment> AhaMoments { get; set; }
-        public List<Stage> PracitcedStages { get; set; }
-        public List<Stage> NewlyMasterdStages {  get; set; }
+        public List<PracticedStage> PracitcedStages { get; set; }
+        public List<NewlyMasteredStage> NewlyMasterdStages {  get; set; }
         public List<ObservableObject> ObservableObjects { get; set; }
 
         public Session()
@@ -16,7 +16,7 @@
 
         }
         public Session(DateTime startTime,DateTime endTime, Meditator meditator,List<AhaMoment> ahaMoments,
-            List<Stage> practicedStages,List<Stage> newlyMasteredStages,List<ObservableObject> observableObjects)
+            List<PracticedStage> practicedStages,List<NewlyMasteredStage> newlyMasteredStages,List<ObservableObject> observableObjects)
         {
             StartTime = startTime;
             EndTime = endTime;

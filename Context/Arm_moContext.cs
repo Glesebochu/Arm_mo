@@ -10,6 +10,36 @@ namespace Arm_mo.Context
         public Arm_moContext(DbContextOptions<Arm_moContext> options) : base(options)
         {
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // Practiced Stages
+            modelBuilder.Entity<PracticedStage>()
+                .HasKey(ps => new { ps.SessionId, ps.StageId });
+
+            modelBuilder.Entity<PracticedStage>()
+                .HasOne(ps => ps.Session)
+                .WithMany(s => s.PracitcedStages)
+                .HasForeignKey(ps => ps.SessionId);
+
+            modelBuilder.Entity<PracticedStage>()
+                .HasOne(ps => ps.Stage)
+                .WithMany() // If you decide to add navigation back to Stage later
+                .HasForeignKey(ps => ps.StageId);
+
+            // Newly Mastered Stages
+            modelBuilder.Entity<NewlyMasteredStage>()
+                .HasKey(nms => new { nms.SessionId, nms.StageId });
+
+            modelBuilder.Entity<NewlyMasteredStage>()
+                .HasOne(nms => nms.Session)
+                .WithMany(s => s.NewlyMasterdStages)
+                .HasForeignKey(nms => nms.SessionId);
+
+            modelBuilder.Entity<NewlyMasteredStage>()
+                .HasOne(nms => nms.Stage)
+                .WithMany() // Similarly, if navigation is added back to Stage
+                .HasForeignKey(nms => nms.StageId);
+        }
         public DbSet<Meditator> Meditators { get; set; }
         public DbSet<ProfilePicture> ProfilePictures { get; set; }
         public DbSet<Stage> Stages { get; set; }
@@ -21,6 +51,5 @@ namespace Arm_mo.Context
         public DbSet<Step> Steps { get; set; }
         public DbSet<Activity> Activities { get; set; }
       
-
     }
 }

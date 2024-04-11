@@ -25,7 +25,8 @@ namespace Arm_mo.Models
         public MentalObjects MentalObjectType { get; set; }
         public Enum ValueOfMentalObjectType { get; set; }
        
-        protected MentalObject(MentalObjects mentalObjectType,Enum valueOfMentalObjectType, String title, string description, string icon, IntensityType intensity) : base(title, description, icon, intensity)
+        protected MentalObject(MentalObjects mentalObjectType,Enum valueOfMentalObjectType, String title, 
+            string description, string icon, IntensityType intensity) : base(title, description, icon, intensity)
         {
             this.MentalObjectType= mentalObjectType;
             this.ValueOfMentalObjectType = valueOfMentalObjectType;

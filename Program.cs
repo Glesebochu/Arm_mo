@@ -1,7 +1,15 @@
+using Arm_mo.Repositories;
+using Microsoft.AspNetCore.Identity;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services
+    .AddIdentity<IdentityUser, IdentityRole>()
+    .AddEntityFrameworkStores<Arm_moContext>();
+
 
 var app = builder.Build();
 

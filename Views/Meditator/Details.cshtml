@@ -1,31 +1,31 @@
 ﻿@using Arm_mo.Models.ViewModels;
-@model VMMeditatorProfilePictures;
+@model Meditator;
 
 <h2>@ViewBag.title</h2>
 <div>
     <div class="form-group">
         <label for="meditatorId">meditatorId</label>
-        <input disabled class="form-control" type="text" name="meditatorId" value="@Model.meditator.MeditatorId">
+        <input disabled class="form-control" type="text" name="meditatorId" value="@Model.MeditatorId">
     </div>
 
     <div class="form-group">
         <label for="firstName">firstName</label>
-        <input disabled class="form-control" type="text" name="firstName" value="@Model.meditator.FirstName">
+        <input disabled class="form-control" type="text" name="firstName" value="@Model.FirstName">
     </div>
 
     <div class="form-group">
         <label for="lastName">lastName</label>
-        <input disabled class="form-control" type="text" name="lastName" value="@Model.meditator.LastName">
+        <input disabled class="form-control" type="text" name="lastName" value="@Model.LastName">
     </div>
 
     <div class="form-group">
         <label for="username">username</label>
-        <input disabled class="form-control" type="text" name="username" value="@Model.meditator.Username">
+        <input disabled class="form-control" type="text" name="username" value="@Model.Username">
     </div>
 
     <div class="form-group">
         <label for="currentStage">currentStage</label>
-        <input disabled class="form-control" type="text" name="currentStage" value="@Model.meditator.CurrentStage">
+        <input disabled class="form-control" type="text" name="currentStage" value="@Model.CurrentStage">
     </div>
     @* <div class="form-group">
         <label for="profilePicture">profilePicture</label>
@@ -33,7 +33,7 @@
     </div> *@
     <div class="form-group">
         <label for="profilePicture">Multiple Profile Pictures</label>
-        @foreach (var pp in @Model.meditator.profilePicturesFormFile)
+        @foreach (var pp in @Model.profilePicturesFormFile)
         {
             <input disabled class="form-control" type="text" name="profilePicture" value="@pp.FileName">
         }

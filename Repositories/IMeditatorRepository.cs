@@ -1,6 +1,6 @@
 ﻿using Arm_mo.Models;
 
-namespace Arm_mo.Data
+namespace Arm_mo.Repositories
 {
     public interface IMeditatorRepository
     {

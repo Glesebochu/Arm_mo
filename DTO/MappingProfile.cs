@@ -15,6 +15,8 @@ namespace Arm_mo.DTO
                 .ForMember(dest => dest.City, act => act.MapFrom(src => src.Address.City))
                 .ForMember(dest => dest.State, act => act.MapFrom(src => src.Address.State))
                 .ForMember(dest => dest.Country, act => act.MapFrom(src => src.Address.Country));
+
+            // Map
         }
     }
 }

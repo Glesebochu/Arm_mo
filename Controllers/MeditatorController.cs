@@ -125,13 +125,7 @@ namespace Arm_mo.Controllers
                 meditator.profilePictures.Add(pic);
             }
 
-            VMMeditatorProfilePictures vMMeditatorProfilePictures = new VMMeditatorProfilePictures
-            {
-                meditator = meditator,
-                pictures = meditator.profilePictures
-            };
-
-            return View("Details", vMMeditatorProfilePictures);
+            return View("Details", meditator);
         }
 
         //// GET: MeditatorController/Edit/5

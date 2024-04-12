@@ -1,15 +1,19 @@
 using Arm_mo.Repositories;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services
-    .AddIdentity<IdentityUser, IdentityRole>()
-    .AddEntityFrameworkStores<Arm_moContext>();
+// Register the DbContext with the necessary connection string
+builder.Services.AddDbContext<Arm_moContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+// Set up Identity
+builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+    .AddEntityFrameworkStores<Arm_moContext>();
 
 var app = builder.Build();
 
@@ -26,6 +30,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication(); // Ensure this is added for Identity to function properly
 app.UseAuthorization();
 
 app.MapControllerRoute(

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Arm_mo.Migrations
 {
     [DbContext(typeof(Arm_moContext))]
-    [Migration("20240405081009_InitialCreateWithIdentity")]
+    [Migration("20240412041128_InitialCreateWithIdentity")]
     partial class InitialCreateWithIdentity
     {
         /// <inheritdoc />
@@ -20,7 +20,7 @@ namespace Arm_mo.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.3")
+                .HasAnnotation("ProductVersion", "8.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);

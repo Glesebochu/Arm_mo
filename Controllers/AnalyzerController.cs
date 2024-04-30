@@ -32,7 +32,7 @@ namespace Arm_mo_analytics.Controllers
                 Id = GetNextUsageID(),
             };
 
-            dbContext.UserUsages.Add(userUsage);
+            dbContext.UserUsage.Add(userUsage);
             await dbContext.SaveChangesAsync();
 
             return Ok();
@@ -40,13 +40,13 @@ namespace Arm_mo_analytics.Controllers
 
         private int GetNextUsageID()
         {
-            var maxUsageID = dbContext.UserUsages.Select(u => (int?)u.Id).DefaultIfEmpty().Max();
+            var maxUsageID = dbContext.UserUsage.Select(u => (int?)u.Id).DefaultIfEmpty().Max();
             return maxUsageID.HasValue ? maxUsageID.Value + 1 : 1;
         }
 
         public async Task<IActionResult> EndUsage(int userId)
         {
-            var userUsage = await dbContext.UserUsages
+            var userUsage = await dbContext.UserUsage
                 .FirstOrDefaultAsync(u => u.UserId == userId && u.UsageTime == TimeSpan.Zero);
 
             if (userUsage != null)
@@ -73,7 +73,7 @@ namespace Arm_mo_analytics.Controllers
 
             foreach (var date in pastWeekDates)
             {
-                var usages = await dbContext.UserUsages
+                var usages = await dbContext.UserUsage
                      .Where(u => u.UserId == 2 && u.Date == date.Date)//change the userId after testing...
                     .Select(u => u.UsageTime.TotalMinutes)
                     .ToListAsync();
@@ -98,7 +98,7 @@ namespace Arm_mo_analytics.Controllers
         [HttpGet]
         public async Task<IActionResult> List()
         {
-            var usages = await dbContext.UserUsages.ToListAsync();
+            var usages = await dbContext.UserUsage.ToListAsync();
 
 
 

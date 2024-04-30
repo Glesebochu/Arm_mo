@@ -22,6 +22,8 @@ namespace Arm_mo.Models
         [NotMapped]
         public List<ProfilePicture> profilePictures { get; set; }
 
+        public List<UserUsage> UserUsages { get; set; }
+
         public Meditator() { }
 
         public Meditator(int meditatorID, string firstName, string lastName, string username, string password, string currentStage)

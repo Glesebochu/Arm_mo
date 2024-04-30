@@ -50,6 +50,7 @@ namespace Arm_mo.Context
         public DbSet<MentalObject> MentalObjects { get; set;}
         public DbSet<Step> Steps { get; set; }
         public DbSet<Activity> Activities { get; set; }
-      
+        public DbSet<UserUsage> UserUsages { get; set; }
+
     }
 }

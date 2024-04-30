@@ -18,6 +18,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Views\Analyzer\DailyUsage.cshtml" />
+    <None Include="Views\Analyzer\List.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.3">

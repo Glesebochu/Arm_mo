@@ -1,0 +1,35 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model List<Arm_mo.Models.UserUsage>
+
+<h1>usages</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>userId</th>
+            <th>date</th>
+            <th>usage Time</th>
+            <th>start time</th>
+        </tr>
+    </thead>
+
+    <tbody>
+       
+         @foreach (var usage in Model)
+        {
+            <tr>
+                <td>@usage.Id</td>
+                <td>@usage.UserId</td>
+                <td>@usage.Date</td>
+                <td>@usage.UsageTime</td>
+                <td>@usage.StartTime</td>
+            </tr>
+        } 
+    </tbody>
+</table>

@@ -9,7 +9,7 @@ namespace Arm_mo.Models
         public string LastName { get; set; }
         public string Username { get; set; }
         public string _password { get; set; }
-        public string CurrentStage { get; set; }
+        public Stage CurrentStage { get; set; }
 
         // Main profile picture
         [NotMapped]

@@ -26,7 +26,7 @@ namespace Arm_mo.Models
 
         public Meditator() { }
 
-        public Meditator(int meditatorID, string firstName, string lastName, string username, string password, string currentStage)
+        public Meditator(int meditatorID, string firstName, string lastName, string username, string password, Stage currentStage)
         {
             this.MeditatorID = meditatorID;
             this.FirstName = firstName;

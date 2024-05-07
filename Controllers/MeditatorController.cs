@@ -3,6 +3,7 @@ using Arm_mo.Models;
 using Arm_mo.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Arm_mo.Controllers
 {
@@ -43,8 +44,8 @@ namespace Arm_mo.Controllers
 
         // GET: MeditatorController/Create
         [HttpGet]
-        [ActionName("Create")]
-        public ActionResult CreateFormRequest()
+		[Authorize]
+		public ActionResult Create()
         {
             ViewBag.title = "Create Meditator";
             return View("Create");
@@ -93,7 +94,8 @@ namespace Arm_mo.Controllers
         // Using model binding
         // POST: MeditatorController/Create
         [HttpPost]
-        public IActionResult Create(Meditator meditator)
+		[Authorize]
+		public IActionResult Create(Meditator meditator)
         {
             //// Get the single profile picture
             //ProfilePicture picture = new ProfilePicture();

@@ -10,6 +10,7 @@ namespace Arm_mo.Repositories
         public Arm_moContext(DbContextOptions<Arm_moContext> options) : base(options)
         {
         }
+        public Arm_moContext() { }
         public DbSet<Meditator> Meditators { get; set; }
         public DbSet<Stage> Stages { get; set; }
         public DbSet<ProfilePicture> Pictures { get; set; }

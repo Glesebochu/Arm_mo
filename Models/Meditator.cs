@@ -10,6 +10,7 @@ namespace Arm_mo.Models
         public string Username { get; set; }
         private string _password { get; set; }
         public string CurrentStage { get; set; }
+        public string[] PracticedStages { get; set; }
         public Address Address { get; set; }
 
         // Main profile picture

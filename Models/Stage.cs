@@ -4,7 +4,7 @@ namespace Arm_mo.Models
 {
     public class Stage
     {
-        public int StageId { get; set; }
+        public int Id { get; set; }
         public string Goal { get; set; }
         public List<string> Intentions { get; set; }
         public List<string> Obstacles { get; set; }

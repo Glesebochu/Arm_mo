@@ -4,6 +4,7 @@ using Arm_mo.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,13 +12,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Arm_mo.Migrations
 {
     [DbContext(typeof(Arm_moContext))]
-    partial class Arm_moContextModelSnapshot : ModelSnapshot
+    [Migration("20240430190637_created local db")]
+    partial class createdlocaldb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.4")
                 .HasAnnotation("ProductVersion", "8.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
@@ -161,12 +163,6 @@ namespace Arm_mo.Migrations
                 {
                     b.Property<int>("SessionId")
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StagePictureId"));
-
-                    b.Property<string>("ImgPath")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("StageId")
                         .HasColumnType("int");
@@ -370,7 +366,6 @@ namespace Arm_mo.Migrations
                         .HasForeignKey("SessionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
 
                     b.HasOne("Arm_mo.Models.Stage", "Stage")
                         .WithMany()
@@ -397,7 +392,6 @@ namespace Arm_mo.Migrations
                         .HasForeignKey("SessionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
 
                     b.HasOne("Arm_mo.Models.Stage", "Stage")
                         .WithMany()

@@ -4,6 +4,7 @@ using Arm_mo.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,13 +12,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Arm_mo.Migrations
 {
     [DbContext(typeof(Arm_moContext))]
-    partial class Arm_moContextModelSnapshot : ModelSnapshot
+    [Migration("20240411131914_IntitialArm_moMigration")]
+    partial class IntitialArm_moMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.4")
                 .HasAnnotation("ProductVersion", "8.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
@@ -162,12 +164,6 @@ namespace Arm_mo.Migrations
                     b.Property<int>("SessionId")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StagePictureId"));
-
-                    b.Property<string>("ImgPath")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("StageId")
                         .HasColumnType("int");
 
@@ -292,33 +288,6 @@ namespace Arm_mo.Migrations
                     b.ToTable("Steps");
                 });
 
-            modelBuilder.Entity("Arm_mo.Models.UserUsage", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("StartTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<TimeSpan>("UsageTime")
-                        .HasColumnType("time");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserUsage");
-                });
-
             modelBuilder.Entity("Arm_mo.Models.MentalObject", b =>
                 {
                     b.HasBaseType("Arm_mo.Models.ObservableObject");
@@ -370,7 +339,6 @@ namespace Arm_mo.Migrations
                         .HasForeignKey("SessionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
 
                     b.HasOne("Arm_mo.Models.Stage", "Stage")
                         .WithMany()
@@ -397,7 +365,6 @@ namespace Arm_mo.Migrations
                         .HasForeignKey("SessionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
 
                     b.HasOne("Arm_mo.Models.Stage", "Stage")
                         .WithMany()
@@ -439,21 +406,8 @@ namespace Arm_mo.Migrations
                     b.Navigation("Activity");
                 });
 
-            modelBuilder.Entity("Arm_mo.Models.UserUsage", b =>
-                {
-                    b.HasOne("Arm_mo.Models.Meditator", "User")
-                        .WithMany("UserUsages")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Arm_mo.Models.Meditator", b =>
                 {
-                    b.Navigation("UserUsages");
-
                     b.Navigation("profilePicture")
                         .IsRequired();
                 });

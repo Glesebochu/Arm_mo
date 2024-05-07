@@ -21,7 +21,22 @@ namespace Arm_mo.Models
         // Old Profile Pictures
         [NotMapped]
         public List<IFormFile> profilePicturesFormFile { get; set; }
+        [NotMapped]
         public List<ProfilePicture> profilePictures { get; set; }
+
+        public List<UserUsage> UserUsages { get; set; }
+
+        public Meditator() { }
+
+        public Meditator(int meditatorID, string firstName, string lastName, string username, string password, Stage currentStage)
+        {
+            this.MeditatorID = meditatorID;
+            this.FirstName = firstName;
+            this.LastName = lastName;
+            this.Username = username;
+            this._password = password;
+            this.CurrentStage = currentStage;
+        }
 
     }
 }

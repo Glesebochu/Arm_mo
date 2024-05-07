@@ -38,6 +38,12 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="GetAllMeditators">Get All Meditators - Admin</a>
                         </li>
                         
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Analyzer" asp-action="DailyUsage">Analytics</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Analyzer" asp-action="List">list usages</a>
+                        </li>
                     </ul>
 
                     @if (signInManager.IsSignedIn(User))

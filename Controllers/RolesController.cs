@@ -18,7 +18,7 @@ namespace Arm_mo.Controllers
         [HttpPost]
         public IActionResult Create(string roleName)
         {
-
+            return View();
         }
         // Update a role
         // Delete a role

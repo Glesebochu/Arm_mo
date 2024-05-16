@@ -30,12 +30,12 @@ namespace Arm_mo.Models
 
         public Meditator(int meditatorID, string firstName, string lastName, string username, string password, Stage currentStage)
         {
-            this.MeditatorID = meditatorID;
+            this.MeditatorId = meditatorID;
             this.FirstName = firstName;
             this.LastName = lastName;
             this.Username = username;
             this._password = password;
-            this.CurrentStage = currentStage;
+            //this.CurrentStage = currentStage;
         }
 
     }

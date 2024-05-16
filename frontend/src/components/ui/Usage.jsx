@@ -1,7 +1,22 @@
 import React from "react";
 import "../../Styles/Usage.css";
 import $ from "jquery";
+import {
+  Chart,
+  LinearScale,
+  CategoryScale,
+  LineController,
+  PointElement,
+  LineElement,
+} from "chart.js";
 
+Chart.register(
+  LinearScale,
+  LineController,
+  CategoryScale,
+  LineElement,
+  PointElement
+);
 const UsageView = () => {
   return (
     <div className="container">
@@ -49,7 +64,7 @@ var chartInstance;
 $(document).ready(function () {
   $.ajax({
     type: "GET",
-    url: "/Analyzer/GetUsageDataForPastWeek",
+    url: "https://localhost:7085/api/Analyzer/api/Analyzer/GetUsageDataForPastWeek",
     data: "",
     contextType: "application/json; charset=utf8",
     dataType: "json",
@@ -66,10 +81,12 @@ $(document).ready(function () {
     var startDate = $(this).val();
     $.ajax({
       type: "GET",
-      url: "/api/Analyzer/GetUsageDataCustom?startDate=" + startDate,
+      url:
+        "https://localhost:7085/api/Analyzer/api/Analyzer/GetUsageDataCustom?startDate=" +
+        startDate,
       data: "",
-      contentType: "application/json; charset=utf8",
-      dataType: "json",
+      contextType: "application/json; charset=utf8",
+      //dataType: "json",
       success: OnSuccess,
       error: function (xhr, status, error) {
         // Handle the error here
@@ -82,8 +99,9 @@ $(document).ready(function () {
 $(document).ready(function () {
   $.ajax({
     type: "GET",
-    url: "/api/Analyzer/GetUsageDataForPastWeek",
+    url: "https://localhost:7085/api/Analyzer/api/Analyzer/GetUsageDataForPastWeek",
     data: "",
+
     contentType: "application/json; charset=utf8",
     dataType: "json",
     success: function (data) {

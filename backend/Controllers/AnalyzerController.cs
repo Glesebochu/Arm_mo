@@ -1,5 +1,6 @@
 ﻿using Arm_mo.Context;
 using Arm_mo.Models;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -26,7 +27,8 @@ namespace backend.Controllers
 
         }
 
-
+        //[EnableCors("AllowedSpecificOrigins")]
+        [EnableCors]
         [HttpGet]
         [Route("api/Analyzer/GetUsageDataForPastWeek")]
         public async Task<ActionResult<IEnumerable<object>>> GetUsageDataForPastWeek(/*int userId*/)//uncomment the parameter after testing.
@@ -63,6 +65,7 @@ namespace backend.Controllers
             return usageData;
         }
 
+        //[EnableCors("AllowedSpecificOrigins")]
         [HttpGet]
         [Route("api/Analyzer/GetUsageDataCustom")]
         public async Task<ActionResult<IEnumerable<object>>> GetUsageDataCustom(string startDate/*,int userId*/)//uncomment the parameter after testing.

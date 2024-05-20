@@ -1,9 +1,6 @@
 ﻿using Arm_mo.Context;
 using Arm_mo.Models;
-<<<<<<< HEAD
-=======
 using Microsoft.AspNetCore.Cors;
->>>>>>> d900fb913e252aaaa9071dd8d43e115996ba4bdf
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -30,12 +27,8 @@ namespace backend.Controllers
 
         }
 
-<<<<<<< HEAD
-
-=======
         //[EnableCors("AllowedSpecificOrigins")]
         [EnableCors]
->>>>>>> d900fb913e252aaaa9071dd8d43e115996ba4bdf
         [HttpGet]
         [Route("api/Analyzer/GetUsageDataForPastWeek")]
         public async Task<ActionResult<IEnumerable<object>>> GetUsageDataForPastWeek(/*int userId*/)//uncomment the parameter after testing.
@@ -72,10 +65,7 @@ namespace backend.Controllers
             return usageData;
         }
 
-<<<<<<< HEAD
-=======
         //[EnableCors("AllowedSpecificOrigins")]
->>>>>>> d900fb913e252aaaa9071dd8d43e115996ba4bdf
         [HttpGet]
         [Route("api/Analyzer/GetUsageDataCustom")]
         public async Task<ActionResult<IEnumerable<object>>> GetUsageDataCustom(string startDate/*,int userId*/)//uncomment the parameter after testing.
@@ -154,5 +144,20 @@ namespace backend.Controllers
         //    var maxUsageID = dbContext.UserUsage.Select(u => (int?)u.Id).DefaultIfEmpty().Max();
         //    return maxUsageID.HasValue ? maxUsageID.Value + 1 : 1;
         //}
+        [HttpGet("/api/Analyzer/GetUserUsageFinhas")]
+        public async Task<IActionResult> GetUserUsage(int userId)
+        {
+            // Assuming dbContext is your database context instance
+            // and UserUsage is the DbSet for user usage data
+            var userUsage = await dbContext.UserUsage
+                                        .Where(u => u.UserId == userId)
+                                        .ToListAsync();
+
+            // Check if any records were found
+            if (userUsage == null || userUsage.Count == 0)
+                return NotFound("No usage data found for the specified user.");
+
+            return Ok(userUsage); // Return the list of user usages
+        }
     }
 }

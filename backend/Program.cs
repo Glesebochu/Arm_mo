@@ -2,10 +2,7 @@
 using Arm_mo.Context;
 using Arm_mo.Models;
 using Microsoft.EntityFrameworkCore;
-<<<<<<< HEAD
-=======
 using Microsoft.Extensions.Hosting;
->>>>>>> d900fb913e252aaaa9071dd8d43e115996ba4bdf
 
 namespace backend
 {
@@ -18,8 +15,6 @@ namespace backend
 
             // Add services to the container.
 
-<<<<<<< HEAD
-=======
 
             //builder.Services.AddCors(options =>
             //{
@@ -46,10 +41,10 @@ namespace backend
                         .AllowAnyMethod()
                         .AllowCredentials()
                         .SetIsOriginAllowed((host) =>{ return host == "http://localhost:5173"; })
+                        // .SetIsOriginAllowed(host => host.Equals("http://localhost:5173", StringComparison.OrdinalIgnoreCase))
                         .AllowAnyHeader());
             });
 
->>>>>>> d900fb913e252aaaa9071dd8d43e115996ba4bdf
             //Adding the Arm'mo context
             builder.Services.AddDbContextPool<Arm_moContext>(option => option.
             UseSqlServer(builder.Configuration.GetConnectionString("Arm_moDbConnection")));
@@ -68,7 +63,9 @@ namespace backend
                 app.UseSwaggerUI();
             }
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
+
+            app.UseRouting();
 
             app.UseCors("AllowedSpecificOrigins");
 

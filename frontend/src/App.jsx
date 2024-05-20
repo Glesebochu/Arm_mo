@@ -5,14 +5,14 @@ import "./output.css";
 import { Button } from "./components/ui/button";
 import { Checkbox } from "./components/ui/checkbox";
 
-import UsageView from "./components/ui/Usage";
+import Home from "./Pages/Home";
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
     <>
-      <UsageView />
+      <Home/>
     </>
   );
 }

@@ -1,9 +1,6 @@
 import React from "react";
 import "../../Styles/Usage.css";
 import $ from "jquery";
-<<<<<<< HEAD
-
-=======
 import {
   Chart,
   LinearScale,
@@ -20,7 +17,6 @@ Chart.register(
   LineElement,
   PointElement
 );
->>>>>>> d900fb913e252aaaa9071dd8d43e115996ba4bdf
 const UsageView = () => {
   return (
     <div className="container">
@@ -68,11 +64,7 @@ var chartInstance;
 $(document).ready(function () {
   $.ajax({
     type: "GET",
-<<<<<<< HEAD
-    url: "/Analyzer/GetUsageDataForPastWeek",
-=======
-    url: "https://localhost:7085/api/Analyzer/api/Analyzer/GetUsageDataForPastWeek",
->>>>>>> d900fb913e252aaaa9071dd8d43e115996ba4bdf
+    url: "http://localhost:5158/api/Analyzer/api/Analyzer/GetUsageDataForPastWeek",
     data: "",
     contextType: "application/json; charset=utf8",
     dataType: "json",
@@ -89,19 +81,12 @@ $(document).ready(function () {
     var startDate = $(this).val();
     $.ajax({
       type: "GET",
-<<<<<<< HEAD
-      url: "/api/Analyzer/GetUsageDataCustom?startDate=" + startDate,
-      data: "",
-      contentType: "application/json; charset=utf8",
-      dataType: "json",
-=======
       url:
-        "https://localhost:7085/api/Analyzer/api/Analyzer/GetUsageDataCustom?startDate=" +
+        "http://localhost:5158/api/Analyzer/api/Analyzer/GetUsageDataCustom?startDate=" +
         startDate,
       data: "",
       contextType: "application/json; charset=utf8",
       //dataType: "json",
->>>>>>> d900fb913e252aaaa9071dd8d43e115996ba4bdf
       success: OnSuccess,
       error: function (xhr, status, error) {
         // Handle the error here
@@ -114,14 +99,9 @@ $(document).ready(function () {
 $(document).ready(function () {
   $.ajax({
     type: "GET",
-<<<<<<< HEAD
-    url: "/api/Analyzer/GetUsageDataForPastWeek",
-    data: "",
-=======
-    url: "https://localhost:7085/api/Analyzer/api/Analyzer/GetUsageDataForPastWeek",
+    url: "http://localhost:5158/api/Analyzer/api/Analyzer/GetUsageDataForPastWeek",
     data: "",
 
->>>>>>> d900fb913e252aaaa9071dd8d43e115996ba4bdf
     contentType: "application/json; charset=utf8",
     dataType: "json",
     success: function (data) {

@@ -4,6 +4,6 @@
     {
         public int ProfilePictureID { get; set; }
         public string ImgPath { get; set; }
-        public int MeditatorID { get; set; }
+        public int Id { get; set; }
     }
 }

@@ -4,7 +4,7 @@ namespace Arm_mo.Models
 {
     public class Meditator
     {
-        public int MeditatorID { get; set; }
+        public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Username { get; set; }
@@ -26,9 +26,9 @@ namespace Arm_mo.Models
 
         public Meditator() { }
 
-        public Meditator(int meditatorID, string firstName, string lastName, string username, string password, string currentStage)
+        public Meditator(int Id, string firstName, string lastName, string username, string password, string currentStage)
         {
-            this.MeditatorID = meditatorID;
+            this.Id = Id;
             this.FirstName = firstName;
             this.LastName = lastName;
             this.Username = username;

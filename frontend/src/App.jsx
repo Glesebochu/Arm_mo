@@ -6,13 +6,14 @@ import { Button } from "./components/ui/button";
 import { Checkbox } from "./components/ui/checkbox";
 
 import Home from "./Pages/Home";
+import SessionSummary from "./Pages/SessionSummary";
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
     <>
-      <Home/>
+      <SessionSummary/>
     </>
   );
 }

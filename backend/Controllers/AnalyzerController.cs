@@ -45,7 +45,7 @@ namespace backend.Controllers
             foreach (var date in pastWeekDates)
             {
                 var usages = await dbContext.UserUsage
-                     .Where(u => u.UserId == 2 && u.Date == date.Date)//change the userId after testing...
+                     .Where(u => u.UserId == 1 && u.Date == date.Date)//change the userId after testing...
                     .Select(u => u.UsageTime.TotalMinutes)
                     .ToListAsync();
 

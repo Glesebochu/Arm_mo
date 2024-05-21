@@ -3,6 +3,7 @@ using Arm_mo.Context;
 using Arm_mo.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
+using System.Text.Json.Serialization;
 
 namespace backend
 {
@@ -49,7 +50,10 @@ namespace backend
             builder.Services.AddDbContextPool<Arm_moContext>(option => option.
             UseSqlServer(builder.Configuration.GetConnectionString("Arm_moDbConnection")));
 
-            builder.Services.AddControllers();
+           builder.Services.AddControllers().AddJsonOptions(options =>
+{
+                options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+            });
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

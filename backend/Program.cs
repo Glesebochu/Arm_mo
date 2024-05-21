@@ -49,11 +49,11 @@ namespace backend
             //Adding the Arm'mo context
             builder.Services.AddDbContextPool<Arm_moContext>(option => option.
             UseSqlServer(builder.Configuration.GetConnectionString("Arm_moDbConnection")));
-
-           builder.Services.AddControllers().AddJsonOptions(options =>
-{
-                options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+            builder.Services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
             });
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

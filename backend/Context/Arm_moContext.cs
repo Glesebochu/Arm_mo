@@ -18,7 +18,7 @@ namespace Arm_mo.Context
 
             modelBuilder.Entity<PracticedStage>()
                 .HasOne(ps => ps.Session)
-                .WithMany(s => s.PracitcedStages)
+                .WithMany(s => s.PracticedStages)
                 .HasForeignKey(ps => ps.SessionId);
 
             modelBuilder.Entity<PracticedStage>()

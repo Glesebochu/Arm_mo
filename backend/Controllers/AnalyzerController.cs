@@ -159,5 +159,26 @@ namespace backend.Controllers
 
             return Ok(userUsage); // Return the list of user usages
         }
+
+        [HttpGet("/api/Analyzer/GetSession")]
+        public async Task<IActionResult> GetSessionEmail(int SessionId)
+        {
+            // Assuming dbContext is your database context instance
+            // and UserUsage is the DbSet for user usage data
+            var session = await dbContext.Sessions
+                            .Where(u => u.Id == SessionId)
+                            .Include(s => s.PracticedStages)  // Include Practiced Stages
+                            .Include(s => s.NewlyMasterdStages)  // Include Newly Mastered Stages
+                            .Include(s => s.AhaMoments)  // Optionally include Aha Moments if needed
+                            .Include(s => s.ObservableObjects)  // Optionally include Observable Objects if needed
+                            .FirstOrDefaultAsync();
+
+            // Check if any records were found
+            if (session == null)
+                return NotFound("No usage data found for the specified user.");
+
+            return Ok(session); // Return the list of user usages
+        }
+        
     }
 }

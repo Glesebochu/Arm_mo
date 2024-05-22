@@ -7,7 +7,7 @@
         public DateTime EndTime { get; set; }
         public Meditator Meditator { get; set; }
         public List<AhaMoment> AhaMoments { get; set; }
-        public List<PracticedStage> PracitcedStages { get; set; }
+        public List<PracticedStage> PracticedStages { get; set; }
         public List<NewlyMasteredStage> NewlyMasterdStages {  get; set; }
         public List<ObservableObject> ObservableObjects { get; set; }
 
@@ -22,7 +22,7 @@
             EndTime = endTime;
             Meditator = meditator;
             AhaMoments = ahaMoments;
-            PracitcedStages = practicedStages;
+            PracticedStages = practicedStages;
             ObservableObjects = observableObjects;
             NewlyMasterdStages= newlyMasteredStages;
         }

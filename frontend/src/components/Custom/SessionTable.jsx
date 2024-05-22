@@ -1,6 +1,9 @@
 "use client"
 
 import * as React from "react"
+import { useEffect } from "react"
+import { useState } from "react"
+import axios from "axios"
 import {
   flexRender,
   getCoreRowModel,
@@ -37,7 +40,7 @@ const data = [
     id: "m5gr84i9",
     amount: 316,
     status: "success",
-    email: "ken99@yahoo.com",
+    email: "zinhas9@yahoo.com",
   },
   {
     id: "3u1reuv4",
@@ -61,7 +64,7 @@ const data = [
     id: "bhqecj4p",
     amount: 721,
     status: "failed",
-    email: "carmella@hotmail.com",
+    email: "xarmella@hotmail.com",
   },
 ]
 
@@ -92,7 +95,7 @@ export const columns = [
   },
   {
     accessorKey: "status",
-    header: "Status",
+    header: "Mastered Stage",
     cell: ({ row }) => (
       <div className="capitalize">{row.getValue("status")}</div>
     ),
@@ -105,7 +108,7 @@ export const columns = [
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Email
+          Time
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       )
@@ -114,18 +117,24 @@ export const columns = [
   },
   {
     accessorKey: "amount",
-    header: () => <div className="text-right">Amount</div>,
+    header: () => <div>Aha Moments</div>,
     cell: ({ row }) => {
       const amount = parseFloat(row.getValue("amount"))
 
       // Format the amount as a dollar amount
       const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
+        
       }).format(amount)
 
-      return <div className="text-right font-medium">{formatted}</div>
+      return <div >{formatted}</div>
     },
+  },
+  {
+    accessorKey: "practicedStages", // Correct this to match the JSON spelling
+    header: () => <div>Practiced Stages</div>,
+    cell: ({ row }) => (
+      <div className="capitalize">{row.getValue("practicedStages")}</div>
+    ),
   },
   {
     id: "actions",
@@ -166,31 +175,55 @@ export function DataTableDemo() {
   const [columnVisibility, setColumnVisibility] =
     React.useState({})
   const [rowSelection, setRowSelection] = React.useState({})
+  const [swaggerData, setSwaggerData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+        try {
+            const response = await axios.get("http://localhost:5158/api/Analyzer/GetSession?SessionId=1");
+            console.log(response.data);
+            if (response.status === 200) {
+                const transformedData = [{
+                    email: `${new Date(response.data.startTime).toLocaleDateString()} , ${new Date(response.data.startTime).toLocaleTimeString().substring(0,5)} -  ${new Date(response.data.endTime).toLocaleTimeString().substring(0,5)}`,
+                    amount: response.data.ahaMoments.length,
+                    status: response.data.newlyMasterdStages.map(stage => `Stage ${stage.stageId}`).join(', '),
+                    practicedStages: Array.isArray(response.data.practicedStages) ? response.data.practicedStages.map(stage => `Stage ${stage.stageId}`).join(', ') : ''
+                }];
+                setSwaggerData(transformedData);
+            }
+        } catch (error) {
+            console.error('Failed to fetch data:', error);
+        }
+    };
+
+    fetchData();
+}, []);
 
   const table = useReactTable({
-    data,
+    data: swaggerData,
     columns,
-    onSortingChange: setSorting,
-    onColumnFiltersChange: setColumnFilters,
-    getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    onColumnVisibilityChange: setColumnVisibility,
-    onRowSelectionChange: setRowSelection,
     state: {
       sorting,
       columnFilters,
       columnVisibility,
       rowSelection,
     },
-  })
+    onSortingChange: setSorting,
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    onColumnVisibilityChange: setColumnVisibility,
+    onRowSelectionChange: setRowSelection,
+})
+
+
 
   return (
     <div className="w-full">
       <div className="flex items-center py-4">
         <Input
-          placeholder="Filter emails..."
+          placeholder="Filter Sessions..."
           value={table.getColumn("email")?.getFilterValue()  ?? ""}
          
           onChange={(event) =>
@@ -285,7 +318,7 @@ export function DataTableDemo() {
             variant="outline"
             size="sm"
             onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
+            disabled={table.getCanPreviousPage()}
           >
             Previous
           </Button>

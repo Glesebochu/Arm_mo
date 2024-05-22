@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace backend.Migrations
 {
     [DbContext(typeof(Arm_moContext))]
-    [Migration("20240513131551_initial")]
-    partial class initial
+    [Migration("20240522074125_StartFomScratch")]
+    partial class StartFomScratch
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -71,15 +71,14 @@ namespace backend.Migrations
 
             modelBuilder.Entity("Arm_mo.Models.Meditator", b =>
                 {
-                    b.Property<int>("MeditatorID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MeditatorID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("CurrentStage")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CurrentStageId")
+                        .HasColumnType("int");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -97,7 +96,14 @@ namespace backend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("MeditatorID");
+                    b.Property<int?>("profilePictureId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CurrentStageId");
+
+                    b.HasIndex("profilePictureId");
 
                     b.ToTable("Meditators");
                 });
@@ -117,48 +123,6 @@ namespace backend.Migrations
                     b.ToTable("NewlyMasteredStage");
                 });
 
-            modelBuilder.Entity("Arm_mo.Models.ObservableObject", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasMaxLength(21)
-                        .HasColumnType("nvarchar(21)");
-
-                    b.Property<string>("Icon")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Intensity")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SessionId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SessionId");
-
-                    b.ToTable("ObservableObjects");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("ObservableObject");
-
-                    b.UseTphMappingStrategy();
-                });
-
             modelBuilder.Entity("Arm_mo.Models.PracticedStage", b =>
                 {
                     b.Property<int>("SessionId")
@@ -176,23 +140,20 @@ namespace backend.Migrations
 
             modelBuilder.Entity("Arm_mo.Models.ProfilePicture", b =>
                 {
-                    b.Property<int>("ProfilePictureID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProfilePictureID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ImgPath")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("MeditatorID")
+                    b.Property<int>("ProfilePictureID")
                         .HasColumnType("int");
 
-                    b.HasKey("ProfilePictureID");
-
-                    b.HasIndex("MeditatorID")
-                        .IsUnique();
+                    b.HasKey("Id");
 
                     b.ToTable("ProfilePictures");
                 });
@@ -208,7 +169,7 @@ namespace backend.Migrations
                     b.Property<DateTime>("EndTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("MeditatorID")
+                    b.Property<int>("MeditatorId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("StartTime")
@@ -216,7 +177,7 @@ namespace backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MeditatorID");
+                    b.HasIndex("MeditatorId");
 
                     b.ToTable("Sessions");
                 });
@@ -230,25 +191,6 @@ namespace backend.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Goal")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Intentions")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsMastered")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("MasteryRequirements")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Obstacles")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Skills")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -315,35 +257,52 @@ namespace backend.Migrations
                     b.ToTable("UserUsage");
                 });
 
-            modelBuilder.Entity("Arm_mo.Models.MentalObject", b =>
+            modelBuilder.Entity("ObservableObject", b =>
                 {
-                    b.HasBaseType("Arm_mo.Models.ObservableObject");
-
-                    b.Property<int?>("FeelingToneValue")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("MentalObjectType")
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Icon")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Intensity")
                         .HasColumnType("int");
 
-                    b.Property<int?>("MentalStateValue")
+                    b.Property<int?>("SessionId")
                         .HasColumnType("int");
 
-                    b.HasDiscriminator().HasValue("MentalObject");
-                });
-
-            modelBuilder.Entity("Arm_mo.Models.SensoryStimulus", b =>
-                {
-                    b.HasBaseType("Arm_mo.Models.ObservableObject");
-
-                    b.Property<int>("SensoryStimulustype")
+                    b.Property<int>("SubType")
                         .HasColumnType("int");
 
-                    b.HasDiscriminator().HasValue("SensoryStimulus");
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("feelingTone")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("mentalState")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SessionId");
+
+                    b.ToTable("ObservableObjects");
                 });
 
             modelBuilder.Entity("Arm_mo.Models.Activity", b =>
                 {
-                    b.HasOne("Arm_mo.Models.MentalObject", "MentalObject")
+                    b.HasOne("ObservableObject", "MentalObject")
                         .WithMany()
                         .HasForeignKey("MentalObjectId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -359,6 +318,23 @@ namespace backend.Migrations
                         .HasForeignKey("SessionId");
                 });
 
+            modelBuilder.Entity("Arm_mo.Models.Meditator", b =>
+                {
+                    b.HasOne("Arm_mo.Models.Stage", "CurrentStage")
+                        .WithMany()
+                        .HasForeignKey("CurrentStageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Arm_mo.Models.ProfilePicture", "profilePicture")
+                        .WithMany()
+                        .HasForeignKey("profilePictureId");
+
+                    b.Navigation("CurrentStage");
+
+                    b.Navigation("profilePicture");
+                });
+
             modelBuilder.Entity("Arm_mo.Models.NewlyMasteredStage", b =>
                 {
                     b.HasOne("Arm_mo.Models.Session", "Session")
@@ -370,7 +346,7 @@ namespace backend.Migrations
                     b.HasOne("Arm_mo.Models.Stage", "Stage")
                         .WithMany()
                         .HasForeignKey("StageId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Session");
@@ -378,17 +354,10 @@ namespace backend.Migrations
                     b.Navigation("Stage");
                 });
 
-            modelBuilder.Entity("Arm_mo.Models.ObservableObject", b =>
-                {
-                    b.HasOne("Arm_mo.Models.Session", null)
-                        .WithMany("ObservableObjects")
-                        .HasForeignKey("SessionId");
-                });
-
             modelBuilder.Entity("Arm_mo.Models.PracticedStage", b =>
                 {
                     b.HasOne("Arm_mo.Models.Session", "Session")
-                        .WithMany("PracitcedStages")
+                        .WithMany("PracticedStages")
                         .HasForeignKey("SessionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -396,7 +365,7 @@ namespace backend.Migrations
                     b.HasOne("Arm_mo.Models.Stage", "Stage")
                         .WithMany()
                         .HasForeignKey("StageId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Session");
@@ -404,20 +373,11 @@ namespace backend.Migrations
                     b.Navigation("Stage");
                 });
 
-            modelBuilder.Entity("Arm_mo.Models.ProfilePicture", b =>
-                {
-                    b.HasOne("Arm_mo.Models.Meditator", null)
-                        .WithOne("profilePicture")
-                        .HasForeignKey("Arm_mo.Models.ProfilePicture", "MeditatorID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Arm_mo.Models.Session", b =>
                 {
                     b.HasOne("Arm_mo.Models.Meditator", "Meditator")
                         .WithMany()
-                        .HasForeignKey("MeditatorID")
+                        .HasForeignKey("MeditatorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -444,12 +404,16 @@ namespace backend.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("ObservableObject", b =>
+                {
+                    b.HasOne("Arm_mo.Models.Session", null)
+                        .WithMany("ObservableObjects")
+                        .HasForeignKey("SessionId");
+                });
+
             modelBuilder.Entity("Arm_mo.Models.Meditator", b =>
                 {
                     b.Navigation("UserUsages");
-
-                    b.Navigation("profilePicture")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Arm_mo.Models.Session", b =>
@@ -460,7 +424,7 @@ namespace backend.Migrations
 
                     b.Navigation("ObservableObjects");
 
-                    b.Navigation("PracitcedStages");
+                    b.Navigation("PracticedStages");
                 });
 #pragma warning restore 612, 618
         }

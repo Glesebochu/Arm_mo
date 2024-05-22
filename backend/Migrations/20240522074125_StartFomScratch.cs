@@ -6,26 +6,23 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace backend.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class StartFomScratch : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Meditators",
+                name: "ProfilePictures",
                 columns: table => new
                 {
-                    MeditatorID = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    _password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CurrentStage = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ProfilePictureID = table.Column<int>(type: "int", nullable: false),
+                    ImgPath = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Meditators", x => x.MeditatorID);
+                    table.PrimaryKey("PK_ProfilePictures", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -34,12 +31,7 @@ namespace backend.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Goal = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Intentions = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Obstacles = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Skills = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MasteryRequirements = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IsMastered = table.Column<bool>(type: "bit", nullable: false)
+                    Goal = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -47,22 +39,31 @@ namespace backend.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProfilePictures",
+                name: "Meditators",
                 columns: table => new
                 {
-                    ProfilePictureID = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ImgPath = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MeditatorID = table.Column<int>(type: "int", nullable: false)
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    _password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CurrentStageId = table.Column<int>(type: "int", nullable: false),
+                    profilePictureId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProfilePictures", x => x.ProfilePictureID);
+                    table.PrimaryKey("PK_Meditators", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ProfilePictures_Meditators_MeditatorID",
-                        column: x => x.MeditatorID,
-                        principalTable: "Meditators",
-                        principalColumn: "MeditatorID",
+                        name: "FK_Meditators_ProfilePictures_profilePictureId",
+                        column: x => x.profilePictureId,
+                        principalTable: "ProfilePictures",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Meditators_Stages_CurrentStageId",
+                        column: x => x.CurrentStageId,
+                        principalTable: "Stages",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -74,16 +75,16 @@ namespace backend.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     StartTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    MeditatorID = table.Column<int>(type: "int", nullable: false)
+                    MeditatorId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Sessions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Sessions_Meditators_MeditatorID",
-                        column: x => x.MeditatorID,
+                        name: "FK_Sessions_Meditators_MeditatorId",
+                        column: x => x.MeditatorId,
                         principalTable: "Meditators",
-                        principalColumn: "MeditatorID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -105,7 +106,7 @@ namespace backend.Migrations
                         name: "FK_UserUsage_Meditators_UserId",
                         column: x => x.UserId,
                         principalTable: "Meditators",
-                        principalColumn: "MeditatorID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -148,8 +149,7 @@ namespace backend.Migrations
                         name: "FK_NewlyMasteredStage_Stages_StageId",
                         column: x => x.StageId,
                         principalTable: "Stages",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -159,15 +159,14 @@ namespace backend.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Icon = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Intensity = table.Column<int>(type: "int", nullable: false),
-                    Discriminator = table.Column<string>(type: "nvarchar(21)", maxLength: 21, nullable: false),
-                    SessionId = table.Column<int>(type: "int", nullable: true),
-                    MentalObjectType = table.Column<int>(type: "int", nullable: true),
-                    FeelingToneValue = table.Column<int>(type: "int", nullable: true),
-                    MentalStateValue = table.Column<int>(type: "int", nullable: true),
-                    SensoryStimulustype = table.Column<int>(type: "int", nullable: true)
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Icon = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Intensity = table.Column<int>(type: "int", nullable: true),
+                    Type = table.Column<int>(type: "int", nullable: false),
+                    SubType = table.Column<int>(type: "int", nullable: false),
+                    mentalState = table.Column<int>(type: "int", nullable: true),
+                    feelingTone = table.Column<int>(type: "int", nullable: true),
+                    SessionId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -199,8 +198,7 @@ namespace backend.Migrations
                         name: "FK_PracticedStage_Stages_StageId",
                         column: x => x.StageId,
                         principalTable: "Stages",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -256,6 +254,16 @@ namespace backend.Migrations
                 column: "SessionId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Meditators_CurrentStageId",
+                table: "Meditators",
+                column: "CurrentStageId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Meditators_profilePictureId",
+                table: "Meditators",
+                column: "profilePictureId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_NewlyMasteredStage_StageId",
                 table: "NewlyMasteredStage",
                 column: "StageId");
@@ -271,15 +279,9 @@ namespace backend.Migrations
                 column: "StageId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProfilePictures_MeditatorID",
-                table: "ProfilePictures",
-                column: "MeditatorID",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Sessions_MeditatorID",
+                name: "IX_Sessions_MeditatorId",
                 table: "Sessions",
-                column: "MeditatorID");
+                column: "MeditatorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Steps_ActivityId",
@@ -305,16 +307,10 @@ namespace backend.Migrations
                 name: "PracticedStage");
 
             migrationBuilder.DropTable(
-                name: "ProfilePictures");
-
-            migrationBuilder.DropTable(
                 name: "Steps");
 
             migrationBuilder.DropTable(
                 name: "UserUsage");
-
-            migrationBuilder.DropTable(
-                name: "Stages");
 
             migrationBuilder.DropTable(
                 name: "Activities");
@@ -327,6 +323,12 @@ namespace backend.Migrations
 
             migrationBuilder.DropTable(
                 name: "Meditators");
+
+            migrationBuilder.DropTable(
+                name: "ProfilePictures");
+
+            migrationBuilder.DropTable(
+                name: "Stages");
         }
     }
 }

@@ -24,7 +24,8 @@ namespace Arm_mo.Context
             modelBuilder.Entity<PracticedStage>()
                 .HasOne(ps => ps.Stage)
                 .WithMany() // If you decide to add navigation back to Stage later
-                .HasForeignKey(ps => ps.StageId);
+                .HasForeignKey(ps => ps.StageId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             // Newly Mastered Stages
             modelBuilder.Entity<NewlyMasteredStage>()
@@ -39,6 +40,12 @@ namespace Arm_mo.Context
                 .HasOne(nms => nms.Stage)
                 .WithMany() // Similarly, if navigation is added back to Stage
                 .HasForeignKey(nms => nms.StageId);
+
+            modelBuilder.Entity<NewlyMasteredStage>()
+                .HasOne(nms => nms.Stage) // Assuming a navigation property named Stage
+                .WithMany() // Adjust based on your model
+                .HasForeignKey(nms => nms.StageId)
+                .OnDelete(DeleteBehavior.NoAction); // Prevent cascading delete
         }
         public DbSet<Meditator> Meditators { get; set; }
         public DbSet<ProfilePicture> ProfilePictures { get; set; }
@@ -46,8 +53,6 @@ namespace Arm_mo.Context
         public DbSet<Session> Sessions { get; set; }
         public DbSet<AhaMoment> AhaMoments { get; set; }
         public DbSet<ObservableObject> ObservableObjects { get; set; }
-        public DbSet<SensoryStimulus> SensoryStimuli { get; set;}
-        public DbSet<MentalObject> MentalObjects { get; set;}
         public DbSet<Step> Steps { get; set; }
         public DbSet<Activity> Activities { get; set; }
         public DbSet<UserUsage> UserUsage { get; set; }

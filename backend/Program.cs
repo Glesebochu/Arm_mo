@@ -52,6 +52,7 @@ namespace backend
             builder.Services.AddControllers().AddJsonOptions(options =>
             {
                 options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
             });
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -79,6 +80,9 @@ namespace backend
             app.MapControllers();
 
             app.Run();
+            ObservableObjectNew test = new ObservableObjectNew();
+            test.Type=ObservableObjectNew.ObservableObjectType.MentalObject;
+            test.SubType=ObservableObjectNew.ObservableObjectSubType.FeelingTone; 
         }
     }
 }

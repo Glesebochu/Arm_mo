@@ -14,7 +14,7 @@ namespace Arm_mo.Models
         // Main profile picture
         [NotMapped]
         public IFormFile profilePictureFormFile { get; set; }
-        public ProfilePicture profilePicture { get; set; }
+        public ProfilePicture? profilePicture { get; set; }
 
         // Old Profile Pictures
         [NotMapped]
@@ -22,7 +22,7 @@ namespace Arm_mo.Models
         [NotMapped]
         public List<ProfilePicture> profilePictures { get; set; }
 
-        public List<UserUsage> UserUsages { get; set; }
+        public List<UserUsage>? UserUsages { get; set; }
 
         public Meditator() { }
 

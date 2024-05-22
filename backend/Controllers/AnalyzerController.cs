@@ -161,7 +161,7 @@ namespace backend.Controllers
         }
 
         [HttpGet("/api/Analyzer/GetSession")]
-        public async Task<IActionResult> GetSessionEmail(int SessionId)
+        public async Task<IActionResult> GetSession(int SessionId)
         {
             // Assuming dbContext is your database context instance
             // and UserUsage is the DbSet for user usage data
@@ -178,6 +178,22 @@ namespace backend.Controllers
                 return NotFound("No usage data found for the specified user.");
 
             return Ok(session); // Return the list of user usages
+        }
+        [HttpGet("/api/Analyzer/GetSessionsForMeditator")]
+        public async Task<IActionResult> GetSessionsForMeditator(int meditatorId){
+             var sessions = await dbContext.Sessions
+                            .Where(u => u.Meditator.Id == meditatorId)
+                            .Include(s => s.PracticedStages)  // Include Practiced Stages
+                            .Include(s => s.NewlyMasterdStages)  // Include Newly Mastered Stages
+                            .Include(s => s.AhaMoments)  // Optionally include Aha Moments if needed
+                            .Include(s => s.ObservableObjects).ToListAsync();
+
+            // Check if any records were found
+            if (!sessions.Any())
+                return NotFound("No sessions found for the specified user.");
+
+            return Ok(sessions); // Return the list of user usages
+
         }
         
     }

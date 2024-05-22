@@ -80,9 +80,7 @@ namespace backend
             app.MapControllers();
 
             app.Run();
-            ObservableObjectNew test = new ObservableObjectNew();
-            test.Type=ObservableObjectNew.ObservableObjectType.MentalObject;
-            test.SubType=ObservableObjectNew.ObservableObjectSubType.FeelingTone; 
+           
         }
     }
 }

@@ -113,15 +113,6 @@ function OnSuccess(data) {
       ],
     },
     options: {
-      plugins: {
-        tooltip: {
-          callbacks: {
-            label: function (context) {
-              return "x: " + context.parsed.x + ", y: " + context.parsed.y;
-            },
-          },
-        },
-      },
       animations: {
         radius: {
           duration: 500,

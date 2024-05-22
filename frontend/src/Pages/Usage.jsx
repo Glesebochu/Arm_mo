@@ -1,6 +1,9 @@
 import React from "react";
-import "../../Styles/Usage.css";
+import "../Styles/Usage.css";
 import $ from "jquery";
+import UsageGraph from "../components/Custom/UsageGraph";
+import TodayUsageBubble from "../components/Custom/TodayUsageBubble";
+
 import {
   Chart,
   LinearScale,
@@ -21,40 +24,11 @@ const UsageView = () => {
   return (
     <div className="container">
       <div className="chart-container">
-        <h1 className="mb-4 text-3xl font-light leading-none tracking-tight text-black md:text-5xl lg:text-6xl dark:text-white">
+        <h1 className="mb-4 text-1xl font-light leading-none tracking-tight text-black md:text-5xl lg:text-4xl dark:text-white">
           Your weekly Activity
         </h1>
-        <div className="form-group">
-          <input
-            type="date"
-            className="form-control"
-            id="startDate"
-            name="startDate"
-          />
-        </div>
-        <canvas
-          id="weeklyUsage"
-          className="small-chart"
-          width="400"
-          height="200"
-        ></canvas>
-
-        <div className="circle-container">
-          <div className="circle">
-            <div className="circle-content">
-              <div id="loader">
-                <div>
-                  <div id="box"></div>
-                  <div id="hill"></div>
-                </div>
-                <div className="timeContainer">
-                  <p id="time">1h 35m</p>
-                </div>
-              </div>
-              <p className="text">Today's Activity</p>
-            </div>
-          </div>
-        </div>
+        <UsageGraph />
+        <TodayUsageBubble />
       </div>
     </div>
   );
@@ -134,10 +108,20 @@ function OnSuccess(data) {
           label: "Daily use",
           data: _CharData,
           borderWidth: 3,
+          borderColor: "rgb(75, 192, 192)",
         },
       ],
     },
     options: {
+      plugins: {
+        tooltip: {
+          callbacks: {
+            label: function (context) {
+              return "x: " + context.parsed.x + ", y: " + context.parsed.y;
+            },
+          },
+        },
+      },
       animations: {
         radius: {
           duration: 500,

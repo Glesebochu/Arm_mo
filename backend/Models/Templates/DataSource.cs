@@ -13,7 +13,7 @@
                     LastName = "Amare",
                     Username = "Fellasfaw",
                     _password = "test",
-                    CurrentStage = "3"
+                    // CurrentStage = "3"
                 },
                 new Meditator()
                 {
@@ -22,7 +22,7 @@
                     LastName = "Abhram",
                     Username = "Yan8i",
                     _password = "test",
-                    CurrentStage = "3"
+                    // CurrentStage = "3"
                 },
                 new Meditator()
                 {
@@ -31,7 +31,7 @@
                     LastName = "Wendwosen",
                     Username = "Yanetawi",
                     _password = "test",
-                    CurrentStage = "3"
+                    // CurrentStage = "3"
                 },
                 new Meditator()
                 {
@@ -40,7 +40,7 @@
                     LastName = "Yohannes",
                     Username = "Gustavo",
                     _password = "test",
-                    CurrentStage = "3"
+                    // CurrentStage = "3"
                 }
         };
         }

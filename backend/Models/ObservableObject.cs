@@ -52,6 +52,10 @@ public class ObservableObject
     public MentalState? mentalState { get; set; }
     public FeelingTone? feelingTone { get; set; }
 
+    public ObservableObject(){
+        
+    }
+
     public ObservableObject(string title,string description,string Icon, 
     IntensityType intensity,ObservableObjectType type,ObservableObjectSubType subType,
     FeelingTone tone, MentalState state){

@@ -5,8 +5,8 @@ import Setting from "./Pages/Settings"
 function App() {
   return (
     <>
-     <Signup/>
-     <Signin/>
+     {/* <Signup/> */}
+     {/* <Signin/> */}
      <Setting/>
     </>
   )

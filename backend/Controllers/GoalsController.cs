@@ -19,7 +19,7 @@ namespace backend.Controllers
             _mapper = mapper;
         }
         
-        // An action for getting all the goals
+        // An action for getting/reading all the goals
         [HttpGet]
         public IActionResult GetAll(){
             var goals = _context.Goals
@@ -31,13 +31,17 @@ namespace backend.Controllers
             return Ok(goalDTOs);
         }
 
-        // An action for getting a single goal
+        // An action for getting/reading a single goal
         [HttpGet("{id}")]
         public IActionResult GetById([FromRoute] int id){
+
+
             var goal = _context.Goals
+                .Include(g => g.ChildGoals)
                 .Include(g => g.Activity)
                 .Include(g => g.MeditationObject)
                 .FirstOrDefault(g => g.Id == id);
+
 
             if (goal == null){
                 return NotFound();
@@ -45,8 +49,29 @@ namespace backend.Controllers
                 return Ok(_mapper.Map<GoalDTO>(goal));
             }
         }
+
+
         // An action for creating a goal; GET
         // An action for creating a goal; POST
+        [HttpPost]
+        [ActionName("Create")]
+        public IActionResult Create([FromBody] CreateGoalDTO createGoalDTO){
+            // Convert the DTO into a Goal object that EF can understand.
+            var goal = _mapper.Map<Models.Goal>(createGoalDTO);
+
+            // Add the goal to the Goals table.
+            _context.Goals.Add(goal);
+
+            // Save changes.
+            _context.SaveChanges();
+
+            return CreatedAtAction(
+                nameof(GetById), 
+                new {id = goal.Id},
+                _mapper.Map<GoalDTO>(goal)
+            );
+
+        }
         
     }
 }

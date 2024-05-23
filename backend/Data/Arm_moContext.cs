@@ -9,10 +9,7 @@ namespace backend.Data
 {
     public class Arm_moContext : DbContext
     {
-        public Arm_moContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
-        {
-            
-        }
+        public Arm_moContext(DbContextOptions dbContextOptions) : base(dbContextOptions){}
 
         public DbSet<Meditator> Meditators { get; set; }
         public DbSet<Activity> Activities { get; set; }

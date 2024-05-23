@@ -15,7 +15,12 @@ namespace backend
             // Add services to the dependency injection container
 
             // Add controller services for API endpoints
-            builder.Services.AddControllers();
+            builder.Services.AddControllers()
+            // Add service for handling cyclical references
+                .AddJsonOptions(opt => {
+                    opt.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+                    opt.JsonSerializerOptions.MaxDepth = 30;
+                });
 
             // Add services for generating API documentation using Swagger
             builder.Services.AddEndpointsApiExplorer();
@@ -29,6 +34,7 @@ namespace backend
 
             // Add AutoMapper service with the Program class for configuration
             builder.Services.AddAutoMapper(typeof(Program));
+
 
             // Build the application
             var app = builder.Build();

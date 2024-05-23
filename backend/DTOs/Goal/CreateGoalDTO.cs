@@ -8,14 +8,14 @@ using backend.Models;
 
 namespace backend.DTOs.Goal
 {
-    public class GoalDTO
+    public class CreateGoalDTO
     {
         public GoalStatus Status { get; set; }
         public ActivityDTO? Activity { get; set; }
         public ObservableObjectDTO? MeditationObject { get; set; }
+        // public CreateGoalDTO? ParentGoal { get; set; }
         public DateTime DueDateTime { get; set; }
         public DateTime CompletedDateTime { get; set; }
-        public GoalDTO? ParentGoal { get; set; }
         public List<GoalDTO>? ChildGoals { get; set; }
     }
 }

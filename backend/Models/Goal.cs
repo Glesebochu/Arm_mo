@@ -17,9 +17,10 @@ namespace backend.Models
         public Goal[]? ChildGoals { get; set; }
         public DateTime DueDateTime { get; set; }
         public DateTime CompletedDateTime { get; set; }
-        public Activity Activity { get; set; }
-        public ObservableObject MeditationObject { get; set; }
+        public Activity? Activity { get; set; }
+        public ObservableObject? MeditationObject { get; set; }
 
+        public Goal(){}
         public Goal(Activity activity, ObservableObject meditationObject){
             this.Activity = activity;
             this.MeditationObject = meditationObject;

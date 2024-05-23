@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Net;
 
 namespace backend.Models
 {
@@ -10,7 +11,9 @@ namespace backend.Models
         public string Username { get; set; } = String.Empty;
         public string Email { get; set; } = String.Empty;
         private string _password { get; set; } = String.Empty;
+        [NotMapped]
         public Stage? CurrentStage { get; set; }
+        [NotMapped]
         public List<Stage>? PracticedStages { get; set; }
         public Address? Address { get; set; }
     }

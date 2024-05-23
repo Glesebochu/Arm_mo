@@ -34,7 +34,7 @@ namespace backend.Models
     public class ObservableObject
     {
         public int Id { get; set; }
-        public string Title { get; set; }
+        public string Title { get; set; } = String.Empty;
         public IntensityType? Intensity { get; set; }
         public ObservableObjectSubType SubType { get; set; }
 

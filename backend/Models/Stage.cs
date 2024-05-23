@@ -5,16 +5,16 @@ namespace backend.Models
     public class Stage
     {
         public int Id { get; set; }
-        public string Goal { get; set; }
+        public string Goal { get; set; } = String.Empty;
 
 
         [NotMapped]
-        public string[] Intentions { get; set; }
+        public string[]? Intentions { get; set; }
         [NotMapped]
-        public string[] Obstacles { get; set; }
+        public string[]? Obstacles { get; set; }
         [NotMapped]
-        public string[] Skills { get; set; }
+        public string[]? Skills { get; set; }
         [NotMapped]
-        public string[] MasteryRequirements { get; set; }
+        public string[]? MasteryRequirements { get; set; }
     }
 }

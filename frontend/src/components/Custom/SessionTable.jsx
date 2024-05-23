@@ -36,73 +36,36 @@ import {
   TableRow,
 } from "../../components/ui/table"
 
-const data = [
-  {
-    id: "m5gr84i9",
-    amount: 316,
-    status: "success",
-    email: "zinhas9@yahoo.com",
-  },
-  {
-    id: "3u1reuv4",
-    amount: 242,
-    status: "success",
-    email: "Abe45@gmail.com",
-  },
-  {
-    id: "derv1ws0",
-    amount: 837,
-    status: "processing",
-    email: "Monserrat44@gmail.com",
-  },
-  {
-    id: "5kma53ae",
-    amount: 874,
-    status: "success",
-    email: "Silas22@gmail.com",
-  },
-  {
-    id: "bhqecj4p",
-    amount: 721,
-    status: "failed",
-    email: "xarmella@hotmail.com",
-  },
-]
-
-
-
 export const columns = [
-  // {
-  //   id: "select",
-  //   header: ({ table }) => (
-  //     <Checkbox
-  //       checked={
-  //         table.getIsAllPageRowsSelected() ||
-  //         (table.getIsSomePageRowsSelected() && "indeterminate")
-  //       }
-  //       onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-  //       aria-label="Select all"
-  //     />
-  //   ),
-  //   cell: ({ row }) => (
-  //     <Checkbox
-  //       checked={row.getIsSelected()}
-  //       onCheckedChange={(value) => row.toggleSelected(!!value)}
-  //       aria-label="Select row"
-  //     />
-  //   ),
-  //   enableSorting: false,
-  //   enableHiding: false,
-  // },
-
   {
-    accessorKey: "id", // Correct this to match the JSON spelling
+    id: "select",
+    header: ({ table }) => (
+      <Checkbox
+        checked={
+          table.getIsAllPageRowsSelected() ||
+          (table.getIsSomePageRowsSelected() && "indeterminate")
+        }
+        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+        aria-label="Select all"
+      />
+    ),
+    cell: ({ row }) => (
+      <Checkbox
+        checked={row.getIsSelected()}
+        onCheckedChange={(value) => row.toggleSelected(!!value)}
+        aria-label="Select row"
+      />
+    ),
+    enableSorting: false,
+    enableHiding: false,
+  },
+  {
+    accessorKey: "id",
     header: () => <div>Id</div>,
     cell: ({ row }) => (
       <div className="capitalize">{row.getValue("id")}</div>
     ),
   },
- 
   {
     accessorKey: "time",
     header: ({ column }) => {
@@ -122,25 +85,19 @@ export const columns = [
     accessorKey: "ahaMoments",
     header: () => <div>Aha Moments</div>,
     cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("ahaMoments"))
-
-      // Format the amount as a dollar amount
-      const formatted = new Intl.NumberFormat("en-US", {
-        
-      }).format(amount)
-
-      return <div >{formatted}</div>
+      const amount = parseInt(row.getValue("ahaMoments"))
+      return <div >{amount}</div>
     },
   },
   {
-    accessorKey: "practicedStages", // Correct this to match the JSON spelling
+    accessorKey: "practicedStages",
     header: () => <div>Practiced Stages</div>,
     cell: ({ row }) => (
       <div className="capitalize">{row.getValue("practicedStages")}</div>
     ),
   },
   {
-    accessorKey: "observableObjects", 
+    accessorKey: "observableObjects",
     header: () => <div>Observable Objects</div>,
     cell: ({ row }) => (
       <div className="capitalize">{row.getValue("observableObjects")}</div>
@@ -158,7 +115,6 @@ export const columns = [
     enableHiding: false,
     cell: ({ row }) => {
       const payment = row.original
-
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -176,7 +132,6 @@ export const columns = [
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>View Session</DropdownMenuItem>
-           
           </DropdownMenuContent>
         </DropdownMenu>
       )
@@ -216,7 +171,6 @@ export function DataTableDemo() {
             masteredStages: session.newlyMasterdStages.map(stage => `Stage ${stage.stageId}`).join(', '),
             practicedStages: session.practicedStages.map(stage => `Stage ${stage.stageId}`).join(', '),
             observableObjects: session.observableObjects.map(obj => obj.title).join(', ')
-            
           }))
           setSwaggerData(transformedData);
         }
@@ -227,7 +181,6 @@ export function DataTableDemo() {
 
     fetchData();
   }, []);
-
 
   const table = useReactTable({
     data: swaggerData,
@@ -240,6 +193,7 @@ export function DataTableDemo() {
     },
     onSortingChange: setSorting,
     onFiltersChange: setColumnFilters,
+    onRowSelectionChange: setRowSelection, // Add this line
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel({
@@ -248,13 +202,18 @@ export function DataTableDemo() {
         }
     }),
     getPaginationRowModel: getPaginationRowModel(),
+    initialState: { // Add this line
+      pagination: { pageSize: 5 } // Add this line
+    }
   });
+
   const toggleColumnVisibility = (columnId, isVisible) => {
     setColumnVisibility(old => ({
         ...old,
         [columnId]: isVisible
     }));
   };
+
   return (
     <div className="w-full">
       <div className="flex items-center py-4">

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useState } from "react";
-import UsageView from "@/components/ui/Usage.jsx";
+import UsageView from "@/Pages/Usage.jsx";
 import { DataTableDemo } from "@/components/Custom/SessionTable.jsx";
 import { NavigationMenuDemo } from "@/components/Custom/AnalyticsNavigation.jsx";
 

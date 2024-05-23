@@ -43,7 +43,8 @@ export const LineGraph = () => {
           gradient.addColorStop(0, 'rgba(10, 24, 82, 0.1)');
           gradient.addColorStop(1, 'rgba(10, 24, 82, 0.4)');
           return gradient;
-        }
+        },
+        tension: 0.4 // Add this line to smooth the edges
       }
     ]
   });
@@ -62,6 +63,7 @@ export const LineGraph = () => {
               data: ahaMoments,
               fill: true,
               borderColor: '#2563eb',
+              tension: 0.2 // Add this line to smooth the edges
             }]
           });
         }

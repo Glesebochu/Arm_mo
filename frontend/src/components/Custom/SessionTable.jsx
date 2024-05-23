@@ -1,10 +1,8 @@
-"use client"
-
-import * as React from "react"
-import { useEffect } from "react"
-import { useState } from "react"
-import axios from "axios"
-
+import * as React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
+// import "@/Styles/SessionTable.css";
+import axios from "axios";
 import {
   flexRender,
   getCoreRowModel,
@@ -12,11 +10,10 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
-} from "@tanstack/react-table"
-import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react"
-
-import { Button } from "../../components/ui/button"
-import { Checkbox } from "../../components/ui/checkbox"
+} from "@tanstack/react-table";
+import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react";
+import { Button } from "../../components/ui/button";
+import { Checkbox } from "../../components/ui/checkbox";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -25,8 +22,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "../../components/ui/dropdown-menu"
-import { Input } from "../../components/ui/input"
+} from "../../components/ui/dropdown-menu";
+import { Input } from "../../components/ui/input";
 import {
   Table,
   TableBody,
@@ -34,8 +31,9 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "../../components/ui/table"
+} from "../../components/ui/table";
 
+// Column definitions
 export const columns = [
   {
     id: "select",
@@ -62,9 +60,7 @@ export const columns = [
   {
     accessorKey: "id",
     header: () => <div>Id</div>,
-    cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("id")}</div>
-    ),
+    cell: ({ row }) => <div className="capitalize">{row.getValue("id")}</div>,
   },
   {
     accessorKey: "time",
@@ -77,7 +73,7 @@ export const columns = [
           Time
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
+      );
     },
     cell: ({ row }) => <div className="lowercase">{row.getValue("time")}</div>,
   },
@@ -85,8 +81,8 @@ export const columns = [
     accessorKey: "ahaMoments",
     header: () => <div>Aha Moments</div>,
     cell: ({ row }) => {
-      const amount = parseInt(row.getValue("ahaMoments"))
-      return <div >{amount}</div>
+      const amount = parseInt(row.getValue("ahaMoments"));
+      return <div>{amount}</div>;
     },
   },
   {
@@ -114,7 +110,7 @@ export const columns = [
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
-      const payment = row.original
+      const payment = row.original;
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -134,15 +130,15 @@ export const columns = [
             <DropdownMenuItem>View Session</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-      )
+      );
     },
   },
-]
+];
 
 function customFilterFn(rows, columnIds, filterValue) {
-  return rows.filter(row => {
-      const rowData = row.values[columnIds[0]].toLowerCase();
-      return rowData.toLowerCase().includes(filterValue.toLowerCase());
+  return rows.filter((row) => {
+    const rowData = row.values[columnIds[0]].toLowerCase();
+    return rowData.includes(filterValue.toLowerCase());
   });
 }
 
@@ -154,28 +150,38 @@ export function DataTableDemo() {
   const [swaggerData, setSwaggerData] = React.useState([]);
 
   const handleFilterChange = (value) => {
-    console.log("Filter value set to: ", value);
-    setColumnFilters([{ id: 'observableObjects', value }]);
-    console.log("Current filters: ", columnFilters);
+    setColumnFilters([{ id: "observableObjects", value }]);
   };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:5158/api/Analyzer/GetSessionsForMeditator?meditatorId=1");
+        const response = await axios.get(
+          "http://localhost:5158/api/Analyzer/GetSessionsForMeditator?meditatorId=1"
+        );
         if (response.status === 200) {
-          const transformedData = response.data.map(session => ({
-            id : session.id,
-            time: `${new Date(session.startTime).toLocaleDateString()} , ${new Date(session.startTime).toLocaleTimeString().substring(0,5)} -  ${new Date(session.endTime).toLocaleTimeString().substring(0,5)}`,
+          const transformedData = response.data.map((session) => ({
+            id: session.id,
+            time: `${new Date(session.startTime).toLocaleDateString()} , ${new Date(session.startTime)
+              .toLocaleTimeString()
+              .substring(0, 5)} - ${new Date(session.endTime)
+              .toLocaleTimeString()
+              .substring(0, 5)}`,
             ahaMoments: session.ahaMoments.length,
-            masteredStages: session.newlyMasterdStages.map(stage => `Stage ${stage.stageId}`).join(', '),
-            practicedStages: session.practicedStages.map(stage => `Stage ${stage.stageId}`).join(', '),
-            observableObjects: session.observableObjects.map(obj => obj.title).join(', ')
-          }))
+            masteredStages: session.newlyMasterdStages
+              .map((stage) => `Stage ${stage.stageId}`)
+              .join(", "),
+            practicedStages: session.practicedStages
+              .map((stage) => `Stage ${stage.stageId}`)
+              .join(", "),
+            observableObjects: session.observableObjects
+              .map((obj) => obj.title)
+              .join(", "),
+          }));
           setSwaggerData(transformedData);
         }
       } catch (error) {
-        console.error('Failed to fetch data:', error);
+        console.error("Failed to fetch data:", error);
       }
     };
 
@@ -193,33 +199,35 @@ export function DataTableDemo() {
     },
     onSortingChange: setSorting,
     onFiltersChange: setColumnFilters,
-    onRowSelectionChange: setRowSelection, // Add this line
+    onRowSelectionChange: setRowSelection,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel({
-        filterFns: {
-            'observableObjects': customFilterFn // Use your custom filter function for the observableObjects column
-        }
+      filterFns: {
+        observableObjects: customFilterFn,
+      },
     }),
     getPaginationRowModel: getPaginationRowModel(),
-    initialState: { // Add this line
-      pagination: { pageSize: 5 } // Add this line
-    }
+    initialState: {
+      pagination: { pageSize: 5 },
+    },
   });
 
   const toggleColumnVisibility = (columnId, isVisible) => {
-    setColumnVisibility(old => ({
-        ...old,
-        [columnId]: isVisible
+    setColumnVisibility((old) => ({
+      ...old,
+      [columnId]: isVisible,
     }));
   };
 
   return (
     <div className="w-full">
       <div className="flex items-center py-4">
-      <Input
+        <Input
           placeholder="Filter Sessions..."
-          value={columnFilters.find(f => f.id === 'observableObjects')?.value || ''}
+          value={
+            columnFilters.find((f) => f.id === "observableObjects")?.value || ""
+          }
           onChange={(event) => handleFilterChange(event.target.value)}
           className="max-w-sm"
         />
@@ -239,12 +247,13 @@ export function DataTableDemo() {
                     key={column.id}
                     className="capitalize"
                     checked={column.getIsVisible()}
-                    onCheckedChange={(value) => toggleColumnVisibility(column.id, value)}
+                    onCheckedChange={(value) =>
+                      toggleColumnVisibility(column.id, value)
+                    }
                   >
                     {column.id}
                   </DropdownMenuCheckboxItem>
-
-                )
+                );
               })}
           </DropdownMenuContent>
         </DropdownMenu>
@@ -264,7 +273,7 @@ export function DataTableDemo() {
                             header.getContext()
                           )}
                     </TableHead>
-                  )
+                  );
                 })}
               </TableRow>
             ))}
@@ -275,23 +284,20 @@ export function DataTableDemo() {
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
+                  className={
+                    row.original.masteredStages && row.original.masteredStages.length > 0 ? "mastered-stage-row" : ""
+                  }
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>
                   ))}
                 </TableRow>
               ))
             ) : (
               <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                >
+                <TableCell colSpan={columns.length} className="h-24 text-center">
                   No results.
                 </TableCell>
               </TableRow>
@@ -324,5 +330,5 @@ export function DataTableDemo() {
         </div>
       </div>
     </div>
-  )
+  );
 }

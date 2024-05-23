@@ -29,7 +29,7 @@ export const LineGraph = () => {
     labels: [],
     datasets: [
       {
-        label: 'Aha Moments per Session',
+        label: 'Aha Moments',
         data: [],
         fill: true,
         borderColor: '#2563eb',
@@ -44,10 +44,29 @@ export const LineGraph = () => {
           gradient.addColorStop(1, 'rgba(10, 24, 82, 0.4)');
           return gradient;
         },
-        tension: 0.4 // Add this line to smooth the edges
+        tension: 0.4
+      },
+      {
+        label: 'Observable Objects',
+        data: [],
+        fill: true,
+        borderColor: '#006400', // Dark green
+        backgroundColor: function(context) {
+          const chart = context.chart;
+          const {ctx, chartArea} = chart;
+          if (!chartArea) {
+            return;
+          }
+          const gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
+          gradient.addColorStop(0, 'rgba(0, 100, 0, 0.1)');
+          gradient.addColorStop(1, 'rgba(0, 100, 0, 0.4)');
+          return gradient;
+        },
+        tension: 0.4
       }
     ]
   });
+  const [averageAhaMoments, setAverageAhaMoments] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -56,16 +75,52 @@ export const LineGraph = () => {
         if (response.status === 200) {
           const sessionIds = response.data.map(session => session.id.toString());
           const ahaMoments = response.data.map(session => session.ahaMoments.length);
+          const observableObjects = response.data.map(session => session.observableObjects.length);
+
+          const averageAha = Math.round(ahaMoments.reduce((a, b) => a + b, 0) / ahaMoments.length);
+
           setChartData({
             labels: sessionIds,
-            datasets: [{
-              label: 'Aha Moments per Session',
-              data: ahaMoments,
-              fill: true,
-              borderColor: '#2563eb',
-              tension: 0.2 // Add this line to smooth the edges
-            }]
+            datasets: [
+              {
+                label: 'Aha Moments',
+                data: ahaMoments,
+                fill: true,
+                borderColor: '#2563eb',
+                backgroundColor: function(context) {
+                  const chart = context.chart;
+                  const {ctx, chartArea} = chart;
+                  if (!chartArea) {
+                    return;
+                  }
+                  const gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
+                  gradient.addColorStop(0, 'rgba(10, 24, 82, 0.1)');
+                  gradient.addColorStop(1, 'rgba(10, 24, 82, 0.4)');
+                  return gradient;
+                },
+                tension: 0.4
+              },
+              {
+                label: 'Observable Objects',
+                data: observableObjects,
+                fill: true,
+                borderColor: '#006400', // Dark green
+                backgroundColor: function(context) {
+                  const chart = context.chart;
+                  const {ctx, chartArea} = chart;
+                  if (!chartArea) {
+                    return;
+                  }
+                  const gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
+                  gradient.addColorStop(0, 'rgba(0, 100, 0, 0.1)');
+                  gradient.addColorStop(1, 'rgba(0, 100, 0, 0.4)');
+                  return gradient;
+                },
+                tension: 0.4
+              }
+            ]
           });
+          setAverageAhaMoments(averageAha);
         }
       } catch (error) {
         console.error('Failed to fetch data:', error);
@@ -84,7 +139,7 @@ export const LineGraph = () => {
         },
         title: {
           display: true,
-          text: 'Aha Moments',
+          text: 'Count',
           font: {
             size: 16
           }
@@ -108,7 +163,9 @@ export const LineGraph = () => {
     },
     plugins: {
       legend: {
-        display: true
+        display: true,
+        position: 'top',
+        align: 'end'
       },
       title: {
         display: true,
@@ -128,6 +185,11 @@ export const LineGraph = () => {
 
   return (
     <div style={{ width: '100%', height: '500px', margin: '0 auto', padding: '0 0%' }}>
+      <div style={{ position: 'relative' }}>
+        <p style={{ position: 'absolute', top: '40px', left: '60px', margin: '0', fontSize: '14px', fontWeight: 'bold', color: '#555' }}>
+          You had an average of {averageAhaMoments} Aha Moments in the past Sessions.
+        </p>
+      </div>
       <Line options={options} data={chartData} />
     </div>
   );

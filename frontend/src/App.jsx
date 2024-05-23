@@ -4,6 +4,7 @@ import viteLogo from "/vite.svg";
 import "./output.css";
 import { Button } from "./components/ui/button";
 import { Checkbox } from "./components/ui/checkbox";
+import UsageView from "./Pages/Usage";
 
 import Home from "./Pages/Home";
 import SessionSummary from "./Pages/SessionSummary";
@@ -13,7 +14,7 @@ function App() {
 
   return (
     <>
-      <SessionSummary/>
+      <UsageView />
     </>
   );
 }

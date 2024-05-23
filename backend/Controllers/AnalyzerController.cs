@@ -20,7 +20,7 @@ namespace backend.Controllers
 
 
         [HttpGet]
-        [Route("api/Analyzer")]
+        [Route("/api/Analyzer")]
         public async Task<ActionResult<IEnumerable<UserUsage>>> List()
         {
             return await dbContext.UserUsage.ToListAsync();
@@ -30,7 +30,7 @@ namespace backend.Controllers
         //[EnableCors("AllowedSpecificOrigins")]
         [EnableCors]
         [HttpGet]
-        [Route("api/Analyzer/GetUsageDataForPastWeek")]
+        [Route("/api/Analyzer/GetUsageDataForPastWeek")]
         public async Task<ActionResult<IEnumerable<object>>> GetUsageDataForPastWeek(/*int userId*/)//uncomment the parameter after testing.
         {
             var currentDate = DateTime.Today;
@@ -67,7 +67,7 @@ namespace backend.Controllers
 
         //[EnableCors("AllowedSpecificOrigins")]
         [HttpGet]
-        [Route("api/Analyzer/GetUsageDataCustom")]
+        [Route("/api/Analyzer/GetUsageDataCustom")]
         public async Task<ActionResult<IEnumerable<object>>> GetUsageDataCustom(string startDate/*,int userId*/)//uncomment the parameter after testing.
         {
             var currentDate = DateTime.Parse(startDate);
@@ -103,7 +103,7 @@ namespace backend.Controllers
 
 
         [HttpPost]
-        [Route("api/Analyzer/StartUsage")]
+        [Route("/api/Analyzer/StartUsage")]
         public async Task<IActionResult> StartUsage(/*int userId*/)//uncomment the parameter after testing.
         {
             var userUsage = new UserUsage
@@ -124,7 +124,7 @@ namespace backend.Controllers
         
 
         [HttpPost]
-        [Route("api/Analyzer/EndUsage")]
+        [Route("/api/Analyzer/EndUsage")]
         public async Task<IActionResult> EndUsage(/*int userId*/)//uncomment the parameter after testing.
         {
             var userUsage = await dbContext.UserUsage

@@ -1,7 +1,5 @@
 import * as React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
-// import "@/Styles/SessionTable.css";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import {
   flexRender,
@@ -32,8 +30,8 @@ import {
   TableHeader,
   TableRow,
 } from "../../components/ui/table";
+import "@/Styles/CustomStyles.css";
 
-// Column definitions
 export const columns = [
   {
     id: "select",
@@ -143,11 +141,11 @@ function customFilterFn(rows, columnIds, filterValue) {
 }
 
 export function DataTableDemo() {
-  const [sorting, setSorting] = React.useState([]);
-  const [columnFilters, setColumnFilters] = React.useState([]);
-  const [columnVisibility, setColumnVisibility] = React.useState({});
-  const [rowSelection, setRowSelection] = React.useState({});
-  const [swaggerData, setSwaggerData] = React.useState([]);
+  const [sorting, setSorting] = useState([]);
+  const [columnFilters, setColumnFilters] = useState([]);
+  const [columnVisibility, setColumnVisibility] = useState({});
+  const [rowSelection, setRowSelection] = useState({});
+  const [swaggerData, setSwaggerData] = useState([]);
 
   const handleFilterChange = (value) => {
     setColumnFilters([{ id: "observableObjects", value }]);
@@ -221,7 +219,7 @@ export function DataTableDemo() {
   };
 
   return (
-    <div className="w-full">
+    <div className="container">
       <div className="flex items-center py-4">
         <Input
           placeholder="Filter Sessions..."
@@ -258,7 +256,7 @@ export function DataTableDemo() {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <div className="rounded-md border">
+      <div className="table-container rounded-md border">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -285,7 +283,10 @@ export function DataTableDemo() {
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                   className={
-                    row.original.masteredStages && row.original.masteredStages.length > 0 ? "mastered-stage-row" : ""
+                    row.original.masteredStages &&
+                    row.original.masteredStages.length > 0
+                      ? "mastered-stage-row"
+                      : ""
                   }
                 >
                   {row.getVisibleCells().map((cell) => (

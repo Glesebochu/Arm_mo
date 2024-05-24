@@ -1,21 +1,16 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./output.css";
-import { Button } from "./components/ui/button";
-import { Checkbox } from "./components/ui/checkbox";
-import UsageView from "./Pages/Usage";
-
-import Home from "./Pages/Home";
+import * as React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import SessionSummary from "./Pages/AnalyticsPage";
+import SessionDetails from "./Pages/SessionDetails"; // Import the new component for session details
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <>
-      <SessionSummary />
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<SessionSummary />} />
+        <Route path="/session/:sessionId" element={<SessionDetails />} />
+      </Routes>
+    </Router>
   );
 }
 

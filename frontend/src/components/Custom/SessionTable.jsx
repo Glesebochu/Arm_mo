@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import {
   flexRender,
   getCoreRowModel,
@@ -146,6 +147,7 @@ export function DataTableDemo() {
   const [columnVisibility, setColumnVisibility] = useState({});
   const [rowSelection, setRowSelection] = useState({});
   const [swaggerData, setSwaggerData] = useState([]);
+  const navigate = useNavigate();
 
   const handleFilterChange = (value) => {
     setColumnFilters([{ id: "observableObjects", value }]);
@@ -218,6 +220,10 @@ export function DataTableDemo() {
     }));
   };
 
+  const handleRowClick = (session) => {
+    navigate(`/session/${session.id}`, { state: { session } });
+  };
+
   return (
     <div className="container">
       <div className="flex items-center py-4">
@@ -288,6 +294,7 @@ export function DataTableDemo() {
                       ? "mastered-stage-row"
                       : ""
                   }
+                  onClick={() => handleRowClick(row.original)}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>

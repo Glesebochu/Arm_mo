@@ -33,7 +33,7 @@
   align-items: center;
   transition: transform 2s ease-in-out;
   transform: scale(1);
-  border: 1px solid #36a2eb;
+  border: 2px solid #2563eb;
 }
 
 .circle:hover {
@@ -50,7 +50,7 @@
   font-size: 30px;
   margin: 0;
   margin-left: 3em;
-  color: #36a2eb;
+  color: #2563eb;
 }
 
 .text {

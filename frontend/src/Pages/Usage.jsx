@@ -85,7 +85,7 @@ const UsageView = () => {
             label: "Daily use",
             data: _CharData,
             borderWidth: 3,
-            borderColor: "rgb(75, 192, 192)",
+            borderColor: "#2563eb",
           },
         ],
       },

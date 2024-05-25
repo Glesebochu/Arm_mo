@@ -197,7 +197,6 @@ namespace backend.Controllers
 
         }
         [HttpGet("/api/Analyzer/GetStage")]
-
         public async Task<IActionResult> GetStage(int stageId)
         {
             var stage = await dbContext.Stages
@@ -217,6 +216,27 @@ namespace backend.Controllers
             return Ok(stage); // Return the list of user usages
 
         }
+
+        [HttpGet("/api/Analyzer/GetCountOfObservableObjectForMeditator")]
+        public async Task<IActionResult> GetCountOfObservableObjectForMeditator(string observableObject, int meditatorId)
+        {
+            var count = await dbContext.Sessions
+                .Where(s => s.Meditator.Id == meditatorId)
+                .SelectMany(s => s.ObservableObjects)
+                .CountAsync(o => o.Title == observableObject);
+
+            return Ok(count);
+        }
+
+        [HttpGet("/api/Analyzer/GetMeditatorForSession")]
+        
+        public async Task<IActionResult> GetMeditatorForSession(int sessionId){
+            var id = await dbContext.Sessions
+                    .Where(u => u.Id == sessionId)
+                    .Select(s => s.Meditator.Id).FirstOrDefaultAsync();
+            return Ok(id);
+        }
+
 
     }
 }

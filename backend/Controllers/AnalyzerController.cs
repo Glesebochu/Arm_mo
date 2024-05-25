@@ -207,7 +207,7 @@ namespace backend.Controllers
 
             // Check if any records were found
             if (stage == null){
-                return NotFound("No sessions found for the specified user.");
+                return NotFound("No Stages were found with that Id.");
             }
 
             stage.Skills = Stage.GetSkillsForStage(stage.Id);

@@ -4,6 +4,7 @@ using Arm_mo.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace backend.Migrations
 {
     [DbContext(typeof(Arm_moContext))]
-    partial class Arm_moContextModelSnapshot : ModelSnapshot
+    [Migration("20240525070029_UpdatedMeditator")]
+    partial class UpdatedMeditator
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,11 +41,17 @@ namespace backend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("MeditatorId")
+                        .HasColumnType("int");
+
                     b.Property<string>("State")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("MeditatorId")
+                        .IsUnique();
 
                     b.ToTable("Address");
                 });
@@ -99,9 +108,6 @@ namespace backend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("AddressId")
-                        .HasColumnType("int");
-
                     b.Property<int>("CurrentStageId")
                         .HasColumnType("int");
 
@@ -125,8 +131,6 @@ namespace backend.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AddressId");
 
                     b.HasIndex("CurrentStageId");
 
@@ -332,6 +336,15 @@ namespace backend.Migrations
                     b.ToTable("ObservableObjects");
                 });
 
+            modelBuilder.Entity("Address", b =>
+                {
+                    b.HasOne("Arm_mo.Models.Meditator", null)
+                        .WithOne("Address")
+                        .HasForeignKey("Address", "MeditatorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Arm_mo.Models.Activity", b =>
                 {
                     b.HasOne("ObservableObject", "MentalObject")
@@ -352,10 +365,6 @@ namespace backend.Migrations
 
             modelBuilder.Entity("Arm_mo.Models.Meditator", b =>
                 {
-                    b.HasOne("Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId");
-
                     b.HasOne("Arm_mo.Models.Stage", "CurrentStage")
                         .WithMany()
                         .HasForeignKey("CurrentStageId")
@@ -365,8 +374,6 @@ namespace backend.Migrations
                     b.HasOne("Arm_mo.Models.ProfilePicture", "profilePicture")
                         .WithMany()
                         .HasForeignKey("profilePictureId");
-
-                    b.Navigation("Address");
 
                     b.Navigation("CurrentStage");
 
@@ -455,6 +462,8 @@ namespace backend.Migrations
 
             modelBuilder.Entity("Arm_mo.Models.Meditator", b =>
                 {
+                    b.Navigation("Address");
+
                     b.Navigation("PracticedStages");
 
                     b.Navigation("UserUsages");

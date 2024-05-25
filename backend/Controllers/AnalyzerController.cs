@@ -121,7 +121,7 @@ namespace backend.Controllers
             return Ok();
         }
 
-        
+
 
         [HttpPost]
         [Route("/api/Analyzer/EndUsage")]
@@ -180,13 +180,14 @@ namespace backend.Controllers
             return Ok(session); // Return the list of user usages
         }
         [HttpGet("/api/Analyzer/GetSessionsForMeditator")]
-        public async Task<IActionResult> GetSessionsForMeditator(int meditatorId){
-             var sessions = await dbContext.Sessions
-                            .Where(u => u.Meditator.Id == meditatorId)
-                            .Include(s => s.PracticedStages)  // Include Practiced Stages
-                            .Include(s => s.NewlyMasterdStages)  // Include Newly Mastered Stages
-                            .Include(s => s.AhaMoments)  // Optionally include Aha Moments if needed
-                            .Include(s => s.ObservableObjects).ToListAsync();
+        public async Task<IActionResult> GetSessionsForMeditator(int meditatorId)
+        {
+            var sessions = await dbContext.Sessions
+                           .Where(u => u.Meditator.Id == meditatorId)
+                           .Include(s => s.PracticedStages)  // Include Practiced Stages
+                           .Include(s => s.NewlyMasterdStages)  // Include Newly Mastered Stages
+                           .Include(s => s.AhaMoments)  // Optionally include Aha Moments if needed
+                           .Include(s => s.ObservableObjects).ToListAsync();
 
             // Check if any records were found
             if (!sessions.Any())
@@ -195,6 +196,27 @@ namespace backend.Controllers
             return Ok(sessions); // Return the list of user usages
 
         }
-        
+        [HttpGet("/api/Analyzer/GetStage")]
+
+        public async Task<IActionResult> GetStage(int stageId)
+        {
+            var stage = await dbContext.Stages
+            .Where(s => s.Id == stageId).FirstOrDefaultAsync();
+
+
+
+            // Check if any records were found
+            if (stage == null){
+                return NotFound("No sessions found for the specified user.");
+            }
+
+            stage.Skills = Stage.GetSkillsForStage(stage.Id);
+            stage.Obstacles = Stage.GetObstaclesForStage(stage.Id);
+            stage.Intentions = Stage.GetIntentionsForStage(stage.Id);
+            stage.MasteryRequirements = Stage.GetMasteryRequirementsForStage(stage.Id);
+            return Ok(stage); // Return the list of user usages
+
+        }
+
     }
 }

@@ -227,6 +227,8 @@ export function DataTableDemo() {
   return (
     <div className="container">
       <div className="flex items-center py-4">
+        <div className="px-4">
+
         <Input
           placeholder="Filter Sessions..."
           value={
@@ -234,7 +236,8 @@ export function DataTableDemo() {
           }
           onChange={(event) => handleFilterChange(event.target.value)}
           className="max-w-sm"
-        />
+          />
+          </div>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">

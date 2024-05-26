@@ -1,15 +1,17 @@
-import Signin from "./Pages/Signin"
-import Signup from "./Pages/Signup"
-import Setting from "./Pages/Settings"
+import * as React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import SessionSummary from "./Pages/AnalyticsPage";
+import SessionDetails from "./Pages/SessionDetails"; // Import the new component for session details
 
 function App() {
   return (
-    <>
-     {/* <Signup/> */}
-     {/* <Signin/> */}
-     <Setting/>
-    </>
-  )
+    <Router>
+      <Routes>
+        <Route path="/" element={<SessionSummary />} />
+        <Route path="/session/:sessionId" element={<SessionDetails />} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;

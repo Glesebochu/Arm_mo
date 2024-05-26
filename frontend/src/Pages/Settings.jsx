@@ -1,7 +1,7 @@
 "use client";
 
-import Tabs from "../components/AnimatedTabs";
-import Profile from "../components/Profile";
+import Tabs from "../components/Custom/AnimatedTabs";
+import Profile from "../components/Custom/Profile";
 
 const Settings = () => {
   const tabs = [

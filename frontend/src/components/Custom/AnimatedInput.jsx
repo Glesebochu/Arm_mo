@@ -1,6 +1,6 @@
 "use client";
 import * as React from "react";
-import { cn } from "../../utils/cn";
+import { cn } from "../../../utils/cn";
 import { useMotionTemplate, useMotionValue, motion } from "framer-motion";
 
 const AnimatedInput = React.forwardRef(

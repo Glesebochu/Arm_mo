@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { Button } from "../components/ui/button";
-import { AnimatedInput } from "../components/AnimatedInput";
+import { AnimatedInput } from "../components/Custom/AnimatedInput";
 import { Label } from "../components/ui/label";
 import { cn } from "../../utils/cn";
 import { FaGoogle } from "react-icons/fa";

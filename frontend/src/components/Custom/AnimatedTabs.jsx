@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { cn } from "../../utils/cn";
+import { cn } from "../../../utils/cn";
 
  const AnimatedTabs = ({
   tabs: propTabs,

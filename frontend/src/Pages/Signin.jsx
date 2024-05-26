@@ -1,8 +1,8 @@
 import { Button } from "../components/ui/button"
 import { Label  } from "../components/ui/label"
 import { FaGoogle } from "react-icons/fa"
-import { AnimatedInput } from "../components/AnimatedInput"
-import { Meteors } from "../components/Meteors";
+import { AnimatedInput } from "../components/Custom/AnimatedInput"
+import { Meteors } from "../components/Custom/Meteors";
 
 const Signin = () => {
   return (

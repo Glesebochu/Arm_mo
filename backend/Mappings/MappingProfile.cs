@@ -23,6 +23,9 @@ namespace backend.Mappings
 
             CreateMap<Goal, CreateGoalDTO>();
             CreateMap<CreateGoalDTO, Goal>();
+            
+            CreateMap<Goal, GoalDTOId>();
+            CreateMap<GoalDTOId, Goal>();
 
             // For Activities
             // ==============

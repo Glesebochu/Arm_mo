@@ -23,6 +23,7 @@ namespace backend.Controllers
         [HttpGet]
         public IActionResult GetAll(){
             var goals = _context.Goals
+                .Include(g => g.Id)
                 .Include(g => g.Activity)
                 .Include(g => g.MeditationObject)
                 .ToList();
@@ -30,7 +31,16 @@ namespace backend.Controllers
 
             return Ok(goalDTOs);
         }
+        [HttpGet]
+        public IActionResult GetAllWithId(){
+            var goals = _context.Goals
+                .Include(g => g.Activity)
+                .Include(g => g.MeditationObject)
+                .ToList();
+            var goalDTOIds = _mapper.Map<List<GoalDTOId>>(goals);
 
+            return Ok(goalDTOIds);
+        }
         // An action for getting/reading a single goal
         [HttpGet("{id}")]
         public IActionResult GetById([FromRoute] int id){

@@ -2,6 +2,7 @@
 using backend.Data;
 using Microsoft.CodeAnalysis.Options;
 using Microsoft.EntityFrameworkCore;
+using AutoMapper;
 
 namespace backend
 {

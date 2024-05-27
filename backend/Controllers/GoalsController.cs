@@ -4,6 +4,8 @@ using backend.DTOs.Goal;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace backend.Controllers
 {
@@ -18,12 +20,12 @@ namespace backend.Controllers
             _context = context;
             _mapper = mapper;
         }
-        
+
         // An action for getting/reading all the goals
         [HttpGet]
-        public IActionResult GetAll(){
+        public IActionResult GetAll()
+        {
             var goals = _context.Goals
-                .Include(g => g.Id)
                 .Include(g => g.Activity)
                 .Include(g => g.MeditationObject)
                 .ToList();
@@ -32,7 +34,8 @@ namespace backend.Controllers
             return Ok(goalDTOs);
         }
         [HttpGet]
-        public IActionResult GetAllWithId(){
+        public IActionResult GetAllWithId()
+        {
             var goals = _context.Goals
                 .Include(g => g.Activity)
                 .Include(g => g.MeditationObject)
@@ -43,7 +46,8 @@ namespace backend.Controllers
         }
         // An action for getting/reading a single goal
         [HttpGet("{id}")]
-        public IActionResult GetById([FromRoute] int id){
+        public IActionResult GetById([FromRoute] int id)
+        {
 
 
             var goal = _context.Goals
@@ -53,9 +57,12 @@ namespace backend.Controllers
                 .FirstOrDefault(g => g.Id == id);
 
 
-            if (goal == null){
+            if (goal == null)
+            {
                 return NotFound();
-            }else{
+            }
+            else
+            {
                 return Ok(_mapper.Map<GoalDTO>(goal));
             }
         }
@@ -65,7 +72,8 @@ namespace backend.Controllers
         // An action for creating a goal; POST
         [HttpPost]
         [ActionName("Create")]
-        public IActionResult Create([FromBody] CreateGoalDTO createGoalDTO){
+        public IActionResult Create([FromBody] CreateGoalDTO createGoalDTO)
+        {
             // Convert the DTO into a Goal object that EF can understand.
             var goal = _mapper.Map<Models.Goal>(createGoalDTO);
 
@@ -76,12 +84,12 @@ namespace backend.Controllers
             _context.SaveChanges();
 
             return CreatedAtAction(
-                nameof(GetById), 
-                new {id = goal.Id},
+                nameof(GetById),
+                new { id = goal.Id },
                 _mapper.Map<GoalDTO>(goal)
             );
 
         }
-        
+
     }
 }

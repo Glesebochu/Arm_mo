@@ -14,16 +14,21 @@ const SessionSummary = () => {
     if (selectedView === "UsageView") {
       return <UsageView />;
     } else if (selectedView === "Insights") {
-      return <Insights />;
-    }
-    return (
+      return(
       <ResponsiveContainer>
-        <div className="flex flex-col items-center justify-center space-y-8">
-          <LineGraph />
-          <DataTableDemo />
-        </div>
-      </ResponsiveContainer>
-    );
+        <Insights />
+        </ResponsiveContainer>
+      )
+    } else {
+      return (
+        <ResponsiveContainer>
+          <div className="flex flex-col items-center justify-center space-y-8">
+            <LineGraph />
+            <DataTableDemo />
+          </div>
+        </ResponsiveContainer>
+      );
+    }
   };
 
   return (

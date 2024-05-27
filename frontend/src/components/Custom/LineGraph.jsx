@@ -220,8 +220,7 @@ export const LineGraph = () => {
       <div className="container">
         <div className="chart-container relative w-full h-[500px] mx-auto px-0">
           <p className="absolute top-9 left-16 m-0 text-sm font-bold text-gray-500">
-            You had an average of {averageAhaMoments} Aha Moments in the past
-            Sessions.
+            Average Aha Moments: {averageAhaMoments}
           </p>
           <Line options={options} data={chartData} />
         </div>

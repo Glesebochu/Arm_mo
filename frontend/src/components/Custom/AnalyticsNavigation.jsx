@@ -42,17 +42,17 @@ export function NavigationMenuDemo({ setSelectedView }) {
                 a tabular format.
               </ListItem>
               <ListItem
+                title="Insights"
+                onClick={() => setSelectedView("Insights")}
+              >
+                Peek into your Meditation status.
+              </ListItem>
+              <ListItem
                 title="Weekly Activity"
                 onClick={() => setSelectedView("UsageView")}
               >
                 Provides you with a graph that shows you the time you spent on
                 the app in a given week.
-              </ListItem>
-              <ListItem
-                title="Today's Activity"
-                onClick={() => setSelectedView("UsageView")}
-              >
-                Shows you the time you spent on the app Today.
               </ListItem>
             </ul>
           </NavigationMenuContent>

@@ -16,7 +16,6 @@ namespace backend.DTOs.Goal
         public ObservableObjectDTO? MeditationObject { get; set; }
         public DateTime DueDateTime { get; set; }
         public DateTime CompletedDateTime { get; set; }
-        public GoalDTO? ParentGoal { get; set; }
         public List<GoalDTO>? ChildGoals { get; set; }
     }
 }

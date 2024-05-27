@@ -50,8 +50,6 @@ namespace backend
             }
             else
             {
-                // Use default error handler for production
-                app.UseExceptionHandler("/Home/Error");
                 // Enforce HSTS (HTTP Strict Transport Security)
                 app.UseHsts();
             }

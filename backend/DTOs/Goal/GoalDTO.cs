@@ -17,5 +17,6 @@ namespace backend.DTOs.Goal
         public DateTime CompletedDateTime { get; set; }
         public GoalDTO? ParentGoal { get; set; }
         public List<GoalDTO>? ChildGoals { get; set; }
+        public string GetTitle() => $"{Activity} {MeditationObject}";
     }
 }

@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using backend.Interfaces;
+
 
 namespace backend.Controllers
 {
@@ -16,6 +18,7 @@ namespace backend.Controllers
     {
         private readonly Arm_moContext _context;
         private readonly IMapper _mapper;
+        private readonly IGoalRepository _goalRepo;
         public GoalsController(Arm_moContext context, IMapper mapper)
         {
             _context = context;
@@ -23,7 +26,7 @@ namespace backend.Controllers
         }
 
         // An action for getting/reading all the goals
-        [HttpGet]
+        [HttpGet("GetAll")]
         public IActionResult GetAll()
         {
             var goals = _context.Goals
@@ -52,7 +55,7 @@ namespace backend.Controllers
             return goalDTO;
         }
         // An action for getting/reading a single goal
-        [HttpGet("{id}")]
+        [HttpGet("GetById/{id}")]
         public IActionResult GetById([FromRoute] int id)
         {
 
@@ -97,9 +100,9 @@ namespace backend.Controllers
             );
 
         }
-        
+
         // An action for deleting a goal; POST
-        [HttpDelete("{id:int}")]
+        [HttpDelete("Delete/{id:int}")]
         public async Task<ActionResult> DeleteGoal(int id)
         {
             try
@@ -125,22 +128,38 @@ namespace backend.Controllers
 
         // An action for updating a goal; POST
         [HttpPut("Update/{id}")]
-        public async Task<ActionResult> UpdateGoal(int id, GoalDTO goalDTO)
+        public async Task<ActionResult> UpdateGoal(int id, [FromBody] UpdateGoalDTO updateGoalDto)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             try
             {
                 // Find the goal by ID
-                var existingGoal = await _context.Goals.FindAsync(id);
+                var existingGoal = await _context.Goals
+                    .Include(g => g.Activity)
+                    .Include(g => g.MeditationObject)
+                    .FirstOrDefaultAsync(g => g.Id == id);
+
                 if (existingGoal == null)
                 {
                     return NotFound("Goal not found"); // Return 404 Not Found if goal is not found
                 }
 
-                // Update the properties of the existing goal entity
-                existingGoal.Status = (GoalStatus)Enum.Parse(typeof(GoalStatus), goalDTO.Status);
-                existingGoal.DueDateTime = goalDTO.DueDateTime;
-                existingGoal.CompletedDateTime = goalDTO.CompletedDateTime;
-                // Update other properties as needed
+                // Map the UpdateGoalDTO to the existing Goal entity
+                existingGoal.Status = updateGoalDto.Status;
+                existingGoal.DueDateTime = updateGoalDto.DueDateTime;
+                existingGoal.CompletedDateTime = updateGoalDto.CompletedDateTime;
+
+                // Update the titles of the Activity and MeditationObject
+                if (existingGoal.Activity != null)
+                {
+                    existingGoal.Activity.Title = updateGoalDto.Activity;
+                }
+                if (existingGoal.MeditationObject != null)
+                {
+                    existingGoal.MeditationObject.Title = updateGoalDto.MeditationObject;
+                }
 
                 // Save changes to the database
                 await _context.SaveChangesAsync();
@@ -154,8 +173,26 @@ namespace backend.Controllers
         }
 
 
+        //     [HttpPut]
+        //     [Route("{id:int}")]
+        //     public async Task<IActionResult> Update([FromRoute] int id, [FromBody] GoalDTO goalDto)
+        //     {
+        //         if (!ModelState.IsValid)
+        //             return BadRequest(ModelState);
+
+        //         var GoalDTOs = await _goalRepo.UpdateAsync(id, goalDto);
+
+        //         if (GoalDTOs == null)
+        //         {
+        //             return NotFound();
+        //         }
+
+        //         return Ok(GoalDTOs);
+        //     }
+
+        // }
+
+
     }
-
-
 }
 

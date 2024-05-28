@@ -55,12 +55,14 @@ export function Goals() {
     return (
         <>
             <h2>Goals</h2>
-            <h3 className="">Not Started</h3>
+            <h3>Not Started</h3>
             <GoalsTable goals={notStartedGoals} />
-            <h3 className="">Underway</h3>
+            <h3>Underway</h3>
             <GoalsTable goals={underwayGoals} />
-            <h3 className="">Done</h3>
+            <h3>Done</h3>
             <GoalsTable goals={doneGoals} />
+            <h3>Blabber</h3>
+            <GoalsTable goals={null} />
         </>
     );
 

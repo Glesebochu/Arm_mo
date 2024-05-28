@@ -269,5 +269,41 @@ namespace backend.Controllers
             return Ok(meditator.CurrentStage);
         }
 
+        [HttpGet("/api/analyzer/GetLongestSessionForMeditator")]
+        public async Task<IActionResult> GetLongestSessionForMeditator([FromQuery] int meditatorId)
+        {
+            if (meditatorId <= 0)
+            {
+                return BadRequest("Invalid meditator ID.");
+            }
+
+            var meditator = await dbContext.Meditators
+                .Where(m => m.Id == meditatorId)
+                .FirstOrDefaultAsync();
+
+            if (meditator == null)
+            {
+                return NotFound("No meditators with that ID found.");
+            }
+
+            var sessions = await dbContext.Sessions
+                .Where(s => s.Meditator.Id == meditatorId)
+                .ToListAsync();
+
+            if (sessions == null || !sessions.Any())
+            {
+                return NotFound("No sessions found for this meditator.");
+            }
+
+            var sessionWithLongestDuration = sessions
+                .OrderByDescending(s => (s.EndTime - s.StartTime).TotalSeconds)
+                .FirstOrDefault();
+
+            return Ok(sessionWithLongestDuration);
+        }
+
+
+
+
     }
 }

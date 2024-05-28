@@ -1,5 +1,5 @@
 ﻿using Arm_mo.Context;
-using Arm_mo.Models;
+using backend.Models;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -205,7 +205,8 @@ namespace backend.Controllers
 
 
             // Check if any records were found
-            if (stage == null){
+            if (stage == null)
+            {
                 return NotFound("No Stages were found with that Id.");
             }
 
@@ -229,14 +230,44 @@ namespace backend.Controllers
         }
 
         [HttpGet("/api/Analyzer/GetMeditatorForSession")]
-        
-        public async Task<IActionResult> GetMeditatorForSession(int sessionId){
+
+        public async Task<IActionResult> GetMeditatorForSession(int sessionId)
+        {
             var id = await dbContext.Sessions
                     .Where(u => u.Id == sessionId)
                     .Select(s => s.Meditator.Id).FirstOrDefaultAsync();
             return Ok(id);
         }
 
+        [HttpGet("/api/analyzer/GetPracticedStagesForMeditator")]
+        public async Task<IActionResult> GetPracticedStagesForMeditator(int meditatorId)
+        {
+            var practicedStages = await dbContext.Meditators
+                .Where(m => m.Id == meditatorId)
+                .Include(m => m.PracticedStages).ToListAsync();
+            return Ok(practicedStages);
+        }
+
+        [HttpGet("/api/analyzer/GetCurrentStageOfMeditator")]
+        public async Task<IActionResult> GetCurrentStageOfMeditator([FromQuery] int meditatorId)
+        {
+            if (meditatorId <= 0)
+            {
+                return BadRequest("Invalid meditator ID.");
+            }
+
+            var meditator = await dbContext.Meditators
+                .Where(m => m.Id == meditatorId)
+                .Select(m => new { m.CurrentStage })
+                .FirstOrDefaultAsync();
+
+            if (meditator == null)
+            {
+                return NotFound("No meditators with that ID found.");
+            }
+
+            return Ok(meditator.CurrentStage);
+        }
 
     }
 }

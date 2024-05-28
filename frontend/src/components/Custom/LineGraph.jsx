@@ -13,6 +13,7 @@ import {
   Filler,
 } from "chart.js";
 import "@/Styles/CustomStyles.css";
+import { ResponsiveContainer } from "recharts";
 
 ChartJS.register(
   CategoryScale,
@@ -50,7 +51,7 @@ export const LineGraph = () => {
           gradient.addColorStop(1, "rgba(10, 24, 82, 0.4)");
           return gradient;
         },
-        tension: 0.4,
+        tension: 0.3,
       },
       {
         label: "Observable Objects",
@@ -73,7 +74,7 @@ export const LineGraph = () => {
           gradient.addColorStop(1, "rgba(0, 100, 0, 0.4)");
           return gradient;
         },
-        tension: 0.4,
+        tension: 0.3,
       },
     ],
   });
@@ -124,7 +125,7 @@ export const LineGraph = () => {
                   gradient.addColorStop(1, "rgba(10, 24, 82, 0.4)");
                   return gradient;
                 },
-                tension: 0.4,
+                tension: 0.3,
               },
               {
                 label: "Observable Objects",
@@ -147,7 +148,7 @@ export const LineGraph = () => {
                   gradient.addColorStop(1, "rgba(0, 100, 0, 0.4)");
                   return gradient;
                 },
-                tension: 0.4,
+                tension: 0.3,
               },
             ],
           });
@@ -215,14 +216,15 @@ export const LineGraph = () => {
   };
 
   return (
-    <div className="container">
-      <div className="chart-container relative w-full h-[500px] mx-auto px-0">
-        <p className="absolute top-9 left-16 m-0 text-sm font-bold text-gray-500">
-          You had an average of {averageAhaMoments} Aha Moments in the past
-          Sessions.
-        </p>
-        <Line options={options} data={chartData} />
+    <ResponsiveContainer>
+      <div className="container">
+        <div className="chart-container relative w-full h-[500px] mx-auto px-0">
+          <p className="absolute top-9 left-16 m-0 text-sm font-bold text-gray-500">
+            Average Aha Moments: {averageAhaMoments}
+          </p>
+          <Line options={options} data={chartData} />
+        </div>
       </div>
-    </div>
+    </ResponsiveContainer>
   );
 };

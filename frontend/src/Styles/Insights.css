@@ -1,0 +1,22 @@
+.containerInsight {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 2fr 4fr;
+  grid-template-rows: 1fr 4fr;
+}
+.box {
+  /* padding: 20px; */
+  border-radius: 10px;
+  /* margin: 10px; */
+  /* border: 1px solid blue; */
+}
+.box1{
+    padding-left: 90px;
+    margin-left: 40px;
+}
+.box2 {
+  margin-right: 40px;
+  padding-right: 30px;
+  margin-left: 100px;
+
+}

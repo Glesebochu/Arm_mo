@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { cn } from "@/lib/utils"
+import * as React from "react";
+import { cn } from "@/lib/utils";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -10,7 +10,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu"
+} from "@/components/ui/navigation-menu";
 
 export function NavigationMenuDemo({ setSelectedView }) {
   return (
@@ -27,19 +27,32 @@ export function NavigationMenuDemo({ setSelectedView }) {
                       Arm_mo Analytics
                     </div>
                     <p className="text-sm leading-tight text-muted-foreground">
-                      View all your analytic data here. You can easily see trends across all of your sessions - from the time you spent on sessions to the number of AhaMoments.
+                      View all your analytic data here. You can easily see
+                      trends across all of your sessions - from the time you
+                      spent on sessions to the number of AhaMoments.
                     </p>
                   </p>
                 </NavigationMenuLink>
               </li>
-              <ListItem title="Sessions Summary" onClick={() => setSelectedView("DataTable")}>
-                View a comprehensive summary of the sessions you had recently in a tabular format.
+              <ListItem
+                title="Sessions Summary"
+                onClick={() => setSelectedView("DataTable")}
+              >
+                View a comprehensive summary of the sessions you had recently in
+                a tabular format.
               </ListItem>
-              <ListItem title="Weekly Activity" onClick={() => setSelectedView("UsageView")}>
-                Provides you with a graph that shows you the time you spent on the app in a given week.
+              <ListItem
+                title="Insights"
+                onClick={() => setSelectedView("Insights")}
+              >
+                Peek into your Meditation status.
               </ListItem>
-              <ListItem title="Today's Activity" onClick={() => setSelectedView("UsageView")}>
-                Shows you the time you spent on the app Today.
+              <ListItem
+                title="Weekly Activity"
+                onClick={() => setSelectedView("UsageView")}
+              >
+                Provides you with a graph that shows you the time you spent on
+                the app in a given week.
               </ListItem>
             </ul>
           </NavigationMenuContent>
@@ -60,31 +73,41 @@ export function NavigationMenuDemo({ setSelectedView }) {
             App Activity
           </NavigationMenuLink>
         </NavigationMenuItem>
+        <NavigationMenuItem>
+          <NavigationMenuLink
+            className={navigationMenuTriggerStyle()}
+            onClick={() => setSelectedView("Insights")}
+          >
+            Insights
+          </NavigationMenuLink>
+        </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
   );
 }
 
-const ListItem = React.forwardRef(({ className, title, children, onClick, ...props }, ref) => {
-  return (
-    <li>
-      <NavigationMenuLink asChild>
-        <a
-          ref={ref}
-          className={cn(
-            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
-            className
-          )}
-          onClick={onClick}
-          {...props}
-        >
-          <div className="text-sm font-medium leading-none">{title}</div>
-          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-            {children}
-          </p>
-        </a>
-      </NavigationMenuLink>
-    </li>
-  );
-});
+const ListItem = React.forwardRef(
+  ({ className, title, children, onClick, ...props }, ref) => {
+    return (
+      <li>
+        <NavigationMenuLink asChild>
+          <a
+            ref={ref}
+            className={cn(
+              "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+              className
+            )}
+            onClick={onClick}
+            {...props}
+          >
+            <div className="text-sm font-medium leading-none">{title}</div>
+            <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+              {children}
+            </p>
+          </a>
+        </NavigationMenuLink>
+      </li>
+    );
+  }
+);
 ListItem.displayName = "ListItem";

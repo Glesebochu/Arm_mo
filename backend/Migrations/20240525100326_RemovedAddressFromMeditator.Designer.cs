@@ -50,7 +50,7 @@ namespace backend.Migrations
                     b.ToTable("Address");
                 });
 
-            modelBuilder.Entity("Arm_mo.Models.Activity", b =>
+            modelBuilder.Entity("backend.Models.Activity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -72,7 +72,7 @@ namespace backend.Migrations
                     b.ToTable("Activities");
                 });
 
-            modelBuilder.Entity("Arm_mo.Models.AhaMoment", b =>
+            modelBuilder.Entity("backend.Models.AhaMoment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -94,7 +94,7 @@ namespace backend.Migrations
                     b.ToTable("AhaMoments");
                 });
 
-            modelBuilder.Entity("Arm_mo.Models.Meditator", b =>
+            modelBuilder.Entity("backend.Models.Meditator", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -138,7 +138,7 @@ namespace backend.Migrations
                     b.ToTable("Meditators");
                 });
 
-            modelBuilder.Entity("Arm_mo.Models.NewlyMasteredStage", b =>
+            modelBuilder.Entity("backend.Models.NewlyMasteredStage", b =>
                 {
                     b.Property<int>("SessionId")
                         .HasColumnType("int");
@@ -153,7 +153,7 @@ namespace backend.Migrations
                     b.ToTable("NewlyMasteredStage");
                 });
 
-            modelBuilder.Entity("Arm_mo.Models.PracticedStage", b =>
+            modelBuilder.Entity("backend.Models.PracticedStage", b =>
                 {
                     b.Property<int>("SessionId")
                         .HasColumnType("int");
@@ -173,7 +173,7 @@ namespace backend.Migrations
                     b.ToTable("PracticedStage");
                 });
 
-            modelBuilder.Entity("Arm_mo.Models.ProfilePicture", b =>
+            modelBuilder.Entity("backend.Models.ProfilePicture", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -193,7 +193,7 @@ namespace backend.Migrations
                     b.ToTable("ProfilePictures");
                 });
 
-            modelBuilder.Entity("Arm_mo.Models.Session", b =>
+            modelBuilder.Entity("backend.Models.Session", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -217,7 +217,7 @@ namespace backend.Migrations
                     b.ToTable("Sessions");
                 });
 
-            modelBuilder.Entity("Arm_mo.Models.Stage", b =>
+            modelBuilder.Entity("backend.Models.Stage", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -234,7 +234,7 @@ namespace backend.Migrations
                     b.ToTable("Stages");
                 });
 
-            modelBuilder.Entity("Arm_mo.Models.Step", b =>
+            modelBuilder.Entity("backend.Models.Step", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -265,7 +265,7 @@ namespace backend.Migrations
                     b.ToTable("Steps");
                 });
 
-            modelBuilder.Entity("Arm_mo.Models.UserUsage", b =>
+            modelBuilder.Entity("backend.Models.UserUsage", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -335,7 +335,7 @@ namespace backend.Migrations
                     b.ToTable("ObservableObjects");
                 });
 
-            modelBuilder.Entity("Arm_mo.Models.Activity", b =>
+            modelBuilder.Entity("backend.Models.Activity", b =>
                 {
                     b.HasOne("ObservableObject", "MentalObject")
                         .WithMany()
@@ -346,26 +346,26 @@ namespace backend.Migrations
                     b.Navigation("MentalObject");
                 });
 
-            modelBuilder.Entity("Arm_mo.Models.AhaMoment", b =>
+            modelBuilder.Entity("backend.Models.AhaMoment", b =>
                 {
-                    b.HasOne("Arm_mo.Models.Session", null)
+                    b.HasOne("backend.Models.Session", null)
                         .WithMany("AhaMoments")
                         .HasForeignKey("SessionId");
                 });
 
-            modelBuilder.Entity("Arm_mo.Models.Meditator", b =>
+            modelBuilder.Entity("backend.Models.Meditator", b =>
                 {
                     b.HasOne("Address", "Address")
                         .WithMany()
                         .HasForeignKey("AddressId");
 
-                    b.HasOne("Arm_mo.Models.Stage", "CurrentStage")
+                    b.HasOne("backend.Models.Stage", "CurrentStage")
                         .WithMany()
                         .HasForeignKey("CurrentStageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Arm_mo.Models.ProfilePicture", "profilePicture")
+                    b.HasOne("backend.Models.ProfilePicture", "profilePicture")
                         .WithMany()
                         .HasForeignKey("profilePictureId");
 
@@ -376,15 +376,15 @@ namespace backend.Migrations
                     b.Navigation("profilePicture");
                 });
 
-            modelBuilder.Entity("Arm_mo.Models.NewlyMasteredStage", b =>
+            modelBuilder.Entity("backend.Models.NewlyMasteredStage", b =>
                 {
-                    b.HasOne("Arm_mo.Models.Session", "Session")
+                    b.HasOne("backend.Models.Session", "Session")
                         .WithMany("NewlyMasterdStages")
                         .HasForeignKey("SessionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Arm_mo.Models.Stage", "Stage")
+                    b.HasOne("backend.Models.Stage", "Stage")
                         .WithMany()
                         .HasForeignKey("StageId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -395,19 +395,19 @@ namespace backend.Migrations
                     b.Navigation("Stage");
                 });
 
-            modelBuilder.Entity("Arm_mo.Models.PracticedStage", b =>
+            modelBuilder.Entity("backend.Models.PracticedStage", b =>
                 {
-                    b.HasOne("Arm_mo.Models.Meditator", null)
+                    b.HasOne("backend.Models.Meditator", null)
                         .WithMany("PracticedStages")
                         .HasForeignKey("MeditatorId");
 
-                    b.HasOne("Arm_mo.Models.Session", "Session")
+                    b.HasOne("backend.Models.Session", "Session")
                         .WithMany("PracticedStages")
                         .HasForeignKey("SessionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Arm_mo.Models.Stage", "Stage")
+                    b.HasOne("backend.Models.Stage", "Stage")
                         .WithMany()
                         .HasForeignKey("StageId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -418,9 +418,9 @@ namespace backend.Migrations
                     b.Navigation("Stage");
                 });
 
-            modelBuilder.Entity("Arm_mo.Models.Session", b =>
+            modelBuilder.Entity("backend.Models.Session", b =>
                 {
-                    b.HasOne("Arm_mo.Models.Meditator", "Meditator")
+                    b.HasOne("backend.Models.Meditator", "Meditator")
                         .WithMany()
                         .HasForeignKey("MeditatorId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -429,18 +429,18 @@ namespace backend.Migrations
                     b.Navigation("Meditator");
                 });
 
-            modelBuilder.Entity("Arm_mo.Models.Step", b =>
+            modelBuilder.Entity("backend.Models.Step", b =>
                 {
-                    b.HasOne("Arm_mo.Models.Activity", "Activity")
+                    b.HasOne("backend.Models.Activity", "Activity")
                         .WithMany()
                         .HasForeignKey("ActivityId");
 
                     b.Navigation("Activity");
                 });
 
-            modelBuilder.Entity("Arm_mo.Models.UserUsage", b =>
+            modelBuilder.Entity("backend.Models.UserUsage", b =>
                 {
-                    b.HasOne("Arm_mo.Models.Meditator", "User")
+                    b.HasOne("backend.Models.Meditator", "User")
                         .WithMany("UserUsages")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -451,19 +451,19 @@ namespace backend.Migrations
 
             modelBuilder.Entity("ObservableObject", b =>
                 {
-                    b.HasOne("Arm_mo.Models.Session", null)
+                    b.HasOne("backend.Models.Session", null)
                         .WithMany("ObservableObjects")
                         .HasForeignKey("SessionId");
                 });
 
-            modelBuilder.Entity("Arm_mo.Models.Meditator", b =>
+            modelBuilder.Entity("backend.Models.Meditator", b =>
                 {
                     b.Navigation("PracticedStages");
 
                     b.Navigation("UserUsages");
                 });
 
-            modelBuilder.Entity("Arm_mo.Models.Session", b =>
+            modelBuilder.Entity("backend.Models.Session", b =>
                 {
                     b.Navigation("AhaMoments");
 

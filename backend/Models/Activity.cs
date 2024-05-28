@@ -4,16 +4,15 @@
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public ObservableObject MentalObject { get; set; }
         public Activity()
         {
 
         }
-        public Activity(String title, ObservableObject mentalObject) { 
+        public Activity(String title)
+        {
             Title = title;
-            MentalObject = mentalObject;
         }
-        
+
 
     }
 }

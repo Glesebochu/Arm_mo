@@ -10,15 +10,16 @@ import "@/Styles/Insights.css";
 const Insights = () => {
   return (
     <div className="containerInsight">
-      <ResponsiveContainer className={"box box1"}>
-        <CurrentStageAlert />
-      </ResponsiveContainer>
-      <ResponsiveContainer className={"box box2"}>
+      <div className="box box2">
         <BarGraph meditatorId={1} />
-      </ResponsiveContainer>
-      <ResponsiveContainer className={"box box2"}>
+      </div>
+      
+      <div className="box box2">
+        <div className="box box1">
+          <CurrentStageAlert />
+        </div>
         <LongestSession />
-      </ResponsiveContainer>
+      </div>
     </div>
   );
 };

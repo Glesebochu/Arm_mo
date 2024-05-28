@@ -50,7 +50,7 @@ const BarGraph = ({ meditatorId }) => {
               borderColor: "#2563eb",
               backgroundColor: "#2563eb",
               borderWidth: 1,
-              barThickness: 50,
+              barThickness: 65,
               borderRadius: 5,
               hoverBackgroundColor: "black",
             },
@@ -83,9 +83,12 @@ const BarGraph = ({ meditatorId }) => {
         },
         title: {
           display: true,
-          text: "Number of Times Each Stage Has Been Practiced",
+          text: "Times Each Stage Has Been Practiced",
           font: {
-            size: 14,
+            size: 18,
+            family: "'Helvetica', 'Arial', sans-serif",
+            weight: "italic",
+            color: "black",
           },
         },
         tooltip: {
@@ -142,8 +145,8 @@ const BarGraph = ({ meditatorId }) => {
   return (
     <div
       style={{
-        width: "70%",
-        height: "350px",
+        width: "50%",
+        height: "430px",
         margin: 0,
         padding: 0,
         boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",

@@ -1,4 +1,4 @@
-﻿namespace Arm_mo.Models.Templates
+﻿namespace backend.Models.Templates
 {
     public class DataSource
     {

@@ -9,7 +9,7 @@ namespace backend.Models
         public string LastName { get; set; }
         public string Username { get; set; }
         public string Email{ get; set; }
-        private string _password { get; set; }
+        public string _password { get; set; }
         public Stage CurrentStage { get; set; }
         public Address? Address{ get; set; }
         public List<PracticedStage>? PracticedStages { get; set; }

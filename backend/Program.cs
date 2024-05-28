@@ -1,6 +1,6 @@
 
 using Arm_mo.Context;
-using Arm_mo.Models;
+using backend.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using System.Text.Json.Serialization;
@@ -41,7 +41,7 @@ namespace backend
                     builder => builder
                         .AllowAnyMethod()
                         .AllowCredentials()
-                        .SetIsOriginAllowed((host) =>{ return host == "http://localhost:5173"; })
+                        .SetIsOriginAllowed((host) => { return host == "http://localhost:5173"; })
                         // .SetIsOriginAllowed(host => host.Equals("http://localhost:5173", StringComparison.OrdinalIgnoreCase))
                         .AllowAnyHeader());
             });
@@ -80,7 +80,7 @@ namespace backend
             app.MapControllers();
 
             app.Run();
-           
+
         }
     }
 }

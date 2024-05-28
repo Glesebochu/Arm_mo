@@ -2,6 +2,7 @@
 using backend.Data;
 using Microsoft.CodeAnalysis.Options;
 using Microsoft.EntityFrameworkCore;
+using AutoMapper;
 
 namespace backend
 {
@@ -17,7 +18,8 @@ namespace backend
             // Add controller services for API endpoints
             builder.Services.AddControllers()
             // Add service for handling cyclical references
-                .AddJsonOptions(opt => {
+                .AddJsonOptions(opt =>
+                {
                     opt.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
                     opt.JsonSerializerOptions.MaxDepth = 30;
                 });
@@ -46,9 +48,20 @@ namespace backend
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+            else
+            {
+                // Enforce HSTS (HTTP Strict Transport Security)
+                app.UseHsts();
+            }
 
             // Enforce HTTPS redirection
             app.UseHttpsRedirection();
+
+            // Serve static files
+            app.UseStaticFiles();
+
+            // Enable routing
+            app.UseRouting();
 
             // Enable authorization middleware
             app.UseAuthorization();
@@ -58,6 +71,7 @@ namespace backend
 
             // Run the application
             app.Run();
+
         }
 
     }

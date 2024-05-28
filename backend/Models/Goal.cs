@@ -11,7 +11,6 @@ namespace backend.Models
 
     public class Goal
     {
-
         public int Id { get; set; }
         public GoalStatus Status { get; set; }
         public Activity? Activity { get; set; }

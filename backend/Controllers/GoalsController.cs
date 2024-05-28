@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
 using backend.Data;
 using backend.DTOs.Goal;
+using backend.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace backend.Controllers
 {
@@ -32,7 +35,18 @@ namespace backend.Controllers
 
             return Ok(goalDTOs);
         }
+        [HttpGet]
+        public IActionResult GetAllWithId()
+        {
+            var goals = _context.Goals
+                .Include(g => g.Activity)
+                .Include(g => g.MeditationObject)
+                .Include(g => g.ChildGoals)
+                .ToList();
+            var goalDTOIds = _mapper.Map<List<GoalDTOId>>(goals);
 
+            return Ok(goalDTOIds);
+        }
         // An action for getting/reading a single goal
         [HttpGet("{id}")]
         public IActionResult GetById([FromRoute] int id)
@@ -79,6 +93,33 @@ namespace backend.Controllers
             );
 
         }
+        [HttpPost("delete")]
+        public async Task<ActionResult> DeleteGoal(GoalDTOId goalDTO)
+        {
+            try
+            {
+                // Reverse map the DTO to the model
+                var goal = _mapper.Map<Goal>(goalDTO);
+
+                // Find the goal by ID
+                var existingGoal = await _context.Goals.FindAsync(goal.Id);
+                if (existingGoal == null)
+                {
+                    return NotFound("Goal not found"); // Return 404 Not Found if goal is not found
+                }
+
+                // Remove the goal from the database
+                _context.Goals.Remove(existingGoal);
+                await _context.SaveChangesAsync(); // Save changes to the database
+
+                return Ok("Goal deleted successfully"); // Return 200 OK on successful deletion
+            }
+            catch (DbUpdateException)
+            {
+                return StatusCode(500, "An error occurred while deleting the goal"); // Return 500 Internal Server Error on database error
+            }
+        }
+
 
     }
 }

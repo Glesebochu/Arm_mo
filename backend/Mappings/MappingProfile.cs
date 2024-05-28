@@ -37,9 +37,6 @@ namespace backend.Mappings
             //     if (dest.MeditationObject == null) dest.MeditationObject = new ObservableObject();
             // });
 
-            CreateMap<Goal, GoalDTOId>();
-            CreateMap<GoalDTOId, Goal>();
-
             // For Activities
             // ==============
             CreateMap<Activity, ActivityDTO>();

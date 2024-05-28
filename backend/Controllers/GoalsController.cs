@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using backend.Interfaces;
+
 
 namespace backend.Controllers
 {
@@ -16,6 +18,7 @@ namespace backend.Controllers
     {
         private readonly Arm_moContext _context;
         private readonly IMapper _mapper;
+        private readonly IGoalRepository _goalRepo;
         public GoalsController(Arm_moContext context, IMapper mapper)
         {
             _context = context;
@@ -23,7 +26,7 @@ namespace backend.Controllers
         }
 
         // An action for getting/reading all the goals
-        [HttpGet]
+        [HttpGet("GetAll")]
         public IActionResult GetAll()
         {
             var goals = _context.Goals
@@ -31,24 +34,28 @@ namespace backend.Controllers
                 .Include(g => g.MeditationObject)
                 .ToList();
 
-            var goalDTOs = _mapper.Map<List<GoalDTO>>(goals);
+            // Map goals to DTOs
+            var goalDTOs = goals.Select(g => MapGoalToDTO(g)).ToList();
 
             return Ok(goalDTOs);
         }
-        [HttpGet]
-        public IActionResult GetAllWithId()
-        {
-            var goals = _context.Goals
-                .Include(g => g.Activity)
-                .Include(g => g.MeditationObject)
-                .Include(g => g.ChildGoals)
-                .ToList();
-            var goalDTOIds = _mapper.Map<List<GoalDTOId>>(goals);
 
-            return Ok(goalDTOIds);
+        private GoalDTO MapGoalToDTO(Goal goal)
+        {
+            var goalDTO = new GoalDTO
+            {
+                Status = goal.Status.ToString(),
+                DueDateTime = goal.DueDateTime,
+                CompletedDateTime = goal.CompletedDateTime,
+                Activity = goal.Activity?.Title,
+                MeditationObject = goal.MeditationObject?.Title,
+                ChildGoals = goal.ChildGoals?.Select(child => MapGoalToDTO(child)).ToList()
+            };
+
+            return goalDTO;
         }
         // An action for getting/reading a single goal
-        [HttpGet("{id}")]
+        [HttpGet("GetById/{id}")]
         public IActionResult GetById([FromRoute] int id)
         {
 
@@ -73,7 +80,7 @@ namespace backend.Controllers
 
         // An action for creating a goal; GET
         // An action for creating a goal; POST
-        [HttpPost]
+        [HttpPost("Create")]
         [ActionName("Create")]
         public IActionResult Create([FromBody] CreateGoalDTO createGoalDTO)
         {
@@ -93,16 +100,15 @@ namespace backend.Controllers
             );
 
         }
-        [HttpPost("delete")]
-        public async Task<ActionResult> DeleteGoal(GoalDTOId goalDTO)
+
+        // An action for deleting a goal; POST
+        [HttpDelete("Delete/{id:int}")]
+        public async Task<ActionResult> DeleteGoal(int id)
         {
             try
             {
-                // Reverse map the DTO to the model
-                var goal = _mapper.Map<Goal>(goalDTO);
-
                 // Find the goal by ID
-                var existingGoal = await _context.Goals.FindAsync(goal.Id);
+                var existingGoal = await _context.Goals.FindAsync(id);
                 if (existingGoal == null)
                 {
                     return NotFound("Goal not found"); // Return 404 Not Found if goal is not found
@@ -116,10 +122,77 @@ namespace backend.Controllers
             }
             catch (DbUpdateException)
             {
-                return StatusCode(500, "An error occurred while deleting the goal"); // Return 500 Internal Server Error on database error
+                return StatusCode(500, "An error occurred while deleting the goal"); // Return 500 Internal Server Error on database error
+            }
+        }
+
+        // An action for updating a goal; POST
+        [HttpPut("Update/{id}")]
+        public async Task<ActionResult> UpdateGoal(int id, [FromBody] UpdateGoalDTO updateGoalDto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            try
+            {
+                // Find the goal by ID
+                var existingGoal = await _context.Goals
+                    .Include(g => g.Activity)
+                    .Include(g => g.MeditationObject)
+                    .FirstOrDefaultAsync(g => g.Id == id);
+
+                if (existingGoal == null)
+                {
+                    return NotFound("Goal not found"); // Return 404 Not Found if goal is not found
+                }
+
+                // Map the UpdateGoalDTO to the existing Goal entity
+                existingGoal.Status = updateGoalDto.Status;
+                existingGoal.DueDateTime = updateGoalDto.DueDateTime;
+                existingGoal.CompletedDateTime = updateGoalDto.CompletedDateTime;
+
+                // Update the titles of the Activity and MeditationObject
+                if (existingGoal.Activity != null)
+                {
+                    existingGoal.Activity.Title = updateGoalDto.Activity;
+                }
+                if (existingGoal.MeditationObject != null)
+                {
+                    existingGoal.MeditationObject.Title = updateGoalDto.MeditationObject;
+                }
+
+                // Save changes to the database
+                await _context.SaveChangesAsync();
+
+                return Ok("Goal updated successfully"); // Return 200 OK on successful update
+            }
+            catch (DbUpdateException)
+            {
+                return StatusCode(500, "An error occurred while updating the goal"); // Return 500 Internal Server Error on database error
             }
         }
 
 
+        //     [HttpPut]
+        //     [Route("{id:int}")]
+        //     public async Task<IActionResult> Update([FromRoute] int id, [FromBody] GoalDTO goalDto)
+        //     {
+        //         if (!ModelState.IsValid)
+        //             return BadRequest(ModelState);
+
+        //         var GoalDTOs = await _goalRepo.UpdateAsync(id, goalDto);
+
+        //         if (GoalDTOs == null)
+        //         {
+        //             return NotFound();
+        //         }
+
+        //         return Ok(GoalDTOs);
+        //     }
+
+        // }
+
+
     }
 }
+

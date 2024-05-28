@@ -1,8 +1,7 @@
-
 using Arm_mo.Context;
-using backend.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using System.Text.Json.Serialization;
 
 namespace backend
@@ -11,30 +10,7 @@ namespace backend
     {
         public static void Main(string[] args)
         {
-            //var AllowedSpecificOrigins = "AllowedSpecificOrigins";
             var builder = WebApplication.CreateBuilder(args);
-
-            // Add services to the container.
-
-
-            //builder.Services.AddCors(options =>
-            //{
-            //    options.AddPolicy(name: AllowedSpecificOrigins,
-            //                      policy =>
-            //                      {
-            //                          policy.WithOrigins("http://localhost:5173/");
-            //                      });
-            //});
-            //builder.Services.AddCors(options =>
-            //{
-            //    options.AddDefaultPolicy(
-            //        policy =>
-            //        {
-            //            policy.WithOrigins("http://localhost:5173/").AllowAnyHeader()
-            //                    .AllowAnyMethod(); ;
-            //        });
-            //});
-
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowedSpecificOrigins",
@@ -43,9 +19,31 @@ namespace backend
                         .AllowCredentials()
                         .SetIsOriginAllowed((host) => { return host == "http://localhost:5173"; })
                         // .SetIsOriginAllowed(host => host.Equals("http://localhost:5173", StringComparison.OrdinalIgnoreCase))
+                        .SetIsOriginAllowed((host) =>{ return host == "http://localhost:5173"; })
                         .AllowAnyHeader());
             });
+            
+            // Configure JWT authentication
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = builder.Configuration["Jwt:Issuer"],
+                    ValidAudience = builder.Configuration["Jwt:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+                };
+            });
 
+            builder.Services.AddScoped<IUserService, UserService>();
             //Adding the Arm'mo context
             builder.Services.AddDbContextPool<Arm_moContext>(option => option.
             UseSqlServer(builder.Configuration.GetConnectionString("Arm_moDbConnection")));
@@ -55,10 +53,8 @@ namespace backend
                 options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
             });
 
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -68,17 +64,10 @@ namespace backend
                 app.UseSwaggerUI();
             }
 
-            // app.UseHttpsRedirection();
-
             app.UseRouting();
-
             app.UseCors("AllowedSpecificOrigins");
-
             app.UseAuthorization();
-
-
             app.MapControllers();
-
             app.Run();
 
         }

@@ -4,7 +4,8 @@ import { DataTableDemo } from "@/components/Custom/SessionTable";
 import { ResponsiveContainer } from "recharts";
 import { CurrentStageAlert } from "@/components/Custom/CurrentStageAlert";
 import { LineGraph } from "@/components/Custom/LineGraph";
-import "@/Styles/Insights.css"
+import LongestSession from "@/components/Custom/LongestSession";
+import "@/Styles/Insights.css";
 
 const Insights = () => {
   return (
@@ -14,6 +15,9 @@ const Insights = () => {
       </ResponsiveContainer>
       <ResponsiveContainer className={"box box2"}>
         <BarGraph meditatorId={1} />
+      </ResponsiveContainer>
+      <ResponsiveContainer className={"box box2"}>
+        <LongestSession />
       </ResponsiveContainer>
     </div>
   );

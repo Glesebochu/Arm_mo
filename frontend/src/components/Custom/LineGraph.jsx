@@ -51,7 +51,7 @@ export const LineGraph = () => {
           gradient.addColorStop(1, "rgba(10, 24, 82, 0.4)");
           return gradient;
         },
-        tension: 0.4,
+        tension: 0.3,
       },
       {
         label: "Observable Objects",
@@ -74,7 +74,7 @@ export const LineGraph = () => {
           gradient.addColorStop(1, "rgba(0, 100, 0, 0.4)");
           return gradient;
         },
-        tension: 0.4,
+        tension: 0.3,
       },
     ],
   });
@@ -125,7 +125,7 @@ export const LineGraph = () => {
                   gradient.addColorStop(1, "rgba(10, 24, 82, 0.4)");
                   return gradient;
                 },
-                tension: 0.4,
+                tension: 0.3,
               },
               {
                 label: "Observable Objects",
@@ -148,7 +148,7 @@ export const LineGraph = () => {
                   gradient.addColorStop(1, "rgba(0, 100, 0, 0.4)");
                   return gradient;
                 },
-                tension: 0.4,
+                tension: 0.3,
               },
             ],
           });

@@ -47,12 +47,12 @@ const BarGraph = ({ meditatorId }) => {
           datasets: [
             {
               data: counts,
-              borderColor: "#007bff",
-              backgroundColor: "#007bff",
+              borderColor: "#2563eb",
+              backgroundColor: "#2563eb",
               borderWidth: 1,
-              barThickness: 30,
+              barThickness: 50,
               borderRadius: 5,
-              hoverBackgroundColor: "#0056b3",
+              hoverBackgroundColor: "black",
             },
           ],
         });

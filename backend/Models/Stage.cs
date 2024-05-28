@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-namespace Arm_mo.Models
+namespace backend.Models
 {
     public class Stage
     {

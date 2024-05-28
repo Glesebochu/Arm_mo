@@ -1,4 +1,5 @@
 ﻿using Arm_mo.Models;
+using backend.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Arm_mo.Context
@@ -55,6 +56,7 @@ namespace Arm_mo.Context
         public DbSet<ObservableObject> ObservableObjects { get; set; }
         public DbSet<Step> Steps { get; set; }
         public DbSet<Activity> Activities { get; set; }
+        public DbSet<Goal> Goals { get; set; }
         public DbSet<UserUsage> UserUsage { get; set; }
 
     }

@@ -31,21 +31,25 @@ namespace backend.Controllers
                 .Include(g => g.MeditationObject)
                 .ToList();
 
-            var goalDTOs = _mapper.Map<List<GoalDTO>>(goals);
+            // Map goals to DTOs
+            var goalDTOs = goals.Select(g => MapGoalToDTO(g)).ToList();
 
             return Ok(goalDTOs);
         }
-        [HttpGet]
-        public IActionResult GetAllWithId()
-        {
-            var goals = _context.Goals
-                .Include(g => g.Activity)
-                .Include(g => g.MeditationObject)
-                .Include(g => g.ChildGoals)
-                .ToList();
-            var goalDTOIds = _mapper.Map<List<GoalDTOId>>(goals);
 
-            return Ok(goalDTOIds);
+        private GoalDTO MapGoalToDTO(Goal goal)
+        {
+            var goalDTO = new GoalDTO
+            {
+                Status = goal.Status.ToString(),
+                DueDateTime = goal.DueDateTime,
+                CompletedDateTime = goal.CompletedDateTime,
+                Activity = goal.Activity?.Title,
+                MeditationObject = goal.MeditationObject?.Title,
+                ChildGoals = goal.ChildGoals?.Select(child => MapGoalToDTO(child)).ToList()
+            };
+
+            return goalDTO;
         }
         // An action for getting/reading a single goal
         [HttpGet("{id}")]
@@ -73,7 +77,7 @@ namespace backend.Controllers
 
         // An action for creating a goal; GET
         // An action for creating a goal; POST
-        [HttpPost]
+        [HttpPost("Create")]
         [ActionName("Create")]
         public IActionResult Create([FromBody] CreateGoalDTO createGoalDTO)
         {
@@ -93,16 +97,15 @@ namespace backend.Controllers
             );
 
         }
-        [HttpPost("delete")]
-        public async Task<ActionResult> DeleteGoal(GoalDTOId goalDTO)
+        
+        // An action for deleting a goal; POST
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult> DeleteGoal(int id)
         {
             try
             {
-                // Reverse map the DTO to the model
-                var goal = _mapper.Map<Goal>(goalDTO);
-
                 // Find the goal by ID
-                var existingGoal = await _context.Goals.FindAsync(goal.Id);
+                var existingGoal = await _context.Goals.FindAsync(id);
                 if (existingGoal == null)
                 {
                     return NotFound("Goal not found"); // Return 404 Not Found if goal is not found
@@ -116,10 +119,43 @@ namespace backend.Controllers
             }
             catch (DbUpdateException)
             {
-                return StatusCode(500, "An error occurred while deleting the goal"); // Return 500 Internal Server Error on database error
+                return StatusCode(500, "An error occurred while deleting the goal"); // Return 500 Internal Server Error on database error
+            }
+        }
+
+        // An action for updating a goal; POST
+        [HttpPut("Update/{id}")]
+        public async Task<ActionResult> UpdateGoal(int id, GoalDTO goalDTO)
+        {
+            try
+            {
+                // Find the goal by ID
+                var existingGoal = await _context.Goals.FindAsync(id);
+                if (existingGoal == null)
+                {
+                    return NotFound("Goal not found"); // Return 404 Not Found if goal is not found
+                }
+
+                // Update the properties of the existing goal entity
+                existingGoal.Status = (GoalStatus)Enum.Parse(typeof(GoalStatus), goalDTO.Status);
+                existingGoal.DueDateTime = goalDTO.DueDateTime;
+                existingGoal.CompletedDateTime = goalDTO.CompletedDateTime;
+                // Update other properties as needed
+
+                // Save changes to the database
+                await _context.SaveChangesAsync();
+
+                return Ok("Goal updated successfully"); // Return 200 OK on successful update
+            }
+            catch (DbUpdateException)
+            {
+                return StatusCode(500, "An error occurred while updating the goal"); // Return 500 Internal Server Error on database error
             }
         }
 
 
     }
+
+
 }
+

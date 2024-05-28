@@ -1,5 +1,4 @@
 using System.Diagnostics;
-using backend.Models;
 namespace backend.Models
 {
     public enum GoalStatus

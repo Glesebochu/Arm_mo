@@ -41,7 +41,7 @@ const UsageView = () => {
         "http://localhost:5158/api/Analyzer/GetUsageDataForPastWeek"
       );
       const data = response.data;
-      const _CharData = data[1].reverse();
+      const _CharData = data[1];
       dailyUse(_CharData[_CharData.length - 1]);
       setChartData(data);
     } catch (error) {

@@ -8,7 +8,7 @@
             {
                 new Meditator()
                 {
-                    Id = 1,
+                    MeditatorId = 1,
                     FirstName = "Zelalem",
                     LastName = "Amare",
                     Username = "Fellasfaw",
@@ -17,7 +17,7 @@
                 },
                 new Meditator()
                 {
-                    Id = 2,
+                    MeditatorId = 2,
                     FirstName = "Yanet",
                     LastName = "Abhram",
                     Username = "Yan8i",
@@ -26,7 +26,7 @@
                 },
                 new Meditator()
                 {
-                    Id = 3,
+                    MeditatorId = 3,
                     FirstName = "Edomiyas",
                     LastName = "Wendwosen",
                     Username = "Yanetawi",
@@ -35,7 +35,7 @@
                 },
                 new Meditator()
                 {
-                    Id = 4,
+                    MeditatorId = 4,
                     FirstName = "Finhas",
                     LastName = "Yohannes",
                     Username = "Gustavo",

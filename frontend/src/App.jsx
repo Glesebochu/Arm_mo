@@ -10,10 +10,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/signup" element={<Signup/>}/>
-        {/* For your specific Modules Modify this so that your Components show up when you run Vite */}
         <Route path="/" element={<SessionSummary />} />
-        
-        {/* No need to to remove the below */}
         <Route path="/session/:sessionId" element={<SessionDetails />} />
         <Route path="/Usage" element={<UsageView />} />
         <Route path="/Insights" element={<Insights />} />

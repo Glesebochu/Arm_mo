@@ -4,6 +4,7 @@ using Arm_mo.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace backend.Migrations
 {
     [DbContext(typeof(Arm_moContext))]
-    partial class Arm_moContextModelSnapshot : ModelSnapshot
+    [Migration("20240528061727_AddedHindranceAndGoal")]
+    partial class AddedHindranceAndGoal
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -310,6 +313,37 @@ namespace backend.Migrations
                     b.ToTable("Stages");
                 });
 
+            modelBuilder.Entity("backend.Models.Step", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<int?>("ActivityId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Category")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Duration")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Response")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ActivityId");
+
+                    b.ToTable("Steps");
+                });
+
             modelBuilder.Entity("backend.Models.UserUsage", b =>
                 {
                     b.Property<int>("Id")
@@ -448,6 +482,15 @@ namespace backend.Migrations
                         .IsRequired();
 
                     b.Navigation("Meditator");
+                });
+
+            modelBuilder.Entity("backend.Models.Step", b =>
+                {
+                    b.HasOne("backend.Models.Activity", "Activity")
+                        .WithMany()
+                        .HasForeignKey("ActivityId");
+
+                    b.Navigation("Activity");
                 });
 
             modelBuilder.Entity("backend.Models.UserUsage", b =>

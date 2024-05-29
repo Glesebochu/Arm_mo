@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import ObservableObjectCard from "@/components/Custom/ObservableObjectCard";
+import AhaMomentCard from "@/components/Custom/AhaMomentCard"; // Import the new AhaMomentCard component
 import "@/Styles/SessionDetails.css"; // Make sure to import the CSS file
 
 function SessionDetails() {
@@ -10,6 +11,7 @@ function SessionDetails() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [counts, setCounts] = useState({});
+  const [ahaCounts, setAhaCounts] = useState({});
 
   useEffect(() => {
     const fetchSessionData = async () => {
@@ -29,7 +31,7 @@ function SessionDetails() {
           `http://localhost:5158/api/Analyzer/GetMeditatorForSession?sessionId=${sessionId}`
         );
         const meditatorId = meditatorResponse.data;
-        console.log("Meditator ID is for you:", meditatorId);
+        console.log("Meditator ID:", meditatorId);
 
         // Fetch counts for each observable object
         const countsPromises = sessionData.observableObjects.map((object) =>
@@ -49,14 +51,43 @@ function SessionDetails() {
             })
         );
 
+        // Fetch counts for each Aha Moment
+        const ahaCountsPromises = sessionData.ahaMoments.map((moment) =>
+          axios
+            .get(
+              `http://localhost:5158/api/Analyzer/GetCountOfAhaMomentForMeditator`,
+              {
+                params: {
+                  ahaMoment: moment.label,
+                  meditatorId: meditatorId,
+                },
+              }
+            )
+            .then((response) => {
+              console.log(`Count for ${moment.label}:`, response.data);
+              return { label: moment.label, count: response.data };
+            })
+        );
+
         const countsResults = await Promise.all(countsPromises);
         const newCounts = countsResults.reduce((acc, { title, count }) => {
           acc[title] = count;
           return acc;
         }, {});
 
+        const ahaCountsResults = await Promise.all(ahaCountsPromises);
+        const newAhaCounts = ahaCountsResults.reduce(
+          (acc, { label, count }) => {
+            acc[label] = count;
+            return acc;
+          },
+          {}
+        );
+
         console.log("Counts Data:", newCounts);
+        console.log("Aha Counts Data:", newAhaCounts);
         setCounts(newCounts);
+        setAhaCounts(newAhaCounts);
       } catch (err) {
         console.error("Error fetching data:", err);
         setError(err.message);
@@ -82,22 +113,40 @@ function SessionDetails() {
 
   return (
     <div className="session-details-container">
-      <div className="card">
-        <h1>Observable Objects</h1>
-        <div>
-          {sessionData.observableObjects.length > 0 ? (
-            sessionData.observableObjects.map((object) => (
-              <ObservableObjectCard
-                key={object.id}
-                object={object.title}
-                description={object.description}
-                icon={object.icon}
-                count={counts[object.title] || 0} // Use the fetched count data here
-              />
-            ))
-          ) : (
-            <p>No observable objects available.</p>
-          )}
+      <div className="card-container">
+        <div className="card">
+          <h1>Observable Objects</h1>
+          <div className="cards-container">
+            {sessionData.observableObjects.length > 0 ? (
+              sessionData.observableObjects.map((object) => (
+                <ObservableObjectCard
+                  key={object.id}
+                  object={object.title}
+                  description={object.description}
+                  icon={object.icon}
+                  count={counts[object.title] || 0} // Use the fetched count data here
+                />
+              ))
+            ) : (
+              <p>No observable objects available.</p>
+            )}
+          </div>
+        </div>
+        <div className="card">
+          <h1>Aha Moments</h1>
+          <div className="cards-container">
+            {sessionData.ahaMoments.length > 0 ? (
+              sessionData.ahaMoments.map((moment) => (
+                <AhaMomentCard
+                  key={moment.id}
+                  label={moment.label}
+                  count={ahaCounts[moment.label] || 0} // Use the fetched count data here
+                />
+              ))
+            ) : (
+              <p>No Aha Moments available.</p>
+            )}
+          </div>
         </div>
       </div>
     </div>

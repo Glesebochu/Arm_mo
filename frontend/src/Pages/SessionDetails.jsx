@@ -12,6 +12,10 @@ function SessionDetails() {
   const [error, setError] = useState(null);
   const [counts, setCounts] = useState({});
   const [ahaCounts, setAhaCounts] = useState({});
+  const [observableObjectsByType, setObservableObjectsByType] = useState({
+    SensoryStimulus: [],
+    MentalObject: [],
+  });
 
   useEffect(() => {
     const fetchSessionData = async () => {
@@ -33,10 +37,10 @@ function SessionDetails() {
         const meditatorId = meditatorResponse.data;
         console.log("Meditator ID:", meditatorId);
 
-        // Fetch counts for each observable object
-        const countsPromises = sessionData.observableObjects.map((object) =>
-          axios
-            .get(
+        // Fetch counts and types for each observable object
+        const countsAndTypesPromises = sessionData.observableObjects.map(
+          async (object) => {
+            const countResponse = await axios.get(
               `http://localhost:5158/api/Analyzer/GetCountOfObservableObjectForMeditator`,
               {
                 params: {
@@ -44,11 +48,37 @@ function SessionDetails() {
                   meditatorId: meditatorId,
                 },
               }
-            )
-            .then((response) => {
-              console.log(`Count for ${object.title}:`, response.data);
-              return { title: object.title, count: response.data };
-            })
+            );
+
+            const typeResponse = await axios.get(
+              `http://localhost:5158/api/analyzer/GetTypeForAnObservableObject`,
+              {
+                params: {
+                  observableObjectId: object.id,
+                },
+              }
+            );
+
+            return {
+              ...object,
+              count: countResponse.data,
+              type: typeResponse.data,
+            };
+          }
+        );
+
+        const countsAndTypesResults = await Promise.all(countsAndTypesPromises);
+        const newCounts = countsAndTypesResults.reduce((acc, obj) => {
+          acc[obj.title] = obj.count;
+          return acc;
+        }, {});
+
+        const organizedByType = countsAndTypesResults.reduce(
+          (acc, obj) => {
+            acc[obj.type].push(obj);
+            return acc;
+          },
+          { SensoryStimulus: [], MentalObject: [] }
         );
 
         // Fetch counts for each Aha Moment
@@ -69,12 +99,6 @@ function SessionDetails() {
             })
         );
 
-        const countsResults = await Promise.all(countsPromises);
-        const newCounts = countsResults.reduce((acc, { title, count }) => {
-          acc[title] = count;
-          return acc;
-        }, {});
-
         const ahaCountsResults = await Promise.all(ahaCountsPromises);
         const newAhaCounts = ahaCountsResults.reduce(
           (acc, { label, count }) => {
@@ -86,8 +110,11 @@ function SessionDetails() {
 
         console.log("Counts Data:", newCounts);
         console.log("Aha Counts Data:", newAhaCounts);
+        console.log("Organized By Type:", organizedByType);
+
         setCounts(newCounts);
         setAhaCounts(newAhaCounts);
+        setObservableObjectsByType(organizedByType);
       } catch (err) {
         console.error("Error fetching data:", err);
         setError(err.message);
@@ -115,10 +142,10 @@ function SessionDetails() {
     <div className="session-details-container">
       <div className="card-container">
         <div className="card">
-          <h1>Observable Objects</h1>
+          <h1>Sensory Stimulus</h1>
           <div className="cards-container">
-            {sessionData.observableObjects.length > 0 ? (
-              sessionData.observableObjects.map((object) => (
+            {observableObjectsByType.SensoryStimulus.length > 0 ? (
+              observableObjectsByType.SensoryStimulus.map((object) => (
                 <ObservableObjectCard
                   key={object.id}
                   object={object.title}
@@ -128,7 +155,23 @@ function SessionDetails() {
                 />
               ))
             ) : (
-              <p>No observable objects available.</p>
+              <p>No sensory stimulus objects available.</p>
+            )}
+          </div>
+          <h1>Mental Objects</h1>
+          <div className="cards-container">
+            {observableObjectsByType.MentalObject.length > 0 ? (
+              observableObjectsByType.MentalObject.map((object) => (
+                <ObservableObjectCard
+                  key={object.id}
+                  object={object.title}
+                  description={object.description}
+                  icon={object.icon}
+                  count={counts[object.title] || 0} // Use the fetched count data here
+                />
+              ))
+            ) : (
+              <p>No mental objects in this session.</p>
             )}
           </div>
         </div>

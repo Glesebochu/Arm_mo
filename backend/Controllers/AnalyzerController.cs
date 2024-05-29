@@ -338,8 +338,21 @@ namespace backend.Controllers
 
             return Ok(sessionWithLongestDuration);
         }
+        [HttpGet("/api/analyzer/GetTypeForAnObservableObject")]
+        public async Task<IActionResult> GetTypeForAnObservableObject(int observableObjectId){
+            var observableObject = await dbContext.ObservableObjects.
+                Where(o => o.Id == observableObjectId).FirstOrDefaultAsync();
 
+            var type = observableObject.Type();
 
+            if(type==null){
+                return NotFound("NO observable object with this Id exists");
+            }
+            else{
+                return Ok(type);
+            }
+
+        }
 
 
     }

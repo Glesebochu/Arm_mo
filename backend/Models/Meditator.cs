@@ -4,7 +4,7 @@ namespace backend.Models
 {
     public class Meditator
     {
-        public int Id { get; set; }
+        public int MeditatorId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Username { get; set; }
@@ -31,7 +31,7 @@ namespace backend.Models
 
         public Meditator(int Id, string firstName, string lastName, string username, string email, string password, Stage currentStage)
         {
-            this.Id = Id;
+            this.MeditatorId = Id;
             this.FirstName = firstName;
             this.LastName = lastName;
             this.Username = username;

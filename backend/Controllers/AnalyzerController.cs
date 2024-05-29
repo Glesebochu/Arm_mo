@@ -27,6 +27,33 @@ namespace backend.Controllers
 
         }
 
+
+        [EnableCors]
+        [HttpGet]
+        [Route("/api/Analyzer/GetSessionUsageCustom")]
+        public async Task<ActionResult<IEnumerable<object>>> GetSessionUsageCustom(/*int userId*/)//uncomment the parameter after testing.
+        {
+            var currentDate = DateTime.Now;
+            var pastWeekDates = Enumerable.Range(0, 7)
+            .Select(i => currentDate.AddDays(-i))
+            .ToList();
+            var sessionLength = new List<object>();
+            foreach (var date in pastWeekDates)
+            {
+                var sessions = await dbContext.Sessions.
+                    Where(u => u.Meditator.MeditatorId == 4 && u.EndTime.Date == date.Date)//change the userId after testing...
+                    .ToListAsync();
+
+                foreach (var session in sessions)
+                {
+                    var sessionDuration = (session.EndTime - session.StartTime).TotalMinutes;
+                    sessionLength.Add(sessionDuration);
+                }
+            }
+
+            return sessionLength;
+        }
+
         //[EnableCors("AllowedSpecificOrigins")]
         [EnableCors]
         [HttpGet]
@@ -183,7 +210,7 @@ namespace backend.Controllers
         public async Task<IActionResult> GetSessionsForMeditator(int meditatorId)
         {
             var sessions = await dbContext.Sessions
-                           .Where(u => u.Meditator.Id == meditatorId)
+                           .Where(u => u.Meditator.MeditatorId == meditatorId)
                            .Include(s => s.PracticedStages)  // Include Practiced Stages
                            .Include(s => s.NewlyMasterdStages)  // Include Newly Mastered Stages
                            .Include(s => s.AhaMoments)  // Optionally include Aha Moments if needed
@@ -222,7 +249,7 @@ namespace backend.Controllers
         public async Task<IActionResult> GetCountOfObservableObjectForMeditator(string observableObject, int meditatorId)
         {
             var count = await dbContext.Sessions
-                .Where(s => s.Meditator.Id == meditatorId)
+                .Where(s => s.Meditator.MeditatorId == meditatorId)
                 .SelectMany(s => s.ObservableObjects)
                 .CountAsync(o => o.Title == observableObject);
 
@@ -245,7 +272,7 @@ namespace backend.Controllers
         {
             var id = await dbContext.Sessions
                     .Where(u => u.Id == sessionId)
-                    .Select(s => s.Meditator.Id).FirstOrDefaultAsync();
+                    .Select(s => s.Meditator.MeditatorId).FirstOrDefaultAsync();
             return Ok(id);
         }
 
@@ -253,7 +280,7 @@ namespace backend.Controllers
         public async Task<IActionResult> GetPracticedStagesForMeditator(int meditatorId)
         {
             var practicedStages = await dbContext.Meditators
-                .Where(m => m.Id == meditatorId)
+                .Where(m => m.MeditatorId == meditatorId)
                 .Include(m => m.PracticedStages).ToListAsync();
             return Ok(practicedStages);
         }
@@ -267,7 +294,7 @@ namespace backend.Controllers
             }
 
             var meditator = await dbContext.Meditators
-                .Where(m => m.Id == meditatorId)
+                .Where(m => m.MeditatorId == meditatorId)
                 .Select(m => new { m.CurrentStage })
                 .FirstOrDefaultAsync();
 
@@ -288,7 +315,7 @@ namespace backend.Controllers
             }
 
             var meditator = await dbContext.Meditators
-                .Where(m => m.Id == meditatorId)
+                .Where(m => m.MeditatorId == meditatorId)
                 .FirstOrDefaultAsync();
 
             if (meditator == null)
@@ -297,7 +324,7 @@ namespace backend.Controllers
             }
 
             var sessions = await dbContext.Sessions
-                .Where(s => s.Meditator.Id == meditatorId)
+                .Where(s => s.Meditator.MeditatorId == meditatorId)
                 .ToListAsync();
 
             if (sessions == null || !sessions.Any())

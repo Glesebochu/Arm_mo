@@ -84,11 +84,11 @@ const BarGraph = ({ meditatorId }) => {
         title: {
           display: true,
           text: "Times Each Stage Has Been Practiced",
+          color: "black",
           font: {
-            size: 18,
-            family: "'Helvetica', 'Arial', sans-serif",
-            weight: "italic",
-            color: "black",
+            size: 20,
+            family: " sans-serif",
+            weight: 600,
           },
         },
         tooltip: {

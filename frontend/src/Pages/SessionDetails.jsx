@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ObservableObjectCard from "@/components/Custom/ObservableObjectCard";
 import AhaMomentCard from "@/components/Custom/AhaMomentCard";
+import StageCard from "@/components/Custom/PracticedStageCard"; // Import the StageCard component
 import "@/Styles/SessionDetails.css"; // Make sure to import the CSS file
 
 function SessionDetails({ sessionId }) {
@@ -140,7 +141,7 @@ function SessionDetails({ sessionId }) {
     <div className="session-details-container">
       <div className="card-container">
         <div className="card">
-          <h1>Sensory Stimulus</h1>
+          <h1 className="section-title">Sensory Stimulus</h1>
           <div className="cards-container">
             {observableObjectsByType.SensoryStimulus.length > 0 ? (
               observableObjectsByType.SensoryStimulus.map((object) => (
@@ -156,7 +157,7 @@ function SessionDetails({ sessionId }) {
               <p>No sensory stimulus objects available.</p>
             )}
           </div>
-          <h1>Mental Objects</h1>
+          <h1 className="section-title">Mental Objects</h1>
           <div className="cards-container">
             {observableObjectsByType.MentalObject.length > 0 ? (
               observableObjectsByType.MentalObject.map((object) => (
@@ -174,7 +175,7 @@ function SessionDetails({ sessionId }) {
           </div>
         </div>
         <div className="card">
-          <h1>Aha Moments</h1>
+          <h1 className="section-title">Aha Moments</h1>
           <div className="cards-container">
             {sessionData.ahaMoments.length > 0 ? (
               sessionData.ahaMoments.map((moment) => (
@@ -188,6 +189,18 @@ function SessionDetails({ sessionId }) {
               <p>No Aha Moments available.</p>
             )}
           </div>
+        </div>
+      </div>
+      <div className="stage-card-container">
+        <h1 className="section-title">Practiced Stages</h1>
+        <div className="stage-cards">
+          {sessionData.practicedStages.length > 0 ? (
+            sessionData.practicedStages.map((stage) => (
+              <StageCard key={stage.stageId} stageId={stage.stageId} />
+            ))
+          ) : (
+            <p>No practiced stages available.</p>
+          )}
         </div>
       </div>
     </div>

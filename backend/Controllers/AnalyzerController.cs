@@ -228,6 +228,16 @@ namespace backend.Controllers
 
             return Ok(count);
         }
+        [HttpGet("/api/Analyzer/GetCountOfAhaMomentForMeditator")]
+        public async Task<IActionResult> GetCountOfAhaMomentForMeditator(string ahaMoment, int meditatorId)
+        {
+            var count = await dbContext.Sessions
+                .Where(s => s.Meditator.Id == meditatorId)
+                .SelectMany(s => s.AhaMoments)
+                .CountAsync(a => a.Label == ahaMoment);
+
+            return Ok(count);
+        }
 
         [HttpGet("/api/Analyzer/GetMeditatorForSession")]
 

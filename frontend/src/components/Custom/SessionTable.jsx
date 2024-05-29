@@ -1,5 +1,4 @@
-import * as React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import {
@@ -142,7 +141,7 @@ function customFilterFn(rows, columnIds, filterValue) {
   });
 }
 
-export function DataTableDemo() {
+export function DataTableDemo({ onSessionClick }) {
   const [sorting, setSorting] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
   const [columnVisibility, setColumnVisibility] = useState({});
@@ -163,7 +162,9 @@ export function DataTableDemo() {
         if (response.status === 200) {
           const transformedData = response.data.map((session) => ({
             id: session.id,
-            time: `${new Date(session.startTime).toLocaleDateString()} , ${new Date(session.startTime)
+            time: `${new Date(
+              session.startTime
+            ).toLocaleDateString()} , ${new Date(session.startTime)
               .toLocaleTimeString()
               .substring(0, 5)} - ${new Date(session.endTime)
               .toLocaleTimeString()
@@ -222,7 +223,9 @@ export function DataTableDemo() {
   };
 
   const handleRowClick = (session) => {
-    navigate(`/session/${session.id}`, { state: { session } });
+    if (onSessionClick) {
+      onSessionClick(session.id);
+    }
   };
 
   return (
@@ -230,15 +233,16 @@ export function DataTableDemo() {
       <div className="container">
         <div className="flex items-center py-4">
           <div className="px-4">
-          <Input
-            placeholder="Filter Sessions..."
-            value={
-              columnFilters.find((f) => f.id === "observableObjects")?.value || ""
-            }
-            onChange={(event) => handleFilterChange(event.target.value)}
-            className="max-w-sm"
+            <Input
+              placeholder="Filter Sessions..."
+              value={
+                columnFilters.find((f) => f.id === "observableObjects")
+                  ?.value || ""
+              }
+              onChange={(event) => handleFilterChange(event.target.value)}
+              className="max-w-sm"
             />
-            </div>
+          </div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="ml-auto">
@@ -302,14 +306,20 @@ export function DataTableDemo() {
                   >
                     {row.getVisibleCells().map((cell) => (
                       <TableCell key={cell.id}>
-                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
                       </TableCell>
                     ))}
                   </TableRow>
                 ))
               ) : (
                 <TableRow>
-                  <TableCell colSpan={columns.length} className="h-24 text-center">
+                  <TableCell
+                    colSpan={columns.length}
+                    className="h-24 text-center"
+                  >
                     No results.
                   </TableCell>
                 </TableRow>

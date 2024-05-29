@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import axios from "axios";
 import ObservableObjectCard from "@/components/Custom/ObservableObjectCard";
-import AhaMomentCard from "@/components/Custom/AhaMomentCard"; // Import the new AhaMomentCard component
+import AhaMomentCard from "@/components/Custom/AhaMomentCard";
 import "@/Styles/SessionDetails.css"; // Make sure to import the CSS file
 
-function SessionDetails() {
-  const { sessionId } = useParams();
+function SessionDetails({ sessionId }) {
   const [sessionData, setSessionData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -171,7 +169,7 @@ function SessionDetails() {
                 />
               ))
             ) : (
-              <p>No mental objects in this session.</p>
+              <p>No mental objects available.</p>
             )}
           </div>
         </div>

@@ -41,7 +41,7 @@ namespace backend.Controllers
             foreach (var date in pastWeekDates)
             {
                 var sessions = await dbContext.Sessions.
-                    Where(u => u.Meditator.MeditatorId == 4 && u.EndTime.Date == date.Date)//change the userId after testing...
+                    Where(u => u.Meditator.Id == 4 && u.EndTime.Date == date.Date)//change the userId after testing...
                     .ToListAsync();
 
                 foreach (var session in sessions)
@@ -210,7 +210,7 @@ namespace backend.Controllers
         public async Task<IActionResult> GetSessionsForMeditator(int meditatorId)
         {
             var sessions = await dbContext.Sessions
-                           .Where(u => u.Meditator.MeditatorId == meditatorId)
+                           .Where(u => u.Meditator.Id == meditatorId)
                            .Include(s => s.PracticedStages)  // Include Practiced Stages
                            .Include(s => s.NewlyMasterdStages)  // Include Newly Mastered Stages
                            .Include(s => s.AhaMoments)  // Optionally include Aha Moments if needed
@@ -249,7 +249,7 @@ namespace backend.Controllers
         public async Task<IActionResult> GetCountOfObservableObjectForMeditator(string observableObject, int meditatorId)
         {
             var count = await dbContext.Sessions
-                .Where(s => s.Meditator.MeditatorId == meditatorId)
+                .Where(s => s.Meditator.Id == meditatorId)
                 .SelectMany(s => s.ObservableObjects)
                 .CountAsync(o => o.Title == observableObject);
 
@@ -272,7 +272,7 @@ namespace backend.Controllers
         {
             var id = await dbContext.Sessions
                     .Where(u => u.Id == sessionId)
-                    .Select(s => s.Meditator.MeditatorId).FirstOrDefaultAsync();
+                    .Select(s => s.Meditator.Id).FirstOrDefaultAsync();
             return Ok(id);
         }
 
@@ -280,7 +280,7 @@ namespace backend.Controllers
         public async Task<IActionResult> GetPracticedStagesForMeditator(int meditatorId)
         {
             var practicedStages = await dbContext.Meditators
-                .Where(m => m.MeditatorId == meditatorId)
+                .Where(m => m.Id == meditatorId)
                 .Include(m => m.PracticedStages).ToListAsync();
             return Ok(practicedStages);
         }
@@ -294,7 +294,7 @@ namespace backend.Controllers
             }
 
             var meditator = await dbContext.Meditators
-                .Where(m => m.MeditatorId == meditatorId)
+                .Where(m => m.Id == meditatorId)
                 .Select(m => new { m.CurrentStage })
                 .FirstOrDefaultAsync();
 
@@ -315,7 +315,7 @@ namespace backend.Controllers
             }
 
             var meditator = await dbContext.Meditators
-                .Where(m => m.MeditatorId == meditatorId)
+                .Where(m => m.Id == meditatorId)
                 .FirstOrDefaultAsync();
 
             if (meditator == null)
@@ -324,7 +324,7 @@ namespace backend.Controllers
             }
 
             var sessions = await dbContext.Sessions
-                .Where(s => s.Meditator.MeditatorId == meditatorId)
+                .Where(s => s.Meditator.Id == meditatorId)
                 .ToListAsync();
 
             if (sessions == null || !sessions.Any())

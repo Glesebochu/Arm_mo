@@ -92,7 +92,7 @@ export function Goals() {
             <h3>Done</h3>
             <GoalsTable goals={doneGoals} />
             <h3>Blabber</h3>
-            {/* <GoalsTable goals={null} /> */}
+            <GoalsTable goals={null} />
         </div>
     );
 

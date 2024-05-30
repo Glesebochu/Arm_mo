@@ -141,7 +141,10 @@ function SessionDetails({ sessionId }) {
     <div className="session-details-container">
       <div className="card-container">
         <div className="card">
-          <h1 className="section-title">Sensory Stimulus</h1>
+          <h1 className="mb-4 text-1xl font-light leading-none tracking-tight text-black md:text-5xl lg:text-4xl dark:text-white">
+            Observable Objects
+          </h1>
+          <h1 className="section-title">Sensory Stimulus </h1>
           <div className="cards-container">
             {observableObjectsByType.SensoryStimulus.length > 0 ? (
               observableObjectsByType.SensoryStimulus.map((object) => (
@@ -175,7 +178,9 @@ function SessionDetails({ sessionId }) {
           </div>
         </div>
         <div className="card">
-          <h1 className="section-title">Aha Moments</h1>
+          <h1 className="mb-4 text-1xl font-light leading-none tracking-tight text-black md:text-5xl lg:text-4xl dark:text-white">
+            Aha Moments
+          </h1>
           <div className="cards-container">
             {sessionData.ahaMoments.length > 0 ? (
               sessionData.ahaMoments.map((moment) => (
@@ -192,7 +197,9 @@ function SessionDetails({ sessionId }) {
         </div>
       </div>
       <div className="stage-card-container">
-        <h1 className="section-title">Practiced Stages</h1>
+        <h1 className="mb-4 text-center text-1xl font-light leading-none tracking-tight text-black md:text-5xl lg:text-4xl dark:text-white">
+          Practiced Stages
+        </h1>
         <div className="stage-cards">
           {sessionData.practicedStages.length > 0 ? (
             sessionData.practicedStages.map((stage) => (

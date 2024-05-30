@@ -5,21 +5,13 @@ import {
   CategoryScale,
   LinearScale,
   BarElement,
-  Title,
   Tooltip,
   Legend,
 } from "chart.js";
 import axios from "axios";
 import { ResponsiveContainer } from "recharts";
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
+ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
 const BarGraph = ({ meditatorId }) => {
   const [chartData, setChartData] = useState({ labels: [], datasets: [] });
@@ -80,16 +72,6 @@ const BarGraph = ({ meditatorId }) => {
       plugins: {
         legend: {
           display: false,
-        },
-        title: {
-          display: true,
-          text: "Times Each Stage Has Been Practiced",
-          color: "black",
-          font: {
-            size: 20,
-            family: " sans-serif",
-            weight: 600,
-          },
         },
         tooltip: {
           backgroundColor: "rgba(0,0,0,0.7)",
@@ -155,6 +137,9 @@ const BarGraph = ({ meditatorId }) => {
         padding: "10px",
       }}
     >
+      <h1 className="mb-4 text-center text-1xl font-light leading-none tracking-tight text-black md:text-5xl lg:text-4xl dark:text-white">
+        Stages you practiced
+      </h1>
       <ResponsiveContainer>
         <Bar data={chartData} options={config.options} />
       </ResponsiveContainer>

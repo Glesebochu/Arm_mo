@@ -1,10 +1,14 @@
-﻿namespace backend.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace backend.Models
 {
     public class Session
     {
         public int Id { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
+       
+        [Column("MeditatorID")]
         public Meditator Meditator { get; set; }
         public List<AhaMoment> AhaMoments { get; set; }
         public List<PracticedStage> PracticedStages { get; set; }

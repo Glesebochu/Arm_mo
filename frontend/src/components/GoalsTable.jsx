@@ -39,7 +39,16 @@ import {
 } from "@/components/ui/table";
 import { DatePicker } from "@/components/ui/date-picker";
 
+// For obtaining data from the backend
+import { useEffect } from "react";
+
+
 export function GoalsTable({ goals = [] }) {
+    console.log(goals);
+
+    useEffect(() => {
+        console.log(goals);
+    }, [])
 
     if (goals == null)
         goals = [];
@@ -187,7 +196,6 @@ export function GoalsTable({ goals = [] }) {
     const [data, setData] = useState(goals);
     const [editGoalId, setEditGoalId] = useState(null);
 
-
     const handleDeleteGoal = (id) => {
         setData(data.filter((goal) => goal.Id !== id));
     };
@@ -206,7 +214,6 @@ export function GoalsTable({ goals = [] }) {
         };
         setData([...data, newGoal]);
     };
-
 
 
     const table = useReactTable({

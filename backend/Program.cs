@@ -13,16 +13,26 @@ namespace backend
             // Create a new WebApplication builder with command line arguments
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the dependency injection container
+            // Configuring CORS (Cross-Origin Resource Sharing) in the application's service collection.
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowedSpecificOrigins",
+                    builder => builder
+                        .AllowAnyMethod()
+                        .AllowCredentials()
+                        .SetIsOriginAllowed((host) => { return host == "http://localhost:5173"; })
+                        .AllowAnyHeader());
+            });
+
 
             // Add controller services for API endpoints
-            builder.Services.AddControllers()
+            builder.Services.AddControllers();
             // Add service for handling cyclical references
-                .AddJsonOptions(opt =>
-                {
-                    opt.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
-                    opt.JsonSerializerOptions.MaxDepth = 30;
-                });
+            // .AddJsonOptions(opt =>
+            // {
+            //     opt.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+            //     opt.JsonSerializerOptions.MaxDepth = 30;
+            // });
 
             // Add services for generating API documentation using Swagger
             builder.Services.AddEndpointsApiExplorer();
@@ -59,6 +69,9 @@ namespace backend
 
             // Serve static files
             app.UseStaticFiles();
+
+            // Enabling CORS middleware in the application pipeline using the "AllowedSpecificOrigins" policy.
+            app.UseCors("AllowedSpecificOrigins");
 
             // Enable routing
             app.UseRouting();

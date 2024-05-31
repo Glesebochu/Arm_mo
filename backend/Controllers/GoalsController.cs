@@ -103,7 +103,7 @@ namespace backend.Controllers
 
         // An action for deleting a goal; POST
         [HttpDelete("Delete/{id:int}")]
-        public async Task<ActionResult> DeleteGoal(int id)
+        public async Task<ActionResult> Delete(int id)
         {
             try
             {
@@ -128,7 +128,7 @@ namespace backend.Controllers
 
         // An action for updating a goal; POST
         [HttpPut("Update/{id}")]
-        public async Task<ActionResult> UpdateGoal(int id, [FromBody] UpdateGoalDTO updateGoalDto)
+        public async Task<ActionResult> Update(int id, [FromBody] UpdateGoalDTO updateGoalDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);

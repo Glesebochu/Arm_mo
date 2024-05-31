@@ -1,8 +1,19 @@
-
 import { GoalsTable } from '../components/GoalsTable.jsx';
-import React from "react";
+import React, { useState } from "react";
+
+// For obtaining data from the backend
+import { useDispatch, useSelector } from "react-redux";
+import { getAll } from "../../slices/GoalsSlice";
+import { useEffect } from "react";
 
 export function Goals() {
+
+    const dispatch = useDispatch();
+    const { goals } = useSelector(state => state.Goals);
+
+    useEffect(() => {
+        dispatch(getAll());
+    }, [])
 
     const goalsDummy = [
         {
@@ -86,13 +97,21 @@ export function Goals() {
         <div>
             <h2>Goals</h2>
             <h3>Not Started</h3>
-            <GoalsTable goals={notStartedGoals} />
-            <h3>Underway</h3>
+
+            {
+                goals.length != 0
+                    ?
+                    <GoalsTable goals={goalsDummy} />
+                    :
+                    <h2>Errorie</h2>
+            }
+
+            {/* <h3>Underway</h3>
             <GoalsTable goals={underwayGoals} />
             <h3>Done</h3>
             <GoalsTable goals={doneGoals} />
             <h3>Blabber</h3>
-            <GoalsTable goals={null} />
+            <GoalsTable goals={null} /> */}
         </div>
     );
 

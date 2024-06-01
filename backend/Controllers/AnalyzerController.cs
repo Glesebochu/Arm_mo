@@ -18,15 +18,12 @@ namespace backend.Controllers
             this.dbContext = dbContext;
         }
 
-
         [HttpGet]
         [Route("/api/Analyzer")]
         public async Task<ActionResult<IEnumerable<UserUsage>>> List()
         {
             return await dbContext.UserUsage.ToListAsync();
-
         }
-
 
         [EnableCors]
         [HttpGet]
@@ -35,13 +32,13 @@ namespace backend.Controllers
         {
             var currentDate = DateTime.Now;
             var pastWeekDates = Enumerable.Range(0, 7)
-            .Select(i => currentDate.AddDays(-i))
-            .ToList();
+                .Select(i => currentDate.AddDays(-i))
+                .ToList();
             var sessionLength = new List<object>();
             foreach (var date in pastWeekDates)
             {
-                var sessions = await dbContext.Sessions.
-                    Where(u => u.Meditator.Id == 4 && u.EndTime.Date == date.Date)//change the userId after testing...
+                var sessions = await dbContext.Sessions
+                    .Where(u => u.Meditator.Id == 4 && u.EndTime.Date == date.Date && !u.IsDeleted) //change the userId after testing...
                     .ToListAsync();
 
                 foreach (var session in sessions)
@@ -54,7 +51,6 @@ namespace backend.Controllers
             return sessionLength;
         }
 
-        //[EnableCors("AllowedSpecificOrigins")]
         [EnableCors]
         [HttpGet]
         [Route("/api/Analyzer/GetUsageDataForPastWeek")]
@@ -62,25 +58,20 @@ namespace backend.Controllers
         {
             var currentDate = DateTime.Today;
             var pastWeekDates = Enumerable.Range(0, 7)
-            .Select(i => currentDate.AddDays(-i))
-            .ToList();
+                .Select(i => currentDate.AddDays(-i))
+                .ToList();
             var usageData = new List<object>();
             var usageDate = new List<object>();
             var usagelength = new List<object>();
 
-
             foreach (var date in pastWeekDates)
             {
                 var usages = await dbContext.UserUsage
-                     .Where(u => u.UserId == 1 && u.Date == date.Date)//change the userId after testing...
+                    .Where(u => u.UserId == 1 && u.Date == date.Date)//change the userId after testing...
                     .Select(u => u.UsageTime.TotalMinutes)
                     .ToListAsync();
 
                 var totalUsageMinutes = usages.DefaultIfEmpty(0).Sum();
-                //if (totalUsageMinutes == null)
-                //{
-                //    totalUsageMinutes = 0;
-                //}
 
                 string dayOfWeek = date.DayOfWeek.ToString().Substring(0, 3);
                 usageDate.Add(dayOfWeek);
@@ -92,7 +83,6 @@ namespace backend.Controllers
             return usageData;
         }
 
-        //[EnableCors("AllowedSpecificOrigins")]
         [HttpGet]
         [Route("/api/Analyzer/GetUsageDataCustom")]
         public async Task<ActionResult<IEnumerable<object>>> GetUsageDataCustom(string startDate/*,int userId*/)//uncomment the parameter after testing.
@@ -113,10 +103,6 @@ namespace backend.Controllers
                     .ToListAsync();
 
                 var totalUsageMinutes = usages.DefaultIfEmpty(0).Sum();
-                //if (totalUsageMinutes == null)
-                //{
-                //    totalUsageMinutes = 0;
-                //}
 
                 string dayOfWeek = date.DayOfWeek.ToString().Substring(0, 3);
                 usageDate.Add(dayOfWeek);
@@ -128,7 +114,6 @@ namespace backend.Controllers
             return usageData;
         }
 
-
         [HttpPost]
         [Route("/api/Analyzer/StartUsage")]
         public async Task<IActionResult> StartUsage(/*int userId*/)//uncomment the parameter after testing.
@@ -139,16 +124,13 @@ namespace backend.Controllers
                 Date = DateTime.Today,
                 UsageTime = TimeSpan.Zero,
                 StartTime = DateTime.Now
-                //Id = /*GetNextUsageID()
             };
 
-            dbContext.UserUsage.AddAsync(userUsage);
+            await dbContext.UserUsage.AddAsync(userUsage);
             await dbContext.SaveChangesAsync();
 
             return Ok();
         }
-
-
 
         [HttpPost]
         [Route("/api/Analyzer/EndUsage")]
@@ -166,73 +148,61 @@ namespace backend.Controllers
             return Ok();
         }
 
-        //private int GetNextUsageID()
-        //{
-        //    var maxUsageID = dbContext.UserUsage.Select(u => (int?)u.Id).DefaultIfEmpty().Max();
-        //    return maxUsageID.HasValue ? maxUsageID.Value + 1 : 1;
-        //}
         [HttpGet("/api/Analyzer/GetUserUsageFinhas")]
         public async Task<IActionResult> GetUserUsage(int userId)
         {
-            // Assuming dbContext is your database context instance
-            // and UserUsage is the DbSet for user usage data
             var userUsage = await dbContext.UserUsage
-                                        .Where(u => u.UserId == userId)
-                                        .ToListAsync();
+                .Where(u => u.UserId == userId)
+                .ToListAsync();
 
-            // Check if any records were found
             if (userUsage == null || userUsage.Count == 0)
                 return NotFound("No usage data found for the specified user.");
 
-            return Ok(userUsage); // Return the list of user usages
+            return Ok(userUsage);
         }
 
         [HttpGet("/api/Analyzer/GetSession")]
         public async Task<IActionResult> GetSession(int SessionId)
         {
-            // Assuming dbContext is your database context instance
-            // and UserUsage is the DbSet for user usage data
             var session = await dbContext.Sessions
-                            .Where(u => u.Id == SessionId)
-                            .Include(s => s.PracticedStages)  // Include Practiced Stages
-                            .Include(s => s.NewlyMasterdStages)  // Include Newly Mastered Stages
-                            .Include(s => s.AhaMoments)  // Optionally include Aha Moments if needed
-                            .Include(s => s.ObservableObjects)  // Optionally include Observable Objects if needed
-                            .Include(s => s.PreparationPhase)
-                            .FirstOrDefaultAsync();
+                .Where(u => u.Id == SessionId && !u.IsDeleted)
+                .Include(s => s.PracticedStages)
+                .Include(s => s.NewlyMasterdStages)
+                .Include(s => s.AhaMoments)
+                .Include(s => s.ObservableObjects)
+                .Include(s => s.PreparationPhase)
+                .FirstOrDefaultAsync();
 
-            // Check if any records were found
             if (session == null)
                 return NotFound("No usage data found for the specified user.");
 
-            return Ok(session); // Return the list of user usages
+            return Ok(session);
         }
+
         [HttpGet("/api/Analyzer/GetSessionsForMeditator")]
         public async Task<IActionResult> GetSessionsForMeditator(int meditatorId)
         {
             var sessions = await dbContext.Sessions
-                           .Where(u => u.Meditator.Id == meditatorId)
-                           .Include(s => s.PracticedStages)  // Include Practiced Stages
-                           .Include(s => s.NewlyMasterdStages)  // Include Newly Mastered Stages
-                           .Include(s => s.AhaMoments)  // Optionally include Aha Moments if needed
-                           .Include(s => s.ObservableObjects).ToListAsync();
+                .Where(u => u.Meditator.Id == meditatorId && !u.IsDeleted)
+                .Include(s => s.PracticedStages)
+                .Include(s => s.NewlyMasterdStages)
+                .Include(s => s.AhaMoments)
+                .Include(s => s.ObservableObjects)
+                .ToListAsync();
 
-            // Check if any records were found
             if (!sessions.Any())
                 return NotFound("No sessions found for the specified user.");
 
-            return Ok(sessions); // Return the list of user usages
-
+            return Ok(sessions);
         }
+
         [HttpGet("/api/Analyzer/GetStage")]
         public async Task<IActionResult> GetStage(int stageId)
         {
             var stage = await dbContext.Stages
-            .Where(s => s.Id == stageId).FirstOrDefaultAsync();
+                .Where(s => s.Id == stageId)
+                .FirstOrDefaultAsync();
 
-
-
-            // Check if any records were found
             if (stage == null)
             {
                 return NotFound("No Stages were found with that Id.");
@@ -242,25 +212,25 @@ namespace backend.Controllers
             stage.Obstacles = Stage.GetObstaclesForStage(stage.Id);
             stage.Intentions = Stage.GetIntentionsForStage(stage.Id);
             stage.MasteryRequirements = Stage.GetMasteryRequirementsForStage(stage.Id);
-            return Ok(stage); // Return the list of user usages
-
+            return Ok(stage);
         }
 
         [HttpGet("/api/Analyzer/GetCountOfObservableObjectForMeditator")]
         public async Task<IActionResult> GetCountOfObservableObjectForMeditator(string observableObject, int meditatorId)
         {
             var count = await dbContext.Sessions
-                .Where(s => s.Meditator.Id == meditatorId)
+                .Where(s => s.Meditator.Id == meditatorId && !s.IsDeleted)
                 .SelectMany(s => s.ObservableObjects)
                 .CountAsync(o => o.Title == observableObject);
 
             return Ok(count);
         }
+
         [HttpGet("/api/Analyzer/GetCountOfAhaMomentForMeditator")]
         public async Task<IActionResult> GetCountOfAhaMomentForMeditator(string ahaMoment, int meditatorId)
         {
             var count = await dbContext.Sessions
-                .Where(s => s.Meditator.Id == meditatorId)
+                .Where(s => s.Meditator.Id == meditatorId && !s.IsDeleted)
                 .SelectMany(s => s.AhaMoments)
                 .CountAsync(a => a.Label == ahaMoment);
 
@@ -268,23 +238,42 @@ namespace backend.Controllers
         }
 
         [HttpGet("/api/Analyzer/GetMeditatorForSession")]
-
         public async Task<IActionResult> GetMeditatorForSession(int sessionId)
         {
             var id = await dbContext.Sessions
-                    .Where(u => u.Id == sessionId)
-                    .Select(s => s.Meditator.Id).FirstOrDefaultAsync();
+                .Where(u => u.Id == sessionId && !u.IsDeleted)
+                .Select(s => s.Meditator.Id)
+                .FirstOrDefaultAsync();
             return Ok(id);
         }
 
         [HttpGet("/api/analyzer/GetPracticedStagesForMeditator")]
         public async Task<IActionResult> GetPracticedStagesForMeditator(int meditatorId)
         {
-            var practicedStages = await dbContext.Meditators
+            var meditator = await dbContext.Meditators
                 .Where(m => m.Id == meditatorId)
-                .Include(m => m.PracticedStages).ToListAsync();
-            return Ok(practicedStages);
+                .Include(m => m.PracticedStages)
+                .FirstOrDefaultAsync();
+
+            if (meditator == null)
+            {
+                return NotFound("No meditator with that Id found.");
+            }
+
+            // Load the sessions to filter practiced stages
+            var sessionIds = meditator.PracticedStages.Select(ps => ps.SessionId).Distinct().ToList();
+            var validSessions = await dbContext.Sessions
+                .Where(s => sessionIds.Contains(s.Id) && !s.IsDeleted)
+                .Select(s => s.Id)
+                .ToListAsync();
+
+            meditator.PracticedStages = meditator.PracticedStages
+                .Where(ps => validSessions.Contains(ps.SessionId))
+                .ToList();
+
+            return Ok(meditator);
         }
+
 
         [HttpGet("/api/analyzer/GetCurrentStageOfMeditator")]
         public async Task<IActionResult> GetCurrentStageOfMeditator([FromQuery] int meditatorId)
@@ -325,7 +314,7 @@ namespace backend.Controllers
             }
 
             var sessions = await dbContext.Sessions
-                .Where(s => s.Meditator.Id == meditatorId)
+                .Where(s => s.Meditator.Id == meditatorId && !s.IsDeleted)
                 .ToListAsync();
 
             if (sessions == null || !sessions.Any())
@@ -339,22 +328,61 @@ namespace backend.Controllers
 
             return Ok(sessionWithLongestDuration);
         }
+
         [HttpGet("/api/analyzer/GetTypeForAnObservableObject")]
-        public async Task<IActionResult> GetTypeForAnObservableObject(int observableObjectId){
-            var observableObject = await dbContext.ObservableObjects.
-                Where(o => o.Id == observableObjectId).FirstOrDefaultAsync();
+        public async Task<IActionResult> GetTypeForAnObservableObject(int observableObjectId)
+        {
+            var observableObject = await dbContext.ObservableObjects
+                .Where(o => o.Id == observableObjectId)
+                .FirstOrDefaultAsync();
 
             var type = observableObject.Type();
 
-            if(type==null){
-                return NotFound("NO observable object with this Id exists");
+            if (type == null)
+            {
+                return NotFound("No observable object with this Id exists");
             }
-            else{
+            else
+            {
                 return Ok(type);
             }
-
         }
 
+        [HttpDelete("/api/Analyzer/DeleteSession")]
+        public async Task<IActionResult> DeleteSession(int sessionId)
+        {
+            var sessionToDelete = await dbContext.Sessions
+                .Where(s => s.Id == sessionId && !s.IsDeleted)
+                .FirstOrDefaultAsync();
 
+            if (sessionToDelete == null)
+            {
+                return NotFound("A session with that Id does not exist");
+            }
+            else
+            {
+                sessionToDelete.IsDeleted = true;
+                await dbContext.SaveChangesAsync();
+                return Ok("Deleted Session with Id: " + sessionToDelete.Id);
+            }
+        }
+        [HttpPost("/api/Analyzer/RestoreSession")]
+        public async Task<IActionResult> RestoreSession(int sessionId)
+        {
+            var sessionToDelete = await dbContext.Sessions
+                .Where(s => s.Id == sessionId && s.IsDeleted)
+                .FirstOrDefaultAsync();
+
+            if (sessionToDelete == null)
+            {
+                return NotFound("A session with that Id does not exist");
+            }
+            else
+            {
+                sessionToDelete.IsDeleted = false;
+                await dbContext.SaveChangesAsync();
+                return Ok("Restored Session with Id: " + sessionToDelete.Id);
+            }
+        }
     }
 }

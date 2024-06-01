@@ -3,6 +3,7 @@ import axios from "axios";
 import ObservableObjectCard from "@/components/Custom/ObservableObjectCard";
 import AhaMomentCard from "@/components/Custom/AhaMomentCard";
 import StageCard from "@/components/Custom/PracticedStageCard"; // Import the StageCard component
+import SessionDuration from "@/components/Custom/SessionDuration"; // Import the new SessionDuration component
 import "@/Styles/SessionDetails.css"; // Make sure to import the CSS file
 
 function SessionDetails({ sessionId }) {
@@ -145,6 +146,9 @@ function SessionDetails({ sessionId }) {
       <h1 className="mb-4 text-2xl font-semibold leading-none tracking-tight text-black md:text-6xl lg:text-5xl dark:text-white">
         {sessionTitle}
       </h1>
+      <div className="text-center mb-8">
+        <SessionDuration sessionId={sessionId} />
+      </div>
       <div className="card-container">
         <div className="card">
           <h2 className="mb-4 text-xl font-light leading-none tracking-tight text-black md:text-4xl lg:text-3xl dark:text-white">

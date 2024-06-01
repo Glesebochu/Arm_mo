@@ -42,9 +42,8 @@
   width: calc(50% - 10px); /* Two cards per row */
 }
 .section-title {
-  font-size: 20px;
-  font-weight: 600;
-  margin-bottom: 10px;
-  color: #333;
-  text-align: center;
+  font-size: 1.25rem; /* text-lg */
+  font-weight: 600; /* font-light */
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
 }

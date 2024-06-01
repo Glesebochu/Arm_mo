@@ -149,7 +149,7 @@ SET SessionId = CASE Title
     WHEN 'Wind Chimes' THEN @SessionId10
     WHEN 'Rain Sound' THEN @SessionId11
     WHEN 'Creative Thoughts' THEN @SessionId12
-    WHEN 'Conversation' THEN @SessionId7
+    WHEN 'Conversation' THEN @SessionId3
     WHEN 'Temperature Change' THEN @SessionId7
     WHEN 'Alarm Clock' THEN @SessionId8
     WHEN 'Meditation Focus' THEN @SessionId8

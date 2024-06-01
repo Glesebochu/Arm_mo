@@ -107,18 +107,18 @@ DECLARE @PreparationPhaseId11 INT = (SELECT Id FROM PreparationPhase WHERE Medit
 DECLARE @PreparationPhaseId12 INT = (SELECT Id FROM PreparationPhase WHERE MeditationObjectId = (SELECT Id FROM ObservableObjects WHERE Title = 'Creative Thoughts') AND Duration = '00:20:00');
 
 INSERT INTO Sessions (MeditatorId, StartTime, EndTime, PreparationPhaseId) VALUES
-(@MeditatorId1, '2023-05-01T08:30:00', '2023-05-01T09:30:00', @PreparationPhaseId1),
-(@MeditatorId1, '2023-05-02T07:45:00', '2023-05-02T08:45:00', @PreparationPhaseId2),
-(@MeditatorId1, '2023-05-03T10:00:00', '2023-05-03T11:00:00', @PreparationPhaseId3),
-(@MeditatorId1, '2023-05-04T09:15:00', '2023-05-04T10:15:00', @PreparationPhaseId4),
+(@MeditatorId1, '2023-05-01T08:30:00', '2023-05-01T09:40:00', @PreparationPhaseId1),
+(@MeditatorId1, '2023-05-02T07:45:00', '2023-05-02T09:45:00', @PreparationPhaseId2),
+(@MeditatorId1, '2023-05-03T10:00:00', '2023-05-03T10:30:00', @PreparationPhaseId3),
+(@MeditatorId1, '2023-05-04T09:15:00', '2023-05-04T10:20:00', @PreparationPhaseId4),
 (@MeditatorId1, '2023-05-05T08:00:00', '2023-05-05T09:00:00', @PreparationPhaseId5),
-(@MeditatorId1, '2023-05-06T07:30:00', '2023-05-06T08:30:00', @PreparationPhaseId6),
-(@MeditatorId1, '2023-05-07T08:00:00', '2023-05-07T09:00:00', @PreparationPhaseId7),
-(@MeditatorId1, '2023-05-08T07:00:00', '2023-05-08T08:00:00', @PreparationPhaseId8),
+(@MeditatorId1, '2023-05-06T07:30:00', '2023-05-06T08:36:00', @PreparationPhaseId6),
+(@MeditatorId1, '2023-05-07T08:00:00', '2023-05-07T10:30:00', @PreparationPhaseId7),
+(@MeditatorId1, '2023-05-08T07:00:00', '2023-05-08T08:10:00', @PreparationPhaseId8),
 (@MeditatorId1, '2023-05-09T10:30:00', '2023-05-09T11:30:00', @PreparationPhaseId9),
-(@MeditatorId1, '2023-05-10T09:00:00', '2023-05-10T10:00:00', @PreparationPhaseId10),
-(@MeditatorId1, '2023-05-11T08:45:00', '2023-05-11T09:45:00', @PreparationPhaseId11),
-(@MeditatorId1, '2023-05-12T07:15:00', '2023-05-12T08:15:00', @PreparationPhaseId12);
+(@MeditatorId1, '2023-05-10T09:00:00', '2023-05-10T09:10:00', @PreparationPhaseId10),
+(@MeditatorId1, '2023-05-11T08:45:00', '2023-05-11T09:40:00', @PreparationPhaseId11),
+(@MeditatorId1, '2023-05-12T07:15:00', '2023-05-12T08:10:00', @PreparationPhaseId12);
 
 -- Declare session IDs for use in updates
 DECLARE @SessionId1 INT = (SELECT TOP 1 Id FROM Sessions WHERE MeditatorId = @MeditatorId1 AND StartTime = '2023-05-01T08:30:00');

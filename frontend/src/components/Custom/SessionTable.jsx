@@ -32,107 +32,7 @@ import {
   TableRow,
 } from "../../components/ui/table";
 import "@/Styles/CustomStyles.css";
-
-export const columns = [
-  {
-    id: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
-    ),
-    enableSorting: false,
-    enableHiding: false,
-  },
-  {
-    accessorKey: "id",
-    header: () => <div>Id</div>,
-    cell: ({ row }) => <div className="capitalize">{row.getValue("id")}</div>,
-  },
-  {
-    accessorKey: "time",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Time
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
-    cell: ({ row }) => <div className="lowercase">{row.getValue("time")}</div>,
-  },
-  {
-    accessorKey: "ahaMoments",
-    header: () => <div>Aha Moments</div>,
-    cell: ({ row }) => {
-      const amount = parseInt(row.getValue("ahaMoments"));
-      return <div>{amount}</div>;
-    },
-  },
-  {
-    accessorKey: "practicedStages",
-    header: () => <div>Practiced Stages</div>,
-    cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("practicedStages")}</div>
-    ),
-  },
-  {
-    accessorKey: "observableObjects",
-    header: () => <div>Observable Objects</div>,
-    cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("observableObjects")}</div>
-    ),
-  },
-  {
-    accessorKey: "masteredStages",
-    header: "Mastered Stage",
-    cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("masteredStages")}</div>
-    ),
-  },
-  {
-    id: "actions",
-    enableHiding: false,
-    cell: ({ row }) => {
-      const payment = row.original;
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
-            >
-              Delete Session
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>View Session</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      );
-    },
-  },
-];
+import DeleteSessionPrompt from "./DeleteSessionPrompt"; // import the prompt component
 
 function customFilterFn(rows, columnIds, filterValue) {
   return rows.filter((row) => {
@@ -147,10 +47,36 @@ export function DataTableDemo({ onSessionClick }) {
   const [columnVisibility, setColumnVisibility] = useState({});
   const [rowSelection, setRowSelection] = useState({});
   const [swaggerData, setSwaggerData] = useState([]);
+  const [deleteSessionId, setDeleteSessionId] = useState(null); // new state
+  const [showDeletePrompt, setShowDeletePrompt] = useState(false); // new state
   const navigate = useNavigate();
 
   const handleFilterChange = (value) => {
     setColumnFilters([{ id: "observableObjects", value }]);
+  };
+
+  const handleDeleteSessionClick = (sessionId) => {
+    setDeleteSessionId(sessionId);
+    setShowDeletePrompt(true);
+  };
+
+  const handleDeleteSession = async (sessionId) => {
+    try {
+      await axios.delete(
+        `http://localhost:5158/api/Analyzer/DeleteSession?sessionId=${sessionId}`
+      );
+      setSwaggerData((prevData) =>
+        prevData.filter((session) => session.id !== sessionId)
+      );
+      setShowDeletePrompt(false);
+    } catch (error) {
+      console.error("Failed to delete session:", error);
+    }
+  };
+
+  const handleCancelDelete = () => {
+    setShowDeletePrompt(false);
+    setDeleteSessionId(null);
   };
 
   useEffect(() => {
@@ -189,6 +115,112 @@ export function DataTableDemo({ onSessionClick }) {
 
     fetchData();
   }, []);
+
+  const columns = [
+    {
+      id: "select",
+      header: ({ table }) => (
+        <Checkbox
+          checked={
+            table.getIsAllPageRowsSelected() ||
+            (table.getIsSomePageRowsSelected() && "indeterminate")
+          }
+          onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+          aria-label="Select all"
+        />
+      ),
+      cell: ({ row }) => (
+        <Checkbox
+          checked={row.getIsSelected()}
+          onCheckedChange={(value) => row.toggleSelected(!!value)}
+          aria-label="Select row"
+        />
+      ),
+      enableSorting: false,
+      enableHiding: false,
+    },
+    {
+      accessorKey: "id",
+      header: () => <div>Id</div>,
+      cell: ({ row }) => <div className="capitalize">{row.getValue("id")}</div>,
+    },
+    {
+      accessorKey: "time",
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Time
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </Button>
+        );
+      },
+      cell: ({ row }) => (
+        <div className="lowercase">{row.getValue("time")}</div>
+      ),
+    },
+    {
+      accessorKey: "ahaMoments",
+      header: () => <div>Aha Moments</div>,
+      cell: ({ row }) => {
+        const amount = parseInt(row.getValue("ahaMoments"));
+        return <div>{amount}</div>;
+      },
+    },
+    {
+      accessorKey: "practicedStages",
+      header: () => <div>Practiced Stages</div>,
+      cell: ({ row }) => (
+        <div className="capitalize">{row.getValue("practicedStages")}</div>
+      ),
+    },
+    {
+      accessorKey: "observableObjects",
+      header: () => <div>Observable Objects</div>,
+      cell: ({ row }) => (
+        <div className="capitalize">{row.getValue("observableObjects")}</div>
+      ),
+    },
+    {
+      accessorKey: "masteredStages",
+      header: "Mastered Stage",
+      cell: ({ row }) => (
+        <div className="capitalize">{row.getValue("masteredStages")}</div>
+      ),
+    },
+    {
+      id: "actions",
+      enableHiding: false,
+      cell: ({ row }) => {
+        const payment = row.original;
+        return (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="h-8 w-8 p-0">
+                <span className="sr-only">Open menu</span>
+                <MoreHorizontal className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+              <DropdownMenuItem
+                onClick={(e) => {
+                  e.stopPropagation(); // Prevent row click event
+                  handleDeleteSessionClick(payment.id);
+                }}
+              >
+                Remove Session
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>View Session</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        );
+      },
+    },
+  ];
 
   const table = useReactTable({
     data: swaggerData,
@@ -352,6 +384,13 @@ export function DataTableDemo({ onSessionClick }) {
           </div>
         </div>
       </div>
+      {showDeletePrompt && (
+        <DeleteSessionPrompt
+          sessionId={deleteSessionId}
+          onDelete={handleDeleteSession}
+          onCancel={handleCancelDelete}
+        />
+      )}
     </ResponsiveContainer>
   );
 }

@@ -37,9 +37,10 @@ INSERT INTO Activities (Title) VALUES
 ('Weekly Review'),
 ('Mindfulness Practice'),
 ('Breathing Exercise'),
-('Yoga Session');
+('Yoga Session'),
+('Reading');
 
--- Insert unique Observable Objects for each session to create the desired trend without linking to sessions
+-- Insert unique Observable Objects without linking to sessions
 INSERT INTO [dbo].[ObservableObjects] (Title, Description, Icon, Intensity, SubType, feelingTone) VALUES
 ('Traffic Noise', 'Horns and engines', 'Traffic.png', 2, 1, NULL),
 ('Daydream', 'Future vacation plans', 'icon_daydream', 1, 6, 0),
@@ -64,59 +65,60 @@ INSERT INTO [dbo].[ObservableObjects] (Title, Description, Icon, Intensity, SubT
 ('Deep Thought', 'Thinking about past events', 'DeepThought.png', 2, 6, 0),
 ('Garden Smell', 'Fresh smell of garden', 'icon_garden', 0, 2, NULL);
 
--- Declare MeditationObjectId variables for use in Goals and PreparationPhase
-DECLARE @MeditationObjectId1 INT = (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Traffic Noise');
-DECLARE @MeditationObjectId2 INT = (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Pet Movement');
-DECLARE @MeditationObjectId3 INT = (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Anxiety');
-DECLARE @MeditationObjectId4 INT = (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Relaxation');
-DECLARE @MeditationObjectId5 INT = (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Wind Chimes');
-
 -- Insert dummy data into Goals using valid MeditationObjectId
 INSERT INTO Goals (Status, ActivityId, MeditationObjectId, DueDateTime, CompletedDateTime, ParentGoalId) VALUES
-(1, 1, @MeditationObjectId1, '2024-06-01T08:00:00', '2024-06-01T09:00:00', NULL),  -- Goal 1: Daily Meditation
-(2, 2, @MeditationObjectId2, '2024-06-02T10:00:00', '2024-06-02T11:00:00', NULL),  -- Goal 2: Weekly Review
+(1, 1, (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Traffic Noise'), '2024-06-01T08:00:00', '2024-06-01T09:00:00', NULL),  -- Goal 1: Daily Meditation
+(2, 2, (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Pet Movement'), '2024-06-02T10:00:00', '2024-06-02T11:00:00', NULL),  -- Goal 2: Weekly Review
 (1, 3, NULL, '2024-06-03T07:00:00', '2024-06-03T08:00:00', NULL),  -- Goal 3: Mindfulness Practice without MeditationObjectId
-(3, 4, @MeditationObjectId3, '2024-06-04T09:00:00', '2024-06-04T10:00:00', 1),  -- Goal 4: Breathing Exercise, parent goal 1
-(1, 5, @MeditationObjectId4, '2024-06-05T06:00:00', '2024-06-05T07:00:00', 2);  -- Goal 5: Yoga Session, parent goal 2
+(3, 4, (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Anxiety'), '2024-06-04T09:00:00', '2024-06-04T10:00:00', 1),  -- Goal 4: Breathing Exercise, parent goal 1
+(1, 5, (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Relaxation'), '2024-06-05T06:00:00', '2024-06-05T07:00:00', 2);  -- Goal 5: Yoga Session, parent goal 2
 
--- Insert dummy data into PreparationPhase using valid MeditationObjectId
+-- Insert dummy data into PreparationPhase with valid MeditationObjectId and corresponding ActivityId
 INSERT INTO PreparationPhase (Duration, ActivityId, MeditationObjectId, Motivation, GoalId, Expectation, Diligence, Posture) VALUES
-('00:15:00', 1, @MeditationObjectId1, 'Stay focused', 1, 'Achieve deep focus', 'High', 'Sitting'),
-('00:10:00', 2, @MeditationObjectId2, 'Calm mind', 2, 'Stay relaxed', 'Medium', 'Lying down'),
-('00:20:00', 3, @MeditationObjectId3, 'Deep breathing', 3, 'Improve breathing', 'High', 'Sitting'),
-('00:15:00', 4, @MeditationObjectId4, 'Mindfulness', 4, 'Stay present', 'High', 'Standing'),
-('00:10:00', 1, @MeditationObjectId1, 'Focus on object', 5, 'No distractions', 'Medium', 'Sitting'),
-('00:20:00', 2, @MeditationObjectId2, 'Relax body', 1, 'Calmness', 'High', 'Lying down'),
-('00:15:00', 3, @MeditationObjectId3, 'Concentration', 2, 'Extended focus', 'High', 'Sitting'),
-('00:10:00', 4, @MeditationObjectId4, 'Body scan', 3, 'Awareness', 'Medium', 'Standing'),
-('00:20:00', 1, @MeditationObjectId1, 'Breathing exercise', 4, 'Deep relaxation', 'High', 'Sitting'),
-('00:15:00', 2, @MeditationObjectId2, 'Visualize', 5, 'Clear mind', 'Medium', 'Sitting'),
-('00:10:00', 3, @MeditationObjectId3, 'Sound focus', 1, 'Deep listening', 'High', 'Lying down'),
-('00:20:00', 4, @MeditationObjectId4, 'Awareness', 2, 'Total presence', 'High', 'Standing');
+('00:15:00', 1, (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Traffic Noise'), 'Stay focused', 1, 'Achieve deep focus', 'High', 'Sitting'),
+('00:10:00', 2, (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Pet Movement'), 'Calm mind', 2, 'Stay relaxed', 'Medium', 'Lying down'),
+('00:20:00', 3, (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Anxiety'), 'Deep breathing', 3, 'Improve breathing', 'High', 'Sitting'),
+('00:15:00', 4, (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Relaxation'), 'Mindfulness', 4, 'Stay present', 'High', 'Standing'),
+('00:10:00', 1, (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Daydream'), 'Focus on object', 5, 'No distractions', 'Medium', 'Sitting'),
+('00:20:00', 2, (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Coffee Aroma'), 'Relax body', 1, 'Calmness', 'High', 'Lying down'),
+('00:15:00', 3, (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Phone Vibration'), 'Concentration', 2, 'Extended focus', 'High', 'Sitting'),
+('00:10:00', 4, (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Morning Dew'), 'Body scan', 3, 'Awareness', 'Medium', 'Standing'),
+('00:20:00', 1, (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Bird Chirping'), 'Breathing exercise', 4, 'Deep relaxation', 'High', 'Sitting'),
+('00:15:00', 2, (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Wind Chimes'), 'Visualize', 5, 'Clear mind', 'Medium', 'Sitting'),
+('00:10:00', 3, (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Rain Sound'), 'Sound focus', 1, 'Deep listening', 'High', 'Lying down'),
+('00:20:00', 4, (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Creative Thoughts'), 'Awareness', 2, 'Total presence', 'High', 'Standing');
 
--- Insert dummy data into Sessions linked with Meditator and PreparationPhase
+-- Insert dummy data into Sessions linked with Meditator and unique PreparationPhase
 DECLARE @MeditatorId1 INT = (SELECT TOP 1 Id FROM Meditators WHERE Username = 'meditator1');
 DECLARE @MeditatorId2 INT = (SELECT TOP 1 Id FROM Meditators WHERE Username = 'meditator2');
 DECLARE @MeditatorId3 INT = (SELECT TOP 1 Id FROM Meditators WHERE Username = 'meditator3');
 
-DECLARE @PreparationPhaseId1 INT = (SELECT TOP 1 Id FROM PreparationPhase WHERE MeditationObjectId = @MeditationObjectId1);
-DECLARE @PreparationPhaseId2 INT = (SELECT TOP 1 Id FROM PreparationPhase WHERE MeditationObjectId = @MeditationObjectId2);
-DECLARE @PreparationPhaseId3 INT = (SELECT TOP 1 Id FROM PreparationPhase WHERE MeditationObjectId = @MeditationObjectId3);
-DECLARE @PreparationPhaseId4 INT = (SELECT TOP 1 Id FROM PreparationPhase WHERE MeditationObjectId = @MeditationObjectId4);
+DECLARE @PreparationPhaseId1 INT = (SELECT Id FROM PreparationPhase WHERE MeditationObjectId = (SELECT Id FROM ObservableObjects WHERE Title = 'Traffic Noise') AND Duration = '00:15:00');
+DECLARE @PreparationPhaseId2 INT = (SELECT Id FROM PreparationPhase WHERE MeditationObjectId = (SELECT Id FROM ObservableObjects WHERE Title = 'Pet Movement') AND Duration = '00:10:00');
+DECLARE @PreparationPhaseId3 INT = (SELECT Id FROM PreparationPhase WHERE MeditationObjectId = (SELECT Id FROM ObservableObjects WHERE Title = 'Anxiety') AND Duration = '00:20:00');
+DECLARE @PreparationPhaseId4 INT = (SELECT Id FROM PreparationPhase WHERE MeditationObjectId = (SELECT Id FROM ObservableObjects WHERE Title = 'Relaxation') AND Duration = '00:15:00');
+DECLARE @PreparationPhaseId5 INT = (SELECT Id FROM PreparationPhase WHERE MeditationObjectId = (SELECT Id FROM ObservableObjects WHERE Title = 'Daydream') AND Duration = '00:10:00');
+DECLARE @PreparationPhaseId6 INT = (SELECT Id FROM PreparationPhase WHERE MeditationObjectId = (SELECT Id FROM ObservableObjects WHERE Title = 'Coffee Aroma') AND Duration = '00:20:00');
+DECLARE @PreparationPhaseId7 INT = (SELECT Id FROM PreparationPhase WHERE MeditationObjectId = (SELECT Id FROM ObservableObjects WHERE Title = 'Phone Vibration') AND Duration = '00:15:00');
+DECLARE @PreparationPhaseId8 INT = (SELECT Id FROM PreparationPhase WHERE MeditationObjectId = (SELECT Id FROM ObservableObjects WHERE Title = 'Morning Dew') AND Duration = '00:10:00');
+DECLARE @PreparationPhaseId9 INT = (SELECT Id FROM PreparationPhase WHERE MeditationObjectId = (SELECT Id FROM ObservableObjects WHERE Title = 'Bird Chirping') AND Duration = '00:20:00');
+DECLARE @PreparationPhaseId10 INT = (SELECT Id FROM PreparationPhase WHERE MeditationObjectId = (SELECT Id FROM ObservableObjects WHERE Title = 'Wind Chimes') AND Duration = '00:15:00');
+DECLARE @PreparationPhaseId11 INT = (SELECT Id FROM PreparationPhase WHERE MeditationObjectId = (SELECT Id FROM ObservableObjects WHERE Title = 'Rain Sound') AND Duration = '00:10:00');
+DECLARE @PreparationPhaseId12 INT = (SELECT Id FROM PreparationPhase WHERE MeditationObjectId = (SELECT Id FROM ObservableObjects WHERE Title = 'Creative Thoughts') AND Duration = '00:20:00');
 
 INSERT INTO Sessions (MeditatorId, StartTime, EndTime, PreparationPhaseId) VALUES
 (@MeditatorId1, '2023-05-01T08:30:00', '2023-05-01T09:30:00', @PreparationPhaseId1),
 (@MeditatorId1, '2023-05-02T07:45:00', '2023-05-02T08:45:00', @PreparationPhaseId2),
 (@MeditatorId1, '2023-05-03T10:00:00', '2023-05-03T11:00:00', @PreparationPhaseId3),
 (@MeditatorId1, '2023-05-04T09:15:00', '2023-05-04T10:15:00', @PreparationPhaseId4),
-(@MeditatorId1, '2023-05-05T08:00:00', '2023-05-05T09:00:00', @PreparationPhaseId1),
-(@MeditatorId1, '2023-05-06T07:30:00', '2023-05-06T08:30:00', @PreparationPhaseId2),
-(@MeditatorId1, '2023-05-07T08:00:00', '2023-05-07T09:00:00', @PreparationPhaseId3),
-(@MeditatorId1, '2023-05-08T07:00:00', '2023-05-08T08:00:00', @PreparationPhaseId4),
-(@MeditatorId1, '2023-05-09T10:30:00', '2023-05-09T11:30:00', @PreparationPhaseId1),
-(@MeditatorId1, '2023-05-10T09:00:00', '2023-05-10T10:00:00', @PreparationPhaseId2),
-(@MeditatorId1, '2023-05-11T08:45:00', '2023-05-11T09:45:00', @PreparationPhaseId3),
-(@MeditatorId1, '2023-05-12T07:15:00', '2023-05-12T08:15:00', @PreparationPhaseId4);
+(@MeditatorId1, '2023-05-05T08:00:00', '2023-05-05T09:00:00', @PreparationPhaseId5),
+(@MeditatorId1, '2023-05-06T07:30:00', '2023-05-06T08:30:00', @PreparationPhaseId6),
+(@MeditatorId1, '2023-05-07T08:00:00', '2023-05-07T09:00:00', @PreparationPhaseId7),
+(@MeditatorId1, '2023-05-08T07:00:00', '2023-05-08T08:00:00', @PreparationPhaseId8),
+(@MeditatorId1, '2023-05-09T10:30:00', '2023-05-09T11:30:00', @PreparationPhaseId9),
+(@MeditatorId1, '2023-05-10T09:00:00', '2023-05-10T10:00:00', @PreparationPhaseId10),
+(@MeditatorId1, '2023-05-11T08:45:00', '2023-05-11T09:45:00', @PreparationPhaseId11),
+(@MeditatorId1, '2023-05-12T07:15:00', '2023-05-12T08:15:00', @PreparationPhaseId12);
 
 -- Declare session IDs for use in updates
 DECLARE @SessionId1 INT = (SELECT TOP 1 Id FROM Sessions WHERE MeditatorId = @MeditatorId1 AND StartTime = '2023-05-01T08:30:00');
@@ -132,21 +134,21 @@ DECLARE @SessionId10 INT = (SELECT TOP 1 Id FROM Sessions WHERE MeditatorId = @M
 DECLARE @SessionId11 INT = (SELECT TOP 1 Id FROM Sessions WHERE MeditatorId = @MeditatorId1 AND StartTime = '2023-05-11T08:45:00');
 DECLARE @SessionId12 INT = (SELECT TOP 1 Id FROM Sessions WHERE MeditatorId = @MeditatorId1 AND StartTime = '2023-05-12T07:15:00');
 
--- Update Meditation Objects to link to their respective Sessions
+-- Update Observable Objects to link to their respective Sessions
 UPDATE ObservableObjects
 SET SessionId = CASE Title
     WHEN 'Traffic Noise' THEN @SessionId1
-    WHEN 'Daydream' THEN @SessionId1
+    WHEN 'Daydream' THEN @SessionId5
     WHEN 'Pet Movement' THEN @SessionId2
-    WHEN 'Coffee Aroma' THEN @SessionId2
+    WHEN 'Coffee Aroma' THEN @SessionId6
     WHEN 'Anxiety' THEN @SessionId3
-    WHEN 'Phone Vibration' THEN @SessionId3
-    WHEN 'Morning Dew' THEN @SessionId3
+    WHEN 'Phone Vibration' THEN @SessionId7
+    WHEN 'Morning Dew' THEN @SessionId8
     WHEN 'Relaxation' THEN @SessionId4
-    WHEN 'Bird Chirping' THEN @SessionId4
-    WHEN 'Wind Chimes' THEN @SessionId5
-    WHEN 'Rain Sound' THEN @SessionId6
-    WHEN 'Creative Thoughts' THEN @SessionId6
+    WHEN 'Bird Chirping' THEN @SessionId9
+    WHEN 'Wind Chimes' THEN @SessionId10
+    WHEN 'Rain Sound' THEN @SessionId11
+    WHEN 'Creative Thoughts' THEN @SessionId12
     WHEN 'Conversation' THEN @SessionId7
     WHEN 'Temperature Change' THEN @SessionId7
     WHEN 'Alarm Clock' THEN @SessionId8
@@ -193,6 +195,7 @@ INSERT INTO NewlyMasteredStage (SessionId, StageId) VALUES
 (@SessionId2, 2),  -- Session 2: Mastering Stage 2
 (@SessionId5, 3);  -- Session 5: Mastering Stage 3
 
+-- Insert varied AhaMoments into different sessions to create the desired trend
 INSERT INTO AhaMoments (SessionId, Label) VALUES
 (@SessionId1, 'Phone Notification'),
 (@SessionId1, 'Pet Movement'),
@@ -247,16 +250,15 @@ INSERT INTO AhaMoments (SessionId, Label) VALUES
 
 -- Insert dummy data into Hindrance table
 INSERT INTO Hindrance (Title, Type, PreparationPhaseId) VALUES
-('Restlessness', 1, (SELECT TOP 1 Id FROM PreparationPhase WHERE MeditationObjectId = (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Traffic Noise'))),
-('Doubt', 2, (SELECT TOP 1 Id FROM PreparationPhase WHERE MeditationObjectId = (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Pet Movement'))),
-('Sensual Desire', 3, (SELECT TOP 1 Id FROM PreparationPhase WHERE MeditationObjectId = (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Anxiety'))),
-('Ill-Will', 4, (SELECT TOP 1 Id FROM PreparationPhase WHERE MeditationObjectId = (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Relaxation'))),
-('Sloth and Torpor', 5, (SELECT TOP 1 Id FROM PreparationPhase WHERE MeditationObjectId = (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Wind Chimes'))),
-('Restlessness', 1, (SELECT TOP 1 Id FROM PreparationPhase WHERE MeditationObjectId = (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Bird Chirping'))),
-('Doubt', 2, (SELECT TOP 1 Id FROM PreparationPhase WHERE MeditationObjectId = (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Coffee Aroma'))),
-('Sensual Desire', 3, (SELECT TOP 1 Id FROM PreparationPhase WHERE MeditationObjectId = (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Morning Dew'))),
-('Ill-Will', 4, (SELECT TOP 1 Id FROM PreparationPhase WHERE MeditationObjectId = (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Creative Thoughts'))),
-('Sloth and Torpor', 5, (SELECT TOP 1 Id FROM PreparationPhase WHERE MeditationObjectId = (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Presence in Nature'))),
-('Restlessness', 1, (SELECT TOP 1 Id FROM PreparationPhase WHERE MeditationObjectId = (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Inspiration'))),
-('Doubt', 2, (SELECT TOP 1 Id FROM PreparationPhase WHERE MeditationObjectId = (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Deep Thought'))),
-('Sensual Desire', 3, (SELECT TOP 1 Id FROM PreparationPhase WHERE MeditationObjectId = (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Garden Smell')));
+('Restlessness', 1, @PreparationPhaseId1),
+('Doubt', 2, @PreparationPhaseId2),
+('Sensual Desire', 3, @PreparationPhaseId3),
+('Ill-Will', 4, @PreparationPhaseId4),
+('Sloth and Torpor', 5, @PreparationPhaseId5),
+('Restlessness', 1, @PreparationPhaseId6),
+('Doubt', 2, @PreparationPhaseId7),
+('Sensual Desire', 3, @PreparationPhaseId8),
+('Ill-Will', 4, @PreparationPhaseId9),
+('Sloth and Torpor', 5, @PreparationPhaseId10),
+('Restlessness', 1, @PreparationPhaseId11),
+('Doubt', 2, @PreparationPhaseId12);

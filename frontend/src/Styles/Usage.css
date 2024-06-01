@@ -2,6 +2,13 @@
   font-family: "Times New Roman";
 }
 
+#time {
+  font-size: 30px;
+  margin: 0;
+  margin-left: 2em;
+  color: #2563eb;
+}
+
 .small-chart {
   max-height: 350px;
   max-width: 700px;
@@ -13,6 +20,7 @@
 
 .chart-container {
   display: flex;
+  padding-bottom: 20px;
   flex-direction: column;
   align-items: center;
 }
@@ -44,13 +52,6 @@
   display: flex;
   flex-direction: column;
   text-align: center;
-}
-
-#time {
-  font-size: 30px;
-  margin: 0;
-  margin-left: 2em;
-  color: #2563eb;
 }
 
 .text {

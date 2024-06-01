@@ -42,7 +42,7 @@ const UsageView = () => {
       );
       const data = response.data;
       const _CharData = data[1];
-      dailyUse(_CharData[_CharData.length - 1]);
+      dailyUse(_CharData[0]);
       setChartData(data);
     } catch (error) {
       console.error("AJAX request failed:", error);
@@ -165,7 +165,9 @@ const UsageView = () => {
                   <div id="hill"></div>
                 </div>
                 <div className="timeContainer">
-                  <p id="time">1h 35m</p>
+                  <p id="time" className=" margin-left: 2em;">
+                    1h 35m
+                  </p>
                 </div>
               </div>
               <p className="text">Today's Activity</p>

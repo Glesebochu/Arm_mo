@@ -128,13 +128,13 @@ const BarGraph = ({ meditatorId }) => {
     <div
       style={{
         width: "50%",
-        height: "430px",
+        height: "390px",
         margin: 0,
         padding: 0,
         boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
         borderRadius: "8px",
         backgroundColor: "white",
-        padding: "10px",
+        padding: "20px",
       }}
     >
       <h1 className="mb-4 text-center text-1xl font-light leading-none tracking-tight text-black md:text-5xl lg:text-4xl dark:text-white">

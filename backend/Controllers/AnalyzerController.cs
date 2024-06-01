@@ -198,6 +198,7 @@ namespace backend.Controllers
                             .Include(s => s.NewlyMasterdStages)  // Include Newly Mastered Stages
                             .Include(s => s.AhaMoments)  // Optionally include Aha Moments if needed
                             .Include(s => s.ObservableObjects)  // Optionally include Observable Objects if needed
+                            .Include(s => s.PreparationPhase)
                             .FirstOrDefaultAsync();
 
             // Check if any records were found

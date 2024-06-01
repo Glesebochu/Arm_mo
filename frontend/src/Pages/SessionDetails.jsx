@@ -137,14 +137,22 @@ function SessionDetails({ sessionId }) {
     return <div>No session data available.</div>;
   }
 
+  const sessionTitle =
+    sessionData.preparationPhase?.meditationObject?.title || "Session Details";
+
   return (
     <div className="session-details-container">
+      <h1 className="mb-4 text-2xl font-semibold leading-none tracking-tight text-black md:text-6xl lg:text-5xl dark:text-white">
+        {sessionTitle}
+      </h1>
       <div className="card-container">
         <div className="card">
-          <h1 className="mb-4 text-1xl font-light leading-none tracking-tight text-black md:text-5xl lg:text-4xl dark:text-white">
+          <h2 className="mb-4 text-xl font-light leading-none tracking-tight text-black md:text-4xl lg:text-3xl dark:text-white">
             Observable Objects
-          </h1>
-          <h1 className="section-title">Sensory Stimulus </h1>
+          </h2>
+          <h3 className="section-title text-lg font-light">
+            Sensory Stimulus{" "}
+          </h3>
           <div className="cards-container">
             {observableObjectsByType.SensoryStimulus.length > 0 ? (
               observableObjectsByType.SensoryStimulus.map((object) => (
@@ -160,7 +168,7 @@ function SessionDetails({ sessionId }) {
               <p>No sensory stimulus objects available.</p>
             )}
           </div>
-          <h1 className="section-title">Mental Objects</h1>
+          <h3 className="section-title text-lg font-light">Mental Objects</h3>
           <div className="cards-container">
             {observableObjectsByType.MentalObject.length > 0 ? (
               observableObjectsByType.MentalObject.map((object) => (
@@ -178,9 +186,9 @@ function SessionDetails({ sessionId }) {
           </div>
         </div>
         <div className="card">
-          <h1 className="mb-4 text-1xl font-light leading-none tracking-tight text-black md:text-5xl lg:text-4xl dark:text-white">
+          <h2 className="mb-4 text-xl font-light leading-none tracking-tight text-black md:text-4xl lg:text-3xl dark:text-white">
             Aha Moments
-          </h1>
+          </h2>
           <div className="cards-container">
             {sessionData.ahaMoments.length > 0 ? (
               sessionData.ahaMoments.map((moment) => (
@@ -197,9 +205,9 @@ function SessionDetails({ sessionId }) {
         </div>
       </div>
       <div className="stage-card-container">
-        <h1 className="mb-4 text-center text-1xl font-light leading-none tracking-tight text-black md:text-5xl lg:text-4xl dark:text-white">
+        <h2 className="mb-4 text-xl font-light leading-none tracking-tight text-black md:text-4xl lg:text-3xl dark:text-white">
           Practiced Stages
-        </h1>
+        </h2>
         <div className="stage-cards">
           {sessionData.practicedStages.length > 0 ? (
             sessionData.practicedStages.map((stage) => (

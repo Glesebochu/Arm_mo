@@ -28,24 +28,41 @@ namespace backend.Controllers
         [EnableCors]
         [HttpGet]
         [Route("/api/Analyzer/GetSessionUsageCustom")]
-        public async Task<ActionResult<IEnumerable<object>>> GetSessionUsageCustom(/*int userId*/)//uncomment the parameter after testing.
+        public async Task<ActionResult<IEnumerable<object>>> GetSessionUsageCustom(/*int userId,*/DateTime customDate)//uncomment the parameter after testing.
         {
-            var currentDate = DateTime.Now;
+            //var currentDate = new DateTime();
+            //if (customDate != null)
+            //{
+            //     currentDate = customDate;
+            //}
+            //else
+            //{
+            //    currentDate = DateTime.Now;
+            //}
+
+            var currentDate = customDate != default ? customDate : DateTime.Now;
+
             var pastWeekDates = Enumerable.Range(0, 7)
                 .Select(i => currentDate.AddDays(-i))
                 .ToList();
             var sessionLength = new List<object>();
             foreach (var date in pastWeekDates)
             {
-                var sessions = await dbContext.Sessions
-                    .Where(u => u.Meditator.Id == 4 && u.EndTime.Date == date.Date && !u.IsDeleted) //change the userId after testing...
+                var sessionEnd = await dbContext.Sessions.
+                    Where(u => u.Meditator.Id == 1 && u.EndTime.Date == date.Date)//change the userId after testing...
+                    .Select(u => u.EndTime.TimeOfDay.TotalMinutes)
                     .ToListAsync();
+                var Endtime = sessionEnd.DefaultIfEmpty(0).Sum();
 
-                foreach (var session in sessions)
-                {
-                    var sessionDuration = (session.EndTime - session.StartTime).TotalMinutes;
-                    sessionLength.Add(sessionDuration);
-                }
+                var sessionStart = await dbContext.Sessions.
+                    Where(u => u.Meditator.Id == 1 && u.StartTime.Date == date.Date)//change the userId after testing...
+                    .Select(u => u.StartTime.TimeOfDay.TotalMinutes)
+                    .ToListAsync();
+                var startTime = sessionStart.DefaultIfEmpty(0).Sum();
+
+             
+                sessionLength.Add(Endtime-startTime);
+                
             }
 
             return sessionLength;

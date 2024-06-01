@@ -37,13 +37,38 @@ const UsageView = () => {
 
   const fetchUsageDataForPastWeek = async () => {
     try {
-      const response = await axios.get(
+      const usageResponse = await axios.get(
         "http://localhost:5158/api/Analyzer/GetUsageDataForPastWeek"
       );
-      const data = response.data;
-      const _CharData = data[1];
-      dailyUse(_CharData[0]);
-      setChartData(data);
+      const sessionResponse = await axios.get(
+        "http://localhost:5158/api/Analyzer/GetSessionUsageCustom"
+      );
+
+      const usageData = usageResponse.data;
+      var dataFirst = {
+        label: "Daily App use",
+        data: usageData[1],
+        borderWidth: 3,
+        borderColor: "#2563eb",
+        // lineTension: 0,
+        // fill: false,
+      };
+
+      var dataSecond = {
+        abel: "Meditation sessions",
+        data: sessionResponse.data,
+        borderWidth: 3,
+        borderColor: "red",
+      };
+
+      //console.log(sessionResponse.data);
+      var combinedLines = {
+        labels: usageData[0],
+        datasets: [dataFirst, dataSecond],
+      };
+
+      dailyUse(usageData[1][0]);
+      setChartData(combinedLines);
     } catch (error) {
       console.error("AJAX request failed:", error);
     }
@@ -69,25 +94,28 @@ const UsageView = () => {
 
   const renderChart = (data) => {
     const canvas = document.getElementById("weeklyUsage");
-    const _labels = data[0].reverse();
-    const _CharData = data[1].reverse();
+    const _labels = data[0];
+    const _CharData = data[1];
 
     if (chartInstance) {
       chartInstance.destroy();
     }
 
+    console.log(data);
     chartInstance = new Chart(canvas, {
       type: "line",
       data: {
-        labels: _labels,
-        datasets: [
-          {
-            label: "Daily use",
-            data: _CharData,
-            borderWidth: 3,
-            borderColor: "#2563eb",
-          },
-        ],
+        data,
+        // chartData,
+        // labels: chartData[0],
+        // datasets: [
+        //   {
+        //     label: "Daily use",
+        //     data: chartData[1],
+        //     borderWidth: 3,
+        //     borderColor: "#2563eb",
+        //   },
+        // ],
       },
       options: {
         animations: {

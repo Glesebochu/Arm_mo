@@ -23,7 +23,7 @@ const BarGraph = ({ meditatorId }) => {
         const response = await axios.get(
           `http://localhost:5158/api/analyzer/GetPracticedStagesForMeditator?meditatorId=${meditatorId}`
         );
-        const practicedStages = response.data[0].practicedStages;
+        const practicedStages = response.data.practicedStages;
 
         // Count the occurrences of each stageId
         const stageCounts = practicedStages.reduce((acc, stage) => {

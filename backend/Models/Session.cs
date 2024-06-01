@@ -15,6 +15,7 @@ namespace backend.Models
         public List<NewlyMasteredStage> NewlyMasterdStages {  get; set; }
         public List<ObservableObject> ObservableObjects { get; set; }
         public PreparationPhase PreparationPhase { get; set; }
+        public bool IsDeleted { get; set; } = false;
         public int PreparationPhaseId { get; set; } // Foreign key property
         public Session()
         {

@@ -35,25 +35,25 @@ namespace backend.Controllers
                 .ToList();
 
             // Map goals to DTOs
-            var goalDTOs = goals.Select(g => MapGoalToDTO(g)).ToList();
+            var goalDTOs = _mapper.Map<List<GoalDTO>>(goals);
 
             return Ok(goalDTOs);
         }
 
-        private GoalDTO MapGoalToDTO(Goal goal)
-        {
-            var goalDTO = new GoalDTO
-            {
-                Status = goal.Status.ToString(),
-                DueDateTime = goal.DueDateTime,
-                CompletedDateTime = goal.CompletedDateTime,
-                Activity = goal.Activity?.Title,
-                MeditationObject = goal.MeditationObject?.Title,
-                ChildGoals = goal.ChildGoals?.Select(child => MapGoalToDTO(child)).ToList()
-            };
+        // private GoalDTO MapGoalToDTO(Goal goal)
+        // {
+        //     var goalDTO = new GoalDTO
+        //     {
+        //         Status = goal.Status.ToString(),
+        //         DueDate = goal.DueDate,
+        //         CompletedDate = goal.CompletedDate,
+        //         Activity = goal.Activity?.Title,
+        //         MeditationObject = goal.MeditationObject?.Title,
+        //         ChildGoals = goal.ChildGoals?.Select(child => MapGoalToDTO(child)).ToList()
+        //     };
 
-            return goalDTO;
-        }
+        //     return goalDTO;
+        // }
         // An action for getting/reading a single goal
         [HttpGet("GetById/{id}")]
         public IActionResult GetById([FromRoute] int id)
@@ -148,8 +148,8 @@ namespace backend.Controllers
 
                 // Map the UpdateGoalDTO to the existing Goal entity
                 existingGoal.Status = updateGoalDto.Status;
-                existingGoal.DueDateTime = updateGoalDto.DueDateTime;
-                existingGoal.CompletedDateTime = updateGoalDto.CompletedDateTime;
+                existingGoal.DueDate = updateGoalDto.DueDate;
+                existingGoal.CompletedDate = updateGoalDto.CompletedDate;
 
                 // Update the titles of the Activity and MeditationObject
                 if (existingGoal.Activity != null)

@@ -14,7 +14,7 @@ namespace backend.DTOs.Goal
         public string Activity { get; set; } = String.Empty;
         public string MeditationObject { get; set; } = String.Empty;
         // public CreateGoalDTO? ParentGoal { get; set; }
-        public DateTime DueDateTime { get; set; }
+        public DateOnly DueDate { get; set; }
         public List<CreateGoalDTO>? ChildGoals { get; set; }
     }
 }

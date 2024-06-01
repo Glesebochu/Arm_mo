@@ -15,8 +15,8 @@ namespace backend.Models
         public GoalStatus Status { get; set; }
         public Activity? Activity { get; set; }
         public ObservableObject? MeditationObject { get; set; }
-        public DateTime DueDateTime { get; set; }
-        public DateTime CompletedDateTime { get; set; }
+        public DateOnly DueDate { get; set; }
+        public DateOnly CompletedDate { get; set; }
         public Goal? ParentGoal { get; set; }
         public List<Goal>? ChildGoals { get; set; }
 
@@ -27,7 +27,7 @@ namespace backend.Models
             this.MeditationObject = meditationObject;
         }
 
-        // A function that sets the Status & CompletionDateTime of the parent goal when 
+        // A function that sets the Status & CompletionDate of the parent goal when 
         // the last child goal is complete.
 
     }

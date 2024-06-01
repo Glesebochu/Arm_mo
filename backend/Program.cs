@@ -27,7 +27,7 @@ namespace backend
 
             // Add controller services for API endpoints
             builder.Services.AddControllers();
-            // Add service for handling cyclical references
+            // // Add service for handling cyclical references
             // .AddJsonOptions(opt =>
             // {
             //     opt.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;

@@ -11,7 +11,7 @@ namespace backend.DTOs.Goal
         public GoalStatus Status { get; set; }
         public string Activity { get; set; } = String.Empty;
         public string MeditationObject { get; set; } = String.Empty;
-        public DateTime DueDateTime { get; set; }
-        public DateTime CompletedDateTime { get; set; }
+        public DateOnly DueDate { get; set; }
+        public DateOnly CompletedDate { get; set; }
     }
 }

@@ -31,12 +31,21 @@ namespace backend.Models
         Unpleasant,
         Neutral
     }
+    public enum Proximity
+    {
+        Unrelated,
+        SameType,
+        DirectlyRelated,
+        MeditationObject
+    }
     public class ObservableObject
     {
         public int Id { get; set; }
         public string Title { get; set; } = String.Empty;
+        public string Description { get; set; } = String.Empty;
         public IntensityType? Intensity { get; set; }
         public ObservableObjectSubType SubType { get; set; }
+        public Proximity ProximityToMO { get; set; }
 
         public ObservableObjectType Type()
         {

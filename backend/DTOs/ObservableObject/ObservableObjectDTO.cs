@@ -9,7 +9,9 @@ namespace backend.DTOs.ObservableObject
     public class ObservableObjectDTO
     {
         public string Title { get; set; } = String.Empty;
+        public string Description { get; set; } = String.Empty;
         public IntensityType Intensity { get; set; }
         public ObservableObjectSubType SubType { get; set; }
+        public Proximity ProximityToMO { get; set; }
     }
 }

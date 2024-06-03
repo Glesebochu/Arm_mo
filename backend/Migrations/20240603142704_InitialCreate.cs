@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace backend.Migrations
 {
     /// <inheritdoc />
-    public partial class Initialization : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -25,19 +25,18 @@ namespace backend.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Meditators",
+                name: "Addresses",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    State = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Country = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Meditators", x => x.Id);
+                    table.PrimaryKey("PK_Addresses", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -47,8 +46,10 @@ namespace backend.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Intensity = table.Column<int>(type: "int", nullable: true),
-                    SubType = table.Column<int>(type: "int", nullable: false)
+                    SubType = table.Column<int>(type: "int", nullable: false),
+                    ProximityToMO = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -69,23 +70,24 @@ namespace backend.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Addresses",
+                name: "Meditators",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    State = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Country = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MeditatorId = table.Column<int>(type: "int", nullable: false)
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AddressId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Addresses", x => x.Id);
+                    table.PrimaryKey("PK_Meditators", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Addresses_Meditators_MeditatorId",
-                        column: x => x.MeditatorId,
-                        principalTable: "Meditators",
+                        name: "FK_Meditators_Addresses_AddressId",
+                        column: x => x.AddressId,
+                        principalTable: "Addresses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -97,11 +99,11 @@ namespace backend.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Status = table.Column<int>(type: "int", nullable: false),
-                    ParentGoalId = table.Column<int>(type: "int", nullable: true),
-                    DueDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CompletedDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ActivityId = table.Column<int>(type: "int", nullable: true),
-                    MeditationObjectId = table.Column<int>(type: "int", nullable: true)
+                    MeditationObjectId = table.Column<int>(type: "int", nullable: true),
+                    DueDate = table.Column<DateOnly>(type: "date", nullable: false),
+                    CompletedDate = table.Column<DateOnly>(type: "date", nullable: false),
+                    ParentGoalId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -124,12 +126,6 @@ namespace backend.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Addresses_MeditatorId",
-                table: "Addresses",
-                column: "MeditatorId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Goals_ActivityId",
                 table: "Goals",
                 column: "ActivityId");
@@ -143,28 +139,33 @@ namespace backend.Migrations
                 name: "IX_Goals_ParentGoalId",
                 table: "Goals",
                 column: "ParentGoalId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Meditators_AddressId",
+                table: "Meditators",
+                column: "AddressId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Addresses");
-
-            migrationBuilder.DropTable(
                 name: "Goals");
 
             migrationBuilder.DropTable(
-                name: "Stages");
+                name: "Meditators");
 
             migrationBuilder.DropTable(
-                name: "Meditators");
+                name: "Stages");
 
             migrationBuilder.DropTable(
                 name: "Activities");
 
             migrationBuilder.DropTable(
                 name: "ObservableObjects");
+
+            migrationBuilder.DropTable(
+                name: "Addresses");
         }
     }
 }

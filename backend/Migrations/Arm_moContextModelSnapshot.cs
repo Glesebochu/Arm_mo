@@ -55,17 +55,11 @@ namespace backend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("MeditatorId")
-                        .HasColumnType("int");
-
                     b.Property<string>("State")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("MeditatorId")
-                        .IsUnique();
 
                     b.ToTable("Addresses");
                 });
@@ -115,6 +109,9 @@ namespace backend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("AddressId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -133,6 +130,8 @@ namespace backend.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AddressId");
+
                     b.ToTable("Meditators");
                 });
 
@@ -144,7 +143,14 @@ namespace backend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("Intensity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProximityToMO")
                         .HasColumnType("int");
 
                     b.Property<int>("SubType")
@@ -176,15 +182,6 @@ namespace backend.Migrations
                     b.ToTable("Stages");
                 });
 
-            modelBuilder.Entity("backend.Models.Address", b =>
-                {
-                    b.HasOne("backend.Models.Meditator", null)
-                        .WithOne("Address")
-                        .HasForeignKey("backend.Models.Address", "MeditatorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("backend.Models.Goal", b =>
                 {
                     b.HasOne("backend.Models.Activity", "Activity")
@@ -206,14 +203,20 @@ namespace backend.Migrations
                     b.Navigation("ParentGoal");
                 });
 
+            modelBuilder.Entity("backend.Models.Meditator", b =>
+                {
+                    b.HasOne("backend.Models.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Address");
+                });
+
             modelBuilder.Entity("backend.Models.Goal", b =>
                 {
                     b.Navigation("ChildGoals");
-                });
-
-            modelBuilder.Entity("backend.Models.Meditator", b =>
-                {
-                    b.Navigation("Address");
                 });
 #pragma warning restore 612, 618
         }

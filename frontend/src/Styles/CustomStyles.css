@@ -1,50 +1,52 @@
 /* CustomStyles.css */
 .container {
-    margin: 0 auto; /* Center align container */
-    padding: 0 20px; /* Initial larger padding on left and right */
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .chart-container, .table-container {
-    width: 100%;
-    max-width: 700px;
-    box-sizing: border-box;
-    background-color: #f0f0f0;
-    border-radius: 10px;
-    box-shadow: 1px 1px 0 1px #f9f9fb, -1px 0 28px 0 rgba(34, 33, 81, 0.01),
-      28px 28px 28px 0 rgba(34, 33, 81, 0.25);
-    margin: 20px 0; /* Added margin for spacing */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .chart-container canvas, .table-container table {
-    width: 100%;
-    height: auto;
-    max-width: 100%; /* Ensure it doesn't exceed the container width */
-  }
-  
-  .small-chart {
-    max-height: 350px;
-    max-width: 700px;
-    border-radius: 10px;
-    background-color: #f0f0f0;
-    box-shadow: 1px 1px 0 1px #f9f9fb, -1px 0 28px 0 rgba(34, 33, 81, 0.01),
-      28px 28px 28px 0 rgba(34, 33, 81, 0.25);
-  }
-  
-  .circle-container {
-    position: relative;
-    margin-top: 50px;
-    margin-left: 20px; /* Adjust the margin as needed */
-  }
-  
-  /* .circle {
+  margin: 0 auto; /* Center align container */
+  padding: 0 20px; /* Initial larger padding on left and right */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.chart-container,
+.table-container {
+  width: 100%;
+  max-width: 700px;
+  box-sizing: border-box;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  box-shadow: 1px 1px 0 1px #f9f9fb, -1px 0 28px 0 rgba(34, 33, 81, 0.01),
+    28px 28px 28px 0 rgba(34, 33, 81, 0.25);
+  margin: 20px 0; /* Added margin for spacing */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.chart-container canvas,
+.table-container table {
+  width: 100%;
+  height: auto;
+  max-width: 100%; /* Ensure it doesn't exceed the container width */
+}
+
+.small-chart {
+  max-height: 350px;
+  max-width: 700px;
+  border-radius: 10px;
+  background-color: #f0f0f0;
+  box-shadow: 1px 1px 0 1px #f9f9fb, -1px 0 28px 0 rgba(34, 33, 81, 0.01),
+    28px 28px 28px 0 rgba(34, 33, 81, 0.25);
+}
+
+.circle-container {
+  position: relative;
+  margin-top: 50px;
+  margin-left: 20px; /* Adjust the margin as needed */
+}
+
+/* .circle {
     width: 300px;
     height: 300px;
     border-radius: 50%;
@@ -56,114 +58,113 @@
     transform: scale(1);
     border: 1px solid #36a2eb;
   } */
-  
-  .circle:hover {
-    transform: scale(1.1);
-  }
-  
-  .circle-content {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-  }
-  
-  #time {
-    font-size: 30px;
-    margin: 0;
-    margin-left: 3em;
-    color: #36a2eb;
-  }
-  
-  .text {
-    margin-top: 4em;
-    font-size: 28px;
-    font-weight: 800;
-    text-align: center;
-  }
-  
-  .timeContainer {
-    width: 50px;
-  }
-  
-  #loader {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-top: -4.7em;
-    margin-left: -5.7em;
-    width: 5.4em;
-    height: 5.4em;
-    background-color: #f0f0f0;
-    display: flex;
-  }
-  
-  #hill {
-    position: absolute;
-    width: 7.1em;
-    height: 7.1em;
-    top: 1.7em;
-    left: 1.7em;
-    background-color: transparent;
-    border-left: 0.25em solid #404456;
-    transform: rotate(45deg);
-  }
-  
-  #box {
-    position: absolute;
-    left: 0;
-    bottom: -0.1em;
-    width: 1em;
-    height: 1em;
-    background-color: transparent;
-    border: 0.25em solid #404456;
-    border-radius: 15%;
+
+.circle:hover {
+  transform: scale(1.1);
+}
+
+.circle-content {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+#time {
+  font-size: 30px;
+  margin: 0;
+  margin-left: 2em;
+  color: #36a2eb;
+}
+
+.text {
+  margin-top: 4em;
+  font-size: 28px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.timeContainer {
+  width: 50px;
+}
+
+#loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -4.7em;
+  margin-left: -5.7em;
+  width: 5.4em;
+  height: 5.4em;
+  background-color: #f0f0f0;
+  display: flex;
+}
+
+#hill {
+  position: absolute;
+  width: 7.1em;
+  height: 7.1em;
+  top: 1.7em;
+  left: 1.7em;
+  background-color: transparent;
+  border-left: 0.25em solid #404456;
+  transform: rotate(45deg);
+}
+
+#box {
+  position: absolute;
+  left: 0;
+  bottom: -0.1em;
+  width: 1em;
+  height: 1em;
+  background-color: transparent;
+  border: 0.25em solid #404456;
+  border-radius: 15%;
+  transform: translate(0, -1em) rotate(-45deg);
+  animation: push 2.5s cubic-bezier(0.79, 0, 0.47, 0.97) infinite;
+}
+
+@keyframes push {
+  0% {
     transform: translate(0, -1em) rotate(-45deg);
-    animation: push 2.5s cubic-bezier(0.79, 0, 0.47, 0.97) infinite;
   }
-  
-  @keyframes push {
-    0% {
-      transform: translate(0, -1em) rotate(-45deg);
-    }
-  
-    5% {
-      transform: translate(0, -1em) rotate(-50deg);
-    }
-  
-    20% {
-      transform: translate(1em, -2em) rotate(47deg);
-    }
-  
-    25% {
-      transform: translate(1em, -2em) rotate(45deg);
-    }
-  
-    30% {
-      transform: translate(1em, -2em) rotate(40deg);
-    }
-  
-    45% {
-      transform: translate(2em, -3em) rotate(137deg);
-    }
-  
-    50% {
-      transform: translate(2em, -3em) rotate(135deg);
-    }
-  
-    55% {
-      transform: translate(2em, -3em) rotate(130deg);
-    }
-  
-    70% {
-      transform: translate(3em, -4em) rotate(217deg);
-    }
-  
-    75% {
-      transform: translate(3em, -4em) rotate(220deg);
-    }
-  
-    100% {
-      transform: translate(0, -1em) rotate(-225deg);
-    }
+
+  5% {
+    transform: translate(0, -1em) rotate(-50deg);
   }
-  
+
+  20% {
+    transform: translate(1em, -2em) rotate(47deg);
+  }
+
+  25% {
+    transform: translate(1em, -2em) rotate(45deg);
+  }
+
+  30% {
+    transform: translate(1em, -2em) rotate(40deg);
+  }
+
+  45% {
+    transform: translate(2em, -3em) rotate(137deg);
+  }
+
+  50% {
+    transform: translate(2em, -3em) rotate(135deg);
+  }
+
+  55% {
+    transform: translate(2em, -3em) rotate(130deg);
+  }
+
+  70% {
+    transform: translate(3em, -4em) rotate(217deg);
+  }
+
+  75% {
+    transform: translate(3em, -4em) rotate(220deg);
+  }
+
+  100% {
+    transform: translate(0, -1em) rotate(-225deg);
+  }
+}

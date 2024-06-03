@@ -30,16 +30,7 @@ namespace backend.Controllers
         [Route("/api/Analyzer/GetSessionUsageCustom")]
         public async Task<ActionResult<IEnumerable<object>>> GetSessionUsageCustom(/*int userId,*/DateTime customDate)//uncomment the parameter after testing.
         {
-            //var currentDate = new DateTime();
-            //if (customDate != null)
-            //{
-            //     currentDate = customDate;
-            //}
-            //else
-            //{
-            //    currentDate = DateTime.Now;
-            //}
-
+            
             var currentDate = customDate != default ? customDate : DateTime.Now;
 
             var pastWeekDates = Enumerable.Range(0, 7)

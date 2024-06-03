@@ -4,14 +4,13 @@ namespace backend.Models
     {
         public int Id { get; set; }
         public TimeSpan Duration { get; set; }
-        public Activity Activity { get; set; }
-        public ObservableObject MeditationObject { get; set; }
-        public string Motivation { get; set; }
-        public Goal Goal { get; set; }
-        public string Expectation { get; set; }
-        public string Diligence { get; set; }
+        public string Motivation { get; set; } = String.Empty;
+        public List<Goal> Goals { get; set; }
+        public string Expectation { get; set; } = String.Empty;
         public Hindrance[] Distractions { get; set; }
-        public string Posture { get; set; }
+        public DateTime StartDateTime { get; set; }
+        public DateTime EndDateTime { get; set; }
+
     }
 
 }

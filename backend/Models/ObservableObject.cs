@@ -34,7 +34,7 @@ namespace backend.Models
     public enum Proximity
     {
         Unrelated,
-        SameType,
+        SameSubType,
         DirectlyRelated,
         MeditationObject
     }

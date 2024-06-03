@@ -46,7 +46,7 @@ namespace backend.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Intensity = table.Column<int>(type: "int", nullable: true),
                     SubType = table.Column<int>(type: "int", nullable: false),
                     ProximityToMO = table.Column<int>(type: "int", nullable: false)
@@ -102,7 +102,7 @@ namespace backend.Migrations
                     ActivityId = table.Column<int>(type: "int", nullable: true),
                     MeditationObjectId = table.Column<int>(type: "int", nullable: true),
                     DueDate = table.Column<DateOnly>(type: "date", nullable: false),
-                    CompletedDate = table.Column<DateOnly>(type: "date", nullable: false),
+                    CompletedDate = table.Column<DateOnly>(type: "date", nullable: true),
                     ParentGoalId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>

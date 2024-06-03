@@ -1,4 +1,4 @@
-USE [Arm_mo]
+USE [Arm_moEF3]
 GO
 /****** Object:  Table [dbo].[__EFMigrationsHistory]    Script Date: 6/3/2024 5:32:32 PM ******/
 SET ANSI_NULLS ON
@@ -160,5 +160,5 @@ ALTER TABLE [dbo].[Meditators] CHECK CONSTRAINT [FK_Meditators_Addresses_Address
 GO
 USE [master]
 GO
-ALTER DATABASE [Arm_mo] SET  READ_WRITE 
+ALTER DATABASE [Arm_moEF3] SET  READ_WRITE 
 GO

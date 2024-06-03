@@ -75,7 +75,7 @@ namespace backend.Migrations
                     b.Property<int?>("ActivityId")
                         .HasColumnType("int");
 
-                    b.Property<DateOnly>("CompletedDate")
+                    b.Property<DateOnly?>("CompletedDate")
                         .HasColumnType("date");
 
                     b.Property<DateOnly>("DueDate")
@@ -144,7 +144,6 @@ namespace backend.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("Intensity")

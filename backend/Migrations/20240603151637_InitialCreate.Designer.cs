@@ -12,7 +12,7 @@ using backend.Data;
 namespace backend.Migrations
 {
     [DbContext(typeof(Arm_moContext))]
-    [Migration("20240603142704_InitialCreate")]
+    [Migration("20240603151637_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -78,7 +78,7 @@ namespace backend.Migrations
                     b.Property<int?>("ActivityId")
                         .HasColumnType("int");
 
-                    b.Property<DateOnly>("CompletedDate")
+                    b.Property<DateOnly?>("CompletedDate")
                         .HasColumnType("date");
 
                     b.Property<DateOnly>("DueDate")
@@ -147,7 +147,6 @@ namespace backend.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("Intensity")

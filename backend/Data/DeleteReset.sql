@@ -1,4 +1,4 @@
-USE [Arm_mo]
+USE [Arm_moEF3]
 GO
 
 -- Disable foreign key constraints to allow deletion

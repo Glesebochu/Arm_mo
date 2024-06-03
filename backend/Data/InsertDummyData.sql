@@ -30,11 +30,11 @@ VALUES
 -- Meditation objects are noun phrases
 INSERT INTO [dbo].[ObservableObjects] (Title, Description, Intensity, SubType, ProximityToMO)
 VALUES
-('four paragraphs from a book', 'Reading four paragraphs from a book', 3, 1, 5),
+('four paragraphs from a book', 'Reading four paragraphs from a book', 3, 1, 2),
 ('a short story', 'Writing a short story', 2, 1, 3),
 ('a workout routine', 'Following a workout routine', 4, 2, 2),
-('notes from a meeting', 'Reviewing notes from a meeting', 2, 1, 4),
-('breathing exercises', 'Performing breathing exercises', 3, 1, 5),
+('notes from a meeting', 'Reviewing notes from a meeting', 2, 1, 1),
+('breathing exercises', 'Performing breathing exercises', 3, 1, 2),
 ('daily schedule', 'Planning a daily schedule', 1, 2, 1);
 
 -- Insert dummy data into Goals

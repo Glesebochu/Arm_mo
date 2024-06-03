@@ -15,8 +15,10 @@ namespace backend.Models
         public GoalStatus Status { get; set; }
         public Activity? Activity { get; set; }
         public ObservableObject? MeditationObject { get; set; }
+
+        // { Read } {four paragraphs from a book}
         public DateOnly DueDate { get; set; }
-        public DateOnly CompletedDate { get; set; }
+        public DateOnly? CompletedDate { get; set; }
         public Goal? ParentGoal { get; set; }
         public List<Goal>? ChildGoals { get; set; }
 

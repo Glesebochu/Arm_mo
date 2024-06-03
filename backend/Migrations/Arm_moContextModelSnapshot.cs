@@ -97,16 +97,19 @@ namespace backend.Migrations
                     b.Property<int>("ActivityId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CompletedDateTime")
-                        .HasColumnType("datetime2");
+                    b.Property<DateOnly>("CompletedDate")
+                        .HasColumnType("date");
 
-                    b.Property<DateTime>("DueDateTime")
-                        .HasColumnType("datetime2");
+                    b.Property<DateOnly>("DueDate")
+                        .HasColumnType("date");
 
                     b.Property<int?>("MeditationObjectId")
                         .HasColumnType("int");
 
                     b.Property<int?>("ParentGoalId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PreparationPhaseId")
                         .HasColumnType("int");
 
                     b.Property<int>("Status")
@@ -119,6 +122,8 @@ namespace backend.Migrations
                     b.HasIndex("MeditationObjectId");
 
                     b.HasIndex("ParentGoalId");
+
+                    b.HasIndex("PreparationPhaseId");
 
                     b.ToTable("Goals");
                 });
@@ -174,24 +179,21 @@ namespace backend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ProfilePicture")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Username")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("_password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("profilePictureId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("AddressId");
 
                     b.HasIndex("CurrentStageId");
-
-                    b.HasIndex("profilePictureId");
 
                     b.ToTable("Meditators");
                 });
@@ -222,10 +224,10 @@ namespace backend.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Icon")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int?>("Intensity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProximityToMO")
                         .HasColumnType("int");
 
                     b.Property<int?>("SessionId")
@@ -237,9 +239,6 @@ namespace backend.Migrations
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("feelingTone")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -276,41 +275,24 @@ namespace backend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ActivityId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Diligence")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<TimeSpan>("Duration")
                         .HasColumnType("time");
+
+                    b.Property<DateTime>("EndDateTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Expectation")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("GoalId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MeditationObjectId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Motivation")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Posture")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("StartDateTime")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ActivityId");
-
-                    b.HasIndex("GoalId");
-
-                    b.HasIndex("MeditationObjectId");
 
                     b.ToTable("PreparationPhase");
                 });
@@ -343,7 +325,7 @@ namespace backend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("EndTime")
+                    b.Property<DateTime>("EndDateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsDeleted")
@@ -355,7 +337,7 @@ namespace backend.Migrations
                     b.Property<int>("PreparationPhaseId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("StartTime")
+                    b.Property<DateTime>("StartDateTime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -435,6 +417,10 @@ namespace backend.Migrations
                         .HasForeignKey("ParentGoalId")
                         .OnDelete(DeleteBehavior.Restrict);
 
+                    b.HasOne("backend.Models.PreparationPhase", null)
+                        .WithMany("Goals")
+                        .HasForeignKey("PreparationPhaseId");
+
                     b.Navigation("Activity");
 
                     b.Navigation("MeditationObject");
@@ -461,15 +447,9 @@ namespace backend.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("backend.Models.ProfilePicture", "profilePicture")
-                        .WithMany()
-                        .HasForeignKey("profilePictureId");
-
                     b.Navigation("Address");
 
                     b.Navigation("CurrentStage");
-
-                    b.Navigation("profilePicture");
                 });
 
             modelBuilder.Entity("backend.Models.NewlyMasteredStage", b =>
@@ -521,33 +501,6 @@ namespace backend.Migrations
                     b.Navigation("Stage");
                 });
 
-            modelBuilder.Entity("backend.Models.PreparationPhase", b =>
-                {
-                    b.HasOne("backend.Models.Activity", "Activity")
-                        .WithMany()
-                        .HasForeignKey("ActivityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("backend.Models.Goal", "Goal")
-                        .WithMany()
-                        .HasForeignKey("GoalId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("backend.Models.ObservableObject", "MeditationObject")
-                        .WithMany()
-                        .HasForeignKey("MeditationObjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Activity");
-
-                    b.Navigation("Goal");
-
-                    b.Navigation("MeditationObject");
-                });
-
             modelBuilder.Entity("backend.Models.Session", b =>
                 {
                     b.HasOne("backend.Models.Meditator", "Meditator")
@@ -593,6 +546,8 @@ namespace backend.Migrations
             modelBuilder.Entity("backend.Models.PreparationPhase", b =>
                 {
                     b.Navigation("Distractions");
+
+                    b.Navigation("Goals");
                 });
 
             modelBuilder.Entity("backend.Models.Session", b =>

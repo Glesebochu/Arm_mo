@@ -49,14 +49,14 @@ namespace backend.Controllers
             foreach (var date in pastWeekDates)
             {
                 var sessionEnd = await dbContext.Sessions.
-                    Where(u => u.Meditator.Id == 1 && u.EndTime.Date == date.Date)//change the userId after testing...
-                    .Select(u => u.EndTime.TimeOfDay.TotalMinutes)
+                    Where(u => u.Meditator.Id == 1 && u.EndDateTime.Date == date.Date)//change the userId after testing...
+                    .Select(u => u.EndDateTime.TimeOfDay.TotalMinutes)
                     .ToListAsync();
                 var Endtime = sessionEnd.DefaultIfEmpty(0).Sum();
 
                 var sessionStart = await dbContext.Sessions.
-                    Where(u => u.Meditator.Id == 1 && u.StartTime.Date == date.Date)//change the userId after testing...
-                    .Select(u => u.StartTime.TimeOfDay.TotalMinutes)
+                    Where(u => u.Meditator.Id == 1 && u.StartDateTime.Date == date.Date)//change the userId after testing...
+                    .Select(u => u.StartDateTime.TimeOfDay.TotalMinutes)
                     .ToListAsync();
                 var startTime = sessionStart.DefaultIfEmpty(0).Sum();
 
@@ -340,7 +340,7 @@ namespace backend.Controllers
             }
 
             var sessionWithLongestDuration = sessions
-                .OrderByDescending(s => (s.EndTime - s.StartTime).TotalSeconds)
+                .OrderByDescending(s => (s.EndDateTime - s.StartDateTime).TotalSeconds)
                 .FirstOrDefault();
 
             return Ok(sessionWithLongestDuration);

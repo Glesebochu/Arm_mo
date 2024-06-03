@@ -13,9 +13,9 @@ export default function SessionDuration({ sessionId }) {
         );
 
         if (response.status === 200 && response.data) {
-          const { startTime, endTime } = response.data;
-          const start = new Date(startTime);
-          const end = new Date(endTime);
+          const { startDateTime, endDateTime } = response.data;
+          const start = new Date(startDateTime);
+          const end = new Date(endDateTime);
           const durationMs = end - start;
           const durationHours = Math.floor(durationMs / (1000 * 60 * 60));
           const durationMinutes = Math.floor(

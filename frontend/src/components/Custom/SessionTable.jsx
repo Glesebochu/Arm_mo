@@ -89,10 +89,10 @@ export function DataTableDemo({ onSessionClick }) {
           const transformedData = response.data.map((session) => ({
             id: session.id,
             time: `${new Date(
-              session.startTime
-            ).toLocaleDateString()} , ${new Date(session.startTime)
+              session.startDateTime
+            ).toLocaleDateString()} , ${new Date(session.startDateTime)
               .toLocaleTimeString()
-              .substring(0, 5)} - ${new Date(session.endTime)
+              .substring(0, 5)} - ${new Date(session.endDateTime)
               .toLocaleTimeString()
               .substring(0, 5)}`,
             ahaMoments: session.ahaMoments.length,

@@ -32,15 +32,19 @@ namespace backend.Models{
             Unpleasant,
             Neutral
         }
+        public enum Proximity
+        {
+            Unrelated,
+            SameType,
+            DirectlyRelated,
+            MeditationObject
+        }
         public int Id { get; set; }
         public string Title { get; set; }
         public string? Description { get; set; }
-        public string? Icon { get; set; }
         public IntensityType? Intensity { get; set; }
         public ObservableObjectSubType SubType { get; set; }
-
-        // Nullable property of FeelingTone
-        public FeelingTone? feelingTone { get; set; }
+        public Proximity ProximityToMO { get; set; }
         public ObservableObjectType Type()
         {
             if (
@@ -58,23 +62,18 @@ namespace backend.Models{
                 return ObservableObjectType.MentalObject;
             }
         }
-
-
         public ObservableObject()
         {
 
         }
-
         public ObservableObject(string title, string description, string Icon,
         IntensityType intensity, ObservableObjectType type, ObservableObjectSubType subType,
         FeelingTone tone)
         {
             this.Title = title;
             this.Description = description;
-            this.Icon = Icon;
             this.Intensity = intensity;
             this.SubType = subType;
-            this.feelingTone = tone;
         }
     }
 

@@ -58,14 +58,11 @@ namespace backend.Controllers
         [HttpGet("GetById/{id}")]
         public IActionResult GetById([FromRoute] int id)
         {
-
-
             var goal = _context.Goals
-                .Include(g => g.ChildGoals)
                 .Include(g => g.Activity)
                 .Include(g => g.MeditationObject)
+                .Include(g => g.ChildGoals)
                 .FirstOrDefault(g => g.Id == id);
-
 
             if (goal == null)
             {

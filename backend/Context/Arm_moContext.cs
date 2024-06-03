@@ -46,11 +46,7 @@ namespace Arm_mo.Context
                 .WithMany() // Adjust based on your model
                 .HasForeignKey(nms => nms.StageId)
                 .OnDelete(DeleteBehavior.NoAction); // Prevent cascading delete
-            // Preparation Phase to Goal relationship
-            modelBuilder.Entity<PreparationPhase>()
-                .HasOne(p => p.Goal)
-                .WithMany()
-                .OnDelete(DeleteBehavior.NoAction);
+
 
             // Goal to ParentGoal relationship
             modelBuilder.Entity<Goal>()

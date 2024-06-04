@@ -19,19 +19,19 @@ export const getAll = createAsyncThunk(
                 return response.data;
             }
         } catch (error) {
-            console.log(error.response.data);
-            return ThunkAPi.rejectWithValue(error.response.data);
+            return rejectWithValue(error.response.data);
         }
     })
 
 // Thunk for creating a new goal
 export const createGoal = createAsyncThunk(
-    'goals/createGoal',
+    'Goals/createGoal',
     async (newGoal, { rejectWithValue }) => {
         try {
-            const response = await axios.post('${webRoot}/Goals/Create', newGoal);
+            const response = await axios.post(`${webRoot}/Goals/Create`, newGoal);
             return response.data;
         } catch (error) {
+            console.log(error.response.data);
             return rejectWithValue(error.response.data);
         }
     }

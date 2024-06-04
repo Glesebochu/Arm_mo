@@ -186,6 +186,23 @@ namespace backend.Controllers
 
             return Ok(session);
         }
+        [HttpGet("/api/Analyzer/GetRemovedSession")]
+        public async Task<IActionResult> GetRemovedSession(int SessionId)
+        {
+            var session = await dbContext.Sessions
+                .Where(u => u.Id == SessionId && u.IsDeleted)
+                .Include(s => s.PracticedStages)
+                .Include(s => s.NewlyMasterdStages)
+                .Include(s => s.AhaMoments)
+                .Include(s => s.ObservableObjects)
+                .Include(s => s.PreparationPhase)
+                .FirstOrDefaultAsync();
+
+            if (session == null)
+                return NotFound("No usage data found for the specified user.");
+
+            return Ok(session);
+        }
 
         [HttpGet("/api/Analyzer/GetSessionsForMeditator")]
         public async Task<IActionResult> GetSessionsForMeditator(int meditatorId)
@@ -250,6 +267,15 @@ namespace backend.Controllers
         {
             var id = await dbContext.Sessions
                 .Where(u => u.Id == sessionId && !u.IsDeleted)
+                .Select(s => s.Meditator.Id)
+                .FirstOrDefaultAsync();
+            return Ok(id);
+        }
+        [HttpGet("/api/Analyzer/GetMeditatorForRemovedSession")]
+        public async Task<IActionResult> GetMeditatorForRemovedSession(int sessionId)
+        {
+            var id = await dbContext.Sessions
+                .Where(u => u.Id == sessionId && u.IsDeleted)
                 .Select(s => s.Meditator.Id)
                 .FirstOrDefaultAsync();
             return Ok(id);
@@ -374,6 +400,24 @@ namespace backend.Controllers
                 return Ok("Deleted Session with Id: " + sessionToDelete.Id);
             }
         }
+        [HttpGet("/api/Analyzer/GetRemovedSessionsForMeditator")]
+        public async Task<IActionResult> GetRemovedSessionsForMeditator(int meditatorId){
+            var sessions = await dbContext.Sessions
+                .Where(s => s.Meditator.Id == meditatorId && s.IsDeleted == true)
+                .Include(s => s.PracticedStages)
+                .Include(s => s.NewlyMasterdStages)
+                .Include(s => s.AhaMoments)
+                .Include(s => s.ObservableObjects)
+                .Include(s => s.PreparationPhase)
+                .ToListAsync();
+            if(sessions!=null){
+                return Ok(sessions);
+            }
+            else{
+                return NotFound("No Deleted Sessions for meditator: "+meditatorId);
+            }
+        }
+
         [HttpPost("/api/Analyzer/RestoreSession")]
         public async Task<IActionResult> RestoreSession(int sessionId)
         {

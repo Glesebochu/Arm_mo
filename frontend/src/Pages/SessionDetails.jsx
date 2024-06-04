@@ -27,7 +27,6 @@ function SessionDetails({ sessionId }) {
           `http://localhost:5158/api/Analyzer/GetSession?SessionId=${sessionId}`
         );
         const sessionData = sessionResponse.data;
-        console.log("Session Data:", sessionData);
         setSessionData(sessionData);
 
         // Fetch the meditator ID for this session
@@ -35,7 +34,6 @@ function SessionDetails({ sessionId }) {
           `http://localhost:5158/api/Analyzer/GetMeditatorForSession?sessionId=${sessionId}`
         );
         const meditatorId = meditatorResponse.data;
-        console.log("Meditator ID:", meditatorId);
 
         // Fetch counts and types for each observable object
         const countsAndTypesPromises = sessionData.observableObjects.map(
@@ -94,7 +92,6 @@ function SessionDetails({ sessionId }) {
               }
             )
             .then((response) => {
-              console.log(`Count for ${moment.label}:`, response.data);
               return { label: moment.label, count: response.data };
             })
         );
@@ -107,10 +104,6 @@ function SessionDetails({ sessionId }) {
           },
           {}
         );
-
-        console.log("Counts Data:", newCounts);
-        console.log("Aha Counts Data:", newAhaCounts);
-        console.log("Organized By Type:", organizedByType);
 
         setCounts(newCounts);
         setAhaCounts(newAhaCounts);

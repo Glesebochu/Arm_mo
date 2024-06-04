@@ -72,12 +72,12 @@
 #time {
   font-size: 30px;
   margin: 0;
-  margin-left: 2em;
-  color: #36a2eb;
+  margin-left: 2.5em;
+  color: #2563eb;
 }
 
 .text {
-  margin-top: 4em;
+  margin-top: 3em;
   font-size: 28px;
   font-weight: 800;
   text-align: center;
@@ -90,12 +90,12 @@
 #loader {
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 70%;
   margin-top: -4.7em;
   margin-left: -5.7em;
   width: 5.4em;
   height: 5.4em;
-  background-color: #f0f0f0;
+  background-color: white;
   display: flex;
 }
 

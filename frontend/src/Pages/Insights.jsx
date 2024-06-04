@@ -13,7 +13,7 @@ const Insights = () => {
       <div className="box box2">
         <BarGraph meditatorId={1} />
       </div>
-      
+
       <div className="box box2">
         <div className="box box1">
           <CurrentStageAlert />

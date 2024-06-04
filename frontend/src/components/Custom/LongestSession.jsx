@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "@/Styles/LongestSession.css";
 
 export default function LongestSession() {
   const [duration, setDuration] = useState("");

@@ -5,7 +5,9 @@ import { NavigationMenuDemo } from "@/components/Custom/AnalyticsNavigation.jsx"
 import { LineGraph } from "@/components/Custom/LineGraph";
 import Insights from "./Insights";
 import { ResponsiveContainer } from "recharts";
-import SessionDetails from "@/pages/SessionDetails.jsx";  // Import the SessionDetails component
+import SessionDetails from "@/pages/SessionDetails.jsx"; // Import the SessionDetails component
+import { RemovedSessions } from "@/components/Custom/RemovedSessionsTable";
+import RemovedSessionDetails from "./RemovedSessionDetails";
 
 const SessionSummary = () => {
   const [selectedView, setSelectedView] = useState("DataTable");
@@ -15,6 +17,10 @@ const SessionSummary = () => {
     setSelectedSessionId(sessionId);
     setSelectedView("SessionDetails");
   };
+    const handleRemovedSessionClick = (sessionId) => {
+      setSelectedSessionId(sessionId);
+      setSelectedView("RemovedSessionDetails");
+    };
 
   const renderSelectedView = () => {
     if (selectedView === "UsageView") {
@@ -27,6 +33,10 @@ const SessionSummary = () => {
       );
     } else if (selectedView === "SessionDetails" && selectedSessionId) {
       return <SessionDetails sessionId={selectedSessionId} />;
+    } else if (selectedView === "RemovedSessions") {
+      return <RemovedSessions onSessionClick={handleRemovedSessionClick} />;
+    } else if (selectedView === "RemovedSessionDetails" && selectedSessionId) {
+      return <RemovedSessionDetails sessionId={selectedSessionId} />;
     } else {
       return (
         <ResponsiveContainer>

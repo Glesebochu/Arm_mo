@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
+import { ResponsiveContainer } from "recharts";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -14,75 +15,91 @@ import {
 
 export function NavigationMenuDemo({ setSelectedView }) {
   return (
-    <NavigationMenu className="mt-4">
-      <NavigationMenuList>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-              <li className="row-span-3">
-                <NavigationMenuLink asChild>
-                  <p className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md">
-                    <div className="mb-2 mt-4 text-lg font-medium">
-                      Arm_mo Analytics
-                    </div>
-                    <p className="text-sm leading-tight text-muted-foreground">
-                      View all your analytic data here. You can easily see
-                      trends across all of your sessions - from the time you
-                      spent on sessions to the number of AhaMoments.
+    <ResponsiveContainer>
+      <NavigationMenu className="mt-4">
+        <NavigationMenuList>
+          <NavigationMenuItem>
+            <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
+            <NavigationMenuContent>
+              <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+                <li className="row-span-3">
+                  <NavigationMenuLink asChild>
+                    <p className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md">
+                      <div className="mb-2 mt-4 text-lg font-medium">
+                        Arm_mo Analytics
+                      </div>
+                      <p className="text-sm leading-tight text-muted-foreground">
+                        View all your analytic data here. You can easily see
+                        trends across all of your sessions - from the time you
+                        spent on sessions to the number of AhaMoments.
+                      </p>
                     </p>
-                  </p>
-                </NavigationMenuLink>
-              </li>
-              <ListItem
-                title="Sessions Summary"
-                onClick={() => setSelectedView("DataTable")}
-              >
-                View a comprehensive summary of the sessions you had recently in
-                a tabular format.
-              </ListItem>
-              <ListItem
-                title="Insights"
-                onClick={() => setSelectedView("Insights")}
-              >
-                Peek into your Meditation status.
-              </ListItem>
-              <ListItem
-                title="Weekly Activity"
-                onClick={() => setSelectedView("UsageView")}
-              >
-                Provides you with a graph that shows you the time you spent on
-                the app in a given week.
-              </ListItem>
-            </ul>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <NavigationMenuLink
-            className={navigationMenuTriggerStyle()}
-            onClick={() => setSelectedView("DataTable")}
-          >
-            Sessions Summary
-          </NavigationMenuLink>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <NavigationMenuLink
-            className={navigationMenuTriggerStyle()}
-            onClick={() => setSelectedView("UsageView")}
-          >
-            App Activity
-          </NavigationMenuLink>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <NavigationMenuLink
-            className={navigationMenuTriggerStyle()}
-            onClick={() => setSelectedView("Insights")}
-          >
-            Insights
-          </NavigationMenuLink>
-        </NavigationMenuItem>
-      </NavigationMenuList>
-    </NavigationMenu>
+                  </NavigationMenuLink>
+                </li>
+                <ListItem
+                  title="Sessions Summary"
+                  onClick={() => setSelectedView("DataTable")}
+                >
+                  View a comprehensive summary of the sessions you had recently in
+                  a tabular format.
+                </ListItem>
+                <ListItem
+                  title="Insights"
+                  onClick={() => setSelectedView("Insights")}
+                >
+                  Peek into your Meditation status.
+                </ListItem>
+                <ListItem
+                  title="Weekly Activity"
+                  onClick={() => setSelectedView("UsageView")}
+                >
+                  Provides you with a graph that shows you the time you spent on
+                  the app in a given week.
+                </ListItem>
+                <ListItem
+                  title="Removed Sessions"
+                  onClick={() => setSelectedView("RemovedSessions")}
+                >
+                  Allows you to view and restore your removed sessions.
+                </ListItem>
+              </ul>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <NavigationMenuLink
+              className={navigationMenuTriggerStyle()}
+              onClick={() => setSelectedView("DataTable")}
+            >
+              Sessions Summary
+            </NavigationMenuLink>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <NavigationMenuLink
+              className={navigationMenuTriggerStyle()}
+              onClick={() => setSelectedView("UsageView")}
+            >
+              App Activity
+            </NavigationMenuLink>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <NavigationMenuLink
+              className={navigationMenuTriggerStyle()}
+              onClick={() => setSelectedView("Insights")}
+            >
+              Insights
+            </NavigationMenuLink>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <NavigationMenuLink
+              className={navigationMenuTriggerStyle()}
+              onClick={() => setSelectedView("RemovedSessions")}
+            >
+              Removed Sessions
+            </NavigationMenuLink>
+          </NavigationMenuItem>
+        </NavigationMenuList>
+      </NavigationMenu>
+    </ResponsiveContainer>
   );
 }
 

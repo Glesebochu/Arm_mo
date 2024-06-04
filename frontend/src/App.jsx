@@ -6,6 +6,7 @@ import SessionSummary from "./pages/AnalyticsPage";
 import SessionDetails from "./pages/SessionDetails"; // Import the new component for session details
 import UsageView from "./pages/Usage";
 import Insights from "./pages/Insights";
+import { RemovedSessions } from './components/Custom/RemovedSessionsTable';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path="/session/:sessionId" element={<SessionDetails />} />
           <Route path="/Usage" element={<UsageView />} />
           <Route path="/Insights" element={<Insights />} />
+          <Route path="/RemovedSessions" element={< RemovedSessions/>} />
         </Routes>
       </Router>
     </>

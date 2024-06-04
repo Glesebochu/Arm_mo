@@ -1,7 +1,7 @@
 ﻿using backend.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Arm_mo.Context
+namespace backend.Data
 {
     public class Arm_moContext : DbContext
     {

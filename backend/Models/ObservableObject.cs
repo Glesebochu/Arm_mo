@@ -68,17 +68,14 @@ namespace backend.Models
         {
 
         }
-
         public ObservableObject(string title, string description, string Icon,
         IntensityType intensity, ObservableObjectType type, ObservableObjectSubType subType,
         FeelingTone tone)
         {
             this.Title = title;
             this.Description = description;
-            this.Icon = Icon;
             this.Intensity = intensity;
             this.SubType = subType;
-            this.feelingTone = tone;
         }
     }
 }

@@ -8,7 +8,6 @@ namespace backend.Models
         InProgress,
         Completed
     }
-
     public class Goal
     {
         public int Id { get; set; }
@@ -28,9 +27,6 @@ namespace backend.Models
             this.Activity = activity;
             this.MeditationObject = meditationObject;
         }
-
-        // A function that sets the Status & CompletionDate of the parent goal when 
-        // the last child goal is complete.
 
     }
 }

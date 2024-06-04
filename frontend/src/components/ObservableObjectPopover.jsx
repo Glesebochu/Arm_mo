@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/select"
 
 
-export function ObservableObjectPopover({ observableObject }) {
+export function ObservableObjectPopover({ observableObject, handleSave }) {
     // var observableObject = {
     //     title: "Four paragraphs from a book",
     //     description: "12 rules for life.",
@@ -131,7 +131,7 @@ export function ObservableObjectPopover({ observableObject }) {
                     </div>
 
                     <div className="grid grid-cols-3 items-center gap-4">
-                        <Button className="w-full mt-4 p-2" variant="outline">
+                        <Button className="w-full mt-4 p-2" variant="outline" onClick={handleSave}>
                             Save
                         </Button>
                     </div>

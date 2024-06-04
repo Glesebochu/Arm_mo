@@ -4,12 +4,19 @@ using Microsoft.CodeAnalysis.Options;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 
+using Arm_mo.Context;
+using backend.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
+using System.Text.Json.Serialization;
+
 namespace backend
 {
     public class Program
     {
         public static void Main(string[] args)
         {
+            //var AllowedSpecificOrigins = "AllowedSpecificOrigins";
             // Create a new WebApplication builder with command line arguments
             var builder = WebApplication.CreateBuilder(args);
 
@@ -26,7 +33,45 @@ namespace backend
 
 
             // Add controller services for API endpoints
-            builder.Services.AddControllers();
+
+            //builder.Services.AddCors(options =>
+            //{
+            //    options.AddPolicy(name: AllowedSpecificOrigins,
+            //                      policy =>
+            //                      {
+            //                          policy.WithOrigins("http://localhost:5173/");
+            //                      });
+            //});
+            //builder.Services.AddCors(options =>
+            //{
+            //    options.AddDefaultPolicy(
+            //        policy =>
+            //        {
+            //            policy.WithOrigins("http://localhost:5173/").AllowAnyHeader()
+            //                    .AllowAnyMethod(); ;
+            //        });
+            //});
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowedSpecificOrigins",
+                    builder => builder
+                        .AllowAnyMethod()
+                        .AllowCredentials()
+                        .SetIsOriginAllowed((host) => { return host == "http://localhost:5173"; })
+                        // .SetIsOriginAllowed(host => host.Equals("http://localhost:5173", StringComparison.OrdinalIgnoreCase))
+                        .AllowAnyHeader());
+            });
+
+            //Adding the Arm'mo context
+            builder.Services.AddDbContextPool<Arm_moContext>(option => option.
+            UseSqlServer(builder.Configuration.GetConnectionString("Arm_moDbConnection")));
+            builder.Services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+            });
+
             // // Add service for handling cyclical references
             // .AddJsonOptions(opt =>
             // {
@@ -64,7 +109,6 @@ namespace backend
                 app.UseHsts();
             }
 
-            // Enforce HTTPS redirection
             app.UseHttpsRedirection();
 
             // Serve static files

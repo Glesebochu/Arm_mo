@@ -4,6 +4,7 @@ using Arm_mo.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace backend.Migrations
 {
     [DbContext(typeof(Arm_moContext))]
-    partial class Arm_moContextModelSnapshot : ModelSnapshot
+    [Migration("20240525070029_UpdatedMeditator")]
+    partial class UpdatedMeditator
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,24 +25,7 @@ namespace backend.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("backend.Models.Activity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Activities");
-                });
-
-            modelBuilder.Entity("backend.Models.Address", b =>
+            modelBuilder.Entity("Address", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -55,13 +41,41 @@ namespace backend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("MeditatorId")
+                        .HasColumnType("int");
+
                     b.Property<string>("State")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("MeditatorId")
+                        .IsUnique();
+
                     b.ToTable("Address");
+                });
+
+            modelBuilder.Entity("backend.Models.Activity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("MentalObjectId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MentalObjectId");
+
+                    b.ToTable("Activities");
                 });
 
             modelBuilder.Entity("backend.Models.AhaMoment", b =>
@@ -86,43 +100,6 @@ namespace backend.Migrations
                     b.ToTable("AhaMoments");
                 });
 
-            modelBuilder.Entity("backend.Models.Goal", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ActivityId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CompletedDateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DueDateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("MeditationObjectId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ParentGoalId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ActivityId");
-
-                    b.HasIndex("MeditationObjectId");
-
-                    b.HasIndex("ParentGoalId");
-
-                    b.ToTable("Goals");
-                });
-
             modelBuilder.Entity("backend.Models.Meditator", b =>
                 {
                     b.Property<int>("Id")
@@ -131,15 +108,8 @@ namespace backend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("AddressId")
-                        .HasColumnType("int");
-
                     b.Property<int>("CurrentStageId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -162,8 +132,6 @@ namespace backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AddressId");
-
                     b.HasIndex("CurrentStageId");
 
                     b.HasIndex("profilePictureId");
@@ -184,43 +152,6 @@ namespace backend.Migrations
                     b.HasIndex("StageId");
 
                     b.ToTable("NewlyMasteredStage");
-                });
-
-            modelBuilder.Entity("backend.Models.ObservableObject", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Icon")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("Intensity")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SessionId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SubType")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("feelingTone")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SessionId");
-
-                    b.ToTable("ObservableObjects");
                 });
 
             modelBuilder.Entity("backend.Models.PracticedStage", b =>
@@ -304,6 +235,37 @@ namespace backend.Migrations
                     b.ToTable("Stages");
                 });
 
+            modelBuilder.Entity("backend.Models.Step", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<int?>("ActivityId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Category")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Duration")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Response")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ActivityId");
+
+                    b.ToTable("Steps");
+                });
+
             modelBuilder.Entity("backend.Models.UserUsage", b =>
                 {
                     b.Property<int>("Id")
@@ -331,6 +293,69 @@ namespace backend.Migrations
                     b.ToTable("UserUsage");
                 });
 
+            modelBuilder.Entity("ObservableObject", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Icon")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Intensity")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SessionId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SubType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("feelingTone")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("mentalState")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SessionId");
+
+                    b.ToTable("ObservableObjects");
+                });
+
+            modelBuilder.Entity("Address", b =>
+                {
+                    b.HasOne("backend.Models.Meditator", null)
+                        .WithOne("Address")
+                        .HasForeignKey("Address", "MeditatorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("backend.Models.Activity", b =>
+                {
+                    b.HasOne("ObservableObject", "MentalObject")
+                        .WithMany()
+                        .HasForeignKey("MentalObjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MentalObject");
+                });
+
             modelBuilder.Entity("backend.Models.AhaMoment", b =>
                 {
                     b.HasOne("backend.Models.Session", null)
@@ -338,35 +363,8 @@ namespace backend.Migrations
                         .HasForeignKey("SessionId");
                 });
 
-            modelBuilder.Entity("backend.Models.Goal", b =>
-                {
-                    b.HasOne("backend.Models.Activity", "Activity")
-                        .WithMany()
-                        .HasForeignKey("ActivityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("backend.Models.ObservableObject", "MeditationObject")
-                        .WithMany()
-                        .HasForeignKey("MeditationObjectId");
-
-                    b.HasOne("backend.Models.Goal", "ParentGoal")
-                        .WithMany("ChildGoals")
-                        .HasForeignKey("ParentGoalId");
-
-                    b.Navigation("Activity");
-
-                    b.Navigation("MeditationObject");
-
-                    b.Navigation("ParentGoal");
-                });
-
             modelBuilder.Entity("backend.Models.Meditator", b =>
                 {
-                    b.HasOne("backend.Models.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId");
-
                     b.HasOne("backend.Models.Stage", "CurrentStage")
                         .WithMany()
                         .HasForeignKey("CurrentStageId")
@@ -376,8 +374,6 @@ namespace backend.Migrations
                     b.HasOne("backend.Models.ProfilePicture", "profilePicture")
                         .WithMany()
                         .HasForeignKey("profilePictureId");
-
-                    b.Navigation("Address");
 
                     b.Navigation("CurrentStage");
 
@@ -401,13 +397,6 @@ namespace backend.Migrations
                     b.Navigation("Session");
 
                     b.Navigation("Stage");
-                });
-
-            modelBuilder.Entity("backend.Models.ObservableObject", b =>
-                {
-                    b.HasOne("backend.Models.Session", null)
-                        .WithMany("ObservableObjects")
-                        .HasForeignKey("SessionId");
                 });
 
             modelBuilder.Entity("backend.Models.PracticedStage", b =>
@@ -444,6 +433,15 @@ namespace backend.Migrations
                     b.Navigation("Meditator");
                 });
 
+            modelBuilder.Entity("backend.Models.Step", b =>
+                {
+                    b.HasOne("backend.Models.Activity", "Activity")
+                        .WithMany()
+                        .HasForeignKey("ActivityId");
+
+                    b.Navigation("Activity");
+                });
+
             modelBuilder.Entity("backend.Models.UserUsage", b =>
                 {
                     b.HasOne("backend.Models.Meditator", "User")
@@ -455,13 +453,17 @@ namespace backend.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("backend.Models.Goal", b =>
+            modelBuilder.Entity("ObservableObject", b =>
                 {
-                    b.Navigation("ChildGoals");
+                    b.HasOne("backend.Models.Session", null)
+                        .WithMany("ObservableObjects")
+                        .HasForeignKey("SessionId");
                 });
 
             modelBuilder.Entity("backend.Models.Meditator", b =>
                 {
+                    b.Navigation("Address");
+
                     b.Navigation("PracticedStages");
 
                     b.Navigation("UserUsages");

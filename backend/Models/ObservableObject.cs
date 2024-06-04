@@ -1,4 +1,4 @@
-﻿using static backend.Models.ObservableObject;
+using static backend.Models.ObservableObject;
 
 namespace backend.Models
 {
@@ -63,6 +63,22 @@ namespace backend.Models
             {
                 return ObservableObjectType.MentalObject;
             }
+        }
+        public ObservableObject()
+        {
+
+        }
+
+        public ObservableObject(string title, string description, string Icon,
+        IntensityType intensity, ObservableObjectType type, ObservableObjectSubType subType,
+        FeelingTone tone)
+        {
+            this.Title = title;
+            this.Description = description;
+            this.Icon = Icon;
+            this.Intensity = intensity;
+            this.SubType = subType;
+            this.feelingTone = tone;
         }
     }
 }

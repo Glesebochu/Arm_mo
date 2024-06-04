@@ -13,10 +13,10 @@
   width: 100%;
   max-width: 700px;
   box-sizing: border-box;
-  background-color: #f0f0f0;
+  background-color: white;
   border-radius: 10px;
   box-shadow: 1px 1px 0 1px #f9f9fb, -1px 0 28px 0 rgba(34, 33, 81, 0.01),
-    28px 28px 28px 0 rgba(34, 33, 81, 0.25);
+    1px 5px 1px 0 rgba(34, 33, 81, 0.25);
   margin: 20px 0; /* Added margin for spacing */
   display: flex;
   flex-direction: column;
@@ -37,7 +37,7 @@
   border-radius: 10px;
   background-color: #f0f0f0;
   box-shadow: 1px 1px 0 1px #f9f9fb, -1px 0 28px 0 rgba(34, 33, 81, 0.01),
-    28px 28px 28px 0 rgba(34, 33, 81, 0.25);
+    1px 5px 1px 0 rgba(34, 33, 81, 0.25);
 }
 
 .circle-container {

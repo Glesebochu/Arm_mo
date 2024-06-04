@@ -70,7 +70,7 @@ const UsageView = () => {
       dailyUse(usageData[1][0]);
       setChartData(combinedLines);
     } catch (error) {
-      console.error("AJAX request failed:", error);
+      console.error("Axios request failed:", error);
     }
   };
 
@@ -108,7 +108,7 @@ const UsageView = () => {
 
       setChartData(combinedLines);
     } catch (error) {
-      console.error("AJAX request failed:", error);
+      console.error("Axios request failed:", error);
     }
   };
 

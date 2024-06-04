@@ -1,50 +1,52 @@
-using System.ComponentModel.DataAnnotations.Schema;
+using static backend.Models.ObservableObject;
 
-namespace backend.Models{
+namespace backend.Models
+{
+    public enum ObservableObjectType
+    {
+        MentalObject,
+        SensoryStimulus
+    }
+    public enum ObservableObjectSubType
+    {
+        Visual,
+        Auditory,
+        Olfactory,
+        Kinesthetic,
+        Taste,
+
+        Thought,
+        MentalState,
+        FeelingTone
+    }
+    public enum IntensityType
+    {
+        Mild,
+        Moderate,
+        Intense
+    }
+    public enum FeelingTone
+    {
+        Pleasant,
+        Unpleasant,
+        Neutral
+    }
+    public enum Proximity
+    {
+        Unrelated,
+        SameSubType,
+        DirectlyRelated,
+        MeditationObject
+    }
     public class ObservableObject
     {
-        public enum ObservableObjectType
-        {
-            MentalObject,
-            SensoryStimulus
-        }
-        public enum ObservableObjectSubType
-        {
-            Visual,
-            Auditory,
-            Olfactory,
-            Kinesthetic,
-            Taste,
-
-            Thought,
-            MentalState,
-            FeelingTone
-        }
-        public enum IntensityType
-        {
-            Mild,
-            Moderate,
-            Intense
-        }
-        public enum FeelingTone
-        {
-            Pleasant,
-            Unpleasant,
-            Neutral
-        }
-        public enum Proximity
-        {
-            Unrelated,
-            SameType,
-            DirectlyRelated,
-            MeditationObject
-        }
         public int Id { get; set; }
-        public string Title { get; set; }
+        public string Title { get; set; } = String.Empty;
         public string? Description { get; set; }
         public IntensityType? Intensity { get; set; }
         public ObservableObjectSubType SubType { get; set; }
         public Proximity ProximityToMO { get; set; }
+
         public ObservableObjectType Type()
         {
             if (
@@ -76,5 +78,4 @@ namespace backend.Models{
             this.SubType = subType;
         }
     }
-
 }

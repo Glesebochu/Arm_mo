@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import UsageView from "@/Pages/Usage.jsx";
+import UsageView from "@/pages/Usage.jsx";
 import { DataTableDemo } from "@/components/Custom/SessionTable.jsx";
 import { NavigationMenuDemo } from "@/components/Custom/AnalyticsNavigation.jsx";
 import { LineGraph } from "@/components/Custom/LineGraph";
 import Insights from "./Insights";
 import { ResponsiveContainer } from "recharts";
-import SessionDetails from "@/Pages/SessionDetails.jsx";  // Import the SessionDetails component
+import SessionDetails from "@/pages/SessionDetails.jsx";  // Import the SessionDetails component
 
 const SessionSummary = () => {
   const [selectedView, setSelectedView] = useState("DataTable");

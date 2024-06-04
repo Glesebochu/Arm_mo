@@ -14,7 +14,7 @@ function App() {
       <Router>
         <Routes>
           {/* For your specific Modules Modify this so that your Components show up when you run Vite */}
-          <Route path="/" element={<Goals />} />
+          <Route path="/" element={<SessionSummary />} />
 
           {/* No need to to remove the below */}
           <Route path="/session/:sessionId" element={<SessionDetails />} />

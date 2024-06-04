@@ -1,11 +1,7 @@
-
 using backend.Data;
-using Microsoft.CodeAnalysis.Options;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
-
 using backend.Models;
-using Microsoft.Extensions.Hosting;
 using System.Text.Json.Serialization;
 
 namespace backend
@@ -14,8 +10,6 @@ namespace backend
     {
         public static void Main(string[] args)
         {
-            //var AllowedSpecificOrigins = "AllowedSpecificOrigins";
-            // Create a new WebApplication builder with command line arguments
             var builder = WebApplication.CreateBuilder(args);
 
             // Configuring CORS (Cross-Origin Resource Sharing) in the application's service collection.
@@ -29,53 +23,14 @@ namespace backend
                         .AllowAnyHeader());
             });
 
-
-            // Add controller services for API endpoints
-
-            //builder.Services.AddCors(options =>
-            //{
-            //    options.AddPolicy(name: AllowedSpecificOrigins,
-            //                      policy =>
-            //                      {
-            //                          policy.WithOrigins("http://localhost:5173/");
-            //                      });
-            //});
-            //builder.Services.AddCors(options =>
-            //{
-            //    options.AddDefaultPolicy(
-            //        policy =>
-            //        {
-            //            policy.WithOrigins("http://localhost:5173/").AllowAnyHeader()
-            //                    .AllowAnyMethod(); ;
-            //        });
-            //});
-
-            builder.Services.AddCors(options =>
-            {
-                options.AddPolicy("AllowedSpecificOrigins",
-                    builder => builder
-                        .AllowAnyMethod()
-                        .AllowCredentials()
-                        .SetIsOriginAllowed((host) => { return host == "http://localhost:5173"; })
-                        // .SetIsOriginAllowed(host => host.Equals("http://localhost:5173", StringComparison.OrdinalIgnoreCase))
-                        .AllowAnyHeader());
-            });
-
-            //Adding the Arm'mo context
+            // Adding the Arm'mo context
             builder.Services.AddDbContextPool<Arm_moContext>(option => option.
             UseSqlServer(builder.Configuration.GetConnectionString("Arm_moDbConnection")));
             builder.Services.AddControllers().AddJsonOptions(options =>
             {
-                options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+                options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
                 options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
             });
-
-            // // Add service for handling cyclical references
-            // .AddJsonOptions(opt =>
-            // {
-            //     opt.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
-            //     opt.JsonSerializerOptions.MaxDepth = 30;
-            // });
 
             // Add services for generating API documentation using Swagger
             builder.Services.AddEndpointsApiExplorer();
@@ -89,7 +44,6 @@ namespace backend
 
             // Add AutoMapper service with the Program class for configuration
             builder.Services.AddAutoMapper(typeof(Program));
-
 
             // Build the application
             var app = builder.Build();
@@ -112,11 +66,11 @@ namespace backend
             // Serve static files
             app.UseStaticFiles();
 
-            // Enabling CORS middleware in the application pipeline using the "AllowedSpecificOrigins" policy.
-            app.UseCors("AllowedSpecificOrigins");
-
             // Enable routing
             app.UseRouting();
+
+            // Enabling CORS middleware in the application pipeline using the "AllowedSpecificOrigins" policy.
+            app.UseCors("AllowedSpecificOrigins");
 
             // Enable authorization middleware
             app.UseAuthorization();
@@ -126,8 +80,6 @@ namespace backend
 
             // Run the application
             app.Run();
-
         }
-
     }
 }

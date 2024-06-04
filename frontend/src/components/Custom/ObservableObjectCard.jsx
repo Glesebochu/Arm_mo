@@ -6,10 +6,6 @@ function ObservableObjectCard({ object, description, icon, count }) {
   return (
     <div className="object-card">
       <div className="object-info">
-        <Avatar>
-          <AvatarImage src={`/src/Icons/${icon}`} alt={object} />
-          <AvatarFallback>CN</AvatarFallback>
-        </Avatar>
 
         <div className="object-text">
           <p className="object-name">{object}</p>

@@ -180,7 +180,6 @@ function SessionDetails({ sessionId }) {
                   key={object.id}
                   object={object.title}
                   description={object.description}
-                  icon={object.icon}
                   count={counts[object.title] || 0} // Use the fetched count data here
                 />
               ))

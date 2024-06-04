@@ -1,15 +1,12 @@
 import React from "react";
-import "@/Styles/ObservableObjectCard.css"; // Ensure to import the updated CSS file
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import "@/Styles/AhaMomentCard.css"; // Ensure to import the updated CSS file
 
-function ObservableObjectCard({ object, description, icon, count }) {
+function AhaMomentCard({ label, count }) {
   return (
     <div className="object-card">
       <div className="object-info">
-
         <div className="object-text">
-          <p className="object-name">{object}</p>
-          <p className="object-description">{description}</p>
+          <p className="object-name">{label}</p>
           <p className="object-count">
             {count > 1
               ? `Has appeared ${count} times in past sessions.`
@@ -21,4 +18,4 @@ function ObservableObjectCard({ object, description, icon, count }) {
   );
 }
 
-export default ObservableObjectCard;
+export default AhaMomentCard;

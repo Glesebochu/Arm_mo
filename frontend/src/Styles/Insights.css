@@ -1,22 +1,27 @@
 .containerInsight {
-  display: grid;
-  gap: 20px;
-  grid-template-columns: 2fr 4fr;
-  grid-template-rows: 1fr 4fr;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-.box {
-  /* padding: 20px; */
-  border-radius: 10px;
-  /* margin: 10px; */
-  /* border: 1px solid blue; */
-}
-.box1{
-    padding-left: 90px;
-    margin-left: 40px;
-}
-.box2 {
-  margin-right: 40px;
-  padding-right: 30px;
-  margin-left: 100px;
 
+.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border-radius: 10px;
+  margin: 10px;
+}
+
+.box1 {
+  /* Additional styling for box1 if needed */
+  display: flex;
+  align-items: flex-start;
+  width: auto;
+  /* background-color: green; */
+}
+
+.box2 {
+  /* Additional styling for box2 if needed */
 }

@@ -5,21 +5,13 @@ import {
   CategoryScale,
   LinearScale,
   BarElement,
-  Title,
   Tooltip,
   Legend,
 } from "chart.js";
 import axios from "axios";
 import { ResponsiveContainer } from "recharts";
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
+ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
 const BarGraph = ({ meditatorId }) => {
   const [chartData, setChartData] = useState({ labels: [], datasets: [] });
@@ -31,7 +23,7 @@ const BarGraph = ({ meditatorId }) => {
         const response = await axios.get(
           `http://localhost:5158/api/analyzer/GetPracticedStagesForMeditator?meditatorId=${meditatorId}`
         );
-        const practicedStages = response.data[0].practicedStages;
+        const practicedStages = response.data.practicedStages;
 
         // Count the occurrences of each stageId
         const stageCounts = practicedStages.reduce((acc, stage) => {
@@ -50,7 +42,7 @@ const BarGraph = ({ meditatorId }) => {
               borderColor: "#2563eb",
               backgroundColor: "#2563eb",
               borderWidth: 1,
-              barThickness: 50,
+              barThickness: 65,
               borderRadius: 5,
               hoverBackgroundColor: "black",
             },
@@ -80,13 +72,6 @@ const BarGraph = ({ meditatorId }) => {
       plugins: {
         legend: {
           display: false,
-        },
-        title: {
-          display: true,
-          text: "Number of Times Each Stage Has Been Practiced",
-          font: {
-            size: 14,
-          },
         },
         tooltip: {
           backgroundColor: "rgba(0,0,0,0.7)",
@@ -142,16 +127,19 @@ const BarGraph = ({ meditatorId }) => {
   return (
     <div
       style={{
-        width: "70%",
-        height: "350px",
+        width: "50%",
+        height: "390px",
         margin: 0,
         padding: 0,
         boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
         borderRadius: "8px",
         backgroundColor: "white",
-        padding: "10px",
+        padding: "20px",
       }}
     >
+      <h1 className="mb-4 text-center text-1xl font-light leading-none tracking-tight text-black md:text-5xl lg:text-4xl dark:text-white">
+        Stages you practiced
+      </h1>
       <ResponsiveContainer>
         <Bar data={chartData} options={config.options} />
       </ResponsiveContainer>

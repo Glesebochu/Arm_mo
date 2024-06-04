@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import axios from "axios";
 import ObservableObjectCard from "@/components/Custom/ObservableObjectCard";
+import AhaMomentCard from "@/components/Custom/AhaMomentCard";
+import StageCard from "@/components/Custom/PracticedStageCard"; // Import the StageCard component
+import SessionDuration from "@/components/Custom/SessionDuration"; // Import the new SessionDuration component
 import "@/Styles/SessionDetails.css"; // Make sure to import the CSS file
 
-function SessionDetails() {
-  const { sessionId } = useParams();
+function SessionDetails({ sessionId }) {
   const [sessionData, setSessionData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [counts, setCounts] = useState({});
+  const [ahaCounts, setAhaCounts] = useState({});
+  const [observableObjectsByType, setObservableObjectsByType] = useState({
+    SensoryStimulus: [],
+    MentalObject: [],
+  });
 
   useEffect(() => {
     const fetchSessionData = async () => {
@@ -29,12 +35,12 @@ function SessionDetails() {
           `http://localhost:5158/api/Analyzer/GetMeditatorForSession?sessionId=${sessionId}`
         );
         const meditatorId = meditatorResponse.data;
-        console.log("Meditator ID is for you:", meditatorId);
+        console.log("Meditator ID:", meditatorId);
 
-        // Fetch counts for each observable object
-        const countsPromises = sessionData.observableObjects.map((object) =>
-          axios
-            .get(
+        // Fetch counts and types for each observable object
+        const countsAndTypesPromises = sessionData.observableObjects.map(
+          async (object) => {
+            const countResponse = await axios.get(
               `http://localhost:5158/api/Analyzer/GetCountOfObservableObjectForMeditator`,
               {
                 params: {
@@ -42,21 +48,73 @@ function SessionDetails() {
                   meditatorId: meditatorId,
                 },
               }
-            )
-            .then((response) => {
-              console.log(`Count for ${object.title}:`, response.data);
-              return { title: object.title, count: response.data };
-            })
+            );
+
+            const typeResponse = await axios.get(
+              `http://localhost:5158/api/analyzer/GetTypeForAnObservableObject`,
+              {
+                params: {
+                  observableObjectId: object.id,
+                },
+              }
+            );
+
+            return {
+              ...object,
+              count: countResponse.data,
+              type: typeResponse.data,
+            };
+          }
         );
 
-        const countsResults = await Promise.all(countsPromises);
-        const newCounts = countsResults.reduce((acc, { title, count }) => {
-          acc[title] = count;
+        const countsAndTypesResults = await Promise.all(countsAndTypesPromises);
+        const newCounts = countsAndTypesResults.reduce((acc, obj) => {
+          acc[obj.title] = obj.count;
           return acc;
         }, {});
 
+        const organizedByType = countsAndTypesResults.reduce(
+          (acc, obj) => {
+            acc[obj.type].push(obj);
+            return acc;
+          },
+          { SensoryStimulus: [], MentalObject: [] }
+        );
+
+        // Fetch counts for each Aha Moment
+        const ahaCountsPromises = sessionData.ahaMoments.map((moment) =>
+          axios
+            .get(
+              `http://localhost:5158/api/Analyzer/GetCountOfAhaMomentForMeditator`,
+              {
+                params: {
+                  ahaMoment: moment.label,
+                  meditatorId: meditatorId,
+                },
+              }
+            )
+            .then((response) => {
+              console.log(`Count for ${moment.label}:`, response.data);
+              return { label: moment.label, count: response.data };
+            })
+        );
+
+        const ahaCountsResults = await Promise.all(ahaCountsPromises);
+        const newAhaCounts = ahaCountsResults.reduce(
+          (acc, { label, count }) => {
+            acc[label] = count;
+            return acc;
+          },
+          {}
+        );
+
         console.log("Counts Data:", newCounts);
+        console.log("Aha Counts Data:", newAhaCounts);
+        console.log("Organized By Type:", organizedByType);
+
         setCounts(newCounts);
+        setAhaCounts(newAhaCounts);
+        setObservableObjectsByType(organizedByType);
       } catch (err) {
         console.error("Error fetching data:", err);
         setError(err.message);
@@ -80,23 +138,86 @@ function SessionDetails() {
     return <div>No session data available.</div>;
   }
 
+  const sessionTitle =
+    sessionData.preparationPhase?.meditationObject?.title || "Session Details";
+
   return (
     <div className="session-details-container">
-      <div className="card">
-        <h1>Observable Objects</h1>
-        <div>
-          {sessionData.observableObjects.length > 0 ? (
-            sessionData.observableObjects.map((object) => (
-              <ObservableObjectCard
-                key={object.id}
-                object={object.title}
-                description={object.description}
-                icon={object.icon}
-                count={counts[object.title] || 0} // Use the fetched count data here
-              />
+      <h1 className="mb-4 text-2xl font-semibold leading-none tracking-tight text-black md:text-6xl lg:text-5xl dark:text-white">
+        {sessionTitle}
+      </h1>
+      <div className="text-center mb-8">
+        <SessionDuration sessionId={sessionId} />
+      </div>
+      <div className="card-container">
+        <div className="card">
+          <h2 className="mb-4 text-xl font-light leading-none tracking-tight text-black md:text-4xl lg:text-3xl dark:text-white">
+            Observable Objects
+          </h2>
+          <h3 className="section-title text-lg font-light">
+            Sensory Stimulus{" "}
+          </h3>
+          <div className="cards-container">
+            {observableObjectsByType.SensoryStimulus.length > 0 ? (
+              observableObjectsByType.SensoryStimulus.map((object) => (
+                <ObservableObjectCard
+                  key={object.id}
+                  object={object.title}
+                  description={object.description}
+                  icon={object.icon}
+                  count={counts[object.title] || 0} // Use the fetched count data here
+                />
+              ))
+            ) : (
+              <p>No sensory stimulus objects available.</p>
+            )}
+          </div>
+          <h3 className="section-title text-lg font-light">Mental Objects</h3>
+          <div className="cards-container">
+            {observableObjectsByType.MentalObject.length > 0 ? (
+              observableObjectsByType.MentalObject.map((object) => (
+                <ObservableObjectCard
+                  key={object.id}
+                  object={object.title}
+                  description={object.description}
+                  count={counts[object.title] || 0} // Use the fetched count data here
+                />
+              ))
+            ) : (
+              <p>No mental objects available.</p>
+            )}
+          </div>
+        </div>
+        <div className="card">
+          <h2 className="mb-4 text-xl font-light leading-none tracking-tight text-black md:text-4xl lg:text-3xl dark:text-white">
+            Aha Moments
+          </h2>
+          <div className="cards-container">
+            {sessionData.ahaMoments.length > 0 ? (
+              sessionData.ahaMoments.map((moment) => (
+                <AhaMomentCard
+                  key={moment.id}
+                  label={moment.label}
+                  count={ahaCounts[moment.label] || 0} // Use the fetched count data here
+                />
+              ))
+            ) : (
+              <p>No Aha Moments available.</p>
+            )}
+          </div>
+        </div>
+      </div>
+      <div className="stage-card-container">
+        <h2 className="mb-4 text-xl font-light leading-none tracking-tight text-black md:text-4xl lg:text-3xl dark:text-white">
+          Practiced Stages
+        </h2>
+        <div className="stage-cards">
+          {sessionData.practicedStages.length > 0 ? (
+            sessionData.practicedStages.map((stage) => (
+              <StageCard key={stage.stageId} stageId={stage.stageId} />
             ))
           ) : (
-            <p>No observable objects available.</p>
+            <p>No practiced stages available.</p>
           )}
         </div>
       </div>

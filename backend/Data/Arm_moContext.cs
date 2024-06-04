@@ -1,7 +1,7 @@
 ﻿using backend.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Arm_mo.Context
+namespace backend.Data
 {
     public class Arm_moContext : DbContext
     {
@@ -46,6 +46,26 @@ namespace Arm_mo.Context
                 .WithMany() // Adjust based on your model
                 .HasForeignKey(nms => nms.StageId)
                 .OnDelete(DeleteBehavior.NoAction); // Prevent cascading delete
+
+
+            // Goal to ParentGoal relationship
+            modelBuilder.Entity<Goal>()
+                .HasOne(g => g.ParentGoal)
+                .WithMany(g => g.ChildGoals)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Goal>()
+                .HasMany(g => g.ChildGoals)
+                .WithOne(g => g.ParentGoal)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Session to PreparationPhase relationship
+            modelBuilder.Entity<Session>()
+                .HasOne(s => s.PreparationPhase)
+                .WithMany()
+                .HasForeignKey(s => s.PreparationPhaseId)
+                .OnDelete(DeleteBehavior.NoAction);
+
         }
         public DbSet<Meditator> Meditators { get; set; }
         public DbSet<ProfilePicture> ProfilePictures { get; set; }

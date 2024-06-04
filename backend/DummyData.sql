@@ -31,20 +31,14 @@ VALUES
 (1, '2024-05-28', '10:00:00', '00:50:00'),  -- 50 minutes
 (1, '2024-05-29', '11:00:00', '01:05:00');  -- 1 hour 5 minutes
 
--- Insert dummy data into Activities
+-- Activities
 INSERT INTO Activities (Title) VALUES
 ('Read'),
-('Write'),
 ('Meditate'),
 ('Listen'),
-('Practice'),
-('Review'),
-('Exercise'),
-('Reflect'),
 ('Plan'),
-('Discuss'),
-('Visualize'),
-('Analyze');
+('Visualize');
+
 
 
 -- Insert unique Observable Objects without linking to sessions
@@ -70,19 +64,7 @@ INSERT INTO [dbo].[ObservableObjects] (Title, Description, Intensity, SubType, P
 ('Air Conditioner Sound', 'Hum of the AC', 1, 1, 0),
 ('Inspiration', 'Sudden flash of inspiration', 2, 6, 1),
 ('Deep Thought', 'Thinking about past events', 2, 6, 0),
-('Garden Smell', 'Fresh smell of garden', 0, 2, 2),
-('12 Rules for Life - Page 10', 'Reading material', 2, 1, 0), -- Read
-('Daily Journal', 'Writing material', 1, 6, 1), -- Write
-('Guided Meditation', 'Meditation guide', 0, 3, 0), -- Meditate
-('Podcast Episode 5', 'Listening material', 0, 2, 2), -- Listen
-('Breathing Exercise', 'Practice material', 2, 7, 1), -- Practice
-('Weekly Review Notes', 'Review material', 1, 1, 0), -- Review
-('Morning Exercise Routine', 'Exercise material', 2, 7, 1), -- Exercise
-('Reflective Journal', 'Reflecting material', 1, 6, 1), -- Reflect
-('Weekly Planner', 'Planning material', 1, 1, 0), -- Plan
-('Discussion Points', 'Discussing material', 1, 1, 0), -- Discuss
-('Visualization Guide', 'Visualizing material', 0, 3, 0), -- Visualize
-('Analysis Report', 'Analyzing material', 2, 6, 1); -- Analyze
+('Garden Smell', 'Fresh smell of garden', 0, 2, 2);
 
 
 
@@ -117,56 +99,6 @@ DECLARE @PreparationPhaseId10 INT = (SELECT Id FROM PreparationPhase WHERE Durat
 DECLARE @PreparationPhaseId11 INT = (SELECT Id FROM PreparationPhase WHERE Duration = '00:10:00' AND Motivation = 'Sound focus');
 DECLARE @PreparationPhaseId12 INT = (SELECT Id FROM PreparationPhase WHERE Duration = '00:20:00' AND Motivation = 'Awareness');
 
--- Insert dummy data into Goals using valid MeditationObjectId and PreparationPhaseId
--- Preparation Phase 1
-INSERT INTO Goals (Status, ActivityId, MeditationObjectId, DueDate, CompletedDate, ParentGoalId, PreparationPhaseId) VALUES
-(1, 1, (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = '12 Rules for Life - Page 10'), '2024-06-01', '2024-06-01', NULL, @PreparationPhaseId1),  -- Goal 1: Read (Parent Goal for PreparationPhaseId1)
-(3, 6, (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Weekly Review Notes'), '2024-06-02', '2024-06-02', 1, @PreparationPhaseId1),  -- Child Goal of Goal 1
-
--- Preparation Phase 2
-(2, 3, (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Guided Meditation'), '2024-06-03', '2024-06-03', NULL, @PreparationPhaseId2),  -- Goal 2: Meditate (Parent Goal for PreparationPhaseId2)
-(1, 5, (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Breathing Exercise'), '2024-06-04', '2024-06-04', 2, @PreparationPhaseId2),  -- Child Goal of Goal 2
-
--- Preparation Phase 3
-(1, 4, (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Podcast Episode 5'), '2024-06-05', '2024-06-05', NULL, @PreparationPhaseId3),  -- Goal 3: Listen (Parent Goal for PreparationPhaseId3)
-(1, 1, (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = '12 Rules for Life - Page 10'), '2024-06-06', '2024-06-06', 3, @PreparationPhaseId3),  -- Child Goal of Goal 3
-
--- Preparation Phase 4
-(1, 3, (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Guided Meditation'), '2024-06-07', '2024-06-07', NULL, @PreparationPhaseId4),  -- Goal 4: Meditate (Parent Goal for PreparationPhaseId4)
-(2, 5, (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Breathing Exercise'), '2024-06-08', '2024-06-08', 4, @PreparationPhaseId4),  -- Child Goal of Goal 4
-
--- Preparation Phase 5
-(1, 4, (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Podcast Episode 5'), '2024-06-09', '2024-06-09', NULL, @PreparationPhaseId5),  -- Goal 5: Listen (Parent Goal for PreparationPhaseId5)
-(1, 1, (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = '12 Rules for Life - Page 10'), '2024-06-10', '2024-06-10', 5, @PreparationPhaseId5),  -- Child Goal of Goal 5
-
--- Preparation Phase 6
-(1, 7, (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Morning Exercise Routine'), '2024-06-11', '2024-06-11', NULL, @PreparationPhaseId6),  -- Goal 6: Exercise (Parent Goal for PreparationPhaseId6)
-(2, 8, (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Reflective Journal'), '2024-06-12', '2024-06-12', 6, @PreparationPhaseId6),  -- Child Goal of Goal 6
-
--- Preparation Phase 7
-(1, 9, (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Weekly Planner'), '2024-06-13', '2024-06-13', NULL, @PreparationPhaseId7),  -- Goal 7: Plan (Parent Goal for PreparationPhaseId7)
-(2, 10, (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Discussion Points'), '2024-06-14', '2024-06-14', 7, @PreparationPhaseId7),  -- Child Goal of Goal 7
-
--- Preparation Phase 8
-(1, 11, (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Visualization Guide'), '2024-06-15', '2024-06-15', NULL, @PreparationPhaseId8),  -- Goal 8: Visualize (Parent Goal for PreparationPhaseId8)
-(2, 12, (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Analysis Report'), '2024-06-16', '2024-06-16', 8, @PreparationPhaseId8),  -- Child Goal of Goal 8
-
--- Preparation Phase 9
-(1, 1, (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = '12 Rules for Life - Page 10'), '2024-06-17', '2024-06-17', NULL, @PreparationPhaseId9),  -- Goal 9: Read (Parent Goal for PreparationPhaseId9)
-(3, 6, (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Weekly Review Notes'), '2024-06-18', '2024-06-18', 9, @PreparationPhaseId9),  -- Child Goal of Goal 9
-
--- Preparation Phase 10
-(2, 3, (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Guided Meditation'), '2024-06-19', '2024-06-19', NULL, @PreparationPhaseId10),  -- Goal 10: Meditate (Parent Goal for PreparationPhaseId10)
-(1, 5, (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Breathing Exercise'), '2024-06-20', '2024-06-20', 10, @PreparationPhaseId10),  -- Child Goal of Goal 10
-
--- Preparation Phase 11
-(1, 4, (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Podcast Episode 5'), '2024-06-21', '2024-06-21', NULL, @PreparationPhaseId11),  -- Goal 11: Listen (Parent Goal for PreparationPhaseId11)
-(1, 1, (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = '12 Rules for Life - Page 10'), '2024-06-22', '2024-06-22', 11, @PreparationPhaseId11),  -- Child Goal of Goal 11
-
--- Preparation Phase 12
-(1, 3, (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Guided Meditation'), '2024-06-23', '2024-06-23', NULL, @PreparationPhaseId12),  -- Goal 12: Meditate (Parent Goal for PreparationPhaseId12)
-(2, 5, (SELECT TOP 1 Id FROM ObservableObjects WHERE Title = 'Breathing Exercise'), '2024-06-24', '2024-06-24', 12, @PreparationPhaseId12);  -- Child Goal of Goal 12
-
 INSERT INTO Sessions (MeditatorId, StartDateTime, EndDateTime, PreparationPhaseId) VALUES
 (@MeditatorId1, '2023-05-01T08:30:00', '2023-05-01T09:40:00', @PreparationPhaseId1),
 (@MeditatorId1, '2023-05-02T07:45:00', '2023-05-02T09:45:00', @PreparationPhaseId2),
@@ -181,7 +113,156 @@ INSERT INTO Sessions (MeditatorId, StartDateTime, EndDateTime, PreparationPhaseI
 (@MeditatorId1, '2023-05-11T08:45:00', '2023-05-11T09:40:00', @PreparationPhaseId11),
 (@MeditatorId1, '2023-05-12T07:15:00', '2023-05-12T08:10:00', @PreparationPhaseId12);
 
--- Declare session IDs for use in updates
+-- Preparation Phase 1
+INSERT INTO ObservableObjects (Title, Description, Intensity, SubType, ProximityToMO, SessionId) VALUES
+('12 Rules for Life', 'Reading material: Understanding fundamental principles of life', 2, 6, 3, 1);
+INSERT INTO Goals (Status, ActivityId, MeditationObjectId, DueDate, CompletedDate) VALUES
+(1, (SELECT Id FROM Activities WHERE Title = 'Read'), (SELECT Id FROM ObservableObjects WHERE Title = '12 Rules for Life'), '2024-06-01', '2024-06-01');
+
+DECLARE @ParentGoalId1 INT = (SELECT Id FROM Goals WHERE MeditationObjectId = (SELECT Id FROM ObservableObjects WHERE Title = '12 Rules for Life'));
+INSERT INTO ObservableObjects (Title, Description, Intensity, SubType, ProximityToMO, SessionId) VALUES
+('12 Rules for Life - Page 10', 'Reading material: Understanding discipline and routine', 2, 6, 3, 1), 
+('12 Rules for Life - Page 11', 'Reading material: Exploring the concept of order and chaos', 2, 6, 3, 1);
+INSERT INTO Goals (Status, ActivityId, MeditationObjectId, DueDate, CompletedDate, ParentGoalId, PreparationPhaseId) VALUES
+(1, (SELECT Id FROM Activities WHERE Title = 'Read'), (SELECT Id FROM ObservableObjects WHERE Title = '12 Rules for Life - Page 10'), '2024-06-01', '2024-06-01', @ParentGoalId1, @PreparationPhaseId1), 
+(1, (SELECT Id FROM Activities WHERE Title = 'Read'), (SELECT Id FROM ObservableObjects WHERE Title = '12 Rules for Life - Page 11'), '2024-06-01', '2024-06-01', @ParentGoalId1, @PreparationPhaseId1);
+
+-- Preparation Phase 2
+INSERT INTO ObservableObjects (Title, Description, Intensity, SubType, ProximityToMO, SessionId) VALUES
+('Guided Meditation', 'Meditation guide: Techniques for mindfulness and relaxation', 0, 7, 3, 2);
+INSERT INTO Goals (Status, ActivityId, MeditationObjectId, DueDate, CompletedDate) VALUES
+(1, (SELECT Id FROM Activities WHERE Title = 'Meditate'), (SELECT Id FROM ObservableObjects WHERE Title = 'Guided Meditation'), '2024-06-03', '2024-06-03');
+
+DECLARE @ParentGoalId2 INT = (SELECT Id FROM Goals WHERE MeditationObjectId = (SELECT Id FROM ObservableObjects WHERE Title = 'Guided Meditation'));
+INSERT INTO ObservableObjects (Title, Description, Intensity, SubType, ProximityToMO, SessionId) VALUES
+('Guided Meditation Session 1', 'Meditation guide: First session focusing on breathing techniques', 0, 7, 3, 2), 
+('Guided Meditation Session 2', 'Meditation guide: Second session focusing on body scan', 0, 7, 3, 2);
+INSERT INTO Goals (Status, ActivityId, MeditationObjectId, DueDate, CompletedDate, ParentGoalId, PreparationPhaseId) VALUES
+(1, (SELECT Id FROM Activities WHERE Title = 'Meditate'), (SELECT Id FROM ObservableObjects WHERE Title = 'Guided Meditation Session 1'), '2024-06-03', '2024-06-03', @ParentGoalId2, @PreparationPhaseId2),  
+(1, (SELECT Id FROM Activities WHERE Title = 'Meditate'), (SELECT Id FROM ObservableObjects WHERE Title = 'Guided Meditation Session 2'), '2024-06-03', '2024-06-03', @ParentGoalId2, @PreparationPhaseId2);
+
+-- Preparation Phase 3
+INSERT INTO ObservableObjects (Title, Description, Intensity, SubType, ProximityToMO, SessionId) VALUES
+('Huberman Lab Podcast', 'Listening material: Neuroscience insights and practical advice', 0, 6, 3, 3);
+INSERT INTO Goals (Status, ActivityId, MeditationObjectId, DueDate, CompletedDate) VALUES
+(1, (SELECT Id FROM Activities WHERE Title = 'Listen'), (SELECT Id FROM ObservableObjects WHERE Title = 'Huberman Lab Podcast'), '2024-06-05', '2024-06-05');
+
+DECLARE @ParentGoalId3 INT = (SELECT Id FROM Goals WHERE MeditationObjectId = (SELECT Id FROM ObservableObjects WHERE Title = 'Huberman Lab Podcast'));
+INSERT INTO ObservableObjects (Title, Description, Intensity, SubType, ProximityToMO, SessionId) VALUES
+('Huberman Lab Podcast Episode 1', 'Listening material: Insights on improving sleep', 0, 6, 3, 3), 
+('Huberman Lab Podcast Episode 2', 'Listening material: Strategies for enhancing focus', 0, 6, 3, 3);
+INSERT INTO Goals (Status, ActivityId, MeditationObjectId, DueDate, CompletedDate, ParentGoalId, PreparationPhaseId) VALUES
+(1, (SELECT Id FROM Activities WHERE Title = 'Listen'), (SELECT Id FROM ObservableObjects WHERE Title = 'Huberman Lab Podcast Episode 1'), '2024-06-05', '2024-06-05', @ParentGoalId3, @PreparationPhaseId3),  
+(1, (SELECT Id FROM Activities WHERE Title = 'Listen'), (SELECT Id FROM ObservableObjects WHERE Title = 'Huberman Lab Podcast Episode 2'), '2024-06-05', '2024-06-05', @ParentGoalId3, @PreparationPhaseId3);
+
+-- Preparation Phase 4
+INSERT INTO ObservableObjects (Title, Description, Intensity, SubType, ProximityToMO, SessionId) VALUES
+('Advanced Guided Meditation', 'Meditation guide: Techniques for deepening mindfulness', 0, 7, 3, 4);
+INSERT INTO Goals (Status, ActivityId, MeditationObjectId, DueDate, CompletedDate) VALUES
+(1, (SELECT Id FROM Activities WHERE Title = 'Meditate'), (SELECT Id FROM ObservableObjects WHERE Title = 'Advanced Guided Meditation'), '2024-06-07', '2024-06-07');
+
+DECLARE @ParentGoalId4 INT = (SELECT Id FROM Goals WHERE MeditationObjectId = (SELECT Id FROM ObservableObjects WHERE Title = 'Advanced Guided Meditation'));
+INSERT INTO ObservableObjects (Title, Description, Intensity, SubType, ProximityToMO, SessionId) VALUES
+('Advanced Meditation Session 1', 'Meditation guide: First session on visualization', 0, 7, 3, 4), 
+('Advanced Meditation Session 2', 'Meditation guide: Second session on loving-kindness', 0, 7, 3, 4);
+INSERT INTO Goals (Status, ActivityId, MeditationObjectId, DueDate, CompletedDate, ParentGoalId, PreparationPhaseId) VALUES
+(1, (SELECT Id FROM Activities WHERE Title = 'Meditate'), (SELECT Id FROM ObservableObjects WHERE Title = 'Advanced Meditation Session 1'), '2024-06-07', '2024-06-07', @ParentGoalId4, @PreparationPhaseId4),  
+(1, (SELECT Id FROM Activities WHERE Title = 'Meditate'), (SELECT Id FROM ObservableObjects WHERE Title = 'Advanced Meditation Session 2'), '2024-06-07', '2024-06-07', @ParentGoalId4, @PreparationPhaseId4);
+
+-- Preparation Phase 5 and 11
+IF NOT EXISTS (SELECT 1 FROM Goals WHERE MeditationObjectId = (SELECT Id FROM ObservableObjects WHERE Title = 'The Tim Ferriss Show'))
+BEGIN
+    INSERT INTO ObservableObjects (Title, Description, Intensity, SubType, ProximityToMO, SessionId) VALUES
+    ('The Tim Ferriss Show', 'Listening material: Interviews with high achievers', 0, 6, 3, 5);
+    INSERT INTO Goals (Status, ActivityId, MeditationObjectId, DueDate, CompletedDate) VALUES
+    (1, (SELECT Id FROM Activities WHERE Title = 'Listen'), (SELECT Id FROM ObservableObjects WHERE Title = 'The Tim Ferriss Show'), '2024-06-09', '2024-06-09');
+END
+
+DECLARE @ParentGoalId5 INT = (SELECT Id FROM Goals WHERE MeditationObjectId = (SELECT Id FROM ObservableObjects WHERE Title = 'The Tim Ferriss Show'));
+INSERT INTO ObservableObjects (Title, Description, Intensity, SubType, ProximityToMO, SessionId) VALUES
+('Tim Ferriss Show Episode 1', 'Listening material: Interview with a successful entrepreneur', 0, 6, 3, 5), 
+('Tim Ferriss Show Episode 2', 'Listening material: Health and wellness strategies', 0, 6, 3, 5);
+INSERT INTO Goals (Status, ActivityId, MeditationObjectId, DueDate, CompletedDate, ParentGoalId, PreparationPhaseId) VALUES
+(1, (SELECT Id FROM Activities WHERE Title = 'Listen'), (SELECT Id FROM ObservableObjects WHERE Title = 'Tim Ferriss Show Episode 1'), '2024-06-09', '2024-06-09', @ParentGoalId5, @PreparationPhaseId5),  
+(1, (SELECT Id FROM Activities WHERE Title = 'Listen'), (SELECT Id FROM ObservableObjects WHERE Title = 'Tim Ferriss Show Episode 2'), '2024-06-09', '2024-06-09', @ParentGoalId5, @PreparationPhaseId5);
+
+INSERT INTO ObservableObjects (Title, Description, Intensity, SubType, ProximityToMO, SessionId) VALUES
+('Tim Ferriss Show Episode 5', 'Listening material: Productivity hacks from experts', 0, 6, 3, 11), 
+('Tim Ferriss Show Episode 6', 'Listening material: Overcoming challenges and setbacks', 0, 6, 3, 11);
+INSERT INTO Goals (Status, ActivityId, MeditationObjectId, DueDate, CompletedDate, ParentGoalId, PreparationPhaseId) VALUES
+(1, (SELECT Id FROM Activities WHERE Title = 'Listen'), (SELECT Id FROM ObservableObjects WHERE Title = 'Tim Ferriss Show Episode 5'), '2024-06-21', '2024-06-21', @ParentGoalId5, @PreparationPhaseId11),  
+(1, (SELECT Id FROM Activities WHERE Title = 'Listen'), (SELECT Id FROM ObservableObjects WHERE Title = 'Tim Ferriss Show Episode 6'), '2024-06-21', '2024-06-21', @ParentGoalId5, @PreparationPhaseId11);
+
+-- Preparation Phase 6
+INSERT INTO ObservableObjects (Title, Description, Intensity, SubType, ProximityToMO, SessionId) VALUES
+('Hunger Games', 'Reading material: Analyzing themes of survival and society', 2, 6, 3, 6);
+INSERT INTO Goals (Status, ActivityId, MeditationObjectId, DueDate, CompletedDate) VALUES
+(1, (SELECT Id FROM Activities WHERE Title = 'Read'), (SELECT Id FROM ObservableObjects WHERE Title = 'Hunger Games'), '2024-06-11', '2024-06-11');
+
+DECLARE @ParentGoalId6 INT = (SELECT Id FROM Goals WHERE MeditationObjectId = (SELECT Id FROM ObservableObjects WHERE Title = 'Hunger Games'));
+INSERT INTO ObservableObjects (Title, Description, Intensity, SubType, ProximityToMO, SessionId) VALUES
+('Hunger Games - Page 54', 'Reading material: Conflict and strategy in the arena', 2, 6, 3, 6), 
+('Hunger Games - Page 55', 'Reading material: Emotional struggles and alliances', 2, 6, 3, 6);
+INSERT INTO Goals (Status, ActivityId, MeditationObjectId, DueDate, CompletedDate, ParentGoalId, PreparationPhaseId) VALUES
+(1, (SELECT Id FROM Activities WHERE Title = 'Read'), (SELECT Id FROM ObservableObjects WHERE Title = 'Hunger Games - Page 54'), '2024-06-11', '2024-06-11', @ParentGoalId6, @PreparationPhaseId6),  
+(1, (SELECT Id FROM Activities WHERE Title = 'Read'), (SELECT Id FROM ObservableObjects WHERE Title = 'Hunger Games - Page 55'), '2024-06-11', '2024-06-11', @ParentGoalId6, @PreparationPhaseId6);
+
+-- Preparation Phase 7
+INSERT INTO ObservableObjects (Title, Description, Intensity, SubType, ProximityToMO, SessionId) VALUES
+('Weekly Planner', 'Planning material: Organizing tasks and priorities for the week', 1, 7, 3, 7);
+INSERT INTO Goals (Status, ActivityId, MeditationObjectId, DueDate, CompletedDate) VALUES
+(1, (SELECT Id FROM Activities WHERE Title = 'Plan'), (SELECT Id FROM ObservableObjects WHERE Title = 'Weekly Planner'), '2024-06-13', '2024-06-13');
+
+DECLARE @ParentGoalId7 INT = (SELECT Id FROM Goals WHERE MeditationObjectId = (SELECT Id FROM ObservableObjects WHERE Title = 'Weekly Planner'));
+INSERT INTO ObservableObjects (Title, Description, Intensity, SubType, ProximityToMO, SessionId) VALUES
+('Weekly Planner Day 1', 'Planning material: Tasks and priorities for Monday', 1, 7, 3, 7), 
+('Weekly Planner Day 2', 'Planning material: Tasks and priorities for Tuesday', 1, 7, 3, 7);
+INSERT INTO Goals (Status, ActivityId, MeditationObjectId, DueDate, CompletedDate, ParentGoalId, PreparationPhaseId) VALUES
+(1, (SELECT Id FROM Activities WHERE Title = 'Plan'), (SELECT Id FROM ObservableObjects WHERE Title = 'Weekly Planner Day 1'), '2024-06-13', '2024-06-13', @ParentGoalId7, @PreparationPhaseId7),  
+(1, (SELECT Id FROM Activities WHERE Title = 'Plan'), (SELECT Id FROM ObservableObjects WHERE Title = 'Weekly Planner Day 2'), '2024-06-13', '2024-06-13', @ParentGoalId7, @PreparationPhaseId7);
+
+-- Preparation Phase 8
+INSERT INTO ObservableObjects (Title, Description, Intensity, SubType, ProximityToMO, SessionId) VALUES
+('Visualization Guide', 'Visualizing material: Techniques for mental imagery and focus', 0, 7, 3, 8);
+INSERT INTO Goals (Status, ActivityId, MeditationObjectId, DueDate, CompletedDate) VALUES
+(1, (SELECT Id FROM Activities WHERE Title = 'Visualize'), (SELECT Id FROM ObservableObjects WHERE Title = 'Visualization Guide'), '2024-06-15', '2024-06-15');
+
+DECLARE @ParentGoalId8 INT = (SELECT Id FROM Goals WHERE MeditationObjectId = (SELECT Id FROM ObservableObjects WHERE Title = 'Visualization Guide'));
+INSERT INTO ObservableObjects (Title, Description, Intensity, SubType, ProximityToMO, SessionId) VALUES
+('Visualization Guide Part 1', 'Visualizing material: Creating vivid mental images', 0, 7, 3, 8), 
+('Visualization Guide Part 2', 'Visualizing material: Enhancing focus and clarity', 0, 7, 3, 8);
+INSERT INTO Goals (Status, ActivityId, MeditationObjectId, DueDate, CompletedDate, ParentGoalId, PreparationPhaseId) VALUES
+(1, (SELECT Id FROM Activities WHERE Title = 'Visualize'), (SELECT Id FROM ObservableObjects WHERE Title = 'Visualization Guide Part 1'), '2024-06-15', '2024-06-15', @ParentGoalId8, @PreparationPhaseId8),  
+(1, (SELECT Id FROM Activities WHERE Title = 'Visualize'), (SELECT Id FROM ObservableObjects WHERE Title = 'Visualization Guide Part 2'), '2024-06-15', '2024-06-15', @ParentGoalId8, @PreparationPhaseId8);
+
+-- Preparation Phase 9
+DECLARE @ParentGoalId9 INT = (SELECT Id FROM Goals WHERE MeditationObjectId = (SELECT Id FROM ObservableObjects WHERE Title = '12 Rules for Life'));
+INSERT INTO ObservableObjects (Title, Description, Intensity, SubType, ProximityToMO, SessionId) VALUES
+('12 Rules for Life - Page 12', 'Reading material: Analyzing self-improvement and growth', 2, 6, 3, 9), 
+('12 Rules for Life - Page 13', 'Reading material: Exploring the importance of responsibility', 2, 6, 3, 9);
+INSERT INTO Goals (Status, ActivityId, MeditationObjectId, DueDate, CompletedDate, ParentGoalId, PreparationPhaseId) VALUES
+(1, (SELECT Id FROM Activities WHERE Title = 'Read'), (SELECT Id FROM ObservableObjects WHERE Title = '12 Rules for Life - Page 12'), '2024-06-17', '2024-06-17', @ParentGoalId9, @PreparationPhaseId9),  
+(1, (SELECT Id FROM Activities WHERE Title = 'Read'), (SELECT Id FROM ObservableObjects WHERE Title = '12 Rules for Life - Page 13'), '2024-06-17', '2024-06-17', @ParentGoalId9, @PreparationPhaseId9);
+
+-- Preparation Phase 10
+DECLARE @ParentGoalId10 INT = (SELECT Id FROM Goals WHERE MeditationObjectId = (SELECT Id FROM ObservableObjects WHERE Title = 'Advanced Guided Meditation'));
+INSERT INTO ObservableObjects (Title, Description, Intensity, SubType, ProximityToMO, SessionId) VALUES
+('Advanced Meditation Session 5', 'Meditation guide: Fifth session focusing on mindful walking', 0, 7, 3, 10), 
+('Advanced Meditation Session 6', 'Meditation guide: Sixth session focusing on compassion', 0, 7, 3, 10);
+INSERT INTO Goals (Status, ActivityId, MeditationObjectId, DueDate, CompletedDate, ParentGoalId, PreparationPhaseId) VALUES
+(1, (SELECT Id FROM Activities WHERE Title = 'Meditate'), (SELECT Id FROM ObservableObjects WHERE Title = 'Advanced Meditation Session 5'), '2024-06-19', '2024-06-19', @ParentGoalId10, @PreparationPhaseId10),  
+(1, (SELECT Id FROM Activities WHERE Title = 'Meditate'), (SELECT Id FROM ObservableObjects WHERE Title = 'Advanced Meditation Session 6'), '2024-06-19', '2024-06-19', @ParentGoalId10, @PreparationPhaseId10);
+
+-- Preparation Phase 12
+DECLARE @ParentGoalId12 INT = (SELECT Id FROM Goals WHERE MeditationObjectId = (SELECT Id FROM ObservableObjects WHERE Title = 'Advanced Guided Meditation'));
+INSERT INTO ObservableObjects (Title, Description, Intensity, SubType, ProximityToMO, SessionId) VALUES
+('Advanced Meditation Session 7', 'Meditation guide: Seventh session focusing on mindful eating', 0, 7, 3, 12), 
+('Advanced Meditation Session 8', 'Meditation guide: Eighth session focusing on breath awareness', 0, 7, 3, 12);
+INSERT INTO Goals (Status, ActivityId, MeditationObjectId, DueDate, CompletedDate, ParentGoalId, PreparationPhaseId) VALUES
+(1, (SELECT Id FROM Activities WHERE Title = 'Meditate'), (SELECT Id FROM ObservableObjects WHERE Title = 'Advanced Meditation Session 7'), '2024-06-23', '2024-06-23', @ParentGoalId12, @PreparationPhaseId12),  
+(1, (SELECT Id FROM Activities WHERE Title = 'Meditate'), (SELECT Id FROM ObservableObjects WHERE Title = 'Advanced Meditation Session 8'), '2024-06-23', '2024-06-23', @ParentGoalId12, @PreparationPhaseId12);
+
+-- Declare session IDs for use in update
 DECLARE @SessionId1 INT = (SELECT TOP 1 Id FROM Sessions WHERE MeditatorId = @MeditatorId1 AND StartDateTime = '2023-05-01T08:30:00');
 DECLARE @SessionId2 INT = (SELECT TOP 1 Id FROM Sessions WHERE MeditatorId = @MeditatorId1 AND StartDateTime = '2023-05-02T07:45:00');
 DECLARE @SessionId3 INT = (SELECT TOP 1 Id FROM Sessions WHERE MeditatorId = @MeditatorId1 AND StartDateTime = '2023-05-03T10:00:00');
@@ -195,7 +276,7 @@ DECLARE @SessionId10 INT = (SELECT TOP 1 Id FROM Sessions WHERE MeditatorId = @M
 DECLARE @SessionId11 INT = (SELECT TOP 1 Id FROM Sessions WHERE MeditatorId = @MeditatorId1 AND StartDateTime = '2023-05-11T08:45:00');
 DECLARE @SessionId12 INT = (SELECT TOP 1 Id FROM Sessions WHERE MeditatorId = @MeditatorId1 AND StartDateTime = '2023-05-12T07:15:00');
 
--- Update Observable Objects to link to their respective Sessions
+-- Update Observable Objects to link to their respective Sessions for sessions 9 to 12, including the newly created meditation objects
 UPDATE ObservableObjects
 SET SessionId = CASE Title
     WHEN 'Traffic Noise' THEN @SessionId1
@@ -207,32 +288,17 @@ SET SessionId = CASE Title
     WHEN 'Morning Dew' THEN @SessionId8
     WHEN 'Relaxation' THEN @SessionId4
     WHEN 'Bird Chirping' THEN @SessionId9
-    WHEN 'Wind Chimes' THEN @SessionId10
-    WHEN 'Rain Sound' THEN @SessionId11
-    WHEN 'Creative Thoughts' THEN @SessionId12
-    WHEN 'Conversation' THEN @SessionId3
-    WHEN 'Temperature Change' THEN @SessionId7
-    WHEN 'Alarm Clock' THEN @SessionId8
-    WHEN 'Meditation Focus' THEN @SessionId8
     WHEN 'Presence in Nature' THEN @SessionId9
+    WHEN 'Wind Chimes' THEN @SessionId10
     WHEN 'Emotional Calm' THEN @SessionId10
+    WHEN 'Rain Sound' THEN @SessionId11
     WHEN 'Air Conditioner Sound' THEN @SessionId11
     WHEN 'Inspiration' THEN @SessionId11
+    WHEN 'Creative Thoughts' THEN @SessionId12
     WHEN 'Deep Thought' THEN @SessionId12
     WHEN 'Garden Smell' THEN @SessionId12
-    WHEN '12 Rules for Life - Page 10' THEN @SessionId1
-    WHEN 'Weekly Review Notes' THEN @SessionId2
-    WHEN 'Guided Meditation' THEN @SessionId3
-    WHEN 'Podcast Episode 5' THEN @SessionId4
-    WHEN 'Breathing Exercise' THEN @SessionId5
-    WHEN 'Morning Exercise Routine' THEN @SessionId6
-    WHEN 'Reflective Journal' THEN @SessionId6
-    WHEN 'Weekly Planner' THEN @SessionId7
-    WHEN 'Discussion Points' THEN @SessionId7
-    WHEN 'Visualization Guide' THEN @SessionId8
-    WHEN 'Analysis Report' THEN @SessionId8
 END
-WHERE Title IN ('Traffic Noise', 'Daydream', 'Pet Movement', 'Coffee Aroma', 'Anxiety', 'Phone Vibration', 'Morning Dew', 'Relaxation', 'Bird Chirping', 'Wind Chimes', 'Rain Sound', 'Creative Thoughts', 'Conversation', 'Temperature Change', 'Alarm Clock', 'Meditation Focus', 'Presence in Nature', 'Emotional Calm', 'Air Conditioner Sound', 'Inspiration', 'Deep Thought', 'Garden Smell', '12 Rules for Life - Page 10', 'Weekly Review Notes', 'Guided Meditation', 'Podcast Episode 5', 'Breathing Exercise', 'Morning Exercise Routine', 'Reflective Journal', 'Weekly Planner', 'Discussion Points', 'Visualization Guide', 'Analysis Report');
+WHERE Title IN ('Traffic Noise', 'Daydream', 'Pet Movement', 'Coffee Aroma', 'Anxiety', 'Phone Vibration', 'Morning Dew', 'Relaxation', 'Bird Chirping', 'Presence in Nature', 'Wind Chimes', 'Emotional Calm', 'Rain Sound', 'Air Conditioner Sound', 'Inspiration', 'Creative Thoughts', 'Deep Thought', 'Garden Smell', '12 Rules for Life - Page 10', 'Weekly Review Notes', 'Guided Meditation', 'Podcast Episode 5', 'Breathing Exercise', 'Morning Exercise Routine', 'Reflective Journal', 'Weekly Planner', 'Discussion Points', 'Visualization Guide', 'Analysis Report');
 
 -- Insert unique PracticedStages for each session with MeditatorId
 INSERT INTO PracticedStage (SessionId, StageId, MeditatorId) VALUES

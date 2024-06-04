@@ -66,6 +66,9 @@ namespace backend.Data
                 .HasForeignKey(s => s.PreparationPhaseId)
                 .OnDelete(DeleteBehavior.NoAction);
 
+            // Set the isDeleted field to false by default
+            modelBuilder.Entity<Session>().Property(s => s.IsDeleted).HasDefaultValue(false);
+
         }
         public DbSet<Meditator> Meditators { get; set; }
         public DbSet<ProfilePicture> ProfilePictures { get; set; }

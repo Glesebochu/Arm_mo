@@ -132,7 +132,10 @@ function SessionDetails({ sessionId }) {
   }
 
   const sessionTitle =
-    sessionData.preparationPhase?.meditationObject?.title || "Session Details";
+    sessionData.preparationPhase?.goals[0]?.parentGoal.activity.title +
+      ": " +
+      sessionData.preparationPhase?.goals[0]?.parentGoal.meditationObject
+        .title || "Session Details";
 
   return (
     <div className="session-details-container">

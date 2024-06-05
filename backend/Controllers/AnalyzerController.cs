@@ -30,7 +30,7 @@ namespace backend.Controllers
         [Route("/api/Analyzer/GetSessionUsageCustom")]
         public async Task<ActionResult<IEnumerable<object>>> GetSessionUsageCustom(/*int userId,*/DateTime customDate)//uncomment the parameter after testing.
         {
-            
+
             var currentDate = customDate != default ? customDate : DateTime.Now;
 
             var pastWeekDates = Enumerable.Range(0, 7)
@@ -51,9 +51,9 @@ namespace backend.Controllers
                     .ToListAsync();
                 var startTime = sessionStart.DefaultIfEmpty(0).Sum();
 
-             
-                sessionLength.Add(Endtime-startTime);
-                
+
+                sessionLength.Add(Endtime - startTime);
+
             }
 
             return sessionLength;
@@ -179,6 +179,14 @@ namespace backend.Controllers
                 .Include(s => s.AhaMoments)
                 .Include(s => s.ObservableObjects)
                 .Include(s => s.PreparationPhase)
+                    .ThenInclude(p => p.Goals)
+                        .ThenInclude(g => g.Activity)
+                .Include(s => s.PreparationPhase)
+                    .ThenInclude(p => p.Goals)
+                        .ThenInclude(g => g.MeditationObject)
+                .Include(s => s.PreparationPhase)
+                    .ThenInclude(p => p.Goals)
+                        .ThenInclude(g => g.ParentGoal)
                 .FirstOrDefaultAsync();
 
             if (session == null)
@@ -401,7 +409,8 @@ namespace backend.Controllers
             }
         }
         [HttpGet("/api/Analyzer/GetRemovedSessionsForMeditator")]
-        public async Task<IActionResult> GetRemovedSessionsForMeditator(int meditatorId){
+        public async Task<IActionResult> GetRemovedSessionsForMeditator(int meditatorId)
+        {
             var sessions = await dbContext.Sessions
                 .Where(s => s.Meditator.Id == meditatorId && s.IsDeleted == true)
                 .Include(s => s.PracticedStages)
@@ -410,11 +419,13 @@ namespace backend.Controllers
                 .Include(s => s.ObservableObjects)
                 .Include(s => s.PreparationPhase)
                 .ToListAsync();
-            if(sessions!=null){
+            if (sessions != null)
+            {
                 return Ok(sessions);
             }
-            else{
-                return NotFound("No Deleted Sessions for meditator: "+meditatorId);
+            else
+            {
+                return NotFound("No Deleted Sessions for meditator: " + meditatorId);
             }
         }
 

@@ -23,6 +23,7 @@
 .stage-card-container {
   width: 70%;
   max-width: 1600px;
+  min-width: 700px;
   margin-top: 20px;
 }
 

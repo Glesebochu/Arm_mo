@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { Button } from "../components/ui/button";
 import { AnimatedInput } from "../components/Custom/AnimatedInput";
 import { Label } from "../components/ui/label";
-import { FaGoogle } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import { register } from "../../Slices/AuthSlice";
 import { ToastContainer } from "react-toastify";
@@ -121,20 +120,8 @@ const Signup = () => {
           <div className="flex flex-col space-y-4">
 
             <div className="flex justify-center">
-              <GoogleLogin
-                onSuccess={credentialResponse => {
-                  const decoded = jwtDecode(credentialResponse?.credential);
-                  console.log(decoded);
-                }}
-                onError={() => {
-                  console.log('Login Failed');
-                }}
-                // text="continue_with"
-                width={600}
-                useOneTap
-              />
+              <GoogleLogin/>
             </div>
-
           </div>
         </form>
       </div>

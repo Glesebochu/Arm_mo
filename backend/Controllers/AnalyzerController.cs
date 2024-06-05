@@ -1,12 +1,13 @@
 ﻿using Arm_mo.Context;
 using backend.Models;
 using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace backend.Controllers
 {
+    
     [Route("api/[controller]")]
     [ApiController]
     public class AnalyzerController : ControllerBase
@@ -19,6 +20,8 @@ namespace backend.Controllers
         }
 
 
+        
+        [Authorize]
         [HttpGet]
         [Route("/api/Analyzer")]
         public async Task<ActionResult<IEnumerable<UserUsage>>> List()
@@ -28,6 +31,7 @@ namespace backend.Controllers
         }
 
         //[EnableCors("AllowedSpecificOrigins")]
+        [Authorize]
         [EnableCors]
         [HttpGet]
         [Route("/api/Analyzer/GetUsageDataForPastWeek")]
@@ -196,6 +200,7 @@ namespace backend.Controllers
             return Ok(sessions); // Return the list of user usages
 
         }
+        [Authorize]
         [HttpGet("/api/Analyzer/GetStage")]
         public async Task<IActionResult> GetStage(int stageId)
         {

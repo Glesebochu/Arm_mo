@@ -1,6 +1,5 @@
-"use client";
-
 import * as React from "react";
+import { useState,useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { ResponsiveContainer } from "recharts";
 import {
@@ -14,9 +13,31 @@ import {
 } from "@/components/ui/navigation-menu";
 
 export function NavigationMenuDemo({ setSelectedView }) {
+  const [hideNav, setHideNav] = useState(false);
+  let lastScrollTop = 0;
+
+  useEffect(() => {
+    const handleScroll = () => {
+      let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      if (scrollTop >=30) {
+        setHideNav(true);
+      } else {
+        setHideNav(false);
+      }
+      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For Mobile or negative scrolling
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <ResponsiveContainer>
-      <NavigationMenu className="mt-4">
+      <NavigationMenu
+        className={`fixed top-0 left-0 right-0 mt-4 z-50 bg-white transition-transform ${
+          hideNav ? "hidden" : ""
+        }`}
+      >
         <NavigationMenuList>
           <NavigationMenuItem>
             <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
@@ -30,8 +51,7 @@ export function NavigationMenuDemo({ setSelectedView }) {
                       </div>
                       <p className="text-sm leading-tight text-muted-foreground">
                         View all your analytic data here. You can easily see
-                        trends across all of your sessions - from the time you
-                        spent on sessions to the number of AhaMoments.
+                        trends across all of your sessions.
                       </p>
                     </p>
                   </NavigationMenuLink>
@@ -40,8 +60,8 @@ export function NavigationMenuDemo({ setSelectedView }) {
                   title="Sessions Summary"
                   onClick={() => setSelectedView("DataTable")}
                 >
-                  View a comprehensive summary of the sessions you had recently in
-                  a tabular format.
+                  View a comprehensive summary of the sessions you had recently
+                  in a tabular format.
                 </ListItem>
                 <ListItem
                   title="Insights"

@@ -1,4 +1,4 @@
-import UsageView from "../Pages/Usage";
+import UsageView from "./Usage";
 const Home = () => {
   return (
     <div>

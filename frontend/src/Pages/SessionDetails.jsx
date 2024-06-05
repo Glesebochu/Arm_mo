@@ -131,11 +131,20 @@ function SessionDetails({ sessionId }) {
     return <div>No session data available.</div>;
   }
 
-  const sessionTitle =
-    sessionData.preparationPhase?.goals[0]?.parentGoal.activity.title +
-      ": " +
-      sessionData.preparationPhase?.goals[0]?.parentGoal.meditationObject
-        .title || "Session Details";
+const sessionTitle =
+  sessionData.preparationPhase?.goals[0]?.parentGoal &&
+  sessionData.preparationPhase?.goals[0]?.parentGoal.activity?.title &&
+  sessionData.preparationPhase?.goals[0]?.parentGoal.meditationObject?.title
+    ? `${sessionData.preparationPhase.goals[0].parentGoal.activity.title}: ` +
+      `${sessionData.preparationPhase.goals[0].parentGoal.meditationObject.title}`
+    : sessionData.preparationPhase?.goals[0]?.activity?.title &&
+      sessionData.preparationPhase?.goals[0]?.meditationObject?.title
+    ? `${sessionData.preparationPhase.goals[0].activity.title}: ` +
+      `${sessionData.preparationPhase.goals[0].meditationObject.title}`
+    : "Session Details";
+
+
+
 
   return (
     <div className="session-details-container">

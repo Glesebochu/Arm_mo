@@ -41,7 +41,7 @@ function customFilterFn(rows, columnIds, filterValue) {
   });
 }
 
-export function DataTableDemo({ onSessionClick }) {
+export function DataTable({ onSessionClick }) {
   const [sorting, setSorting] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
   const [columnVisibility, setColumnVisibility] = useState({});

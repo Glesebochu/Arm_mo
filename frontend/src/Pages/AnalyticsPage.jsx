@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import UsageView from "@/pages/Usage.jsx";
-import { DataTableDemo } from "@/components/Custom/SessionTable.jsx";
-import { NavigationMenuDemo } from "@/components/Custom/AnalyticsNavigation.jsx";
+import { DataTable } from "@/components/Custom/SessionTable.jsx";
+import { NavigationBar } from "@/components/Custom/AnalyticsNavigation.jsx";
 import { LineGraph } from "@/components/Custom/LineGraph";
 import Insights from "./Insights";
 import { ResponsiveContainer } from "recharts";
@@ -17,10 +17,10 @@ const SessionSummary = () => {
     setSelectedSessionId(sessionId);
     setSelectedView("SessionDetails");
   };
-    const handleRemovedSessionClick = (sessionId) => {
-      setSelectedSessionId(sessionId);
-      setSelectedView("RemovedSessionDetails");
-    };
+  const handleRemovedSessionClick = (sessionId) => {
+    setSelectedSessionId(sessionId);
+    setSelectedView("RemovedSessionDetails");
+  };
 
   const renderSelectedView = () => {
     if (selectedView === "UsageView") {
@@ -42,7 +42,7 @@ const SessionSummary = () => {
         <ResponsiveContainer>
           <div className="flex flex-col items-center justify-center space-y-8">
             <LineGraph />
-            <DataTableDemo onSessionClick={handleSessionClick} />
+            <DataTable onSessionClick={handleSessionClick} />
           </div>
         </ResponsiveContainer>
       );
@@ -51,7 +51,7 @@ const SessionSummary = () => {
 
   return (
     <div className="flex flex-col items-center justify-center space-y-8 min-h-screen">
-      <NavigationMenuDemo setSelectedView={setSelectedView} />
+      <NavigationBar setSelectedView={setSelectedView} />
       {renderSelectedView()}
     </div>
   );

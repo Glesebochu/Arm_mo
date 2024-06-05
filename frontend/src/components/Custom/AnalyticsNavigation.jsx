@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { ResponsiveContainer } from "recharts";
 import {
@@ -12,14 +12,14 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 
-export function NavigationMenuDemo({ setSelectedView }) {
+export function NavigationBar({ setSelectedView }) {
   const [hideNav, setHideNav] = useState(false);
   let lastScrollTop = 0;
 
   useEffect(() => {
     const handleScroll = () => {
       let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      if (scrollTop >=30) {
+      if (scrollTop >= 30) {
         setHideNav(true);
       } else {
         setHideNav(false);

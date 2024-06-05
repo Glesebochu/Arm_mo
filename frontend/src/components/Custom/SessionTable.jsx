@@ -194,7 +194,7 @@ export function DataTable({ onSessionClick }) {
       id: "actions",
       enableHiding: false,
       cell: ({ row }) => {
-        const payment = row.original;
+        const selectedSession = row.original;
         return (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -208,7 +208,7 @@ export function DataTable({ onSessionClick }) {
               <DropdownMenuItem
                 onClick={(e) => {
                   e.stopPropagation(); // Prevent row click event
-                  handleDeleteSessionClick(payment.id);
+                  handleDeleteSessionClick(selectedSession.id);
                 }}
               >
                 Remove Session
@@ -365,6 +365,22 @@ export function DataTable({ onSessionClick }) {
             {table.getFilteredRowModel().rows.length} row(s) selected.
           </div>
           <div className="space-x-2">
+            {table.getFilteredSelectedRowModel().rows.length > 0 && (
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  const selectedRows = table
+                    .getFilteredSelectedRowModel()
+                    .rows.map((row) => row.original.id);
+                  selectedRows.forEach((sessionId) =>
+                    handleDeleteSession(sessionId)
+                  );
+                }}
+              >
+                Remove
+              </Button>
+            )}
             <Button
               variant="outline"
               size="sm"

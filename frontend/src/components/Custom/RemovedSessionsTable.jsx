@@ -365,6 +365,22 @@ export function RemovedSessions({ onSessionClick }) {
             {table.getFilteredRowModel().rows.length} row(s) selected.
           </div>
           <div className="space-x-2">
+            {table.getFilteredSelectedRowModel().rows.length > 0 && (
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  const selectedRows = table
+                    .getFilteredSelectedRowModel()
+                    .rows.map((row) => row.original.id);
+                  selectedRows.forEach((sessionId) =>
+                    handleRestoreSession(sessionId)
+                  );
+                }}
+              >
+                Restore
+              </Button>
+            )}
             <Button
               variant="outline"
               size="sm"

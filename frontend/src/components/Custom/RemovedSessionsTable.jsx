@@ -55,20 +55,31 @@ export function RemovedSessions({ onSessionClick }) {
     setColumnFilters([{ id: "observableObjects", value }]);
   };
 
-  const handleRestoreSessionClick = (sessionId) => {
-    setRestoreSessionId(sessionId);
+  const handleRestoreSessionClick = (sessionIds) => {
+    setRestoreSessionId(sessionIds);
     setShowRestorePrompt(true);
   };
 
-  const handleRestoreSession = async (sessionId) => {
+  const handleRestoreSession = async (sessionIds) => {
     try {
-      await axios.post(
-        `http://localhost:5158/api/Analyzer/RestoreSession?sessionId=${sessionId}`
-      );
+      if (Array.isArray(sessionIds)) {
+        await Promise.all(
+          sessionIds.map(async (sessionId) => {
+            await axios.post(
+              `http://localhost:5158/api/Analyzer/RestoreSession?sessionId=${sessionId}`
+            );
+          })
+        );
+      } else {
+        await axios.post(
+          `http://localhost:5158/api/Analyzer/RestoreSession?sessionId=${sessionIds}`
+        );
+      }
       setSwaggerData((prevData) =>
-        prevData.filter((session) => session.id !== sessionId)
+        prevData.filter((session) => !sessionIds.includes(session.id))
       );
       setShowRestorePrompt(false);
+      window.location.reload(); // Refresh the screen after restoring
     } catch (error) {
       console.error("Failed to restore session:", error);
     }
@@ -338,9 +349,20 @@ export function RemovedSessions({ onSessionClick }) {
                   >
                     {row.getVisibleCells().map((cell) => (
                       <TableCell key={cell.id}>
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
+                        {cell.column.id === "select" ? (
+                          <Checkbox
+                            checked={row.getIsSelected()}
+                            onCheckedChange={(value) =>
+                              row.toggleSelected(!!value)
+                            }
+                            aria-label="Select row"
+                            onClick={(e) => e.stopPropagation()} // Prevent row click event
+                          />
+                        ) : (
+                          flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )
                         )}
                       </TableCell>
                     ))}
@@ -373,9 +395,7 @@ export function RemovedSessions({ onSessionClick }) {
                   const selectedRows = table
                     .getFilteredSelectedRowModel()
                     .rows.map((row) => row.original.id);
-                  selectedRows.forEach((sessionId) =>
-                    handleRestoreSession(sessionId)
-                  );
+                  handleRestoreSessionClick(selectedRows);
                 }}
               >
                 Restore
@@ -401,11 +421,34 @@ export function RemovedSessions({ onSessionClick }) {
         </div>
       </div>
       {showRestorePrompt && (
-        <RestoreSessionPrompt
-          sessionId={restoreSessionId}
-          onDelete={handleRestoreSession}
-          onCancel={handleCancelRestore}
-        />
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50">
+          <div
+            className={`bg-white p-6 rounded-lg shadow-lg transition-transform duration-500 transform ${
+              showRestorePrompt ? "scale-100 opacity-100" : "scale-0 opacity-0"
+            }`}
+          >
+            <h2 className="text-xl font-bold mb-4">Confirm Restore</h2>
+            <p className="mb-6">
+              {Array.isArray(restoreSessionId) && restoreSessionId.length > 1
+                ? "Are you sure you want to restore these sessions?"
+                : "Are you sure you want to restore this session?"}
+            </p>
+            <div className="flex justify-end">
+              <button
+                onClick={handleCancelRestore}
+                className="bg-gray-300 text-gray-700 px-4 py-2 rounded mr-2 hover:bg-grey-600"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={() => handleRestoreSession(restoreSessionId)}
+                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500"
+              >
+                Restore
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </ResponsiveContainer>
   );

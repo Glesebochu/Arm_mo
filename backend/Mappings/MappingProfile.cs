@@ -7,6 +7,7 @@ using backend.DTOs.Goal;
 using backend.DTOs.Activity;
 using backend.Models;
 using backend.DTOs.ObservableObject;
+using backend.DTOs.PreparationPhase;
 
 namespace backend.Mappings
 {
@@ -24,6 +25,9 @@ namespace backend.Mappings
             // =====================
             CreateMap<ObservableObject, ObservableObjectDTO>();
             CreateMap<ObservableObjectDTO, ObservableObject>();
+
+            CreateMap<PreparationPhase, CreatePreparationPhaseDTO>();
+            CreateMap<CreatePreparationPhaseDTO, PreparationPhase>();
 
             CreateMap<ObservableObject, MeditationObjectDTO>();
             CreateMap<MeditationObjectDTO, ObservableObject>()

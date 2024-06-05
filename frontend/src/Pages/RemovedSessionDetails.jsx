@@ -133,7 +133,16 @@ function RemovedSessionDetails({ sessionId }) {
   }
 
   const sessionTitle =
-    sessionData.preparationPhase?.meditationObject?.title || "Session Details";
+    sessionData.preparationPhase?.goals[0]?.parentGoal &&
+    sessionData.preparationPhase?.goals[0]?.parentGoal.activity?.title &&
+    sessionData.preparationPhase?.goals[0]?.parentGoal.meditationObject?.title
+      ? `${sessionData.preparationPhase.goals[0].parentGoal.activity.title}: ` +
+        `${sessionData.preparationPhase.goals[0].parentGoal.meditationObject.title}`
+      : sessionData.preparationPhase?.goals[0]?.activity?.title &&
+        sessionData.preparationPhase?.goals[0]?.meditationObject?.title
+      ? `${sessionData.preparationPhase.goals[0].activity.title}: ` +
+        `${sessionData.preparationPhase.goals[0].meditationObject.title}`
+      : "Session Details";
 
   return (
     <div className="session-details-container">

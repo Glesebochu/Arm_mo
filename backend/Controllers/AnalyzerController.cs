@@ -204,6 +204,14 @@ namespace backend.Controllers
                 .Include(s => s.AhaMoments)
                 .Include(s => s.ObservableObjects)
                 .Include(s => s.PreparationPhase)
+                    .ThenInclude(p => p.Goals)
+                        .ThenInclude(g => g.Activity)
+                .Include(s => s.PreparationPhase)
+                    .ThenInclude(p => p.Goals)
+                        .ThenInclude(g => g.MeditationObject)
+                .Include(s => s.PreparationPhase)
+                    .ThenInclude(p => p.Goals)
+                        .ThenInclude(g => g.ParentGoal)
                 .FirstOrDefaultAsync();
 
             if (session == null)

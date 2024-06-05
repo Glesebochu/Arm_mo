@@ -1,37 +1,39 @@
+using Arm_mo.Context;
 using backend.Models;
+using dotenv.net;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text;
+using Microsoft.AspNetCore.Authorization;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class AuthController : ControllerBase
 {
     private readonly IUserService _userService;
     private readonly IConfiguration _configuration;
 
-    public AuthController(IUserService userService, IConfiguration configuration)
+    private readonly Arm_moContext _context;
+    public AuthController(IUserService userService, IConfiguration configuration, Arm_moContext context)
     {
         _userService = userService;
         _configuration = configuration;
+        _context = context;
     }
 
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
     {
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(ModelState);
-        }
+        var currentStage = _context.Stages.Find(1);
 
         var user = new Meditator
         {
             FirstName = registerDto.FirstName,
             LastName = registerDto.LastName,
-            Username = registerDto.Username,
+            Email = registerDto.Email,
             _password = registerDto.Password,
+            CurrentStage = currentStage
         };
 
         var result = await _userService.RegisterUserAsync(user);
@@ -47,11 +49,24 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
     {
-        var user = await _userService.AuthenticateAsync(loginDto.Username, loginDto.Password);
+        var user = await _userService.AuthenticateAsync(loginDto.Email, loginDto.Password);
         if (user != null)
         {
             var token = GenerateJwtToken(user);
-            return Ok(new { token });
+
+            Console.WriteLine(user.Email);
+            // Set the httpOnly cookie with SameSite=None and Secure=false for development
+            var cookieOptions = new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = true, 
+                SameSite = SameSiteMode.None, // Allowing cross-origin requests
+                Expires = DateTime.UtcNow.AddDays(1)
+            };
+
+            HttpContext.Response.Cookies.Append("token", token, cookieOptions);
+
+            return Ok();
         }
 
         return Unauthorized();
@@ -59,21 +74,43 @@ public class AuthController : ControllerBase
 
     private string GenerateJwtToken(Meditator user)
     {
-        var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
-        var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+        DotEnv.Load();
 
-        var claims = new[]
+        var jwtKey = Environment.GetEnvironmentVariable("JWT_KEY");
+        var jwtIssuer = Environment.GetEnvironmentVariable("JWT_ISSUER");
+        var jwtAudience = Environment.GetEnvironmentVariable("JWT_AUDIENCE");
+
+        if (string.IsNullOrEmpty(jwtKey) || string.IsNullOrEmpty(jwtIssuer) || string.IsNullOrEmpty(jwtAudience))
         {
-            new Claim(JwtRegisteredClaimNames.Sub, user.Username),
-            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+            throw new ArgumentNullException("One of the JWT environment variables is null or empty");
+        }
+
+        var keyBytes = Convert.FromBase64String(jwtKey);
+        var signingKey = new SymmetricSecurityKey(keyBytes);
+        var tokenHandler = new JwtSecurityTokenHandler();
+        var tokenDescriptor = new SecurityTokenDescriptor
+        {
+            Subject = new ClaimsIdentity(new[]
+            {
+                new Claim(ClaimTypes.Name, user.Username),
+                new Claim(ClaimTypes.Email, user.Email)
+            }),
+            Expires = DateTime.UtcNow.AddMinutes(5),
+            Issuer = jwtIssuer,
+            Audience = jwtAudience,
+            SigningCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256Signature)
         };
 
-        var token = new JwtSecurityToken(_configuration["Jwt:Issuer"],
-            _configuration["Jwt:Audience"],
-            claims,
-            expires: DateTime.Now.AddMinutes(120),
-            signingCredentials: credentials);
+        var token = tokenHandler.CreateToken(tokenDescriptor);
+        return tokenHandler.WriteToken(token);
+    }
+    
 
-        return new JwtSecurityTokenHandler().WriteToken(token);
+    [Authorize]
+    [HttpGet("Me")]
+    public IActionResult Me(){
+       var email = User.FindFirstValue(ClaimTypes.Email);
+       var meditator = _context.Meditators.Where(meditator => meditator.Email == email);
+       return Ok(new {user = meditator});
     }
 }

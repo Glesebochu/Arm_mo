@@ -183,6 +183,7 @@ const sessionTitle =
               observableObjectsByType.MentalObject.map((object) => (
                 <ObservableObjectCard
                   key={object.id}
+                  deletedSession={false}
                   object={object.title}
                   description={object.description}
                   count={counts[object.title] || 0} // Use the fetched count data here

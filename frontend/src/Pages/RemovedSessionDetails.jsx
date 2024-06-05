@@ -181,6 +181,7 @@ function RemovedSessionDetails({ sessionId }) {
               observableObjectsByType.MentalObject.map((object) => (
                 <ObservableObjectCard
                   key={object.id}
+                  deletedSession={true}
                   object={object.title}
                   description={object.description}
                   count={counts[object.title] || 0} // Use the fetched count data here
@@ -200,6 +201,7 @@ function RemovedSessionDetails({ sessionId }) {
               sessionData.ahaMoments.map((moment) => (
                 <AhaMomentCard
                   key={moment.id}
+                  deletedSession={true}
                   label={moment.label}
                   count={ahaCounts[moment.label] || 0} // Use the fetched count data here
                 />

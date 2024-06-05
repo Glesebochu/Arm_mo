@@ -27,7 +27,7 @@ namespace backend.Controllers
 
         [EnableCors]
         [HttpGet]
-        [Route("/api/Analyzer/GetSessionUsageCustom")]
+        [Route("GetSessionUsageCustom")]
         public async Task<ActionResult<IEnumerable<object>>> GetSessionUsageCustom(/*int userId,*/DateTime customDate)//uncomment the parameter after testing.
         {
 
@@ -61,7 +61,7 @@ namespace backend.Controllers
 
         [EnableCors]
         [HttpGet]
-        [Route("/api/Analyzer/GetUsageDataForPastWeek")]
+        [Route("GetUsageDataForPastWeek")]
         public async Task<ActionResult<IEnumerable<object>>> GetUsageDataForPastWeek(/*int userId*/)//uncomment the parameter after testing.
         {
             var currentDate = DateTime.Today;
@@ -92,7 +92,7 @@ namespace backend.Controllers
         }
 
         [HttpGet]
-        [Route("/api/Analyzer/GetUsageDataCustom")]
+        [Route("GetUsageDataCustom")]
         public async Task<ActionResult<IEnumerable<object>>> GetUsageDataCustom(string startDate/*,int userId*/)//uncomment the parameter after testing.
         {
             var currentDate = DateTime.Parse(startDate);
@@ -123,7 +123,7 @@ namespace backend.Controllers
         }
 
         [HttpPost]
-        [Route("/api/Analyzer/StartUsage")]
+        [Route("StartUsage")]
         public async Task<IActionResult> StartUsage(/*int userId*/)//uncomment the parameter after testing.
         {
             var userUsage = new UserUsage
@@ -141,7 +141,7 @@ namespace backend.Controllers
         }
 
         [HttpPost]
-        [Route("/api/Analyzer/EndUsage")]
+        [Route("EndUsage")]
         public async Task<IActionResult> EndUsage(/*int userId*/)//uncomment the parameter after testing.
         {
             var userUsage = await dbContext.UserUsage
@@ -156,7 +156,7 @@ namespace backend.Controllers
             return Ok();
         }
 
-        [HttpGet("/api/Analyzer/GetUserUsageFinhas")]
+        [HttpGet("GetUserUsageFinhas")]
         public async Task<IActionResult> GetUserUsage(int userId)
         {
             var userUsage = await dbContext.UserUsage
@@ -169,7 +169,7 @@ namespace backend.Controllers
             return Ok(userUsage);
         }
 
-        [HttpGet("/api/Analyzer/GetSession")]
+        [HttpGet("GetSession")]
         public async Task<IActionResult> GetSession(int SessionId)
         {
             var session = await dbContext.Sessions
@@ -194,7 +194,7 @@ namespace backend.Controllers
 
             return Ok(session);
         }
-        [HttpGet("/api/Analyzer/GetRemovedSession")]
+        [HttpGet("GetRemovedSession")]
         public async Task<IActionResult> GetRemovedSession(int SessionId)
         {
             var session = await dbContext.Sessions
@@ -220,7 +220,7 @@ namespace backend.Controllers
             return Ok(session);
         }
 
-        [HttpGet("/api/Analyzer/GetSessionsForMeditator")]
+        [HttpGet("GetSessionsForMeditator")]
         public async Task<IActionResult> GetSessionsForMeditator(int meditatorId)
         {
             var sessions = await dbContext.Sessions
@@ -237,7 +237,7 @@ namespace backend.Controllers
             return Ok(sessions);
         }
 
-        [HttpGet("/api/Analyzer/GetStage")]
+        [HttpGet("GetStage")]
         public async Task<IActionResult> GetStage(int stageId)
         {
             var stage = await dbContext.Stages
@@ -256,7 +256,7 @@ namespace backend.Controllers
             return Ok(stage);
         }
 
-        [HttpGet("/api/Analyzer/GetCountOfObservableObjectForMeditator")]
+        [HttpGet("GetCountOfObservableObjectForMeditator")]
         public async Task<IActionResult> GetCountOfObservableObjectForMeditator(string observableObject, int meditatorId)
         {
             var count = await dbContext.Sessions
@@ -267,7 +267,7 @@ namespace backend.Controllers
             return Ok(count);
         }
 
-        [HttpGet("/api/Analyzer/GetCountOfAhaMomentForMeditator")]
+        [HttpGet("GetCountOfAhaMomentForMeditator")]
         public async Task<IActionResult> GetCountOfAhaMomentForMeditator(string ahaMoment, int meditatorId)
         {
             var count = await dbContext.Sessions
@@ -278,7 +278,7 @@ namespace backend.Controllers
             return Ok(count);
         }
 
-        [HttpGet("/api/Analyzer/GetMeditatorForSession")]
+        [HttpGet("GetMeditatorForSession")]
         public async Task<IActionResult> GetMeditatorForSession(int sessionId)
         {
             var id = await dbContext.Sessions
@@ -287,7 +287,7 @@ namespace backend.Controllers
                 .FirstOrDefaultAsync();
             return Ok(id);
         }
-        [HttpGet("/api/Analyzer/GetMeditatorForRemovedSession")]
+        [HttpGet("GetMeditatorForRemovedSession")]
         public async Task<IActionResult> GetMeditatorForRemovedSession(int sessionId)
         {
             var id = await dbContext.Sessions
@@ -297,7 +297,7 @@ namespace backend.Controllers
             return Ok(id);
         }
 
-        [HttpGet("/api/analyzer/GetPracticedStagesForMeditator")]
+        [HttpGet("GetPracticedStagesForMeditator")]
         public async Task<IActionResult> GetPracticedStagesForMeditator(int meditatorId)
         {
             var meditator = await dbContext.Meditators
@@ -325,7 +325,7 @@ namespace backend.Controllers
         }
 
 
-        [HttpGet("/api/analyzer/GetCurrentStageOfMeditator")]
+        [HttpGet("GetCurrentStageOfMeditator")]
         public async Task<IActionResult> GetCurrentStageOfMeditator([FromQuery] int meditatorId)
         {
             if (meditatorId <= 0)
@@ -346,7 +346,7 @@ namespace backend.Controllers
             return Ok(meditator.CurrentStage);
         }
 
-        [HttpGet("/api/analyzer/GetLongestSessionForMeditator")]
+        [HttpGet("GetLongestSessionForMeditator")]
         public async Task<IActionResult> GetLongestSessionForMeditator([FromQuery] int meditatorId)
         {
             if (meditatorId <= 0)
@@ -379,7 +379,7 @@ namespace backend.Controllers
             return Ok(sessionWithLongestDuration);
         }
 
-        [HttpGet("/api/analyzer/GetTypeForAnObservableObject")]
+        [HttpGet("GetTypeForAnObservableObject")]
         public async Task<IActionResult> GetTypeForAnObservableObject(int observableObjectId)
         {
             var observableObject = await dbContext.ObservableObjects
@@ -398,7 +398,7 @@ namespace backend.Controllers
             }
         }
 
-        [HttpDelete("/api/Analyzer/DeleteSession")]
+        [HttpDelete("DeleteSession")]
         public async Task<IActionResult> DeleteSession(int sessionId)
         {
             var sessionToDelete = await dbContext.Sessions
@@ -416,7 +416,7 @@ namespace backend.Controllers
                 return Ok("Deleted Session with Id: " + sessionToDelete.Id);
             }
         }
-        [HttpGet("/api/Analyzer/GetRemovedSessionsForMeditator")]
+        [HttpGet("GetRemovedSessionsForMeditator")]
         public async Task<IActionResult> GetRemovedSessionsForMeditator(int meditatorId)
         {
             var sessions = await dbContext.Sessions
@@ -437,7 +437,7 @@ namespace backend.Controllers
             }
         }
 
-        [HttpPost("/api/Analyzer/RestoreSession")]
+        [HttpPost("RestoreSession")]
         public async Task<IActionResult> RestoreSession(int sessionId)
         {
             var sessionToDelete = await dbContext.Sessions

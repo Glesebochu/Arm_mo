@@ -15,21 +15,17 @@ INSERT INTO Meditators (CurrentStageId, Username, FirstName, LastName, _password
 -- Insert dummy data into dbo.UserUsage
 INSERT INTO dbo.UserUsage (UserId, Date, StartTime, UsageTime)
 VALUES 
-(1, '2024-05-15', '08:00:00', '00:30:00'),  -- 30 minutes
-(1, '2024-05-16', '09:00:00', '00:45:00'),  -- 45 minutes
-(1, '2024-05-17', '10:15:00', '00:40:00'),  -- 40 minutes
-(1, '2024-05-18', '07:30:00', '01:00:00'),  -- 1 hour
-(1, '2024-05-19', '08:45:00', '00:50:00'),  -- 50 minutes
-(1, '2024-05-20', '09:00:00', '00:25:00'),  -- 25 minutes
-(1, '2024-05-21', '14:00:00', '00:35:00'),  -- 35 minutes
-(1, '2024-05-22', '08:15:00', '00:55:00'),  -- 55 minutes
-(1, '2024-05-23', '17:00:00', '01:10:00'),  -- 1 hour 10 minutes
-(1, '2024-05-24', '06:45:00', '00:20:00'),  -- 20 minutes
-(1, '2024-05-25', '12:30:00', '00:40:00'),  -- 40 minutes
-(1, '2024-05-26', '09:00:00', '01:20:00'),  -- 1 hour 20 minutes
-(1, '2024-05-27', '18:00:00', '00:30:00'),  -- 30 minutes
-(1, '2024-05-28', '10:00:00', '00:50:00'),  -- 50 minutes
-(1, '2024-05-29', '11:00:00', '01:05:00');  -- 1 hour 5 minutes
+(1, '2024-06-06', '08:00:00', '02:30:00'),  -- 2 hours 30 minutes
+(1, '2024-06-07', '07:00:00', '01:00:00'),  -- 1 hour
+(1, '2024-06-08', '06:30:00', '01:45:00'),  -- 1 hour 45 minutes
+(1, '2024-06-09', '06:45:00', '02:45:00'),  -- 2 hours 45 minutes
+(1, '2024-06-10', '07:30:00', '01:30:00'),  -- 1 hour 30 minutes
+(1, '2024-06-11', '06:15:00', '01:30:00'),  -- 1 hour 30 minutes
+(1, '2024-06-12', '07:45:00', '01:15:00'),  -- 1 hour 15 minutes
+(1, '2024-06-13', '06:45:00', '01:30:00'),  -- 1 hour 30 minutes
+(1, '2024-06-14', '08:45:00', '01:15:00'),  -- 1 hour 15 minutes
+(1, '2024-06-15', '07:00:00', '01:30:00');  -- 1 hour 30 minutes
+
 
 -- Activities
 INSERT INTO Activities (Title) VALUES
@@ -68,20 +64,22 @@ INSERT INTO [dbo].[ObservableObjects] (Title, Description, Intensity, SubType, P
 
 
 
--- Insert dummy data into PreparationPhase with valid MeditationObjectId and corresponding ActivityId
+-- Insert dummy data into PreparationPhase
 INSERT INTO PreparationPhase (Duration, Motivation, Expectation, EndDateTime, StartDateTime) VALUES
-('00:15:00', 'Stay focused', 'Achieve deep focus', '2024-06-01T09:00:00', '2024-06-01T08:00:00'),
-('00:10:00', 'Calm mind', 'Stay relaxed', '2024-06-02T11:00:00', '2024-06-02T10:00:00'),
-('00:20:00', 'Deep breathing', 'Improve breathing', '2024-06-03T08:00:00', '2024-06-03T07:00:00'),
-('00:15:00', 'Mindfulness', 'Stay present', '2024-06-04T10:00:00', '2024-06-04T09:00:00'),
-('00:10:00', 'Focus on object', 'No distractions', '2024-06-05T07:00:00', '2024-06-05T06:00:00'),
-('00:20:00', 'Relax body', 'Calmness', '2024-06-01T09:00:00', '2024-06-01T08:00:00'),
-('00:15:00', 'Concentration', 'Extended focus', '2024-06-02T11:00:00', '2024-06-02T10:00:00'),
-('00:10:00', 'Body scan', 'Awareness', '2024-06-03T08:00:00', '2024-06-03T07:00:00'),
-('00:20:00', 'Breathing exercise', 'Deep relaxation', '2024-06-04T10:00:00', '2024-06-04T09:00:00'),
-('00:15:00', 'Visualize', 'Clear mind', '2024-06-05T07:00:00', '2024-06-05T06:00:00'),
-('00:10:00', 'Sound focus', 'Deep listening', '2024-06-01T09:00:00', '2024-06-01T08:00:00'),
-('00:20:00', 'Awareness', 'Total presence', '2024-06-02T11:00:00', '2024-06-02T10:00:00');
+('00:15:00', 'Stay focused', 'Achieve deep focus', '2024-06-06T08:15:00', '2024-06-06T08:00:00'),
+('00:10:00', 'Calm mind', 'Stay relaxed', '2024-06-06T09:50:00', '2024-06-06T09:40:00'),
+('00:20:00', 'Deep breathing', 'Improve breathing', '2024-06-07T07:10:00', '2024-06-07T06:50:00'),
+('00:15:00', 'Mindfulness', 'Stay present', '2024-06-08T06:30:00', '2024-06-08T06:15:00'),
+('00:10:00', 'Focus on object', 'No distractions', '2024-06-09T06:50:00', '2024-06-09T06:40:00'),
+('00:20:00', 'Relax body', 'Calmness', '2024-06-09T08:40:00', '2024-06-09T08:20:00'),
+('00:15:00', 'Concentration', 'Extended focus', '2024-06-10T07:30:00', '2024-06-10T07:15:00'),
+('00:10:00', 'Body scan', 'Awareness', '2024-06-11T06:20:00', '2024-06-11T06:10:00'),
+('00:20:00', 'Breathing exercise', 'Deep relaxation', '2024-06-12T07:50:00', '2024-06-12T07:30:00'),
+('00:15:00', 'Visualize', 'Clear mind', '2024-06-13T06:55:00', '2024-06-13T06:40:00'),
+('00:10:00', 'Sound focus', 'Deep listening', '2024-06-14T08:50:00', '2024-06-14T08:40:00'),
+('00:20:00', 'Awareness', 'Total presence', '2024-06-15T07:05:00', '2024-06-15T06:45:00');
+
+
 
 -- Insert dummy data into Sessions with valid PreparationPhaseId
 DECLARE @MeditatorId1 INT = (SELECT TOP 1 Id FROM Meditators);
@@ -100,18 +98,19 @@ DECLARE @PreparationPhaseId11 INT = (SELECT Id FROM PreparationPhase WHERE Durat
 DECLARE @PreparationPhaseId12 INT = (SELECT Id FROM PreparationPhase WHERE Duration = '00:20:00' AND Motivation = 'Awareness');
 
 INSERT INTO Sessions (MeditatorId, StartDateTime, EndDateTime, PreparationPhaseId) VALUES
-(@MeditatorId1, '2023-05-01T08:30:00', '2023-05-01T09:40:00', @PreparationPhaseId1),
-(@MeditatorId1, '2023-05-02T07:45:00', '2023-05-02T09:45:00', @PreparationPhaseId2),
-(@MeditatorId1, '2023-05-03T10:00:00', '2023-05-03T10:30:00', @PreparationPhaseId3),
-(@MeditatorId1, '2023-05-04T09:15:00', '2023-05-04T10:20:00', @PreparationPhaseId4),
-(@MeditatorId1, '2023-05-05T08:00:00', '2023-05-05T09:00:00', @PreparationPhaseId5),
-(@MeditatorId1, '2023-05-06T07:30:00', '2023-05-06T08:36:00', @PreparationPhaseId6),
-(@MeditatorId1, '2023-05-07T08:00:00', '2023-05-07T10:30:00', @PreparationPhaseId7),
-(@MeditatorId1, '2023-05-08T07:00:00', '2023-05-08T08:10:00', @PreparationPhaseId8),
-(@MeditatorId1, '2023-05-09T10:30:00', '2023-05-09T11:30:00', @PreparationPhaseId9),
-(@MeditatorId1, '2023-05-10T09:00:00', '2023-05-10T09:10:00', @PreparationPhaseId10),
-(@MeditatorId1, '2023-05-11T08:45:00', '2023-05-11T09:40:00', @PreparationPhaseId11),
-(@MeditatorId1, '2023-05-12T07:15:00', '2023-05-12T08:10:00', @PreparationPhaseId12);
+(@MeditatorId1, '2024-06-06T08:30:00', '2024-06-06T09:30:00', @PreparationPhaseId1),
+(@MeditatorId1, '2024-06-06T10:00:00', '2024-06-06T11:15:00', @PreparationPhaseId2),
+(@MeditatorId1, '2024-06-07T07:30:00', '2024-06-07T08:10:00', @PreparationPhaseId3),
+(@MeditatorId1, '2024-06-08T06:45:00', '2024-06-08T08:00:00', @PreparationPhaseId4),
+(@MeditatorId1, '2024-06-09T07:00:00', '2024-06-09T08:30:00', @PreparationPhaseId5),
+(@MeditatorId1, '2024-06-09T09:00:00', '2024-06-09T09:45:00', @PreparationPhaseId6),
+(@MeditatorId1, '2024-06-10T07:45:00', '2024-06-10T08:45:00', @PreparationPhaseId7),
+(@MeditatorId1, '2024-06-11T06:30:00', '2024-06-11T07:30:00', @PreparationPhaseId8),
+(@MeditatorId1, '2024-06-12T08:00:00', '2024-06-12T08:40:00', @PreparationPhaseId9),
+(@MeditatorId1, '2024-06-13T07:00:00', '2024-06-13T07:50:00', @PreparationPhaseId10),
+(@MeditatorId1, '2024-06-14T09:00:00', '2024-06-14T09:45:00', @PreparationPhaseId11),
+(@MeditatorId1, '2024-06-15T07:15:00', '2024-06-15T08:00:00', @PreparationPhaseId12);
+
 
 -- Preparation Phase 1
 INSERT INTO ObservableObjects (Title, Description, Intensity, SubType, ProximityToMO, SessionId) VALUES
@@ -263,18 +262,18 @@ INSERT INTO Goals (Status, ActivityId, MeditationObjectId, DueDate, CompletedDat
 (1, (SELECT Id FROM Activities WHERE Title = 'Meditate'), (SELECT Id FROM ObservableObjects WHERE Title = 'Advanced Meditation Session 8'), '2024-06-23', '2024-06-23', @ParentGoalId12, @PreparationPhaseId12);
 
 -- Declare session IDs for use in update
-DECLARE @SessionId1 INT = (SELECT TOP 1 Id FROM Sessions WHERE MeditatorId = @MeditatorId1 AND StartDateTime = '2023-05-01T08:30:00');
-DECLARE @SessionId2 INT = (SELECT TOP 1 Id FROM Sessions WHERE MeditatorId = @MeditatorId1 AND StartDateTime = '2023-05-02T07:45:00');
-DECLARE @SessionId3 INT = (SELECT TOP 1 Id FROM Sessions WHERE MeditatorId = @MeditatorId1 AND StartDateTime = '2023-05-03T10:00:00');
-DECLARE @SessionId4 INT = (SELECT TOP 1 Id FROM Sessions WHERE MeditatorId = @MeditatorId1 AND StartDateTime = '2023-05-04T09:15:00');
-DECLARE @SessionId5 INT = (SELECT TOP 1 Id FROM Sessions WHERE MeditatorId = @MeditatorId1 AND StartDateTime = '2023-05-05T08:00:00');
-DECLARE @SessionId6 INT = (SELECT TOP 1 Id FROM Sessions WHERE MeditatorId = @MeditatorId1 AND StartDateTime = '2023-05-06T07:30:00');
-DECLARE @SessionId7 INT = (SELECT TOP 1 Id FROM Sessions WHERE MeditatorId = @MeditatorId1 AND StartDateTime = '2023-05-07T08:00:00');
-DECLARE @SessionId8 INT = (SELECT TOP 1 Id FROM Sessions WHERE MeditatorId = @MeditatorId1 AND StartDateTime = '2023-05-08T07:00:00');
-DECLARE @SessionId9 INT = (SELECT TOP 1 Id FROM Sessions WHERE MeditatorId = @MeditatorId1 AND StartDateTime = '2023-05-09T10:30:00');
-DECLARE @SessionId10 INT = (SELECT TOP 1 Id FROM Sessions WHERE MeditatorId = @MeditatorId1 AND StartDateTime = '2023-05-10T09:00:00');
-DECLARE @SessionId11 INT = (SELECT TOP 1 Id FROM Sessions WHERE MeditatorId = @MeditatorId1 AND StartDateTime = '2023-05-11T08:45:00');
-DECLARE @SessionId12 INT = (SELECT TOP 1 Id FROM Sessions WHERE MeditatorId = @MeditatorId1 AND StartDateTime = '2023-05-12T07:15:00');
+DECLARE @SessionId1 INT = (SELECT TOP 1 Id FROM Sessions WHERE MeditatorId = @MeditatorId1 AND StartDateTime = '2024-06-06T08:30:00');
+DECLARE @SessionId2 INT = (SELECT TOP 1 Id FROM Sessions WHERE MeditatorId = @MeditatorId1 AND StartDateTime = '2024-06-06T10:00:00');
+DECLARE @SessionId3 INT = (SELECT TOP 1 Id FROM Sessions WHERE MeditatorId = @MeditatorId1 AND StartDateTime = '2024-06-07T07:30:00');
+DECLARE @SessionId4 INT = (SELECT TOP 1 Id FROM Sessions WHERE MeditatorId = @MeditatorId1 AND StartDateTime = '2024-06-08T06:45:00');
+DECLARE @SessionId5 INT = (SELECT TOP 1 Id FROM Sessions WHERE MeditatorId = @MeditatorId1 AND StartDateTime = '2024-06-09T07:00:00');
+DECLARE @SessionId6 INT = (SELECT TOP 1 Id FROM Sessions WHERE MeditatorId = @MeditatorId1 AND StartDateTime = '2024-06-09T09:00:00');
+DECLARE @SessionId7 INT = (SELECT TOP 1 Id FROM Sessions WHERE MeditatorId = @MeditatorId1 AND StartDateTime = '2024-06-10T07:45:00');
+DECLARE @SessionId8 INT = (SELECT TOP 1 Id FROM Sessions WHERE MeditatorId = @MeditatorId1 AND StartDateTime = '2024-06-11T06:30:00');
+DECLARE @SessionId9 INT = (SELECT TOP 1 Id FROM Sessions WHERE MeditatorId = @MeditatorId1 AND StartDateTime = '2024-06-12T08:00:00');
+DECLARE @SessionId10 INT = (SELECT TOP 1 Id FROM Sessions WHERE MeditatorId = @MeditatorId1 AND StartDateTime = '2024-06-13T07:00:00');
+DECLARE @SessionId11 INT = (SELECT TOP 1 Id FROM Sessions WHERE MeditatorId = @MeditatorId1 AND StartDateTime = '2024-06-14T09:00:00');
+DECLARE @SessionId12 INT = (SELECT TOP 1 Id FROM Sessions WHERE MeditatorId = @MeditatorId1 AND StartDateTime = '2024-06-15T07:15:00');
 
 -- Update Observable Objects to link to their respective Sessions for sessions 9 to 12, including the newly created meditation objects
 UPDATE ObservableObjects

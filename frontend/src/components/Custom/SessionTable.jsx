@@ -32,7 +32,6 @@ import {
   TableRow,
 } from "../../components/ui/table";
 import "@/Styles/CustomStyles.css";
-import DeleteSessionPrompt from "./DeleteSessionPrompt"; // import the prompt component
 
 function customFilterFn(rows, columnIds, filterValue) {
   return rows.filter((row) => {
@@ -470,7 +469,7 @@ export function DataTable({ onSessionClick }) {
               </button>
               <button
                 onClick={() => handleDeleteSession(deleteSessionId)}
-                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-green-500"
+                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
               >
                 Remove
               </button>

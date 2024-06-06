@@ -147,10 +147,10 @@ const UsageView = () => {
           loop: (context) => context.active,
         },
         tension: {
-          duration: 500,
+          duration: 1000,
           easing: "linear",
           from: 0.5,
-          to: 0.3,
+          to: 0.4,
           loop: true,
         },
       },

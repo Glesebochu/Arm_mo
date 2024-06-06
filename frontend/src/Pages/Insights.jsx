@@ -18,7 +18,9 @@ const Insights = () => {
         <div className="box box1">
           <CurrentStageAlert />
         </div>
-        <LongestSession />
+        <div className="box box1">
+          <LongestSession />
+        </div>
       </div>
     </div>
   );

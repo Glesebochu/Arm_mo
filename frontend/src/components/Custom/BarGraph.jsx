@@ -9,12 +9,12 @@ import {
   Legend,
 } from "chart.js";
 import axios from "axios";
-import { ResponsiveContainer } from "recharts";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
 const BarGraph = ({ meditatorId }) => {
   const [chartData, setChartData] = useState({ labels: [], datasets: [] });
+  const [containerHeight, setContainerHeight] = useState(400); // Default height
 
   useEffect(() => {
     // Fetch the data from the API
@@ -23,7 +23,7 @@ const BarGraph = ({ meditatorId }) => {
         const response = await axios.get(
           `http://localhost:5158/api/analyzer/GetPracticedStagesForMeditator?meditatorId=${meditatorId}`
         );
-        const practicedStages = response.data.practicedStages;
+        let practicedStages = response.data.practicedStages;
 
         // Count the occurrences of each stageId
         const stageCounts = practicedStages.reduce((acc, stage) => {
@@ -31,13 +31,14 @@ const BarGraph = ({ meditatorId }) => {
           return acc;
         }, {});
 
-        const labels = Object.keys(stageCounts);
+        const labels = Object.keys(stageCounts).map((key) => `Stage ${key}`);
         const counts = Object.values(stageCounts);
 
         setChartData({
           labels: labels,
           datasets: [
             {
+              label: "Count",
               data: counts,
               borderColor: "#2563eb",
               backgroundColor: "#2563eb",
@@ -48,6 +49,9 @@ const BarGraph = ({ meditatorId }) => {
             },
           ],
         });
+
+        // Set container height based on the number of data points
+        setContainerHeight(labels.length * 50); // Adjust 50 as needed
       } catch (error) {
         console.error("Error fetching data", error);
       }
@@ -127,9 +131,9 @@ const BarGraph = ({ meditatorId }) => {
   return (
     <div className="bar-graph-container">
       <h1 className="bar-graph-title">Stages you've practiced</h1>
-      <ResponsiveContainer>
+      <div style={{ width: "100%", height: `${containerHeight+containerHeight*1.2}px` }}>
         <Bar data={chartData} options={config.options} />
-      </ResponsiveContainer>
+      </div>
     </div>
   );
 };

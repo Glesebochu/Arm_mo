@@ -36,6 +36,7 @@ const UsageView = () => {
   }, [customStartDate]);
 
   const fetchUsageDataForPastWeek = async () => {
+    document.getElementById("startDate").valueAsDate = new Date();
     try {
       const usageResponse = await axios.get(
         "http://localhost:5158/api/Analyzer/GetUsageDataForPastWeek"
@@ -58,7 +59,7 @@ const UsageView = () => {
         label: "Meditation sessions",
         data: sessionResponse.data.reverse(),
         borderWidth: 3,
-        borderColor: "red",
+        borderColor: "#006400",
       };
 
       //console.log(sessionResponse.data);
@@ -67,7 +68,8 @@ const UsageView = () => {
         datasets: [dataFirst, dataSecond],
       };
 
-      dailyUse(usageData[1][0]);
+      dailyUse(usageData[1][6]);
+      console.log(usageData[1][6]);
       setChartData(combinedLines);
     } catch (error) {
       console.error("Axios request failed:", error);
@@ -97,7 +99,7 @@ const UsageView = () => {
         label: "Meditation sessions",
         data: sessionResponse.data.reverse(),
         borderWidth: 3,
-        borderColor: "red",
+        borderColor: "#006400",
       };
 
       //console.log(sessionResponse.data);
@@ -127,7 +129,7 @@ const UsageView = () => {
       chartInstance.destroy();
     }
 
-    console.log(data);
+    //console.log(data);
 
     var chartOptions = {
       legend: {
@@ -183,7 +185,7 @@ const UsageView = () => {
     const hours = Math.floor(minutes / 60);
     const remainingMinutes = minutes % 60;
     const formattedTime = `${hours}h ${remainingMinutes}m`;
-    const timeDisplayElement = document.getElementById("time");
+    const timeDisplayElement = document.getElementById("timeBubble");
     timeDisplayElement.textContent = formattedTime;
   };
 
@@ -193,7 +195,22 @@ const UsageView = () => {
         <h1 className="mb-4 text-1xl font-light leading-none tracking-tight text-black md:text-5xl lg:text-4xl dark:text-white">
           Your weekly Activity
         </h1>
-        <UsageGraph />
+        <div className="form-group">
+          <input
+            type="date"
+            className="form-control"
+            id="startDate"
+            name="startDate"
+            onChange={(e) => setCustomStartDate(e.target.value)}
+            defaultValue={"Pick a Date"}
+          />
+        </div>
+        <canvas
+          id="weeklyUsage"
+          className="small-chart"
+          width="400"
+          height="200"
+        ></canvas>
         <TodayUsageBubble />
       </div>
     </div>

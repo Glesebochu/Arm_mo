@@ -49,6 +49,14 @@
   text-align: center;
 }
 
+.textBubble {
+  margin-top: 3em !important;
+  font-size: 26px;
+  font-weight: 800;
+  text-align: center;
+  color: #404456;
+}
+
 .timeContainer {
   width: 50px;
 }

@@ -76,6 +76,13 @@
   color: #2563eb;
 }
 
+#timeBubble {
+  font-size: 30px;
+  margin: 0;
+  margin-left: 2em;
+  color: #2563eb;
+}
+
 .text {
   margin-top: 3em;
   font-size: 28px;

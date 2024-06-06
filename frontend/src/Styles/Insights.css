@@ -1,5 +1,5 @@
 /* General styles for larger screens */
-.containerInsight {
+.container-insight {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -8,7 +8,7 @@
   padding: 0 10px; /* Adding some padding to prevent content from touching the edges */
 }
 
-.box {
+.bar-graph-box {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -19,18 +19,35 @@
   box-sizing: border-box; /* Ensure padding is included in the element's total width and height */
 }
 
-.box1 {
+.alerts-box {
   display: flex;
+  justify-content: center; /* Center the items */
   align-items: flex-start;
   width: 100%;
+  max-width: 860px; /* Ensure the alerts-box doesn't exceed the max width */
   box-sizing: border-box;
+  gap: 20px; /* Add some space between the alert boxes */
 }
 
-.box2 {
+.alert-box {
   display: flex;
-  flex-wrap: wrap; /* Allow items to wrap */
+  flex-direction: column; /* Ensure content stacks vertically */
+  align-items: flex-start;
   width: 100%;
+  max-width: 400px; /* Adjust max-width for individual alert boxes */
   box-sizing: border-box;
+  margin: 0; /* Remove margin */
+}
+
+.longest-session-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 860px;
+  border-radius: 10px;
+  margin: 10px;
+  box-sizing: border-box; /* Ensure padding is included in the element's total width and height */
 }
 
 /* BarGraph component styles */
@@ -56,11 +73,11 @@
 
 /* Responsive adjustments for smaller screens */
 @media (max-width: 860px) {
-  .containerInsight {
+  .container-insight {
     padding: 0 5px; /* Adjust padding for smaller screens */
   }
 
-  .box,
+  .bar-graph-box,
   .bar-graph-container {
     max-width: 100%; /* Ensure elements take full width of smaller screens */
     margin: 5px; /* Reduce margin for smaller screens */
@@ -70,7 +87,19 @@
     font-size: 1.5rem; /* Adjust font size for smaller screens */
   }
 
-  .box1, .box2 {
+  .alerts-box {
+    flex-direction: column; /* Stack items vertically on smaller screens */
+    max-width: 100%; /* Ensure the alerts-box takes full width on smaller screens */
+  }
+
+  .alert-box {
     flex: 1 1 100%; /* Allow items to shrink and take full width */
+    max-width: 100%; /* Ensure alert boxes take full width on smaller screens */
+    margin: 5px 0; /* Reduce margin for smaller screens */
+  }
+
+  .longest-session-box {
+    max-width: 100%; /* Ensure the longest session box takes full width on smaller screens */
+    margin: 5px; /* Reduce margin for smaller screens */
   }
 }

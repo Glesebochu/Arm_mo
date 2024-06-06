@@ -116,6 +116,13 @@ export function DataTable({ onSessionClick }) {
             observableObjects: session.observableObjects
               .map((obj) => obj.title)
               .join(", "),
+            activity:
+              session.preparationPhase?.goals[0]?.parentGoal &&
+              session.preparationPhase?.goals[0]?.parentGoal.activity?.title
+                ? `${session.preparationPhase.goals[0].parentGoal.activity.title} `
+                : session.preparationPhase?.goals[0]?.activity?.title
+                ? `${session.preparationPhase.goals[0].activity.title} `
+                : "undefined",
           }));
           setSwaggerData(transformedData);
         }
@@ -154,6 +161,11 @@ export function DataTable({ onSessionClick }) {
       accessorKey: "id",
       header: () => <div>Id</div>,
       cell: ({ row }) => <div className="capitalize">{row.getValue("id")}</div>,
+    },
+    {
+      accessorKey: "activity",
+      header: () => <div>Activity</div>,
+      cell: ({ row }) => <div className="capitalize">{row.getValue("activity")}</div>,
     },
     {
       accessorKey: "time",

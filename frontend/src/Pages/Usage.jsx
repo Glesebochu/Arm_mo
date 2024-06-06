@@ -149,8 +149,8 @@ const UsageView = () => {
         tension: {
           duration: 1000,
           easing: "linear",
-          from: 0.5,
-          to: 0.4,
+          from: 0.55,
+          to: 0.35,
           loop: true,
         },
       },

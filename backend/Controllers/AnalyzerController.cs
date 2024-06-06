@@ -156,19 +156,6 @@ namespace backend.Controllers
             return Ok();
         }
 
-        [HttpGet("GetUserUsageFinhas")]
-        public async Task<IActionResult> GetUserUsage(int userId)
-        {
-            var userUsage = await dbContext.UserUsage
-                .Where(u => u.UserId == userId)
-                .ToListAsync();
-
-            if (userUsage == null || userUsage.Count == 0)
-                return NotFound("No usage data found for the specified user.");
-
-            return Ok(userUsage);
-        }
-
         [HttpGet("GetSession")]
         public async Task<IActionResult> GetSession(int SessionId)
         {

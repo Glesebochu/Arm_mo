@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace backend.Migrations
 {
     /// <inheritdoc />
-    public partial class DbAfterPullRequest : Migration
+    public partial class CreatedMigrationsToRemoveAlreadyExistingActivitiesError : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -285,11 +285,11 @@ namespace backend.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Status = table.Column<int>(type: "int", nullable: false),
-                    ParentGoalId = table.Column<int>(type: "int", nullable: true),
-                    DueDate = table.Column<DateOnly>(type: "date", nullable: false),
-                    CompletedDate = table.Column<DateOnly>(type: "date", nullable: false),
-                    ActivityId = table.Column<int>(type: "int", nullable: false),
+                    ActivityId = table.Column<int>(type: "int", nullable: true),
                     MeditationObjectId = table.Column<int>(type: "int", nullable: true),
+                    DueDate = table.Column<DateOnly>(type: "date", nullable: false),
+                    CompletedDate = table.Column<DateOnly>(type: "date", nullable: true),
+                    ParentGoalId = table.Column<int>(type: "int", nullable: true),
                     PreparationPhaseId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -299,8 +299,7 @@ namespace backend.Migrations
                         name: "FK_Goals_Activities_ActivityId",
                         column: x => x.ActivityId,
                         principalTable: "Activities",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Goals_Goals_ParentGoalId",
                         column: x => x.ParentGoalId,

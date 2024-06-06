@@ -12,8 +12,8 @@ using backend.Data;
 namespace backend.Migrations
 {
     [DbContext(typeof(Arm_moContext))]
-    [Migration("20240604075202_DbAfterPullRequest")]
-    partial class DbAfterPullRequest
+    [Migration("20240606125618_CreatedMigrationsToRemoveAlreadyExistingActivitiesError")]
+    partial class CreatedMigrationsToRemoveAlreadyExistingActivitiesError
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -97,10 +97,10 @@ namespace backend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ActivityId")
+                    b.Property<int?>("ActivityId")
                         .HasColumnType("int");
 
-                    b.Property<DateOnly>("CompletedDate")
+                    b.Property<DateOnly?>("CompletedDate")
                         .HasColumnType("date");
 
                     b.Property<DateOnly>("DueDate")
@@ -409,9 +409,7 @@ namespace backend.Migrations
                 {
                     b.HasOne("backend.Models.Activity", "Activity")
                         .WithMany()
-                        .HasForeignKey("ActivityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ActivityId");
 
                     b.HasOne("backend.Models.ObservableObject", "MeditationObject")
                         .WithMany()

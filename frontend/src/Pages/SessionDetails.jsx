@@ -131,24 +131,21 @@ function SessionDetails({ sessionId }) {
     return <div>No session data available.</div>;
   }
 
-const sessionTitle =
-  sessionData.preparationPhase?.goals[0]?.parentGoal &&
-  sessionData.preparationPhase?.goals[0]?.parentGoal.activity?.title &&
-  sessionData.preparationPhase?.goals[0]?.parentGoal.meditationObject?.title
-    ? `${sessionData.preparationPhase.goals[0].parentGoal.activity.title}: ` +
-      `${sessionData.preparationPhase.goals[0].parentGoal.meditationObject.title}`
-    : sessionData.preparationPhase?.goals[0]?.activity?.title &&
-      sessionData.preparationPhase?.goals[0]?.meditationObject?.title
-    ? `${sessionData.preparationPhase.goals[0].activity.title}: ` +
-      `${sessionData.preparationPhase.goals[0].meditationObject.title}`
-    : "Session Details";
-
-
-
+  const sessionTitle =
+    sessionData.preparationPhase?.goals[0]?.parentGoal &&
+    sessionData.preparationPhase?.goals[0]?.parentGoal.activity?.title &&
+    sessionData.preparationPhase?.goals[0]?.parentGoal.meditationObject?.title
+      ? `${sessionData.preparationPhase.goals[0].parentGoal.activity.title}: ` +
+        `${sessionData.preparationPhase.goals[0].parentGoal.meditationObject.title}`
+      : sessionData.preparationPhase?.goals[0]?.activity?.title &&
+        sessionData.preparationPhase?.goals[0]?.meditationObject?.title
+      ? `${sessionData.preparationPhase.goals[0].activity.title}: ` +
+        `${sessionData.preparationPhase.goals[0].meditationObject.title}`
+      : "Session Details";
 
   return (
     <div className="session-details-container">
-      <h1 className="mb-4 text-2xl font-semibold leading-none tracking-tight text-black md:text-6xl lg:text-5xl dark:text-white">
+      <h1 className="mb-4 text-2xl font-semibold leading-none tracking-tight text-black  lg:text-5xl dark:text-white">
         {sessionTitle}
       </h1>
       <div className="text-center mb-8">
@@ -159,9 +156,7 @@ const sessionTitle =
           <h2 className="mb-4 text-xl font-light leading-none tracking-tight text-black md:text-4xl lg:text-3xl dark:text-white">
             Observable Objects
           </h2>
-          <h3 className="section-title text-lg font-light">
-            Sensory Stimulus{" "}
-          </h3>
+          <h3 className="section-title text-lg font-light">Sensory Stimulus</h3>
           <div className="cards-container">
             {observableObjectsByType.SensoryStimulus.length > 0 ? (
               observableObjectsByType.SensoryStimulus.map((object) => (

@@ -52,7 +52,7 @@ export function DataTable({ onSessionClick }) {
   const navigate = useNavigate();
 
   const handleFilterChange = (value) => {
-    setColumnFilters([{ id: "observableObjects", value }]);
+    setColumnFilters([{ id: "meditationObject", value }]);
   };
 
   const handleDeleteSessionClick = (sessionId) => {
@@ -307,7 +307,7 @@ export function DataTable({ onSessionClick }) {
             <Input
               placeholder="Filter Sessions..."
               value={
-                columnFilters.find((f) => f.id === "observableObjects")
+                columnFilters.find((f) => f.id === "meditationObject")
                   ?.value || ""
               }
               onChange={(event) => handleFilterChange(event.target.value)}

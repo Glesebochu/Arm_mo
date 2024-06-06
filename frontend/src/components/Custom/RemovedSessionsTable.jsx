@@ -52,7 +52,7 @@ export function RemovedSessions({ onSessionClick }) {
   const navigate = useNavigate();
 
   const handleFilterChange = (value) => {
-    setColumnFilters([{ id: "observableObjects", value }]);
+    setColumnFilters([{ id: "meditationObject", value }]);
   };
 
   const handleRestoreSessionClick = (sessionIds) => {
@@ -308,7 +308,7 @@ export function RemovedSessions({ onSessionClick }) {
             <Input
               placeholder="Filter Sessions..."
               value={
-                columnFilters.find((f) => f.id === "observableObjects")
+                columnFilters.find((f) => f.id === "meditationObject")
                   ?.value || ""
               }
               onChange={(event) => handleFilterChange(event.target.value)}

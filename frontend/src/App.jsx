@@ -9,6 +9,9 @@ import Insights from "./pages/Insights";
 import { RemovedSessions } from './components/Custom/RemovedSessionsTable';
 
 
+import Home from "./Pages/Home";
+import Settings from "./Pages/Settings";
+
 function App() {
   return (
     <>
@@ -22,7 +25,9 @@ function App() {
           <Route path="/Usage" element={<UsageView />} />
           <Route path="/Insights" element={<Insights />} />
           <Route path="/RemovedSessions" element={< RemovedSessions/>} />
-        </Routes>
+          <Route path="/Home" element={<Home />} />
+        <Route path="/Settings" element={<Settings />} />
+      </Routes>
       </Router>
     </>
   )

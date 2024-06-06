@@ -117,7 +117,7 @@ const BarGraph = ({ meditatorId }) => {
         padding: {
           top: 20,
           right: 20,
-          bottom: 20,
+          bottom: 40, // Adjusted padding to ensure x-axis label is visible
           left: 20,
         },
       },
@@ -125,21 +125,8 @@ const BarGraph = ({ meditatorId }) => {
   };
 
   return (
-    <div
-      style={{
-        width: "50%",
-        height: "390px",
-        margin: 0,
-        padding: 0,
-        boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-        borderRadius: "8px",
-        backgroundColor: "white",
-        padding: "20px",
-      }}
-    >
-      <h1 className="mb-4 text-center text-1xl font-light leading-none tracking-tight text-black md:text-5xl lg:text-4xl dark:text-white">
-        Stages you practiced
-      </h1>
+    <div className="bar-graph-container">
+      <h1 className="bar-graph-title">Stages you've practiced</h1>
       <ResponsiveContainer>
         <Bar data={chartData} options={config.options} />
       </ResponsiveContainer>

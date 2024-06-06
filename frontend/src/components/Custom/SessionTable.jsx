@@ -32,7 +32,6 @@ import {
   TableRow,
 } from "../../components/ui/table";
 import "@/Styles/CustomStyles.css";
-import DeleteSessionPrompt from "./DeleteSessionPrompt"; // import the prompt component
 
 function customFilterFn(rows, columnIds, filterValue) {
   return rows.filter((row) => {

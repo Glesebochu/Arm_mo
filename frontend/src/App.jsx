@@ -5,6 +5,9 @@ import SessionDetails from "./Pages/SessionDetails"; // Import the new component
 import Signup from "./Pages/Signup";
 import UsageView from "./Pages/Usage";
 import Insights from "./Pages/Insights";
+import Home from "./Pages/Home";
+import Settings from "./Pages/Settings";
+
 function App() {
   return (
     <Router>
@@ -14,6 +17,8 @@ function App() {
         <Route path="/session/:sessionId" element={<SessionDetails />} />
         <Route path="/Usage" element={<UsageView />} />
         <Route path="/Insights" element={<Insights />} />
+        <Route path="/Home" element={<Home />} />
+        <Route path="/Settings" element={<Settings />} />
       </Routes>
     </Router>
   );

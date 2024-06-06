@@ -1,11 +1,9 @@
-"use client"
-
-// Imports
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { format } from "date-fns";
 import {
     CaretSortIcon,
     ChevronDownIcon,
+    ChevronRightIcon,
     DotsHorizontalIcon,
 } from "@radix-ui/react-icons";
 import {
@@ -16,7 +14,6 @@ import {
     getSortedRowModel,
     useReactTable,
 } from "@tanstack/react-table";
-
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -38,31 +35,121 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import { DatePicker } from "@/components/ui/date-picker";
+import { ObservableObjectPopover } from "./ObservableObjectPopover";
+import { useDispatch, useSelector } from "react-redux";
+import { createGoal } from "../../slices/GoalsSlice";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select"
+import { v4 as uuidv4 } from 'uuid';
 
-// For obtaining data from the backend
-import { useEffect } from "react";
+export function GoalsTable({ goals = [], isSubGoals = false }) {
+
+    const dispatch = useDispatch();
+
+    const initialGoalState = {
+        id: '',
+        status: 'NotStarted',
+        activity: {
+            title: ''
+        },
+        meditationObject: {
+            title: '',
+            description: '',
+            intensity: '',
+            subType: '',
+            proximityToMO: '',
+        },
+        dueDate: '',
+        childGoals: [],
+    };
+    const [data, setData] = useState(goals);
+    const [sorting, setSorting] = useState([]);
+    const [columnFilters, setColumnFilters] = useState([]);
+    const [columnVisibility, setColumnVisibility] = useState({});
+    const [rowSelection, setRowSelection] = useState({});
+    const [isCreating, setIsCreating] = useState(false);
+    const [isEditing, setIsEditing] = useState(null);
+    const [expandedRows, setExpandedRows] = useState({});
+    const [newGoal, setNewGoal] = useState(initialGoalState);
+
+    const handleDeleteGoal = (id) => {
+        setData(data.filter((goal) => goal.id !== id));
+    };
 
 
-export function GoalsTable({ goals = [] }) {
-    console.log(goals);
+    const handleCreateGoal = () => {
+        const newId = uuidv4();
+        const newGoalData = { ...initialGoalState, id: newId }; // Ensure activity has title
+        setData([...data, newGoalData]);
+        setIsEditing(newId);
+        setIsCreating(true);
+    };
 
-    useEffect(() => {
-        console.log(goals);
-    }, [])
+    const handleSaveGoal = () => {
+        setData((prevData) =>
+            prevData.map((goal) => (goal.id === isEditing ? goal : goal))
+        );
+        setIsEditing(null);
+        setIsCreating(false);
+    };
 
-    if (goals == null)
-        goals = [];
+    // useEffect(() => {
+    //     console.log(data); // This will log the updated state
+    // }, [data]);
 
-    // Columns for the data table
-    const columns = [
+    const handleInputChange = (e, id) => {
+        const { name, value } = e.target;
+        setData((prevData) =>
+            prevData.map((goal) =>
+                goal.id === id ? { ...goal, [name]: value } : goal
+            )
+        );
+    };
+
+    const handleActivityChange = (e, id) => {
+        const { value } = e.target;
+        setData((prevData) =>
+            prevData.map((goal) =>
+                goal.id === id ? { ...goal, activity: { ...goal.activity, title: value } } : goal
+            )
+        );
+    };
+
+    const handleMeditationObjectChange = (value, id) => {
+        setData((prevData) =>
+            prevData.map((goal) =>
+                goal.id === id ? { ...goal, meditationObject: value } : goal
+            )
+        );
+    };
+
+    const handleDateChange = (date, id) => {
+        const formattedDate = date.toISOString().split('T')[0];
+        setData((prevData) =>
+            prevData.map((goal) =>
+                goal.id === id ? { ...goal, dueDate: formattedDate } : goal
+            )
+        );
+    };
+
+    const handleToggleExpand = (id) => {
+        setExpandedRows((prev) => ({
+            ...prev,
+            [id]: !prev[id],
+        }));
+    };
+
+    const columns = React.useMemo(() => [
         {
-            id: "select",
+            id: 'select',
             header: ({ table }) => (
                 <Checkbox
-                    checked={
-                        table.getIsAllPageRowsSelected() ||
-                        (table.getIsSomePageRowsSelected() && "indeterminate")
-                    }
+                    checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && 'indeterminate')}
                     onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
                     aria-label="Select all"
                 />
@@ -78,93 +165,121 @@ export function GoalsTable({ goals = [] }) {
             enableHiding: false,
         },
         {
-            accessorKey: "Status",
-            header: "Status",
-            cell: ({ row, table }) => {
-                const isEditing = table.getState().editGoalId === row.original.Id;
-                return isEditing ? (
-                    <Input
-                        defaultValue={row.getValue("Status")}
-                        onChange={(e) => row.updateData("Status", e.target.value)}
-                    />
+            id: 'toggle',
+            cell: ({ row }) => (
+                <Button variant="ghost" onClick={() => handleToggleExpand(row.original.id)} className="p-0">
+                    {expandedRows[row.original.id] ? (
+                        <ChevronDownIcon className="h-4 w-4" />
+                    ) : (
+                        <ChevronRightIcon className="h-4 w-4" />
+                    )}
+                </Button>
+            ),
+        },
+        {
+            accessorKey: 'status',
+            header: ({ column }) => (
+                <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+                    Status
+                    <CaretSortIcon className="ml-2 h-4 w-4" />
+                </Button>
+            ),
+            cell: ({ row }) => {
+                const isEditingRow = isEditing === row.original.id;
+                const statusOptions = ['NotStarted', 'InProgress', 'Done'];
+                return isEditingRow ? (
+                    <Select onValueChange={(value) => handleInputChange({ target: { name: 'status', value } }, row.original.id)}>
+                        <SelectTrigger className="w-full">
+                            <SelectValue placeholder={row.getValue('status')} />
+                        </SelectTrigger>
+                        <SelectContent>
+                            {statusOptions.map(option => (
+                                <SelectItem key={option} value={option}>
+                                    {option}
+                                </SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
                 ) : (
-                    <div className="capitalize">{row.getValue("Status")}</div>
+                    <div className="capitalize text-center">{row.getValue('status')}</div>
                 );
             },
         },
         {
-            accessorKey: "Activity",
-            header: ({ column }) => {
-                return (
-                    <Button
-                        variant="ghost"
-                        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-                    >
-                        Activity
-                        <ChevronDownIcon className="ml-2 h-4 w-4" />
-                    </Button>
-                );
-            },
-            cell: ({ row, table }) => {
-                const isEditing = table.getState().editGoalId === row.original.Id;
-                return isEditing ? (
+            accessorKey: 'activity',
+            header: ({ column }) => (
+                <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+                    Activity
+                    <CaretSortIcon className="ml-2 h-4 w-4" />
+                </Button>
+            ),
+            cell: ({ row }) => {
+                const isEditingRow = isEditing === row.original.id;
+                const activityTitle = row.getValue('activity').title;
+                return isEditingRow ? (
                     <Input
-                        defaultValue={row.getValue("Activity")}
-                        onChange={(e) => row.updateData("Activity", e.target.value)}
+                        name="activity"
+                        value={activityTitle}
+                        onChange={(e) => handleActivityChange(e, row.original.id)}
+                        className="w-full"
                     />
                 ) : (
-                    <div>{row.getValue("Activity")}</div>
+                    <div className="text-center">{activityTitle}</div>
                 );
             },
         },
         {
-            accessorKey: "MeditationObject",
-            header: "Meditation Object",
-            cell: ({ row, table }) => {
-                const isEditing = table.getState().editGoalId === row.original.Id;
-                return isEditing ? (
-                    <Input
-                        defaultValue={row.getValue("MeditationObject")}
-                        onChange={(e) => row.updateData("MeditationObject", e.target.value)}
+            accessorKey: 'meditationObject',
+            header: ({ column }) => (
+                <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+                    Meditation Object
+                    <CaretSortIcon className="ml-2 h-4 w-4" />
+                </Button>
+            ),
+            cell: ({ row }) => {
+                const isEditingRow = isEditing === row.original.id;
+                const meditationObject = row.getValue('meditationObject');
+                return isEditingRow ? (
+                    <ObservableObjectPopover className="w-full"
+                        observableObject={meditationObject}
+                        onSave={(updatedObject) => handleMeditationObjectChange(updatedObject, row.original.id)}
+                        buttonClass="w-full"
                     />
                 ) : (
-                    <div>{row.getValue("MeditationObject")}</div>
+                    <div className="text-center">{meditationObject?.title}</div>
                 );
             },
         },
         {
-            accessorKey: "DueDate",
-            header: () => <div className="text-right">Due Date & Time</div>,
-            cell: ({ row, table }) => {
-                const isEditing = table.getState().editGoalId === row.original.Id;
-                const dueDate = new Date(row.getValue("DueDate"));
-                return isEditing ? (
+            accessorKey: 'dueDate',
+            header: ({ column }) => (
+                <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+                    Due Date
+                    <CaretSortIcon className="ml-2 h-4 w-4" />
+                </Button>
+            ),
+            cell: ({ row }) => {
+                const isEditingRow = isEditing === row.original.id;
+                const dueDateValue = row.getValue('dueDate');
+                const dueDate = dueDateValue ? new Date(dueDateValue) : null;
+
+                return isEditingRow ? (
                     <DatePicker
                         initialDate={dueDate}
-                        onDateChange={(date) => row.updateData("DueDate", date.toISOString())}
+                        onDateChange={(date) => handleDateChange(date, row.original.id)}
                     />
                 ) : (
-                    <div className="text-right font-medium">
-                        {format(new Date(row.getValue("DueDate")), "PPP")}
-                    </div>
+                    <div className="text-center" >{dueDate ? format(dueDate, 'yyyy-MM-dd') : ''}</div>
                 );
             },
         },
         {
-            id: "actions",
+            id: 'actions',
             enableHiding: false,
-            cell: ({ row, table }) => {
-                const goal = row.original;
-                const isEditing = table.getState().editGoalId === row.original.Id;
-                return isEditing ? (
-                    <Button
-                        variant="ghost"
-                        className="h-8 w-8 p-0"
-                        onClick={() => {
-                            table.setState({ ...table.getState(), editGoalId: null });
-                            // Save changes (if needed)
-                        }}
-                    >
+            cell: ({ row }) => {
+                const isEditingRow = isEditing === row.original.id;
+                return isEditingRow ? (
+                    <Button variant="ghost" className="h-8 w-8 p-0" onClick={handleSaveGoal}>
                         Save
                     </Button>
                 ) : (
@@ -176,45 +291,15 @@ export function GoalsTable({ goals = [] }) {
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
-                            <DropdownMenuItem onClick={() => setEditGoalId(goal.Id)}>
-                                Edit
-                            </DropdownMenuItem>
-                            <DropdownMenuItem onClick={() => handleDeleteGoal(goal.Id)}>
-                                Delete
-                            </DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => setIsEditing(row.original.id)}>Edit</DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => handleDeleteGoal(row.original.id)}>Delete</DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
                 );
             },
         },
-    ];
 
-    const [sorting, setSorting] = useState([]);
-    const [columnFilters, setColumnFilters] = useState([]);
-    const [columnVisibility, setColumnVisibility] = useState({});
-    const [rowSelection, setRowSelection] = useState({});
-    const [data, setData] = useState(goals);
-    const [editGoalId, setEditGoalId] = useState(null);
-
-    const handleDeleteGoal = (id) => {
-        setData(data.filter((goal) => goal.Id !== id));
-    };
-
-    const handleUpdateGoal = (id) => {
-        setData(data.filter((goal) => goal.Id !== id));
-    };
-
-    const handleAddGoal = () => {
-        const newGoal = {
-            Id: data.length + 1,
-            Status: "NotStarted",
-            Activity: "New Activity",
-            MeditationObject: "New Meditation Object",
-            DueDate: new Date().toISOString(),
-        };
-        setData([...data, newGoal]);
-    };
-
+    ], [isCreating, isEditing, expandedRows]);
 
     const table = useReactTable({
         data: data,
@@ -232,19 +317,19 @@ export function GoalsTable({ goals = [] }) {
             columnFilters,
             columnVisibility,
             rowSelection,
-            editGoalId,
+            editGoalId: isEditing,
         }
-
     });
 
     return (
         <div className="w-full">
+
             <div className="flex items-center py-4">
                 <Input
                     placeholder="Filter activities..."
-                    value={(table.getColumn("Activity")?.getFilterValue() ?? "")}
+                    value={(table.getColumn("activity")?.getFilterValue() ?? "")}
                     onChange={(event) =>
-                        table.getColumn("Activity")?.setFilterValue(event.target.value)
+                        table.getColumn("activity")?.setFilterValue(event.target.value)
                     }
                     className="max-w-sm"
                 />
@@ -276,7 +361,6 @@ export function GoalsTable({ goals = [] }) {
                 </DropdownMenu>
             </div>
 
-
             <div className="rounded-md border">
                 <Table>
                     <TableHeader>
@@ -284,7 +368,7 @@ export function GoalsTable({ goals = [] }) {
                             <TableRow key={headerGroup.id}>
                                 {headerGroup.headers.map((header) => {
                                     return (
-                                        <TableHead key={header.id}>
+                                        <TableHead key={header.id} className="text-center">
                                             {header.isPlaceholder
                                                 ? null
                                                 : flexRender(
@@ -302,45 +386,49 @@ export function GoalsTable({ goals = [] }) {
                         {table.getRowModel().rows?.length ? (
                             <>
                                 {table.getRowModel().rows.map((row) => (
-                                    <TableRow
-                                        key={row.id}
-                                        data-state={row.getIsSelected() && "selected"}
-                                    >
-                                        {row.getVisibleCells().map((cell) => (
-                                            <TableCell key={cell.id}>
-                                                {flexRender(
-                                                    cell.column.columnDef.cell,
-                                                    cell.getContext()
-                                                )}
-                                            </TableCell>
-                                        ))}
-                                    </TableRow>
+                                    <React.Fragment key={row.id}>
+                                        <TableRow key={`row-${row.id}`} data-state={row.getIsSelected() && "selected"}>
+                                            {row.getVisibleCells().map((cell) => (
+                                                <TableCell key={cell.id}>
+                                                    {flexRender(
+                                                        cell.column.columnDef.cell,
+                                                        cell.getContext()
+                                                    )}
+                                                </TableCell>
+                                            ))}
+                                        </TableRow>
+                                        {expandedRows[row.original.id] && (
+                                            <TableRow key={`child-${row.original.id}`}>
+                                                <TableCell colSpan={columns.length}>
+                                                    <div className="ml-8 mr-8">
+                                                        <GoalsTable goals={row.original.childGoals} isSubGoals={true} />
+                                                    </div>
+                                                </TableCell>
+                                            </TableRow>
+                                        )}
+                                    </React.Fragment>
                                 ))}
-
                             </>
                         ) : (
-                            <TableRow>
+                            <TableRow key="no-results">
                                 <TableCell colSpan={columns.length} className="h-24 text-center">
                                     No results.
                                 </TableCell>
                             </TableRow>
                         )}
 
-                        <TableRow>
-                            <TableCell colSpan={columns.length}>
-                                <Button
-                                    variant="outline"
-                                    className="w-full"
-                                    onClick={handleAddGoal}
-                                >
-                                    Add
+                        {/* Add Button */}
+                        <TableRow key="add-button">
+                            <TableCell colSpan={columns.length} className="text-center">
+                                <Button variant="outline" className="w-full" onClick={handleCreateGoal}>
+                                    Add Goal
                                 </Button>
                             </TableCell>
                         </TableRow>
                     </TableBody>
+
                 </Table>
             </div>
-
 
             <div className="flex items-center justify-end space-x-2 py-4">
                 <div className="flex-1 text-sm text-muted-foreground">

@@ -123,6 +123,14 @@ export function RemovedSessions({ onSessionClick }) {
                 : session.preparationPhase?.goals[0]?.activity?.title
                 ? `${session.preparationPhase.goals[0].activity.title} `
                 : "undefined",
+            meditationObject:
+              session.preparationPhase?.goals[0]?.parentGoal &&
+              session.preparationPhase?.goals[0]?.parentGoal.meditationObject
+                ?.title
+                ? `${session.preparationPhase.goals[0].parentGoal.meditationObject.title} `
+                : session.preparationPhase?.goals[0]?.meditationObject?.title
+                ? `${session.preparationPhase.goals[0].meditationObject.title} `
+                : "undefined",
           }));
           setSwaggerData(transformedData);
         }
@@ -202,12 +210,19 @@ export function RemovedSessions({ onSessionClick }) {
       ),
     },
     {
-      accessorKey: "observableObjects",
-      header: () => <div>Observable Objects</div>,
+      accessorKey: "meditationObject",
+      header: () => <div>Meditation Object</div>,
       cell: ({ row }) => (
-        <div className="capitalize">{row.getValue("observableObjects")}</div>
+        <div className="capitalize">{row.getValue("meditationObject")}</div>
       ),
     },
+    // {
+    //   accessorKey: "observableObjects",
+    //   header: () => <div>Observable Objects</div>,
+    //   cell: ({ row }) => (
+    //     <div className="capitalize">{row.getValue("observableObjects")}</div>
+    //   ),
+    // },
     {
       accessorKey: "masteredStages",
       header: "Mastered Stage",

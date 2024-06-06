@@ -11,7 +11,7 @@
 .chart-container,
 .table-container {
   width: 100%;
-  max-width: 700px;
+  max-width: 860px;
   box-sizing: border-box;
   background-color: white;
   border-radius: 10px;

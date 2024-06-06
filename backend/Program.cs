@@ -61,7 +61,7 @@ namespace backend
                 app.UseHsts();
             }
 
-            //app.UseHttpsRedirection();
+            // //app.UseHttpsRedirection();
 
             // Serve static files
             app.UseStaticFiles();

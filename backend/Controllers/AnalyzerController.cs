@@ -216,6 +216,13 @@ namespace backend.Controllers
                 .Include(s => s.NewlyMasterdStages)
                 .Include(s => s.AhaMoments)
                 .Include(s => s.ObservableObjects)
+                .Include(s => s.PreparationPhase)
+                    .ThenInclude(p => p.Goals)
+                        .ThenInclude(g => g.ParentGoal)
+                            .ThenInclude(pa => pa.Activity)
+                .Include(s => s.PreparationPhase)
+                    .ThenInclude(p => p.Goals)
+                        .ThenInclude(g => g.Activity)
                 .ToListAsync();
 
             if (!sessions.Any())
@@ -413,6 +420,12 @@ namespace backend.Controllers
                 .Include(s => s.AhaMoments)
                 .Include(s => s.ObservableObjects)
                 .Include(s => s.PreparationPhase)
+                    .ThenInclude(p => p.Goals)
+                        .ThenInclude(g => g.ParentGoal)
+                            .ThenInclude(pa => pa.Activity)
+                .Include(s => s.PreparationPhase)
+                    .ThenInclude(p => p.Goals)
+                        .ThenInclude(g => g.Activity)
                 .ToListAsync();
             if (sessions != null)
             {
@@ -442,5 +455,66 @@ namespace backend.Controllers
                 return Ok("Restored Session with Id: " + sessionToDelete.Id);
             }
         }
+        [HttpGet("GetMostFrequentedActivity")]
+        public async Task<IActionResult> GetMostFrequentedActivity(int meditatorId)
+        {
+            if (dbContext == null)
+            {
+                return StatusCode(500, "Database context is not initialized.");
+            }
+
+            try
+            {
+                // Step 1: Filter sessions for the meditator
+                var sessions = await dbContext.Sessions
+                    .Where(u => u.Meditator.Id == meditatorId && !u.IsDeleted)
+                    .Include(s => s.PreparationPhase)
+                        .ThenInclude(pp => pp.Goals)
+                            .ThenInclude(g => g.Activity)
+                    .ToListAsync();
+
+                if (!sessions.Any())
+                {
+                    return NotFound("No sessions found for the specified meditator.");
+                }
+
+                // Step 2: Extract activities from goals in preparation phases
+                var activities = sessions
+                    .SelectMany(s => s.PreparationPhase.Goals)
+                    .Select(g => g.Activity)
+                    .Where(a => a != null) // Ensure we only take non-null activities
+                    .ToList();
+
+                if (!activities.Any())
+                {
+                    return NotFound("No activities found for the specified meditator.");
+                }
+
+                // Step 3: Group by activity title and count occurrences
+                var mostFrequentedActivity = activities
+                    .GroupBy(a => a.Title)
+                    .OrderByDescending(g => g.Count())
+                    .Select(g => new
+                    {
+                        Activity = g.Key,
+                        Count = g.Count()
+                    })
+                    .FirstOrDefault();
+
+                if (mostFrequentedActivity == null)
+                {
+                    return NotFound("No frequent activity found.");
+                }
+
+                // Step 4: Return the most frequented activity
+                return Ok(mostFrequentedActivity);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+
     }
 }

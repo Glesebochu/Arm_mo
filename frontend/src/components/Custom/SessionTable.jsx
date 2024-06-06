@@ -52,7 +52,7 @@ export function DataTable({ onSessionClick }) {
   const navigate = useNavigate();
 
   const handleFilterChange = (value) => {
-    setColumnFilters([{ id: "observableObjects", value }]);
+    setColumnFilters([{ id: "meditationObject", value }]);
   };
 
   const handleDeleteSessionClick = (sessionId) => {
@@ -116,6 +116,20 @@ export function DataTable({ onSessionClick }) {
             observableObjects: session.observableObjects
               .map((obj) => obj.title)
               .join(", "),
+            activity:
+              session.preparationPhase?.goals[0]?.parentGoal &&
+              session.preparationPhase?.goals[0]?.parentGoal.activity?.title
+                ? `${session.preparationPhase.goals[0].parentGoal.activity.title} `
+                : session.preparationPhase?.goals[0]?.activity?.title
+                ? `${session.preparationPhase.goals[0].activity.title} `
+                : "undefined",
+            meditationObject:
+              session.preparationPhase?.goals[0]?.parentGoal &&
+              session.preparationPhase?.goals[0]?.parentGoal.meditationObject?.title
+                ? `${session.preparationPhase.goals[0].parentGoal.meditationObject.title} `
+                : session.preparationPhase?.goals[0]?.meditationObject?.title
+                ? `${session.preparationPhase.goals[0].meditationObject.title} `
+                : "undefined",
           }));
           setSwaggerData(transformedData);
         }
@@ -156,6 +170,13 @@ export function DataTable({ onSessionClick }) {
       cell: ({ row }) => <div className="capitalize">{row.getValue("id")}</div>,
     },
     {
+      accessorKey: "activity",
+      header: () => <div>Activity</div>,
+      cell: ({ row }) => (
+        <div className="capitalize">{row.getValue("activity")}</div>
+      ),
+    },
+    {
       accessorKey: "time",
       header: ({ column }) => {
         return (
@@ -188,12 +209,19 @@ export function DataTable({ onSessionClick }) {
       ),
     },
     {
-      accessorKey: "observableObjects",
-      header: () => <div>Observable Objects</div>,
+      accessorKey: "meditationObject",
+      header: () => <div>Meditation Object</div>,
       cell: ({ row }) => (
-        <div className="capitalize">{row.getValue("observableObjects")}</div>
+        <div className="capitalize">{row.getValue("meditationObject")}</div>
       ),
     },
+    // {
+    //   accessorKey: "observableObjects",
+    //   header: () => <div>Observable Objects</div>,
+    //   cell: ({ row }) => (
+    //     <div className="capitalize">{row.getValue("observableObjects")}</div>
+    //   ),
+    // },
     {
       accessorKey: "masteredStages",
       header: "Mastered Stage",
@@ -279,7 +307,7 @@ export function DataTable({ onSessionClick }) {
             <Input
               placeholder="Filter Sessions..."
               value={
-                columnFilters.find((f) => f.id === "observableObjects")
+                columnFilters.find((f) => f.id === "meditationObject")
                   ?.value || ""
               }
               onChange={(event) => handleFilterChange(event.target.value)}

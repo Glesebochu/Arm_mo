@@ -13,6 +13,8 @@ namespace backend.DTOs.Goal
         public string Activity { get; set; } = String.Empty;
         public MeditationObjectDTO? MeditationObject { get; set; }
         public DateOnly DueDate { get; set; }
+        public DateOnly? CompletedDate { get; set; }
+        public int? ParentGoalId { get; set; }
         public List<CreateGoalDTO>? ChildGoals { get; set; }
     }
 }

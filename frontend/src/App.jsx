@@ -5,6 +5,9 @@ import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
 import UsageView from "./pages/Usage";
 import Insights from "./pages/Insights";
+import Home from "./Pages/Home";
+import Settings from "./Pages/Settings";
+
 import Landing from "./pages/Landing";
 import ProtectedRoute from "../utils/ProtectedRoute";
 
@@ -34,6 +37,8 @@ function App() {
             <Insights/>
           </ProtectedRoute>
         } />
+        <Route path="/Home" element={<Home />} />
+        <Route path="/Settings" element={<Settings />} />
       </Routes>
     </Router>
   );

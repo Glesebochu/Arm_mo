@@ -36,20 +36,17 @@ const content = [
   },
 ];
 
-
 const Features = ()=> {
   return (
     <div className="p-10 flex flex-col items-center mt-10">
-        <h1 className="mb-12 font-k2d font-bold text-3xl my-8 text-neutral-600">Features {" "}
+        <h1 className="mb-12 font-k2d font-bold text-4xl my-8 text-neutral-600">Features {" "}
         <div className="relative inline">
-          We Offer
+          <span className="font-k2d font-bold">We Offer</span>
           <span className="absolute top-[-30px] left-[-8px] w-full">
-            <Circle width={140} height={100} />
+            <Circle width={158} height={100} />
           </span>
         </div>
-        
         </h1>
-
       <StickyScroll content={content}/>
     </div>
   );

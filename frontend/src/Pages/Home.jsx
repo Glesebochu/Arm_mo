@@ -70,7 +70,6 @@ const Home = () => {
         ...userData.practicedStages.map((stage) => stage.stageId)
       );
 
-
       // Set frameworks up to the maximum practiced stage
       const stages = Array.from({ length: maxPracticedStage }, (_, i) => ({
         value: numberToString(i + 1).toLowerCase(),
@@ -87,8 +86,8 @@ const Home = () => {
   }, []);
 
   const handleStageSelect = (currentValue) => {
-    console.log(`Selected stage: ${currentValue}`);
     setValue(currentValue);
+    console.log(`Selected stage: ${currentValue}`);
     setOpen(false);
   };
 
@@ -129,7 +128,20 @@ const Home = () => {
               <Command>
                 <CommandList>
                   {filteredFrameworks.length === 0 ? (
-                    <CommandEmpty>No framework found.</CommandEmpty>
+                    <CommandGroup>
+                      <CommandItem
+                        value="one"
+                        onSelect={() => handleStageSelect("one")}
+                      >
+                        <Check
+                          className={cn(
+                            "mr-2 h-4 w-4",
+                            value === "one" ? "opacity-100" : "opacity-0"
+                          )}
+                        />
+                        One
+                      </CommandItem>
+                    </CommandGroup>
                   ) : (
                     <CommandGroup>
                       {filteredFrameworks.map((framework) => (

@@ -42,9 +42,10 @@ namespace backend.Mappings
             // For Goals
             // =========
             CreateMap<Goal, GoalDTO>()
-                // .ForMember(dest => dest.Activity, opt => opt.MapFrom(src => src.Activity.Title))
-                // .ForMember(dest => dest.MeditationObject, opt => opt.MapFrom(src => src.MeditationObject.Title))
-                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()));
+            // .ForMember(dest => dest.Activity, opt => opt.MapFrom(src => src.Activity.Title))
+            // .ForMember(dest => dest.MeditationObject, opt => opt.MapFrom(src => src.MeditationObject.Title))
+            // .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()))
+            ;
             CreateMap<GoalDTO, Goal>()
             // .ForPath(dest => dest.Activity.Title, opt => opt.MapFrom(src => src.Activity))
             // .ForPath(dest => dest.MeditationObject.Title, opt => opt.MapFrom(src => src.MeditationObject));

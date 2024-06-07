@@ -12,10 +12,8 @@ namespace backend.Models
     {
         public int Id { get; set; }
         public GoalStatus Status { get; set; }
-        public Activity? Activity { get; set; }
-        public ObservableObject? MeditationObject { get; set; }
-
-        // { Read } {four paragraphs from a book}
+        public Activity Activity { get; set; }
+        public ObservableObject MeditationObject { get; set; }
         public DateOnly DueDate { get; set; }
         public DateOnly? CompletedDate { get; set; }
         public Goal? ParentGoal { get; set; }

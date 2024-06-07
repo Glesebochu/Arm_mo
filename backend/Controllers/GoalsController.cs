@@ -32,6 +32,7 @@ namespace backend.Controllers
             var goals = _context.Goals
                 .Include(g => g.Activity)
                 .Include(g => g.MeditationObject)
+                .Include(g => g.ChildGoals)
                 .ToList();
 
             // Map goals to DTOs

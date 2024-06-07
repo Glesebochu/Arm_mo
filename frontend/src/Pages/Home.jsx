@@ -70,6 +70,7 @@ const Home = () => {
         ...userData.practicedStages.map((stage) => stage.stageId)
       );
 
+
       // Set frameworks up to the maximum practiced stage
       const stages = Array.from({ length: maxPracticedStage }, (_, i) => ({
         value: numberToString(i + 1).toLowerCase(),
@@ -92,9 +93,10 @@ const Home = () => {
   };
 
   const filteredFrameworks = frameworks;
+  console.log("User profile picture:", user?.profilePicture);
 
   return (
-    <div className="h-screen pt-4">
+    <div className="pt-4">
       <div className="flex justify-between items-center px-6 h-1/6">
         <div>
           <Button
@@ -161,7 +163,7 @@ const Home = () => {
               <Button variant="ghost" className="px-3 py-4 rounded-full">
                 <Avatar className="h-10 w-10">
                   {user?.profilePicture ? (
-                    <AvatarImage src={user.profilePicture} />
+                    <AvatarImage src={`/profilePics/${user.profilePicture}`} />
                   ) : (
                     <AvatarFallback className="flex items-center justify-center bg-black text-white">
                       {user?.firstName.charAt(0)}
@@ -178,13 +180,16 @@ const Home = () => {
                   </h4>
                   <Avatar className="h-16 w-16 mx-auto">
                     {user?.profilePicture ? (
-                      <AvatarImage src={user.profilePicture} />
+                      <AvatarImage
+                        src={`/profilePics/${user.profilePicture}`}
+                      />
                     ) : (
                       <AvatarFallback className="bg-black text-white">
                         {user?.firstName.charAt(0)}
                       </AvatarFallback>
                     )}
                   </Avatar>
+
                   <p className="text-sm text-muted-foreground mt-2">
                     {user ? `@${user.username}` : "Loading..."}
                   </p>

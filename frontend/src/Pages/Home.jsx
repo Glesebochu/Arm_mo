@@ -79,7 +79,7 @@ const Home = () => {
       {/* <UsageView /> */}
       <div className="flex justify-between h-1/4 items-center px-14" >
         <div>
-          <Button variant="ghost" size="lg" onClick={handleSettingsClick} className="px-3 py-8 rounded-full">
+          <Button variant="ghost" onClick={handleSettingsClick} className="px-3 py-8 rounded-full">
             <GoGear size={44}/>
           </Button>
         </div>

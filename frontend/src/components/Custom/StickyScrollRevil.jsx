@@ -3,7 +3,7 @@ import React, { useRef } from "react";
 import { useMotionValueEvent, useScroll } from "framer-motion";
 import { motion } from "framer-motion";
 import { cn } from "../../../utils/cn";
-import { Icon } from "./Icon"; 
+import { Icon } from "./Icon";
 
 export const StickyScroll = ({
   content,
@@ -44,7 +44,7 @@ export const StickyScroll = ({
       animate={{
         backgroundColor: backgroundColors[activeCard % backgroundColors.length],
       }}
-      className="h-[30rem] w-[1150px] overflow-y-auto no-scrollbar flex justify-center relative space-x-10 rounded-md p-10 scrollbar-hide"
+      className="h-[28rem] w-[1150px] overflow-y-auto no-scrollbar flex justify-center relative space-x-10 rounded-md p-10 scrollbar-hide"
       ref={ref}
     >
       <div className="div relative flex items-start px-4">
@@ -58,7 +58,7 @@ export const StickyScroll = ({
                 animate={{
                   opacity: activeCard === index ? 1 : 0.2,
                 }}
-                className="text-2xl font-bold text-slate-500"
+                className="text-3xl text-center lg:text-start font-bold text-slate-500 font-k2d"
               >
                 {item.title}
               </motion.h2>
@@ -69,7 +69,7 @@ export const StickyScroll = ({
                 animate={{
                   opacity: activeCard === index ? 1 : 0.2,
                 }}
-                className="text-kg text-slate-500 max-w-sm mt-10"
+                className="text-kg text-slate-500 max-w-sm mt-10 font-k2d"
               >
                 {item.description}
               </motion.p>

@@ -36,7 +36,7 @@ import {
 } from "@/components/ui/table";
 import { DatePicker } from "@/components/ui/date-picker";
 import { ObservableObjectPopover } from "./ObservableObjectPopover";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { createGoal } from "../../slices/GoalsSlice";
 import {
     Select,
@@ -72,22 +72,52 @@ export function GoalsTable({ goals = [], isSubGoals = false }) {
     const [columnFilters, setColumnFilters] = useState([]);
     const [columnVisibility, setColumnVisibility] = useState({});
     const [rowSelection, setRowSelection] = useState({});
-    const [isCreating, setIsCreating] = useState(false);
+    // const [isCreating, setIsCreating] = useState(false);
     const [isEditing, setIsEditing] = useState(null);
     const [expandedRows, setExpandedRows] = useState({});
-    const [newGoal, setNewGoal] = useState(initialGoalState);
+    // const [newGoal, setNewGoal] = useState(initialGoalState);
+
+    // useEffect(() => {
+    //     console.log(data); // This will log the updated state
+    // }, [data]);
 
     const handleDeleteGoal = (id) => {
         setData(data.filter((goal) => goal.id !== id));
     };
 
+    const organizeGoals = (goals) => {
+        const goalMap = new Map();
+
+        // Create a map of goals by their id
+        goals.forEach(goal => {
+            goalMap.set(goal.id, { ...goal });
+        });
+
+        // Organize goals into parent-child relationships
+        // goals.forEach(goal => {
+        //     if (goal.parentGoal !== null) {
+        //         const parentGoal = goalMap.get(goal.parentGoal);
+        //         if (parentGoal) {
+        //             parentGoal.childGoals.push(goalMap.get(goal.id));
+        //         }
+        //     }
+        // });
+
+        // Return only the top-level goals
+        return Array.from(goalMap.values()).filter(goal => goal.parentGoal === null);
+    };
+
+    useEffect(() => {
+        const organizedData = organizeGoals(goals);
+        setData(organizedData);
+        console.log(organizedData);
+    }, [goals]);
 
     const handleCreateGoal = () => {
-        const newId = uuidv4();
+        const newId = `[new]-${uuidv4()}`;
         const newGoalData = { ...initialGoalState, id: newId }; // Ensure activity has title
         setData([...data, newGoalData]);
         setIsEditing(newId);
-        setIsCreating(true);
     };
 
     const handleSaveGoal = () => {
@@ -95,12 +125,7 @@ export function GoalsTable({ goals = [], isSubGoals = false }) {
             prevData.map((goal) => (goal.id === isEditing ? goal : goal))
         );
         setIsEditing(null);
-        setIsCreating(false);
     };
-
-    // useEffect(() => {
-    //     console.log(data); // This will log the updated state
-    // }, [data]);
 
     const handleInputChange = (e, id) => {
         const { name, value } = e.target;
@@ -201,7 +226,7 @@ export function GoalsTable({ goals = [], isSubGoals = false }) {
                         </SelectContent>
                     </Select>
                 ) : (
-                    <div className="capitalize text-center">{row.getValue('status')}</div>
+                    <div className="capitalize">{row.getValue('status')}</div>
                 );
             },
         },
@@ -224,7 +249,7 @@ export function GoalsTable({ goals = [], isSubGoals = false }) {
                         className="w-full"
                     />
                 ) : (
-                    <div className="text-center">{activityTitle}</div>
+                    <div>{activityTitle}</div>
                 );
             },
         },
@@ -246,7 +271,7 @@ export function GoalsTable({ goals = [], isSubGoals = false }) {
                         buttonClass="w-full"
                     />
                 ) : (
-                    <div className="text-center">{meditationObject?.title}</div>
+                    <div>{meditationObject?.title}</div>
                 );
             },
         },
@@ -269,7 +294,7 @@ export function GoalsTable({ goals = [], isSubGoals = false }) {
                         onDateChange={(date) => handleDateChange(date, row.original.id)}
                     />
                 ) : (
-                    <div className="text-center" >{dueDate ? format(dueDate, 'yyyy-MM-dd') : ''}</div>
+                    <div>{dueDate ? format(dueDate, 'yyyy-MM-dd') : ''}</div>
                 );
             },
         },
@@ -299,7 +324,7 @@ export function GoalsTable({ goals = [], isSubGoals = false }) {
             },
         },
 
-    ], [isCreating, isEditing, expandedRows]);
+    ], [isEditing, expandedRows]);
 
     const table = useReactTable({
         data: data,
@@ -389,7 +414,7 @@ export function GoalsTable({ goals = [], isSubGoals = false }) {
                                     <React.Fragment key={row.id}>
                                         <TableRow key={`row-${row.id}`} data-state={row.getIsSelected() && "selected"}>
                                             {row.getVisibleCells().map((cell) => (
-                                                <TableCell key={cell.id}>
+                                                <TableCell key={cell.id} className="text-center">
                                                     {flexRender(
                                                         cell.column.columnDef.cell,
                                                         cell.getContext()
@@ -419,7 +444,7 @@ export function GoalsTable({ goals = [], isSubGoals = false }) {
 
                         {/* Add Button */}
                         <TableRow key="add-button">
-                            <TableCell colSpan={columns.length} className="text-center">
+                            <TableCell colSpan={columns.length} className="text-left">
                                 <Button variant="outline" className="w-full" onClick={handleCreateGoal}>
                                     Add Goal
                                 </Button>

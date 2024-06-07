@@ -1,16 +1,15 @@
-import './index.css'
-import { Goals } from './pages/Goals'
+import "./index.css";
+import { Goals } from "./pages/Goals";
 import * as React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import SessionSummary from "./pages/AnalyticsPage";
 import SessionDetails from "./pages/SessionDetails"; // Import the new component for session details
 import UsageView from "./pages/Usage";
 import Insights from "./pages/Insights";
-import { RemovedSessions } from './components/Custom/RemovedSessionsTable';
+import { RemovedSessions } from "./components/Custom/RemovedSessionsTable";
 
-
-import Home from "./Pages/Home";
-import Settings from "./Pages/Settings";
+import Home from "./pages/Home";
+// import Settings from "./pages/Settings";
 
 function App() {
   return (
@@ -24,13 +23,13 @@ function App() {
           <Route path="/session/:sessionId" element={<SessionDetails />} />
           <Route path="/Usage" element={<UsageView />} />
           <Route path="/Insights" element={<Insights />} />
-          <Route path="/RemovedSessions" element={< RemovedSessions/>} />
+          <Route path="/RemovedSessions" element={<RemovedSessions />} />
           <Route path="/Home" element={<Home />} />
-        <Route path="/Settings" element={<Settings />} />
-      </Routes>
+          {/* <Route path="/Settings" element={<Settings />} /> */}
+        </Routes>
       </Router>
     </>
-  )
+  );
 }
 
 export default App;

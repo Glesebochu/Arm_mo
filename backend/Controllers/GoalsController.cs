@@ -79,11 +79,16 @@ namespace backend.Controllers
         // An action for creating a goal; GET
         // An action for creating a goal; POST
         [HttpPost("Create")]
-        [ActionName("Create")]
         public IActionResult Create([FromBody] CreateGoalDTO createGoalDTO)
         {
             // Convert the DTO into a Goal object that EF can understand.
             var goal = _mapper.Map<Models.Goal>(createGoalDTO);
+
+            var activity = goal.Activity;
+            var meditationObject = goal.MeditationObject;
+
+            _context.Activities.Add(activity);
+            _context.ObservableObjects.Add(meditationObject);
 
             // Add the goal to the Goals table.
             _context.Goals.Add(goal);

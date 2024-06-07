@@ -35,7 +35,7 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import { DatePicker } from "@/components/ui/date-picker";
-import { ObservableObjectPopover } from "./ObservableObjectPopover";
+import { MeditationObjectPopover } from "./MeditationObjectPopover";
 import { useDispatch } from "react-redux";
 import { createGoal } from "../../slices/GoalsSlice";
 import {
@@ -44,11 +44,10 @@ import {
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from "@/components/ui/select"
+} from "@/components/ui/select";
 import { v4 as uuidv4 } from 'uuid';
 
 export function GoalsTable({ goals = [], isSubGoals = false }) {
-
     const dispatch = useDispatch();
 
     const initialGoalState = {
@@ -60,12 +59,12 @@ export function GoalsTable({ goals = [], isSubGoals = false }) {
         meditationObject: {
             title: '',
             description: '',
-            subType: '', // Make sure this matches the expected type in the backend
+            subType: '',
         },
         dueDate: '', // Ensure this is in the correct date format
         completedDate: null,
-        parentGoal: null, // Reference to parent goal if any
-        childGoals: [], // List of child goals
+        parentGoalId: null,
+        childGoals: [],
     };
 
     const [data, setData] = useState(goals);
@@ -73,14 +72,17 @@ export function GoalsTable({ goals = [], isSubGoals = false }) {
     const [columnFilters, setColumnFilters] = useState([]);
     const [columnVisibility, setColumnVisibility] = useState({});
     const [rowSelection, setRowSelection] = useState({});
-    // const [isCreating, setIsCreating] = useState(false);
     const [isEditing, setIsEditing] = useState(null);
+    const [isCreating, setIsCreating] = useState(false);
     const [expandedRows, setExpandedRows] = useState({});
-    // const [newGoal, setNewGoal] = useState(initialGoalState);
+    const [localData, setLocalData] = useState({});
 
-    // useEffect(() => {
-    //     console.log(data); // This will log the updated state
-    // }, [data]);
+    useEffect(() => {
+        if (!isSubGoals) {
+            const organizedData = organizeGoals(goals);
+            setData(organizedData);
+        }
+    }, [goals]);
 
     const handleDeleteGoal = (id) => {
         setData(data.filter((goal) => goal.id !== id));
@@ -89,66 +91,112 @@ export function GoalsTable({ goals = [], isSubGoals = false }) {
     const organizeGoals = (goals) => {
         return goals.filter(goal => goal.parentGoalId == null);
     };
+    const prepareGoalForCreation = (g) => {
 
-    useEffect(() => {
-        if (!isSubGoals) {
-            const organizedData = organizeGoals(goals);
-            setData(organizedData);
-            console.log(organizedData);
-        }
-    }, [goals]);
+        var preparedGoal = {
+            status: g.status,
+            activity: {
+                title: g.activity.title
+            },
+            meditationObject: {
+                title: g.meditationObject.title,
+                description: g.meditationObject.description,
+                subType: g.meditationObject.subType,
+            },
+            dueDate: g.dueDate,
+            completedDate: g.completedDate,
+            parentGoalId: g.parentGoalId,
+            childGoals: g.childGoals.map(child => prepareGoalForCreation(child))
+        };
+
+        return preparedGoal;
+    };
 
     const handleCreateGoal = () => {
         const newId = `[new]-${uuidv4()}`;
         const newGoalData = { ...initialGoalState, id: newId }; // Ensure activity has title
+        setLocalData((prevData) => ({
+            ...prevData,
+            [newId]: newGoalData,
+        }));
         setData([...data, newGoalData]);
+        // * Testing
+        console.log(localData);
         setIsEditing(newId);
+        setIsCreating(true);
     };
 
     const handleSaveGoal = () => {
-        setData((prevData) =>
-            prevData.map((goal) => (goal.id === isEditing ? goal : goal))
-        );
-        const goalToSave = data.find(goal => goal.id === isEditing);
-        if (goalToSave) {
-            dispatch(createGoal(goalToSave));
+
+        var goalToSave = null;
+
+        if (isCreating) {
+            goalToSave = localData[isEditing];
+        } else {
+            goalToSave = data.find((goal) => goal.id === isEditing);
         }
+
+        // * Testing
+        console.log(localData);
+        if (goalToSave) {
+            const preparedGoal = prepareGoalForCreation(goalToSave);
+            dispatch(createGoal(preparedGoal));
+            setData((prevData) =>
+                prevData.map((goal) => (goal.id === isEditing ? goalToSave : goal))
+            );
+        }
+        setLocalData((prevData) => {
+            const { [isEditing]: removed, ...rest } = prevData;
+            return rest;
+        });
         setIsEditing(null);
+        setIsCreating(false);
     };
 
     const handleInputChange = (e, id) => {
         const { name, value } = e.target;
-        setData((prevData) =>
-            prevData.map((goal) =>
-                goal.id === id ? { ...goal, [name]: value } : goal
-            )
-        );
+        setLocalData((prevData) => ({
+            ...prevData,
+            [id]: {
+                ...prevData[id],
+                [name]: value,
+            },
+        }));
     };
 
     const handleActivityChange = (e, id) => {
         const { value } = e.target;
-        setData((prevData) =>
-            prevData.map((goal) =>
-                goal.id === id ? { ...goal, activity: { ...goal.activity, title: value } } : goal
-            )
-        );
+        setLocalData((prevData) => ({
+            ...prevData,
+            [id]: {
+                ...prevData[id],
+                activity: {
+                    // ...prevData[id]?.activity,
+                    title: value,
+                },
+            },
+        }));
     };
 
     const handleMeditationObjectChange = (value, id) => {
-        setData((prevData) =>
-            prevData.map((goal) =>
-                goal.id === id ? { ...goal, meditationObject: value } : goal
-            )
-        );
+        setLocalData((prevData) => ({
+            ...prevData,
+            [id]: {
+                ...prevData[id],
+                meditationObject: value,
+            },
+        }));
     };
 
     const handleDateChange = (date, id) => {
         const formattedDate = date.toISOString().split('T')[0];
-        setData((prevData) =>
-            prevData.map((goal) =>
-                goal.id === id ? { ...goal, dueDate: formattedDate } : goal
-            )
-        );
+        setLocalData((prevData) => ({
+            ...prevData,
+            [id]: {
+                ...prevData[id],
+                dueDate: formattedDate,
+            },
+        }));
     };
 
     const handleToggleExpand = (id) => {
@@ -200,11 +248,12 @@ export function GoalsTable({ goals = [], isSubGoals = false }) {
             ),
             cell: ({ row }) => {
                 const isEditingRow = isEditing === row.original.id;
-                const statusOptions = ['NotStarted', 'InProgress', 'Done'];
+                const statusOptions = ['NotStarted', 'InProgress', 'Completed'];
+                const statusValue = localData[row.original.id]?.status || row.getValue('status');
                 return isEditingRow ? (
                     <Select onValueChange={(value) => handleInputChange({ target: { name: 'status', value } }, row.original.id)}>
                         <SelectTrigger className="w-full">
-                            <SelectValue placeholder={row.getValue('status')} />
+                            <SelectValue placeholder={statusValue} />
                         </SelectTrigger>
                         <SelectContent>
                             {statusOptions.map(option => (
@@ -215,7 +264,7 @@ export function GoalsTable({ goals = [], isSubGoals = false }) {
                         </SelectContent>
                     </Select>
                 ) : (
-                    <div className="capitalize">{row.getValue('status')}</div>
+                    <div className="capitalize">{statusValue}</div>
                 );
             },
         },
@@ -229,7 +278,8 @@ export function GoalsTable({ goals = [], isSubGoals = false }) {
             ),
             cell: ({ row }) => {
                 const isEditingRow = isEditing === row.original.id;
-                const activityTitle = row.getValue('activity').title;
+                const activityTitle = localData[row.original.id]?.activity?.title || row.getValue('activity').title;
+
                 return isEditingRow ? (
                     <Input
                         name="activity"
@@ -252,9 +302,9 @@ export function GoalsTable({ goals = [], isSubGoals = false }) {
             ),
             cell: ({ row }) => {
                 const isEditingRow = isEditing === row.original.id;
-                const meditationObject = row.getValue('meditationObject');
+                const meditationObject = localData[row.original.id]?.meditationObject || row.getValue('meditationObject');
                 return isEditingRow ? (
-                    <ObservableObjectPopover className="w-full"
+                    <MeditationObjectPopover className="w-full"
                         observableObject={meditationObject}
                         onSave={(updatedObject) => handleMeditationObjectChange(updatedObject, row.original.id)}
                         buttonClass="w-full"
@@ -274,7 +324,7 @@ export function GoalsTable({ goals = [], isSubGoals = false }) {
             ),
             cell: ({ row }) => {
                 const isEditingRow = isEditing === row.original.id;
-                const dueDateValue = row.getValue('dueDate');
+                const dueDateValue = localData[row.original.id]?.dueDate || row.getValue('dueDate');
                 const dueDate = dueDateValue ? new Date(dueDateValue) : null;
 
                 return isEditingRow ? (
@@ -312,8 +362,7 @@ export function GoalsTable({ goals = [], isSubGoals = false }) {
                 );
             },
         },
-
-    ], [isEditing, expandedRows]);
+    ], [isEditing, expandedRows, localData]);
 
     const table = useReactTable({
         data: data,
@@ -337,7 +386,6 @@ export function GoalsTable({ goals = [], isSubGoals = false }) {
 
     return (
         <div className="w-full">
-
             <div className="flex items-center py-4">
                 <Input
                     placeholder="Filter activities..."
@@ -440,7 +488,6 @@ export function GoalsTable({ goals = [], isSubGoals = false }) {
                             </TableCell>
                         </TableRow>
                     </TableBody>
-
                 </Table>
             </div>
 

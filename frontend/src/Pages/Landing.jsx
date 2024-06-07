@@ -2,6 +2,9 @@ import NavBar from "../components/Custom/NavBar";
 import Hero from "../components/Custom/Hero";
 import Developers from "../components/Custom/Developers";
 import Features from "../components/Custom/Features";
+import Testimonial from "../components/Custom/Testimonial";
+import ContactUs from "../components/Custom/ContactUs";
+import Footer from "@/components/Custom/Footer";
 
 const Landing = () => {
   return (
@@ -10,6 +13,9 @@ const Landing = () => {
       <Hero />
       <Developers />
       <Features/>
+      <Testimonial/>
+      <ContactUs/>
+      <Footer/>
     </div>
   );
 };

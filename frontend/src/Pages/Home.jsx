@@ -1,6 +1,6 @@
 "use client"
 import { Button } from "@/components/ui/button";
-import UsageView from "../Pages/Usage"
+import UsageView from "../pages/Usage"
 import {
   DropdownMenu,
   DropdownMenuContent,

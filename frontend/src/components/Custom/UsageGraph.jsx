@@ -10,9 +10,9 @@ export default function UsageGraph() {
           className="form-control"
           id="startDate"
           name="startDate"
+          onChange={(e) => setCustomStartDate(e.target.value)}
         />
       </div>
-
       <canvas
         id="weeklyUsage"
         className="small-chart"

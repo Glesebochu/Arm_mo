@@ -36,28 +36,81 @@ const UsageView = () => {
   }, [customStartDate]);
 
   const fetchUsageDataForPastWeek = async () => {
+    document.getElementById("startDate").valueAsDate = new Date();
     try {
-      const response = await axios.get(
+      const usageResponse = await axios.get(
         "http://localhost:5158/api/Analyzer/GetUsageDataForPastWeek"
       );
-      const data = response.data;
-      const _CharData = data[1].reverse();
-      dailyUse(_CharData[_CharData.length - 1]);
-      setChartData(data);
+      const sessionResponse = await axios.get(
+        "http://localhost:5158/api/Analyzer/GetSessionUsageCustom"
+      );
+
+      const usageData = usageResponse.data;
+      var dataFirst = {
+        label: "Daily App use",
+        data: usageData[1].reverse(),
+        borderWidth: 3,
+        borderColor: "#2563eb",
+        // lineTension: 0,
+        // fill: false,
+      };
+
+      var dataSecond = {
+        label: "Meditation sessions",
+        data: sessionResponse.data.reverse(),
+        borderWidth: 3,
+        borderColor: "#006400",
+      };
+
+      //console.log(sessionResponse.data);
+      var combinedLines = {
+        labels: usageData[0].reverse(),
+        datasets: [dataFirst, dataSecond],
+      };
+
+      dailyUse(usageData[1][6]);
+      console.log(usageData[1][6]);
+      setChartData(combinedLines);
     } catch (error) {
-      console.error("AJAX request failed:", error);
+      console.error("Axios request failed:", error);
     }
   };
 
   const fetchUsageDataCustom = async (startDate) => {
     try {
-      const response = await axios.get(
+      const usageResponse = await axios.get(
         `http://localhost:5158/api/Analyzer/GetUsageDataCustom?startDate=${startDate}`
       );
-      const data = response.data;
-      setChartData(data);
+      const sessionResponse = await axios.get(
+        `http://localhost:5158/api/Analyzer/GetSessionUsageCustom?customDate=${startDate}`
+      );
+
+      const usageData = usageResponse.data;
+      var dataFirst = {
+        label: "Daily App use",
+        data: usageData[1].reverse(),
+        borderWidth: 3,
+        borderColor: "#2563eb",
+        // lineTension: 0,
+        // fill: false,
+      };
+
+      var dataSecond = {
+        label: "Meditation sessions",
+        data: sessionResponse.data.reverse(),
+        borderWidth: 3,
+        borderColor: "#006400",
+      };
+
+      //console.log(sessionResponse.data);
+      var combinedLines = {
+        labels: usageData[0].reverse(),
+        datasets: [dataFirst, dataSecond],
+      };
+
+      setChartData(combinedLines);
     } catch (error) {
-      console.error("AJAX request failed:", error);
+      console.error("Axios request failed:", error);
     }
   };
 
@@ -69,69 +122,70 @@ const UsageView = () => {
 
   const renderChart = (data) => {
     const canvas = document.getElementById("weeklyUsage");
-    const _labels = data[0].reverse();
-    const _CharData = data[1].reverse();
+    const _labels = data[0];
+    const _CharData = data[1];
 
     if (chartInstance) {
       chartInstance.destroy();
     }
 
-    chartInstance = new Chart(canvas, {
-      type: "line",
-      data: {
-        labels: _labels,
-        datasets: [
-          {
-            label: "Daily use",
-            data: _CharData,
-            borderWidth: 3,
-            borderColor: "#2563eb",
-          },
-        ],
+    //console.log(data);
+
+    var chartOptions = {
+      legend: {
+        display: true,
+        position: "top",
+        labels: {
+          boxWidth: 80,
+          fontColor: "black",
+        },
       },
-      options: {
-        animations: {
-          radius: {
-            duration: 500,
-            easing: "easeInCirc",
-            loop: (context) => context.active,
-          },
-          tension: {
-            duration: 1000,
-            easing: "linear",
-            from: 0.5,
-            to: 0,
-            loop: true,
-          },
+      animations: {
+        radius: {
+          duration: 500,
+          easing: "easeInCirc",
+          loop: (context) => context.active,
         },
-        hoverRadius: 12,
-        hoverBackgroundColor: "red",
-        interaction: {
-          mode: "nearest",
-          intersect: false,
-          axis: "x",
+        tension: {
+          duration: 1000,
+          easing: "linear",
+          from: 0.55,
+          to: 0.35,
+          loop: true,
         },
-        scales: {
-          y: {
-            beginAtZero: true,
-            title: {
-              display: true,
-              text: "Minutes",
-              font: {
-                size: "10",
-              },
+      },
+      hoverRadius: 12,
+      hoverBackgroundColor: "red",
+      interaction: {
+        mode: "nearest",
+        intersect: false,
+        axis: "x",
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: "Minutes",
+            font: {
+              size: "10",
             },
           },
         },
       },
+    };
+
+    chartInstance = new Chart(canvas, {
+      type: "line",
+      data: data,
+      options: chartOptions,
     });
   };
-
   const dailyUse = (minutes) => {
     const hours = Math.floor(minutes / 60);
     const remainingMinutes = minutes % 60;
     const formattedTime = `${hours}h ${remainingMinutes}m`;
-    const timeDisplayElement = document.getElementById("time");
+    const timeDisplayElement = document.getElementById("timeBubble");
     timeDisplayElement.textContent = formattedTime;
   };
 
@@ -148,6 +202,7 @@ const UsageView = () => {
             id="startDate"
             name="startDate"
             onChange={(e) => setCustomStartDate(e.target.value)}
+            defaultValue={"Pick a Date"}
           />
         </div>
         <canvas
@@ -156,22 +211,7 @@ const UsageView = () => {
           width="400"
           height="200"
         ></canvas>
-        <div className="circle-container">
-          <div className="circle">
-            <div className="circle-content">
-              <div id="loader">
-                <div>
-                  <div id="box"></div>
-                  <div id="hill"></div>
-                </div>
-                <div className="timeContainer">
-                  <p id="time">1h 35m</p>
-                </div>
-              </div>
-              <p className="text">Today's Activity</p>
-            </div>
-          </div>
-        </div>
+        <TodayUsageBubble />
       </div>
     </div>
   );

@@ -1,5 +1,16 @@
+import "./index.css";
+import { Goals } from "./pages/Goals";
 import * as React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import SessionSummary from "./pages/AnalyticsPage";
+import SessionDetails from "./pages/SessionDetails"; // Import the new component for session details
+import UsageView from "./pages/Usage";
+import Insights from "./pages/Insights";
+import { RemovedSessions } from "./components/Custom/RemovedSessionsTable";
+
+import Home from "./pages/Home";
+// import Settings from "./pages/Settings";
+
 import SessionDetails from "./pages/SessionDetails";
 import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";

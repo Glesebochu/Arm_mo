@@ -93,6 +93,17 @@ public class AuthController : ControllerBase
         // Create and return the JWT token
         var token = GenerateJwtToken(payload.Email);
 
+        // Set the httpOnly cookie with SameSite=None and Secure=false for development
+        var cookieOptions = new CookieOptions
+        {
+            HttpOnly = true,
+            Secure = true, 
+            SameSite = SameSiteMode.None, // Allowing cross-origin requests
+            Expires = DateTime.UtcNow.AddDays(1)
+        };
+
+        HttpContext.Response.Cookies.Append("token", token, cookieOptions);
+
         return Ok(new { Token = token });
     }
 

@@ -14,10 +14,10 @@ INSERT INTO Stages (Goal) VALUES
 ('Attain deep tranquility and equanimity, free from mental and physical discomfort.');
 
 -- Insert dummy data into Meditator
-INSERT INTO Meditators (CurrentStageId, Username, FirstName, LastName, _password, Email) VALUES
-(1, 'meditator1', 'John', 'Doe', 'password1', 'john.doe@example.com'),
-(2, 'meditator2', 'Jane', 'Smith', 'password2', 'jane.smith@example.com'),
-(3, 'meditator3', 'Jim', 'Beam', 'password3', 'jim.beam@example.com');
+INSERT INTO Meditators (CurrentStageId, Username, FirstName, LastName, _password, Email,ProfilePicture) VALUES
+(1, 'JohnnyBravo', 'John', 'Doe', 'password1', 'john.doe@example.com','johndoe.png'),
+(2, 'JaneyDane', 'Jane', 'Smith', 'password2', 'jane.smith@example.com',null),
+(3, 'JimTheBeam', 'Jim', 'Beam', 'password3', 'jim.beam@example.com',null);
 
 -- Insert dummy data into dbo.UserUsage
 INSERT INTO dbo.UserUsage (UserId, Date, StartTime, UsageTime)

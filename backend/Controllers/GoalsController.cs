@@ -131,7 +131,7 @@ namespace backend.Controllers
 
         // An action for updating a goal; POST
         [HttpPut("Update/{id}")]
-        public async Task<ActionResult> Update(int id, [FromBody] UpdateGoalDTO updateGoalDto)
+        public async Task<ActionResult> Update([FromBody] UpdateGoalDTO updateGoalDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -142,7 +142,7 @@ namespace backend.Controllers
                 var existingGoal = await _context.Goals
                     .Include(g => g.Activity)
                     .Include(g => g.MeditationObject)
-                    .FirstOrDefaultAsync(g => g.Id == id);
+                    .FirstOrDefaultAsync(g => g.Id == updateGoalDto.Id);
 
                 if (existingGoal == null)
                 {
@@ -157,11 +157,11 @@ namespace backend.Controllers
                 // Update the titles of the Activity and MeditationObject
                 if (existingGoal.Activity != null)
                 {
-                    existingGoal.Activity.Title = updateGoalDto.Activity;
+                    existingGoal.Activity = _mapper.Map<Activity>(updateGoalDto.Activity);
                 }
                 if (existingGoal.MeditationObject != null)
                 {
-                    existingGoal.MeditationObject.Title = updateGoalDto.MeditationObject;
+                    existingGoal.MeditationObject = _mapper.Map<ObservableObject>(updateGoalDto.MeditationObject);
                 }
 
                 // Save changes to the database

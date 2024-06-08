@@ -60,8 +60,10 @@ namespace backend.Mappings
                 .ForMember(dest => dest.MeditationObject, opt => opt.MapFrom(
                     (src, dest, destMember, context) => context.Mapper.Map<ObservableObject>(src.MeditationObject))
                 )
-                ;
+            ;
 
+            CreateMap<Goal, UpdateGoalDTO>();
+            CreateMap<UpdateGoalDTO, Goal>();
 
         }
     }

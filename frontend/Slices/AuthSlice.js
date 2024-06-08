@@ -9,6 +9,19 @@ const initialState = {
     user: null,
 }
 
+export const loginWithGoogle = createAsyncThunk("Auth/loginWithGoogle", async (arg, ThunkAPi) => {
+    try {
+        const response = await axios.post("http://localhost:5158/api/Auth/google", arg);
+        if (response.status === 200) {
+            console.log("registered successfully!")
+            return response.data;
+        }
+    } catch (error) {
+        console.log("Error occured! oops...")
+        return ThunkAPi.rejectWithValue(error.response.data);
+    }
+});
+
 export const register = createAsyncThunk("Auth/register", async (arg, ThunkAPi) => {
     try {
         const response = await axios.post("http://localhost:5158/api/Auth/register", arg);

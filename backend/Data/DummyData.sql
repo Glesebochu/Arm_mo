@@ -4,7 +4,14 @@ USE Arm_moEF3;
 INSERT INTO Stages (Goal) VALUES
 ('Develop a consistent daily meditation practice.'),
 ('Shorten the periods of mind-wandering and extend the periods of sustained attention to the meditation object'),
-('Overcome gross distraction and strong dullness.');
+('Overcome gross distraction and strong dullness.'),
+('Increase the clarity and vividness of the meditation object.'),
+('Sustain attention on the whole body with increased vividness and stability.'),
+('Fully engage with the meditation object and maintain consistent mindfulness.'),
+('Effortlessly overcome gross distractions and maintain a unified mind.'),
+('Achieve effortless, continuous attention with a sense of joy and contentment.'),
+('Develop mental pliancy and complete unification of mind and body.'),
+('Attain deep tranquility and equanimity, free from mental and physical discomfort.');
 
 -- Insert dummy data into Meditator
 INSERT INTO Meditators (CurrentStageId, Username, FirstName, LastName, _password, Email) VALUES
@@ -317,6 +324,7 @@ INSERT INTO PracticedStage (SessionId, StageId, MeditatorId) VALUES
 (@SessionId7, 2, @MeditatorId1),
 (@SessionId8, 2, @MeditatorId1),
 (@SessionId8, 3, @MeditatorId1),
+(@SessionId8, 4, @MeditatorId1),
 (@SessionId9, 1, @MeditatorId1),
 (@SessionId9, 3, @MeditatorId1),
 (@SessionId10, 1, @MeditatorId1),
@@ -324,13 +332,15 @@ INSERT INTO PracticedStage (SessionId, StageId, MeditatorId) VALUES
 (@SessionId11, 2, @MeditatorId1),
 (@SessionId11, 3, @MeditatorId1),
 (@SessionId12, 1, @MeditatorId1),
-(@SessionId12, 3, @MeditatorId1);
+(@SessionId12, 3, @MeditatorId1),
+(@SessionId12, 4, @MeditatorId1);
 
 -- Insert unique NewlyMasteredStages ensuring no duplicate mastery within a session and in ascending order
 INSERT INTO NewlyMasteredStage (SessionId, StageId) VALUES
 (@SessionId1, 1),  -- Session 1: Mastering Stage 1
 (@SessionId2, 2),  -- Session 2: Mastering Stage 2
-(@SessionId5, 3);  -- Session 5: Mastering Stage 3
+(@SessionId5, 3),  -- Session 5: Mastering Stage 3
+(@SessionId12, 4);  -- Session 12: Mastering Stage 4
 
 -- Insert varied AhaMoments into different sessions to create the desired trend
 INSERT INTO AhaMoments (SessionId, Label) VALUES

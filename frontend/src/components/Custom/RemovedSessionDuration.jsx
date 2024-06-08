@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import "@/Styles/LongestSession.css";
 
-export default function LongestSession({ onSessionClick }) {
+export default function SessionDuration({ sessionId }) {
   const [duration, setDuration] = useState("");
-  const [sessionId, setSessionId] = useState(null);
 
   useEffect(() => {
-    const fetchLongestSession = async () => {
+    const fetchSessionDuration = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5158/api/analyzer/GetLongestSessionForMeditator",
-          { params: { meditatorId: 1 } }
+          `http://localhost:5158/api/Analyzer/GetRemovedSession?SessionId=${sessionId}`
         );
 
         if (response.status === 200 && response.data) {
-          const { id, startDateTime, endDateTime } = response.data;
+          const { startDateTime, endDateTime } = response.data;
           const start = new Date(startDateTime);
           const end = new Date(endDateTime);
           const durationMs = end - start;
@@ -24,24 +23,17 @@ export default function LongestSession({ onSessionClick }) {
           );
 
           setDuration(`${durationHours}h ${durationMinutes}m`);
-          setSessionId(id);
         }
       } catch (error) {
         console.error("Failed to fetch data:", error);
       }
     };
 
-    fetchLongestSession();
-  }, []);
-
-  const handleSessionClick = () => {
-    if (sessionId) {
-      onSessionClick(sessionId);
-    }
-  };
+    fetchSessionDuration();
+  }, [sessionId]);
 
   return (
-    <div className="circle-container" onClick={handleSessionClick}>
+    <div className="circle-container">
       <div className="circle">
         <div className="circle-content">
           <div id="loader">
@@ -53,7 +45,7 @@ export default function LongestSession({ onSessionClick }) {
               <p id="time">{duration}</p>
             </div>
           </div>
-          <p className="text">Your Longest Session</p>
+          <p className="text">Session Length</p>
         </div>
       </div>
     </div>

@@ -32,7 +32,6 @@ namespace backend.Mappings
             CreateMap<ObservableObject, MeditationObjectDTO>();
             CreateMap<MeditationObjectDTO, ObservableObject>()
                 .ForMember(dest => dest.ProximityToMO, opt => opt.MapFrom(src => Proximity.MeditationObject)) // Set default value for ProximityToMO
-                .ForMember(dest => dest.Intensity, opt => opt.MapFrom(src => IntensityType.Intense)) // Set default value for Intensity
             // .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title))
             // .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
             // .ForMember(dest => dest.SubType, opt => opt.MapFrom(src => src.SubType))
@@ -52,21 +51,19 @@ namespace backend.Mappings
             // .ForMember(dest => dest.Status, opt => opt.MapFrom(src => Enum.Parse(typeof(GoalStatus), src.Status)))
             ;
 
-            CreateMap<Goal, CreateGoalDTO>()
-                .ForMember(dest => dest.Activity, opt => opt.MapFrom(src => src.Activity.Title))
-                .ForMember(dest => dest.MeditationObject, opt => opt.MapFrom(src => src.MeditationObject));
+            CreateMap<Goal, CreateGoalDTO>();
             CreateMap<CreateGoalDTO, Goal>()
                 .ConstructUsing(dto => new Goal()) // Ensure the default constructor is used
-                .ForMember(dest => dest.Activity, opt => opt.MapFrom(src =>
-                    new Activity
-                    {
-                        Title = src.Activity
-                    }))
+                .ForMember(dest => dest.Activity, opt => opt.MapFrom(
+                    (src, dest, destMember, context) => context.Mapper.Map<Activity>(src.Activity))
+                )
                 .ForMember(dest => dest.MeditationObject, opt => opt.MapFrom(
                     (src, dest, destMember, context) => context.Mapper.Map<ObservableObject>(src.MeditationObject))
                 )
-                ;
+            ;
 
+            CreateMap<Goal, UpdateGoalDTO>();
+            CreateMap<UpdateGoalDTO, Goal>();
 
         }
     }

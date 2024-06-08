@@ -43,7 +43,7 @@ namespace backend.Data
 
             modelBuilder.Entity<NewlyMasteredStage>()
                 .HasOne(nms => nms.Stage) // Assuming a navigation property named Stage
-                .WithMany() // Adjust based on your model
+                .WithMany() 
                 .HasForeignKey(nms => nms.StageId)
                 .OnDelete(DeleteBehavior.NoAction); // Prevent cascading delete
 

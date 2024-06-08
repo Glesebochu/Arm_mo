@@ -16,7 +16,7 @@ namespace backend.DTOs.Goal
         public MeditationObjectDTO MeditationObject { get; set; }
         public DateOnly DueDate { get; set; }
         public DateOnly? CompletedDate { get; set; }
-        public GoalDTO? ParentGoal { get; set; }
+        public int? ParentGoalId { get; set; }
         public List<GoalDTO>? ChildGoals { get; set; }
         public string GetTitle() => $"{Activity} {MeditationObject}";
     }

@@ -27,10 +27,10 @@ namespace backend.Controllers
 
         [EnableCors]
         [HttpGet]
-        [Route("/api/Analyzer/GetSessionUsageCustom")]
+        [Route("GetSessionUsageCustom")]
         public async Task<ActionResult<IEnumerable<object>>> GetSessionUsageCustom(/*int userId,*/DateTime customDate)//uncomment the parameter after testing.
         {
-            
+
             var currentDate = customDate != default ? customDate : DateTime.Now;
 
             var pastWeekDates = Enumerable.Range(0, 7)
@@ -51,9 +51,9 @@ namespace backend.Controllers
                     .ToListAsync();
                 var startTime = sessionStart.DefaultIfEmpty(0).Sum();
 
-             
-                sessionLength.Add(Endtime-startTime);
-                
+
+                sessionLength.Add(Endtime - startTime);
+
             }
 
             return sessionLength;
@@ -61,7 +61,7 @@ namespace backend.Controllers
 
         [EnableCors]
         [HttpGet]
-        [Route("/api/Analyzer/GetUsageDataForPastWeek")]
+        [Route("GetUsageDataForPastWeek")]
         public async Task<ActionResult<IEnumerable<object>>> GetUsageDataForPastWeek(/*int userId*/)//uncomment the parameter after testing.
         {
             var currentDate = DateTime.Today;
@@ -92,7 +92,7 @@ namespace backend.Controllers
         }
 
         [HttpGet]
-        [Route("/api/Analyzer/GetUsageDataCustom")]
+        [Route("GetUsageDataCustom")]
         public async Task<ActionResult<IEnumerable<object>>> GetUsageDataCustom(string startDate/*,int userId*/)//uncomment the parameter after testing.
         {
             var currentDate = DateTime.Parse(startDate);
@@ -123,7 +123,7 @@ namespace backend.Controllers
         }
 
         [HttpPost]
-        [Route("/api/Analyzer/StartUsage")]
+        [Route("StartUsage")]
         public async Task<IActionResult> StartUsage(/*int userId*/)//uncomment the parameter after testing.
         {
             var userUsage = new UserUsage
@@ -141,7 +141,7 @@ namespace backend.Controllers
         }
 
         [HttpPost]
-        [Route("/api/Analyzer/EndUsage")]
+        [Route("EndUsage")]
         public async Task<IActionResult> EndUsage(/*int userId*/)//uncomment the parameter after testing.
         {
             var userUsage = await dbContext.UserUsage
@@ -156,20 +156,7 @@ namespace backend.Controllers
             return Ok();
         }
 
-        [HttpGet("/api/Analyzer/GetUserUsageFinhas")]
-        public async Task<IActionResult> GetUserUsage(int userId)
-        {
-            var userUsage = await dbContext.UserUsage
-                .Where(u => u.UserId == userId)
-                .ToListAsync();
-
-            if (userUsage == null || userUsage.Count == 0)
-                return NotFound("No usage data found for the specified user.");
-
-            return Ok(userUsage);
-        }
-
-        [HttpGet("/api/Analyzer/GetSession")]
+        [HttpGet("GetSession")]
         public async Task<IActionResult> GetSession(int SessionId)
         {
             var session = await dbContext.Sessions
@@ -179,6 +166,39 @@ namespace backend.Controllers
                 .Include(s => s.AhaMoments)
                 .Include(s => s.ObservableObjects)
                 .Include(s => s.PreparationPhase)
+                    .ThenInclude(p => p.Goals)
+                        .ThenInclude(g => g.Activity)
+                .Include(s => s.PreparationPhase)
+                    .ThenInclude(p => p.Goals)
+                        .ThenInclude(g => g.MeditationObject)
+                .Include(s => s.PreparationPhase)
+                    .ThenInclude(p => p.Goals)
+                        .ThenInclude(g => g.ParentGoal)
+                .FirstOrDefaultAsync();
+
+            if (session == null)
+                return NotFound("No usage data found for the specified user.");
+
+            return Ok(session);
+        }
+        [HttpGet("GetRemovedSession")]
+        public async Task<IActionResult> GetRemovedSession(int SessionId)
+        {
+            var session = await dbContext.Sessions
+                .Where(u => u.Id == SessionId && u.IsDeleted)
+                .Include(s => s.PracticedStages)
+                .Include(s => s.NewlyMasterdStages)
+                .Include(s => s.AhaMoments)
+                .Include(s => s.ObservableObjects)
+                .Include(s => s.PreparationPhase)
+                    .ThenInclude(p => p.Goals)
+                        .ThenInclude(g => g.Activity)
+                .Include(s => s.PreparationPhase)
+                    .ThenInclude(p => p.Goals)
+                        .ThenInclude(g => g.MeditationObject)
+                .Include(s => s.PreparationPhase)
+                    .ThenInclude(p => p.Goals)
+                        .ThenInclude(g => g.ParentGoal)
                 .FirstOrDefaultAsync();
 
             if (session == null)
@@ -187,7 +207,7 @@ namespace backend.Controllers
             return Ok(session);
         }
 
-        [HttpGet("/api/Analyzer/GetSessionsForMeditator")]
+        [HttpGet("GetSessionsForMeditator")]
         public async Task<IActionResult> GetSessionsForMeditator(int meditatorId)
         {
             var sessions = await dbContext.Sessions
@@ -196,6 +216,13 @@ namespace backend.Controllers
                 .Include(s => s.NewlyMasterdStages)
                 .Include(s => s.AhaMoments)
                 .Include(s => s.ObservableObjects)
+                .Include(s => s.PreparationPhase)
+                    .ThenInclude(p => p.Goals)
+                        .ThenInclude(g => g.ParentGoal)
+                            .ThenInclude(pa => pa.Activity)
+                .Include(s => s.PreparationPhase)
+                    .ThenInclude(p => p.Goals)
+                        .ThenInclude(g => g.Activity)
                 .ToListAsync();
 
             if (!sessions.Any())
@@ -204,7 +231,7 @@ namespace backend.Controllers
             return Ok(sessions);
         }
 
-        [HttpGet("/api/Analyzer/GetStage")]
+        [HttpGet("GetStage")]
         public async Task<IActionResult> GetStage(int stageId)
         {
             var stage = await dbContext.Stages
@@ -223,7 +250,7 @@ namespace backend.Controllers
             return Ok(stage);
         }
 
-        [HttpGet("/api/Analyzer/GetCountOfObservableObjectForMeditator")]
+        [HttpGet("GetCountOfObservableObjectForMeditator")]
         public async Task<IActionResult> GetCountOfObservableObjectForMeditator(string observableObject, int meditatorId)
         {
             var count = await dbContext.Sessions
@@ -234,7 +261,7 @@ namespace backend.Controllers
             return Ok(count);
         }
 
-        [HttpGet("/api/Analyzer/GetCountOfAhaMomentForMeditator")]
+        [HttpGet("GetCountOfAhaMomentForMeditator")]
         public async Task<IActionResult> GetCountOfAhaMomentForMeditator(string ahaMoment, int meditatorId)
         {
             var count = await dbContext.Sessions
@@ -245,7 +272,7 @@ namespace backend.Controllers
             return Ok(count);
         }
 
-        [HttpGet("/api/Analyzer/GetMeditatorForSession")]
+        [HttpGet("GetMeditatorForSession")]
         public async Task<IActionResult> GetMeditatorForSession(int sessionId)
         {
             var id = await dbContext.Sessions
@@ -254,8 +281,17 @@ namespace backend.Controllers
                 .FirstOrDefaultAsync();
             return Ok(id);
         }
+        [HttpGet("GetMeditatorForRemovedSession")]
+        public async Task<IActionResult> GetMeditatorForRemovedSession(int sessionId)
+        {
+            var id = await dbContext.Sessions
+                .Where(u => u.Id == sessionId && u.IsDeleted)
+                .Select(s => s.Meditator.Id)
+                .FirstOrDefaultAsync();
+            return Ok(id);
+        }
 
-        [HttpGet("/api/analyzer/GetPracticedStagesForMeditator")]
+        [HttpGet("GetPracticedStagesForMeditator")]
         public async Task<IActionResult> GetPracticedStagesForMeditator(int meditatorId)
         {
             var meditator = await dbContext.Meditators
@@ -283,7 +319,7 @@ namespace backend.Controllers
         }
 
 
-        [HttpGet("/api/analyzer/GetCurrentStageOfMeditator")]
+        [HttpGet("GetCurrentStageOfMeditator")]
         public async Task<IActionResult> GetCurrentStageOfMeditator([FromQuery] int meditatorId)
         {
             if (meditatorId <= 0)
@@ -304,7 +340,7 @@ namespace backend.Controllers
             return Ok(meditator.CurrentStage);
         }
 
-        [HttpGet("/api/analyzer/GetLongestSessionForMeditator")]
+        [HttpGet("GetLongestSessionForMeditator")]
         public async Task<IActionResult> GetLongestSessionForMeditator([FromQuery] int meditatorId)
         {
             if (meditatorId <= 0)
@@ -337,7 +373,7 @@ namespace backend.Controllers
             return Ok(sessionWithLongestDuration);
         }
 
-        [HttpGet("/api/analyzer/GetTypeForAnObservableObject")]
+        [HttpGet("GetTypeForAnObservableObject")]
         public async Task<IActionResult> GetTypeForAnObservableObject(int observableObjectId)
         {
             var observableObject = await dbContext.ObservableObjects
@@ -356,7 +392,7 @@ namespace backend.Controllers
             }
         }
 
-        [HttpDelete("/api/Analyzer/DeleteSession")]
+        [HttpDelete("DeleteSession")]
         public async Task<IActionResult> DeleteSession(int sessionId)
         {
             var sessionToDelete = await dbContext.Sessions
@@ -374,7 +410,34 @@ namespace backend.Controllers
                 return Ok("Deleted Session with Id: " + sessionToDelete.Id);
             }
         }
-        [HttpPost("/api/Analyzer/RestoreSession")]
+        [HttpGet("GetRemovedSessionsForMeditator")]
+        public async Task<IActionResult> GetRemovedSessionsForMeditator(int meditatorId)
+        {
+            var sessions = await dbContext.Sessions
+                .Where(s => s.Meditator.Id == meditatorId && s.IsDeleted == true)
+                .Include(s => s.PracticedStages)
+                .Include(s => s.NewlyMasterdStages)
+                .Include(s => s.AhaMoments)
+                .Include(s => s.ObservableObjects)
+                .Include(s => s.PreparationPhase)
+                    .ThenInclude(p => p.Goals)
+                        .ThenInclude(g => g.ParentGoal)
+                            .ThenInclude(pa => pa.Activity)
+                .Include(s => s.PreparationPhase)
+                    .ThenInclude(p => p.Goals)
+                        .ThenInclude(g => g.Activity)
+                .ToListAsync();
+            if (sessions != null)
+            {
+                return Ok(sessions);
+            }
+            else
+            {
+                return NotFound("No Deleted Sessions for meditator: " + meditatorId);
+            }
+        }
+
+        [HttpPost("RestoreSession")]
         public async Task<IActionResult> RestoreSession(int sessionId)
         {
             var sessionToDelete = await dbContext.Sessions
@@ -392,5 +455,66 @@ namespace backend.Controllers
                 return Ok("Restored Session with Id: " + sessionToDelete.Id);
             }
         }
+        [HttpGet("GetMostFrequentedActivity")]
+        public async Task<IActionResult> GetMostFrequentedActivity(int meditatorId)
+        {
+            if (dbContext == null)
+            {
+                return StatusCode(500, "Database context is not initialized.");
+            }
+
+            try
+            {
+                // Step 1: Filter sessions for the meditator
+                var sessions = await dbContext.Sessions
+                    .Where(u => u.Meditator.Id == meditatorId && !u.IsDeleted)
+                    .Include(s => s.PreparationPhase)
+                        .ThenInclude(pp => pp.Goals)
+                            .ThenInclude(g => g.Activity)
+                    .ToListAsync();
+
+                if (!sessions.Any())
+                {
+                    return NotFound("No sessions found for the specified meditator.");
+                }
+
+                // Step 2: Extract activities from goals in preparation phases
+                var activities = sessions
+                    .SelectMany(s => s.PreparationPhase.Goals)
+                    .Select(g => g.Activity)
+                    .Where(a => a != null) // Ensure we only take non-null activities
+                    .ToList();
+
+                if (!activities.Any())
+                {
+                    return NotFound("No activities found for the specified meditator.");
+                }
+
+                // Step 3: Group by activity title and count occurrences
+                var mostFrequentedActivity = activities
+                    .GroupBy(a => a.Title)
+                    .OrderByDescending(g => g.Count())
+                    .Select(g => new
+                    {
+                        Activity = g.Key,
+                        Count = g.Count()
+                    })
+                    .FirstOrDefault();
+
+                if (mostFrequentedActivity == null)
+                {
+                    return NotFound("No frequent activity found.");
+                }
+
+                // Step 4: Return the most frequented activity
+                return Ok(mostFrequentedActivity);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+
     }
 }

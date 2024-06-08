@@ -3,10 +3,10 @@ import axios from "axios";
 import ObservableObjectCard from "@/components/Custom/ObservableObjectCard";
 import AhaMomentCard from "@/components/Custom/AhaMomentCard";
 import StageCard from "@/components/Custom/PracticedStageCard"; // Import the StageCard component
-import SessionDuration from "@/components/Custom/SessionDuration"; // Import the new SessionDuration component
+import RemovedSessionDuration from "@/components/Custom/RemovedSessionDuration"; // Import the new SessionDuration component
 import "@/Styles/SessionDetails.css"; // Make sure to import the CSS file
 
-function SessionDetails({ sessionId }) {
+function RemovedSessionDetails({ sessionId }) {
   const [sessionData, setSessionData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -24,14 +24,15 @@ function SessionDetails({ sessionId }) {
 
         // Fetch session data
         const sessionResponse = await axios.get(
-          `http://localhost:5158/api/Analyzer/GetSession?SessionId=${sessionId}`
+          `http://localhost:5158/api/Analyzer/GetRemovedSession?SessionId=${sessionId}`
         );
         const sessionData = sessionResponse.data;
+        console.log(sessionData);
         setSessionData(sessionData);
 
         // Fetch the meditator ID for this session
         const meditatorResponse = await axios.get(
-          `http://localhost:5158/api/Analyzer/GetMeditatorForSession?sessionId=${sessionId}`
+          `http://localhost:5158/api/Analyzer/GetMeditatorForRemovedSession?sessionId=${sessionId}`
         );
         const meditatorId = meditatorResponse.data;
 
@@ -145,18 +146,20 @@ function SessionDetails({ sessionId }) {
 
   return (
     <div className="session-details-container">
-      <h1 className="mb-4 text-2xl font-semibold leading-none tracking-tight text-black  lg:text-5xl dark:text-white">
+      <h1 className="mb-4 text-2xl font-semibold leading-none tracking-tight text-black md:text-6xl lg:text-5xl dark:text-white">
         {sessionTitle}
       </h1>
       <div className="text-center mb-8">
-        <SessionDuration sessionId={sessionId} />
+        <RemovedSessionDuration sessionId={sessionId} />
       </div>
       <div className="card-container">
         <div className="card">
           <h2 className="mb-4 text-xl font-light leading-none tracking-tight text-black md:text-4xl lg:text-3xl dark:text-white">
             Observable Objects
           </h2>
-          <h3 className="section-title text-lg font-light">Sensory Stimulus</h3>
+          <h3 className="section-title text-lg font-light">
+            Sensory Stimulus{" "}
+          </h3>
           <div className="cards-container">
             {observableObjectsByType.SensoryStimulus.length > 0 ? (
               observableObjectsByType.SensoryStimulus.map((object) => (
@@ -178,7 +181,7 @@ function SessionDetails({ sessionId }) {
               observableObjectsByType.MentalObject.map((object) => (
                 <ObservableObjectCard
                   key={object.id}
-                  deletedSession={false}
+                  deletedSession={true}
                   object={object.title}
                   description={object.description}
                   count={counts[object.title] || 0} // Use the fetched count data here
@@ -198,6 +201,7 @@ function SessionDetails({ sessionId }) {
               sessionData.ahaMoments.map((moment) => (
                 <AhaMomentCard
                   key={moment.id}
+                  deletedSession={true}
                   label={moment.label}
                   count={ahaCounts[moment.label] || 0} // Use the fetched count data here
                 />
@@ -226,4 +230,4 @@ function SessionDetails({ sessionId }) {
   );
 }
 
-export default SessionDetails;
+export default RemovedSessionDetails;

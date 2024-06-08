@@ -1,0 +1,54 @@
+:root {
+  --animation-duration: 5s;
+}
+
+.start-circle-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+.start-circle {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: #ffffff; /* White background for the circle */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 2s ease-in-out;
+  transform: scale(1);
+  border: 2px solid #2564eb00;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2), 0 10px 20px rgba(0, 0, 0, 0.2),
+    0 2px 3px rgba(0, 0, 0, 0.2), 0 30px 40px rgba(0, 0, 0, 0.2);
+  animation: start-breathe var(--animation-duration) ease-in-out infinite;
+}
+
+.start-circle:hover {
+  transform: scale(1.01);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3), 0 10px 20px rgba(0, 0, 0, 0.3),
+    0 5px 10px rgba(0, 0, 0, 0.3), 0 30px 40px rgba(0, 0, 0, 0.3);
+}
+
+.start-circle-content {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.start-text {
+  font-size: 30px;
+  margin: 0;
+  font-weight: 600;
+}
+
+@keyframes start-breathe {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+}

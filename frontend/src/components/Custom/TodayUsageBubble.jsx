@@ -12,10 +12,10 @@ export default function TodayUsageBubble() {
               <div id="hill"></div>
             </div>
             <div className="timeContainer">
-              <p id="time">1h 35m</p>
+              <p id="timeBubble">1h 35m</p>
             </div>
           </div>
-          <p className="text">Today's Activity</p>
+          <p className="textBubble">Today's Activity</p>
         </div>
       </div>
     </div>

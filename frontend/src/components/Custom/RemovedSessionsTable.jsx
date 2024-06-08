@@ -10,7 +10,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react";
-import { Button } from "../../components/ui/button";
+import { Button } from "../ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ResponsiveContainer } from "recharts";
 import {
@@ -21,8 +21,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "../../components/ui/dropdown-menu";
-import { Input } from "../../components/ui/input";
+} from "../ui/dropdown-menu";
+import { Input } from "../ui/input";
 import {
   Table,
   TableBody,
@@ -30,8 +30,9 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "../../components/ui/table";
+} from "../ui/table";
 import "@/Styles/CustomStyles.css";
+import RestoreSessionPrompt from "./RestoreSessionPrompt";
 
 function customFilterFn(rows, columnIds, filterValue) {
   return rows.filter((row) => {
@@ -40,60 +41,60 @@ function customFilterFn(rows, columnIds, filterValue) {
   });
 }
 
-export function DataTable({ onSessionClick }) {
+export function RemovedSessions({ onSessionClick }) {
   const [sorting, setSorting] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
   const [columnVisibility, setColumnVisibility] = useState({});
   const [rowSelection, setRowSelection] = useState({});
   const [swaggerData, setSwaggerData] = useState([]);
-  const [deleteSessionId, setDeleteSessionId] = useState(null); // new state
-  const [showDeletePrompt, setShowDeletePrompt] = useState(false); // new state
+  const [restoreSessionId, setRestoreSessionId] = useState(null); // new state
+  const [showRestorePrompt, setShowRestorePrompt] = useState(false); // new state
   const navigate = useNavigate();
 
   const handleFilterChange = (value) => {
     setColumnFilters([{ id: "meditationObject", value }]);
   };
 
-  const handleDeleteSessionClick = (sessionId) => {
-    setDeleteSessionId(sessionId);
-    setShowDeletePrompt(true);
+  const handleRestoreSessionClick = (sessionIds) => {
+    setRestoreSessionId(sessionIds);
+    setShowRestorePrompt(true);
   };
 
-  const handleDeleteSession = async (sessionIds) => {
+  const handleRestoreSession = async (sessionIds) => {
     try {
       if (Array.isArray(sessionIds)) {
         await Promise.all(
           sessionIds.map(async (sessionId) => {
-            await axios.delete(
-              `http://localhost:5158/api/Analyzer/DeleteSession?sessionId=${sessionId}`
+            await axios.post(
+              `http://localhost:5158/api/Analyzer/RestoreSession?sessionId=${sessionId}`
             );
           })
         );
       } else {
-        await axios.delete(
-          `http://localhost:5158/api/Analyzer/DeleteSession?sessionId=${sessionIds}`
+        await axios.post(
+          `http://localhost:5158/api/Analyzer/RestoreSession?sessionId=${sessionIds}`
         );
       }
       setSwaggerData((prevData) =>
         prevData.filter((session) => !sessionIds.includes(session.id))
       );
-      setShowDeletePrompt(false);
-      window.location.reload(); // Refresh the screen after deleting
+      setShowRestorePrompt(false);
+      window.location.reload(); // Refresh the screen after restoring
     } catch (error) {
-      console.error("Failed to delete session:", error);
+      console.error("Failed to restore session:", error);
     }
   };
 
-  const handleCancelDelete = () => {
-    setShowDeletePrompt(false);
-    setDeleteSessionId(null);
+  const handleCancelRestore = () => {
+    setShowRestorePrompt(false);
+    setRestoreSessionId(null);
   };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5158/api/Analyzer/GetSessionsForMeditator?meditatorId=1"
+          "http://localhost:5158/api/Analyzer/GetRemovedSessionsForMeditator?meditatorId=1"
         );
         if (response.status === 200) {
           const transformedData = response.data.map((session) => ({
@@ -124,7 +125,8 @@ export function DataTable({ onSessionClick }) {
                 : "undefined",
             meditationObject:
               session.preparationPhase?.goals[0]?.parentGoal &&
-              session.preparationPhase?.goals[0]?.parentGoal.meditationObject?.title
+              session.preparationPhase?.goals[0]?.parentGoal.meditationObject
+                ?.title
                 ? `${session.preparationPhase.goals[0].parentGoal.meditationObject.title} `
                 : session.preparationPhase?.goals[0]?.meditationObject?.title
                 ? `${session.preparationPhase.goals[0].meditationObject.title} `
@@ -232,7 +234,7 @@ export function DataTable({ onSessionClick }) {
       id: "actions",
       enableHiding: false,
       cell: ({ row }) => {
-        const selectedSession = row.original;
+        const sessionId = row.original;
         return (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -246,10 +248,10 @@ export function DataTable({ onSessionClick }) {
               <DropdownMenuItem
                 onClick={(e) => {
                   e.stopPropagation(); // Prevent row click event
-                  handleDeleteSessionClick(selectedSession.id);
+                  handleRestoreSessionClick(sessionId.id);
                 }}
               >
-                Remove Session
+                Restore Session
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem>View Session</DropdownMenuItem>
@@ -422,10 +424,10 @@ export function DataTable({ onSessionClick }) {
                   const selectedRows = table
                     .getFilteredSelectedRowModel()
                     .rows.map((row) => row.original.id);
-                  handleDeleteSessionClick(selectedRows);
+                  handleRestoreSessionClick(selectedRows);
                 }}
               >
-                Remove
+                Restore
               </Button>
             )}
             <Button
@@ -447,31 +449,31 @@ export function DataTable({ onSessionClick }) {
           </div>
         </div>
       </div>
-      {showDeletePrompt && (
+      {showRestorePrompt && (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50">
           <div
             className={`bg-white p-6 rounded-lg shadow-lg transition-transform duration-500 transform ${
-              showDeletePrompt ? "scale-100 opacity-100" : "scale-0 opacity-0"
+              showRestorePrompt ? "scale-100 opacity-100" : "scale-0 opacity-0"
             }`}
           >
-            <h2 className="text-xl font-bold mb-4">Confirm Remove</h2>
+            <h2 className="text-xl font-bold mb-4">Confirm Restore</h2>
             <p className="mb-6">
-              {Array.isArray(deleteSessionId) && deleteSessionId.length > 1
-                ? "Are you sure you want to remove these sessions?"
-                : "Are you sure you want to remove this session?"}
+              {Array.isArray(restoreSessionId) && restoreSessionId.length > 1
+                ? "Are you sure you want to restore these sessions?"
+                : "Are you sure you want to restore this session?"}
             </p>
             <div className="flex justify-end">
               <button
-                onClick={handleCancelDelete}
-                className="bg-gray-300 text-gray-700 px-4 py-2 rounded mr-2 hover:bg-grey-900"
+                onClick={handleCancelRestore}
+                className="bg-gray-300 text-gray-700 px-4 py-2 rounded mr-2 hover:bg-grey-600"
               >
                 Cancel
               </button>
               <button
-                onClick={() => handleDeleteSession(deleteSessionId)}
-                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
+                onClick={() => handleRestoreSession(restoreSessionId)}
+                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500"
               >
-                Remove
+                Restore
               </button>
             </div>
           </div>

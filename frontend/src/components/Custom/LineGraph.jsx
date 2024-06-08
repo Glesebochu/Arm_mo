@@ -218,11 +218,11 @@ export const LineGraph = () => {
   return (
     <ResponsiveContainer>
       <div className="container">
-        <h1 className="mb-4 text-center text-1xl font-light leading-none tracking-tight text-black md:text-5xl lg:text-4xl dark:text-white">
+        <h1 className="mb-3 text-2xl font-semibold leading-none tracking-tight text-black md:text-6xl lg:text-5xl dark:text-white">
           Sessions Analysis
         </h1>
         <div className="chart-container relative w-full h-[500px] mx-auto px-0">
-          <p className="absolute top-9 left-16 m-0 text-sm font-bold text-gray-500">
+          <p className="absolute top-0 left-16 m-0 text-sm font-bold text-gray-500">
             Average Aha Moments: {averageAhaMoments}
           </p>
           <Line options={options} data={chartData} />

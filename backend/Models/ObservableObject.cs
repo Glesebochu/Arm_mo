@@ -25,18 +25,18 @@ namespace backend.Models
         Moderate,
         Intense
     }
-    public enum FeelingTone
-    {
-        Pleasant,
-        Unpleasant,
-        Neutral
-    }
     public enum Proximity
     {
         Unrelated,
         SameSubType,
         DirectlyRelated,
         MeditationObject
+    }
+    public enum FeelingTone
+    {
+        Pleasant,
+        Unpleasant,
+        Neutral
     }
     public class ObservableObject
     {

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-export default function LongestSession() {
+export default function LongestSession({ onSessionClick }) {
   const [duration, setDuration] = useState("");
+  const [sessionId, setSessionId] = useState(null);
 
   useEffect(() => {
     const fetchLongestSession = async () => {
@@ -13,7 +14,7 @@ export default function LongestSession() {
         );
 
         if (response.status === 200 && response.data) {
-          const { startDateTime, endDateTime } = response.data;
+          const { id, startDateTime, endDateTime } = response.data;
           const start = new Date(startDateTime);
           const end = new Date(endDateTime);
           const durationMs = end - start;
@@ -23,6 +24,7 @@ export default function LongestSession() {
           );
 
           setDuration(`${durationHours}h ${durationMinutes}m`);
+          setSessionId(id);
         }
       } catch (error) {
         console.error("Failed to fetch data:", error);
@@ -32,8 +34,14 @@ export default function LongestSession() {
     fetchLongestSession();
   }, []);
 
+  const handleSessionClick = () => {
+    if (sessionId) {
+      onSessionClick(sessionId);
+    }
+  };
+
   return (
-    <div className="circle-container">
+    <div className="circle-container" onClick={handleSessionClick}>
       <div className="circle">
         <div className="circle-content">
           <div id="loader">

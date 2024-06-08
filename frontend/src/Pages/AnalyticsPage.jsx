@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import UsageView from "@/pages/Usage.jsx";
 import { DataTable } from "@/components/Custom/SessionTable.jsx";
 import { NavigationBar } from "@/components/Custom/AnalyticsNavigation.jsx";
@@ -17,9 +17,17 @@ const SessionSummary = () => {
     setSelectedSessionId(sessionId);
     setSelectedView("SessionDetails");
   };
+
   const handleRemovedSessionClick = (sessionId) => {
     setSelectedSessionId(sessionId);
     setSelectedView("RemovedSessionDetails");
+  };
+
+  const handleViewChange = (view) => {
+    setSelectedView(view);
+    if (view === "Insights") {
+      setSelectedSessionId(null); // Reset the session ID when navigating to Insights
+    }
   };
 
   const renderSelectedView = () => {
@@ -28,7 +36,7 @@ const SessionSummary = () => {
     } else if (selectedView === "Insights") {
       return (
         <ResponsiveContainer>
-          <Insights />
+          <Insights onSessionClick={handleSessionClick} />
         </ResponsiveContainer>
       );
     } else if (selectedView === "SessionDetails" && selectedSessionId) {
@@ -51,7 +59,7 @@ const SessionSummary = () => {
 
   return (
     <div className="flex flex-col items-center justify-center space-y-8 min-h-screen">
-      <NavigationBar setSelectedView={setSelectedView} />
+      <NavigationBar setSelectedView={handleViewChange} />
       {renderSelectedView()}
     </div>
   );

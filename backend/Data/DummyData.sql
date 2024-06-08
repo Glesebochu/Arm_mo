@@ -102,7 +102,7 @@ INSERT INTO Sessions (MeditatorId, StartDateTime, EndDateTime, PreparationPhaseI
 (@MeditatorId1, '2024-06-06T10:00:00', '2024-06-06T11:15:00', @PreparationPhaseId2),
 (@MeditatorId1, '2024-06-07T07:30:00', '2024-06-07T08:10:00', @PreparationPhaseId3),
 (@MeditatorId1, '2024-06-08T06:45:00', '2024-06-08T08:00:00', @PreparationPhaseId4),
-(@MeditatorId1, '2024-06-09T07:00:00', '2024-06-09T08:30:00', @PreparationPhaseId5),
+(@MeditatorId1, '2024-06-09T07:00:00', '2024-06-09T08:32:00', @PreparationPhaseId5),
 (@MeditatorId1, '2024-06-09T09:00:00', '2024-06-09T09:45:00', @PreparationPhaseId6),
 (@MeditatorId1, '2024-06-10T07:45:00', '2024-06-10T08:45:00', @PreparationPhaseId7),
 (@MeditatorId1, '2024-06-11T06:30:00', '2024-06-11T07:30:00', @PreparationPhaseId8),

@@ -31,6 +31,10 @@ export function NavigationBar({ setSelectedView }) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleInsightsClick = () => {
+    setSelectedView("Insights");
+  };
+
   return (
     <ResponsiveContainer>
       <NavigationMenu
@@ -63,10 +67,7 @@ export function NavigationBar({ setSelectedView }) {
                   View a comprehensive summary of the sessions you had recently
                   in a tabular format.
                 </ListItem>
-                <ListItem
-                  title="Insights"
-                  onClick={() => setSelectedView("Insights")}
-                >
+                <ListItem title="Insights" onClick={handleInsightsClick}>
                   Peek into your Meditation status.
                 </ListItem>
                 <ListItem
@@ -104,7 +105,7 @@ export function NavigationBar({ setSelectedView }) {
           <NavigationMenuItem>
             <NavigationMenuLink
               className={navigationMenuTriggerStyle()}
-              onClick={() => setSelectedView("Insights")}
+              onClick={handleInsightsClick}
             >
               Insights
             </NavigationMenuLink>

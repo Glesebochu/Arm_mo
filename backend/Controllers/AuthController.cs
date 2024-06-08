@@ -89,7 +89,7 @@ public class AuthController : ControllerBase
         {
             return Unauthorized();
         }
-
+        
         // Create and return the JWT token
         var token = GenerateJwtToken(payload.Email);
 
@@ -104,7 +104,25 @@ public class AuthController : ControllerBase
         };
 
         HttpContext.Response.Cookies.Append("token", token, cookieOptions);
-        return Ok(new { Token = token });
+
+        //registering the user
+        var currentStage = _context.Stages.Find(1);
+        var user = new Meditator
+        {
+            FirstName = payload.GivenName,
+            LastName = payload.FamilyName,
+            Email = payload.Email,
+            ProfilePicture = payload.Picture,
+            CurrentStage = currentStage
+        };
+
+        var result = await _userService.RegisterUserAsync(user);
+        if (result)
+        {
+            return Ok("User registered successfully.");
+        }
+        
+        return BadRequest("User already exists.");
     }
 
     private async Task<GoogleJsonWebSignature.Payload> ValidateGoogleTokenAsync(string idToken)

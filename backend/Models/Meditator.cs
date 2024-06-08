@@ -9,7 +9,7 @@ namespace backend.Models
         public string LastName { get; set; } = String.Empty;
         public string? Username { get; set; } = String.Empty;
         public string Email { get; set; } = String.Empty;
-        public string _password { get; set; } = String.Empty;
+        public string? _password { get; set; } = String.Empty;
         public Stage CurrentStage { get; set; }
         public Address? Address { get; set; }
         public List<PracticedStage>? PracticedStages { get; set; }

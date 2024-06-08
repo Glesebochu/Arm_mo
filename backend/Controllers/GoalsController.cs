@@ -146,7 +146,7 @@ namespace backend.Controllers
 
                 if (existingGoal == null)
                 {
-                    return NotFound("Goal not found"); // Return 404 Not Found if goal is not found
+                    return NotFound("Goal not found" + updateGoalDto); // Return 404 Not Found if goal is not found
                 }
 
                 // Map the UpdateGoalDTO to the existing Goal entity

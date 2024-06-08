@@ -37,7 +37,7 @@ import {
 import { DatePicker } from "@/components/ui/date-picker";
 import { MeditationObjectPopover } from "./MeditationObjectPopover";
 import { useDispatch } from "react-redux";
-import { createGoal } from "../../slices/GoalsSlice";
+import { createGoal, updateGoal } from "../../slices/GoalsSlice";
 import {
     Select,
     SelectContent,
@@ -112,6 +112,28 @@ export function GoalsTable({ goals = [], isSubGoals = false, parentGoalId = null
         return preparedGoal;
     };
 
+    const prepareGoalForUpdating = (g) => {
+
+        var preparedGoal = {
+            id: g.id,
+            status: g.status,
+            activity: {
+                title: g.activity.title
+            },
+            meditationObject: {
+                title: g.meditationObject.title,
+                description: g.meditationObject.description,
+                subType: g.meditationObject.subType,
+            },
+            dueDate: g.dueDate,
+            completedDate: g.completedDate,
+            parentGoalId: g.parentGoalId,
+            childGoals: g.childGoals.map(child => prepareGoalForCreation(child))
+        };
+
+        return preparedGoal;
+    };
+
     const handleCreateGoal = () => {
         const newId = `[new]-${uuidv4()}`;
         const newGoalData = { ...initialGoalState, id: newId }; // Ensure activity has title
@@ -121,30 +143,42 @@ export function GoalsTable({ goals = [], isSubGoals = false, parentGoalId = null
         }));
         setData([...data, newGoalData]);
         // * Testing
-        console.log(localData);
+        // console.log(localData);
         setIsEditing(newId);
         setIsCreating(true);
     };
 
+    const handleEditGoal = (id) => {
+        setIsEditing(id);
+        const goalToEdit = data.find(goal => goal.id === id);
+        if (goalToEdit) {
+            setLocalData((prevData) => ({
+                ...prevData,
+                [id]: goalToEdit,
+            }));
+        }
+    };
+
     const handleSaveGoal = () => {
 
-        var goalToSave = null;
+        var goalToSave = localData[isEditing];
 
-        if (isCreating) {
-            goalToSave = localData[isEditing];
-        } else {
-            goalToSave = data.find((goal) => goal.id === isEditing);
-        }
-
-        // * Testing
-        console.log(localData);
         if (goalToSave) {
-            const preparedGoal = prepareGoalForCreation(goalToSave);
-            dispatch(createGoal(preparedGoal));
-            setData((prevData) =>
-                prevData.map((goal) => (goal.id === isEditing ? goalToSave : goal))
-            );
+            if (isCreating) {
+                const preparedGoal = prepareGoalForCreation(goalToSave);
+                dispatch(createGoal(preparedGoal));
+            } else {
+                const preparedGoal = prepareGoalForUpdating(goalToSave);
+                console.log("Goal to save before passing to updateGoal():");
+                console.log(preparedGoal);
+                dispatch(updateGoal(preparedGoal));
+            }
         }
+
+        setData((prevData) =>
+            prevData.map((goal) => (goal.id === isEditing ? goalToSave : goal))
+        );
+
         setLocalData((prevData) => {
             const { [isEditing]: removed, ...rest } = prevData;
             return rest;
@@ -355,7 +389,7 @@ export function GoalsTable({ goals = [], isSubGoals = false, parentGoalId = null
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
-                            <DropdownMenuItem onClick={() => setIsEditing(row.original.id)}>Edit</DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => handleEditGoal(row.original.id)}>Edit</DropdownMenuItem>
                             <DropdownMenuItem onClick={() => handleDeleteGoal(row.original.id)}>Delete</DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>

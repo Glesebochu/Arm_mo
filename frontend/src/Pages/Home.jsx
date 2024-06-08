@@ -71,10 +71,16 @@ const Home = () => {
       );
 
       // Set frameworks up to the maximum practiced stage
-      const stages = Array.from({ length: maxPracticedStage }, (_, i) => ({
+      let stages = Array.from({ length: maxPracticedStage }, (_, i) => ({
         value: numberToString(i + 1).toLowerCase(),
         label: numberToString(i + 1),
       }));
+
+      // Check if stages is empty and add "One" if it is
+      if (stages.length === 0) {
+        stages.push({ value: "one", label: "One" });
+      }
+
       setFrameworks(stages);
     } catch (error) {
       console.error("Error fetching user data:", error);

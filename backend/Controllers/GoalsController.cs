@@ -84,11 +84,11 @@ namespace backend.Controllers
             // Convert the DTO into a Goal object that EF can understand.
             var goal = _mapper.Map<Models.Goal>(createGoalDTO);
 
-            var activity = goal.Activity;
-            var meditationObject = goal.MeditationObject;
+            // var activity = goal.Activity;
+            // var meditationObject = goal.MeditationObject;
 
-            _context.Activities.Add(activity);
-            _context.ObservableObjects.Add(meditationObject);
+            // _context.Activities.Add(activity);
+            // _context.ObservableObjects.Add(meditationObject);
 
             // Add the goal to the Goals table.
             _context.Goals.Add(goal);

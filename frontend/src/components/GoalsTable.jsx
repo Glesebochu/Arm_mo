@@ -37,7 +37,7 @@ import {
 import { DatePicker } from "@/components/ui/date-picker";
 import { MeditationObjectPopover } from "./MeditationObjectPopover";
 import { useDispatch } from "react-redux";
-import { createGoal, updateGoal } from "../../slices/GoalsSlice";
+import { createGoal, updateGoal, deleteGoal } from "../../slices/GoalsSlice";
 import {
     Select,
     SelectContent,
@@ -85,7 +85,8 @@ export function GoalsTable({ goals = [], isSubGoals = false, parentGoalId = null
     }, [goals]);
 
     const handleDeleteGoal = (id) => {
-        setData(data.filter((goal) => goal.id !== id));
+        // setData(data.filter((goal) => goal.id !== id));
+        dispatch(deleteGoal(id));
     };
 
     const organizeGoals = (goals) => {

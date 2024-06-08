@@ -7,10 +7,12 @@ import { Meteors } from "../components/Custom/Meteors";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../Slices/AuthSlice";
-import { z } from "zod";
 import { notifyError} from "../../utils/Toast";
 import { ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { GoogleLogin } from '@react-oauth/google';
+import { loginWithGoogle } from "../../Slices/AuthSlice";
+import { z } from "zod";
 
 // Define the schema for the signin form using zod
 const signinSchema = z.object({
@@ -43,7 +45,7 @@ const Signin = () => {
     useEffect(()=> {
       if(isSubmitting){
         if(!isError){
-            navigate("/usage")
+            navigate("/home")
         } 
         notifyError(error.title);
         setIsSubmitting(false);
@@ -73,34 +75,41 @@ const Signin = () => {
 
     // Return the JSX for the signin form
     return (
-        <div className="container rounded flex h-screen w-screen flex-col items-center justify-center">
-            <div className="relative overflow-hidden grid gap-6 bg-white w-[25%] shadow-input rounded-tl-none rounded-2xl p-8">
+        <div className="container flex h-screen w-screen flex-col items-center justify-center">
+            <div className="relative overflow-hidden grid gap-6 bg-white w-full max-w-[390px] shadow-input rounded-tl-none rounded-2xl p-8 mx-4">
                 <div className="grid gap-2 z-50">
                     <div className="grid gap-1">
-                        <Label htmlFor="email">Email</Label>
-                        <AnimatedInput id="email" placeholder="name@example.com" name="Email" onChange={handleChange}/>
+                        <Label className="font-k2d" htmlFor="email">Email</Label>
+                        <AnimatedInput id="email" placeholder="name@example.com" name="Email" onChange={handleChange} className="font-k2d"/>
                     </div>
                     <div className="grid gap-1">
-                        <Label htmlFor="password">Password</Label>
-                        <AnimatedInput id="password" type="password" name="Password"  placeholder="••••••••" onChange={handleChange}/>
+                        <Label className="font-k2d" htmlFor="password">Password</Label>
+                        <AnimatedInput id="password" type="password" name="Password" placeholder="••••••••" onChange={handleChange} className="font-k2d"/>
                     </div>
                 </div>
-                <Button onClick={handleSubmit}>Sign In</Button>
+                <Button onClick={handleSubmit} className="font-k2d w-full">Sign In</Button>
                 <div className="relative">
                     <div className="absolute flex inset-0 items-center">
                         <span className="bg-red-500 w-full border-t border-slate-300 dark:border-slate-700" />
                     </div>
                     <div className="relative flex justify-center text-xs uppercase">
-                        <span className="bg-white px-2 text-slate-600 dark:bg-slate-800 dark:text-slate-400">
+                        <span className="font-k2d bg-white px-2 text-slate-600 dark:bg-slate-800 dark:text-slate-400">
                             Or continue with
                         </span>
                     </div>
                 </div>
-                <div className="flex justify-center z-50">
-                    <Button variant="outline" className="w-full">
-                        <FaGoogle className="mr-2 h-4 w-4 text-primary"/>
-                        Google
-                    </Button>
+                <div className="flex justify-center z-50 w-full">
+                    <GoogleLogin
+                        onSuccess={async (credentialResponse) => {
+                            await dispatch(loginWithGoogle({"IdToken": credentialResponse.credential}));
+                            navigate("/home"); 
+                        }}
+                        onError={() => {
+                            console.log('Login Failed');
+                        }}
+                        useOneTap
+                        width={323}
+                    />
                 </div>
                 <Meteors number={20}/>
             </div>

@@ -47,7 +47,7 @@ import {
 } from "@/components/ui/select";
 import { v4 as uuidv4 } from 'uuid';
 
-export function GoalsTable({ goals = [], isSubGoals = false }) {
+export function GoalsTable({ goals = [], isSubGoals = false, parentGoalId = null }) {
     const dispatch = useDispatch();
 
     const initialGoalState = {
@@ -63,7 +63,7 @@ export function GoalsTable({ goals = [], isSubGoals = false }) {
         },
         dueDate: '', // Ensure this is in the correct date format
         completedDate: null,
-        parentGoalId: null,
+        parentGoalId: parentGoalId,
         childGoals: [],
     };
 
@@ -463,7 +463,7 @@ export function GoalsTable({ goals = [], isSubGoals = false }) {
                                             <TableRow key={`child-${row.original.id}`}>
                                                 <TableCell colSpan={columns.length}>
                                                     <div className="ml-8 mr-8">
-                                                        <GoalsTable goals={row.original.childGoals} isSubGoals={true} />
+                                                        <GoalsTable goals={row.original.childGoals} isSubGoals={true} parentGoalId={row.original.id} />
                                                     </div>
                                                 </TableCell>
                                             </TableRow>

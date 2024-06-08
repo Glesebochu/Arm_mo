@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using Google.Apis.Auth;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -13,7 +14,6 @@ public class AuthController : ControllerBase
 {
     private readonly IUserService _userService;
     private readonly IConfiguration _configuration;
-
     private readonly Arm_moContext _context;
     public AuthController(IUserService userService, IConfiguration configuration, Arm_moContext context)
     {
@@ -52,7 +52,7 @@ public class AuthController : ControllerBase
         var user = await _userService.AuthenticateAsync(loginDto.Email, loginDto.Password);
         if (user != null)
         {
-            var token = GenerateJwtToken(user);
+            var token = GenerateJwtToken(user.Email);
 
             Console.WriteLine(user.Email);
             // Set the httpOnly cookie with SameSite=None and Secure=false for development
@@ -72,7 +72,52 @@ public class AuthController : ControllerBase
         return Unauthorized();
     }
 
-    private string GenerateJwtToken(Meditator user)
+    [Authorize]
+    [HttpGet("Me")]
+    public IActionResult Me(){
+       var email = User.FindFirstValue(ClaimTypes.Email);
+       var meditator = _context.Meditators.Where(meditator => meditator.Email == email);
+       return Ok(new {user = meditator});
+    }
+
+
+    [HttpPost("google")]
+    public async Task<IActionResult> Google([FromBody] GoogleAuthRequest request)
+    {
+        Console.WriteLine("decode liyareg new");
+        var payload = await ValidateGoogleTokenAsync(request.IdToken);
+        if (payload == null)
+        {
+            return Unauthorized();
+        }
+
+        Console.WriteLine("decode argowal");
+        // Create and return the JWT token
+        var token = GenerateJwtToken(payload.Email);
+
+        Console.WriteLine($"the token is -> {token}");
+
+        return Ok(new { Token = token });
+    }
+
+    private async Task<GoogleJsonWebSignature.Payload> ValidateGoogleTokenAsync(string idToken)
+    {
+        try
+        {
+            var settings = new GoogleJsonWebSignature.ValidationSettings()
+            {
+                Audience = new List<string> { _configuration["Authentication:Google:ClientId"] }
+            };
+
+            var payload = await GoogleJsonWebSignature.ValidateAsync(idToken, settings);
+            return payload;
+        }
+        catch (InvalidJwtException)
+        {
+            return null;
+        }
+    }
+    private string GenerateJwtToken(string email)
     {
         DotEnv.Load();
 
@@ -92,7 +137,7 @@ public class AuthController : ControllerBase
         {
             Subject = new ClaimsIdentity(new[]
             {
-                new Claim(ClaimTypes.Email, user.Email)
+                new Claim(ClaimTypes.Email, email)
             }),
             Expires = DateTime.UtcNow.AddMinutes(5),
             Issuer = jwtIssuer,
@@ -102,14 +147,5 @@ public class AuthController : ControllerBase
 
         var token = tokenHandler.CreateToken(tokenDescriptor);
         return tokenHandler.WriteToken(token);
-    }
-    
-
-    [Authorize]
-    [HttpGet("Me")]
-    public IActionResult Me(){
-       var email = User.FindFirstValue(ClaimTypes.Email);
-       var meditator = _context.Meditators.Where(meditator => meditator.Email == email);
-       return Ok(new {user = meditator});
     }
 }

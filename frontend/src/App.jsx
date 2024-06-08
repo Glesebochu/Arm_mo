@@ -14,12 +14,15 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/signup" element={<Signup/>}/>
-        <Route path="/signin" element={<Signin/>}/>
         <Route path="/" element={
           <Landing />
         } 
         />
+        <Route path="/Home" element={
+          <ProtectedRoute>
+            <Home/>
+          </ProtectedRoute>
+        } />
         <Route path="/Usage" element={
           <ProtectedRoute>
             <UsageView />
@@ -36,8 +39,17 @@ function App() {
             <Insights/>
           </ProtectedRoute>
         } />
-        <Route path="/Home" element={<Home />} />
-        <Route path="/Settings" element={<Settings />} />
+        <Route path="/Settings" element={
+          <ProtectedRoute>
+            <Settings/>
+          </ProtectedRoute>
+        } />
+        <Route path="/signup" element={
+          <Signup/>
+        }/>
+        <Route path="/signin" element={
+          <Signin/>
+        }/>
       </Routes>
     </Router>
   );

@@ -11,7 +11,9 @@ const initialState = {
 
 export const loginWithGoogle = createAsyncThunk("Auth/loginWithGoogle", async (arg, ThunkAPi) => {
     try {
-        const response = await axios.post("http://localhost:5158/api/Auth/google", arg);
+        const response = await axios.post("http://localhost:5158/api/Auth/google", arg, {
+            withCredentials: true
+        });
         if (response.status === 200) {
             console.log("registered successfully!")
             return response.data;

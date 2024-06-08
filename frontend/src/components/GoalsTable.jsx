@@ -48,7 +48,6 @@ import {
 import { v4 as uuidv4 } from 'uuid';
 
 export function GoalsTable({ goals = [], isSubGoals = false }) {
-
     const dispatch = useDispatch();
 
     const initialGoalState = {

@@ -66,9 +66,10 @@ const Home = () => {
       setUser(userData);
 
       // Determine the maximum practiced stage
-      const maxPracticedStage = Math.max(
+      var maxPracticedStage = Math.max(
         ...userData.practicedStages.map((stage) => stage.stageId)
       );
+      maxPracticedStage = 10;
 
       // Set frameworks up to the maximum practiced stage
       let stages = Array.from({ length: maxPracticedStage }, (_, i) => ({

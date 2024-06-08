@@ -8,6 +8,8 @@ import { register } from "../../Slices/AuthSlice";
 import { ToastContainer } from "react-toastify";
 import { notifyError, notifySuccess } from "../../utils/Toast";
 import { injectStyle } from "react-toastify/dist/inject-style";
+import { GoogleLogin } from '@react-oauth/google';
+import { loginWithGoogle } from "../../Slices/AuthSlice";
 import { z } from "zod";
 
 // Inject the necessary styles for react-toastify
@@ -119,6 +121,17 @@ const Signup = () => {
           <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
           <div className="flex flex-col space-y-4">
             <div className="flex justify-center">
+              <GoogleLogin
+                onSuccess={credentialResponse => {
+                  dispatch(loginWithGoogle({"IdToken": credentialResponse.credential}));
+                }}
+                onError={() => {
+                  console.log('Login Failed');
+                }}
+                // text="continue_with"
+                width={600}
+                useOneTap
+              />
             </div>
           </div>
         </form>

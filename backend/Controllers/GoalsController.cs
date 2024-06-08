@@ -130,7 +130,7 @@ namespace backend.Controllers
         }
 
         // An action for updating a goal; POST
-        [HttpPut("Update/{id}")]
+        [HttpPut("Update")]
         public async Task<ActionResult> Update([FromBody] UpdateGoalDTO updateGoalDto)
         {
             if (!ModelState.IsValid)

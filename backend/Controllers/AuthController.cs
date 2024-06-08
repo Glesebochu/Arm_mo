@@ -84,18 +84,14 @@ public class AuthController : ControllerBase
     [HttpPost("google")]
     public async Task<IActionResult> Google([FromBody] GoogleAuthRequest request)
     {
-        Console.WriteLine("decode liyareg new");
         var payload = await ValidateGoogleTokenAsync(request.IdToken);
         if (payload == null)
         {
             return Unauthorized();
         }
 
-        Console.WriteLine("decode argowal");
         // Create and return the JWT token
         var token = GenerateJwtToken(payload.Email);
-
-        Console.WriteLine($"the token is -> {token}");
 
         return Ok(new { Token = token });
     }

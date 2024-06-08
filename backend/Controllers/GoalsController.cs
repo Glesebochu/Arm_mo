@@ -174,28 +174,6 @@ namespace backend.Controllers
                 return StatusCode(500, "An error occurred while updating the goal"); // Return 500 Internal Server Error on database error
             }
         }
-
-
-        //     [HttpPut]
-        //     [Route("{id:int}")]
-        //     public async Task<IActionResult> Update([FromRoute] int id, [FromBody] GoalDTO goalDto)
-        //     {
-        //         if (!ModelState.IsValid)
-        //             return BadRequest(ModelState);
-
-        //         var GoalDTOs = await _goalRepo.UpdateAsync(id, goalDto);
-
-        //         if (GoalDTOs == null)
-        //         {
-        //             return NotFound();
-        //         }
-
-        //         return Ok(GoalDTOs);
-        //     }
-
-        // }
-
-
     }
 }
 

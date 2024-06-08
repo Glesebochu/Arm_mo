@@ -52,6 +52,20 @@ export const updateGoal = createAsyncThunk(
   }
 );
 
+// Thunk for deleting a goal
+export const deleteGoal = createAsyncThunk(
+  "Goals/deleteGoal",
+  async (goalId, { rejectWithValue }) => {
+    try {
+      const response = await axios.delete(`${webRoot}/Goals/Delete/${goalId}`);
+      return goalId;
+    } catch (error) {
+      console.log(error.response.data);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 const GoalsSlice = createSlice({
   name: "Goals",
   initialState,
@@ -99,6 +113,20 @@ const GoalsSlice = createSlice({
         }
       })
       .addCase(updateGoal.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+
+      // For deleting a goal
+      .addCase(deleteGoal.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(deleteGoal.fulfilled, (state, action) => {
+        state.loading = false;
+        state.goals = state.goals.filter((goal) => goal.id !== action.payload);
+      })
+      .addCase(deleteGoal.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });

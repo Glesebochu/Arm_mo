@@ -6,12 +6,12 @@ import { AnimatedInput } from "../components/Custom/AnimatedInput";
 import { Meteors } from "../components/Custom/Meteors";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../../Slices/AuthSlice";
+import { login } from "../../slices/AuthSlice";
 import { notifyError} from "../../utils/Toast";
 import { ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { GoogleLogin } from '@react-oauth/google';
-import { loginWithGoogle } from "../../Slices/AuthSlice";
+import { loginWithGoogle } from "../../slices/AuthSlice";
 import { z } from "zod";
 
 // Define the schema for the signin form using zod

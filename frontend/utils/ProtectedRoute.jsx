@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { fetchMe } from "../Slices/AuthSlice";
+import { fetchMe } from "../slices/AuthSlice";
 
 function ProtectedRoute({ children }) {
   const { isAuthenticated } = useSelector((state) => state.Auth);

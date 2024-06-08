@@ -1,5 +1,5 @@
 :root {
-  --time: 10s;
+  --time: 40s;
 }
 
 .circle-container {
@@ -20,13 +20,13 @@
   transform: scale(1);
   border: 2px solid #2564eb00;
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2), 0 10px 20px rgba(0, 0, 0, 0.2),
-    0 20px 30px rgba(0, 0, 0, 0.2), 0 30px 40px rgba(0, 0, 0, 0.2);
+    0 2px 3px rgba(0, 0, 0, 0.2), 0 30px 40px rgba(0, 0, 0, 0.2);
 }
 
 .circle:hover {
-  transform: scale(1.05);
+  transform: scale(1.01);
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3), 0 10px 20px rgba(0, 0, 0, 0.3),
-    0 20px 30px rgba(0, 0, 0, 0.3), 0 30px 40px rgba(0, 0, 0, 0.3);
+    0 5px 10px rgba(0, 0, 0, 0.3), 0 30px 40px rgba(0, 0, 0, 0.3);
 }
 
 .circle-content {
@@ -38,15 +38,23 @@
 #time {
   font-size: 30px;
   margin: 0;
-  margin-left: 2em;
+  margin-left: 3em;
   color: #2563eb;
 }
 
 .text {
-  margin-top: 4em;
-  font-size: 28px;
+  margin-top: 3em !important;
+  font-size: 26px;
   font-weight: 800;
   text-align: center;
+}
+
+.textBubble {
+  margin-top: 3em !important;
+  font-size: 26px;
+  font-weight: 800;
+  text-align: center;
+  color: #404456;
 }
 
 .timeContainer {
@@ -68,8 +76,8 @@
 
 .hourglass {
   animation: flip var(--time) ease-in-out infinite;
-  border-bottom: solid 1vmin #630;
-  border-top: solid 1vmin #630;
+  border-bottom: solid 1vmin black;
+  border-top: solid 1vmin black;
   left: 50%;
   margin-left: -3vmin; /* Adjusted for smaller size */
   margin-top: -5.5vmin; /* Adjusted for smaller size */

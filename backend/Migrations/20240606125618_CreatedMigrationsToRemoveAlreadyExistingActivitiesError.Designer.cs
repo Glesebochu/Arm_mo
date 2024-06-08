@@ -12,8 +12,8 @@ using backend.Data;
 namespace backend.Migrations
 {
     [DbContext(typeof(Arm_moContext))]
-    [Migration("20240604074919_InitialCreate7")]
-    partial class InitialCreate7
+    [Migration("20240606125618_CreatedMigrationsToRemoveAlreadyExistingActivitiesError")]
+    partial class CreatedMigrationsToRemoveAlreadyExistingActivitiesError
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

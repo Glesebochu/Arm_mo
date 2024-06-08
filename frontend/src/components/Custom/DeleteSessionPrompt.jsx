@@ -1,8 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-function DeleteSessionPrompt({ sessionId, onDelete, onCancel }) {
+function DeleteSessionPrompt({ sessionId, onCancel }) {
   const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    document.body.classList.add("overflow-hidden");
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+    };
+  }, []);
 
   const handleDelete = async (id) => {
     setIsDeleting(true);
@@ -10,9 +17,7 @@ function DeleteSessionPrompt({ sessionId, onDelete, onCancel }) {
       await axios.delete(
         `http://localhost:5158/api/Analyzer/DeleteSession?SessionId=${id}`
       );
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000); // Delay to allow animation to play
+      window.location.reload();
     } catch (error) {
       console.error("There was an error deleting the session!", error);
       setIsDeleting(false);
@@ -20,12 +25,10 @@ function DeleteSessionPrompt({ sessionId, onDelete, onCancel }) {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75">
+    <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50">
       <div
-        className={`bg-white p-6 rounded-lg shadow-lg transition-transform duration-500 ${
-          isDeleting
-            ? "transform scale-0 opacity-0"
-            : "transform scale-100 opacity-100"
+        className={`bg-white p-6 rounded-lg shadow-lg transition-transform duration-500 transform ${
+          isDeleting ? "scale-0 opacity-0" : "scale-100 opacity-100"
         }`}
       >
         <h2 className="text-xl font-bold mb-4">Confirm Delete</h2>
@@ -33,13 +36,13 @@ function DeleteSessionPrompt({ sessionId, onDelete, onCancel }) {
         <div className="flex justify-end">
           <button
             onClick={onCancel}
-            className="bg-gray-300 text-gray-700 px-4 py-2 rounded mr-2"
+            className="bg-gray-300 text-gray-700 px-4 py-2 rounded mr-2 hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500"
           >
             Cancel
           </button>
           <button
             onClick={() => handleDelete(sessionId)}
-            className="bg-blue-500 text-white px-4 py-2 rounded"
+            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
           >
             Remove
           </button>

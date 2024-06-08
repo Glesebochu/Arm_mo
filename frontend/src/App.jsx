@@ -5,9 +5,8 @@ import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
 import UsageView from "./pages/Usage";
 import Insights from "./pages/Insights";
-import Home from "./Pages/Home";
-import Settings from "./Pages/Settings";
-
+import Home from "./pages/Home";
+import Settings from "./pages/Settings";
 import Landing from "./pages/Landing";
 import ProtectedRoute from "../utils/ProtectedRoute";
 

@@ -41,20 +41,6 @@ namespace backend.Controllers
             return Ok(goalDTOs);
         }
 
-        // private GoalDTO MapGoalToDTO(Goal goal)
-        // {
-        //     var goalDTO = new GoalDTO
-        //     {
-        //         Status = goal.Status.ToString(),
-        //         DueDate = goal.DueDate,
-        //         CompletedDate = goal.CompletedDate,
-        //         Activity = goal.Activity?.Title,
-        //         MeditationObject = goal.MeditationObject?.Title,
-        //         ChildGoals = goal.ChildGoals?.Select(child => MapGoalToDTO(child)).ToList()
-        //     };
-
-        //     return goalDTO;
-        // }
         // An action for getting/reading a single goal
         [HttpGet("GetById/{id}")]
         public IActionResult GetById([FromRoute] int id)

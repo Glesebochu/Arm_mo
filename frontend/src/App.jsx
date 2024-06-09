@@ -9,7 +9,7 @@ import Insights from "./pages/Insights";
 import { RemovedSessions } from "./components/Custom/RemovedSessionsTable";
 
 import Home from "./pages/Home";
-import CreatePreparationPhase from "./Pages/PreparationPhase";
+import { TransitionPhase } from "./pages/TransitionPhase";
 // import Settings from "./pages/Settings";
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
       <Router>
         <Routes>
           {/* For your specific Modules Modify this so that your Components show up when you run Vite */}
-          <Route path="/" element={<CreatePreparationPhase />} />
+          <Route path="/" element={<TransitionPhase />} />
 
           {/* No need to to remove the below */}
           {/* <Route path="/session/:sessionId" element={<SessionDetails />} />

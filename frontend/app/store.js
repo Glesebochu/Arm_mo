@@ -3,6 +3,6 @@ import { thunk } from "redux-thunk";
 import goalReducer from "../slices/GoalsSlice";
 
 export const store = configureStore({
-    reducer: { Goals: goalReducer },
+    reducer: { Goals: goalReducer, PreparationPhase: PreparationPhaseReducer},
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunk),
 });

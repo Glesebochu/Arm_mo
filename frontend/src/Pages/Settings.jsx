@@ -1,5 +1,4 @@
 "use client";
-
 import Tabs from "../components/Custom/AnimatedTabs";
 import Profile from "../components/Custom/Profile";
 

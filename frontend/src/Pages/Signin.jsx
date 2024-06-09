@@ -101,6 +101,7 @@ const Signin = () => {
                 <div className="flex justify-center z-50 w-full">
                     <GoogleLogin
                         onSuccess={async (credentialResponse) => {
+                            console.log(credentialResponse);
                             await dispatch(loginWithGoogle({"IdToken": credentialResponse.credential}));
                             navigate("/home"); 
                         }}

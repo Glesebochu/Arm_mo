@@ -98,7 +98,7 @@ public class AuthController : ControllerBase
         {
             return Unauthorized();
         }
-
+        
         // Create and return the JWT token
         var token = GenerateJwtToken(payload.Email);
 

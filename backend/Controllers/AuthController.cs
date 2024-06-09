@@ -22,6 +22,7 @@ public class AuthController : ControllerBase
         _context = context;
     }
 
+    
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
     {
@@ -65,16 +66,24 @@ public class AuthController : ControllerBase
             };
 
             HttpContext.Response.Cookies.Append("token", token, cookieOptions);
-
             return Ok();
         }
 
         return Unauthorized();
     }
 
+    [HttpPost("logout")]
+    public IActionResult Logout()
+    {
+        HttpContext.Response.Cookies.Delete("token");
+
+        return Ok(new { message = "Logged out successfully" });
+    }
+
     [Authorize]
     [HttpGet("Me")]
     public IActionResult Me(){
+       Console.WriteLine("Hello world");
        var email = User.FindFirstValue(ClaimTypes.Email);
        var meditator = _context.Meditators.Where(meditator => meditator.Email == email);
        return Ok(new {user = meditator});
@@ -104,7 +113,24 @@ public class AuthController : ControllerBase
         };
 
         HttpContext.Response.Cookies.Append("token", token, cookieOptions);
-        return Ok(new { Token = token });
+        var currentStage = _context.Stages.Find(1);
+
+        var user = new Meditator
+        {
+            FirstName = payload.GivenName,
+            LastName = payload.FamilyName,
+            Email = payload.Email,
+            ProfilePicture = payload.Picture,
+            CurrentStage = currentStage
+        };
+
+        var result = await _userService.RegisterUserAsync(user);
+        if (result)
+        {
+            return Ok("User registered successfully.");
+        }
+
+        return BadRequest("User already exists.");
     }
 
     private async Task<GoogleJsonWebSignature.Payload> ValidateGoogleTokenAsync(string idToken)

@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import axios from "axios";
 import { GoGear } from "react-icons/go";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -30,6 +29,8 @@ import {
 } from "@/components/ui/command";
 import "@/Styles/StartButton.css";
 import { logout } from "../../slices/AuthSlice";
+import { useSelector } from "react-redux";
+import { FaPen } from "react-icons/fa";
 
 const numberToString = (number) => {
   const numberStrings = [
@@ -50,9 +51,9 @@ const numberToString = (number) => {
 
 
 const Home = () => {
+  const user = useSelector(state => state.Auth.user.user[0]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [user, setUser] = useState(null);
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
   const [frameworks, setFrameworks] = useState([]);
@@ -61,40 +62,6 @@ const Home = () => {
     navigate("/settings");
   };
 
-  const fetchUserData = async () => {
-    try {
-      const response = await axios.get(
-        "http://localhost:5158/api/Home/GetMeditatorById?meditatorId=1"
-      );
-      const userData = response.data;
-      setUser(userData);
-
-      // Determine the maximum practiced stage
-      var maxPracticedStage = Math.max(
-        ...userData.practicedStages.map((stage) => stage.stageId)
-      );
-
-      // Set frameworks up to the maximum practiced stage
-      let stages = Array.from({ length: maxPracticedStage }, (_, i) => ({
-        value: numberToString(i + 1).toLowerCase(),
-        label: numberToString(i + 1),
-      }));
-
-      // Check if stages is empty and add "One" if it is
-      if (stages.length === 0) {
-        stages.push({ value: "one", label: "One" });
-      }
-
-      setFrameworks(stages);
-    } catch (error) {
-      console.error("Error fetching user data:", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchUserData();
-  }, []);
-
   const handleStageSelect = (currentValue) => {
     setValue(currentValue);
     console.log(`Selected stage: ${currentValue}`);
@@ -102,8 +69,6 @@ const Home = () => {
   };
 
   const filteredFrameworks = frameworks;
-  console.log("User profile picture:", user?.profilePicture);
-
   return (
     <div className="pt-4">
       <div className="flex justify-between items-center px-6 h-1/6">
@@ -179,13 +144,14 @@ const Home = () => {
           </Popover>
         </div>
 
+        {/* user profile */}
         <div>
           <Popover>
             <PopoverTrigger asChild>
               <Button variant="ghost" className="px-3 py-4 rounded-full">
                 <Avatar className="h-10 w-10">
                   {user?.profilePicture ? (
-                    <AvatarImage src={`/profilePics/${user.profilePicture}`} />
+                    <AvatarImage src={`${user.profilePicture}`} />
                   ) : (
                     <AvatarFallback className="flex items-center justify-center bg-black text-white">
                       {user?.firstName.charAt(0)}
@@ -194,53 +160,54 @@ const Home = () => {
                 </Avatar>
               </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-96" align="end">
+            <PopoverContent className="w-96 mt-[-4px] border mr-12 rounded-tr-none" align="end">
               <div className="grid gap-4 p-4">
                 <div className="text-center">
-                  <h4 className="text-lg font-medium">
-                    {user ? `${user.firstName} ${user.lastName}` : "Loading..."}
+                  <h4 className="text-lg font-medium font-k2d mb-2">
+                    {user ? `${user.firstName} ${user.lastName ? user.lastName : ""}` : "Loading..."}
                   </h4>
-                  <Avatar className="h-16 w-16 mx-auto">
-                    {user?.profilePicture ? (
-                      <AvatarImage
-                        src={`/profilePics/${user.profilePicture}`}
-                      />
-                    ) : (
-                      <AvatarFallback className="bg-black text-white">
-                        {user?.firstName.charAt(0)}
-                      </AvatarFallback>
-                    )}
-                  </Avatar>
+                  <div className="relative flex justify-center">
+                    <div className="border-[10px] w-fit rounded-[50%]">
+                      <Avatar className="h-16 w-16 mx-auto">
+                        {user?.profilePicture ? (
+                          <AvatarImage
+                            src={`${user.profilePicture}`}
+                          />
+                        ) : (
+                          <AvatarFallback className="bg-black text-white">
+                            {user?.firstName.charAt(0)}
+                          </AvatarFallback>
+                        )}
+                      </Avatar>
+                      <div className="bg-[#E2E8F0] p-1 rounded-[50%] w-fit absolute left-[42%] bottom-[6%] rotate-6 cursor-pointer"  onClick={()=> navigate("/settings")}>
+                        <FaPen className="text-black text-[16px] -rotate-12"/>
+                      </div>
+                    </div>
+                  </div>
 
-                  <p className="text-sm text-muted-foreground mt-2">
-                    {user ? `@${user.username}` : "Loading..."}
+                  <p className={user.username ? `text-sm text-muted-foreground mt-2` : "hidden"}>
+                    {user.username ? `@${user.username}` : ""}
                   </p>
-                  <a
-                    href="/edit-account"
-                    className="text-blue-600 hover:underline mt-2"
-                  >
-                    Edit your Account
-                  </a>
                 </div>
                 <div className="grid gap-6">
                   <div className="flex items-center space-x-2">
-                    <Mail className="h-5 w-5" />
-                    <div className="grid grid-cols-3 items-center space-x-2">
+                    <Mail className="" />
+                    <div className="flex items-center">
                       <Label htmlFor="email">
                         <b>Email</b>
                       </Label>
-                      <label className="col-span-2 h-7" htmlFor="email">
-                        {user ? user.email : "Loading..."}
+                      <label className="ml-4" htmlFor="email">
+                        {user.email ? user.email : ""}
                       </label>
                     </div>
                   </div>
-                  <div className="flex items-center space-x-2">
-                    <Target className="h-9 w-9" />
-                    <div className="grid grid-cols-3 items-center">
+                  <div className="flex items-center">
+                    <Target className="mr-2"/>
+                    <div className="flex items-center">
                       <Label htmlFor="currentStage">
                         <b>Stage</b>
                       </Label>
-                      <label className="col-span-2 h-13" htmlFor="currentStage">
+                      <label className="ml-4" htmlFor="currentStage">
                         {user?.currentStage
                           ? user.currentStage.goal
                           : "Loading..."}

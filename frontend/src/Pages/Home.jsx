@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { GoGear } from "react-icons/go";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { Label } from "@/components/ui/label";
 import {
   Popover,
@@ -28,6 +29,7 @@ import {
   CommandList,
 } from "@/components/ui/command";
 import "@/Styles/StartButton.css";
+import { logout } from "../../slices/AuthSlice";
 
 const numberToString = (number) => {
   const numberStrings = [
@@ -46,8 +48,10 @@ const numberToString = (number) => {
   return numberStrings[number];
 };
 
+
 const Home = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [user, setUser] = useState(null);
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
@@ -69,7 +73,6 @@ const Home = () => {
       var maxPracticedStage = Math.max(
         ...userData.practicedStages.map((stage) => stage.stageId)
       );
-      maxPracticedStage = 10;
 
       // Set frameworks up to the maximum practiced stage
       let stages = Array.from({ length: maxPracticedStage }, (_, i) => ({
@@ -250,7 +253,7 @@ const Home = () => {
                     variant="outline"
                     className="w-full mb-2 flex items-center justify-start space-x-2 pl-0"
                     onClick={() => {
-                      // Handle analytics logic here
+                      navigate("/sessionsummary");
                     }}
                   >
                     <BarChart2 className="h-5 w-5" />
@@ -260,7 +263,7 @@ const Home = () => {
                     variant="outline"
                     className="w-full flex items-center justify-start space-x-2 pl-0"
                     onClick={() => {
-                      // Handle sign out logic here
+                     dispatch(logout()); 
                     }}
                   >
                     <LogOut className="h-5 w-5" />

@@ -9,8 +9,6 @@ import Landing from "./pages/Landing";
 import ProtectedRoute from "../utils/ProtectedRoute";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import SessionSummary from "./pages/AnalyticsPage";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import SessionSummary from "./pages/AnalyticsPage";
 
 function App() {
   return (

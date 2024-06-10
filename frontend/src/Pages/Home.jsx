@@ -173,7 +173,7 @@ const Home = () => {
         <div>
           <Popover>
             <PopoverTrigger asChild>
-              <Button variant="ghost" className="px-3 py-4 rounded-full">
+              <Button variant="ghost" className="p-0 rounded-[50%]">
                 <Avatar className="h-10 w-10">
                   {user?.profilePicture ? (
                     <AvatarImage src={`${user.profilePicture}`} />

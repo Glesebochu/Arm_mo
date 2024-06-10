@@ -67,13 +67,19 @@ export function DataTable({ onSessionClick }) {
         await Promise.all(
           sessionIds.map(async (sessionId) => {
             await axios.delete(
-              `http://localhost:5158/api/Analyzer/DeleteSession?sessionId=${sessionId}`
+              `http://localhost:5158/api/Analyzer/DeleteSession?sessionId=${sessionId}`,
+              {
+                withCredentials: true,
+              }
             );
           })
         );
       } else {
         await axios.delete(
-          `http://localhost:5158/api/Analyzer/DeleteSession?sessionId=${sessionIds}`
+          `http://localhost:5158/api/Analyzer/DeleteSession?sessionId=${sessionIds}`,
+          {
+            withCredentials: true,
+          }
         );
       }
       setSwaggerData((prevData) =>
@@ -92,7 +98,7 @@ export function DataTable({ onSessionClick }) {
   };
 
   useEffect(() => {
-    console.log("For data table",user);
+    console.log("For data table", user);
     const fetchData = async () => {
       try {
         const response = await axios.get(

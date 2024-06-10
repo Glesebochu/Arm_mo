@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace backend.Controllers
 {
-    
+
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
@@ -30,7 +30,7 @@ namespace backend.Controllers
         [EnableCors]
         [HttpGet]
         [Route("GetSessionUsageCustom")]
-        public async Task<ActionResult<IEnumerable<object>>> GetSessionUsageCustom(/*int userId,*/DateTime customDate)//uncomment the parameter after testing.
+        public async Task<ActionResult<IEnumerable<object>>> GetSessionUsageCustom(int userId, DateTime customDate)//uncomment the parameter after testing.
         {
 
             var currentDate = customDate != default ? customDate : DateTime.Now;
@@ -42,13 +42,13 @@ namespace backend.Controllers
             foreach (var date in pastWeekDates)
             {
                 var sessionEnd = await dbContext.Sessions.
-                    Where(u => u.Meditator.Id == 1 && u.EndDateTime.Date == date.Date)//change the userId after testing...
+                    Where(u => u.Meditator.Id == userId && !u.IsDeleted && u.EndDateTime.Date == date.Date)//change the userId after testing...
                     .Select(u => u.EndDateTime.TimeOfDay.TotalMinutes)
                     .ToListAsync();
                 var Endtime = sessionEnd.DefaultIfEmpty(0).Sum();
 
                 var sessionStart = await dbContext.Sessions.
-                    Where(u => u.Meditator.Id == 1 && u.StartDateTime.Date == date.Date)//change the userId after testing...
+                    Where(u => u.Meditator.Id == userId && !u.IsDeleted && u.StartDateTime.Date == date.Date)//change the userId after testing...
                     .Select(u => u.StartDateTime.TimeOfDay.TotalMinutes)
                     .ToListAsync();
                 var startTime = sessionStart.DefaultIfEmpty(0).Sum();
@@ -64,7 +64,7 @@ namespace backend.Controllers
         [EnableCors]
         [HttpGet]
         [Route("GetUsageDataForPastWeek")]
-        public async Task<ActionResult<IEnumerable<object>>> GetUsageDataForPastWeek(/*int userId*/)//uncomment the parameter after testing.
+        public async Task<ActionResult<IEnumerable<object>>> GetUsageDataForPastWeek(int userId)//uncomment the parameter after testing.
         {
             var currentDate = DateTime.Today;
             var pastWeekDates = Enumerable.Range(0, 7)
@@ -77,7 +77,7 @@ namespace backend.Controllers
             foreach (var date in pastWeekDates)
             {
                 var usages = await dbContext.UserUsage
-                    .Where(u => u.UserId == 1 && u.Date == date.Date)//change the userId after testing...
+                    .Where(u => u.UserId == userId && u.Date == date.Date)//change the userId after testing...
                     .Select(u => u.UsageTime.TotalMinutes)
                     .ToListAsync();
 
@@ -95,7 +95,7 @@ namespace backend.Controllers
 
         [HttpGet]
         [Route("GetUsageDataCustom")]
-        public async Task<ActionResult<IEnumerable<object>>> GetUsageDataCustom(string startDate/*,int userId*/)//uncomment the parameter after testing.
+        public async Task<ActionResult<IEnumerable<object>>> GetUsageDataCustom(string startDate,int userId)//uncomment the parameter after testing.
         {
             var currentDate = DateTime.Parse(startDate);
             var pastWeekDates = Enumerable.Range(0, 7)
@@ -108,7 +108,7 @@ namespace backend.Controllers
             foreach (var date in pastWeekDates)
             {
                 var usages = await dbContext.UserUsage
-                    .Where(u => u.UserId == 1 && u.Date == date.Date)//change the userId after testing...
+                    .Where(u => u.UserId == userId && u.Date == date.Date)//change the userId after testing...
                     .Select(u => u.UsageTime.TotalMinutes)
                     .ToListAsync();
 
@@ -126,11 +126,11 @@ namespace backend.Controllers
 
         [HttpPost]
         [Route("StartUsage")]
-        public async Task<IActionResult> StartUsage(/*int userId*/)//uncomment the parameter after testing.
+        public async Task<IActionResult> StartUsage(int userId)//uncomment the parameter after testing.
         {
             var userUsage = new UserUsage
             {
-                UserId = /*userId*/2,//change the userId after testing...
+                UserId = userId,//change the userId after testing...
                 Date = DateTime.Today,
                 UsageTime = TimeSpan.Zero,
                 StartTime = DateTime.Now
@@ -144,7 +144,7 @@ namespace backend.Controllers
 
         [HttpPost]
         [Route("EndUsage")]
-        public async Task<IActionResult> EndUsage(/*int userId*/)//uncomment the parameter after testing.
+        public async Task<IActionResult> EndUsage(int userId)//uncomment the parameter after testing.
         {
             var userUsage = await dbContext.UserUsage
                 .FirstOrDefaultAsync(u => u.UserId == 2 && u.UsageTime == TimeSpan.Zero);//change the userId after testing...

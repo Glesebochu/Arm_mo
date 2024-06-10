@@ -133,8 +133,15 @@ const BarGraph = ({ meditatorId }) => {
 
   return (
     <div className="bar-graph-container">
-      <h1 className="bar-graph-title">Stages you've practiced</h1>
-      <div style={{ width: "100%", height: `${containerHeight+containerHeight*1.2}px` }}>
+      <h1 className="mb-4 mt-4 text-1xl text-center font-light leading-none tracking-tight text-black md:text-5xl lg:text-4xl dark:text-white">
+        Stages you've practiced
+      </h1>
+      <div
+        style={{
+          width: "100%",
+          height: `${containerHeight + containerHeight * 1.2}px`,
+        }}
+      >
         <Bar data={chartData} options={config.options} />
       </div>
     </div>

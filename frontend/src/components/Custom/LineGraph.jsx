@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
+import { useSelector } from "react-redux";
 import axios from "axios";
 import {
   Chart as ChartJS,
@@ -79,12 +80,16 @@ export const LineGraph = () => {
     ],
   });
   const [averageAhaMoments, setAverageAhaMoments] = useState(0);
+  const user = useSelector((state) => state.Auth.user.user);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5158/api/Analyzer/GetSessionsForMeditator?meditatorId=1"
+          `http://localhost:5158/api/Analyzer/GetSessionsForMeditator?meditatorId=${user.id}`,
+          {
+            withCredentials: true,
+          }
         );
         if (response.status === 200) {
           const sessionIds = response.data.map((session) =>

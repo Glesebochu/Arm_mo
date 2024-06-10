@@ -14,8 +14,8 @@ export default function LongestSession({ onSessionClick }) {
           "http://localhost:5158/api/analyzer/GetLongestSessionForMeditator",
           {
             withCredentials: true,
-          },
-          { params: { meditatorId: user.id } }
+            params: { meditatorId: user.id },
+          }
         );
 
         if (response.status === 200 && response.data) {

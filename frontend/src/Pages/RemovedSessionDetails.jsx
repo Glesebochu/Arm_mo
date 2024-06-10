@@ -49,8 +49,6 @@ function RemovedSessionDetails({ sessionId }) {
               `http://localhost:5158/api/Analyzer/GetCountOfObservableObjectForMeditator`,
               {
                 withCredentials: true,
-              },
-              {
                 params: {
                   observableObject: object.title,
                   meditatorId: meditatorId,
@@ -62,8 +60,6 @@ function RemovedSessionDetails({ sessionId }) {
               `http://localhost:5158/api/analyzer/GetTypeForAnObservableObject`,
               {
                 withCredentials: true,
-              },
-              {
                 params: {
                   observableObjectId: object.id,
                 },
@@ -99,13 +95,11 @@ function RemovedSessionDetails({ sessionId }) {
               `http://localhost:5158/api/Analyzer/GetCountOfAhaMomentForMeditator`,
               {
                 withCredentials: true,
-              },
-              {
                 params: {
                   ahaMoment: moment.label,
                   meditatorId: meditatorId,
                 },
-              }
+              },
             )
             .then((response) => {
               return { label: moment.label, count: response.data };

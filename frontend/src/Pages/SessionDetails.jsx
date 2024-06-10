@@ -48,21 +48,17 @@ function SessionDetails({ sessionId }) {
               `http://localhost:5158/api/Analyzer/GetCountOfObservableObjectForMeditator`,
               {
                 withCredentials: true,
-              },
-              {
                 params: {
                   observableObject: object.title,
                   meditatorId: meditatorId,
                 },
-              }
+              },
             );
 
             const typeResponse = await axios.get(
               `http://localhost:5158/api/analyzer/GetTypeForAnObservableObject`,
               {
                 withCredentials: true,
-              },
-              {
                 params: {
                   observableObjectId: object.id,
                 },
@@ -98,8 +94,6 @@ function SessionDetails({ sessionId }) {
               `http://localhost:5158/api/Analyzer/GetCountOfAhaMomentForMeditator`,
               {
                 withCredentials: true,
-              },
-              {
                 params: {
                   ahaMoment: moment.label,
                   meditatorId: meditatorId,

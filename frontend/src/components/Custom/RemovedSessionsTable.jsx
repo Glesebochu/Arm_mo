@@ -33,7 +33,6 @@ import {
   TableRow,
 } from "../ui/table";
 import "@/Styles/CustomStyles.css";
-import RestoreSessionPrompt from "./RestoreSessionPrompt";
 
 function customFilterFn(rows, columnIds, filterValue) {
   return rows.filter((row) => {
@@ -321,8 +320,8 @@ export function RemovedSessions({ onSessionClick }) {
             <Input
               placeholder="Filter Sessions..."
               value={
-                columnFilters.find((f) => f.id === "meditationObject")
-                  ?.value || ""
+                columnFilters.find((f) => f.id === "meditationObject")?.value ||
+                ""
               }
               onChange={(event) => handleFilterChange(event.target.value)}
               className="max-w-sm"
@@ -484,7 +483,7 @@ export function RemovedSessions({ onSessionClick }) {
               </button>
               <button
                 onClick={() => handleRestoreSession(restoreSessionId)}
-                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500"
+                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-black focus:outline-none focus:ring-2 focus:ring-black"
               >
                 Restore
               </button>

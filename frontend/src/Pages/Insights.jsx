@@ -4,12 +4,14 @@ import { CurrentStageAlert } from "@/components/Custom/CurrentStageAlert";
 import { MostVisitedActivityAlert } from "@/components/Custom/FrequentedActivityAlert";
 import LongestSession from "@/components/Custom/LongestSession";
 import { ResponsiveContainer } from "recharts";
+import { useSelector } from "react-redux";
 import SessionDetails from "@/pages/SessionDetails.jsx";
 import "@/Styles/Insights.css";
 
 const Insights = ({ onSessionClick }) => {
   const [selectedSessionId, setSelectedSessionId] = useState(null);
   const [selectedView, setSelectedView] = useState("Insights");
+  const user = useSelector((state) => state.Auth.user.user);
 
   useEffect(() => {
     if (selectedView === "Insights") {
@@ -29,7 +31,7 @@ const Insights = ({ onSessionClick }) => {
       return (
         <div className="container-insight">
           <div className="bar-graph-box">
-            <BarGraph meditatorId={1} />
+            <BarGraph meditatorId={user.id} />
           </div>
 
           <div className="alerts-box">

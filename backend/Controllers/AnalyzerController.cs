@@ -157,6 +157,7 @@ namespace backend.Controllers
             return Ok();
         }
 
+        [Authorize]
         [HttpGet("GetSession")]
         public async Task<IActionResult> GetSession(int SessionId)
         {

@@ -24,7 +24,9 @@ function SessionDetails({ sessionId }) {
 
         // Fetch session data
         const sessionResponse = await axios.get(
-          `http://localhost:5158/api/Analyzer/GetSession?SessionId=${sessionId}`
+          `http://localhost:5158/api/Analyzer/GetSession?SessionId=${sessionId}`,{
+            withCredentials: true
+          }
         );
         const sessionData = sessionResponse.data;
         setSessionData(sessionData);

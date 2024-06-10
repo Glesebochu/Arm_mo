@@ -1,34 +1,62 @@
-import "./index.css";
-import { Goals } from "./pages/Goals";
-import * as React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import SessionSummary from "./pages/AnalyticsPage";
-import SessionDetails from "./pages/SessionDetails"; // Import the new component for session details
+import SessionDetails from "./pages/SessionDetails";
+import Signup from "./pages/Signup";
+import Signin from "./pages/Signin";
 import UsageView from "./pages/Usage";
 import Insights from "./pages/Insights";
-import { RemovedSessions } from "./components/Custom/RemovedSessionsTable";
-
 import Home from "./pages/Home";
-// import Settings from "./pages/Settings";
+import Settings from "./pages/Settings";
+import Landing from "./pages/Landing";
+import ProtectedRoute from "../utils/ProtectedRoute";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import SessionSummary from "./pages/AnalyticsPage";
 
 function App() {
   return (
-    <>
-      <Router>
-        <Routes>
-          {/* For your specific Modules Modify this so that your Components show up when you run Vite */}
-          <Route path="/" element={<SessionSummary />} />
-
-          {/* No need to to remove the below */}
-          <Route path="/session/:sessionId" element={<SessionDetails />} />
-          <Route path="/Usage" element={<UsageView />} />
-          <Route path="/Insights" element={<Insights />} />
-          <Route path="/RemovedSessions" element={<RemovedSessions />} />
-          <Route path="/Home" element={<Home />} />
-          {/* <Route path="/Settings" element={<Settings />} /> */}
-        </Routes>
-      </Router>
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={
+          <Landing />
+        } 
+        />
+        <Route path="/Home" element={
+          <ProtectedRoute>
+            <Home/>
+          </ProtectedRoute>
+        } />
+        <Route path="/Sessionsummary" element={
+          <ProtectedRoute>
+            <SessionSummary/>
+          </ProtectedRoute>
+        } />
+        <Route path="/Usage" element={
+          <ProtectedRoute>
+            <UsageView />
+          </ProtectedRoute>
+        } 
+        />
+        <Route path="/session/:sessionId" element={
+          <ProtectedRoute>
+            <SessionDetails/>
+          </ProtectedRoute>
+        } />
+        <Route path="/Insights" element={
+          <ProtectedRoute>
+            <Insights/>
+          </ProtectedRoute>
+        } />
+        <Route path="/Settings" element={
+          <ProtectedRoute>
+            <Settings/>
+          </ProtectedRoute>
+        } />
+        <Route path="/signup" element={
+          <Signup/>
+        }/>
+        <Route path="/signin" element={
+          <Signin/>
+        }/>
+      </Routes>
+    </Router>
   );
 }
 

@@ -1,6 +1,21 @@
+/* index.css or App.css */
+@import url('https://fonts.googleapis.com/css2?family=Delius+Unicase:wght@400;700&family=K2D:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Delius+Unicase:wght@400;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
 
 @layer base {
   :root {
@@ -70,7 +85,7 @@ h1 {
   @apply text-muted-foreground scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl;
 }
 h2 {
-  @apply text-muted-foreground scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0;
+  @apply text-muted-foreground scroll-m-20 pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0;
 }
 h3 {
   @apply text-muted-foreground mt-8 scroll-m-20 text-2xl font-semibold tracking-tight;

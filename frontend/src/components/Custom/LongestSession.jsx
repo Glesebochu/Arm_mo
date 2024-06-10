@@ -42,8 +42,8 @@ export default function LongestSession({ onSessionClick }) {
 
   return (
     <div className="circle-container" onClick={handleSessionClick}>
-      <div className="circle">
-        <div className="circle-content">
+      <div className="circle bg-white">
+        <div className="circle-content ">
           <div id="loader">
             <div className="hourglass">
               <div className="top"></div>

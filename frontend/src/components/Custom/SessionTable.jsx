@@ -96,7 +96,10 @@ export function DataTable({ onSessionClick }) {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5158/api/Analyzer/GetSessionsForMeditator?meditatorId=${user.id}`
+          `http://localhost:5158/api/Analyzer/GetSessionsForMeditator?meditatorId=${user.id}`,
+          {
+            withCredentials: true,
+          }
         );
         if (response.status === 200) {
           const transformedData = response.data.map((session) => ({

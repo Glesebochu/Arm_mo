@@ -21,7 +21,10 @@ const BarGraph = ({ meditatorId }) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5158/api/analyzer/GetPracticedStagesForMeditator?meditatorId=${meditatorId}`
+          `http://localhost:5158/api/analyzer/GetPracticedStagesForMeditator?meditatorId=${meditatorId}`,
+          {
+            withCredentials: true,
+          }
         );
         let practicedStages = response.data.practicedStages;
 

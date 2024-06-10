@@ -24,7 +24,10 @@ function RemovedSessionDetails({ sessionId }) {
 
         // Fetch session data
         const sessionResponse = await axios.get(
-          `http://localhost:5158/api/Analyzer/GetRemovedSession?SessionId=${sessionId}`
+          `http://localhost:5158/api/Analyzer/GetRemovedSession?SessionId=${sessionId}`,
+          {
+            withCredentials: true,
+          }
         );
         const sessionData = sessionResponse.data;
         console.log(sessionData);
@@ -32,7 +35,10 @@ function RemovedSessionDetails({ sessionId }) {
 
         // Fetch the meditator ID for this session
         const meditatorResponse = await axios.get(
-          `http://localhost:5158/api/Analyzer/GetMeditatorForRemovedSession?sessionId=${sessionId}`
+          `http://localhost:5158/api/Analyzer/GetMeditatorForRemovedSession?sessionId=${sessionId}`,
+          {
+            withCredentials: true,
+          }
         );
         const meditatorId = meditatorResponse.data;
 
@@ -41,6 +47,9 @@ function RemovedSessionDetails({ sessionId }) {
           async (object) => {
             const countResponse = await axios.get(
               `http://localhost:5158/api/Analyzer/GetCountOfObservableObjectForMeditator`,
+              {
+                withCredentials: true,
+              },
               {
                 params: {
                   observableObject: object.title,
@@ -51,6 +60,9 @@ function RemovedSessionDetails({ sessionId }) {
 
             const typeResponse = await axios.get(
               `http://localhost:5158/api/analyzer/GetTypeForAnObservableObject`,
+              {
+                withCredentials: true,
+              },
               {
                 params: {
                   observableObjectId: object.id,
@@ -85,6 +97,9 @@ function RemovedSessionDetails({ sessionId }) {
           axios
             .get(
               `http://localhost:5158/api/Analyzer/GetCountOfAhaMomentForMeditator`,
+              {
+                withCredentials: true,
+              },
               {
                 params: {
                   ahaMoment: moment.label,

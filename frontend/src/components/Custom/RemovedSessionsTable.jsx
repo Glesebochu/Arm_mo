@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import {
   flexRender,
   getCoreRowModel,
@@ -43,6 +44,7 @@ function customFilterFn(rows, columnIds, filterValue) {
 
 export function RemovedSessions({ onSessionClick }) {
   const [sorting, setSorting] = useState([]);
+  const user = useSelector((state) => state.Auth.user.user);
   const [columnFilters, setColumnFilters] = useState([]);
   const [columnVisibility, setColumnVisibility] = useState({});
   const [rowSelection, setRowSelection] = useState({});
@@ -66,13 +68,19 @@ export function RemovedSessions({ onSessionClick }) {
         await Promise.all(
           sessionIds.map(async (sessionId) => {
             await axios.post(
-              `http://localhost:5158/api/Analyzer/RestoreSession?sessionId=${sessionId}`
+              `http://localhost:5158/api/Analyzer/RestoreSession?sessionId=${sessionId}`,
+              {
+                withCredentials: true,
+              }
             );
           })
         );
       } else {
         await axios.post(
-          `http://localhost:5158/api/Analyzer/RestoreSession?sessionId=${sessionIds}`
+          `http://localhost:5158/api/Analyzer/RestoreSession?sessionId=${sessionIds}`,
+          {
+            withCredentials: true,
+          }
         );
       }
       setSwaggerData((prevData) =>
@@ -94,7 +102,10 @@ export function RemovedSessions({ onSessionClick }) {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5158/api/Analyzer/GetRemovedSessionsForMeditator?meditatorId=1"
+          `http://localhost:5158/api/Analyzer/GetRemovedSessionsForMeditator?meditatorId=${user.id}`,
+          {
+            withCredentials: true,
+          }
         );
         if (response.status === 200) {
           const transformedData = response.data.map((session) => ({

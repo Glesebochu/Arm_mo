@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 export default function LongestSession({ onSessionClick }) {
   const [duration, setDuration] = useState("");
   const [sessionId, setSessionId] = useState(null);
+  const user = useSelector((state) => state.Auth.user.user);
 
   useEffect(() => {
     const fetchLongestSession = async () => {
       try {
         const response = await axios.get(
           "http://localhost:5158/api/analyzer/GetLongestSessionForMeditator",
-          { params: { meditatorId: 1 } }
+          {
+            withCredentials: true,
+          },
+          { params: { meditatorId: user.id } }
         );
 
         if (response.status === 200 && response.data) {

@@ -15,7 +15,10 @@ function DeleteSessionPrompt({ sessionId, onCancel }) {
     setIsDeleting(true);
     try {
       await axios.delete(
-        `http://localhost:5158/api/Analyzer/DeleteSession?SessionId=${id}`
+        `http://localhost:5158/api/Analyzer/DeleteSession?SessionId=${id}`,
+        {
+          withCredentials: true,
+        }
       );
       window.location.reload();
     } catch (error) {

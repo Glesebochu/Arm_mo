@@ -2,17 +2,22 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Target } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { useSelector } from "react-redux";
 import { ResponsiveContainer } from "recharts";
 
 export function CurrentStageAlert() {
   const [currentStage, setCurrentStage] = useState(null);
   const [goal, setGoal] = useState("");
+  const user = useSelector((state) => state.Auth.user.user);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5158/api/analyzer/GetCurrentStageOfMeditator?meditatorId=1"
+          `http://localhost:5158/api/analyzer/GetCurrentStageOfMeditator?meditatorId=${user.id}`,
+          {
+            withCredentials: true,
+          }
         );
         const data = response.data;
         setCurrentStage(data.id);

@@ -2,17 +2,22 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Activity } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { useSelector } from "react-redux";
 import { ResponsiveContainer } from "recharts";
 
 export function MostVisitedActivityAlert() {
   const [activity, setActivity] = useState("");
   const [count, setCount] = useState(0);
+  const user = useSelector((state) => state.Auth.user.user);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5158/api/Analyzer/GetMostFrequentedActivity?meditatorId=1"
+          `http://localhost:5158/api/Analyzer/GetMostFrequentedActivity?meditatorId=${user.id}`,
+          {
+            withCredentials: true,
+          }
         );
         const data = response.data;
         setActivity(data.activity);
@@ -34,9 +39,7 @@ export function MostVisitedActivityAlert() {
             Most Visited Activity
           </AlertTitle>
           <AlertDescription className="text-md">
-            {activity
-              ? `${activity}`
-              : "Loading..."}
+            {activity ? `${activity}` : "Loading..."}
           </AlertDescription>
         </div>
         <div className="mt-2">

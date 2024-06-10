@@ -15,7 +15,10 @@ function RestoreSessionPrompt({ sessionId, onCancel }) {
     setisRestoring(true);
     try {
       await axios.post(
-        `http://localhost:5158/api/Analyzer/RestoreSession?SessionId=${id}`
+        `http://localhost:5158/api/Analyzer/RestoreSession?SessionId=${id}`,
+        {
+          withCredentials: true,
+        }
       );
       window.location.reload();
     } catch (error) {

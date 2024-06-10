@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 // Define the CreatePreparationPhase thunk
-export const CreatePreparationPhase = createAsyncThunk(
+export const CreatePreparationPhaseThunk = createAsyncThunk(
   "preparationPhase/CreatePreparationPhase",
   async (preparationPhaseData, thunkAPI) => {
     try {
@@ -74,14 +74,14 @@ const preparationPhaseSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(CreatePreparationPhase.pending, (state) => {
+      .addCase(CreatePreparationPhaseThunk.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(CreatePreparationPhase.fulfilled, (state, action) => {
+      .addCase(CreatePreparationPhaseThunk.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.preparationPhase = action.payload;
       })
-      .addCase(CreatePreparationPhase.rejected, (state, action) => {
+      .addCase(CreatePreparationPhaseThunk.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload;
       })

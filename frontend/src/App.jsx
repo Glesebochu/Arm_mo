@@ -11,6 +11,7 @@ import { RemovedSessions } from "./components/Custom/RemovedSessionsTable";
 import Home from "./pages/Home";
 import { TransitionPhase } from "./pages/TransitionPhase";
 // import Settings from "./pages/Settings";
+import CreatePreparationPhase from "./pages/PreparationPhases/CreatePreparationPhase";
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
       <Router>
         <Routes>
           {/* For your specific Modules Modify this so that your Components show up when you run Vite */}
-          <Route path="/" element={<TransitionPhase />} />
+          <Route path="/" element={<CreatePreparationPhase />} />
 
           {/* No need to to remove the below */}
           {/* <Route path="/session/:sessionId" element={<SessionDetails />} />

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace backend.Controllers
 {
     
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class AnalyzerController : ControllerBase
@@ -157,7 +158,6 @@ namespace backend.Controllers
             return Ok();
         }
 
-        [Authorize]
         [HttpGet("GetSession")]
         public async Task<IActionResult> GetSession(int SessionId)
         {

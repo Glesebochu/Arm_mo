@@ -49,14 +49,37 @@ const numberToString = (number) => {
   return numberStrings[number];
 };
 
-
 const Home = () => {
-  const user = useSelector(state => state.Auth.user.user[0]);
+  const user = useSelector((state) => state.Auth.user.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
   const [frameworks, setFrameworks] = useState([]);
+  // useEffect(() => {
+  //   console.log(user, "We printed the user");
+  // }, []);
+
+  useEffect(() => {
+    console.log(user);
+    // Determine the maximum practiced stage
+    var maxPracticedStage = Math.max(
+      ...user.practicedStages.map((stage) => stage.stageId)
+    );
+
+    // Set frameworks up to the maximum practiced stage
+    let stages = Array.from({ length: maxPracticedStage }, (_, i) => ({
+      value: numberToString(i + 1).toLowerCase(),
+      label: numberToString(i + 1),
+    }));
+
+    // Check if stages is empty and add "One" if it is
+    if (stages.length === 0) {
+      stages.push({ value: "one", label: "One" });
+    }
+
+    setFrameworks(stages);
+  }, []);
 
   const handleSettingsClick = () => {
     navigate("/settings");
@@ -69,7 +92,9 @@ const Home = () => {
   };
 
   const filteredFrameworks = frameworks;
+
   return (
+
     <div className="pt-4">
       <div className="flex justify-between items-center px-6 h-1/6">
         <div>
@@ -160,32 +185,46 @@ const Home = () => {
                 </Avatar>
               </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-96 mt-[-4px] border mr-12 rounded-tr-none" align="end">
+            <PopoverContent
+              className="w-96 mt-[-4px] border mr-12 rounded-tr-none"
+              align="end"
+            >
               <div className="grid gap-4 p-4">
                 <div className="text-center">
                   <h4 className="text-lg font-medium font-k2d mb-2">
-                    {user ? `${user.firstName} ${user.lastName ? user.lastName : ""}` : "Loading..."}
+                    {user
+                      ? `${user.firstName} ${
+                          user.lastName ? user.lastName : ""
+                        }`
+                      : "Loadings..."}
                   </h4>
                   <div className="relative flex justify-center">
                     <div className="border-[10px] w-fit rounded-[50%]">
                       <Avatar className="h-16 w-16 mx-auto">
                         {user?.profilePicture ? (
-                          <AvatarImage
-                            src={`${user.profilePicture}`}
-                          />
+                          <AvatarImage src={`${user.profilePicture}`} />
                         ) : (
                           <AvatarFallback className="bg-black text-white">
                             {user?.firstName.charAt(0)}
                           </AvatarFallback>
                         )}
                       </Avatar>
-                      <div className="bg-[#E2E8F0] p-1 rounded-[50%] w-fit absolute left-[42%] bottom-[6%] rotate-6 cursor-pointer"  onClick={()=> navigate("/settings")}>
-                        <FaPen className="text-black text-[16px] -rotate-12"/>
+                      <div
+                        className="bg-[#E2E8F0] p-1 rounded-[50%] w-fit absolute left-[42%] bottom-[6%] rotate-6 cursor-pointer"
+                        onClick={() => navigate("/settings")}
+                      >
+                        <FaPen className="text-black text-[16px] -rotate-12" />
                       </div>
                     </div>
                   </div>
 
-                  <p className={user.username ? `text-sm text-muted-foreground mt-2` : "hidden"}>
+                  <p
+                    className={
+                      user.username
+                        ? `text-sm text-muted-foreground mt-2`
+                        : "hidden"
+                    }
+                  >
                     {user.username ? `@${user.username}` : ""}
                   </p>
                 </div>
@@ -202,7 +241,7 @@ const Home = () => {
                     </div>
                   </div>
                   <div className="flex items-center">
-                    <Target className="mr-2"/>
+                    <Target className="mr-2" />
                     <div className="flex items-center">
                       <Label htmlFor="currentStage">
                         <b>Stage</b>
@@ -230,7 +269,7 @@ const Home = () => {
                     variant="outline"
                     className="w-full flex items-center justify-start space-x-2 pl-0"
                     onClick={() => {
-                     dispatch(logout()); 
+                      dispatch(logout());
                     }}
                   >
                     <LogOut className="h-5 w-5" />

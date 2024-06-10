@@ -24,8 +24,9 @@ function SessionDetails({ sessionId }) {
 
         // Fetch session data
         const sessionResponse = await axios.get(
-          `http://localhost:5158/api/Analyzer/GetSession?SessionId=${sessionId}`,{
-            withCredentials: true
+          `http://localhost:5158/api/Analyzer/GetSession?SessionId=${sessionId}`,
+          {
+            withCredentials: true,
           }
         );
         const sessionData = sessionResponse.data;
@@ -33,7 +34,10 @@ function SessionDetails({ sessionId }) {
 
         // Fetch the meditator ID for this session
         const meditatorResponse = await axios.get(
-          `http://localhost:5158/api/Analyzer/GetMeditatorForSession?sessionId=${sessionId}`
+          `http://localhost:5158/api/Analyzer/GetMeditatorForSession?sessionId=${sessionId}`,
+          {
+            withCredentials: true,
+          }
         );
         const meditatorId = meditatorResponse.data;
 
@@ -42,6 +46,9 @@ function SessionDetails({ sessionId }) {
           async (object) => {
             const countResponse = await axios.get(
               `http://localhost:5158/api/Analyzer/GetCountOfObservableObjectForMeditator`,
+              {
+                withCredentials: true,
+              },
               {
                 params: {
                   observableObject: object.title,
@@ -52,6 +59,9 @@ function SessionDetails({ sessionId }) {
 
             const typeResponse = await axios.get(
               `http://localhost:5158/api/analyzer/GetTypeForAnObservableObject`,
+              {
+                withCredentials: true,
+              },
               {
                 params: {
                   observableObjectId: object.id,
@@ -86,6 +96,9 @@ function SessionDetails({ sessionId }) {
           axios
             .get(
               `http://localhost:5158/api/Analyzer/GetCountOfAhaMomentForMeditator`,
+              {
+                withCredentials: true,
+              },
               {
                 params: {
                   ahaMoment: moment.label,

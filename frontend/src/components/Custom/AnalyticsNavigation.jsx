@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
+import { Navigate, useNavigate } from "react-router-dom";
 import { ResponsiveContainer } from "recharts";
 import {
   NavigationMenu,
@@ -14,6 +15,7 @@ import {
 
 export function NavigationBar({ setSelectedView }) {
   const [hideNav, setHideNav] = useState(false);
+  const navigate = useNavigate();
   let lastScrollTop = 0;
 
   useEffect(() => {
@@ -60,6 +62,9 @@ export function NavigationBar({ setSelectedView }) {
                     </p>
                   </NavigationMenuLink>
                 </li>
+                <ListItem title="Home" onClick={() => navigate("/home")}>
+                  Navigate back to the Home page.
+                </ListItem>
                 <ListItem
                   title="Sessions Summary"
                   onClick={() => setSelectedView("DataTable")}
@@ -86,6 +91,12 @@ export function NavigationBar({ setSelectedView }) {
               </ul>
             </NavigationMenuContent>
           </NavigationMenuItem>
+          <NavigationMenuLink
+            className={navigationMenuTriggerStyle()}
+            onClick={() => navigate("/Home")}
+          >
+            Home
+          </NavigationMenuLink>
           <NavigationMenuItem>
             <NavigationMenuLink
               className={navigationMenuTriggerStyle()}

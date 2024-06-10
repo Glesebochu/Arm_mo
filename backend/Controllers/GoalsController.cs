@@ -32,6 +32,7 @@ namespace backend.Controllers
             var goals = _context.Goals
                 .Include(g => g.Activity)
                 .Include(g => g.MeditationObject)
+                .Include(g => g.ChildGoals)
                 .ToList();
 
             // Map goals to DTOs
@@ -40,20 +41,6 @@ namespace backend.Controllers
             return Ok(goalDTOs);
         }
 
-        // private GoalDTO MapGoalToDTO(Goal goal)
-        // {
-        //     var goalDTO = new GoalDTO
-        //     {
-        //         Status = goal.Status.ToString(),
-        //         DueDate = goal.DueDate,
-        //         CompletedDate = goal.CompletedDate,
-        //         Activity = goal.Activity?.Title,
-        //         MeditationObject = goal.MeditationObject?.Title,
-        //         ChildGoals = goal.ChildGoals?.Select(child => MapGoalToDTO(child)).ToList()
-        //     };
-
-        //     return goalDTO;
-        // }
         // An action for getting/reading a single goal
         [HttpGet("GetById/{id}")]
         public IActionResult GetById([FromRoute] int id)
@@ -78,11 +65,16 @@ namespace backend.Controllers
         // An action for creating a goal; GET
         // An action for creating a goal; POST
         [HttpPost("Create")]
-        [ActionName("Create")]
         public IActionResult Create([FromBody] CreateGoalDTO createGoalDTO)
         {
             // Convert the DTO into a Goal object that EF can understand.
             var goal = _mapper.Map<Models.Goal>(createGoalDTO);
+
+            // var activity = goal.Activity;
+            // var meditationObject = goal.MeditationObject;
+
+            // _context.Activities.Add(activity);
+            // _context.ObservableObjects.Add(meditationObject);
 
             // Add the goal to the Goals table.
             _context.Goals.Add(goal);
@@ -124,8 +116,8 @@ namespace backend.Controllers
         }
 
         // An action for updating a goal; POST
-        [HttpPut("Update/{id}")]
-        public async Task<ActionResult> Update(int id, [FromBody] UpdateGoalDTO updateGoalDto)
+        [HttpPut("Update")]
+        public async Task<ActionResult> Update([FromBody] UpdateGoalDTO updateGoalDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -136,11 +128,11 @@ namespace backend.Controllers
                 var existingGoal = await _context.Goals
                     .Include(g => g.Activity)
                     .Include(g => g.MeditationObject)
-                    .FirstOrDefaultAsync(g => g.Id == id);
+                    .FirstOrDefaultAsync(g => g.Id == updateGoalDto.Id);
 
                 if (existingGoal == null)
                 {
-                    return NotFound("Goal not found"); // Return 404 Not Found if goal is not found
+                    return NotFound("Goal not found" + updateGoalDto); // Return 404 Not Found if goal is not found
                 }
 
                 // Map the UpdateGoalDTO to the existing Goal entity
@@ -151,11 +143,11 @@ namespace backend.Controllers
                 // Update the titles of the Activity and MeditationObject
                 if (existingGoal.Activity != null)
                 {
-                    existingGoal.Activity.Title = updateGoalDto.Activity;
+                    existingGoal.Activity = _mapper.Map<Activity>(updateGoalDto.Activity);
                 }
                 if (existingGoal.MeditationObject != null)
                 {
-                    existingGoal.MeditationObject.Title = updateGoalDto.MeditationObject;
+                    existingGoal.MeditationObject = _mapper.Map<ObservableObject>(updateGoalDto.MeditationObject);
                 }
 
                 // Save changes to the database
@@ -168,28 +160,6 @@ namespace backend.Controllers
                 return StatusCode(500, "An error occurred while updating the goal"); // Return 500 Internal Server Error on database error
             }
         }
-
-
-        //     [HttpPut]
-        //     [Route("{id:int}")]
-        //     public async Task<IActionResult> Update([FromRoute] int id, [FromBody] GoalDTO goalDto)
-        //     {
-        //         if (!ModelState.IsValid)
-        //             return BadRequest(ModelState);
-
-        //         var GoalDTOs = await _goalRepo.UpdateAsync(id, goalDto);
-
-        //         if (GoalDTOs == null)
-        //         {
-        //             return NotFound();
-        //         }
-
-        //         return Ok(GoalDTOs);
-        //     }
-
-        // }
-
-
     }
 }
 

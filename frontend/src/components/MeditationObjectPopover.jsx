@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/select"
 
 
-export function ObservableObjectPopover({ observableObject, onSave, buttonClass }) {
+export function MeditationObjectPopover({ observableObject, onSave, buttonClass }) {
     const subTypeOptions = [
         'Visual',
         'Auditory',
@@ -30,19 +30,6 @@ export function ObservableObjectPopover({ observableObject, onSave, buttonClass 
         'Thought',
         'MentalState',
         'FeelingTone'
-    ];
-
-    const intensityOptions = [
-        'Mild',
-        'Moderate',
-        'Intense'
-    ];
-
-    const proximityOptions = [
-        'Unrelated',
-        'SameSubType',
-        'DirectlyRelated',
-        'MeditationObject'
     ];
 
     const [formState, setFormState] = useState({ ...observableObject });
@@ -78,7 +65,7 @@ export function ObservableObjectPopover({ observableObject, onSave, buttonClass 
             <PopoverContent>
                 <div className="grid gap-2">
                     <div className="space-y-2">
-                        <h4 className="font-medium leading-none text-muted-foreground">Observable Object</h4>
+                        <h4 className="font-medium leading-none text-muted-foreground">Meditation Object</h4>
                     </div>
                     <hr key="divider" className="my-2 border-t-2" />
                     <div className="grid grid-cols-3 items-center gap-4">
@@ -102,21 +89,6 @@ export function ObservableObjectPopover({ observableObject, onSave, buttonClass 
                         />
                     </div>
                     <div className="grid grid-cols-3 items-center gap-4">
-                        <Label className="text-muted-foreground" htmlFor="intensity">Intensity</Label>
-                        <Select onValueChange={(value) => handleSelectChange('intensity', value)}>
-                            <SelectTrigger className="w-full col-span-2 h-8">
-                                <SelectValue placeholder={formState.intensity} />
-                            </SelectTrigger>
-                            <SelectContent className="w-full">
-                                {intensityOptions.map(option => (
-                                    <SelectItem key={option} value={option}>
-                                        {option}
-                                    </SelectItem>
-                                ))}
-                            </SelectContent>
-                        </Select>
-                    </div>
-                    <div className="grid grid-cols-3 items-center gap-4">
                         <Label className="text-muted-foreground" htmlFor="subType">SubType</Label>
                         <Select onValueChange={(value) => handleSelectChange('subType', value)}>
                             <SelectTrigger className="w-full col-span-2 h-8">
@@ -129,21 +101,6 @@ export function ObservableObjectPopover({ observableObject, onSave, buttonClass 
                                         : <SelectItem key={option} value={option}>
                                             {option}
                                         </SelectItem>
-                                ))}
-                            </SelectContent>
-                        </Select>
-                    </div>
-                    <div className="grid grid-cols-3 items-center gap-4">
-                        <Label className="text-muted-foreground" htmlFor="proximityToMO">Proximity to MO</Label>
-                        <Select onValueChange={(value) => handleSelectChange('proximityToMO', value)}>
-                            <SelectTrigger className="w-full col-span-2 h-8">
-                                <SelectValue placeholder={formState.proximityToMO} />
-                            </SelectTrigger>
-                            <SelectContent className="w-full">
-                                {proximityOptions.map(option => (
-                                    <SelectItem key={option} value={option}>
-                                        {option}
-                                    </SelectItem>
                                 ))}
                             </SelectContent>
                         </Select>

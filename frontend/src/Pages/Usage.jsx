@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../Styles/Usage.css";
 import UsageGraph from "../components/Custom/UsageGraph";
+import { useSelector } from "react-redux";
 import TodayUsageBubble from "../components/Custom/TodayUsageBubble";
 
 import {
@@ -24,6 +25,7 @@ Chart.register(
 const UsageView = () => {
   const [chartData, setChartData] = useState(null);
   const [customStartDate, setCustomStartDate] = useState(null);
+  const user = useSelector((state) => state.Auth.user.user);
 
   useEffect(() => {
     fetchUsageDataForPastWeek();
@@ -39,10 +41,16 @@ const UsageView = () => {
     document.getElementById("startDate").valueAsDate = new Date();
     try {
       const usageResponse = await axios.get(
-        "http://localhost:5158/api/Analyzer/GetUsageDataForPastWeek"
+        `http://localhost:5158/api/Analyzer/GetUsageDataForPastWeek?userId=${user.id}`,
+        {
+          withCredentials: true,
+        }
       );
       const sessionResponse = await axios.get(
-        "http://localhost:5158/api/Analyzer/GetSessionUsageCustom"
+        `http://localhost:5158/api/Analyzer/GetSessionUsageCustom?userId=${user.id}`,
+        {
+          withCredentials: true,
+        }
       );
 
       const usageData = usageResponse.data;
@@ -79,10 +87,16 @@ const UsageView = () => {
   const fetchUsageDataCustom = async (startDate) => {
     try {
       const usageResponse = await axios.get(
-        `http://localhost:5158/api/Analyzer/GetUsageDataCustom?startDate=${startDate}`
+        `http://localhost:5158/api/Analyzer/GetUsageDataCustom?startDate=${startDate}&userId=${user.id}`,
+        {
+          withCredentials: true,
+        }
       );
       const sessionResponse = await axios.get(
-        `http://localhost:5158/api/Analyzer/GetSessionUsageCustom?customDate=${startDate}`
+        `http://localhost:5158/api/Analyzer/GetSessionUsageCustom?customDate=${startDate}&userId=${user.id}`,
+        {
+          withCredentials: true,
+        }
       );
 
       const usageData = usageResponse.data;

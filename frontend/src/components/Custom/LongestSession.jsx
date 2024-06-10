@@ -58,7 +58,7 @@ export default function LongestSession({ onSessionClick }) {
               <p id="time">{duration}</p>
             </div>
           </div>
-          <p className="text">Your Longest Session</p>
+          <p className="textLongest">Your Longest Session</p>
         </div>
       </div>
     </div>

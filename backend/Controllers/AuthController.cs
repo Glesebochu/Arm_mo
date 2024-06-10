@@ -7,6 +7,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Google.Apis.Auth;
+using Microsoft.EntityFrameworkCore;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -85,7 +86,8 @@ public class AuthController : ControllerBase
     public IActionResult Me(){
        Console.WriteLine("Hello world");
        var email = User.FindFirstValue(ClaimTypes.Email);
-       var meditator = _context.Meditators.Where(meditator => meditator.Email == email);
+       var meditator = _context.Meditators.Where(meditator => meditator.Email == email)
+        .Include(m=>m.CurrentStage);
        return Ok(new {user = meditator});
     }
 

@@ -23,7 +23,7 @@ public class AuthController : ControllerBase
         _context = context;
     }
 
-    
+
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
     {
@@ -61,7 +61,7 @@ public class AuthController : ControllerBase
             var cookieOptions = new CookieOptions
             {
                 HttpOnly = true,
-                Secure = true, 
+                Secure = true,
                 SameSite = SameSiteMode.None, // Allowing cross-origin requests
                 Expires = DateTime.UtcNow.AddDays(1)
             };
@@ -83,12 +83,20 @@ public class AuthController : ControllerBase
 
     [Authorize]
     [HttpGet("Me")]
-    public IActionResult Me(){
-       Console.WriteLine("Hello world");
-       var email = User.FindFirstValue(ClaimTypes.Email);
-       var meditator = _context.Meditators.Where(meditator => meditator.Email == email)
-        .Include(m=>m.CurrentStage);
-       return Ok(new {user = meditator});
+    public IActionResult Me()
+    {
+        Console.WriteLine("Hello world");
+        var email = User.FindFirstValue(ClaimTypes.Email);
+
+        // Materialize the query
+        var meditator = _context.Meditators
+            .Where(m => m.Email == email)
+            .Include(m => m.CurrentStage)
+            .Include(m => m.PracticedStages)
+            .FirstOrDefault();
+
+        // Return the materialized list as the response
+        return Ok(new { user = meditator });
     }
 
 
@@ -100,7 +108,7 @@ public class AuthController : ControllerBase
         {
             return Unauthorized();
         }
-        
+
         // Create and return the JWT token
         var token = GenerateJwtToken(payload.Email);
 
@@ -109,7 +117,7 @@ public class AuthController : ControllerBase
         var cookieOptions = new CookieOptions
         {
             HttpOnly = true,
-            Secure = true, 
+            Secure = true,
             SameSite = SameSiteMode.None, // Allowing cross-origin requests
             Expires = DateTime.UtcNow.AddDays(1)
         };

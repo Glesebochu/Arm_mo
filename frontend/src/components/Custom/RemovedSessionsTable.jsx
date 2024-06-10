@@ -69,6 +69,7 @@ export function RemovedSessions({ onSessionClick }) {
           sessionIds.map(async (sessionId) => {
             await axios.post(
               `http://localhost:5158/api/Analyzer/RestoreSession?sessionId=${sessionId}`,
+              {},
               {
                 withCredentials: true,
               }
@@ -78,6 +79,7 @@ export function RemovedSessions({ onSessionClick }) {
       } else {
         await axios.post(
           `http://localhost:5158/api/Analyzer/RestoreSession?sessionId=${sessionIds}`,
+          {},
           {
             withCredentials: true,
           }

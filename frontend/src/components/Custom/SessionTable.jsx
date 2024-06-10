@@ -12,6 +12,7 @@ import {
 import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react";
 import { Button } from "../../components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useSelector } from "react-redux";
 import { ResponsiveContainer } from "recharts";
 import {
   DropdownMenu,
@@ -42,6 +43,7 @@ function customFilterFn(rows, columnIds, filterValue) {
 
 export function DataTable({ onSessionClick }) {
   const [sorting, setSorting] = useState([]);
+  const user = useSelector((state) => state.Auth.user.user);
   const [columnFilters, setColumnFilters] = useState([]);
   const [columnVisibility, setColumnVisibility] = useState({});
   const [rowSelection, setRowSelection] = useState({});
@@ -90,10 +92,11 @@ export function DataTable({ onSessionClick }) {
   };
 
   useEffect(() => {
+    console.log("For data table",user);
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5158/api/Analyzer/GetSessionsForMeditator?meditatorId=1"
+          `http://localhost:5158/api/Analyzer/GetSessionsForMeditator?meditatorId=${user.id}`
         );
         if (response.status === 200) {
           const transformedData = response.data.map((session) => ({
@@ -124,7 +127,8 @@ export function DataTable({ onSessionClick }) {
                 : "undefined",
             meditationObject:
               session.preparationPhase?.goals[0]?.parentGoal &&
-              session.preparationPhase?.goals[0]?.parentGoal.meditationObject?.title
+              session.preparationPhase?.goals[0]?.parentGoal.meditationObject
+                ?.title
                 ? `${session.preparationPhase.goals[0].parentGoal.meditationObject.title} `
                 : session.preparationPhase?.goals[0]?.meditationObject?.title
                 ? `${session.preparationPhase.goals[0].meditationObject.title} `
@@ -306,8 +310,8 @@ export function DataTable({ onSessionClick }) {
             <Input
               placeholder="Filter Sessions..."
               value={
-                columnFilters.find((f) => f.id === "meditationObject")
-                  ?.value || ""
+                columnFilters.find((f) => f.id === "meditationObject")?.value ||
+                ""
               }
               onChange={(event) => handleFilterChange(event.target.value)}
               className="max-w-sm"

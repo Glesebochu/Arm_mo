@@ -56,9 +56,6 @@ const Home = () => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
   const [frameworks, setFrameworks] = useState([]);
-  // useEffect(() => {
-  //   console.log(user, "We printed the user");
-  // }, []);
 
   useEffect(() => {
     console.log(user);

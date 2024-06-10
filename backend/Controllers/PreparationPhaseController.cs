@@ -57,5 +57,62 @@ namespace backend.Controllers
             }
         }
 
+        [HttpPut("Update")]
+        public async Task<ActionResult> Update([FromBody] PreparationPhase perparationPhase)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            try
+            {
+                var existingpreparationPhase = await _context.PreparationPhase
+                    .FirstOrDefaultAsync(g => g.Id == perparationPhase.Id);
+
+                if (existingpreparationPhase == null)
+                {
+                    return NotFound("Preparation Phase not found" + perparationPhase); // Return 404 Not Found if Preparation Phase is not found
+                }
+
+                existingpreparationPhase.Duration = perparationPhase.Duration;
+                existingpreparationPhase.Motivation = perparationPhase.Motivation;
+                existingpreparationPhase.Expectation = perparationPhase.Expectation;
+                existingpreparationPhase.Distractions = perparationPhase.Distractions;
+                existingpreparationPhase.StartDateTime = perparationPhase.StartDateTime;
+                existingpreparationPhase.EndDateTime = perparationPhase.EndDateTime;
+
+                // Save changes to the database
+                await _context.SaveChangesAsync();
+
+                return Ok("Preparation Phase updated successfully"); // Return 200 OK on successful update
+            }
+            catch (DbUpdateException)
+            {
+                return StatusCode(500, "An error occurred while updating the Preparation Phase"); // Return 500 Internal Server Error on database error
+            }
+        }
+
+        [HttpDelete("Delete/{id:int}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            try
+            {
+                var existinexistingpreparationPhase = await _context.PreparationPhase.FindAsync(id);
+                if (existinexistingpreparationPhase == null)
+                {
+                    return NotFound("Preparation Phase not found"); // Return 404 Not Found if Preparation Phase is not found
+                }
+
+                _context.PreparationPhase.Remove(existinexistingpreparationPhase);
+                await _context.SaveChangesAsync(); // Save changes to the database
+
+                return Ok("Preparation Phase deleted successfully"); // Return 200 OK on successful deletion
+            }
+            catch (DbUpdateException)
+            {
+                return StatusCode(500, "An error occurred while deleting the Preparation Phase"); // Return 500 Internal Server Error on database error
+            }
+        }
+
+
     }
 }

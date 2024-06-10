@@ -14,6 +14,8 @@ INSERT INTO Stages (Goal) VALUES
 ('Attain deep tranquility and equanimity, free from mental and physical discomfort.');
 
 --Make sure To create a meditator via the frontend first before running the rest of this script.
+USE Arm_moEF3;
+
 DECLARE @MeditatorId1 INT = (SELECT TOP 1 Id FROM Meditators);
 
 -- Insert dummy data into dbo.UserUsage

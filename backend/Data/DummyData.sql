@@ -1,6 +1,6 @@
 USE Arm_moEF3;
 
--- Insert dummy data into Stages
+-- Insert dummy data into Stages this should be done before creating the meditator.
 INSERT INTO Stages (Goal) VALUES
 ('Develop a consistent daily meditation practice.'),
 ('Shorten the periods of mind-wandering and extend the periods of sustained attention to the meditation object'),
@@ -13,25 +13,22 @@ INSERT INTO Stages (Goal) VALUES
 ('Develop mental pliancy and complete unification of mind and body.'),
 ('Attain deep tranquility and equanimity, free from mental and physical discomfort.');
 
--- Insert dummy data into Meditator
-INSERT INTO Meditators (CurrentStageId, Username, FirstName, LastName, _password, Email,ProfilePicture) VALUES
-(1, 'JohnnyBravo', 'John', 'Doe', 'password1', 'john.doe@example.com','johndoe.png'),
-(2, 'JaneyDane', 'Jane', 'Smith', 'password2', 'jane.smith@example.com',null),
-(3, 'JimTheBeam', 'Jim', 'Beam', 'password3', 'jim.beam@example.com',null);
+--Make sure To create a meditator first before running the rest of this script.
+DECLARE @MeditatorId1 INT = (SELECT TOP 1 Id FROM Meditators);
 
 -- Insert dummy data into dbo.UserUsage
 INSERT INTO dbo.UserUsage (UserId, Date, StartTime, UsageTime)
 VALUES 
-(1, '2024-06-06', '08:00:00', '02:30:00'),  -- 2 hours 30 minutes
-(1, '2024-06-07', '07:00:00', '01:00:00'),  -- 1 hour
-(1, '2024-06-08', '06:30:00', '01:45:00'),  -- 1 hour 45 minutes
-(1, '2024-06-09', '06:45:00', '02:45:00'),  -- 2 hours 45 minutes
-(1, '2024-06-10', '07:30:00', '01:30:00'),  -- 1 hour 30 minutes
-(1, '2024-06-11', '06:15:00', '01:30:00'),  -- 1 hour 30 minutes
-(1, '2024-06-12', '07:45:00', '01:15:00'),  -- 1 hour 15 minutes
-(1, '2024-06-13', '06:45:00', '01:30:00'),  -- 1 hour 30 minutes
-(1, '2024-06-14', '08:45:00', '01:15:00'),  -- 1 hour 15 minutes
-(1, '2024-06-15', '07:00:00', '01:30:00');  -- 1 hour 30 minutes
+(@MeditatorId1, '2024-06-06', '08:00:00', '02:30:00'),  -- 2 hours 30 minutes
+(@MeditatorId1, '2024-06-07', '07:00:00', '01:00:00'),  -- 1 hour
+(@MeditatorId1, '2024-06-08', '06:30:00', '01:45:00'),  -- 1 hour 45 minutes
+(@MeditatorId1, '2024-06-09', '06:45:00', '02:45:00'),  -- 2 hours 45 minutes
+(@MeditatorId1, '2024-06-10', '07:30:00', '01:30:00'),  -- 1 hour 30 minutes
+(@MeditatorId1, '2024-06-11', '06:15:00', '01:30:00'),  -- 1 hour 30 minutes
+(@MeditatorId1, '2024-06-12', '07:45:00', '01:15:00'),  -- 1 hour 15 minutes
+(@MeditatorId1, '2024-06-13', '06:45:00', '01:30:00'),  -- 1 hour 30 minutes
+(@MeditatorId1, '2024-06-14', '08:45:00', '01:15:00'),  -- 1 hour 15 minutes
+(@MeditatorId1, '2024-06-15', '07:00:00', '01:30:00');  -- 1 hour 30 minutes
 
 
 -- Activities
@@ -89,7 +86,7 @@ INSERT INTO PreparationPhase (Duration, Motivation, Expectation, EndDateTime, St
 
 
 -- Insert dummy data into Sessions with valid PreparationPhaseId
-DECLARE @MeditatorId1 INT = (SELECT TOP 1 Id FROM Meditators);
+
 
 DECLARE @PreparationPhaseId1 INT = (SELECT Id FROM PreparationPhase WHERE Duration = '00:15:00' AND Motivation = 'Stay focused');
 DECLARE @PreparationPhaseId2 INT = (SELECT Id FROM PreparationPhase WHERE Duration = '00:10:00' AND Motivation = 'Calm mind');

@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { updateUser } from "./UserSlice";
+import { setUserStatus, setUserError } from "./UserSlice";
 
 const initialState = {
   isLoading: false,
@@ -104,7 +106,7 @@ export const fetchMe = createAsyncThunk("Auth/fetchMe", async (_, ThunkAPi) => {
 
 const authSlice = createSlice({
   name: "Auth",
-  initialState,
+  initialState, 
   reducers: {
     logOut: (state) => {
       state.isAuthenticated = false;
@@ -130,6 +132,7 @@ const authSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(login.fulfilled, (state, action) => {
+        console.log("seeing what will be printed", action.meta.arg);
         state.isLoading = false;
         state.error = "";
         state.isError = false;
@@ -160,6 +163,17 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.user = null;
         state.isAuthenticated = false;
+      })
+      .addCase(updateUser.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(updateUser.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.user = action.payload;
+      })
+      .addCase(updateUser.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.payload;
       });
   },
 });

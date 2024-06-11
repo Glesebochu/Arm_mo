@@ -5,6 +5,7 @@ import { GoGear } from "react-icons/go";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { Label } from "@/components/ui/label";
+import { fetchStartUsage } from "./Usage";
 import {
   Popover,
   PopoverContent,
@@ -91,7 +92,6 @@ const Home = () => {
   const filteredFrameworks = frameworks;
 
   return (
-
     <div className="pt-4">
       <div className="flex justify-between items-center px-6 h-1/6">
         <div>
@@ -266,6 +266,11 @@ const Home = () => {
                     variant="outline"
                     className="w-full flex items-center justify-start space-x-2 pl-0"
                     onClick={() => {
+                      if (user) {
+                        fetchStartUsage(
+                          `http://localhost:5158/api/Analyzer/EndUsage?userId=${user.id}`
+                        );
+                      }
                       dispatch(logout());
                     }}
                   >

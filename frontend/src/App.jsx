@@ -9,52 +9,75 @@ import Landing from "./pages/Landing";
 import ProtectedRoute from "../utils/ProtectedRoute";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import SessionSummary from "./pages/AnalyticsPage";
+import { useSelector } from "react-redux";
 
 function App() {
+  // const user = useSelector((state) => state.Auth.user);
+
+  // useEffect(() => {
+  //   window.addEventListener("beforeunload", endUsage);
+
+  //   return () => {
+  //     window.removeEventListener("beforeunload", endUsage);
+  //   };
+  // }, []);
+  // const endUsage = async () => {
+  //   alert("closing!");
+  // };
   return (
     <Router>
       <Routes>
-        <Route path="/" element={
-          <Landing />
-        } 
+        <Route path="/" element={<Landing />} />
+        <Route
+          path="/Home"
+          element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          }
         />
-        <Route path="/Home" element={
-          <ProtectedRoute>
-            <Home/>
-          </ProtectedRoute>
-        } />
-        <Route path="/Sessionsummary" element={
-          <ProtectedRoute>
-            <SessionSummary/>
-          </ProtectedRoute>
-        } />
-        <Route path="/Usage" element={
-          <ProtectedRoute>
-            <UsageView />
-          </ProtectedRoute>
-        } 
+        <Route
+          path="/Sessionsummary"
+          element={
+            <ProtectedRoute>
+              <SessionSummary />
+            </ProtectedRoute>
+          }
         />
-        <Route path="/session/:sessionId" element={
-          <ProtectedRoute>
-            <SessionDetails/>
-          </ProtectedRoute>
-        } />
-        <Route path="/Insights" element={
-          <ProtectedRoute>
-            <Insights/>
-          </ProtectedRoute>
-        } />
-        <Route path="/Settings" element={
-          <ProtectedRoute>
-            <Settings/>
-          </ProtectedRoute>
-        } />
-        <Route path="/signup" element={
-          <Signup/>
-        }/>
-        <Route path="/signin" element={
-          <Signin/>
-        }/>
+        <Route
+          path="/Usage"
+          element={
+            <ProtectedRoute>
+              <UsageView />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/session/:sessionId"
+          element={
+            <ProtectedRoute>
+              <SessionDetails />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/Insights"
+          element={
+            <ProtectedRoute>
+              <Insights />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/Settings"
+          element={
+            <ProtectedRoute>
+              <Settings />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/signin" element={<Signin />} />
       </Routes>
     </Router>
   );

@@ -15,6 +15,7 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 const BarGraph = ({ meditatorId }) => {
   const [chartData, setChartData] = useState({ labels: [], datasets: [] });
   const [containerHeight, setContainerHeight] = useState(400); // Default height
+  const [hasData, setHasData] = useState(false);
 
   useEffect(() => {
     // Fetch the data from the API
@@ -27,6 +28,10 @@ const BarGraph = ({ meditatorId }) => {
           }
         );
         let practicedStages = response.data.practicedStages;
+
+        if (practicedStages.length > 0) {
+          setHasData(true);
+        }
 
         // Count the occurrences of each stageId
         const stageCounts = practicedStages.reduce((acc, stage) => {
@@ -132,7 +137,7 @@ const BarGraph = ({ meditatorId }) => {
   };
 
   return (
-    <div className="bar-graph-container">
+    <div className={`bar-graph-container ${!hasData ? "hidden" : ""}`}>
       <h1 className="mb-4 mt-4 text-1xl text-center font-light leading-none tracking-tight text-black md:text-5xl lg:text-4xl dark:text-white">
         Stages you've practiced
       </h1>

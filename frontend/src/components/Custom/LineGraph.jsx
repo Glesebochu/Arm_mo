@@ -127,7 +127,7 @@ export const LineGraph = () => {
                     chartArea.top
                   );
                   gradient.addColorStop(0, "rgba(10, 24, 82, 0.1)");
-                  gradient.addColorStop(1, "rgba(10, 24, 82, 0.4)");
+                  gradient.addColorStop(1, "rgba(11, 24, 82, 0.1)");
                   return gradient;
                 },
                 tension: 0.3,
@@ -150,7 +150,7 @@ export const LineGraph = () => {
                     chartArea.top
                   );
                   gradient.addColorStop(0, "rgba(0, 100, 0, 0.1)");
-                  gradient.addColorStop(1, "rgba(0, 100, 0, 0.4)");
+                  gradient.addColorStop(1, "rgba(0, 100, 0, 0.1)");
                   return gradient;
                 },
                 tension: 0.3,

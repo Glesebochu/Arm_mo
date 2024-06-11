@@ -128,6 +128,8 @@ namespace backend.Controllers
         [Route("StartUsage")]
         public async Task<IActionResult> StartUsage(int userId)//uncomment the parameter after testing.
         {
+            Console.WriteLine(userId);
+
             var userUsage = new UserUsage
             {
                 UserId = userId,//change the userId after testing...
@@ -139,7 +141,7 @@ namespace backend.Controllers
             await dbContext.UserUsage.AddAsync(userUsage);
             await dbContext.SaveChangesAsync();
 
-            return Ok();
+            return Ok(new {Id = userId});
         }
 
         [HttpPost]

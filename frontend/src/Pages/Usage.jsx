@@ -231,6 +231,14 @@ const UsageView = () => {
   );
 };
 
+export const fetchStartUsage = async (endpoint) => {
+  try {
+    const startTime = await axios.post(`${endpoint}`, null, {
+      withCredentials: true,
+    });
+  } catch {}
+};
+
 var chartInstance;
 
 export default UsageView;

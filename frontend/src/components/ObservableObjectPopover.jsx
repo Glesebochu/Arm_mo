@@ -18,8 +18,7 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 
-
-export function ObservableObjectPopover({ observableObject, onSave, buttonClass, proximity = null }) {
+export function ObservableObjectPopover({ observableObject, onSave, onDelete, buttonClass, proximity = null }) {
     const subTypeOptions = [
         'Visual',
         'Auditory',
@@ -48,7 +47,6 @@ export function ObservableObjectPopover({ observableObject, onSave, buttonClass,
     const [formState, setFormState] = useState({ ...observableObject });
     const [open, setOpen] = useState(false);
 
-
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormState({
@@ -69,6 +67,10 @@ export function ObservableObjectPopover({ observableObject, onSave, buttonClass,
         setOpen(false); // Close the popover on save
     };
 
+    const handleDelete = () => {
+        onDelete(observableObject);
+        setOpen(false); // Close the popover on delete
+    };
 
     return (
         <Popover open={open} onOpenChange={setOpen}>
@@ -148,11 +150,16 @@ export function ObservableObjectPopover({ observableObject, onSave, buttonClass,
                             </SelectContent>
                         </Select>
                     </div>
-                    <div className="grid grid-cols-3 items-center gap-4">
-                        <Button className="w-full mt-4 p-2" variant="outline" onClick={handleSave}>
+                    <div className="grid grid-cols-2 gap-4 mt-4">
+                        <Button className="w-full p-2" variant="outline" onClick={handleSave}>
                             Save
                         </Button>
+                        <Button className="w-full p-2" variant="destructive" onClick={handleDelete}>
+                            Delete
+                        </Button>
                     </div>
+
+
                 </div>
             </PopoverContent>
         </Popover>

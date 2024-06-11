@@ -3,7 +3,10 @@ const { nextui } = require("@nextui-org/theme");
 module.exports = {
   darkMode: ["class"],
   content: [
-    "./pages/**/*.{js,jsx},\r\n    ./components/**/*.{js,jsx},\r\n    ./app/**/*.{js,jsx},\r\n    ./src/**/*.{js,jsx},",
+    "./pages/**/*.{js,jsx}",
+    "./components/**/*.{js,jsx}",
+    "./app/**/*.{js,jsx}",
+    "./src/**/*.{js,jsx}",
   ],
   prefix: "",
   theme: {

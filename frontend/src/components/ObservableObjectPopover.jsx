@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/select"
 
 
-export function ObservableObjectPopover({ observableObject, onSave, buttonClass }) {
+export function ObservableObjectPopover({ observableObject, onSave, buttonClass, proximity = null }) {
     const subTypeOptions = [
         'Visual',
         'Auditory',
@@ -137,7 +137,7 @@ export function ObservableObjectPopover({ observableObject, onSave, buttonClass 
                         <Label className="text-muted-foreground" htmlFor="proximityToMO">Proximity to MO</Label>
                         <Select onValueChange={(value) => handleSelectChange('proximityToMO', value)}>
                             <SelectTrigger className="w-full col-span-2 h-8">
-                                <SelectValue placeholder={formState.proximityToMO} />
+                                <SelectValue placeholder={proximity ? proximity : formState.proximityToMO} />
                             </SelectTrigger>
                             <SelectContent className="w-full">
                                 {proximityOptions.map(option => (

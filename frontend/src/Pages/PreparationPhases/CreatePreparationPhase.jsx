@@ -7,6 +7,7 @@ import { Time } from "@internationalized/date";
 import { useDispatch, useSelector } from "react-redux";
 import { getAll } from "../../../slices/GoalsSlice.js";
 import { CreatePreparationPhaseThunk } from "../../../slices/PreparationPhaseSlice.js";
+import { GoalsTable } from "@/components/GoalsTable.jsx";
 
 export default function CreatePreparationPhase() {
   const dispatch = useDispatch();
@@ -33,12 +34,12 @@ export default function CreatePreparationPhase() {
       instruction:
         "Set a complete and achievable goal for your meditation session",
       component: (
-        <Input
-          value={preparationData.Goals}
-          onChange={(e) =>
-            setPreparationData({ ...preparationData, Goals: e.target.value })
-          }
-        />
+        <GoalsTable goals={goals} />
+        //   value={preparationData.Goals}
+        //   onChange={(e) =>
+        //     setPreparationData({ ...preparationData, Goals: e.target.value })
+        //   }
+        // />
       ),
       buttons: ["Next step", "Cancel"],
     },
@@ -53,7 +54,7 @@ export default function CreatePreparationPhase() {
           }
         />
       ),
-      buttons: ["Previous", "Next step", "Cancel"],
+      buttons: ["Next step", "Cancel"],
     },
     {
       title: "Motivation",
@@ -70,7 +71,7 @@ export default function CreatePreparationPhase() {
           }
         />
       ),
-      buttons: ["Previous", "Next step", "Cancel"],
+      buttons: ["Next step", "Cancel"],
     },
     {
       title: "Distraction",
@@ -87,7 +88,7 @@ export default function CreatePreparationPhase() {
           }
         />
       ),
-      buttons: ["Previous", "Next step", "Cancel"],
+      buttons: ["Next step", "Cancel"],
     },
     {
       title: "Expectation",
@@ -104,21 +105,21 @@ export default function CreatePreparationPhase() {
           }
         />
       ),
-      buttons: ["Previous", "Next step", "Cancel"],
+      buttons: ["Next step", "Cancel"],
     },
     {
       title: "Diligence",
       instruction:
         "Intend to focus diligently during your meditation. Click 'Ready' to proceed.",
       component: <Input />, // Placeholder for any additional components
-      buttons: ["Previous", "Cancel", "Ready"],
+      buttons: ["Cancel", "Ready"],
     },
     {
       title: "Posture",
       instruction:
         "Correct your posture according to the user guide. Click 'Save' to save all your data & move on to the transition phase.",
       component: null, // No additional components
-      buttons: ["Previous", "Cancel", "Save"],
+      buttons: ["Cancel", "Save"],
     },
   ];
 

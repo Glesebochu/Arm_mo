@@ -28,6 +28,24 @@ const UsageView = () => {
   const user = useSelector((state) => state.Auth.user.user);
 
   useEffect(() => {
+    window.onunload = async () => {
+      await endUsage();
+    };
+  });
+  const endUsage = async () => {
+    try {
+      alert("closing!");
+      // Add your logic to call the EndUsage API endpoint here
+      if (user) {
+        fetchStartUsage(
+          `http://localhost:5158/api/Analyzer/EndUsage?userId=${user.id}`
+        );
+      }
+    } catch (error) {
+      console.error("Error ending usage:", error);
+    }
+  };
+  useEffect(() => {
     fetchUsageDataForPastWeek();
   }, []);
 
@@ -197,7 +215,7 @@ const UsageView = () => {
   };
   const dailyUse = (minutes) => {
     const hours = Math.floor(minutes / 60);
-    const remainingMinutes = minutes % 60;
+    const remainingMinutes = parseFloat((minutes % 60).toFixed(1));
     const formattedTime = `${hours}h ${remainingMinutes}m`;
     const timeDisplayElement = document.getElementById("timeBubble");
     timeDisplayElement.textContent = formattedTime;

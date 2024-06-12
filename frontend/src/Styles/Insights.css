@@ -49,6 +49,16 @@
   margin: 10px;
   box-sizing: border-box; /* Ensure padding is included in the element's total width and height */
 }
+.Activities{
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  width: 100%;
+  /* max-width: 860px; */
+  /* border-radius: 10px; */
+  margin: 10px;
+  box-sizing: border-box;  /* Ensure padding is included in the element's total width and height */
+}
 
 /* BarGraph component styles */
 .bar-graph-container {

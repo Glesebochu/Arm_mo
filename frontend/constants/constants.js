@@ -1,5 +1,7 @@
 export const webRoot = "http://localhost:5158/backend";
 
+export const typeOptions = ["MentalObject", "SensoryStimulus"];
+
 export const subTypeOptions = [
   "Visual",
   "Auditory",

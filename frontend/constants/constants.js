@@ -7,6 +7,7 @@ export const subTypeOptions = [
   "Auditory",
   "Olfactory",
   "Kinesthetic",
+  "Taste",
   "---",
   "Taste",
   "Thought",
@@ -24,3 +25,5 @@ export const proximityOptions = [
 ];
 
 export const statusOptions = ["NotStarted", "InProgress", "Completed"];
+
+export const feelingToneOptions = ["Pleasant", "Neutral", "Unpleasant"];

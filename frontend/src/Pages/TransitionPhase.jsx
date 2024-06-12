@@ -6,11 +6,10 @@ import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Card } from "@/components/ui/card";
 import { Step1Box } from "@/components/TransitionSteps/Step1Box";
-import { Step2Box } from "@/components/TransitionSteps/Step2Box";
-import { Step3Box } from "@/components/TransitionSteps/Step3Box";
+import { Step2N3Box } from "@/components/TransitionSteps/Step2N3Box";
 import { Step4Box } from "@/components/TransitionSteps/Step4Box";
 import { ChevronRight, ChevronLeft, Pause, Play } from "lucide-react"
-import { typeOptions } from '../../constants/constants';
+import { typeOptions, subTypeOptions } from '../../constants/constants';
 
 export function TransitionPhase({ goals }) {
     const [currentStep, setCurrentStep] = useState(1);
@@ -61,6 +60,14 @@ export function TransitionPhase({ goals }) {
         alert("Timer ended");
     };
 
+    const extractMeditationObject = () => {
+        return {
+            title: "Chapter 1 of Brana",
+            description: "Fascinating as hell of a novel.",
+            subType: "Thought",
+        }
+    }
+
     return (
         <div className="transition-phase grid grid-cols-10 grid-rows-9 h-[90vh] w-full">
             <Button
@@ -82,14 +89,8 @@ export function TransitionPhase({ goals }) {
 
             <div className="col-start-2 col-span-8 row-start-2 row-span-7 flex items-center justify-center">
                 {currentStep === 1 && <Step1Box onDone={handleNextStep} meditationObjectType={typeOptions[0]} />}
-                {currentStep === 2 && <Step2Box onDone={handleNextStep} />}
-                {currentStep === 3 && (
-                    <Step3Box
-                        observableObjects={[]}
-                        onDone={handleNextStep}
-                        onAddObservableObject={() => { }}
-                    />
-                )}
+                {currentStep === 2 && <Step2N3Box meditationObject={extractMeditationObject()} stepNo={2} />}
+                {currentStep === 3 && <Step2N3Box meditationObject={extractMeditationObject()} stepNo={3} />}
                 {currentStep === 4 && (
                     <Step4Box
                         goal={goals[currentGoalIndex]}

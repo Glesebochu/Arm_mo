@@ -5,5 +5,9 @@
   },
   "[csharp]": {
     "editor.defaultFormatter": "ms-dotnettools.csharp"
-  }
+  },
+  "window.autoDetectColorScheme": true,
+  "workbench.preferredDarkColorTheme": "GitHub Dark",
+  "workbench.colorTheme": "GitHub Light",
+  "workbench.preferredLightColorTheme": "GitHub Light"
 }

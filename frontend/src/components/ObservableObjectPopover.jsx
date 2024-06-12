@@ -18,52 +18,29 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 
+import { subTypeOptions, intensityOptions, proximityOptions } from '../../constants/constants';
+
 export function ObservableObjectPopover({ observableObject, onSave, onDelete, buttonClass, proximity = null }) {
-    const subTypeOptions = [
-        'Visual',
-        'Auditory',
-        'Olfactory',
-        'Kinesthetic',
-        '---',
-        'Taste',
-        'Thought',
-        'MentalState',
-        'FeelingTone'
-    ];
-
-    const intensityOptions = [
-        'Mild',
-        'Moderate',
-        'Intense'
-    ];
-
-    const proximityOptions = [
-        'Unrelated',
-        'SameSubType',
-        'DirectlyRelated',
-        'MeditationObject'
-    ];
-
-    const [formState, setFormState] = useState({ ...observableObject });
+    const [observableObject, setObservableObject] = useState({ ...observableObject });
     const [open, setOpen] = useState(false);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setFormState({
-            ...formState,
+        setObservableObject({
+            ...observableObject,
             [name]: value,
         });
     };
 
     const handleSelectChange = (name, value) => {
-        setFormState({
-            ...formState,
+        setObservableObject({
+            ...observableObject,
             [name]: value,
         });
     };
 
     const handleSave = () => {
-        onSave(formState);
+        onSave(observableObject);
         setOpen(false); // Close the popover on save
     };
 
@@ -75,7 +52,7 @@ export function ObservableObjectPopover({ observableObject, onSave, onDelete, bu
     return (
         <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
-                <Button className={buttonClass} variant="outline" onClick={() => setOpen(true)}>{formState.title}</Button>
+                <Button className={buttonClass} variant="outline" onClick={() => setOpen(true)}>{observableObject.title}</Button>
             </PopoverTrigger>
             <PopoverContent>
                 <div className="grid gap-2">
@@ -88,7 +65,7 @@ export function ObservableObjectPopover({ observableObject, onSave, onDelete, bu
                         <Input
                             id="title"
                             name="title"
-                            value={formState.title}
+                            value={observableObject.title}
                             onChange={handleInputChange}
                             className="col-span-2 h-8 w-full resize-y"
                         />
@@ -98,7 +75,7 @@ export function ObservableObjectPopover({ observableObject, onSave, onDelete, bu
                         <Textarea
                             id="description"
                             name="description"
-                            value={formState.description}
+                            value={observableObject.description}
                             onChange={handleInputChange}
                             className="col-span-2 h-8 w-full resize-y"
                         />
@@ -107,7 +84,7 @@ export function ObservableObjectPopover({ observableObject, onSave, onDelete, bu
                         <Label className="text-muted-foreground" htmlFor="intensity">Intensity</Label>
                         <Select onValueChange={(value) => handleSelectChange('intensity', value)}>
                             <SelectTrigger className="w-full col-span-2 h-8">
-                                <SelectValue placeholder={formState.intensity} />
+                                <SelectValue placeholder={observableObject.intensity} />
                             </SelectTrigger>
                             <SelectContent className="w-full">
                                 {intensityOptions.map(option => (
@@ -122,7 +99,7 @@ export function ObservableObjectPopover({ observableObject, onSave, onDelete, bu
                         <Label className="text-muted-foreground" htmlFor="subType">SubType</Label>
                         <Select onValueChange={(value) => handleSelectChange('subType', value)}>
                             <SelectTrigger className="w-full col-span-2 h-8">
-                                <SelectValue placeholder={formState.subType} />
+                                <SelectValue placeholder={observableObject.subType} />
                             </SelectTrigger>
                             <SelectContent className="w-full">
                                 {subTypeOptions.map(option => (
@@ -139,7 +116,7 @@ export function ObservableObjectPopover({ observableObject, onSave, onDelete, bu
                         <Label className="text-muted-foreground" htmlFor="proximityToMO">Proximity to MO</Label>
                         <Select onValueChange={(value) => handleSelectChange('proximityToMO', value)}>
                             <SelectTrigger className="w-full col-span-2 h-8">
-                                <SelectValue placeholder={proximity ? proximity : formState.proximityToMO} />
+                                <SelectValue placeholder={proximity ? proximity : observableObject.proximityToMO} />
                             </SelectTrigger>
                             <SelectContent className="w-full">
                                 {proximityOptions.map(option => (

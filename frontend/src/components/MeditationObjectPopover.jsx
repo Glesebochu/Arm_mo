@@ -17,42 +17,31 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
-
+import { subTypeOptions } from '../../constants/constants';
 
 export function MeditationObjectPopover({ observableObject, onSave, buttonClass }) {
-    const subTypeOptions = [
-        'Visual',
-        'Auditory',
-        'Olfactory',
-        'Kinesthetic',
-        '---',
-        'Taste',
-        'Thought',
-        'MentalState',
-        'FeelingTone'
-    ];
 
-    const [formState, setFormState] = useState({ ...observableObject });
+    const [meditationObject, setMeditationObject] = useState({ ...observableObject });
     const [open, setOpen] = useState(false);
 
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setFormState({
-            ...formState,
+        setMeditationObject({
+            ...meditationObject,
             [name]: value,
         });
     };
 
     const handleSelectChange = (name, value) => {
-        setFormState({
-            ...formState,
+        setMeditationObject({
+            ...meditationObject,
             [name]: value,
         });
     };
 
     const handleSave = () => {
-        onSave(formState);
+        onSave(meditationObject);
         setOpen(false); // Close the popover on save
     };
 
@@ -60,7 +49,7 @@ export function MeditationObjectPopover({ observableObject, onSave, buttonClass 
     return (
         <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
-                <Button className={buttonClass} variant="outline" onClick={() => setOpen(true)}>{formState.title}</Button>
+                <Button className={buttonClass} variant="outline" onClick={() => setOpen(true)}>{meditationObject.title}</Button>
             </PopoverTrigger>
             <PopoverContent>
                 <div className="grid gap-2">
@@ -73,7 +62,7 @@ export function MeditationObjectPopover({ observableObject, onSave, buttonClass 
                         <Input
                             id="title"
                             name="title"
-                            value={formState.title}
+                            value={meditationObject.title}
                             onChange={handleInputChange}
                             className="col-span-2 h-8 w-full resize-y"
                         />
@@ -83,7 +72,7 @@ export function MeditationObjectPopover({ observableObject, onSave, buttonClass 
                         <Textarea
                             id="description"
                             name="description"
-                            value={formState.description}
+                            value={meditationObject.description}
                             onChange={handleInputChange}
                             className="col-span-2 h-8 w-full resize-y"
                         />
@@ -92,7 +81,7 @@ export function MeditationObjectPopover({ observableObject, onSave, buttonClass 
                         <Label className="text-muted-foreground" htmlFor="subType">SubType</Label>
                         <Select onValueChange={(value) => handleSelectChange('subType', value)}>
                             <SelectTrigger className="w-full col-span-2 h-8">
-                                <SelectValue placeholder={formState.subType} />
+                                <SelectValue placeholder={meditationObject.subType} />
                             </SelectTrigger>
                             <SelectContent className="w-full">
                                 {subTypeOptions.map(option => (

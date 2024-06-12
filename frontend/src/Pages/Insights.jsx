@@ -3,7 +3,7 @@ import BarGraph from "@/components/Custom/BarGraph";
 import { CurrentStageAlert } from "@/components/Custom/CurrentStageAlert";
 import { MostVisitedActivityAlert } from "@/components/Custom/FrequentedActivityAlert";
 import LongestSession from "@/components/Custom/LongestSession";
-import { DonutChartUsageExampleWithCustomColors } from "@/components/Custom/ActivityAhaMoments";
+import { ActivityAhaMomentDonut } from "@/components/Custom/ActivityAhaMoments";
 import { ResponsiveContainer } from "recharts";
 import { useSelector } from "react-redux";
 import SessionDetails from "@/pages/SessionDetails.jsx";
@@ -48,7 +48,7 @@ const Insights = ({ onSessionClick }) => {
             <LongestSession onSessionClick={handleSessionClick} />
           </div>
           <div className="Activities">
-            <DonutChartUsageExampleWithCustomColors/>
+            <ActivityAhaMomentDonut/>
           </div>
         </div>
       );

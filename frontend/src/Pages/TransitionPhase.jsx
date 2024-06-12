@@ -9,11 +9,16 @@ import { Step1Box } from "@/components/TransitionSteps/Step1Box";
 import { Step2Box } from "@/components/TransitionSteps/Step2Box";
 import { Step3Box } from "@/components/TransitionSteps/Step3Box";
 import { Step4Box } from "@/components/TransitionSteps/Step4Box";
+import { ChevronRight, ChevronLeft, Pause, Play } from "lucide-react"
+import { typeOptions } from '../../constants/constants';
 
 export function TransitionPhase({ goals }) {
     const [currentStep, setCurrentStep] = useState(1);
     const [currentGoalIndex, setCurrentGoalIndex] = useState(0);
     const [isPaused, setIsPaused] = useState(false);
+
+    const iconHeight = "h-10";
+    const iconWidth = "w-6";
 
     const createObservableObject = async (object) => {
         const response = await axios.post(
@@ -57,25 +62,26 @@ export function TransitionPhase({ goals }) {
     };
 
     return (
-        <div className="transition-phase grid grid-cols-7 grid-rows-7 h-[90vh] w-full overflow-hidden">
+        <div className="transition-phase grid grid-cols-10 grid-rows-9 h-[90vh] w-full">
             <Button
                 onClick={() => setIsPaused(!isPaused)}
-                variant="outline"
-                className="col-start-7 row-start-1 row-span-1 justify-self-end m-4"
+                variant="ghost"
+                className="col-start-10 row-start-1 self-center justify-self m-4"
             >
-                {isPaused ? "Resume" : "Pause"}
+                {isPaused ? <Play className={`${iconHeight} ${iconWidth}`} /> : <Pause className={`${iconHeight} ${iconWidth}`} />}
             </Button>
 
             <Button
                 onClick={handlePreviousStep}
                 disabled={currentStep === 1}
-                className="col-start-1 row-start-4 row-span-1 self-center justify-self-start ml-4 bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700"
+                variant="ghost"
+                className="col-start-1 row-start-5 self-center justify-self m-4"
             >
-                Previous
+                <ChevronLeft className={`${iconHeight} ${iconWidth}`} />
             </Button>
 
-            <div className="col-start-2 col-span-5 row-start-2 row-span-5 flex items-center justify-center">
-                {currentStep === 1 && <Step1Box onDone={handleNextStep} />}
+            <div className="col-start-2 col-span-8 row-start-2 row-span-7 flex items-center justify-center">
+                {currentStep === 1 && <Step1Box onDone={handleNextStep} meditationObjectType={typeOptions[0]} />}
                 {currentStep === 2 && <Step2Box onDone={handleNextStep} />}
                 {currentStep === 3 && (
                     <Step3Box
@@ -96,13 +102,14 @@ export function TransitionPhase({ goals }) {
             <Button
                 onClick={handleNextStep}
                 disabled={currentStep === 4}
-                className="col-start-7 row-start-4 row-span-1 self-center justify-self-end mr-4 bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700"
+                variant="ghost"
+                className="col-start-10 row-start-5 self-center justify-self m-4"
             >
-                Next
+                <ChevronRight className={`${iconHeight} ${iconWidth}`} />
             </Button>
 
             {currentStep === 4 && (
-                <div className="col-span-5 row-start-5 row-span-1 flex justify-center items-center">
+                <div className="col-span-5 row-start-5 flex justify-center items-center">
                     <Checkbox label="Go to next goal" className="text-gray-700" />
                 </div>
             )}

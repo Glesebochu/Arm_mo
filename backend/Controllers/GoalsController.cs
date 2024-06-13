@@ -18,7 +18,6 @@ namespace backend.Controllers
     {
         private readonly Arm_moContext _context;
         private readonly IMapper _mapper;
-        private readonly IGoalRepository _goalRepo;
         public GoalsController(Arm_moContext context, IMapper mapper)
         {
             _context = context;

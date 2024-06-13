@@ -112,14 +112,14 @@ export default function CreatePreparationPhase() {
       instruction:
         "Intend to focus diligently during your meditation. Click 'Ready' to proceed.",
       component: <Input />, // Placeholder for any additional components
-      buttons: ["Cancel", "Ready"],
+      buttons: ["Ready", "Cancel"],
     },
     {
       title: "Posture",
       instruction:
         "Correct your posture according to the user guide. Click 'Save' to save all your data & move on to the transition phase.",
       component: null, // No additional components
-      buttons: ["Cancel", "Save"],
+      buttons: ["Save", "Cancel"],
     },
   ];
 

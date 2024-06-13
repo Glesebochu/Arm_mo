@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAll } from "../../../slices/GoalsSlice.js";
 import { CreatePreparationPhaseThunk } from "../../../slices/PreparationPhaseSlice.js";
 import { GoalsTable } from "@/components/GoalsTable.jsx";
+import DistractionsTable from "@/components/DistractionsTable.jsx";
 
 export default function CreatePreparationPhase() {
   const dispatch = useDispatch();
@@ -28,18 +29,22 @@ export default function CreatePreparationPhase() {
     EndDateTime: "",
   });
 
+  const handleRowChange = (index, title, type) => {
+    const newDistractions = [...preparationData.Distractions];
+    newDistractions[index] = { title, type };
+    setPreparationData({ ...preparationData, Distractions: newDistractions });
+  };
+  const handleGoalsSelection = (selectedGoals) => {
+    setPreparationData({ ...preparationData, Goals: selectedGoals });
+  };
+
   const steps = [
     {
       title: "Goal",
       instruction:
         "Set a complete and achievable goal for your meditation session",
       component: (
-        <GoalsTable goals={goals} />
-        //   value={preparationData.Goals}
-        //   onChange={(e) =>
-        //     setPreparationData({ ...preparationData, Goals: e.target.value })
-        //   }
-        // />
+        <GoalsTable goals={goals} onGoalsSelection={handleGoalsChange} />
       ),
       buttons: ["Next step", "Cancel"],
     },
@@ -62,6 +67,7 @@ export default function CreatePreparationPhase() {
         "Write a complete and meaningful statement about what motivates you to meditate.",
       component: (
         <Input
+          Placeholder="e.g., To improve my focus"
           value={preparationData.Motivation}
           onChange={(e) =>
             setPreparationData({
@@ -77,17 +83,7 @@ export default function CreatePreparationPhase() {
       title: "Distraction",
       instruction:
         "Properly articulate any potential distractions that may affect your meditation.",
-      component: (
-        <Input
-          value={preparationData.Distractions}
-          onChange={(e) =>
-            setPreparationData({
-              ...preparationData,
-              Distractions: e.target.value.split(","),
-            })
-          }
-        />
-      ),
+      component: <DistractionsTable onRowChange={handleRowChange} />,
       buttons: ["Next step", "Cancel"],
     },
     {
@@ -96,6 +92,7 @@ export default function CreatePreparationPhase() {
         "Write a complete and meaningful statement about your expectations for this session.",
       component: (
         <Input
+          Placeholder="e.g., Stay focused without any distractions for 10 "
           value={preparationData.Expectation}
           onChange={(e) =>
             setPreparationData({
@@ -111,7 +108,7 @@ export default function CreatePreparationPhase() {
       title: "Diligence",
       instruction:
         "Intend to focus diligently during your meditation. Click 'Ready' to proceed.",
-      component: <Input />, // Placeholder for any additional components
+      component: null,
       buttons: ["Ready", "Cancel"],
     },
     {
@@ -133,13 +130,13 @@ export default function CreatePreparationPhase() {
 
   const handleSave = () => {
     const preparationPhaseData = {
-      Duration: preparationData.Duration.toString(),
-      Motivation: preparationData.Motivation,
       Goals: preparationData.Goals,
-      Expectation: preparationData.Expectation,
-      Distractions: preparationData.Distractions,
-      StartDateTime: preparationData.StartDateTime,
-      EndDateTime: new Date().toISOString(),
+      duration: preparationData.Duration.toString(),
+      motivation: preparationData.Motivation,
+      distractions: preparationData.Distractions,
+      expectation: preparationData.Expectation,
+      startDateTime: preparationData.StartDateTime,
+      endDateTime: new Date().toISOString(),
     };
     dispatch(CreatePreparationPhaseThunk(preparationPhaseData)); // Save preparation phase data
   };

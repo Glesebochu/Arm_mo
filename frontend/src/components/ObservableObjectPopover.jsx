@@ -18,32 +18,9 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 
-export function ObservableObjectPopover({ observableObject, onSave, onDelete, buttonClass, proximity = null }) {
-    const subTypeOptions = [
-        'Visual',
-        'Auditory',
-        'Olfactory',
-        'Kinesthetic',
-        '---',
-        'Taste',
-        'Thought',
-        'MentalState',
-        'FeelingTone'
-    ];
+import { subTypeOptions, intensityOptions, proximityOptions } from '../../constants/constants';
 
-    const intensityOptions = [
-        'Mild',
-        'Moderate',
-        'Intense'
-    ];
-
-    const proximityOptions = [
-        'Unrelated',
-        'SameSubType',
-        'DirectlyRelated',
-        'MeditationObject'
-    ];
-
+export function ObservableObjectPopover({ observableObject, onSave, onDelete, buttonClass }) {
     const [formState, setFormState] = useState({ ...observableObject });
     const [open, setOpen] = useState(false);
 
@@ -139,7 +116,7 @@ export function ObservableObjectPopover({ observableObject, onSave, onDelete, bu
                         <Label className="text-muted-foreground" htmlFor="proximityToMO">Proximity to MO</Label>
                         <Select onValueChange={(value) => handleSelectChange('proximityToMO', value)}>
                             <SelectTrigger className="w-full col-span-2 h-8">
-                                <SelectValue placeholder={proximity ? proximity : formState.proximityToMO} />
+                                <SelectValue placeholder={formState.proximityToMO} />
                             </SelectTrigger>
                             <SelectContent className="w-full">
                                 {proximityOptions.map(option => (
@@ -165,3 +142,4 @@ export function ObservableObjectPopover({ observableObject, onSave, onDelete, bu
         </Popover>
     );
 }
+

@@ -46,6 +46,7 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 import { v4 as uuidv4 } from 'uuid';
+import { statusOptions } from "../../constants/constants";
 
 export function GoalsTable({ goals = [], isSubGoals = false, parentGoalId = null }) {
     const dispatch = useDispatch();
@@ -283,7 +284,7 @@ export function GoalsTable({ goals = [], isSubGoals = false, parentGoalId = null
             ),
             cell: ({ row }) => {
                 const isEditingRow = isEditing === row.original.id;
-                const statusOptions = ['NotStarted', 'InProgress', 'Completed'];
+
                 const statusValue = localData[row.original.id]?.status || row.getValue('status');
                 return isEditingRow ? (
                     <Select onValueChange={(value) => handleInputChange({ target: { name: 'status', value } }, row.original.id)}>

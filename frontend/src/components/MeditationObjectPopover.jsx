@@ -17,20 +17,9 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
-
+import { subTypeOptions } from '../../constants/constants';
 
 export function MeditationObjectPopover({ observableObject, onSave, buttonClass }) {
-    const subTypeOptions = [
-        'Visual',
-        'Auditory',
-        'Olfactory',
-        'Kinesthetic',
-        '---',
-        'Taste',
-        'Thought',
-        'MentalState',
-        'FeelingTone'
-    ];
 
     const [formState, setFormState] = useState({ ...observableObject });
     const [open, setOpen] = useState(false);

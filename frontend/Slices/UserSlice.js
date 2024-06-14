@@ -7,23 +7,27 @@ const initialState = {
   error: null
 };
 
-export const updateUser = createAsyncThunk(
-  'user/updateUser',
-  async ({ userId, profileImage, name, username }, thunkAPI) => {
+export const updateUserAccount = createAsyncThunk(
+  'user/updateUserAccount',
+  async ({ id, firstName, lastName, username, profilePicture}, thunkAPI) => {
     try {
       const formData = new FormData();
-      formData.append('profileImage', profileImage);
-      formData.append('name', name);
-      formData.append('username', username);
+      formData.append('ProfilePicture', profilePicture);
+      formData.append('FirstName', firstName);
+      formData.append('LastName', lastName);
+      formData.append('Username', username);
 
-      const response = await axios.put(`/api/users/${userId}`, formData, {
+      const response = await axios.put(`/api/users/${id}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       });
 
+      thunkAPI.dispatch(setUserStatus("succeeded"));
       return response.data;
     } catch (error) {
+      thunkAPI.dispatch(setUserError("failed"))
+      thunkAPI.dispatch(setUserError(error.response.data));
       return thunkAPI.rejectWithValue(error.response.data);
     }
   }

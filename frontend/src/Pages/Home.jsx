@@ -204,7 +204,7 @@ const Home = () => {
                         {user?.profilePicture ? (
                           <AvatarImage src={`${user.profilePicture}`} />
                         ) : (
-                          <AvatarFallback className="bg-black text-white">
+                          <AvatarFallback className="bg-black text-white font-k2d font-bold text-xl">
                             {user?.firstName.charAt(0)}
                           </AvatarFallback>
                         )}

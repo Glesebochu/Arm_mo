@@ -9,8 +9,9 @@ const Settings = () => {
       value: "MyAccount",
       content: (
         <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-white border border-primary">
-          <p className="text-black">My Profile</p>
-          <div className="flex justify-center mt-6"><Profile/></div>
+          <div className="flex justify-center">
+            <Profile />
+          </div>
         </div>
       ),
     },
@@ -19,7 +20,6 @@ const Settings = () => {
       value: "GameSettings",
       content: (
         <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-white border border-primary">
-          <p className="text-black">Game Settings</p>
         </div>
       ),
     },
@@ -28,7 +28,6 @@ const Settings = () => {
       value: "plaGamePlaySettingsyground",
       content: (
         <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-white border border-primary">
-          <p className="text-black">Game Play Settings</p>
         </div>
       ),
     },

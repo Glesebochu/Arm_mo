@@ -38,7 +38,9 @@ namespace backend.Controllers
 
             return CreatedAtAction(
                 nameof(GetById),
-                new { id = preparationPhase.Id }
+                new { id = preparationPhase.Id },
+                _mapper.Map<CreatePreparationPhaseDTO>(preparationPhase)
+
             );
 
         }

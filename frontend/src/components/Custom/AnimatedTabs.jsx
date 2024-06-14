@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { cn } from "../../../utils/cn";
 
- const AnimatedTabs = ({
+const AnimatedTabs = ({
   tabs: propTabs,
   containerClassName,
   activeTabClassName,
@@ -61,13 +61,14 @@ import { cn } from "../../../utils/cn";
             </span>
           </button>
         ))}
+        {/* end of the navbar for settings page */}
       </div>
       <FadeInDiv
         tabs={tabs}
         active={active}
         key={active.value}
         hovering={hovering}
-        className={cn("mt-16", contentClassName)}
+        className={cn("mt-12 h-fit", contentClassName)}
       />
     </>
   );

@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { Button } from '../ui/button';
+import React, { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Checkbox } from "@/components/ui/checkbox";
+import { Card } from "@/components/ui/card";
 
-export function Step4Box({ goal, onComplete, onTimerEnd }) {
-    const [timeLeft, setTimeLeft] = useState(goal.timer);
+export function Step4Box({ goals, onComplete }) {
+    const [currentGoalIndex, setCurrentGoalIndex] = useState(0);
+    const [checkedStates, setCheckedStates] = useState(Array(goals.length).fill(false));
 
     useEffect(() => {
         if (timeLeft > 0) {

@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAll } from "../../../slices/GoalsSlice.js";
 import { CreatePreparationPhaseThunk } from "../../../slices/PreparationPhaseSlice.js";
 import { GoalsTable } from "@/components/GoalsTable.jsx";
+import DistractionsTable from "@/components/DistractionsTable.jsx";
 
 export default function CreatePreparationPhase() {
   const dispatch = useDispatch();
@@ -21,12 +22,22 @@ export default function CreatePreparationPhase() {
   const [preparationData, setPreparationData] = useState({
     Duration: new Time(1, 0),
     Motivation: "",
-    Goals: [],
+    // Goals: [],
     Expectation: "",
-    Distractions: [],
+    Distractions: [{ title: "", type: "" }], // Initialize with an empty row
     StartDateTime: "",
     EndDateTime: "",
   });
+
+  const handleRowChange = (index, title, type) => {
+    const newDistractions = [...preparationData.Distractions];
+    newDistractions[index] = { title, type };
+    setPreparationData({ ...preparationData, Distractions: newDistractions });
+  };
+  // The function that updates the goaltable's preparation data
+  // const handleGoalsSelection = (selectedGoals) => {
+  //   setPreparationData({ ...preparationData, Goals: selectedGoals });
+  // };
 
   const steps = [
     {
@@ -35,11 +46,7 @@ export default function CreatePreparationPhase() {
         "Set a complete and achievable goal for your meditation session",
       component: (
         <GoalsTable goals={goals} />
-        //   value={preparationData.Goals}
-        //   onChange={(e) =>
-        //     setPreparationData({ ...preparationData, Goals: e.target.value })
-        //   }
-        // />
+        // <GoalsTable goals={goals} onGoalsSelection={handleGoalsChange} />
       ),
       buttons: ["Next step", "Cancel"],
     },
@@ -62,6 +69,7 @@ export default function CreatePreparationPhase() {
         "Write a complete and meaningful statement about what motivates you to meditate.",
       component: (
         <Input
+          placeholder="e.g., To improve my focus"
           value={preparationData.Motivation}
           onChange={(e) =>
             setPreparationData({
@@ -78,14 +86,25 @@ export default function CreatePreparationPhase() {
       instruction:
         "Properly articulate any potential distractions that may affect your meditation.",
       component: (
-        <Input
-          value={preparationData.Distractions}
-          onChange={(e) =>
+        <DistractionsTable
+          rows={preparationData.Distractions}
+          onRowChange={(index, title, type) => {
+            const newDistractions = [...preparationData.Distractions];
+            newDistractions[index] = { title, type };
             setPreparationData({
               ...preparationData,
-              Distractions: e.target.value.split(","),
-            })
-          }
+              Distractions: newDistractions,
+            });
+          }}
+          onAddRow={() => {
+            setPreparationData({
+              ...preparationData,
+              Distractions: [
+                ...preparationData.Distractions,
+                { title: "", type: "" },
+              ],
+            });
+          }}
         />
       ),
       buttons: ["Next step", "Cancel"],
@@ -96,6 +115,7 @@ export default function CreatePreparationPhase() {
         "Write a complete and meaningful statement about your expectations for this session.",
       component: (
         <Input
+          placeholder="e.g., Stay focused without any distractions for 10 "
           value={preparationData.Expectation}
           onChange={(e) =>
             setPreparationData({
@@ -111,15 +131,15 @@ export default function CreatePreparationPhase() {
       title: "Diligence",
       instruction:
         "Intend to focus diligently during your meditation. Click 'Ready' to proceed.",
-      component: <Input />, // Placeholder for any additional components
-      buttons: ["Cancel", "Ready"],
+      component: null,
+      buttons: ["Ready", "Cancel"],
     },
     {
       title: "Posture",
       instruction:
         "Correct your posture according to the user guide. Click 'Save' to save all your data & move on to the transition phase.",
       component: null, // No additional components
-      buttons: ["Cancel", "Save"],
+      buttons: ["Save", "Cancel"],
     },
   ];
 
@@ -133,15 +153,22 @@ export default function CreatePreparationPhase() {
 
   const handleSave = () => {
     const preparationPhaseData = {
-      Duration: preparationData.Duration.toString(),
-      Motivation: preparationData.Motivation,
-      Goals: preparationData.Goals,
-      Expectation: preparationData.Expectation,
-      Distractions: preparationData.Distractions,
-      StartDateTime: preparationData.StartDateTime,
-      EndDateTime: new Date().toISOString(),
+      // Goals: preparationData.Goals,
+      duration: preparationData.Duration.toString(),
+      motivation: preparationData.Motivation,
+      distractions: preparationData.Distractions,
+      expectation: preparationData.Expectation,
+      startDateTime: preparationData.StartDateTime,
+      endDateTime: new Date().toISOString(),
     };
-    dispatch(CreatePreparationPhaseThunk(preparationPhaseData)); // Save preparation phase data
+    dispatch(CreatePreparationPhaseThunk(preparationPhaseData)).then(
+      (response) => {
+        const prepPhaseId = response.data.id; // Assuming the ID is in response.data
+        // history.push({
+        //   pathname: "/transition",
+        //   state: { prepPhaseId },
+      }
+    );
   };
 
   const handleCancel = () => {
@@ -184,24 +211,27 @@ export default function CreatePreparationPhase() {
   const isLastStep = stepIndex === steps.length - 1;
 
   return (
-    <div>
+    <div className="Preparation-phase grid grid-cols-20 grid-rows-20 h-[auto] w-full ">
       <h1>Main Instruction → Prepare to meditate</h1>
-      <p>
-        Instruction Description → Hey there! Let's take your meditation practice
-        to the next level by answering some important questions.
-      </p>
-      <Progress value={stepIndex + 1} max={steps.length} />
-      <h2>Title- {currentStep.title}</h2>
-      <p>Instruction- {currentStep.instruction}</p>
-      {currentStep.component}
       <div>
-        {!isFirstStep && <Button onClick={handlePrevious}>Previous</Button>}
-        {currentStep.buttons.map((buttonLabel) => (
-          <Button key={buttonLabel} onClick={() => handleAction(buttonLabel)}>
-            {buttonLabel}
-          </Button>
-        ))}
+        <p>
+          Instruction Description → Hey there! Let's take your meditation
+          practice to the next level by answering some important questions.
+        </p>
+        <Progress value={stepIndex + 1} max={steps.length} />
+        <h2>Title- {currentStep.title}</h2>
+        <p>Instruction- {currentStep.instruction}</p>
+        {currentStep.component}
+        <div>
+          {!isFirstStep && <Button onClick={handlePrevious}>Previous</Button>}
+          {currentStep.buttons.map((buttonLabel) => (
+            <Button key={buttonLabel} onClick={() => handleAction(buttonLabel)}>
+              {buttonLabel}
+            </Button>
+          ))}
+        </div>
       </div>
     </div>
   );
 }
+// }

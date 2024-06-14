@@ -8,6 +8,7 @@ using backend.DTOs.Activity;
 using backend.Models;
 using backend.DTOs.ObservableObject;
 using backend.DTOs.PreparationPhase;
+using backend.DTOs.Hindrance;
 
 namespace backend.Mappings
 {
@@ -27,7 +28,24 @@ namespace backend.Mappings
             CreateMap<ObservableObjectDTO, ObservableObject>();
 
             CreateMap<PreparationPhase, CreatePreparationPhaseDTO>();
-            CreateMap<CreatePreparationPhaseDTO, PreparationPhase>();
+            CreateMap<CreatePreparationPhaseDTO, PreparationPhase>()
+                .ConstructUsing(dto => new PreparationPhase()) // Ensure the default constructor is used
+                .ForMember(dest => dest.Goals, opt => opt.MapFrom(
+                    (src, dest, destMember, context) => context.Mapper.Map<Goal>(src.Goals))
+                )
+                .ForMember(dest => dest.Distractions, opt => opt.MapFrom(
+                    (src, dest, destMember, context) => context.Mapper.Map<Hindrance>(src.Distractions))
+                )
+            ;
+            CreateMap<PreparationPhase, PreparationPhaseDTO>();
+            CreateMap<PreparationPhaseDTO, PreparationPhase>();
+
+            CreateMap<Hindrance, CreateHindranceDTO>();
+            CreateMap<CreateHindranceDTO, Hindrance>();
+
+            CreateMap<Hindrance, HindranceDTO>();
+            CreateMap<HindranceDTO, Hindrance>();
+
 
             CreateMap<ObservableObject, MeditationObjectDTO>();
             CreateMap<MeditationObjectDTO, ObservableObject>()

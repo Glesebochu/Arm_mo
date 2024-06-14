@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import {
   flexRender,
   getCoreRowModel,
@@ -32,7 +33,6 @@ import {
   TableRow,
 } from "../ui/table";
 import "@/Styles/CustomStyles.css";
-import RestoreSessionPrompt from "./RestoreSessionPrompt";
 
 function customFilterFn(rows, columnIds, filterValue) {
   return rows.filter((row) => {
@@ -43,6 +43,7 @@ function customFilterFn(rows, columnIds, filterValue) {
 
 export function RemovedSessions({ onSessionClick }) {
   const [sorting, setSorting] = useState([]);
+  const user = useSelector((state) => state.Auth.user.user);
   const [columnFilters, setColumnFilters] = useState([]);
   const [columnVisibility, setColumnVisibility] = useState({});
   const [rowSelection, setRowSelection] = useState({});
@@ -66,13 +67,21 @@ export function RemovedSessions({ onSessionClick }) {
         await Promise.all(
           sessionIds.map(async (sessionId) => {
             await axios.post(
-              `http://localhost:5158/api/Analyzer/RestoreSession?sessionId=${sessionId}`
+              `http://localhost:5158/api/Analyzer/RestoreSession?sessionId=${sessionId}`,
+              {},
+              {
+                withCredentials: true,
+              }
             );
           })
         );
       } else {
         await axios.post(
-          `http://localhost:5158/api/Analyzer/RestoreSession?sessionId=${sessionIds}`
+          `http://localhost:5158/api/Analyzer/RestoreSession?sessionId=${sessionIds}`,
+          {},
+          {
+            withCredentials: true,
+          }
         );
       }
       setSwaggerData((prevData) =>
@@ -94,7 +103,10 @@ export function RemovedSessions({ onSessionClick }) {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5158/api/Analyzer/GetRemovedSessionsForMeditator?meditatorId=1"
+          `http://localhost:5158/api/Analyzer/GetRemovedSessionsForMeditator?meditatorId=${user.id}`,
+          {
+            withCredentials: true,
+          }
         );
         if (response.status === 200) {
           const transformedData = response.data.map((session) => ({
@@ -308,8 +320,8 @@ export function RemovedSessions({ onSessionClick }) {
             <Input
               placeholder="Filter Sessions..."
               value={
-                columnFilters.find((f) => f.id === "meditationObject")
-                  ?.value || ""
+                columnFilters.find((f) => f.id === "meditationObject")?.value ||
+                ""
               }
               onChange={(event) => handleFilterChange(event.target.value)}
               className="max-w-sm"
@@ -471,7 +483,7 @@ export function RemovedSessions({ onSessionClick }) {
               </button>
               <button
                 onClick={() => handleRestoreSession(restoreSessionId)}
-                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500"
+                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-black focus:outline-none focus:ring-2 focus:ring-black"
               >
                 Restore
               </button>

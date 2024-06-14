@@ -9,7 +9,10 @@ export default function SessionDuration({ sessionId }) {
     const fetchSessionDuration = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5158/api/Analyzer/GetSession?SessionId=${sessionId}`
+          `http://localhost:5158/api/Analyzer/GetSession?SessionId=${sessionId}`,
+          {
+            withCredentials: true,
+          }
         );
 
         if (response.status === 200 && response.data) {

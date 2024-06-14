@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
+import { useSelector } from "react-redux";
 import axios from "axios";
 import {
   Chart as ChartJS,
@@ -79,12 +80,16 @@ export const LineGraph = () => {
     ],
   });
   const [averageAhaMoments, setAverageAhaMoments] = useState(0);
+  const user = useSelector((state) => state.Auth.user.user);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5158/api/Analyzer/GetSessionsForMeditator?meditatorId=1"
+          `http://localhost:5158/api/Analyzer/GetSessionsForMeditator?meditatorId=${user.id}`,
+          {
+            withCredentials: true,
+          }
         );
         if (response.status === 200) {
           const sessionIds = response.data.map((session) =>
@@ -122,7 +127,7 @@ export const LineGraph = () => {
                     chartArea.top
                   );
                   gradient.addColorStop(0, "rgba(10, 24, 82, 0.1)");
-                  gradient.addColorStop(1, "rgba(10, 24, 82, 0.4)");
+                  gradient.addColorStop(1, "rgba(11, 24, 82, 0.1)");
                   return gradient;
                 },
                 tension: 0.3,
@@ -145,7 +150,7 @@ export const LineGraph = () => {
                     chartArea.top
                   );
                   gradient.addColorStop(0, "rgba(0, 100, 0, 0.1)");
-                  gradient.addColorStop(1, "rgba(0, 100, 0, 0.4)");
+                  gradient.addColorStop(1, "rgba(0, 100, 0, 0.1)");
                   return gradient;
                 },
                 tension: 0.3,
@@ -217,11 +222,11 @@ export const LineGraph = () => {
 
   return (
     <ResponsiveContainer>
-      <div className="container">
-        <h1 className="mb-3 text-2xl font-semibold leading-none tracking-tight text-black md:text-6xl lg:text-5xl dark:text-white">
+      <div className="container recharts-responsive-container">
+        <h1 className="mb-4 mt-4 text-1xl font-light leading-none tracking-tight text-black md:text-5xl lg:text-4xl dark:text-white">
           Sessions Analysis
         </h1>
-        <div className="chart-container relative w-full h-[500px] mx-auto px-0">
+        <div className="chart-container relative w-full h-[500px] mx-auto px-0 recharts-responsive-container">
           <p className="absolute top-0 left-16 m-0 text-sm font-bold text-gray-500">
             Average Aha Moments: {averageAhaMoments}
           </p>

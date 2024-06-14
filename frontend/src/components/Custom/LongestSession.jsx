@@ -1,30 +1,37 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 export default function LongestSession({ onSessionClick }) {
-  const [duration, setDuration] = useState("");
+  const [duration, setDuration] = useState("NaN");
   const [sessionId, setSessionId] = useState(null);
+  const user = useSelector((state) => state.Auth.user.user);
 
   useEffect(() => {
     const fetchLongestSession = async () => {
       try {
         const response = await axios.get(
           "http://localhost:5158/api/analyzer/GetLongestSessionForMeditator",
-          { params: { meditatorId: 1 } }
+          {
+            withCredentials: true,
+            params: { meditatorId: user.id },
+          }
         );
 
         if (response.status === 200 && response.data) {
           const { id, startDateTime, endDateTime } = response.data;
-          const start = new Date(startDateTime);
-          const end = new Date(endDateTime);
-          const durationMs = end - start;
-          const durationHours = Math.floor(durationMs / (1000 * 60 * 60));
-          const durationMinutes = Math.floor(
-            (durationMs % (1000 * 60 * 60)) / (1000 * 60)
-          );
+          if (id && startDateTime && endDateTime) {
+            const start = new Date(startDateTime);
+            const end = new Date(endDateTime);
+            const durationMs = end - start;
+            const durationHours = Math.floor(durationMs / (1000 * 60 * 60));
+            const durationMinutes = Math.floor(
+              (durationMs % (1000 * 60 * 60)) / (1000 * 60)
+            );
 
-          setDuration(`${durationHours}h ${durationMinutes}m`);
-          setSessionId(id);
+            setDuration(`${durationHours}h ${durationMinutes}m`);
+            setSessionId(id);
+          }
         }
       } catch (error) {
         console.error("Failed to fetch data:", error);
@@ -32,7 +39,7 @@ export default function LongestSession({ onSessionClick }) {
     };
 
     fetchLongestSession();
-  }, []);
+  }, [user.id]);
 
   const handleSessionClick = () => {
     if (sessionId) {
@@ -53,7 +60,7 @@ export default function LongestSession({ onSessionClick }) {
               <p id="time">{duration}</p>
             </div>
           </div>
-          <p className="text">Your Longest Session</p>
+          <p className="textLongest">Your Longest Session</p>
         </div>
       </div>
     </div>

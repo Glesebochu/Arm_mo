@@ -67,13 +67,19 @@ export function DataTable({ onSessionClick }) {
         await Promise.all(
           sessionIds.map(async (sessionId) => {
             await axios.delete(
-              `http://localhost:5158/api/Analyzer/DeleteSession?sessionId=${sessionId}`
+              `http://localhost:5158/api/Analyzer/DeleteSession?sessionId=${sessionId}`,
+              {
+                withCredentials: true,
+              }
             );
           })
         );
       } else {
         await axios.delete(
-          `http://localhost:5158/api/Analyzer/DeleteSession?sessionId=${sessionIds}`
+          `http://localhost:5158/api/Analyzer/DeleteSession?sessionId=${sessionIds}`,
+          {
+            withCredentials: true,
+          }
         );
       }
       setSwaggerData((prevData) =>
@@ -92,11 +98,14 @@ export function DataTable({ onSessionClick }) {
   };
 
   useEffect(() => {
-    console.log("For data table",user);
+    console.log("For data table", user);
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5158/api/Analyzer/GetSessionsForMeditator?meditatorId=${user.id}`
+          `http://localhost:5158/api/Analyzer/GetSessionsForMeditator?meditatorId=${user.id}`,
+          {
+            withCredentials: true,
+          }
         );
         if (response.status === 200) {
           const transformedData = response.data.map((session) => ({
@@ -473,7 +482,7 @@ export function DataTable({ onSessionClick }) {
               </button>
               <button
                 onClick={() => handleDeleteSession(deleteSessionId)}
-                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
+                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-black focus:outline-none focus:ring-2 focus:ring-black"
               >
                 Remove
               </button>

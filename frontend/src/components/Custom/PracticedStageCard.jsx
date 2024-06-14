@@ -14,7 +14,10 @@ function StageCard({ stageId }) {
     const fetchStageData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5158/api/Analyzer/GetStage?stageId=${stageId}`
+          `http://localhost:5158/api/Analyzer/GetStage?stageId=${stageId}`,
+          {
+            withCredentials: true,
+          }
         );
         setStageData(response.data);
       } catch (error) {

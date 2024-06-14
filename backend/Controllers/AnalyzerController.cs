@@ -7,7 +7,8 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace backend.Controllers
 {
-    
+
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class AnalyzerController : ControllerBase
@@ -29,7 +30,7 @@ namespace backend.Controllers
         [EnableCors]
         [HttpGet]
         [Route("GetSessionUsageCustom")]
-        public async Task<ActionResult<IEnumerable<object>>> GetSessionUsageCustom(/*int userId,*/DateTime customDate)//uncomment the parameter after testing.
+        public async Task<ActionResult<IEnumerable<object>>> GetSessionUsageCustom(int userId, DateTime customDate)//uncomment the parameter after testing.
         {
 
             var currentDate = customDate != default ? customDate : DateTime.Now;
@@ -41,13 +42,13 @@ namespace backend.Controllers
             foreach (var date in pastWeekDates)
             {
                 var sessionEnd = await dbContext.Sessions.
-                    Where(u => u.Meditator.Id == 1 && u.EndDateTime.Date == date.Date)//change the userId after testing...
+                    Where(u => u.Meditator.Id == userId && !u.IsDeleted && u.EndDateTime.Date == date.Date)//change the userId after testing...
                     .Select(u => u.EndDateTime.TimeOfDay.TotalMinutes)
                     .ToListAsync();
                 var Endtime = sessionEnd.DefaultIfEmpty(0).Sum();
 
                 var sessionStart = await dbContext.Sessions.
-                    Where(u => u.Meditator.Id == 1 && u.StartDateTime.Date == date.Date)//change the userId after testing...
+                    Where(u => u.Meditator.Id == userId && !u.IsDeleted && u.StartDateTime.Date == date.Date)//change the userId after testing...
                     .Select(u => u.StartDateTime.TimeOfDay.TotalMinutes)
                     .ToListAsync();
                 var startTime = sessionStart.DefaultIfEmpty(0).Sum();
@@ -63,7 +64,7 @@ namespace backend.Controllers
         [EnableCors]
         [HttpGet]
         [Route("GetUsageDataForPastWeek")]
-        public async Task<ActionResult<IEnumerable<object>>> GetUsageDataForPastWeek(/*int userId*/)//uncomment the parameter after testing.
+        public async Task<ActionResult<IEnumerable<object>>> GetUsageDataForPastWeek(int userId)//uncomment the parameter after testing.
         {
             var currentDate = DateTime.Today;
             var pastWeekDates = Enumerable.Range(0, 7)
@@ -76,7 +77,7 @@ namespace backend.Controllers
             foreach (var date in pastWeekDates)
             {
                 var usages = await dbContext.UserUsage
-                    .Where(u => u.UserId == 1 && u.Date == date.Date)//change the userId after testing...
+                    .Where(u => u.UserId == userId && u.Date == date.Date)//change the userId after testing...
                     .Select(u => u.UsageTime.TotalMinutes)
                     .ToListAsync();
 
@@ -94,7 +95,7 @@ namespace backend.Controllers
 
         [HttpGet]
         [Route("GetUsageDataCustom")]
-        public async Task<ActionResult<IEnumerable<object>>> GetUsageDataCustom(string startDate/*,int userId*/)//uncomment the parameter after testing.
+        public async Task<ActionResult<IEnumerable<object>>> GetUsageDataCustom(string startDate, int userId)//uncomment the parameter after testing.
         {
             var currentDate = DateTime.Parse(startDate);
             var pastWeekDates = Enumerable.Range(0, 7)
@@ -107,7 +108,7 @@ namespace backend.Controllers
             foreach (var date in pastWeekDates)
             {
                 var usages = await dbContext.UserUsage
-                    .Where(u => u.UserId == 1 && u.Date == date.Date)//change the userId after testing...
+                    .Where(u => u.UserId == userId && u.Date == date.Date)//change the userId after testing...
                     .Select(u => u.UsageTime.TotalMinutes)
                     .ToListAsync();
 
@@ -125,11 +126,13 @@ namespace backend.Controllers
 
         [HttpPost]
         [Route("StartUsage")]
-        public async Task<IActionResult> StartUsage(/*int userId*/)//uncomment the parameter after testing.
+        public async Task<IActionResult> StartUsage(int userId)//uncomment the parameter after testing.
         {
+            Console.WriteLine(userId);
+
             var userUsage = new UserUsage
             {
-                UserId = /*userId*/2,//change the userId after testing...
+                UserId = userId,//change the userId after testing...
                 Date = DateTime.Today,
                 UsageTime = TimeSpan.Zero,
                 StartTime = DateTime.Now
@@ -138,15 +141,15 @@ namespace backend.Controllers
             await dbContext.UserUsage.AddAsync(userUsage);
             await dbContext.SaveChangesAsync();
 
-            return Ok();
+            return Ok(new { Id = userId });
         }
 
         [HttpPost]
         [Route("EndUsage")]
-        public async Task<IActionResult> EndUsage(/*int userId*/)//uncomment the parameter after testing.
+        public async Task<IActionResult> EndUsage(int userId)//uncomment the parameter after testing.
         {
             var userUsage = await dbContext.UserUsage
-                .FirstOrDefaultAsync(u => u.UserId == 2 && u.UsageTime == TimeSpan.Zero);//change the userId after testing...
+                .FirstOrDefaultAsync(u => u.UserId == userId && u.UsageTime == TimeSpan.Zero);//change the userId after testing...
 
             if (userUsage != null)
             {
@@ -157,7 +160,6 @@ namespace backend.Controllers
             return Ok();
         }
 
-        [Authorize]
         [HttpGet("GetSession")]
         public async Task<IActionResult> GetSession(int SessionId)
         {
@@ -516,6 +518,73 @@ namespace backend.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
+
+        [HttpGet("GetActivitesWithTheirAhaMoments")]
+        public async Task<IActionResult> GetActivitesWithTheirAhaMoments(int meditatorId)
+        {
+            if (dbContext == null)
+            {
+                return StatusCode(500, "Database context is not initialized.");
+            }
+
+            try
+            {
+                // Step 1: Filter sessions for the meditator
+                var sessions = await dbContext.Sessions
+                    .Where(u => u.Meditator.Id == meditatorId && !u.IsDeleted)
+                    .Include(s => s.PreparationPhase)
+                        .ThenInclude(pp => pp.Goals)
+                            .ThenInclude(g => g.Activity)
+                    .Include(s => s.AhaMoments)
+                    .ToListAsync();
+
+                if (!sessions.Any())
+                {
+                    return NotFound("No sessions found for the specified meditator.");
+                }
+
+                // Step 2: Extract the first activity from the preparation phase goals for each session
+                var activitiesWithAhaMomentsCount = sessions
+                    .Where(s => s.PreparationPhase != null && s.PreparationPhase.Goals != null && s.PreparationPhase.Goals.Any())
+                    .Select(s => new
+                    {
+                        Activity = s.PreparationPhase.Goals.First().Activity,
+                        AhaMomentCount = s.AhaMoments.Count
+                    })
+                    .Where(a => a.Activity != null) // Ensure we only take non-null activities
+                    .ToList();
+
+                if (!activitiesWithAhaMomentsCount.Any())
+                {
+                    return NotFound("No activities found for the specified meditator.");
+                }
+
+                // Step 3: Group by activity title and sum the count of Aha Moments
+                var result = activitiesWithAhaMomentsCount
+                    .GroupBy(a => a.Activity.Title)
+                    .Select(g => new
+                    {
+                        Activity = g.Key,
+                        AhaMomentCount = g.Sum(a => a.AhaMomentCount)
+                    })
+                    .OrderByDescending(g => g.AhaMomentCount)
+                    .ToList();
+
+                if (result == null || !result.Any())
+                {
+                    return NotFound("No frequent activity found.");
+                }
+
+                // Step 4: Return the activities with their Aha Moments count
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+
 
 
     }

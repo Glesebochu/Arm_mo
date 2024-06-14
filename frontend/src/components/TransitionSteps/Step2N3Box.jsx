@@ -14,7 +14,6 @@ export function Step2N3Box({ stepNo, meditationObject }) {
 				return (
 					<h3 className="row-start-1 col-start-1 col-span-7 row-span-2 text-2xl justify-self self-center text-center m-4">
 						Limit the scope of your attention to
-						<br />
 						<span className='text-primary font-bold p-1'>{textReplacement(subType)}</span>.
 						<br />
 						Keep your peripheral awareness open and alert.

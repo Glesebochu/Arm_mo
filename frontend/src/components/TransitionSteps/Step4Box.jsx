@@ -7,14 +7,29 @@ export function Step4Box({ goals, onComplete }) {
     const [currentGoalIndex, setCurrentGoalIndex] = useState(0);
     const [checkedStates, setCheckedStates] = useState(Array(goals.length).fill(false));
 
-    useEffect(() => {
-        if (timeLeft > 0) {
-            const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
-            return () => clearTimeout(timer);
-        } else {
-            onTimerEnd();
+    const handleGoalCompletion = (index) => {
+        if (index < goals.length - 1) {
+            // onComplete(goals[index]);
+            setCurrentGoalIndex(index + 1);
         }
-    }, [timeLeft, onTimerEnd]);
+        const newCheckedStates = [...checkedStates];
+        newCheckedStates[index] = true;
+        setCheckedStates(newCheckedStates);
+    };
+
+    const handleCheckboxChange = (index) => {
+        console.log(`changed checkbox-${index} from ${checkedStates[index]} `);
+        if (index === currentGoalIndex) {
+            // This is for checking the current goal
+            handleGoalCompletion(index);
+        } else {
+            // This is for unchecking previously checked goals
+            const newCheckedStates = [...checkedStates];
+            newCheckedStates.fill(false, index);
+            setCheckedStates(newCheckedStates);
+            setCurrentGoalIndex(index);
+        }
+    };
 
     return (
         <div className="step-box w-full h-full flex flex-col items-center justify-center p-6 bg-white shadow-lg rounded-lg">

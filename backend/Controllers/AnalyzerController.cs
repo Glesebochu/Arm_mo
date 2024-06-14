@@ -149,7 +149,7 @@ namespace backend.Controllers
         public async Task<IActionResult> EndUsage(int userId)//uncomment the parameter after testing.
         {
             var userUsage = await dbContext.UserUsage
-                .FirstOrDefaultAsync(u => u.UserId == userId && u.UsageTime == TimeSpan.Zero);//change the userId after testing...
+                .FirstOrDefaultAsync(u => u.UserId == userId && u.UsageTime == TimeSpan.Zero && (u.StartTime.Date == DateTime.Now.Date || u.StartTime.Date == DateTime.Now.Date.AddDays(-1)));//change the userId after testing...
 
             if (userUsage != null)
             {

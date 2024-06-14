@@ -34,8 +34,6 @@ const UsageView = () => {
   });
   const endUsage = async () => {
     try {
-      alert("closing!");
-      // Add your logic to call the EndUsage API endpoint here
       if (user) {
         fetchStartUsage(
           `http://localhost:5158/api/Analyzer/EndUsage?userId=${user.id}`

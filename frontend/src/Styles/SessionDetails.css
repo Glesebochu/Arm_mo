@@ -12,7 +12,7 @@
   flex-wrap: wrap;
   justify-content: center;
   width: 100%;
-  max-width: 860px;
+  max-width: 80%;
   gap: 20px; /* Add space between cards */
 }
 
@@ -55,7 +55,7 @@
 }
 
 /* Responsive adjustments for smaller screens */
-@media (max-width: 860px) {
+@media (max-width: 80%) {
   .session-details-container {
     padding: 10px; /* Adjust padding for smaller screens */
   }
@@ -84,11 +84,11 @@
     width: 100%; /* Ensure stage cards take full width */
   }
 
- .section-title {
-  font-size: 1.25rem; /* text-lg */
-  font-weight: 600; /* font-light */
-  margin-top: 1rem;
-  margin-left: 2rem;
-  margin-bottom: 0.5rem;
-}
+  .section-title {
+    font-size: 1.25rem; /* text-lg */
+    font-weight: 600; /* font-light */
+    margin-top: 1rem;
+    margin-left: 2rem;
+    margin-bottom: 0.5rem;
+  }
 }

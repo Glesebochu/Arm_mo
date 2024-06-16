@@ -43,7 +43,7 @@ function customFilterFn(rows, columnIds, filterValue) {
 
 export function DataTable({ onSessionClick }) {
   const [sorting, setSorting] = useState([]);
-  const user = useSelector((state) => state.Auth.user.user);
+  const user = useSelector((state) => state.Auth.user);
   const [columnFilters, setColumnFilters] = useState([]);
   const [columnVisibility, setColumnVisibility] = useState({});
   const [rowSelection, setRowSelection] = useState({});

@@ -12,7 +12,7 @@ import "@/Styles/Insights.css";
 const Insights = ({ onSessionClick }) => {
   const [selectedSessionId, setSelectedSessionId] = useState(null);
   const [selectedView, setSelectedView] = useState("Insights");
-  const user = useSelector((state) => state.Auth.user.user);
+  const user = useSelector((state) => state.Auth.user);
 
   useEffect(() => {
     if (selectedView === "Insights") {

@@ -80,7 +80,7 @@ export const LineGraph = () => {
     ],
   });
   const [averageAhaMoments, setAverageAhaMoments] = useState(0);
-  const user = useSelector((state) => state.Auth.user.user);
+  const user = useSelector((state) => state.Auth.user);
 
   useEffect(() => {
     const fetchData = async () => {

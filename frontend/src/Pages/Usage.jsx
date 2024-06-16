@@ -25,7 +25,7 @@ Chart.register(
 const UsageView = () => {
   const [chartData, setChartData] = useState(null);
   const [customStartDate, setCustomStartDate] = useState(null);
-  const user = useSelector((state) => state.Auth.user.user);
+  const user = useSelector((state) => state.Auth.user);
 
   useEffect(() => {
     window.onunload = async () => {

@@ -51,7 +51,7 @@ const numberToString = (number) => {
 };
 
 const Home = () => {
-  const user = useSelector((state) => state.Auth.user.user);
+  const user = useSelector((state) => state.Auth.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
@@ -173,7 +173,7 @@ const Home = () => {
               <Button variant="ghost" className="p-0 rounded-[50%]">
                 <Avatar className="h-10 w-10">
                   {user?.profilePicture ? (
-                    <AvatarImage src={`${user.profilePicture}`} />
+                    <AvatarImage src={`http://localhost:5158${user.profilePicture}`} />
                   ) : (
                     <AvatarFallback className="flex items-center justify-center bg-black text-white">
                       {user?.firstName.charAt(0)}
@@ -199,7 +199,7 @@ const Home = () => {
                     <div className="border-[10px] w-fit rounded-[50%]">
                       <Avatar className="h-16 w-16 mx-auto">
                         {user?.profilePicture ? (
-                          <AvatarImage src={`${user.profilePicture}`} />
+                          <AvatarImage src={`http://localhost:5158${user.profilePicture}`} />
                         ) : (
                           <AvatarFallback className="bg-black text-white font-k2d font-bold text-xl">
                             {user?.firstName.charAt(0)}

@@ -96,7 +96,7 @@ public class AuthController : ControllerBase
             .FirstOrDefault();
 
         // Return the materialized list as the response
-        return Ok(new { user = meditator });
+        return Ok(meditator);
     }
 
 

@@ -18,13 +18,14 @@ public class UsersController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateUser(string id, [FromForm] UpdateUserAccountDTO updateUserAccountDto)
     {
+        Console.WriteLine($"the profile picture is -> {updateUserAccountDto.ProfilePicture} and the username is {updateUserAccountDto.Username}");
+        Console.WriteLine(id, updateUserAccountDto.Id);
         if (id != updateUserAccountDto.Id.ToString())
         {
             return BadRequest("User ID mismatch.");
         }
 
         var result = await _userService.UpdateUserAsync(updateUserAccountDto);
-
         if (!result.Success)
         {
             return StatusCode(StatusCodes.Status500InternalServerError, result.Message);

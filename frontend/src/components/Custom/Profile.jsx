@@ -14,7 +14,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useSelector, useDispatch } from "react-redux";
 import { FaPen } from "react-icons/fa";
 import { AnimatedInput } from "./AnimatedInput";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { updateUserAccount } from "../../../slices/UserSlice";
 
 const Profile = () => {
@@ -26,7 +26,8 @@ const Profile = () => {
     lastName: "",
     username: "",
   });
-  const user = useSelector((state) => state.Auth.user.user);
+
+  const user = useSelector((state) => state.Auth.user);
 
   const handleAccountChange = (e) => {
     if(e.target.name == "profilePicture"){
@@ -68,7 +69,7 @@ const Profile = () => {
               <div className="border-[10px] w-fit rounded-[50%]">
                 <Avatar className="h-16 w-16 mx-auto">
                   {user?.profilePicture ? (
-                    <AvatarImage src={`${user.profilePicture}`} />
+                    <AvatarImage src={`http://localhost:5158${user.profilePicture}`} />
                   ) : (
                     <AvatarFallback className="bg-black text-white">
                       {user?.firstName.charAt(0)}

@@ -29,11 +29,6 @@ export default function CreatePreparationPhase() {
     EndDateTime: "",
   });
 
-  const handleRowChange = (index, title, type) => {
-    const newDistractions = [...preparationData.Distractions];
-    newDistractions[index] = { title, type };
-    setPreparationData({ ...preparationData, Distractions: newDistractions });
-  };
   // The function that updates the goaltable's preparation data
   // const handleGoalsSelection = (selectedGoals) => {
   //   setPreparationData({ ...preparationData, Goals: selectedGoals });
@@ -43,25 +38,29 @@ export default function CreatePreparationPhase() {
     {
       title: "Goal",
       instruction:
-        "Set a complete and achievable goal for your meditation session",
+        "Set a complete and achievable goal for your meditation session.",
       component: (
         <GoalsTable goals={goals} />
         // <GoalsTable goals={goals} onGoalsSelection={handleGoalsChange} />
       ),
-      buttons: ["Next step", "Cancel"],
     },
     {
       title: "Duration",
-      instruction: "Set a reasonable timer for your meditation session",
+      instruction: "Set a reasonable timer for your meditation session.",
       component: (
         <TimeInput
-          defaultValue={new Time(1, 0)}
-          onChange={(e) =>
-            setPreparationData({ ...preparationData, Duration: e.target.value })
+          hourCycle={24}
+          value={preparationData.Duration}
+          onChange={(value) =>
+            setPreparationData((prevData) => ({
+              ...prevData,
+              Duration: value,
+            }))
           }
+          className="col-span-7 text-4xl mr-[30px] mt-[20px] tracking-widest rounded-md hover:bg-gray-100 transition duration-100 border 
+          border-grey"
         />
       ),
-      buttons: ["Next step", "Cancel"],
     },
     {
       title: "Motivation",
@@ -69,7 +68,7 @@ export default function CreatePreparationPhase() {
         "Write a complete and meaningful statement about what motivates you to meditate.",
       component: (
         <Input
-          placeholder="e.g., To improve my focus"
+          placeholder="e.g., To improve my focus."
           value={preparationData.Motivation}
           onChange={(e) =>
             setPreparationData({
@@ -77,9 +76,9 @@ export default function CreatePreparationPhase() {
               Motivation: e.target.value,
             })
           }
+          className="col-span-7 p-5 text-2xl mr-[50px]"
         />
       ),
-      buttons: ["Next step", "Cancel"],
     },
     {
       title: "Distraction",
@@ -105,9 +104,16 @@ export default function CreatePreparationPhase() {
               ],
             });
           }}
+          onDeleteRow={(index) => {
+            const newDistractions = [...preparationData.Distractions];
+            newDistractions.splice(index, 1);
+            setPreparationData({
+              ...preparationData,
+              Distractions: newDistractions,
+            });
+          }}
         />
       ),
-      buttons: ["Next step", "Cancel"],
     },
     {
       title: "Expectation",
@@ -115,7 +121,8 @@ export default function CreatePreparationPhase() {
         "Write a complete and meaningful statement about your expectations for this session.",
       component: (
         <Input
-          placeholder="e.g., Stay focused without any distractions for 10 "
+          placeholder="e.g., To stay focused without any distractions for 10 minutes. "
+          style={{ "::placeholder": { fontSize: "50px" } }}
           value={preparationData.Expectation}
           onChange={(e) =>
             setPreparationData({
@@ -123,23 +130,19 @@ export default function CreatePreparationPhase() {
               Expectation: e.target.value,
             })
           }
+          className="col-span-7 p-5 text-2xl mr-[50px]"
         />
       ),
-      buttons: ["Next step", "Cancel"],
     },
     {
       title: "Diligence",
-      instruction:
-        "Intend to focus diligently during your meditation. Click 'Ready' to proceed.",
+      instruction: "Intend to focus diligently during your meditation.",
       component: null,
-      buttons: ["Ready", "Cancel"],
     },
     {
       title: "Posture",
-      instruction:
-        "Correct your posture according to the user guide. Click 'Save' to save all your data & move on to the transition phase.",
+      instruction: "Correct your posture according to the user guide.",
       component: null, // No additional components
-      buttons: ["Save", "Cancel"],
     },
   ];
 
@@ -152,6 +155,7 @@ export default function CreatePreparationPhase() {
   };
 
   const handleSave = () => {
+    preparationData.EndDateTime = new Date().toISOString();
     const preparationPhaseData = {
       // Goals: preparationData.Goals,
       duration: preparationData.Duration.toString(),
@@ -159,11 +163,12 @@ export default function CreatePreparationPhase() {
       distractions: preparationData.Distractions,
       expectation: preparationData.Expectation,
       startDateTime: preparationData.StartDateTime,
-      endDateTime: new Date().toISOString(),
+      endDateTime: preparationData.EndDateTime,
     };
+    console.log(preparationData);
     dispatch(CreatePreparationPhaseThunk(preparationPhaseData)).then(
       (response) => {
-        const prepPhaseId = response.data.id; // Assuming the ID is in response.data
+        // const prepPhaseId = response.data.id;
         // history.push({
         //   pathname: "/transition",
         //   state: { prepPhaseId },
@@ -196,42 +201,182 @@ export default function CreatePreparationPhase() {
 
   useEffect(() => {
     if (stepIndex === 0) {
-      const timer = setTimeout(() => {
-        setPreparationData({
-          ...preparationData,
-          StartDateTime: new Date().toISOString(),
-        });
-      }, 5000);
-      return () => clearTimeout(timer);
+      setPreparationData({
+        ...preparationData,
+        StartDateTime: new Date().toISOString(),
+      });
     }
   }, [stepIndex]);
 
   const currentStep = steps[stepIndex];
   const isFirstStep = stepIndex === 0;
+  const isSixthStep = stepIndex === 5;
   const isLastStep = stepIndex === steps.length - 1;
 
+  const progress = stepIndex === 0 ? 0 : ((stepIndex + 1) / steps.length) * 100;
+
   return (
-    <div className="Preparation-phase grid grid-cols-20 grid-rows-20 h-[auto] w-full ">
-      <h1>Main Instruction → Prepare to meditate</h1>
-      <div>
-        <p>
-          Instruction Description → Hey there! Let's take your meditation
-          practice to the next level by answering some important questions.
-        </p>
-        <Progress value={stepIndex + 1} max={steps.length} />
-        <h2>Title- {currentStep.title}</h2>
-        <p>Instruction- {currentStep.instruction}</p>
-        {currentStep.component}
-        <div>
-          {!isFirstStep && <Button onClick={handlePrevious}>Previous</Button>}
-          {currentStep.buttons.map((buttonLabel) => (
-            <Button key={buttonLabel} onClick={() => handleAction(buttonLabel)}>
-              {buttonLabel}
+    <div className="grid grid-cols-8 grid-rows-6 gap-2 h-[90vh] w-Full m-[70px]">
+      {isFirstStep && (
+        <>
+          <div className="col-start-1 col-span-7 row-start-1 row-span-2 mt-0 ml-[50px] mr-[50px] w-full">
+            <h1 className="col-start-1 col-span-7 p-0">Prepare To Meditate!</h1>
+            <Progress
+              value={progress}
+              className="p-0 h-1.5 col-start-1 col-span-7 mt-[40px] w-full mr-0"
+            />
+            <h3 className="col-start-1 col-span-7 text-4xl font-bold ml-[40px] p-0">
+              {currentStep.title}
+            </h3>
+            <p className="col-start-1 col-span-7 text-xl ml-[40px] p-0">
+              {currentStep.instruction}
+            </p>
+          </div>
+
+          <div className="col-start-1 col-span-7 row-start-3 row-span-2 p-5 text-xl mt-[30px] ml-[90px] overflow-auto w-full">
+            {currentStep.component}
+          </div>
+          <Button
+            onClick={handleNext}
+            className="col-start-1 row-start-5 p-4  h-[70px] w-[300px] mt-[70px] ml-[80px] mr-[60px] text-2xl"
+          >
+            Next Step
+          </Button>
+          <Button
+            onClick={handleCancel}
+            className="col-start-7 col-span-2 row-start-5 p-4 mt-[70px] w-[300px] h-[70px] text-2xl"
+          >
+            Cancel
+          </Button>
+        </>
+      )}
+
+      {!isFirstStep && !isSixthStep && !isLastStep && (
+        <>
+          <div className="col-start-1 col-span-7 row-start-1 mt-0 ml-[50px] mr-[50px] w-full">
+            <h1>{currentStep.title}</h1>
+            <Progress
+              value={progress}
+              className="p-0 h-1.5 mt-[40px] w-full mr-0"
+            />
+            <p className="text-xl">{currentStep.instruction}</p>
+          </div>
+          {stepIndex === 1 && (
+            <>
+              <label className="text-m col-start-1 col-span-7 ml-[80px] row-start-3">
+                Timer
+              </label>
+              <div className="col-start-1 col-span-7 row-start-3 p-5 text-xl mt-0 ml-[50px] mr-[50px] w-full">
+                {currentStep.component}
+              </div>
+            </>
+          )}
+          {!(stepIndex === 1) && (
+            <div className="col-start-1 col-span-7 row-start-2 row-span-3 p-5 text-xl mt-[70px] ml-[50px] mr-[50px] overflow-auto w-full">
+              {currentStep.component}
+            </div>
+          )}
+          <Button
+            onClick={handlePrevious}
+            className="col-start-1 row-start-5 p-4 h-[70px] w-[300px] mt-[70px] ml-[50px] mr-[60px] text-2xl"
+          >
+            Previous
+          </Button>
+        </>
+      )}
+      {isSixthStep ? (
+        <>
+          <div className="col-start-1 col-span-7 row-start-1 ml-[40px] w-full">
+            <h1 className="col-start-1 col-span-7 row-start-1 ">
+              {currentStep.title}
+            </h1>
+            <Progress
+              value={progress}
+              className="p-0 h-1.5 mt-[40px] col-start-1 col-span-7 row-start-2 w-full mr-0"
+            />
+          </div>
+
+          <div className="col-start-1 col-span-7 row-start-2 ml-[60px] mt-[60px] text-4xl mb-0 ">
+            <h3 className="mt-0 text-4xl ">{currentStep.instruction}</h3>
+            <p className=" font-bold text-sm text-gray-500 tracking-wider">
+              Click 'Ready' to proceed.
+            </p>
+          </div>
+          <Button
+            onClick={handlePrevious}
+            className="col-start-1 row-start-5 p-4 h-[70px] w-[300px] mt-[70px] ml-[50px] mr-[60px] text-2xl"
+          >
+            Previous
+          </Button>
+          <Button
+            onClick={handleNext}
+            className="col-start-4 row-start-5 p-4 h-[70px] w-[300px] mt-[70px] ml-[20px] mr-[60px] text-2xl"
+          >
+            Ready
+          </Button>
+          <Button
+            onClick={handleCancel}
+            className="col-start-7 col-span-2 row-start-5 p-4 mt-[70px] w-[300px] h-[70px] text-2xl"
+          >
+            Cancel
+          </Button>
+        </>
+      ) : isLastStep ? (
+        <>
+          <div className="col-start-1 col-span-7 row-start-1 ml-[40px] ">
+            <h1 className="col-start-1 col-span-7 row-start-1 ">
+              {currentStep.title}
+            </h1>
+            <Progress
+              value={progress}
+              className="p-0 h-1.5 mt-[40px] col-start-1 col-span-7 row-start-2 w-full mr-0"
+            />
+          </div>
+          <div className="col-start-1 col-span-7 row-start-2 ml-[60px] mt-[60px] text-4xl mb-0 ">
+            <h3 className="mt-0 text-4xl ">{currentStep.instruction}</h3>
+            <p className=" font-bold text-sm  text-gray-500 tracking-wider">
+              Click 'Save' to save all your data & move on to the transition
+              phase.
+            </p>
+          </div>
+
+          <Button
+            onClick={handlePrevious}
+            className="col-start-1 row-start-5 p-4 h-[70px] w-[300px] mt-[70px] ml-[50px] mr-[60px] text-2xl"
+          >
+            Previous
+          </Button>
+          <Button
+            onClick={handleSave}
+            className="col-start-4 row-start-5 p-4  h-[70px] w-[300px] mt-[70px]  ml-[20px] mr-[60px] text-2xl"
+          >
+            Save
+          </Button>
+          <Button
+            onClick={handleCancel}
+            className="col-start-7 col-span-2 row-start-5 p-4 mt-[70px] w-[300px] h-[70px] text-2xl"
+          >
+            Cancel
+          </Button>
+        </>
+      ) : (
+        !isFirstStep && (
+          <>
+            <Button
+              onClick={handleNext}
+              className="col-start-4 row-start-5 p-4  h-[70px] w-[300px] mt-[70px]  ml-[20px] mr-[60px] text-2xl"
+            >
+              Next Step
             </Button>
-          ))}
-        </div>
-      </div>
+            <Button
+              onClick={handleCancel}
+              className="col-start-7 col-span-2 row-start-5 p-4 mt-[70px] w-[300px] h-[70px] text-2xl"
+            >
+              Cancel
+            </Button>
+          </>
+        )
+      )}
     </div>
   );
 }
-// }

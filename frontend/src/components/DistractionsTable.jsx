@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import * as React from "react";
 import {
   Table,
   TableBody,
@@ -8,97 +8,91 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-
-const initialRows = [{ title: "", type: "" }];
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function DistractionsTable({
-  rows = initialRows,
+  rows,
   onRowChange,
   onAddRow,
+  onDeleteRow,
 }) {
-  const [selectedTypes, setSelectedTypes] = useState(
-    rows.map(() => "Select Type")
-  );
-
   const handleTitleChange = (index, event) => {
     const newTitle = event.target.value;
     onRowChange(index, newTitle, rows[index].type);
   };
 
-  const handleTypeChange = (index, selectedLabel) => {
-    const newRows = [...rows];
-    newRows[index].type = selectedLabel;
-    onRowChange(index, rows[index].title, selectedLabel);
-
-    const newSelectedTypes = [...selectedTypes];
-    newSelectedTypes[index] = selectedLabel;
-    setSelectedTypes(newSelectedTypes);
+  const handleTypeChange = (index, value) => {
+    onRowChange(index, rows[index].title, value);
   };
-
-  const handleAddRow = () => {
-    const newRows = [...rows, { title: "", type: "" }];
-    onAddRow(newRows);
-
-    setSelectedTypes([...selectedTypes, "Select Type"]);
-  };
+  // const handleDeleteRow = (index) => {};
 
   return (
     <div>
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Title</TableHead>
-            <TableHead>Type</TableHead>
+            <TableHead className="font-bold">Title</TableHead>
+            <TableHead className="font-bold">Type</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {rows.map((row, index) => (
             <TableRow key={index}>
               <TableCell>
-                <input
+                <Input
                   type="text"
+                  placeholder="e.g., Restlessness"
                   value={row.title}
                   onChange={(event) => handleTitleChange(index, event)}
                 />
               </TableCell>
               <TableCell>
-                <DropdownMenu
+                <Select
                   value={row.type}
-                  onChange={(selectedLabel) =>
-                    handleTypeChange(index, selectedLabel)
-                  }
+                  onValueChange={(event) => handleTypeChange(index, event)}
                 >
-                  <DropdownMenuTrigger>
-                    {selectedTypes[index]}
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent>
-                    <DropdownMenuItem value="Worldly Desire">
-                      Worldly Desire
-                    </DropdownMenuItem>
-                    <DropdownMenuItem value="Aversion">
-                      Aversion
-                    </DropdownMenuItem>
-                    <DropdownMenuItem value="Lethargy / Laziness">
-                      Lethargy / Laziness
-                    </DropdownMenuItem>
-                    <DropdownMenuItem value="Worry / Remorse">
-                      Worry / Remorse
-                    </DropdownMenuItem>
-                    <DropdownMenuItem value="Doubt">Doubt</DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
+                  <SelectTrigger className="w-[180px]">
+                    <SelectValue placeholder="Select a Type" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectLabel>Type</SelectLabel>
+                      <SelectItem value="Doubt">Doubt</SelectItem>
+                      <SelectItem value="Worry_Remorse">
+                        Worry_Remorse
+                      </SelectItem>
+                      <SelectItem value="Lethargy_Laziness">
+                        Lethargy_Laziness
+                      </SelectItem>
+                      <SelectItem value="Aversion">Aversion</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </TableCell>
+              <TableCell>
+                <Button onClick={(index) => onDeleteRow(index)}>Delete</Button>
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
-      <Button onClick={handleAddRow}>Add Row</Button>
+      <Button
+        onClick={onAddRow}
+        variant="outline"
+        size="sm"
+        className="ml-[10px] mt-[10px] w-[80px] p-4 font-bold"
+      >
+        Add Row
+      </Button>
     </div>
   );
 }

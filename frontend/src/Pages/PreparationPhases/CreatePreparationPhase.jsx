@@ -57,8 +57,6 @@ export default function CreatePreparationPhase() {
               Duration: value,
             }))
           }
-          className="col-span-7 text-4xl mr-[30px] mt-[20px] tracking-widest rounded-md hover:bg-gray-100 transition duration-100 border 
-          border-grey"
         />
       ),
     },
@@ -263,10 +261,13 @@ export default function CreatePreparationPhase() {
           </div>
           {stepIndex === 1 && (
             <>
-              <label className="text-m col-start-1 col-span-7 ml-[80px] row-start-3">
+              <label className="text-xl col-start-1 col-span-7 ml-[65px] row-start-3">
                 Timer
               </label>
-              <div className="col-start-1 col-span-7 row-start-3 p-5 text-xl mt-0 ml-[50px] mr-[50px] w-full">
+              <div
+                className="col-start-1 col-span-7 row-start-3 mt-10 ml-[65px] tracking-widest rounded-md hover:bg-gray-100 transition duration-100 border 
+          border-grey text-5xl"
+              >
                 {currentStep.component}
               </div>
             </>

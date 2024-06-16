@@ -57,7 +57,34 @@ const Home = () => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
   const [frameworks, setFrameworks] = useState([]);
+  useEffect(() => {
+    window.onunload = async (event) => {
+      event.preventDefault();
+      const promise = new Promise((resolve) => {
+        endUsage().then(() => {
+          resolve();
+        });
+      });
+    };
 
+    return () => {
+      promise.then(() => {
+        // Call a timeout function after promise with an alert maybe to make sure we're calling.
+      });
+    };
+  }, []);
+
+  const endUsage = async () => {
+    try {
+      if (user) {
+        await fetchStartUsage(
+          `http://localhost:5158/api/Analyzer/EndUsage?userId=${user.id}`
+        );
+      }
+    } catch (error) {
+      console.error("Error ending usage:", error);
+    }
+  };
   useEffect(() => {
     console.log(user);
     // Determine the maximum practiced stage

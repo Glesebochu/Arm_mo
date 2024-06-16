@@ -226,7 +226,7 @@ export default function CreatePreparationPhase() {
             <h3 className="col-start-1 col-span-7 text-4xl font-bold ml-[40px] p-0">
               {currentStep.title}
             </h3>
-            <p className="col-start-1 col-span-7 text-xl ml-[40px] p-0 mt-5">
+            <p className="col-start-1 col-span-7 text-2xl ml-[40px] p-0 mt-10 font-bold text-gray-600 ">
               {currentStep.instruction}
             </p>
           </div>
@@ -257,7 +257,9 @@ export default function CreatePreparationPhase() {
               value={progress}
               className="p-0 h-1.5 mt-[40px] w-full mr-0"
             />
-            <p className="text-xl mt-5">{currentStep.instruction}</p>
+            <p className="text-2xl mt-10 font-bold text-gray-600 ">
+              {currentStep.instruction}
+            </p>
           </div>
           {stepIndex === 1 && (
             <>
@@ -273,7 +275,7 @@ export default function CreatePreparationPhase() {
             </>
           )}
           {!(stepIndex === 1) && (
-            <div className="col-start-1 col-span-7 row-start-2 row-span-3 p-5 text-xl mt-[70px] ml-[50px] mr-[50px] overflow-auto w-full">
+            <div className="col-start-1 col-span-7 row-start-2 row-span-3 p-5 text-xl mt-[90px] ml-[50px] mr-[50px] overflow-auto w-full">
               {currentStep.component}
             </div>
           )}

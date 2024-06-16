@@ -298,7 +298,7 @@ export default function CreatePreparationPhase() {
 
           <div className="col-start-1 col-span-7 row-start-2 ml-[60px] mt-[60px] text-4xl mb-0 ">
             <h3 className="mt-0 text-4xl ">{currentStep.instruction}</h3>
-            <p className=" font-bold text-sm text-gray-500 tracking-wider">
+            <p className=" font-bold text-sm text-gray-500 tracking-wider mt-5">
               Click 'Ready' to proceed.
             </p>
           </div>
@@ -334,7 +334,7 @@ export default function CreatePreparationPhase() {
           </div>
           <div className="col-start-1 col-span-7 row-start-2 ml-[60px] mt-[60px] text-4xl mb-0 ">
             <h3 className="mt-0 text-4xl ">{currentStep.instruction}</h3>
-            <p className=" font-bold text-sm  text-gray-500 tracking-wider">
+            <p className=" font-bold text-sm  text-gray-500 tracking-wider mt-5">
               Click 'Save' to save all your data & move on to the transition
               phase.
             </p>

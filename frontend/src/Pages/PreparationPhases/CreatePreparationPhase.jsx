@@ -228,7 +228,7 @@ export default function CreatePreparationPhase() {
             <h3 className="col-start-1 col-span-7 text-4xl font-bold ml-[40px] p-0">
               {currentStep.title}
             </h3>
-            <p className="col-start-1 col-span-7 text-xl ml-[40px] p-0">
+            <p className="col-start-1 col-span-7 text-xl ml-[40px] p-0 mt-5">
               {currentStep.instruction}
             </p>
           </div>
@@ -259,7 +259,7 @@ export default function CreatePreparationPhase() {
               value={progress}
               className="p-0 h-1.5 mt-[40px] w-full mr-0"
             />
-            <p className="text-xl">{currentStep.instruction}</p>
+            <p className="text-xl mt-5">{currentStep.instruction}</p>
           </div>
           {stepIndex === 1 && (
             <>
@@ -297,7 +297,7 @@ export default function CreatePreparationPhase() {
           </div>
 
           <div className="col-start-1 col-span-7 row-start-2 ml-[60px] mt-[60px] text-4xl mb-0 ">
-            <h3 className="mt-0 text-4xl ">{currentStep.instruction}</h3>
+            <h3 className="mt-5 text-4xl ">{currentStep.instruction}</h3>
             <p className=" font-bold text-sm text-gray-500 tracking-wider mt-5">
               Click 'Ready' to proceed.
             </p>
@@ -333,7 +333,7 @@ export default function CreatePreparationPhase() {
             />
           </div>
           <div className="col-start-1 col-span-7 row-start-2 ml-[60px] mt-[60px] text-4xl mb-0 ">
-            <h3 className="mt-0 text-4xl ">{currentStep.instruction}</h3>
+            <h3 className="mt-5 text-4xl ">{currentStep.instruction}</h3>
             <p className=" font-bold text-sm  text-gray-500 tracking-wider mt-5">
               Click 'Save' to save all your data & move on to the transition
               phase.

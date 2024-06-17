@@ -8,7 +8,7 @@ import { ResponsiveContainer } from "recharts";
 export function CurrentStageAlert() {
   const [currentStage, setCurrentStage] = useState(null);
   const [goal, setGoal] = useState("");
-  const user = useSelector((state) => state.Auth.user.user);
+  const user = useSelector((state) => state.Auth.user);
 
   useEffect(() => {
     const fetchData = async () => {

@@ -147,7 +147,7 @@ const authSlice = createSlice({
       .addCase(logout.fulfilled, (state) => {
         state.isAuthenticated = false;
         state.user = null;
-        state.error = null;
+        state.error = "";
       })
       .addCase(logout.rejected, (state, action) => {
         state.error = action.payload;
@@ -159,6 +159,7 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.user = action.payload;
         state.isAuthenticated = true;
+        state.error = "";
       })
       .addCase(fetchMe.rejected, (state, action) => {
         state.isLoading = false;
@@ -166,15 +167,17 @@ const authSlice = createSlice({
         state.isAuthenticated = false;
       })
       .addCase(updateUserAccount.pending, (state) => {
-        state.status = 'loading';
+        state.isLoading = true;
       })
       .addCase(updateUserAccount.fulfilled, (state, action) => {
-        state.status = 'succeeded';
+        state.isLoading = false;
         state.user = action.payload;
+        state.error = "";
         console.log(state.user, "the updated user");
       })
       .addCase(updateUserAccount.rejected, (state, action) => {
-        state.status = 'failed';
+        state.isLoading = false;
+        state.isError = true;
         state.error = action.payload;
       });
   },

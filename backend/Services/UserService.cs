@@ -1,6 +1,7 @@
 using backend.Data;
 using backend.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 public class UserService : IUserService
 {
@@ -57,9 +58,17 @@ public class UserService : IUserService
             user.ProfilePicture = await SaveFileAsync(updateUserAccountDto.ProfilePicture);
         }
 
-        user.FirstName = updateUserAccountDto.FirstName;
-        user.LastName = updateUserAccountDto.LastName;
-        user.Username = updateUserAccountDto.Username;
+        if(!string.IsNullOrEmpty(updateUserAccountDto.FirstName)){
+            user.FirstName = updateUserAccountDto.FirstName;
+        }
+
+        if(!string.IsNullOrEmpty(updateUserAccountDto.LastName)){
+            user.LastName = updateUserAccountDto.LastName;
+        }
+
+        if(!string.IsNullOrEmpty(updateUserAccountDto.Username)){
+            user.Username = updateUserAccountDto.Username;
+        }
 
         _context.Meditators.Update(user);
         await _context.SaveChangesAsync();

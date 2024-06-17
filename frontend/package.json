@@ -26,7 +26,7 @@
     "@radix-ui/react-tabs": "^1.0.4",
     "@react-oauth/google": "^0.12.1",
     "@reduxjs/toolkit": "^2.2.5",
-    "@rollup/rollup-win32-x64-msvc": "^4.18.0",
+    "@rollup/wasm-node": "^4.18.0",
     "@tanstack/react-table": "^8.17.3",
     "@tremor/react": "^3.17.2",
     "@tsparticles/engine": "^3.4.0",

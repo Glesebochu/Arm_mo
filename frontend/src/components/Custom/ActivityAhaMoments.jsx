@@ -16,7 +16,7 @@ const colors = [
 
 export function ActivityAhaMomentDonut() {
   const [chartData, setChartData] = useState(null);
-  const user = useSelector((state) => state.Auth.user.user);
+  const user = useSelector((state) => state.Auth.user);
 
   useEffect(() => {
     const fetchData = async () => {

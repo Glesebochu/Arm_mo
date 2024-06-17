@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 export default function LongestSession({ onSessionClick }) {
   const [duration, setDuration] = useState("NaN");
   const [sessionId, setSessionId] = useState(null);
-  const user = useSelector((state) => state.Auth.user.user);
+  const user = useSelector((state) => state.Auth.user);
 
   useEffect(() => {
     const fetchLongestSession = async () => {

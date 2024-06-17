@@ -8,7 +8,7 @@ import { ResponsiveContainer } from "recharts";
 export function MostVisitedActivityAlert() {
   const [activity, setActivity] = useState("");
   const [count, setCount] = useState(0);
-  const user = useSelector((state) => state.Auth.user.user);
+  const user = useSelector((state) => state.Auth.user);
 
   useEffect(() => {
     const fetchData = async () => {

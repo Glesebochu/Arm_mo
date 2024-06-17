@@ -82,6 +82,28 @@
   box-sizing: border-box;
 }
 
+.no-data-image {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100vh; /* Full viewport height to center vertically */
+  background: white; /* Adjust based on your background color */
+}
+
+.no-data-image img {
+  max-width: 70%;
+  max-height: 70%;
+  opacity: 1; /* Adjust to blend with the background */
+}
+
+.MeditateButton {
+  margin-top: 30px; /* Adjust the space between the image and the button */
+  padding: 10px 20px; /* Adjust padding as needed */
+  font-size: 16px; /* Adjust font size as needed */
+}
+
+
 /* Responsive adjustments for smaller screens */
 @media (max-width: 860px) {
   .container-insight {

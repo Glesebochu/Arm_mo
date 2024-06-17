@@ -4,14 +4,15 @@ import { CurrentStageAlert } from "@/components/Custom/CurrentStageAlert";
 import { MostVisitedActivityAlert } from "@/components/Custom/FrequentedActivityAlert";
 import LongestSession from "@/components/Custom/LongestSession";
 import { ActivityAhaMomentDonut } from "@/components/Custom/ActivityAhaMoments";
-import { ResponsiveContainer } from "recharts";
 import { useSelector } from "react-redux";
 import SessionDetails from "@/pages/SessionDetails.jsx";
+import { Button } from "@/components/ui/button";
 import "@/Styles/Insights.css";
 
 const Insights = ({ onSessionClick }) => {
   const [selectedSessionId, setSelectedSessionId] = useState(null);
   const [selectedView, setSelectedView] = useState("Insights");
+  const [hasBarGraphData, setHasBarGraphData] = useState(true);
   const user = useSelector((state) => state.Auth.user);
 
   useEffect(() => {
@@ -25,14 +26,26 @@ const Insights = ({ onSessionClick }) => {
     setSelectedView("SessionDetails");
   };
 
+  const handleDataCheck = (hasData) => {
+    setHasBarGraphData(hasData);
+  };
+
   const renderSelectedView = () => {
     if (selectedView === "SessionDetails" && selectedSessionId) {
       return <SessionDetails sessionId={selectedSessionId} />;
     } else {
+      if (!hasBarGraphData) {
+        return (
+          <div className="no-data-image">
+            <img src="public/InsightsNotFound.jpg" alt="Insights Not Found" />
+            <Button className="MeditateButton">Meditate</Button>
+          </div>
+        );
+      }
       return (
         <div className="container-insight">
           <div className="bar-graph-box">
-            <BarGraph meditatorId={user.id} />
+            <BarGraph meditatorId={user.id} onDataCheck={handleDataCheck} />
           </div>
 
           <div className="alerts-box">
@@ -48,7 +61,7 @@ const Insights = ({ onSessionClick }) => {
             <LongestSession onSessionClick={handleSessionClick} />
           </div>
           <div className="Activities">
-            <ActivityAhaMomentDonut/>
+            <ActivityAhaMomentDonut />
           </div>
         </div>
       );

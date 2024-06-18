@@ -7,13 +7,16 @@ import { useSelector } from "react-redux";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const colors = [
-  "#1E3A8A",// blue-900
+  "#101A8B", // blue-900
   "#1E3A8A", // blue-700
   "#2563EB", // blue-600
   "#3B82F6", // blue-500
   "#60A5FA", // blue-400
+  "#93C5FD", // blue-300
+  "#BFDBFE", // blue-200
+  "#DBEAFE", // blue-100
+  "black", // black
 ];
-
 export function ActivityAhaMomentDonut() {
   const [chartData, setChartData] = useState(null);
   const user = useSelector((state) => state.Auth.user);
@@ -28,6 +31,21 @@ export function ActivityAhaMomentDonut() {
           }
         );
         const data = response.data;
+        // Dummy data for testing purposes
+        // const data = [
+        //   { activity: "Activity 1", ahaMomentCount: 100 },
+        //   { activity: "Activity 2", ahaMomentCount: 90 },
+        //   { activity: "Activity 3", ahaMomentCount: 80 },
+        //   { activity: "Activity 4", ahaMomentCount: 70 },
+        //   { activity: "Activity 5", ahaMomentCount: 60 },
+        //   { activity: "Activity 6", ahaMomentCount: 50 },
+        //   { activity: "Activity 7", ahaMomentCount: 40 },
+        //   { activity: "Activity 8", ahaMomentCount: 30 },
+        //   { activity: "Activity 9", ahaMomentCount: 20 },
+        //   { activity: "Activity 10", ahaMomentCount: 10 },
+        //   { activity: "Activity 11", ahaMomentCount: 10 },
+        //   { activity: "Activity 12", ahaMomentCount: 10 },
+        // ];
 
         // Sort data by Aha Moment count in descending order
         data.sort((a, b) => b.ahaMomentCount - a.ahaMomentCount);
@@ -35,13 +53,13 @@ export function ActivityAhaMomentDonut() {
         let labels = data.map((item) => item.activity);
         let ahaMomentCounts = data.map((item) => item.ahaMomentCount);
 
-        // Check if activities exceed 5
-        if (labels.length > 5) {
+        // Check if activities exceed 8
+        if (labels.length > 8) {
           const otherCount = ahaMomentCounts
-            .slice(4)
+            .slice(8)
             .reduce((acc, val) => acc + val, 0);
-          labels = labels.slice(0, 4).concat("Other");
-          ahaMomentCounts = ahaMomentCounts.slice(0, 4).concat(otherCount);
+          labels = labels.slice(0, 8).concat("Other");
+          ahaMomentCounts = ahaMomentCounts.slice(0, 8).concat(otherCount);
         }
 
         const backgroundColors = colors.slice(0, labels.length);

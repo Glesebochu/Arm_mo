@@ -48,7 +48,7 @@ const Signin = () => {
       if (!isError) {
         if (user) {
           fetchStartUsage(
-            `http://localhost:5158/api/Analyzer/StartUsage?userId=${user.user.id}`
+            `http://localhost:5158/api/Analyzer/StartUsage?userId=${user.id}`
           );
         }
         navigate("/home");

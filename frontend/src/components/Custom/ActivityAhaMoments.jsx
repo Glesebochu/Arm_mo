@@ -17,6 +17,7 @@ const colors = [
   "#DBEAFE", // blue-100
   "black", // black
 ];
+
 export function ActivityAhaMomentDonut() {
   const [chartData, setChartData] = useState(null);
   const user = useSelector((state) => state.Auth.user);
@@ -84,6 +85,9 @@ export function ActivityAhaMomentDonut() {
     fetchData();
   }, [user.id]);
 
+  const sumAhaMoments =
+    chartData?.datasets[0].data.reduce((a, b) => a + b, 0) || 0;
+
   const config = {
     type: "doughnut",
     options: {
@@ -97,13 +101,43 @@ export function ActivityAhaMomentDonut() {
           text: "Aha Moments by Activity",
         },
       },
+      cutout: "60%", // Adjust the cutout percentage to create space in the middle
+      animation: {
+        animateRotate: true,
+        animateScale: true,
+      },
+      layout: {
+        padding: {
+          top: 20,
+          bottom: 20,
+        },
+      },
     },
+    plugins: [
+      {
+        afterDraw: (chart) => {
+          const ctx = chart.ctx;
+          ctx.save();
+          const centerX = chart.getDatasetMeta(0).data[0].x;
+          const centerY = chart.getDatasetMeta(0).data[0].y;
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.font = "bold 24px sans-serif";
+          ctx.fillText(sumAhaMoments, centerX, centerY);
+          ctx.restore();
+        },
+      },
+    ],
   };
 
   return (
     <div>
       {chartData ? (
-        <Doughnut data={chartData} options={config.options} />
+        <Doughnut
+          data={chartData}
+          options={config.options}
+          plugins={config.plugins}
+        />
       ) : (
         "Loading..."
       )}

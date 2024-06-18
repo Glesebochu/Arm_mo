@@ -1,8 +1,7 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
-import { Navigate, useNavigate } from "react-router-dom";
-import { ResponsiveContainer } from "recharts";
+import { useNavigate } from "react-router-dom";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -12,6 +11,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import "@/Styles/NavBar.css"; // Ensure you import your CSS file
 
 export function NavigationBar({ setSelectedView }) {
   const [hideNav, setHideNav] = useState(false);
@@ -38,16 +38,16 @@ export function NavigationBar({ setSelectedView }) {
   };
 
   return (
-    <ResponsiveContainer>
+    <div className="ParentContainer">
       <NavigationMenu
         className={`fixed top-0 left-0 right-0 mt-4 z-50 bg-white transition-transform ${
           hideNav ? "hidden" : ""
-        }`}
+        } shrink-nav`}
       >
-        <NavigationMenuList>
-          <NavigationMenuItem>
+        <NavigationMenuList className="flex justify-between items-center w-full">
+          <NavigationMenuItem className="nav-item z-100">
             <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
-            <NavigationMenuContent>
+            <NavigationMenuContent className="overflow-y-auto">
               <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
                 <li className="row-span-3">
                   <NavigationMenuLink asChild>
@@ -92,12 +92,12 @@ export function NavigationBar({ setSelectedView }) {
             </NavigationMenuContent>
           </NavigationMenuItem>
           <NavigationMenuLink
-            className={navigationMenuTriggerStyle()}
+            className={`nav-item ${navigationMenuTriggerStyle()}`}
             onClick={() => navigate("/Home")}
           >
             Home
           </NavigationMenuLink>
-          <NavigationMenuItem>
+          <NavigationMenuItem className="nav-item">
             <NavigationMenuLink
               className={navigationMenuTriggerStyle()}
               onClick={() => setSelectedView("DataTable")}
@@ -105,7 +105,7 @@ export function NavigationBar({ setSelectedView }) {
               Sessions Summary
             </NavigationMenuLink>
           </NavigationMenuItem>
-          <NavigationMenuItem>
+          <NavigationMenuItem className="nav-item">
             <NavigationMenuLink
               className={navigationMenuTriggerStyle()}
               onClick={() => setSelectedView("UsageView")}
@@ -113,7 +113,7 @@ export function NavigationBar({ setSelectedView }) {
               App Activity
             </NavigationMenuLink>
           </NavigationMenuItem>
-          <NavigationMenuItem>
+          <NavigationMenuItem className="nav-item">
             <NavigationMenuLink
               className={navigationMenuTriggerStyle()}
               onClick={handleInsightsClick}
@@ -121,7 +121,7 @@ export function NavigationBar({ setSelectedView }) {
               Insights
             </NavigationMenuLink>
           </NavigationMenuItem>
-          <NavigationMenuItem>
+          <NavigationMenuItem className="nav-item">
             <NavigationMenuLink
               className={navigationMenuTriggerStyle()}
               onClick={() => setSelectedView("RemovedSessions")}
@@ -131,7 +131,7 @@ export function NavigationBar({ setSelectedView }) {
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
-    </ResponsiveContainer>
+    </div>
   );
 }
 

@@ -20,6 +20,7 @@ export function TransitionPhase({ preparationPhaseId }) {
     const [currentStep, setCurrentStep] = useState(1);
     const [currentGoalIndex, setCurrentGoalIndex] = useState(0);
     const [isPaused, setIsPaused] = useState(false);
+    const [timeLeft, setTimeLeft] = useState(400);
 
     const iconHeight = "h-10";
     const iconWidth = "w-6";
@@ -84,24 +85,24 @@ export function TransitionPhase({ preparationPhaseId }) {
     }, [dispatch]);
     // * Until here
 
-    // ! Timer code
-    // const [timeLeft, setTimeLeft] = useState(goal.timer);
+    // Timer code
 
-    // useEffect(() => {
-    //     if (timeLeft > 0) {
-    //         const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
-    //         return () => clearTimeout(timer);
-    //     } else {
-    //         onTimerEnd();
-    //     }
-    // }, [timeLeft, onTimerEnd]);
+
+    useEffect(() => {
+        if (timeLeft > 0) {
+            const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
+            return () => clearTimeout(timer);
+        } else {
+            handleTimerEnd();
+        }
+    }, [timeLeft, handleTimerEnd]);
 
     return (
         <div className="transition-phase grid grid-cols-10 grid-rows-9 h-[90vh] w-full">
 
             <h3
-                className="col-start-4 col-span-4 row-start-1 justify-self self-center text-center m-4"
-            >30 mins left</h3>
+                className="col-start-4 col-span-4 row-start-1 self-center text-center m-4"
+            >{Math.round(timeLeft / 60)} mins left</h3>
 
             <Button
                 onClick={() => setIsPaused(!isPaused)}

@@ -58,6 +58,12 @@ const Home = () => {
   const [value, setValue] = useState("");
   const [frameworks, setFrameworks] = useState([]);
   useEffect(() => {
+    if (user) {
+      console.log(user.user)
+      fetchStartUsage(
+        `http://localhost:5158/api/Analyzer/StartUsage?userId=${user.id}`
+      );
+    }
     window.onunload = async (event) => {
       event.preventDefault();
       const promise = new Promise((resolve) => {

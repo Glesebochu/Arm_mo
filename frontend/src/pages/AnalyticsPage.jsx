@@ -59,7 +59,12 @@ const SessionSummary = () => {
 
   return (
     <div className="flex flex-col items-center justify-center space-y-8 min-h-screen">
-      <NavigationBar setSelectedView={handleViewChange} />
+      <div className="mt-8 w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+        <NavigationBar
+          className="max-w-full sm:max-w-xl md:max-w-2xl lg:max-w-4xl xl:max-w-6xl"
+          setSelectedView={handleViewChange}
+        />
+      </div>
       {renderSelectedView()}
     </div>
   );

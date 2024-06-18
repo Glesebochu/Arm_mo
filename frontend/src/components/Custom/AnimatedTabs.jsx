@@ -106,4 +106,4 @@ export const FadeInDiv = ({
   );
 };
 
-export default AnimatedTabs 
+export default AnimatedTab 

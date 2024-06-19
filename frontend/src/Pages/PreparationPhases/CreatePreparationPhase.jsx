@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -9,6 +9,8 @@ import { getAll } from "../../../slices/GoalsSlice.js";
 import { CreatePreparationPhaseThunk } from "../../../slices/PreparationPhaseSlice.js";
 import { GoalsTable } from "@/components/GoalsTable.jsx";
 import DistractionsTable from "@/components/DistractionsTable.jsx";
+import "normalize.css";
+import { motion } from "framer-motion";
 
 export default function CreatePreparationPhase() {
   const dispatch = useDispatch();
@@ -214,7 +216,7 @@ export default function CreatePreparationPhase() {
   const progress = stepIndex === 0 ? 0 : ((stepIndex + 1) / steps.length) * 100;
 
   return (
-    <div className="grid grid-cols-9 grid-rows-11 gap-2 h-[85vh] w-Full m-[70px]">
+    <div className="grid grid-cols-9 grid-rows-11 gap-2 h-[85vh] w-Full m-20">
       <Button
         onClick={handleCancel}
         className="col-start-9 row-start-1 font-bold"
@@ -224,7 +226,7 @@ export default function CreatePreparationPhase() {
       </Button>
       {isFirstStep && (
         <>
-          <h1 className="col-start-1 col-span-5 row-start-1">
+          <h1 className="col-start-1 col-span-5 row-start-1 text-5xl mt-0">
             Prepare To Meditate!
           </h1>
           <Progress
@@ -232,21 +234,20 @@ export default function CreatePreparationPhase() {
             className=" h-1.5 col-start-1 col-span-9 row-start-2 w-full mt-5"
           />
 
-          <div className="col-start-1 col-span-9 row-start-3 row-span-2 font-bold ml-5 mt-5">
-            <h3 className="col-start-1 col-span-4 row-start-3 text-4xl font-bold mt-0">
+          <div className="col-start-1 col-span-9 row-start-3 row-span-2 font-bold ml-5">
+            <h2 className="col-start-1 col-span-4 row-start-3 text-5xl font-bold mt-0">
               {currentStep.title}
-            </h3>
-            <p className="col-start-1 col-span-9 row-start-4 text-xl font-bold mt-4 text-gray-600 ">
+            </h2>
+            <p className="col-start-1 col-span-9 row-start-4 text-xl font-bold m-3 mt-6 text-gray-600 ">
               {currentStep.instruction}
             </p>
           </div>
-          <div className="col-start-1 col-span-9 row-start-5 row-span-6 ml-8 mt-5 overflow-auto">
+          <div className="col-start-1 col-span-9 row-start-5 row-span-6 ml-8 mt-5 overflow-auto no-scrollbar scrollbar-hide">
             {currentStep.component}
           </div>
           <Button
             onClick={handleNext}
-            className="col-start-8 col-span-2 row-start-11 row-span-2 h-15 mt-5 text-xl bg-blue-100 font-bold 
-            border-b-2 border-solid shadow-m"
+            className="col-start-8 col-span-2 row-start-11 row-span-2 h-15 mt-5 text-xl bg-gray-100 font-bold border-b-2 border-solid shadow-m"
             variant="secondary"
           >
             Next
@@ -254,9 +255,9 @@ export default function CreatePreparationPhase() {
         </>
       )}
 
-      {!isFirstStep && !isSixthStep && !isLastStep && (
+      {!isFirstStep && !isSixthStep && !isLastStep && !(stepIndex == 3) && (
         <>
-          <h1 className="col-start-1 col-span-5 row-start-1">
+          <h1 className="col-start-1 col-span-5 row-start-1 text-5xl mt-0">
             {currentStep.title}
           </h1>
           <Progress
@@ -280,12 +281,7 @@ export default function CreatePreparationPhase() {
               </div>
             </>
           )}
-          {stepIndex == 3 && (
-            <div className="col-start-1 col-span-9 row-start-5 row-span-6 m-5 text-xl overflow-auto">
-              {currentStep.component}
-            </div>
-          )}
-          {!(stepIndex === 1 || stepIndex == 3) && (
+          {!(stepIndex === 1) && (
             <div className="col-start-1 col-span-9 row-start-6 m-5 text-xl w-full">
               {currentStep.component}
             </div>
@@ -299,9 +295,38 @@ export default function CreatePreparationPhase() {
           </Button>
         </>
       )}
+      {stepIndex == 3 && (
+        <>
+          <h1 className="col-start-1 col-span-5 row-start-1 text-5xl mt-0">
+            {currentStep.title}
+          </h1>
+          <Progress
+            value={progress}
+            className=" h-1.5 col-start-1 col-span-9 row-start-2 w-full mt-5"
+          />
+
+          <p className="col-start-1 col-span-9 row-start-3 text-3xl m-5 font-bold text-gray-600 ">
+            {currentStep.instruction}
+          </p>
+
+          <div
+            className="col-start-1 col-span-9 row-start-5 row-span-6 m-5 text-xl overflow-auto position-sticky no-scrollbar scrollbar-hide
+"
+          >
+            {currentStep.component}
+          </div>
+          <Button
+            onClick={handlePrevious}
+            className="col-start-1 col-span-2 row-start-11 row-span-2 h-15 mt-5 text-xl bg-gray-100 font-bold border-b-2 border-solid shadow-m"
+            variant="secondary"
+          >
+            Previous
+          </Button>
+        </>
+      )}
       {isSixthStep ? (
         <>
-          <h1 className="col-start-1 col-span-5 row-start-1 ">
+          <h1 className="col-start-1 col-span-5 row-start-1 text-5xl mt-0">
             {currentStep.title}
           </h1>
           <Progress
@@ -333,7 +358,7 @@ export default function CreatePreparationPhase() {
         </>
       ) : isLastStep ? (
         <>
-          <h1 className="col-start-1 col-span-5 row-start-1 ">
+          <h1 className="col-start-1 col-span-5 row-start-1 text-5xl mt-0">
             {currentStep.title}
           </h1>
           <Progress

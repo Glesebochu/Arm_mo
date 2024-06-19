@@ -59,6 +59,8 @@ export default function DistractionsTable({
                 <Select
                   value={row.type}
                   onValueChange={(event) => handleTypeChange(index, event)}
+                  className="position-sticky"
+                  id="my-select"
                 >
                   <SelectTrigger className="w-[180px]">
                     <SelectValue placeholder="Select a Type" />
@@ -79,7 +81,12 @@ export default function DistractionsTable({
                 </Select>
               </TableCell>
               <TableCell>
-                <Button onClick={(index) => onDeleteRow(index)} variant="destructive">Delete</Button>
+                <Button
+                  onClick={(index) => onDeleteRow(index)}
+                  variant="destructive"
+                >
+                  Delete
+                </Button>
               </TableCell>
             </TableRow>
           ))}

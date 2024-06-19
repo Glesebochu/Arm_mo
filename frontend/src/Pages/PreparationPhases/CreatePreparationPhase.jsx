@@ -214,74 +214,86 @@ export default function CreatePreparationPhase() {
   const progress = stepIndex === 0 ? 0 : ((stepIndex + 1) / steps.length) * 100;
 
   return (
-    <div className="grid grid-cols-8 grid-rows-6 gap-2 h-[90vh] w-Full m-[70px]">
+    <div className="grid grid-cols-9 grid-rows-11 gap-2 h-[85vh] w-Full m-[70px]">
+      <Button
+        onClick={handleCancel}
+        className="col-start-9 row-start-1 font-bold"
+        variant="destructive"
+      >
+        Cancel
+      </Button>
       {isFirstStep && (
         <>
-          <div className="col-start-1 col-span-7 row-start-1 row-span-2 mt-0 ml-[50px] mr-[50px] w-full">
-            <h1 className="col-start-1 col-span-7 p-0">Prepare To Meditate!</h1>
-            <Progress
-              value={progress}
-              className="p-0 h-1.5 col-start-1 col-span-7 mt-[40px] w-full mr-0"
-            />
-            <h3 className="col-start-1 col-span-7 text-4xl font-bold ml-[40px] p-0">
+          <h1 className="col-start-1 col-span-5 row-start-1">
+            Prepare To Meditate!
+          </h1>
+          <Progress
+            value={progress}
+            className=" h-1.5 col-start-1 col-span-9 row-start-2 w-full mt-5"
+          />
+
+          <div className="col-start-1 col-span-9 row-start-3 row-span-2 font-bold ml-5 mt-5">
+            <h3 className="col-start-1 col-span-4 row-start-3 text-4xl font-bold mt-0">
               {currentStep.title}
             </h3>
-            <p className="col-start-1 col-span-7 text-2xl ml-[40px] p-0 mt-10 font-bold text-gray-600 ">
+            <p className="col-start-1 col-span-9 row-start-4 text-xl font-bold mt-4 text-gray-600 ">
               {currentStep.instruction}
             </p>
           </div>
-
-          <div className="col-start-1 col-span-7 row-start-3 row-span-2 p-5 text-xl mt-[30px] ml-[90px] overflow-auto w-full">
+          <div className="col-start-1 col-span-9 row-start-5 row-span-6 ml-8 mt-5 overflow-auto">
             {currentStep.component}
           </div>
           <Button
             onClick={handleNext}
-            className="col-start-1 row-start-5 p-4  h-[70px] w-[300px] mt-[70px] ml-[80px] mr-[60px] text-2xl"
+            className="col-start-8 col-span-2 row-start-11 row-span-2 h-15 mt-5 text-xl bg-blue-100 font-bold 
+            border-b-2 border-solid shadow-m"
+            variant="secondary"
           >
-            Next Step
-          </Button>
-          <Button
-            onClick={handleCancel}
-            className="col-start-7 col-span-2 row-start-5 p-4 mt-[70px] w-[300px] h-[70px] text-2xl"
-          >
-            Cancel
+            Next
           </Button>
         </>
       )}
 
       {!isFirstStep && !isSixthStep && !isLastStep && (
         <>
-          <div className="col-start-1 col-span-7 row-start-1 mt-0 ml-[50px] mr-[50px] w-full">
-            <h1>{currentStep.title}</h1>
-            <Progress
-              value={progress}
-              className="p-0 h-1.5 mt-[40px] w-full mr-0"
-            />
-            <p className="text-2xl mt-10 font-bold text-gray-600 ">
-              {currentStep.instruction}
-            </p>
-          </div>
+          <h1 className="col-start-1 col-span-5 row-start-1">
+            {currentStep.title}
+          </h1>
+          <Progress
+            value={progress}
+            className=" h-1.5 col-start-1 col-span-9 row-start-2 w-full mt-5"
+          />
+
+          <p className="col-start-1 col-span-9 row-start-3 text-3xl m-5 font-bold text-gray-600 ">
+            {currentStep.instruction}
+          </p>
           {stepIndex === 1 && (
             <>
-              <label className="text-xl col-start-1 col-span-7 ml-[65px] row-start-3">
+              <label className="col-start-1 col-span-9 row-start-5 text-xl mt-5 ml-5">
                 Timer
               </label>
               <div
-                className="col-start-1 col-span-7 row-start-3 mt-10 ml-[65px] tracking-widest rounded-md hover:bg-gray-100 transition duration-100 border 
+                className="col-start-1 col-span-9 row-start-6 row-span-2 mb-8 m-5 tracking-widest rounded-md hover:bg-gray-100 transition duration-50 border 
           border-grey text-5xl"
               >
                 {currentStep.component}
               </div>
             </>
           )}
-          {!(stepIndex === 1) && (
-            <div className="col-start-1 col-span-7 row-start-2 row-span-3 p-5 text-xl mt-[90px] ml-[50px] mr-[50px] overflow-auto w-full">
+          {stepIndex == 3 && (
+            <div className="col-start-1 col-span-9 row-start-5 row-span-6 m-5 text-xl overflow-auto">
+              {currentStep.component}
+            </div>
+          )}
+          {!(stepIndex === 1 || stepIndex == 3) && (
+            <div className="col-start-1 col-span-9 row-start-6 m-5 text-xl w-full">
               {currentStep.component}
             </div>
           )}
           <Button
             onClick={handlePrevious}
-            className="col-start-1 row-start-5 p-4 h-[70px] w-[300px] mt-[70px] ml-[50px] mr-[60px] text-2xl"
+            className="col-start-1 col-span-2 row-start-11 row-span-2 h-15 mt-5 text-xl bg-gray-100 font-bold border-b-2 border-solid shadow-m"
+            variant="secondary"
           >
             Previous
           </Button>
@@ -289,77 +301,66 @@ export default function CreatePreparationPhase() {
       )}
       {isSixthStep ? (
         <>
-          <div className="col-start-1 col-span-7 row-start-1 ml-[40px] w-full">
-            <h1 className="col-start-1 col-span-7 row-start-1 ">
-              {currentStep.title}
-            </h1>
-            <Progress
-              value={progress}
-              className="p-0 h-1.5 mt-[40px] col-start-1 col-span-7 row-start-2 w-full mr-0"
-            />
-          </div>
-
-          <div className="col-start-1 col-span-7 row-start-2 ml-[60px] mt-[60px] text-4xl mb-0 ">
-            <h3 className="mt-5 text-4xl ">{currentStep.instruction}</h3>
-            <p className=" font-bold text-sm text-gray-500 tracking-wider mt-5">
+          <h1 className="col-start-1 col-span-5 row-start-1 ">
+            {currentStep.title}
+          </h1>
+          <Progress
+            value={progress}
+            className=" h-1.5 col-start-1 col-span-9 row-start-2 w-full mt-5"
+          />
+          <div className="col-start-1 col-span-9 row-start-4 text-4xl m-5">
+            <h3 className="text-4xl mt-5 font-bold text-gray-600">
+              {currentStep.instruction}
+            </h3>
+            <p className=" font-bold text-xl text-gray-500 tracking-wider mt-5">
               Click 'Ready' to proceed.
             </p>
           </div>
           <Button
             onClick={handlePrevious}
-            className="col-start-1 row-start-5 p-4 h-[70px] w-[300px] mt-[70px] ml-[50px] mr-[60px] text-2xl"
+            className="col-start-1 col-span-2 row-start-11 row-span-2 h-15 mt-5 text-xl bg-gray-100 font-bold border-b-2 border-solid shadow-m"
+            variant="secondary"
           >
             Previous
           </Button>
           <Button
             onClick={handleNext}
-            className="col-start-4 row-start-5 p-4 h-[70px] w-[300px] mt-[70px] ml-[20px] mr-[60px] text-2xl"
+            className="col-start-8 col-span-2 row-start-11 row-span-2 h-15 mt-5 text-xl bg-gray-100 font-bold border-b-2 border-solid shadow-m"
+            variant="secondary"
           >
             Ready
-          </Button>
-          <Button
-            onClick={handleCancel}
-            className="col-start-7 col-span-2 row-start-5 p-4 mt-[70px] w-[300px] h-[70px] text-2xl"
-          >
-            Cancel
           </Button>
         </>
       ) : isLastStep ? (
         <>
-          <div className="col-start-1 col-span-7 row-start-1 ml-[40px] ">
-            <h1 className="col-start-1 col-span-7 row-start-1 ">
-              {currentStep.title}
-            </h1>
-            <Progress
-              value={progress}
-              className="p-0 h-1.5 mt-[40px] col-start-1 col-span-7 row-start-2 w-full mr-0"
-            />
-          </div>
-          <div className="col-start-1 col-span-7 row-start-2 ml-[60px] mt-[60px] text-4xl mb-0 ">
-            <h3 className="mt-5 text-4xl ">{currentStep.instruction}</h3>
-            <p className=" font-bold text-sm  text-gray-500 tracking-wider mt-5">
-              Click 'Save' to save all your data & move on to the transition
-              phase.
+          <h1 className="col-start-1 col-span-5 row-start-1 ">
+            {currentStep.title}
+          </h1>
+          <Progress
+            value={progress}
+            className=" h-1.5 col-start-1 col-span-9 row-start-2 w-full mt-5"
+          />
+          <div className="col-start-1 col-span-9 row-start-4 text-4xl m-5">
+            <h3 className="text-4xl mt-5 font-bold text-gray-600">
+              {currentStep.instruction}
+            </h3>
+            <p className=" font-bold text-xl text-gray-500 tracking-wider mt-5">
+              Click 'Ready' to proceed.
             </p>
           </div>
-
           <Button
             onClick={handlePrevious}
-            className="col-start-1 row-start-5 p-4 h-[70px] w-[300px] mt-[70px] ml-[50px] mr-[60px] text-2xl"
+            className="col-start-1 col-span-2 row-start-11 row-span-2 h-15 mt-5 text-xl bg-gray-100 font-bold border-b-2 border-solid shadow-m"
+            variant="secondary"
           >
             Previous
           </Button>
           <Button
             onClick={handleSave}
-            className="col-start-4 row-start-5 p-4  h-[70px] w-[300px] mt-[70px]  ml-[20px] mr-[60px] text-2xl"
+            className="col-start-8 col-span-2 row-start-11 row-span-2 h-15 mt-5 text-xl bg-gray-100 font-bold border-b-2 border-solid shadow-m"
+            variant="secondary"
           >
             Save
-          </Button>
-          <Button
-            onClick={handleCancel}
-            className="col-start-7 col-span-2 row-start-5 p-4 mt-[70px] w-[300px] h-[70px] text-2xl"
-          >
-            Cancel
           </Button>
         </>
       ) : (
@@ -367,15 +368,10 @@ export default function CreatePreparationPhase() {
           <>
             <Button
               onClick={handleNext}
-              className="col-start-4 row-start-5 p-4  h-[70px] w-[300px] mt-[70px]  ml-[20px] mr-[60px] text-2xl"
+              className="col-start-8 col-span-2 row-start-11 row-span-2 h-15 mt-5 text-xl bg-gray-100 font-bold border-b-2 border-solid shadow-m"
+              variant="secondary"
             >
-              Next Step
-            </Button>
-            <Button
-              onClick={handleCancel}
-              className="col-start-7 col-span-2 row-start-5 p-4 mt-[70px] w-[300px] h-[70px] text-2xl"
-            >
-              Cancel
+              Next
             </Button>
           </>
         )

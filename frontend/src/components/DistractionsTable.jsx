@@ -40,8 +40,8 @@ export default function DistractionsTable({
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="font-bold">Title</TableHead>
-            <TableHead className="font-bold">Type</TableHead>
+            <TableHead className=" font-extrabold">Title</TableHead>
+            <TableHead className="font-extrabold">Type</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -79,7 +79,7 @@ export default function DistractionsTable({
                 </Select>
               </TableCell>
               <TableCell>
-                <Button onClick={(index) => onDeleteRow(index)}>Delete</Button>
+                <Button onClick={(index) => onDeleteRow(index)} variant="destructive">Delete</Button>
               </TableCell>
             </TableRow>
           ))}

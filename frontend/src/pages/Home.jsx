@@ -57,28 +57,74 @@ const Home = () => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
   const [frameworks, setFrameworks] = useState([]);
+
+
   useEffect(() => {
     if (user) {
-      console.log(user.user)
-      fetchStartUsage(
-        `http://localhost:5158/api/Analyzer/StartUsage?userId=${user.id}`
-      );
+          console.log(user.user)
+          fetchStartUsage(
+            `http://localhost:5158/api/Analyzer/StartUsage?userId=${user.id}`
+          );
     }
-    window.onunload = async (event) => {
-      event.preventDefault();
-      const promise = new Promise((resolve) => {
-        endUsage().then(() => {
-          resolve();
-        });
-      });
+
+    const handleBeforeUnload = (event) => {
+      localStorage.setItem("id", "yes");
+      
+      // const url = `http://localhost:5158/api/Analyzer/EndUsage?userId=${user.id}`;
+
+      // // Create a synchronous XHR request
+      // const xhr = new XMLHttpRequest();
+      // xhr.open('GET', url, false); // false makes the request synchronous
+      // xhr.send(null);
+
+      
+      // event.preventDefault();
+      // // Optionally show a confirmation dialog
+      // const confirmationMessage = 'Are you sure you want to leave?';
+      // event.returnValue = confirmationMessage; // Gecko, Trident, Edge
+      // return confirmationMessage; // Gecko, WebKit, Chrome < 34
     };
 
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
     return () => {
-      promise.then(() => {
-        // Call a timeout function after promise with an alert maybe to make sure we're calling.
-      });
+      window.removeEventListener('beforeunload', handleBeforeUnload);
     };
   }, []);
+
+  // useEffect(() => {
+  //   if (user) {
+  //     console.log(user.user)
+  //     fetchStartUsage(
+  //       `http://localhost:5158/api/Analyzer/StartUsage?userId=${user.id}`
+  //     );
+  //   }
+  //   // window.onunload = async (event) => {
+  //   //   event.preventDefault();
+  //   //   const promise = new Promise((resolve) => {
+  //   //     endUsage().then(() => {
+  //   //       resolve();
+  //   //     });
+  //   //   });
+  //   // };
+
+  //   return () => {
+  //     // promise.then(() => {
+  //     //   // Call a timeout function after promise with an alert maybe to make sure we're calling.
+  //     // });
+  //   };
+
+  //   // window.onbeforeunload = function (e) {
+  //   //   e = e || window.event;
+  //   //   endUsage();
+  //   //   // For IE and Firefox prior to version 4
+  //   //   if (e) {
+  //   //       e.returnValue = 'Any string';
+  //   //   }
+  
+  //   //   // For Safari
+  //   //   return 'Any string';
+  // }, []);
 
   const endUsage = async () => {
     try {

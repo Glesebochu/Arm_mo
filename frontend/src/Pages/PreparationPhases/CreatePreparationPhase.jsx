@@ -76,7 +76,7 @@ export default function CreatePreparationPhase() {
               Motivation: e.target.value,
             })
           }
-          className="col-span-7 p-5 text-2xl mr-[50px]"
+          className="text-2xl "
         />
       ),
     },
@@ -130,7 +130,7 @@ export default function CreatePreparationPhase() {
               Expectation: e.target.value,
             })
           }
-          className="col-span-7 p-5 text-2xl mr-[50px]"
+          className="text-2xl"
         />
       ),
     },
@@ -274,7 +274,7 @@ export default function CreatePreparationPhase() {
                 Timer
               </label>
               <div
-                className="col-start-1 col-span-9 row-start-6 row-span-2 mb-8 m-5 tracking-widest rounded-md hover:bg-gray-100 transition duration-50 border 
+                className="col-start-1 col-span-9 row-start-6 p-0 row-span-2 mt-5 ml-5 tracking-widest rounded-md hover:bg-gray-100 transition duration-50 border 
           border-grey text-5xl"
               >
                 {currentStep.component}
@@ -282,7 +282,7 @@ export default function CreatePreparationPhase() {
             </>
           )}
           {!(stepIndex === 1) && (
-            <div className="col-start-1 col-span-9 row-start-6 m-5 text-xl w-full">
+            <div className="col-start-1 col-span-9 row-start-6 mt-5 ml-5 text-xl">
               {currentStep.component}
             </div>
           )}
@@ -310,7 +310,7 @@ export default function CreatePreparationPhase() {
           </p>
 
           <div
-            className="col-start-1 col-span-9 row-start-5 row-span-6 m-5 text-xl overflow-auto position-sticky no-scrollbar scrollbar-hide
+            className="col-start-1 col-span-9 row-start-5 row-span-6 mt-5 ml-5 text-xl overflow-auto position-sticky no-scrollbar scrollbar-hide
 "
           >
             {currentStep.component}

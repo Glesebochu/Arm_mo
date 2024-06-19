@@ -46,11 +46,7 @@ const Signin = () => {
   useEffect(() => {
     if (isSubmitting) {
       if (!isError) {
-        if (user) {
-          fetchStartUsage(
-            `http://localhost:5158/api/Analyzer/StartUsage?userId=${user.user.id}`
-          );
-        }
+        
         navigate("/home");
       }
       notifyError(error.title);

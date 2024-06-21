@@ -160,6 +160,7 @@ public class AuthController : ControllerBase
             return null;
         }
     }
+    [NonAction]
     private string GenerateJwtToken(string email)
     {
         DotEnv.Load();
@@ -182,7 +183,7 @@ public class AuthController : ControllerBase
             {
                 new Claim(ClaimTypes.Email, email)
             }),
-            Expires = DateTime.UtcNow.AddMinutes(5),
+            Expires = DateTime.UtcNow.AddDays(1),
             Issuer = jwtIssuer,
             Audience = jwtAudience,
             SigningCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256Signature)

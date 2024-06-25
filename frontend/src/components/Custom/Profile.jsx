@@ -16,18 +16,62 @@ import { FaPen } from "react-icons/fa";
 import { AnimatedInput } from "./AnimatedInput";
 import { useEffect, useRef, useState } from "react";
 import { updateUserAccount } from "../../../slices/UserSlice";
+import { z } from "zod";
+import { notifyError, notifySuccess } from "../../../utils/Toast";
+import { ToastContainer } from "react-toastify";
+import { updateUserPassword } from "../../../slices/UserSlice";
+
+// Define the schema for the signin form using zod
+const passwordSchema = z.object({
+  currentPassword: z.string().min(6, "Current Password must be at least 6 characters"),
+  newPassword: z.string().min(6, "New Password must be at least 6 characters"),
+});
 
 const Profile = () => {
   const dispatch = useDispatch();
   const fileInputRef = useRef(null);
+  const user = useSelector((state) => state.Auth.user);
+  
   const [userAccount, setUserAccount] = useState({
     profilePicture: "", 
     firstName: "",
     lastName: "",
     username: "",
   });
+  
+  const [userPassword, setUserPassword] = useState({
+    currentPassword: "",
+    newPassword: "",
+  });
+  
+  const {passwordStatus} = useSelector(state => state.Account);
+  const handlePasswordSubmit = async (e)=> {
+    try{
+      passwordSchema.parse(userPassword);
+      const resultAction = await dispatch(updateUserPassword(userPassword));
+      console.log(resultAction, "result action")
+      if (updateUserPassword.fulfilled.match(resultAction)) {
+        const status = resultAction.payload;
+        if (status === "succeded") {
+          notifySuccess("Password changed successfully", "bottom-right");
+        } else {
+          notifyError("Your current password is incorrect", "bottom-right");
+        }
+      }
+    }catch(error){ 
+      if(error instanceof z.ZodError){
+        error.errors.forEach(err => notifyError(err.message))
+      }
+    }
+  }
 
-  const user = useSelector((state) => state.Auth.user);
+  const handlePasswordChange  = (e) => {
+    setUserPassword({
+      "id": user.id,
+      ...userPassword,
+      [e.target.name] : e.target.value
+    });
+  }
 
   const handleAccountChange = (e) => {
     if(e.target.name == "profilePicture"){
@@ -138,18 +182,19 @@ const Profile = () => {
           <CardContent>
             <div className="">
               <Label htmlFor="current">Current password</Label>
-              <AnimatedInput id="current" type="password" />
+              <AnimatedInput id="current" type="password" name="currentPassword" value={userPassword["currentPassword"]} onChange={handlePasswordChange} />
             </div>
             <div className="mt-[-2px] font-k2d">
               <Label htmlFor="new">New password</Label>
-              <AnimatedInput id="new" type="password" />
+              <AnimatedInput id="new" type="password"  name="newPassword" onChange={handlePasswordChange} value={userPassword["newPassword"]}/>
             </div>
           </CardContent>
           <CardFooter className="flex justify-center">
-            <Button>Change password</Button>
+            <Button onClick={handlePasswordSubmit}>Change password</Button>
           </CardFooter>
         </Card>
       </TabsContent>
+      <ToastContainer className="text-sm font-k2d"/>
     </Tabs>
   );
 };

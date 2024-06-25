@@ -154,6 +154,23 @@ namespace backend.Controllers
         }
 
         [HttpPost]
+        [Route("UpdateUsage")]
+        public async Task<IActionResult> UpdateUsage(int userId)//uncomment the parameter after testing.
+        {
+            var userUsage = await dbContext.UserUsage
+                .Where(u => u.UserId == userId)
+                .OrderByDescending(u => u.StartTime)
+                .FirstOrDefaultAsync();
+            if (userUsage != null)
+            {
+                userUsage.UsageTime = DateTime.Now - userUsage.StartTime;
+                await dbContext.SaveChangesAsync();
+            }
+
+            return Ok();
+        }
+
+        [HttpPost]
         [Route("EndUsage")]
         public async Task<IActionResult> EndUsage(int userId)//uncomment the parameter after testing.
         {

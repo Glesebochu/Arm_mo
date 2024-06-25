@@ -35,7 +35,7 @@ const UsageView = () => {
   const endUsage = async () => {
     try {
       if (user) {
-        fetchStartUsage(
+        CallUsage(
           `http://localhost:5158/api/Analyzer/EndUsage?userId=${user.id}`
         );
       }
@@ -247,7 +247,7 @@ const UsageView = () => {
   );
 };
 
-export const fetchStartUsage = async (endpoint) => {
+export const CallUsage = async (endpoint) => {
   try {
     const startTime = await axios.post(`${endpoint}`, null, {
       withCredentials: true,

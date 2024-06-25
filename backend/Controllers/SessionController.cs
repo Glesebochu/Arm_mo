@@ -89,5 +89,24 @@ namespace backend.Controllers
             );
         }
 
+        [HttpDelete("Delete")]
+        public async Task<IActionResult> Delete(int sessionId)
+        {
+            var sessionToDelete = await _context.Sessions
+                .Where(s => s.Id == sessionId && !s.IsDeleted)
+                .FirstOrDefaultAsync();
+
+            if (sessionToDelete == null)
+            {
+                return NotFound("A session with that Id does not exist");
+            }
+            else
+            {
+                sessionToDelete.IsDeleted = true;
+                await _context.SaveChangesAsync();
+                return Ok("Deleted Session with Id: " + sessionToDelete.Id);
+            }
+        }
+
     }
 }

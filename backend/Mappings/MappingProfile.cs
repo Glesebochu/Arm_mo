@@ -9,6 +9,7 @@ using backend.Models;
 using backend.DTOs.ObservableObject;
 using backend.DTOs.PreparationPhase;
 using backend.DTOs.Hindrance;
+using backend.DTOs.Session;
 
 namespace backend.Mappings
 {
@@ -82,6 +83,14 @@ namespace backend.Mappings
 
             CreateMap<Goal, UpdateGoalDTO>();
             CreateMap<UpdateGoalDTO, Goal>();
+
+
+            // For Sessions
+            CreateMap<Session, SessionDTO>();
+            CreateMap<SessionDTO, Session>();
+
+            CreateMap<Session, CreateSessionDTO>();
+            CreateMap<CreateSessionDTO, Session>();
 
         }
     }

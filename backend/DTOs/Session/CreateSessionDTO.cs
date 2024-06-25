@@ -13,12 +13,12 @@ namespace backend.DTOs.Session
     {
         public DateTime StartDateTime { get; set; }
         public DateTime EndDateTime { get; set; }
-        public int MeditatorId { get; set; }
+        public Meditator Meditator { get; set; }
         public List<AhaMoment> AhaMoments { get; set; }
         public List<PracticedStage> PracticedStages { get; set; }
         public List<NewlyMasteredStage> NewlyMasteredStages { get; set; }
         public List<ObservableObjectDTO> ObservableObjects { get; set; }
-        public int PreparationPhaseId { get; set; }
+        public PreparationPhaseDTO PreparationPhase { get; set; }
         public bool IsDeleted { get; set; } = false;
     }
 }

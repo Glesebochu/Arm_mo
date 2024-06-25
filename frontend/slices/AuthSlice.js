@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { updateUserAccount } from "./UserSlice";
-import { setUserStatus, setUserError } from "./UserSlice";
 
 const initialState = {
   isLoading: false,

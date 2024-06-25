@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { TimeInput } from "@nextui-org/date-input";
 import { Time } from "@internationalized/date";
 import { useDispatch, useSelector } from "react-redux";
-import { getAll } from "../../../slices/GoalsSlice.js";
+import { getAllGoals } from "../../../slices/GoalsSlice.js";
 import { CreatePreparationPhaseThunk } from "../../../slices/PreparationPhaseSlice.js";
 import { GoalsTable } from "@/components/GoalsTable.jsx";
 import DistractionsTable from "@/components/DistractionsTable.jsx";
@@ -17,7 +17,7 @@ export default function CreatePreparationPhase() {
   const goals = useSelector((state) => state.Goals.goals);
 
   useEffect(() => {
-    dispatch(getAll());
+    dispatch(getAllGoals());
   }, [dispatch]);
 
   const [stepIndex, setStepIndex] = useState(0);

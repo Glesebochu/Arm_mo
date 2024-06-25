@@ -14,7 +14,8 @@ import { typeOptions, subTypeOptions } from '../../constants/constants';
 
 // * For testing purposes
 import { useDispatch, useSelector } from "react-redux";
-import { getAll } from "../../slices/GoalsSlice.js";
+import { getAllGoals, updateGoal } from "../../slices/GoalsSlice.js";
+import { createObservableObject } from "../../slices/ObservableObjectsSlice.js";
 // * Until here
 
 export function TransitionPhase({ preparationPhaseId }) {
@@ -73,16 +74,16 @@ export function TransitionPhase({ preparationPhaseId }) {
         }
     }
 
-    // * For testing purposes only
+    // ! For testing purposes only
     const dispatch = useDispatch();
 
     var goals = useSelector(state => state.Goals.goals); // Ensure you are accessing the correct state
     goals = goals.filter(g => g.id < 11)
 
     useEffect(() => {
-        dispatch(getAll());
+        dispatch(getAllGoals());
     }, [dispatch]);
-    // * Until here
+    // ! Until here
 
     // * Timer code
 

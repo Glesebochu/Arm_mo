@@ -29,8 +29,6 @@ export function TimeIsUpAlertDialog({ isOpen, setIsOpen, extendBy }) {
         closeDialog();
     };
 
-    console.log(isOpen);
-
     return (
         <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
             <AlertDialogContent>

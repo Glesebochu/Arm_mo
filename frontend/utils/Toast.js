@@ -29,12 +29,12 @@ export const notifyError = (message) => {
 
 // Export a function to display a success notification
 // with a specified message at the top-right position
-export const notifySuccess = (message) => {
+export const notifySuccess = (message, position="top-right") => {
     // Use toast.success from react-toastify to display the success message
     // with the specified options
     toast.success(message, {
         // Set the position of the notification to top-right
-        position: "top-right",
+        position: position,
         // Set the theme of the notification to light
         theme: "light",
         // Set the autoClose time to 5000 milliseconds (5 seconds)

@@ -12,7 +12,7 @@ namespace backend.Models
         public Meditator Meditator { get; set; }
         public List<AhaMoment> AhaMoments { get; set; }
         public List<PracticedStage> PracticedStages { get; set; }
-        public List<NewlyMasteredStage> NewlyMasterdStages { get; set; }
+        public List<NewlyMasteredStage>? NewlyMasterdStages { get; set; }
         public List<ObservableObject> ObservableObjects { get; set; }
         public PreparationPhase PreparationPhase { get; set; }
         public int PreparationPhaseId { get; set; } // Foreign key property

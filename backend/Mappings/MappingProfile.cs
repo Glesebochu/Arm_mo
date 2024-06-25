@@ -96,9 +96,6 @@ namespace backend.Mappings
             CreateMap<Session, SessionDTO>();
             CreateMap<SessionDTO, Session>();
 
-            CreateMap<Session, CreateSessionDTO>();
-            CreateMap<CreateSessionDTO, Session>();
-
             // For AhaMoments
             // ==============
             CreateMap<AhaMoment, CreateAhaMomentDTO>();

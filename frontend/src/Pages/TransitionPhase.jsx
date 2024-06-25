@@ -87,6 +87,14 @@ export function TransitionPhase({ preparationPhase }) {
         }
     }, [timeLeft]);
 
+
+    // The function that brings it all together
+    const endMeditation = () => {
+        // Create a session object
+        // Set all its properties: meditatorId, preparationPhase, 
+        // Prepare it for sending to the Action method
+    };
+
     return (
         <div className="transition-phase grid grid-cols-10 grid-rows-9 h-[90vh] w-full">
 

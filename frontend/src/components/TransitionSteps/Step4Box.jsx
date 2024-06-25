@@ -9,13 +9,15 @@ export function Step4Box({ goals, onComplete }) {
 
     const handleGoalCompletion = (index) => {
         if (index < goals.length - 1) {
-            // onComplete(goals[index]);
             setCurrentGoalIndex(index + 1);
+        } else {
+            onComplete(goals); // Call onComplete to update the status of all goals
         }
         const newCheckedStates = [...checkedStates];
         newCheckedStates[index] = true;
         setCheckedStates(newCheckedStates);
     };
+
 
     const handleCheckboxChange = (index) => {
         console.log(`changed checkbox-${index} from ${checkedStates[index]} `);

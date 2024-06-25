@@ -10,7 +10,7 @@ import { Step2N3Box } from "@/components/TransitionSteps/Step2N3Box";
 import { Step4Box } from "@/components/TransitionSteps/Step4Box";
 import { TimeIsUpAlertDialog } from "@/components/TimeIsUpAlertDialog"
 import { ChevronRight, ChevronLeft, Pause, Play } from "lucide-react"
-import { typeOptions, subTypeOptions } from '../../constants/constants';
+import { typeOptions, subTypeOptions, statusOptions } from '../../constants/constants';
 
 // * For testing purposes
 import { useDispatch, useSelector } from "react-redux";
@@ -22,24 +22,30 @@ export function TransitionPhase({ preparationPhase }) {
 
     // TODO: Remove this after testing
     preparationPhase = {
-        Duration: 30,
-        Motivation: "",
-        Goals: useSelector(state => state.Goals.goals).filter(g => g.id < 11),
-        Expectation: "",
-        Distractions: [{ title: "", type: "" }], // Initialize with an empty row
-        StartDateTime: "",
-        EndDateTime: "",
+        duration: 30,
+        motivation: "",
+        goals: useSelector(state => state.Goals.goals).filter(g => g.id < 4),
+        expectation: "",
+        distractions: [{ title: "", type: "" }], // Initialize with an empty row
+        startDateTime: "",
+        endDateTime: "",
     };
 
     const [currentStep, setCurrentStep] = useState(1);
-    const [currentGoalIndex, setCurrentGoalIndex] = useState(0);
     const [isPaused, setIsPaused] = useState(false);
-    const [timeLeft, setTimeLeft] = useState(preparationPhase.Duration * 60);
+    const [timeLeft, setTimeLeft] = useState(preparationPhase.duration * 60);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [step2Objects, setStep2Objects] = useState([]);
     const [step3Objects, setStep3Objects] = useState([]);
     const [currentObservableObjects, setCurrentObservableObjects] = useState([]);
 
+    // ! For testing purposes only
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getAllGoals());
+    }, [dispatch]);
+    // ! Until here
 
     const iconHeight = "h-10";
     const iconWidth = "w-6";
@@ -47,11 +53,10 @@ export function TransitionPhase({ preparationPhase }) {
     const saveObservableObjects = () => {
         if (currentStep === 2) {
             setStep2Objects(currentObservableObjects);
-            setCurrentObservableObjects([]);
         } else if (currentStep === 3) {
             setStep3Objects(currentObservableObjects);
-            setCurrentObservableObjects([]);
         }
+        setCurrentObservableObjects([]);
     };
 
     const handleNextStep = () => {
@@ -64,9 +69,18 @@ export function TransitionPhase({ preparationPhase }) {
         if (currentStep > 1) setCurrentStep(currentStep - 1);
     };
 
-    const handleGoalCompletion = (goal) => {
-        setCurrentGoalIndex(currentGoalIndex + 1);
+    const updateGoalsStatus = (updatedGoals) => {
+        const newGoals = updatedGoals.map(goal => ({
+            ...goal,
+            status: "Completed"
+        }));
+        setGoals(newGoals);
+        // You might also want to dispatch an action to update the goals in your backend
+        newGoals.forEach(goal => {
+            dispatch(updateGoal(goal));
+        });
     };
+
 
     const extractMeditationObject = () => {
         return {
@@ -76,13 +90,7 @@ export function TransitionPhase({ preparationPhase }) {
         }
     }
 
-    // ! For testing purposes only
-    const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(getAllGoals());
-    }, [dispatch]);
-    // ! Until here
 
     // Timer code
 
@@ -156,8 +164,8 @@ export function TransitionPhase({ preparationPhase }) {
                     />}
                 {currentStep === 4 && (
                     <Step4Box
-                        goals={preparationPhase.Goals}
-                        onComplete={handleGoalCompletion}
+                        goals={preparationPhase.goals}
+                        onComplete={updateGoalsStatus}
                         onTimerEnd={handleTimerEnd}
                     />
                 )}

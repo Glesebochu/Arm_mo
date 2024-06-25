@@ -9,7 +9,6 @@ export const subTypeOptions = [
   "Kinesthetic",
   "Taste",
   "---",
-  "Taste",
   "Thought",
   "MentalState",
   "FeelingTone",

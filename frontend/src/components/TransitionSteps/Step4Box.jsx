@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Checkbox } from "@/components/ui/checkbox";
 import { Card } from "@/components/ui/card";
 
-export function Step4Box({ goals, onComplete }) {
+export function Step4Box({ goals, onComplete, onSessionEnd }) {
     const [currentGoalIndex, setCurrentGoalIndex] = useState(0);
     const [checkedStates, setCheckedStates] = useState(Array(goals.length).fill(false));
 

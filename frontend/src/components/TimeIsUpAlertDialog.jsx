@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from './ui/input';
 import { extend } from 'jquery';
 
-export function TimeIsUpAlertDialog({ isOpen, setIsOpen, extendBy }) {
+export function TimeIsUpAlertDialog({ isOpen, setIsOpen, extendBy, onSessionEnd }) {
 
     const [extensionTime, setExtensionTime] = useState("");
 
@@ -28,6 +28,11 @@ export function TimeIsUpAlertDialog({ isOpen, setIsOpen, extendBy }) {
         }
         closeDialog();
     };
+
+    const handleEnd = () => {
+        onSessionEnd();
+        closeDialog();
+    }
 
     return (
         <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
@@ -46,7 +51,7 @@ export function TimeIsUpAlertDialog({ isOpen, setIsOpen, extendBy }) {
                     </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                    <AlertDialogCancel>
+                    <AlertDialogCancel onClick={handleEnd}>
                         End
                     </AlertDialogCancel>
                     <AlertDialogAction onClick={handleExtend}>

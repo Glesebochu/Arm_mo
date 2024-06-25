@@ -46,7 +46,7 @@ export function Step4Box({ goals, onComplete }) {
             <Card
                 className="
                     row-start-1 col-start-1
-                    flex items-center justify-center w-full h-full p-4 text-xl self-start
+                    flex items-center justify-center w-full h-full p-4 text-lg self-start
                 "
             >
                 <p>{goals[currentGoalIndex].activity.title} <span className='font-bold text-primary'>{goals[currentGoalIndex].meditationObject.title}</span></p>
@@ -70,7 +70,7 @@ export function Step4Box({ goals, onComplete }) {
                 "
             >
                 {goals.slice(0, currentGoalIndex).map((goal, index) => (
-                    <Card key={index} className="flex w-full p-4 line-through text-sm">
+                    <Card key={index} className="flex w-full p-4 line-through text-sm items-center">
                         <Checkbox
                             name={`completedGoal-${index}`}
                             className="h-6 w-6 rounded-2xl mr-4"

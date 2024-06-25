@@ -8,6 +8,7 @@ import { Card } from "@/components/ui/card";
 import { Step1Box } from "@/components/TransitionSteps/Step1Box";
 import { Step2N3Box } from "@/components/TransitionSteps/Step2N3Box";
 import { Step4Box } from "@/components/TransitionSteps/Step4Box";
+import { TimeIsUpAlertDialog } from "@/components/TimeIsUpAlertDialog"
 import { ChevronRight, ChevronLeft, Pause, Play } from "lucide-react"
 import { typeOptions, subTypeOptions } from '../../constants/constants';
 
@@ -20,7 +21,9 @@ export function TransitionPhase({ preparationPhaseId }) {
     const [currentStep, setCurrentStep] = useState(1);
     const [currentGoalIndex, setCurrentGoalIndex] = useState(0);
     const [isPaused, setIsPaused] = useState(false);
-    const [timeLeft, setTimeLeft] = useState(400);
+    const [timeLeft, setTimeLeft] = useState(5);
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+
 
     const iconHeight = "h-10";
     const iconWidth = "w-6";
@@ -62,13 +65,9 @@ export function TransitionPhase({ preparationPhaseId }) {
         setCurrentGoalIndex(currentGoalIndex + 1);
     };
 
-    const handleTimerEnd = () => {
-        alert("Timer ended");
-    };
-
     const extractMeditationObject = () => {
         return {
-            title: "Chapter 1 of Brana",
+            title: "Chapter 1 of 12 Rules for Life",
             description: "Fascinating as hell of a novel.",
             subType: "Thought",
         }
@@ -85,8 +84,15 @@ export function TransitionPhase({ preparationPhaseId }) {
     }, [dispatch]);
     // * Until here
 
-    // Timer code
+    // * Timer code
 
+    const handleTimerEnd = () => {
+        setIsDialogOpen(true);
+    };
+
+    const extendTimer = (extension) => {
+        setTimeLeft(extension * 60);
+    };
 
     useEffect(() => {
         if (timeLeft > 0) {
@@ -95,7 +101,7 @@ export function TransitionPhase({ preparationPhaseId }) {
         } else {
             handleTimerEnd();
         }
-    }, [timeLeft, handleTimerEnd]);
+    }, [timeLeft]);
 
     return (
         <div className="transition-phase grid grid-cols-10 grid-rows-9 h-[90vh] w-full">
@@ -142,6 +148,8 @@ export function TransitionPhase({ preparationPhaseId }) {
             >
                 <ChevronRight className={`${iconHeight} ${iconWidth}`} />
             </Button>
+
+            <TimeIsUpAlertDialog isOpen={isDialogOpen} setIsOpen={setIsDialogOpen} extendBy={extendTimer} />
 
         </div>
     );

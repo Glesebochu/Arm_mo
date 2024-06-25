@@ -12,28 +12,40 @@ import { TimeIsUpAlertDialog } from "@/components/TimeIsUpAlertDialog"
 import { ChevronRight, ChevronLeft, Pause, Play } from "lucide-react"
 import { typeOptions, subTypeOptions, statusOptions } from '../../constants/constants';
 
-// * For testing purposes
+// For creating the session on the backend
+import { createSession } from "../../slices/SessionsSlice";
+
 import { useDispatch, useSelector } from "react-redux";
+// * For testing purposes
 import { getAllGoals, updateGoal } from "../../slices/GoalsSlice.js";
-import { createObservableObject } from "../../slices/ObservableObjectsSlice.js";
-// * Until here
+
+// * For navigating to another page
+import { useNavigate } from 'react-router-dom';
 
 export function TransitionPhase({ preparationPhase }) {
 
     // TODO: Remove this after testing
     preparationPhase = {
-        duration: 30,
+        duration: {
+            ticks: 30
+        },
         motivation: "",
         goals: useSelector(state => state.Goals.goals).filter(g => g.id < 4),
         expectation: "",
-        distractions: [{ title: "", type: "" }], // Initialize with an empty row
+        distractions: [
+            {
+                title: "Eneksh eneka",
+                type: "WorldlyDesire"
+            }
+        ], // Initialize with an empty row
         startDateTime: "",
         endDateTime: "",
     };
 
     const [currentStep, setCurrentStep] = useState(1);
+    const [goals, setGoals] = useState(preparationPhase.goals);
     const [isPaused, setIsPaused] = useState(false);
-    const [timeLeft, setTimeLeft] = useState(preparationPhase.duration * 60);
+    const [timeLeft, setTimeLeft] = useState(preparationPhase.duration.ticks * 60);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [step2Objects, setStep2Objects] = useState([]);
     const [step3Objects, setStep3Objects] = useState([]);
@@ -75,10 +87,9 @@ export function TransitionPhase({ preparationPhase }) {
             status: "Completed"
         }));
         setGoals(newGoals);
-        // You might also want to dispatch an action to update the goals in your backend
-        newGoals.forEach(goal => {
-            dispatch(updateGoal(goal));
-        });
+
+        endMeditation();
+
     };
 
 
@@ -90,10 +101,7 @@ export function TransitionPhase({ preparationPhase }) {
         }
     }
 
-
-
     // Timer code
-
     const handleTimerEnd = () => {
         setIsDialogOpen(true);
     };
@@ -114,12 +122,42 @@ export function TransitionPhase({ preparationPhase }) {
 
     // The function that brings it all together
     const endMeditation = () => {
-        // TODO: Create a session object
-        // TODO: Set all its properties: meditatorId, preparationPhase, 
-        // TODO: Prepare it for sending to the Action method
-        // TODO: Call the createSession method in SessionsSlice
+        // Create a session object
+        // Set all its properties by using the state variables and the store: meditatorId, preparationPhase,
+        var session = {
+            startDateTime: preparationPhase.startDateTime,
+            endDateTime: "2024-0625T14:18.886Z",
+            meditatorId: 0,
+            ahaMoments: [],
+            practicedStageIds: [
+                1,
+                2
+            ],
+            newlyMasteredStageIds: [
+                2
+            ],
+            observableObjects: [
+                ...step2Objects,
+                ...step3Objects
+            ],
+            preparationPhase: preparationPhase,
+            isDeleted: false
+        };
 
-        // TODO: Associate this with the end button in the TimeIsUpAlertDialog
+        // Update the goals
+        goals.forEach(goal => {
+            dispatch(updateGoal(goal));
+        });
+
+        // Create the session in the backend and navigate to the session page with the session ID
+        dispatch(createSession(session)).then((result) => {
+            if (result.meta.requestStatus === 'fulfilled') {
+                const sessionId = result.payload.id; // Adjust this based on your API response
+                navigate(`/Session/${sessionId}`);
+            } else {
+                console.error('Failed to create session:', result.payload);
+            }
+        });
     };
 
     return (
@@ -166,7 +204,6 @@ export function TransitionPhase({ preparationPhase }) {
                     <Step4Box
                         goals={preparationPhase.goals}
                         onComplete={updateGoalsStatus}
-                        onTimerEnd={handleTimerEnd}
                     />
                 )}
             </div>
@@ -180,7 +217,7 @@ export function TransitionPhase({ preparationPhase }) {
                 <ChevronRight className={`${iconHeight} ${iconWidth}`} />
             </Button>
 
-            <TimeIsUpAlertDialog isOpen={isDialogOpen} setIsOpen={setIsDialogOpen} extendBy={extendTimer} />
+            <TimeIsUpAlertDialog isOpen={isDialogOpen} setIsOpen={setIsDialogOpen} extendBy={extendTimer} onSessionEnd={endMeditation} />
 
         </div>
     );

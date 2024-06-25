@@ -75,6 +75,7 @@ namespace backend.Controllers
             };
 
             // Code for adding practiced stages one by one from the list of integers
+
             // currentStage = _context.Stages.Find(createSessionDTO.PracticedStageIds[0]);
             // var practicedStage = new PracticedStage{ Session = session, Stage = currentStage };
             // _context.PracticedStages.Add(PracticedStage);

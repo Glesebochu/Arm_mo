@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using backend.Models;
 using backend.DTOs.Goal;
 using backend.DTOs.Activity;
-using backend.Models;
 using backend.DTOs.ObservableObject;
 using backend.DTOs.PreparationPhase;
 using backend.DTOs.Hindrance;
 using backend.DTOs.Session;
+using backend.DTOs.AhaMoment;
 
 namespace backend.Mappings
 {
@@ -28,6 +29,11 @@ namespace backend.Mappings
             CreateMap<ObservableObject, ObservableObjectDTO>();
             CreateMap<ObservableObjectDTO, ObservableObject>();
 
+            CreateMap<ObservableObject, CreateObservableObjectDTO>();
+            CreateMap<CreateObservableObjectDTO, ObservableObject>();
+
+            // For PreparationPhases
+            // =====================
             CreateMap<PreparationPhase, CreatePreparationPhaseDTO>();
             CreateMap<CreatePreparationPhaseDTO, PreparationPhase>()
                 .ConstructUsing(dto => new PreparationPhase()) // Ensure the default constructor is used
@@ -86,11 +92,17 @@ namespace backend.Mappings
 
 
             // For Sessions
+            // ============
             CreateMap<Session, SessionDTO>();
             CreateMap<SessionDTO, Session>();
 
             CreateMap<Session, CreateSessionDTO>();
             CreateMap<CreateSessionDTO, Session>();
+
+            // For AhaMoments
+            // ==============
+            CreateMap<AhaMoment, CreateAhaMomentDTO>();
+            CreateMap<CreateAhaMomentDTO, AhaMoment>();
 
         }
     }

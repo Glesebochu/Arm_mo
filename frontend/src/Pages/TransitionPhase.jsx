@@ -36,15 +36,31 @@ export function TransitionPhase({ preparationPhase }) {
     const [isPaused, setIsPaused] = useState(false);
     const [timeLeft, setTimeLeft] = useState(preparationPhase.Duration * 60);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [step2Objects, setStep2Objects] = useState([]);
+    const [step3Objects, setStep3Objects] = useState([]);
+    const [currentObservableObjects, setCurrentObservableObjects] = useState([]);
+
 
     const iconHeight = "h-10";
     const iconWidth = "w-6";
 
+    const saveObservableObjects = () => {
+        if (currentStep === 2) {
+            setStep2Objects(currentObservableObjects);
+            setCurrentObservableObjects([]);
+        } else if (currentStep === 3) {
+            setStep3Objects(currentObservableObjects);
+            setCurrentObservableObjects([]);
+        }
+    };
+
     const handleNextStep = () => {
+        saveObservableObjects();
         if (currentStep < 4) setCurrentStep(currentStep + 1);
     };
 
     const handlePreviousStep = () => {
+        saveObservableObjects();
         if (currentStep > 1) setCurrentStep(currentStep - 1);
     };
 
@@ -90,13 +106,16 @@ export function TransitionPhase({ preparationPhase }) {
 
     // The function that brings it all together
     const endMeditation = () => {
-        // Create a session object
-        // Set all its properties: meditatorId, preparationPhase, 
-        // Prepare it for sending to the Action method
+        // TODO: Create a session object
+        // TODO: Set all its properties: meditatorId, preparationPhase, 
+        // TODO: Prepare it for sending to the Action method
+        // TODO: Call the createSession method in SessionsSlice
+
+        // TODO: Associate this with the end button in the TimeIsUpAlertDialog
     };
 
     return (
-        <div className="transition-phase grid grid-cols-10 grid-rows-9 h-[90vh] w-full">
+        <div className="transition-phase grid grid-cols-10 grid-rows-9 h-[100vh] w-full">
 
             <h3
                 className="col-start-4 col-span-4 row-start-1 self-center text-center m-4"
@@ -121,8 +140,20 @@ export function TransitionPhase({ preparationPhase }) {
 
             <div className="col-start-2 col-span-8 row-start-2 row-span-7 flex items-center justify-center">
                 {currentStep === 1 && <Step1Box onDone={handleNextStep} meditationObjectType={typeOptions[0]} />}
-                {currentStep === 2 && <Step2N3Box meditationObject={extractMeditationObject()} stepNo={2} />}
-                {currentStep === 3 && <Step2N3Box meditationObject={extractMeditationObject()} stepNo={3} />}
+                {currentStep === 2 &&
+                    <Step2N3Box
+                        meditationObject={extractMeditationObject()}
+                        stepNo={2}
+                        initialObjects={step2Objects}
+                        setCurrentObservableObjects={setCurrentObservableObjects}
+                    />}
+                {currentStep === 3 &&
+                    <Step2N3Box
+                        meditationObject={extractMeditationObject()}
+                        stepNo={3}
+                        initialObjects={step3Objects}
+                        setCurrentObservableObjects={setCurrentObservableObjects}
+                    />}
                 {currentStep === 4 && (
                     <Step4Box
                         goals={preparationPhase.Goals}

@@ -13,7 +13,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: 860px;
+  max-width: 80%;
   border-radius: 10px;
   margin: 10px;
   box-sizing: border-box; /* Ensure padding is included in the element's total width and height */
@@ -24,7 +24,7 @@
   justify-content: center; /* Center the items */
   align-items: flex-start;
   width: 100%;
-  max-width: 860px; /* Ensure the alerts-box doesn't exceed the max width */
+  max-width: 80%; /* Ensure the alerts-box doesn't exceed the max width */
   box-sizing: border-box;
   gap: 20px; /* Add some space between the alert boxes */
 }
@@ -44,7 +44,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: 860px;
+  max-width: 80%;
   border-radius: 10px;
   margin: 10px;
   box-sizing: border-box; /* Ensure padding is included in the element's total width and height */
@@ -53,7 +53,7 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  /* max-width: 860px; */
+  /* max-width: 80%; */
   /* border-radius: 10px; */
   margin: 10px;
   box-sizing: border-box;
@@ -61,11 +61,10 @@
   border: none;
 }
 
-
 /* BarGraph component styles */
 .bar-graph-container {
   width: 100%;
-  max-width: 860px;
+  max-width: 80%;
   height: 100%;
   margin: 0;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
@@ -82,6 +81,28 @@
   color: black;
   box-sizing: border-box;
 }
+
+.no-data-image {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100vh; /* Full viewport height to center vertically */
+  background: white; /* Adjust based on your background color */
+}
+
+.no-data-image img {
+  max-width: 70%;
+  max-height: 70%;
+  opacity: 1; /* Adjust to blend with the background */
+}
+
+.MeditateButton {
+  margin-top: 30px; /* Adjust the space between the image and the button */
+  padding: 10px 20px; /* Adjust padding as needed */
+  font-size: 16px; /* Adjust font size as needed */
+}
+
 
 /* Responsive adjustments for smaller screens */
 @media (max-width: 860px) {

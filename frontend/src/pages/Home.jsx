@@ -5,7 +5,7 @@ import { GoGear } from "react-icons/go";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { Label } from "@/components/ui/label";
-import { fetchStartUsage } from "./Usage";
+import { CallUsage } from "./Usage";
 import {
   Popover,
   PopoverContent,
@@ -57,37 +57,30 @@ const Home = () => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
   const [frameworks, setFrameworks] = useState([]);
+  const [intervalId, setIntervalId] = useState(null);
+
+
   useEffect(() => {
-    const onBeforeUnload = (event) => {
-      event.preventDefault();
-      var confirmation = "Are you sure";
-      event.returnValue = confirmation; 
+    if (user) {
+          //console.log(user.user)
+          CallUsage(
+            `http://localhost:5158/api/Analyzer/StartUsage?userId=${user.id}`
+          );
+          const UpdateUsage = () => {
+            CallUsage(`http://localhost:5158/api/Analyzer/UpdateUsage?userId=${user.id}`);
+           //console.log("updated!")
+          };
+      
+          const id = setInterval(UpdateUsage, 10000);
+          setIntervalId(id);
+      
+          return () => {
+            clearInterval(id);
+          };
+    }
 
-      return confirmation;
-      // const promise = new Promise((resolve) => {
-      //   endUsage().then(() => {
-      //     resolve();
-      //   });
-      // });
-    };
-
-    window.addEventListener('beforeunload', onBeforeUnload);
-    return () => {
-      window.removeEventListener('beforeunload', onBeforeUnload);
-    };
   }, []);
 
-  const endUsage = async () => {
-    try {
-      if (user) {
-        await fetchStartUsage(
-          `http://localhost:5158/api/Analyzer/EndUsage?userId=${user.id}`
-        );
-      }
-    } catch (error) {
-      console.error("Error ending usage:", error);
-    }
-  };
   useEffect(() => {
     console.log(user);
     // Determine the maximum practiced stage
@@ -297,8 +290,8 @@ const Home = () => {
                     className="w-full flex items-center justify-start space-x-2 pl-0"
                     onClick={() => {
                       if (user) {
-                        fetchStartUsage(
-                          `http://localhost:5158/api/Analyzer/EndUsage?userId=${user.id}`
+                        CallUsage(
+                          `http://localhost:5158/api/Analyzer/UpdateUsage?userId=${user.id}`
                         );
                       }
                       dispatch(logout());

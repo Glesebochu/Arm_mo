@@ -1,3 +1,4 @@
+// BarGraph.jsx
 import React, { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
 import {
@@ -12,7 +13,7 @@ import axios from "axios";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
-const BarGraph = ({ meditatorId }) => {
+const BarGraph = ({ meditatorId, onDataCheck }) => {
   const [chartData, setChartData] = useState({ labels: [], datasets: [] });
   const [containerHeight, setContainerHeight] = useState(400); // Default height
   const [hasData, setHasData] = useState(false);
@@ -31,6 +32,9 @@ const BarGraph = ({ meditatorId }) => {
 
         if (practicedStages.length > 0) {
           setHasData(true);
+          onDataCheck(true);
+        } else {
+          onDataCheck(false);
         }
 
         // Count the occurrences of each stageId
@@ -66,7 +70,7 @@ const BarGraph = ({ meditatorId }) => {
     };
 
     fetchData();
-  }, [meditatorId]);
+  }, [meditatorId, onDataCheck]);
 
   const config = {
     type: "bar",

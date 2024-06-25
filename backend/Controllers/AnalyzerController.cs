@@ -126,22 +126,48 @@ namespace backend.Controllers
 
         [HttpPost]
         [Route("StartUsage")]
-        public async Task<IActionResult> StartUsage(int userId)//uncomment the parameter after testing.
+       public async Task<IActionResult> StartUsage(int userId)//uncomment the parameter after testing.
         {
-            Console.WriteLine(userId);
-
-            var userUsage = new UserUsage
+            var zerousage = await dbContext.UserUsage
+                .Where(u => u.UserId == userId && u.UsageTime == TimeSpan.Zero)//change the userId after testing...
+                .ToListAsync();
+            if (zerousage.Any())
             {
-                UserId = userId,//change the userId after testing...
-                Date = DateTime.Today,
-                UsageTime = TimeSpan.Zero,
-                StartTime = DateTime.Now
-            };
+                
+                return Ok(new { result = "usage already started" });
+                
+            }
+            else
+            {
+                var userUsage = new UserUsage
+                {
+                    UserId = userId,//change the userId after testing...
+                    Date = DateTime.Today,
+                    UsageTime = TimeSpan.Zero,
+                    StartTime = DateTime.Now
+                };
 
-            await dbContext.UserUsage.AddAsync(userUsage);
-            await dbContext.SaveChangesAsync();
+                await dbContext.UserUsage.AddAsync(userUsage);
+                await dbContext.SaveChangesAsync();
+                return Ok(new { Id = userId });
+            }
+        }
 
-            return Ok(new { Id = userId });
+        [HttpPost]
+        [Route("UpdateUsage")]
+        public async Task<IActionResult> UpdateUsage(int userId)//uncomment the parameter after testing.
+        {
+            var userUsage = await dbContext.UserUsage
+                .Where(u => u.UserId == userId)
+                .OrderByDescending(u => u.StartTime)
+                .FirstOrDefaultAsync();
+            if (userUsage != null)
+            {
+                userUsage.UsageTime = DateTime.Now - userUsage.StartTime;
+                await dbContext.SaveChangesAsync();
+            }
+
+            return Ok();
         }
 
         [HttpPost]

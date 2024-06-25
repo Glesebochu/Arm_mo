@@ -160,7 +160,7 @@ public class AuthController : ControllerBase
             return null;
         }
     }
-
+    [NonAction]
     private string GenerateJwtToken(string email)
     {
         DotEnv.Load();

@@ -74,6 +74,22 @@ module.exports = {
       },
     },
   },
+  // tailwind.config.js
+  plugins: [
+    function ({ addUtilities }) {
+      addUtilities({
+        ".no-scrollbar": {
+          /* Hide scrollbar for IE, Edge and Firefox */
+          "-ms-overflow-style": "none" /* IE and Edge */,
+          "scrollbar-width": "none" /* Firefox */,
+        },
+        ".no-scrollbar::-webkit-scrollbar": {
+          display: "none" /* Chrome, Safari, and Opera */,
+        },
+      });
+    },
+  ],
+
   plugins: [
     require("tailwindcss-animate"), // Make sure to install the package first
   ],

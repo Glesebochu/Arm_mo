@@ -12,7 +12,8 @@ import Home from "./pages/Home";
 import { TransitionPhase } from "./pages/TransitionPhase";
 // import Settings from "./pages/Settings";
 import CreatePreparationPhase from "./pages/PreparationPhases/CreatePreparationPhase";
-import DistractionsTable from "./components/DistractionsTable";
+// import PracticedStageCard from "./components/Custom/PracticedStageCard";
+import StageCard from "./components/Custom/PracticedStageCard";
 
 function App() {
   return (

@@ -58,19 +58,22 @@ const Home = () => {
   const [value, setValue] = useState("");
   const [frameworks, setFrameworks] = useState([]);
   useEffect(() => {
-    window.onunload = async (event) => {
+    const onBeforeUnload = (event) => {
       event.preventDefault();
-      const promise = new Promise((resolve) => {
-        endUsage().then(() => {
-          resolve();
-        });
-      });
+      var confirmation = "Are you sure";
+      event.returnValue = confirmation; 
+
+      return confirmation;
+      // const promise = new Promise((resolve) => {
+      //   endUsage().then(() => {
+      //     resolve();
+      //   });
+      // });
     };
 
+    window.addEventListener('beforeunload', onBeforeUnload);
     return () => {
-      promise.then(() => {
-        // Call a timeout function after promise with an alert maybe to make sure we're calling.
-      });
+      window.removeEventListener('beforeunload', onBeforeUnload);
     };
   }, []);
 

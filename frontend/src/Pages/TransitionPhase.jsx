@@ -18,36 +18,27 @@ import { getAllGoals, updateGoal } from "../../slices/GoalsSlice.js";
 import { createObservableObject } from "../../slices/ObservableObjectsSlice.js";
 // * Until here
 
-export function TransitionPhase({ preparationPhaseId }) {
+export function TransitionPhase({ preparationPhase }) {
+
+    // TODO: Remove this after testing
+    preparationPhase = {
+        Duration: 30,
+        Motivation: "",
+        Goals: useSelector(state => state.Goals.goals).filter(g => g.id < 11),
+        Expectation: "",
+        Distractions: [{ title: "", type: "" }], // Initialize with an empty row
+        StartDateTime: "",
+        EndDateTime: "",
+    };
+
     const [currentStep, setCurrentStep] = useState(1);
     const [currentGoalIndex, setCurrentGoalIndex] = useState(0);
     const [isPaused, setIsPaused] = useState(false);
-    const [timeLeft, setTimeLeft] = useState(5);
+    const [timeLeft, setTimeLeft] = useState(preparationPhase.Duration * 60);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
-
 
     const iconHeight = "h-10";
     const iconWidth = "w-6";
-
-    const createObservableObject = async (object) => {
-        const response = await axios.post(
-            "/backend/ObservableObject/Create",
-            object
-        );
-        return response.data;
-    };
-    const updateObservableObject = async (object) => {
-        const response = await axios.post(
-            "/backend/ObservableObject/Update",
-            object
-        );
-        return response.data;
-    };
-
-    const updateGoalStatus = async (goal) => {
-        const response = await axios.put("/backend/Goals/Update", { goal });
-        return response.data;
-    };
 
     const handleNextStep = () => {
         if (currentStep < 4) setCurrentStep(currentStep + 1);
@@ -57,12 +48,7 @@ export function TransitionPhase({ preparationPhaseId }) {
         if (currentStep > 1) setCurrentStep(currentStep - 1);
     };
 
-    const handleGoalCompletion = async () => {
-        const currentGoal = goals[currentGoalIndex];
-        await axios.put("/backend/Goals/Update", {
-            id: currentGoal.id,
-            status: "Completed",
-        });
+    const handleGoalCompletion = (goal) => {
         setCurrentGoalIndex(currentGoalIndex + 1);
     };
 
@@ -77,15 +63,12 @@ export function TransitionPhase({ preparationPhaseId }) {
     // ! For testing purposes only
     const dispatch = useDispatch();
 
-    var goals = useSelector(state => state.Goals.goals); // Ensure you are accessing the correct state
-    goals = goals.filter(g => g.id < 11)
-
     useEffect(() => {
         dispatch(getAllGoals());
     }, [dispatch]);
     // ! Until here
 
-    // * Timer code
+    // Timer code
 
     const handleTimerEnd = () => {
         setIsDialogOpen(true);
@@ -134,7 +117,7 @@ export function TransitionPhase({ preparationPhaseId }) {
                 {currentStep === 3 && <Step2N3Box meditationObject={extractMeditationObject()} stepNo={3} />}
                 {currentStep === 4 && (
                     <Step4Box
-                        goals={goals}
+                        goals={preparationPhase.Goals}
                         onComplete={handleGoalCompletion}
                         onTimerEnd={handleTimerEnd}
                     />

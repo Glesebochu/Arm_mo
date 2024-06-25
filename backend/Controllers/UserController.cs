@@ -15,22 +15,37 @@ public class UsersController : ControllerBase
         _userService = userService;
     }
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateUser(string id, [FromForm] UpdateUserAccountDTO updateUserAccountDto)
+    [HttpPatch("{id}")]
+    public async Task<IActionResult> UpdateAccount(string id, [FromForm] UpdateUserAccountDTO updateUserAccountDto)
     {
-        Console.WriteLine($"the profile picture is -> {updateUserAccountDto.ProfilePicture} and the username is {updateUserAccountDto.Username}");
-        Console.WriteLine(id, updateUserAccountDto.Id);
         if (id != updateUserAccountDto.Id.ToString())
         {
             return BadRequest("User ID mismatch.");
         }
 
-        var result = await _userService.UpdateUserAsync(updateUserAccountDto);
+        var result = await _userService.UpdateAccountAsync(updateUserAccountDto);
         if (!result.Success)
         {
             return StatusCode(StatusCodes.Status500InternalServerError, result.Message);
         }
 
         return Ok(result.Data);
+    }
+
+    [HttpPatch("{id}/password")]
+    public async Task<IActionResult> UpdatePassword(int id, [FromBody] UpdatePasswordDTO updatePasswordDTO){
+        Console.WriteLine($"{User.Claims.ToList()} is user's claim");
+        if (id != updatePasswordDTO.Id)
+        {
+            return BadRequest("User ID mismatch.");
+        }
+
+        Console.WriteLine(updatePasswordDTO.CurrentPassword);
+        Console.WriteLine(updatePasswordDTO.NewPassword);
+        Console.WriteLine(updatePasswordDTO.Id);
+        var result = await _userService.UpdatePasswordAsync(updatePasswordDTO);
+        Console.WriteLine(result.Message);
+        Console.WriteLine(result.Success);
+        return Ok(result);
     }
 }

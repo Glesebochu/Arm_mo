@@ -1,5 +1,6 @@
 using backend.Data;
 using backend.Models;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
@@ -41,7 +42,7 @@ public class UserService : IUserService
         return await _context.Meditators.SingleOrDefaultAsync(u => u.Username == username);
     }
 
-    public async Task<ServiceResult<Meditator>> UpdateUserAsync(UpdateUserAccountDTO updateUserAccountDto)
+    public async Task<ServiceResult<Meditator>> UpdateAccountAsync(UpdateUserAccountDTO updateUserAccountDto)
     {
         var user = await _context.Meditators.FindAsync(updateUserAccountDto.Id);
         if (user == null)
@@ -101,5 +102,32 @@ public class UserService : IUserService
         }
 
         return $"/uploads/{fileName}";
+    }
+
+    public async Task<ServiceResult<Meditator>> UpdatePasswordAsync(UpdatePasswordDTO updatePasswordDTO)
+    {
+        var user = await _context.Meditators.FindAsync(updatePasswordDTO.Id);
+        if(user != null){
+            if(BCrypt.Net.BCrypt.Verify(updatePasswordDTO.CurrentPassword, user._password)){
+                user._password =  BCrypt.Net.BCrypt.HashPassword(updatePasswordDTO.NewPassword);
+                _context.Meditators.Update(user);
+                await _context.SaveChangesAsync();
+
+                return new ServiceResult<Meditator>{
+                    Success = true,
+                    Message = "Password changed successfully"
+                };
+            }
+
+            return new ServiceResult<Meditator>{
+                Success = false,
+                Message = "Your current (old) password is incorrect"
+            };
+        }
+        
+        return new ServiceResult<Meditator>{
+            Success = false, 
+            Message = "No user found with the provided ID"
+        };
     }
 }

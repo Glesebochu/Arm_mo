@@ -9,20 +9,17 @@ const initialState = {
   goals: [],
 };
 
-export const getAll = createAsyncThunk(
-  "Goals/getAll",
-  async (arg, ThunkAPi) => {
-    try {
-      const response = await axios.get(`${webRoot}/Goals/getAll`);
-      if (response.status == 200) {
-        // console.log(response.data);
-        return response.data;
-      }
-    } catch (error) {
-      return rejectWithValue(error.response.data);
+export const getAllGoals = createAsyncThunk("Goals/getAll", async () => {
+  try {
+    const response = await axios.get(`${webRoot}/Goals/getAll`);
+    if (response.status == 200) {
+      // console.log(response.data);
+      return response.data;
     }
+  } catch (error) {
+    return rejectWithValue(error.response.data);
   }
-);
+});
 
 // Thunk for creating a new goal
 export const createGoal = createAsyncThunk(
@@ -73,14 +70,14 @@ const GoalsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       // For getting all goals
-      .addCase(getAll.pending, (state) => {
+      .addCase(getAllGoals.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getAll.fulfilled, (state, action) => {
+      .addCase(getAllGoals.fulfilled, (state, action) => {
         state.isLoading = false;
         state.goals = action.payload;
       })
-      .addCase(getAll.rejected, (state) => {
+      .addCase(getAllGoals.rejected, (state) => {
         state.isLoading = true;
       })
 

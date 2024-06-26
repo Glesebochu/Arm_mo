@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { ObservableObjectPopover } from '../ObservableObjectPopover';
 
-export function Step2N3Box({ stepNo, meditationObject }) {
-	const [observableObjects, setObservableObjects] = useState([]);
+export function Step2N3Box({ stepNo, meditationObject, initialObjects, setCurrentObservableObjects }) {
+	const [observableObjects, setObservableObjects] = useState(initialObjects || []);
+
+	useEffect(() => {
+		setCurrentObservableObjects(observableObjects);
+	}, [observableObjects]);
 
 	const { title, subType } = meditationObject;
 
@@ -108,5 +112,3 @@ export function Step2N3Box({ stepNo, meditationObject }) {
 		</Card>
 	);
 }
-
-export default Step2N3Box;

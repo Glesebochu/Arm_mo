@@ -26,12 +26,13 @@ function App() {
           <Route path="/" element={<ViewStageInfo />} />
 
           {/* No need to to remove the below */}
-          {/* <Route path="/session/:sessionId" element={<SessionDetails />} />
+          <Route path="/Session/:sessionId" element={<SessionDetails />} />
           <Route path="/Usage" element={<UsageView />} />
           <Route path="/Insights" element={<Insights />} />
           <Route path="/RemovedSessions" element={<RemovedSessions />} />
-          <Route path="/Home" element={<Home />} />
-          <Route path="/Settings" element={<Settings />} /> */}
+          <Route path="/Analytics" element={<SessionSummary />} />
+          {/* <Route path="/Home" element={<Home />} /> */}
+          {/* <Route path="/Settings" element={<Settings />} /> */}
         </Routes>
       </Router>
     </>

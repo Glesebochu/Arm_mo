@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using backend.Models;
 using backend.DTOs.Goal;
 using backend.DTOs.Activity;
-using backend.Models;
 using backend.DTOs.ObservableObject;
 using backend.DTOs.PreparationPhase;
 using backend.DTOs.Hindrance;
+using backend.DTOs.Session;
+using backend.DTOs.AhaMoment;
 
 namespace backend.Mappings
 {
@@ -27,16 +29,16 @@ namespace backend.Mappings
             CreateMap<ObservableObject, ObservableObjectDTO>();
             CreateMap<ObservableObjectDTO, ObservableObject>();
 
+            CreateMap<ObservableObject, CreateObservableObjectDTO>();
+            CreateMap<CreateObservableObjectDTO, ObservableObject>();
+
+            // For PreparationPhases
             CreateMap<PreparationPhase, CreatePreparationPhaseDTO>();
             CreateMap<CreatePreparationPhaseDTO, PreparationPhase>()
                 .ConstructUsing(dto => new PreparationPhase()) // Ensure the default constructor is used
-                .ForMember(dest => dest.Goals, opt => opt.MapFrom(
-                    (src, dest, destMember, context) => context.Mapper.Map<Goal>(src.Goals))
-                )
-                .ForMember(dest => dest.Distractions, opt => opt.MapFrom(
-                    (src, dest, destMember, context) => context.Mapper.Map<Hindrance>(src.Distractions))
-                )
-            ;
+                .ForMember(dest => dest.Goals, opt => opt.MapFrom(src => src.Goals))
+                .ForMember(dest => dest.Distractions, opt => opt.MapFrom(src => src.Distractions));
+
             CreateMap<PreparationPhase, PreparationPhaseDTO>();
             CreateMap<PreparationPhaseDTO, PreparationPhase>();
 
@@ -82,6 +84,17 @@ namespace backend.Mappings
 
             CreateMap<Goal, UpdateGoalDTO>();
             CreateMap<UpdateGoalDTO, Goal>();
+
+
+            // For Sessions
+            // ============
+            CreateMap<Session, SessionDTO>();
+            CreateMap<SessionDTO, Session>();
+
+            // For AhaMoments
+            // ==============
+            CreateMap<AhaMoment, CreateAhaMomentDTO>();
+            CreateMap<CreateAhaMomentDTO, AhaMoment>();
 
         }
     }

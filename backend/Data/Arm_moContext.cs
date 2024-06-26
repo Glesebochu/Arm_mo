@@ -78,10 +78,12 @@ namespace backend.Data
         public DbSet<ObservableObject> ObservableObjects { get; set; }
         public DbSet<Activity> Activities { get; set; }
         public DbSet<Goal> Goals { get; set; }
-        public DbSet<PreparationPhase> PreparationPhases { get; set; }
+        public DbSet<PreparationPhase> PreparationPhase { get; set; }
 
         public DbSet<Hindrance> Hindrances { get; set; }
         public DbSet<UserUsage> UserUsage { get; set; }
+        public DbSet<PracticedStage> PracticedStages { get; set; }
+        public DbSet<NewlyMasteredStage> NewlyMasteredStages { get; set; }
 
     }
 }

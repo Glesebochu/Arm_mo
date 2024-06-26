@@ -31,7 +31,7 @@ namespace backend.Controllers
             // Convert the DTO into a Goal object that EF can understand.
             var preparationPhase = _mapper.Map<Models.PreparationPhase>(createPreparationPhaseDTO);
 
-            _context.PreparationPhases.Add(preparationPhase);
+            _context.PreparationPhase.Add(preparationPhase);
 
             // Save changes.
             _context.SaveChanges();
@@ -48,7 +48,7 @@ namespace backend.Controllers
         [HttpGet("GetById/{id}")]
         public IActionResult GetById([FromRoute] int id)
         {
-            var preparationPhase = _context.PreparationPhases
+            var preparationPhase = _context.PreparationPhase
                 .FirstOrDefault(g => g.Id == id);
 
             if (preparationPhase == null)
@@ -70,7 +70,7 @@ namespace backend.Controllers
         //     try
         //     {
         //         // Find the preparation phase by ID
-        //         var existingPreparationPhase = await _context.PreparationPhases
+        //         var existingPreparationPhase = await _context.PreparationPhase
         //             .Include(pp => pp.Goals)
         //             .Include(pp => pp.Distractions)
         //             .FirstOrDefaultAsync(pp => pp.Id == preparationPhaseDto.Id);
@@ -150,13 +150,13 @@ namespace backend.Controllers
         // {
         //     try
         //     {
-        //         var existinexistingpreparationPhase = await _context.PreparationPhases.FindAsync(id);
+        //         var existinexistingpreparationPhase = await _context.PreparationPhase.FindAsync(id);
         //         if (existinexistingpreparationPhase == null)
         //         {
         //             return NotFound("Preparation Phase not found"); // Return 404 Not Found if Preparation Phase is not found
         //         }
 
-        //         _context.PreparationPhases.Remove(existinexistingpreparationPhase);
+        //         _context.PreparationPhase.Remove(existinexistingpreparationPhase);
         //         await _context.SaveChangesAsync(); // Save changes to the database
 
         //         return Ok("Preparation Phase deleted successfully"); // Return 200 OK on successful deletion

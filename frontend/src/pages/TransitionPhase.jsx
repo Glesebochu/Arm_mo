@@ -27,37 +27,15 @@ export function TransitionPhase() {
     const location = useLocation();
     const preparationPhase = location.state;
 
-    console.log(preparationPhase);
-
     const navigate = useNavigate();
 
     // ! For testing purposes only
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     // useEffect(() => {
     //     dispatch(getAllGoals());
     // }, [dispatch]);
     // ! Until here
-
-    // TODO: Remove this after testing
-    // preparationPhase = {
-    //     duration: {
-    //         ticks: 30
-    //     },
-    //     motivation: "",
-    //     goals: useSelector(state => state.Goals.goals).filter(g => g.id < 4),
-    //     expectation: "",
-    //     distractions: [
-    //         {
-    //             title: "Eneksh eneka",
-    //             type: "WorldlyDesire"
-    //         }
-    //     ], // Initialize with an empty row
-    //     startDateTime: "",
-    //     endDateTime: "",
-    // };
-
-
 
     const [currentStep, setCurrentStep] = useState(1);
     const [goals, setGoals] = useState(preparationPhase.goals);
@@ -143,6 +121,18 @@ export function TransitionPhase() {
         }
     }, [timeLeft]);
 
+    function durationToTicks(duration) {
+        const hours = duration.hour || 0;
+        const minutes = duration.minute || 0;
+        const seconds = duration.second || 0;
+        const milliseconds = duration.millisecond || 0;
+
+        const totalMilliseconds = (((hours * 60) + minutes) * 60 + seconds) * 1000 + milliseconds;
+        const ticks = totalMilliseconds * 10000; // 1 tick = 100 nanoseconds = 0.0001 milliseconds
+
+        return ticks;
+    }
+
 
     // The function that brings it all together
     const endMeditation = () => {
@@ -150,8 +140,8 @@ export function TransitionPhase() {
         // Set all its properties by using the state variables and the store: meditatorId, preparationPhase,
         var session = {
             startDateTime: preparationPhase.startDateTime,
-            endDateTime: "2024-0625T14:18.886Z",
-            meditatorId: 0,
+            endDateTime: new Date().toISOString(),
+            meditatorId: 1,
             ahaMoments: [],
             practicedStageIds: [
                 1,
@@ -164,7 +154,12 @@ export function TransitionPhase() {
                 ...step2Objects,
                 ...step3Objects
             ],
-            preparationPhase: preparationPhase,
+            preparationPhase: {
+                ...preparationPhase,
+                duration: {
+                    ticks: durationToTicks(preparationPhase.duration)
+                }
+            },
             isDeleted: false
         };
 
@@ -173,11 +168,13 @@ export function TransitionPhase() {
             dispatch(updateGoal(goal));
         });
 
+        console.log(session);
+
         // Create the session in the backend and navigate to the session page with the session ID
         dispatch(createSession(session)).then((result) => {
             if (result.meta.requestStatus === 'fulfilled') {
                 const sessionId = result.payload.id; // Adjust this based on your API response
-                navigate(`/Session/${sessionId}`);
+                navigate(`/Session/:${sessionId}`);
             } else {
                 console.error('Failed to create session:', result.payload);
             }

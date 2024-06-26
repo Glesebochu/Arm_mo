@@ -98,7 +98,6 @@ export function TransitionPhase() {
 
     };
 
-
     const extractMeditationObject = () => {
         return preparationPhase.goals[0].meditationObject;
     }

@@ -8,30 +8,30 @@ import { X } from "lucide-react";
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllGoals } from "../../../slices/GoalsSlice.js";
-import { GoalsTable } from "@/components/GoalsTable.jsx";
-import DistractionsTable from "@/components/DistractionsTable.jsx";
+import { getAllgoals } from "../../../slices/goalsSlice.js";
+import { goalsTable } from "@/components/goalsTable.jsx";
+import distractionsTable from "@/components/distractionsTable.jsx";
 import "normalize.css";
 import { motion } from "framer-motion";
 
 export default function CreatePreparationPhase() {
     const dispatch = useDispatch();
-    const goals = useSelector((state) => state.Goals.goals);
+    const goals = useSelector((state) => state.goals.goals);
 
     useEffect(() => {
-        dispatch(getAllGoals());
+        dispatch(getAllgoals());
     }, [dispatch]);
 
     const [stepIndex, setStepIndex] = useState(0);
-    const [selectedGoals, setSelectedGoals] = useState([]);
+    const [selectedgoals, setSelectedgoals] = useState([]);
     const [preparationData, setPreparationData] = useState({
         duration: new Time(1, 0),
-        Motivation: "",
-        Goals: [],
-        Expectation: "",
-        Distractions: [{ title: "", type: "" }], // Initialize with an empty row
-        StartDateTime: "",
-        EndDateTime: "",
+        motivation: "",
+        goals: [],
+        expectation: "",
+        distractions: [{ title: "", type: "" }], // Initialize with an empty row
+        startDateTime: "",
+        endDateTime: "",
     });
     const [stepErrorClasses, setStepErrorClasses] = useState({
         // goals: [],
@@ -43,8 +43,8 @@ export default function CreatePreparationPhase() {
 
 
     // The function that updates the goaltable's preparation data
-    // const handleGoalsSelection = (selectedGoals) => {
-    //   setPreparationData({ ...preparationData, Goals: selectedGoals });
+    // const handlegoalsSelection = (selectedgoals) => {
+    //   setPreparationData({ ...preparationData, goals: selectedgoals });
     // };
 
     const steps = [
@@ -53,7 +53,7 @@ export default function CreatePreparationPhase() {
             instruction:
                 "Set a complete and achievable goal for your meditation session.",
             component: (
-                <GoalsTable goals={goals} onSelectedGoals={setSelectedGoals} />
+                <goalsTable goals={goals} onSelectedgoals={setSelectedgoals} />
             ),
             errorComponent: (
                 <Alert variant="destructive" className="bg-red-100 h-10 p-3.5">
@@ -88,11 +88,11 @@ export default function CreatePreparationPhase() {
             component: (
                 <Input
                     placeholder="e.g., To improve my focus."
-                    value={preparationData.Motivation}
+                    value={preparationData.motivation}
                     onChange={(e) =>
                         setPreparationData({
                             ...preparationData,
-                            Motivation: e.target.value,
+                            motivation: e.target.value,
                         })
                     }
                     className="text-2xl "
@@ -105,31 +105,31 @@ export default function CreatePreparationPhase() {
             instruction:
                 "Properly articulate any potential distractions that may affect your meditation.",
             component: (
-                <DistractionsTable
-                    rows={preparationData.Distractions}
+                <distractionsTable
+                    rows={preparationData.distractions}
                     onRowChange={(index, title, type) => {
-                        const newDistractions = [...preparationData.Distractions];
-                        newDistractions[index] = { title, type };
+                        const newdistractions = [...preparationData.distractions];
+                        newdistractions[index] = { title, type };
                         setPreparationData({
                             ...preparationData,
-                            Distractions: newDistractions,
+                            distractions: newdistractions,
                         });
                     }}
                     onAddRow={() => {
                         setPreparationData({
                             ...preparationData,
-                            Distractions: [
-                                ...preparationData.Distractions,
+                            distractions: [
+                                ...preparationData.distractions,
                                 { title: "", type: "" },
                             ],
                         });
                     }}
                     onDeleteRow={(index) => {
-                        const newDistractions = [...preparationData.Distractions];
-                        newDistractions.splice(index, 1);
+                        const newdistractions = [...preparationData.distractions];
+                        newdistractions.splice(index, 1);
                         setPreparationData({
                             ...preparationData,
-                            Distractions: newDistractions,
+                            distractions: newdistractions,
                         });
                     }}
                 />
@@ -151,11 +151,11 @@ export default function CreatePreparationPhase() {
                 <Input
                     placeholder="e.g., To stay focused without any distractions for 10 minutes. "
                     style={{ "::placeholder": { fontSize: "50px" } }}
-                    value={preparationData.Expectation}
+                    value={preparationData.expectation}
                     onChange={(e) =>
                         setPreparationData({
                             ...preparationData,
-                            Expectation: e.target.value,
+                            expectation: e.target.value,
                         })
                     }
                     className="text-2xl"
@@ -180,7 +180,7 @@ export default function CreatePreparationPhase() {
     const handleNext = () => {
         let hasError = false;
         const newStepErrorClasses = { ...stepErrorClasses };
-        const newDistractionErrors = preparationData.Distractions.map(
+        const newDistractionErrors = preparationData.distractions.map(
             (distraction) => ({
                 title: "",
                 type: "",
@@ -200,14 +200,14 @@ export default function CreatePreparationPhase() {
             newStepErrorClasses.duration = "border-grey-500";
         }
 
-        // if (stepIndex === 2 && preparationData.Motivation.length <= 1) {
+        // if (stepIndex === 2 && preparationData.motivation.length <= 1) {
         //   newStepErrorClasses.motivation = "border-red-500";
         //   hasError = true;
         // } else {
         //   newStepErrorClasses.motivation = "";
         // }
 
-        // if (stepIndex === 4 && preparationData.Expectation.length <= 1) {
+        // if (stepIndex === 4 && preparationData.expectation.length <= 1) {
         //   newStepErrorClasses.expectation = "border-red-500";
         //   hasError = true;
         // } else {
@@ -215,7 +215,7 @@ export default function CreatePreparationPhase() {
         // }
 
         // if (stepIndex === 3) {
-        //   preparationData.Distractions.forEach((distraction, index) => {
+        //   preparationData.distractions.forEach((distraction, index) => {
         //     if (distraction.title.length <= 1) {
         //       newDistractionErrors[index].title = "border-red-500";
         //       hasError = true;
@@ -242,10 +242,10 @@ export default function CreatePreparationPhase() {
     };
 
     const handleSave = () => {
-        preparationData.EndDateTime = new Date().toISOString();
-        preparationData.Goals = selectedGoals;
+        preparationData.endDateTime = new Date().toISOString();
+        preparationData.goals = selectedgoals;
         console.log(preparationData);
-        console.log(selectedGoals);
+        console.log(selectedgoals);
         // dispatch(CreatePreparationPhaseThunk(preparationPhaseData)).then(
         //     (response) => {
         //         // const prepPhaseId = response.data.id;
@@ -259,12 +259,12 @@ export default function CreatePreparationPhase() {
     const handleCancel = () => {
         setPreparationData({
             duration: new Time(1, 0),
-            Motivation: "",
-            Goals: [],
-            Expectation: "",
-            Distractions: [],
-            StartDateTime: "",
-            EndDateTime: "",
+            motivation: "",
+            goals: [],
+            expectation: "",
+            distractions: [],
+            startDateTime: "",
+            endDateTime: "",
         });
         setStepIndex(0);
     };
@@ -273,7 +273,7 @@ export default function CreatePreparationPhase() {
         if (stepIndex === 0) {
             setPreparationData({
                 ...preparationData,
-                StartDateTime: new Date().toISOString(),
+                startDateTime: new Date().toISOString(),
             });
         }
     }, [stepIndex]);

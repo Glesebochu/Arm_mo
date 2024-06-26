@@ -33,7 +33,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<TransitionPhase />} />
+        <Route path="/" element={<Landing />} />
         <Route
           path="/Home"
           element={

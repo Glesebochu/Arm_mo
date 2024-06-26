@@ -24,6 +24,14 @@ import { useNavigate } from 'react-router-dom';
 
 export function TransitionPhase({ preparationPhase }) {
 
+    // ! For testing purposes only
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getAllGoals());
+    }, [dispatch]);
+    // ! Until here
+
     // TODO: Remove this after testing
     preparationPhase = {
         duration: {
@@ -51,13 +59,7 @@ export function TransitionPhase({ preparationPhase }) {
     const [step3Objects, setStep3Objects] = useState([]);
     const [currentObservableObjects, setCurrentObservableObjects] = useState([]);
 
-    // ! For testing purposes only
-    const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(getAllGoals());
-    }, [dispatch]);
-    // ! Until here
 
     const iconHeight = "h-10";
     const iconWidth = "w-6";

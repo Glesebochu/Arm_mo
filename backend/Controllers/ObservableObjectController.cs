@@ -54,7 +54,7 @@ namespace backend.Controllers
 
         // An action for creating a new observable object
         [HttpPost("Create")]
-        public IActionResult Create([FromBody] ObservableObjectDTO newObservableObject)
+        public IActionResult Create([FromBody] CreateObservableObjectDTO newObservableObject)
         {
             var observableObject = _mapper.Map<ObservableObject>(newObservableObject);
 

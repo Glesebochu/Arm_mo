@@ -18,36 +18,11 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 
+import { subTypeOptions, intensityOptions, proximityOptions } from '../../constants/constants';
 
-export function ObservableObjectPopover({ observableObject, onSave, buttonClass }) {
-    const subTypeOptions = [
-        'Visual',
-        'Auditory',
-        'Olfactory',
-        'Kinesthetic',
-        '---',
-        'Taste',
-        'Thought',
-        'MentalState',
-        'FeelingTone'
-    ];
-
-    const intensityOptions = [
-        'Mild',
-        'Moderate',
-        'Intense'
-    ];
-
-    const proximityOptions = [
-        'Unrelated',
-        'SameSubType',
-        'DirectlyRelated',
-        'MeditationObject'
-    ];
-
+export function ObservableObjectPopover({ observableObject, onSave, onDelete, buttonClass }) {
     const [formState, setFormState] = useState({ ...observableObject });
     const [open, setOpen] = useState(false);
-
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -69,6 +44,10 @@ export function ObservableObjectPopover({ observableObject, onSave, buttonClass 
         setOpen(false); // Close the popover on save
     };
 
+    const handleDelete = () => {
+        onDelete(observableObject);
+        setOpen(false); // Close the popover on delete
+    };
 
     return (
         <Popover open={open} onOpenChange={setOpen}>
@@ -148,13 +127,19 @@ export function ObservableObjectPopover({ observableObject, onSave, buttonClass 
                             </SelectContent>
                         </Select>
                     </div>
-                    <div className="grid grid-cols-3 items-center gap-4">
-                        <Button className="w-full mt-4 p-2" variant="outline" onClick={handleSave}>
+                    <div className="grid grid-cols-2 gap-4 mt-4">
+                        <Button className="w-full p-2" variant="outline" onClick={handleSave}>
                             Save
                         </Button>
+                        <Button className="w-full p-2" variant="destructive" onClick={handleDelete}>
+                            Delete
+                        </Button>
                     </div>
+
+
                 </div>
             </PopoverContent>
         </Popover>
     );
 }
+

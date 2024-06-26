@@ -19,81 +19,81 @@ injectStyle();
 
 // Define the schema for the signup form using zod
 const signupSchema = z.object({
-    FirstName: z.string().min(1, "First Name is required"),
-    LastName: z.string().min(1, "Last Name is required"),
-    Email: z.string().email("Invalid email address"),
-    Password: z.string().min(6, "Password must be at least 6 characters"),
+  FirstName: z.string().min(1, "First Name is required"),
+  LastName: z.string().min(1, "Last Name is required"),
+  Email: z.string().email("Invalid email address"),
+  Password: z.string().min(6, "Password must be at least 6 characters"),
 });
 
 // Export a functional component for the signup form
 const Signup = () => {
-    const navigate = useNavigate();
-    // Use the useSelector hook to select the necessary state from the Redux store
-    const { error, isLoading, isError } = useSelector((state) => state.Auth);
-    // Use the useDispatch hook to dispatch actions to the Redux store
-    const dispatch = useDispatch();
-    // Use the useState hook to manage the state of the form data
-    const [formData, setFormData] = useState({
-        FirstName: "",
-        LastName: "",
-        Email: "",
-        Password: "",
+  const navigate = useNavigate();
+  // Use the useSelector hook to select the necessary state from the Redux store
+  const { error, isLoading, isError } = useSelector((state) => state.Auth);
+  // Use the useDispatch hook to dispatch actions to the Redux store
+  const dispatch = useDispatch();
+  // Use the useState hook to manage the state of the form data
+  const [formData, setFormData] = useState({
+    FirstName: "",
+    LastName: "",
+    Email: "",
+    Password: "",
+  });
+  // Use the useState hook to manage the state of the form submission
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Define a function to handle changes to the form data
+  const handleChange = (e) => {
+    // Update the form data state with the new value
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
     });
-    // Use the useState hook to manage the state of the form submission
-    const [isSubmitting, setIsSubmitting] = useState(false);
+  };
 
-    // Define a function to handle changes to the form data
-    const handleChange = (e) => {
-        // Update the form data state with the new value
-        setFormData({
-          ...formData,
-            [e.target.name]: e.target.value,
-        });
-    };
+  // Use the useEffect hook to handle the form submission
+  useEffect(() => {
+    // Check if the form is being submitted
+    if (isSubmitting) {
+      // Check if there was an error
+      if (!isError) {
+        // Display a success notification
+        notifySuccess("Registered Successfully");
 
-    // Use the useEffect hook to handle the form submission
-    useEffect(() => {
-      // Check if the form is being submitted
-      if (isSubmitting) {
-        // Check if there was an error
-        if (!isError) {
-            // Display a success notification
-            notifySuccess("Registered Successfully");
+        // Set up a timeout to navigate after 5000 milliseconds
+        const timeout = setTimeout(() => {
+          navigate("/Signin");
+        }, 5000);
 
-            // Set up a timeout to navigate after 5000 milliseconds
-            const timeout = setTimeout(() => {
-                navigate("/Signin");
-            }, 5000);
-
-            // Clean up the timeout to prevent it from recurring
-            return () => clearTimeout(timeout);
-        } else {
-            // Display an error notification
-            notifyError(error);
-        }
-        // Reset the isSubmitting state
-        setIsSubmitting(false);
+        // Clean up the timeout to prevent it from recurring
+        return () => clearTimeout(timeout);
+      } else {
+        // Display an error notification
+        notifyError(error);
       }
-    }, [isError, isSubmitting, navigate, notifyError, notifySuccess, error]);
+      // Reset the isSubmitting state
+      setIsSubmitting(false);
+    }
+  }, [isError, isSubmitting, navigate, notifyError, notifySuccess, error]);
 
-    // Define a function to handle the form submission
-    const handleSubmit = async (e) => {
-        // Prevent the default form submission behavior
-        e.preventDefault();
-        // Try to parse the form data using the schema
-        try {
-            signupSchema.parse(formData);
-            // Dispatch the register action to the Redux store
-            await dispatch(register(formData));
-            // Set the isSubmitting state to true
-            setIsSubmitting(true);
-        } catch (error) {
-            // If there was an error, display an error notification
-            if (error instanceof z.ZodError) {
-                error.errors.forEach((err) => notifyError(err.message));
-            }
-        }
-    };
+  // Define a function to handle the form submission
+  const handleSubmit = async (e) => {
+    // Prevent the default form submission behavior
+    e.preventDefault();
+    // Try to parse the form data using the schema
+    try {
+      signupSchema.parse(formData);
+      // Dispatch the register action to the Redux store
+      await dispatch(register(formData));
+      // Set the isSubmitting state to true
+      setIsSubmitting(true);
+    } catch (error) {
+      // If there was an error, display an error notification
+      if (error instanceof z.ZodError) {
+        error.errors.forEach((err) => notifyError(err.message));
+      }
+    }
+  };
 
   // Return the JSX for the signup form
   return (

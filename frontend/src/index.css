@@ -79,7 +79,7 @@ nav {
   @apply max-w-6xl mx-auto my-12;
 }
 p {
-  @apply leading-7 [&:not(:first-child)]:mt-6;
+  @apply leading-7;
 }
 h1 {
   @apply text-muted-foreground scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl;

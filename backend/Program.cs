@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using AutoMapper;
 using backend.Models;
+using backend.Services;
 using System.Text.Json.Serialization;
 using AutoMapper.Internal.Mappers;
 
@@ -121,6 +122,8 @@ namespace backend
 
             // Add AutoMapper service with the Program class for configuration
             builder.Services.AddAutoMapper(typeof(Program));
+            // Register the SessionService
+            builder.Services.AddScoped<SessionService>();
 
             // Build the application
             var app = builder.Build();

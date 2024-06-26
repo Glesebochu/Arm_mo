@@ -46,8 +46,9 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 import { v4 as uuidv4 } from 'uuid';
+import { statusOptions } from "../../constants/constants";
 
-export function GoalsTable({ goals = [], isSubGoals = false, parentGoalId = null }) {
+export function GoalsTable({ goals = [], isSubGoals = false, parentGoalId = null, onSelectedGoals = null, doNotIncludeStatus = "Completed" }) {
     const dispatch = useDispatch();
 
     const initialGoalState = {
@@ -67,6 +68,9 @@ export function GoalsTable({ goals = [], isSubGoals = false, parentGoalId = null
         childGoals: [],
     };
 
+    // Remove completed goals from the list
+    goals = goals.filter(g => g.status != doNotIncludeStatus);
+
     const [data, setData] = useState(goals);
     const [sorting, setSorting] = useState([]);
     const [columnFilters, setColumnFilters] = useState([]);
@@ -83,6 +87,11 @@ export function GoalsTable({ goals = [], isSubGoals = false, parentGoalId = null
             setData(organizedData);
         }
     }, [goals]);
+
+    useEffect(() => {
+        const selectedGoals = table.getSelectedRowModel().rows.map(row => row.original);
+        onSelectedGoals ? onSelectedGoals(selectedGoals) : '';
+    }, [rowSelection]);
 
     const handleDeleteGoal = (id) => {
         // setData(data.filter((goal) => goal.id !== id));
@@ -283,7 +292,7 @@ export function GoalsTable({ goals = [], isSubGoals = false, parentGoalId = null
             ),
             cell: ({ row }) => {
                 const isEditingRow = isEditing === row.original.id;
-                const statusOptions = ['NotStarted', 'InProgress', 'Completed'];
+
                 const statusValue = localData[row.original.id]?.status || row.getValue('status');
                 return isEditingRow ? (
                     <Select onValueChange={(value) => handleInputChange({ target: { name: 'status', value } }, row.original.id)}>

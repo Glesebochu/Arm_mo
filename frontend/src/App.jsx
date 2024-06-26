@@ -4,12 +4,18 @@ import Signin from "./pages/Signin";
 import UsageView from "./pages/Usage";
 import Insights from "./pages/Insights";
 import Home from "./pages/Home";
+import { TransitionPhase } from "./pages/TransitionPhase";
 import Settings from "./pages/Settings";
 import Landing from "./pages/Landing";
 import ProtectedRoute from "../utils/ProtectedRoute";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import SessionSummary from "./pages/AnalyticsPage";
 import { useSelector } from "react-redux";
+import CreatePreparationPhase from "./pages/PreparationPhases/CreatePreparationPhase";
+// import PracticedStageCard from "./components/Custom/PracticedStageCard";
+import StageCard from "./components/Custom/PracticedStageCard";
+import ViewStageInfo from "./pages/ViewStageInfo";
+
 
 function App() {
   // const user = useSelector((state) => state.Auth.user);

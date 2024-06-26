@@ -306,7 +306,7 @@ END
 WHERE Title IN ('Traffic Noise', 'Daydream', 'Pet Movement', 'Coffee Aroma', 'Anxiety', 'Phone Vibration', 'Morning Dew', 'Relaxation', 'Bird Chirping', 'Presence in Nature', 'Wind Chimes', 'Emotional Calm', 'Rain Sound', 'Air Conditioner Sound', 'Inspiration', 'Creative Thoughts', 'Deep Thought', 'Garden Smell', '12 Rules for Life - Page 10', 'Weekly Review Notes', 'Guided Meditation', 'Podcast Episode 5', 'Breathing Exercise', 'Morning Exercise Routine', 'Reflective Journal', 'Weekly Planner', 'Discussion Points', 'Visualization Guide', 'Analysis Report');
 
 -- Insert unique PracticedStages for each session with MeditatorId
-INSERT INTO PracticedStage (SessionId, StageId, MeditatorId) VALUES
+INSERT INTO PracticedStages (SessionId, StageId, MeditatorId) VALUES
 (@SessionId1, 1, @MeditatorId1),
 (@SessionId1, 2, @MeditatorId1),
 (@SessionId2, 1, @MeditatorId1),
@@ -335,7 +335,7 @@ INSERT INTO PracticedStage (SessionId, StageId, MeditatorId) VALUES
 (@SessionId12, 4, @MeditatorId1);
 
 -- Insert unique NewlyMasteredStages ensuring no duplicate mastery within a session and in ascending order
-INSERT INTO NewlyMasteredStage (SessionId, StageId) VALUES
+INSERT INTO NewlyMasteredStages (SessionId, StageId) VALUES
 (@SessionId1, 1),  -- Session 1: Mastering Stage 1
 (@SessionId2, 2),  -- Session 2: Mastering Stage 2
 (@SessionId5, 3),  -- Session 5: Mastering Stage 3
@@ -395,7 +395,7 @@ INSERT INTO AhaMoments (SessionId, Label) VALUES
 (@SessionId12, 'Wind Blowing');
 
 -- Insert dummy data into Hindrance table
-INSERT INTO Hindrance (Title, Type, PreparationPhaseId) VALUES
+INSERT INTO Hindrances (Title, Type, PreparationPhaseId) VALUES
 ('Restlessness', 1, @PreparationPhaseId1),
 ('Doubt', 2, @PreparationPhaseId2),
 ('Sensual Desire', 3, @PreparationPhaseId3),

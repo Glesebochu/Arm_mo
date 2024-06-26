@@ -110,6 +110,11 @@ export function TransitionPhase() {
 
     const extendTimer = (extension) => {
         setTimeLeft(extension * 60);
+        preparationPhase.duration = {
+            ...preparationPhase.duration,
+            minute: preparationPhase.duration.minute + extension
+        }
+        console.log(preparationPhase.duration);
     };
 
     useEffect(() => {
@@ -170,14 +175,14 @@ export function TransitionPhase() {
         console.log(session);
 
         // Create the session in the backend and navigate to the session page with the session ID
-        dispatch(createSession(session)).then((result) => {
-            if (result.meta.requestStatus === 'fulfilled') {
-                const sessionId = result.payload.id; // Adjust this based on your API response
-                navigate(`/Session/:${sessionId}`);
-            } else {
-                console.error('Failed to create session:', result.payload);
-            }
-        });
+        // dispatch(createSession(session)).then((result) => {
+        //     if (result.meta.requestStatus === 'fulfilled') {
+        //         const sessionId = result.payload.id; // Adjust this based on your API response
+        //         navigate(`/Session/:${sessionId}`);
+        //     } else {
+        //         console.error('Failed to create session:', result.payload);
+        //     }
+        // });
     };
 
     return (

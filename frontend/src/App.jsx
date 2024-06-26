@@ -15,6 +15,7 @@ import CreatePreparationPhase from "./pages/PreparationPhases/CreatePreparationP
 // import PracticedStageCard from "./components/Custom/PracticedStageCard";
 import StageCard from "./components/Custom/PracticedStageCard";
 import ViewStageInfo from "./pages/ViewStageInfo";
+import { Goals } from "./pages/Goals";
 
 
 function App() {
@@ -79,6 +80,30 @@ function App() {
           element={
             <ProtectedRoute>
               <Settings />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/Goals"
+          element={
+            <ProtectedRoute>
+              <Goals />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/PreparationPhase"
+          element={
+            <ProtectedRoute>
+              <CreatePreparationPhase />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/TransitionPhase"
+          element={
+            <ProtectedRoute>
+              <TransitionPhase />
             </ProtectedRoute>
           }
         />

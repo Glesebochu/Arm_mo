@@ -2,6 +2,7 @@ using AutoMapper;
 using backend.Data;
 using backend.DTOs.Session;
 using backend.Models;
+using backend.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -16,10 +17,12 @@ namespace backend.Controllers
     {
         private readonly Arm_moContext _context;
         private readonly IMapper _mapper;
-        public SessionsController(Arm_moContext context, IMapper mapper)
+        private readonly SessionService _sessionService;
+        public SessionsController(Arm_moContext context, IMapper mapper, SessionService sessionService)
         {
             _context = context;
             _mapper = mapper;
+            _sessionService = sessionService;
         }
 
         // Action for getting all sessions
@@ -61,27 +64,9 @@ namespace backend.Controllers
 
         // Action for creating a session; POST
         [HttpPost("Create")]
-        public IActionResult Create([FromBody] CreateSessionDTO createSessionDTO)
+        public async Task<IActionResult> Create([FromBody] CreateSessionDTO createSessionDTO)
         {
-            var session = new Session
-            {
-                StartDateTime = createSessionDTO.StartDateTime,
-                EndDateTime = createSessionDTO.EndDateTime,
-                Meditator = _context.Meditators.Find(createSessionDTO.MeditatorId),
-                AhaMoments = _mapper.Map<List<AhaMoment>>(createSessionDTO.AhaMoments),
-                ObservableObjects = _mapper.Map<List<ObservableObject>>(createSessionDTO.ObservableObjects),
-                PreparationPhase = _mapper.Map<PreparationPhase>(createSessionDTO.PreparationPhase),
-                IsDeleted = createSessionDTO.IsDeleted
-            };
-
-            // Code for adding practiced stages one by one from the list of integers
-
-            // currentStage = _context.Stages.Find(createSessionDTO.PracticedStageIds[0]);
-            // var practicedStage = new PracticedStage{ Session = session, Stage = currentStage };
-            // _context.PracticedStages.Add(PracticedStage);
-
-            _context.Sessions.Add(session);
-            _context.SaveChanges();
+            var session = await _sessionService.CreateSessionAsync(createSessionDTO);
 
             return CreatedAtAction(
                 nameof(GetById),

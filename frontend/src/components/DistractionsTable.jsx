@@ -98,7 +98,7 @@ export default function DistractionsTable({
         size="sm"
         className="ml-[10px] mt-[10px] w-[80px] p-4 font-bold"
       >
-        Add Row
+        Add Distraction
       </Button>
     </div>
   );

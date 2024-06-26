@@ -156,9 +156,8 @@ export function TransitionPhase() {
             ],
             preparationPhase: {
                 ...preparationPhase,
-                duration: {
-                    ticks: durationToTicks(preparationPhase.duration)
-                }
+                goals: preparationPhase.goals.map(g => g.id),
+                duration: durationToTicks(preparationPhase.duration)
             },
             isDeleted: false
         };

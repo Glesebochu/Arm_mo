@@ -34,7 +34,7 @@ export default function CreatePreparationPhase() {
         motivation: "",
         goals: [],
         expectation: "",
-        distractions: [{ title: "", type: "" }], // Initialize with an empty row
+        distractions: [], // Initialize with an empty row
         startDateTime: "",
         endDateTime: "",
     });

@@ -13,8 +13,12 @@ import { GoalsTable } from "@/components/GoalsTable.jsx";
 import DistractionsTable from "@/components/DistractionsTable.jsx";
 import "normalize.css";
 import { motion } from "framer-motion";
+// * For navigating to another page
+import { useNavigate } from 'react-router-dom';
 
 export default function CreatePreparationPhase() {
+
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const goals = useSelector((state) => state.Goals.goals);
 
@@ -249,14 +253,8 @@ export default function CreatePreparationPhase() {
     preparationData.endDateTime = new Date().toISOString();
     preparationData.goals = selectedGoals;
     console.log(preparationData);
-    // dispatch(CreatePreparationPhaseThunk(preparationPhaseData)).then(
-    //     (response) => {
-    //         // const prepPhaseId = response.data.id;
-    //         // history.push({
-    //         //   pathname: "/transition",
-    //         //   state: { prepPhaseId },
-    //     }
-    // );
+
+    navigate('/TransitionPhase', { state: preparationData })
   };
 
   const handleCancel = () => {

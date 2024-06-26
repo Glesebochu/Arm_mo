@@ -3,8 +3,8 @@ import axios from "axios";
 import { Target } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-export default function ViewStageInfo() {
-  const [stageId, setStageId] = useState(1);
+export default function ViewStageInfo({ stageId = 1 }) {
+  const [stageId, setStageId] = useState(stageId);
   const [stageData, setStageData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -12,7 +12,7 @@ export default function ViewStageInfo() {
   const fetchStageData = async (id) => {
     try {
       const response = await axios.get(
-       ` http://localhost:5158/api/Analyzer/GetStage?stageId=${id}`
+        ` http://localhost:5158/api/Analyzer/GetStage?stageId=${id}`
       );
       setStageData(response.data);
     } catch (error) {
@@ -57,7 +57,9 @@ export default function ViewStageInfo() {
         {stageData.goal}
       </h3>
       <div className="col-start-1 row-start-5 col-span-full mt-2 border border-solid p-2 ml-5">
-        <h2 className="col-start-1 row-start-5 font-bold text-xl mb-5">Obstacles</h2>
+        <h2 className="col-start-1 row-start-5 font-bold text-xl mb-5">
+          Obstacles
+        </h2>
         <ul className="col-start-1 row-start-6 stage-list">
           {stageData.obstacles.map((obstacle, index) => (
             <li key={index} className="text-lg">
@@ -67,7 +69,9 @@ export default function ViewStageInfo() {
         </ul>
       </div>
       <div className="col-start-1 row-start-6 col-span-full mt-2 border border-solid p-2 ml-5">
-        <h2 className="col-start-1 row-start-6 font-bold text-xl mb-5">Mastery Requirements</h2>
+        <h2 className="col-start-1 row-start-6 font-bold text-xl mb-5">
+          Mastery Requirements
+        </h2>
         <ul className="stage-list">
           {stageData.masteryRequirements.map((requirement, index) => (
             <li key={index} className="text-lg">
@@ -94,6 +98,6 @@ export default function ViewStageInfo() {
           Next
         </Button>
       )}
- </div>
-);
+    </div>
+  );
 }

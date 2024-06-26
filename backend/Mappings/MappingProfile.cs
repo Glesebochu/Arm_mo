@@ -33,17 +33,12 @@ namespace backend.Mappings
             CreateMap<CreateObservableObjectDTO, ObservableObject>();
 
             // For PreparationPhases
-            // =====================
             CreateMap<PreparationPhase, CreatePreparationPhaseDTO>();
             CreateMap<CreatePreparationPhaseDTO, PreparationPhase>()
                 .ConstructUsing(dto => new PreparationPhase()) // Ensure the default constructor is used
-                .ForMember(dest => dest.Goals, opt => opt.MapFrom(
-                    (src, dest, destMember, context) => context.Mapper.Map<Goal>(src.Goals))
-                )
-                .ForMember(dest => dest.Distractions, opt => opt.MapFrom(
-                    (src, dest, destMember, context) => context.Mapper.Map<Hindrance>(src.Distractions))
-                )
-            ;
+                .ForMember(dest => dest.Goals, opt => opt.MapFrom(src => src.Goals))
+                .ForMember(dest => dest.Distractions, opt => opt.MapFrom(src => src.Distractions));
+
             CreateMap<PreparationPhase, PreparationPhaseDTO>();
             CreateMap<PreparationPhaseDTO, PreparationPhase>();
 

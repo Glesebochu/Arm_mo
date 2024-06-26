@@ -82,6 +82,8 @@ namespace backend.Data
 
         public DbSet<Hindrance> Hindrances { get; set; }
         public DbSet<UserUsage> UserUsage { get; set; }
+        public DbSet<PracticedStage> PracticedStages { get; set; }
+        public DbSet<NewlyMasteredStage> NewlyMasteredStages { get; set; }
 
     }
 }

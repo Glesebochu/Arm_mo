@@ -14,6 +14,8 @@ import { TransitionPhase } from "./pages/TransitionPhase";
 import CreatePreparationPhase from "./pages/PreparationPhases/CreatePreparationPhase";
 // import PracticedStageCard from "./components/Custom/PracticedStageCard";
 import StageCard from "./components/Custom/PracticedStageCard";
+import ViewStageInfo from "./pages/ViewStageInfo";
+
 
 function App() {
   return (
@@ -21,7 +23,7 @@ function App() {
       <Router>
         <Routes>
           {/* For your specific Modules Modify this so that your Components show up when you run Vite */}
-          <Route path="/" element={<CreatePreparationPhase />} />
+          <Route path="/" element={<ViewStageInfo />} />
 
           {/* No need to to remove the below */}
           {/* <Route path="/session/:sessionId" element={<SessionDetails />} />

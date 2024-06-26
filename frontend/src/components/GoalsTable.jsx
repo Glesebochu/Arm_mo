@@ -48,7 +48,7 @@ import {
 import { v4 as uuidv4 } from 'uuid';
 import { statusOptions } from "../../constants/constants";
 
-export function GoalsTable({ goals = [], isSubGoals = false, parentGoalId = null }) {
+export function GoalsTable({ goals = [], isSubGoals = false, parentGoalId = null, onSelectedGoals = null }) {
     const dispatch = useDispatch();
 
     const initialGoalState = {
@@ -84,6 +84,11 @@ export function GoalsTable({ goals = [], isSubGoals = false, parentGoalId = null
             setData(organizedData);
         }
     }, [goals]);
+
+    useEffect(() => {
+        const selectedGoals = table.getSelectedRowModel().rows.map(row => row.original);
+        onSelectedGoals ? onSelectedGoals(selectedGoals) : '';
+    }, [rowSelection]);
 
     const handleDeleteGoal = (id) => {
         // setData(data.filter((goal) => goal.id !== id));

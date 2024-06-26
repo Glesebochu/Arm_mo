@@ -24,12 +24,13 @@ export default function CreatePreparationPhase() {
     const [preparationData, setPreparationData] = useState({
         Duration: new Time(1, 0),
         Motivation: "",
-        // Goals: [],
+        Goals: [],
         Expectation: "",
         Distractions: [{ title: "", type: "" }], // Initialize with an empty row
         StartDateTime: "",
         EndDateTime: "",
     });
+    const [selectedGoals, setSelectedGoals] = useState([]);
 
     // The function that updates the goaltable's preparation data
     // const handleGoalsSelection = (selectedGoals) => {
@@ -42,7 +43,7 @@ export default function CreatePreparationPhase() {
             instruction:
                 "Set a complete and achievable goal for your meditation session.",
             component: (
-                <GoalsTable goals={goals} />
+                <GoalsTable goals={goals} onSelectedGoals={setSelectedGoals} />
                 // <GoalsTable goals={goals} onGoalsSelection={handleGoalsChange} />
             ),
         },
@@ -157,7 +158,7 @@ export default function CreatePreparationPhase() {
     const handleSave = () => {
         preparationData.EndDateTime = new Date().toISOString();
         const preparationPhaseData = {
-            // Goals: preparationData.Goals,
+            goals: selectedGoals,
             duration: preparationData.Duration.toString(),
             motivation: preparationData.Motivation,
             distractions: preparationData.Distractions,
@@ -165,7 +166,7 @@ export default function CreatePreparationPhase() {
             startDateTime: preparationData.StartDateTime,
             endDateTime: preparationData.EndDateTime,
         };
-        console.log(preparationData);
+        console.log(preparationPhaseData);
         dispatch(CreatePreparationPhaseThunk(preparationPhaseData)).then(
             (response) => {
                 // const prepPhaseId = response.data.id;

@@ -279,17 +279,18 @@ export function TransitionPhase() {
                 </Button>
             }
 
-            <div
-                className="row-start-9 col-start-2 col-span-8 mt-5"
-            >
+            {!isPaused &&
+                <div
+                    className="row-start-9 col-start-2 col-span-8 mt-5"
+                >
 
-                <AhaMomentAlertDialog
-                    isOpen={isAhaMomentDialogOpen}
-                    setIsOpen={setIsAhaMomentDialogOpen}
-                    addAhaMoment={addAhaMoment}
-                />
-            </div>
-
+                    <AhaMomentAlertDialog
+                        isOpen={isAhaMomentDialogOpen}
+                        setIsOpen={setIsAhaMomentDialogOpen}
+                        addAhaMoment={addAhaMoment}
+                    />
+                </div>
+            }
 
             <TimeIsUpAlertDialog isOpen={isDialogOpen} setIsOpen={setIsDialogOpen} extendBy={extendTimer} onSessionEnd={endMeditation} />
 

@@ -1,13 +1,17 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { X, Target, Mountain } from 'lucide-react'
+import { X, Target, Mountain, RotateCcw } from 'lucide-react'
 
-export function PauseMenu({ onEnd, onViewInfo, onShowGoals, onNextStage }) {
+export function PauseMenu({ onEnd, onViewInfo, onShowGoals, onRestart, onNextStage }) {
     const commonStyles = "h-20 text-xl w-full";
     const variant = "outline";
     const iconClasses = "mr-3"
     return (
         <div className="flex flex-col gap-4 p-8 w-1/2 h-full items-center justify-center">
+            <Button variant={variant} onClick={onRestart} className={commonStyles}>
+                <RotateCcw className={iconClasses} />
+                Restart
+            </Button>
             <Button variant={variant} onClick={onEnd} className={commonStyles}>
                 <X className={iconClasses} />
                 End Meditation

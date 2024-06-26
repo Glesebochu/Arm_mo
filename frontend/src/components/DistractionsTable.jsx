@@ -96,7 +96,7 @@ export default function DistractionsTable({
         onClick={onAddRow}
         variant="outline"
         size="sm"
-        className="ml-[10px] mt-[10px] w-[80px] p-4 font-bold"
+        className="ml-[10px] mt-[10px] w-1/4 p-4 font-bold"
       >
         Add Distraction
       </Button>

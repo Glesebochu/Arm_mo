@@ -507,7 +507,7 @@ export function GoalsTable({ goals = [], isSubGoals = false, parentGoalId = null
                                             <TableRow key={`child-${row.original.id}`}>
                                                 <TableCell colSpan={columns.length}>
                                                     <div className="ml-8 mr-8">
-                                                        <GoalsTable goals={row.original.childGoals} isSubGoals={true} parentGoalId={row.original.id} onSelectedGoals={onSelectedGoals} />
+                                                        <GoalsTable goals={row.original.childGoals} isSubGoals={true} parentGoalId={row.original.id} onSelectedGoals={onSelectedGoals} doNotIncludeStatus={doNotIncludeStatus} />
                                                     </div>
                                                 </TableCell>
                                             </TableRow>

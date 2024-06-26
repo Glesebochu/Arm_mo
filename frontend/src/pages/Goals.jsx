@@ -15,7 +15,7 @@ export function Goals() {
   }, [dispatch]);
 
   return (
-    <div>
+    <div className="m-20">
       <h2>Goals</h2>
       {goals && goals.length > 0 ? (
         <GoalsTable goals={goals} />

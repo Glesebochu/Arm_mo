@@ -21,6 +21,7 @@ import { getAllGoals, updateGoal } from "../../slices/GoalsSlice.js";
 
 // * For navigating to another page
 import { useLocation, useNavigate } from 'react-router-dom';
+import { PauseMenu } from "@/components/TransitionSteps/PauseMenu";
 
 export function TransitionPhase() {
 
@@ -87,6 +88,10 @@ export function TransitionPhase() {
         if (currentStep > 1) setCurrentStep(currentStep - 1);
     };
 
+    const handlePause = () => {
+        setIsPaused(!isPaused);
+    }
+
     const updateGoalsStatus = (updatedGoals) => {
         const newGoals = updatedGoals.map(goal => ({
             ...goal,
@@ -117,13 +122,14 @@ export function TransitionPhase() {
     };
 
     useEffect(() => {
-        if (timeLeft > 0) {
+        if (timeLeft > 0 && !isPaused) {
             const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
             return () => clearTimeout(timer);
-        } else {
+        } else if (timeLeft === 0) {
             handleTimerEnd();
         }
-    }, [timeLeft]);
+    }, [timeLeft, isPaused]);
+
 
     function durationToTicks(duration) {
         const hours = duration.hour || 0;
@@ -192,54 +198,68 @@ export function TransitionPhase() {
             >{Math.round(timeLeft / 60)} mins left</h3>
 
             <Button
-                onClick={() => setIsPaused(!isPaused)}
+                onClick={handlePause}
                 variant="ghost"
                 className="col-start-10 row-start-1 self-center justify-self m-4"
             >
                 {isPaused ? <Play className={`${iconHeight} ${iconWidth}`} /> : <Pause className={`${iconHeight} ${iconWidth}`} />}
             </Button>
 
-            <Button
-                onClick={handlePreviousStep}
-                disabled={currentStep === 1}
-                variant="ghost"
-                className="col-start-1 row-start-5 self-center justify-self m-4"
-            >
-                <ChevronLeft className={`${iconHeight} ${iconWidth}`} />
-            </Button>
+            {!isPaused &&
+                <Button
+                    onClick={handlePreviousStep}
+                    disabled={currentStep === 1}
+                    variant="ghost"
+                    className="col-start-1 row-start-5 self-center justify-self m-4"
+                >
+                    <ChevronLeft className={`${iconHeight} ${iconWidth}`} />
+                </Button>
+            }
 
-            <div className="col-start-2 col-span-8 row-start-2 row-span-7 flex items-center justify-center">
-                {currentStep === 1 && <Step1Box onDone={handleNextStep} meditationObjectType={typeOptions[0]} />}
-                {currentStep === 2 &&
-                    <Step2N3Box
-                        meditationObject={extractMeditationObject()}
-                        stepNo={2}
-                        initialObjects={step2Objects}
-                        setCurrentObservableObjects={setCurrentObservableObjects}
-                    />}
-                {currentStep === 3 &&
-                    <Step2N3Box
-                        meditationObject={extractMeditationObject()}
-                        stepNo={3}
-                        initialObjects={step3Objects}
-                        setCurrentObservableObjects={setCurrentObservableObjects}
-                    />}
-                {currentStep === 4 && (
-                    <Step4Box
-                        goals={preparationPhase.goals}
-                        onComplete={updateGoalsStatus}
-                    />
+            {isPaused ?
+                (
+                    < div className="col-start-2 col-span-8 row-start-2 row-span-7 flex items-center justify-center">
+                        <PauseMenu onEnd={endMeditation} />
+                    </div>
+                )
+                :
+                (
+                    <div className="col-start-2 col-span-8 row-start-2 row-span-7 flex items-center justify-center">
+
+                        {currentStep === 1 && <Step1Box onDone={handleNextStep} meditationObjectType={typeOptions[0]} />}
+                        {currentStep === 2 &&
+                            <Step2N3Box
+                                meditationObject={extractMeditationObject()}
+                                stepNo={2}
+                                initialObjects={step2Objects}
+                                setCurrentObservableObjects={setCurrentObservableObjects}
+                            />}
+                        {currentStep === 3 &&
+                            <Step2N3Box
+                                meditationObject={extractMeditationObject()}
+                                stepNo={3}
+                                initialObjects={step3Objects}
+                                setCurrentObservableObjects={setCurrentObservableObjects}
+                            />}
+                        {currentStep === 4 && (
+                            <Step4Box
+                                goals={preparationPhase.goals}
+                                onComplete={updateGoalsStatus}
+                            />
+                        )}
+                    </div>
                 )}
-            </div>
 
-            <Button
-                onClick={handleNextStep}
-                disabled={currentStep === 4}
-                variant="ghost"
-                className="col-start-10 row-start-5 self-center justify-self m-4"
-            >
-                <ChevronRight className={`${iconHeight} ${iconWidth}`} />
-            </Button>
+            {!isPaused &&
+                <Button
+                    onClick={handleNextStep}
+                    disabled={currentStep === 4}
+                    variant="ghost"
+                    className="col-start-10 row-start-5 self-center justify-self m-4"
+                >
+                    <ChevronRight className={`${iconHeight} ${iconWidth}`} />
+                </Button>
+            }
 
             <TimeIsUpAlertDialog isOpen={isDialogOpen} setIsOpen={setIsDialogOpen} extendBy={extendTimer} onSessionEnd={endMeditation} />
 

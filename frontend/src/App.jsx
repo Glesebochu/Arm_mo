@@ -28,6 +28,7 @@ function App() {
           <Route path="/Usage" element={<UsageView />} />
           <Route path="/Insights" element={<Insights />} />
           <Route path="/RemovedSessions" element={<RemovedSessions />} />
+          <Route path="/Analytics" element={<SessionSummary />} />
           {/* <Route path="/Home" element={<Home />} /> */}
           {/* <Route path="/Settings" element={<Settings />} /> */}
         </Routes>

@@ -18,6 +18,11 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 
+//Icons
+import { Eye, Ear, Thermometer } from "lucide-react"
+import { GiTongue, GiNoseFront, GiBrain, GiHearts } from 'react-icons/gi'
+import { IoHandRightOutline } from "react-icons/io5";
+
 import { subTypeOptions, intensityOptions, proximityOptions } from '../../constants/constants';
 
 export function ObservableObjectPopover({ observableObject, onSave, onDelete, buttonClass }) {
@@ -49,10 +54,36 @@ export function ObservableObjectPopover({ observableObject, onSave, onDelete, bu
         setOpen(false); // Close the popover on delete
     };
 
+    const getProperIcon = () => {
+        switch (formState.subType) {
+            case "Visual":
+                return <Eye className="mr-2" />
+            case "Auditory":
+                return <Ear className="mr-2" />
+            case "Olfactory":
+                return <GiNoseFront className="mr-2" />
+            case "Kinesthetic":
+                return <IoHandRightOutline className="mr-2" />
+            case "Taste":
+                return <GiTongue className="mr-2" />
+            case "MentalState":
+                return <GiHearts className="mr-2" />
+            case "Thought":
+                return <GiBrain className="mr-2" />
+            case "FeelingTone":
+                return <Thermometer className="mr-2" />
+            default:
+                return <Eye className="mr-2" />
+        }
+    };
+
     return (
         <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
-                <Button className={buttonClass} variant="outline" onClick={() => setOpen(true)}>{formState.title}</Button>
+                <Button className={buttonClass} variant="outline" onClick={() => setOpen(true)}>
+                    {getProperIcon()}
+                    {formState.title}
+                </Button>
             </PopoverTrigger>
             <PopoverContent>
                 <div className="grid gap-2">

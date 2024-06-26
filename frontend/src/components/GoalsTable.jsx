@@ -48,7 +48,7 @@ import {
 import { v4 as uuidv4 } from 'uuid';
 import { statusOptions } from "../../constants/constants";
 
-export function GoalsTable({ goals = [], isSubGoals = false, parentGoalId = null, onSelectedGoals = null }) {
+export function GoalsTable({ goals = [], isSubGoals = false, parentGoalId = null, onSelectedGoals = null, doNotIncludeStatus = "Completed" }) {
     const dispatch = useDispatch();
 
     const initialGoalState = {
@@ -67,6 +67,9 @@ export function GoalsTable({ goals = [], isSubGoals = false, parentGoalId = null
         parentGoalId: parentGoalId,
         childGoals: [],
     };
+
+    // Remove completed goals from the list
+    goals = goals.filter(g => g.status != doNotIncludeStatus);
 
     const [data, setData] = useState(goals);
     const [sorting, setSorting] = useState([]);

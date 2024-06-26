@@ -22,6 +22,7 @@ import { getAllGoals, updateGoal } from "../../slices/GoalsSlice.js";
 // * For navigating to another page
 import { useLocation, useNavigate } from 'react-router-dom';
 import { PauseMenu } from "@/components/TransitionSteps/PauseMenu";
+import { AhaMomentAlertDialog } from "@/components/AhaMomentAlertDialog";
 
 export function TransitionPhase() {
 
@@ -45,6 +46,8 @@ export function TransitionPhase() {
     const [step2Objects, setStep2Objects] = useState([]);
     const [step3Objects, setStep3Objects] = useState([]);
     const [currentObservableObjects, setCurrentObservableObjects] = useState([]);
+    const [ahaMoments, setAhaMoments] = useState([]);
+
 
     function calculateTotalSeconds(duration) {
         let totalSeconds = 0;
@@ -66,8 +69,23 @@ export function TransitionPhase() {
     }
     const [timeLeft, setTimeLeft] = useState(calculateTotalSeconds(preparationPhase.duration));
 
+    const [isAhaMomentDialogOpen, setIsAhaMomentDialogOpen] = useState(false);
+
     const iconHeight = "h-10";
     const iconWidth = "w-6";
+
+    const handleAddAhaMoment = () => {
+        setIsAhaMomentDialogOpen(true);
+    };
+
+    const addAhaMoment = (ahaMoment) => {
+        // Handle the logic to add an Aha moment here
+        setAhaMoments([...ahaMoments, {
+            title: ahaMoment
+        }]);
+        console.log('Aha moment added:', ahaMoment);
+    };
+
 
     const saveObservableObjects = () => {
         if (currentStep === 2) {
@@ -152,7 +170,7 @@ export function TransitionPhase() {
             startDateTime: preparationPhase.startDateTime,
             endDateTime: new Date().toISOString(),
             meditatorId: 1,
-            ahaMoments: [],
+            ahaMoments: ahaMoments,
             practicedStageIds: [
                 1,
                 2
@@ -261,7 +279,20 @@ export function TransitionPhase() {
                 </Button>
             }
 
+            <div
+                className="row-start-9 col-start-2 col-span-8 mt-5"
+            >
+
+                <AhaMomentAlertDialog
+                    isOpen={isAhaMomentDialogOpen}
+                    setIsOpen={setIsAhaMomentDialogOpen}
+                    addAhaMoment={addAhaMoment}
+                />
+            </div>
+
+
             <TimeIsUpAlertDialog isOpen={isDialogOpen} setIsOpen={setIsDialogOpen} extendBy={extendTimer} onSessionEnd={endMeditation} />
+
 
         </div>
     );

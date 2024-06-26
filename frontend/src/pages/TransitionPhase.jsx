@@ -20,46 +20,72 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllGoals, updateGoal } from "../../slices/GoalsSlice.js";
 
 // * For navigating to another page
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-export function TransitionPhase({ preparationPhase }) {
+export function TransitionPhase() {
+
+    const location = useLocation();
+    const preparationPhase = location.state;
+
+    console.log(preparationPhase);
+
+    const navigate = useNavigate();
 
     // ! For testing purposes only
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(getAllGoals());
-    }, [dispatch]);
+    // useEffect(() => {
+    //     dispatch(getAllGoals());
+    // }, [dispatch]);
     // ! Until here
 
     // TODO: Remove this after testing
-    preparationPhase = {
-        duration: {
-            ticks: 30
-        },
-        motivation: "",
-        goals: useSelector(state => state.Goals.goals).filter(g => g.id < 4),
-        expectation: "",
-        distractions: [
-            {
-                title: "Eneksh eneka",
-                type: "WorldlyDesire"
-            }
-        ], // Initialize with an empty row
-        startDateTime: "",
-        endDateTime: "",
-    };
+    // preparationPhase = {
+    //     duration: {
+    //         ticks: 30
+    //     },
+    //     motivation: "",
+    //     goals: useSelector(state => state.Goals.goals).filter(g => g.id < 4),
+    //     expectation: "",
+    //     distractions: [
+    //         {
+    //             title: "Eneksh eneka",
+    //             type: "WorldlyDesire"
+    //         }
+    //     ], // Initialize with an empty row
+    //     startDateTime: "",
+    //     endDateTime: "",
+    // };
+
+
 
     const [currentStep, setCurrentStep] = useState(1);
     const [goals, setGoals] = useState(preparationPhase.goals);
     const [isPaused, setIsPaused] = useState(false);
-    const [timeLeft, setTimeLeft] = useState(preparationPhase.duration.ticks * 60);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [step2Objects, setStep2Objects] = useState([]);
     const [step3Objects, setStep3Objects] = useState([]);
     const [currentObservableObjects, setCurrentObservableObjects] = useState([]);
 
+    function calculateTotalSeconds(duration) {
+        let totalSeconds = 0;
 
+        if (duration.hour !== null && duration.hour !== undefined) {
+            totalSeconds += duration.hour * 3600;
+        }
+        if (duration.minute !== null && duration.minute !== undefined) {
+            totalSeconds += duration.minute * 60;
+        }
+        if (duration.second !== null && duration.second !== undefined) {
+            totalSeconds += duration.second;
+        }
+        if (duration.millisecond !== null && duration.millisecond !== undefined) {
+            totalSeconds += duration.millisecond / 1000;
+        }
+
+        return totalSeconds;
+    }
+    const [timeLeft, setTimeLeft] = useState(calculateTotalSeconds(preparationPhase.duration));
 
     const iconHeight = "h-10";
     const iconWidth = "w-6";
@@ -96,11 +122,7 @@ export function TransitionPhase({ preparationPhase }) {
 
 
     const extractMeditationObject = () => {
-        return {
-            title: "Chapter 1 of 12 Rules for Life",
-            description: "Fascinating as hell of a novel.",
-            subType: "Thought",
-        }
+        return preparationPhase.goals[0].meditationObject;
     }
 
     // Timer code

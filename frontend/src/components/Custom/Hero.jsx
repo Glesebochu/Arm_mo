@@ -49,7 +49,7 @@ const Hero = () => {
           {/* end */}
           <div>
             <h2 className="scroll-m-20 pb-8 text-[40px] tracking-tight first:mt-0">
-              <div className="relative pb-2 font-k2d font-bold text-center hidden lg:text-start lg:block">
+              <div className="relative pb-8 font-k2d font-bold text-center hidden lg:text-start lg:block">
                 Arm&rsquo;mo
                 <span className="absolute top-0 lg:left-0 w-full mt-2">
                     <UnderLine width={130} height={100}/>

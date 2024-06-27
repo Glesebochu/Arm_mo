@@ -21,6 +21,8 @@ import { getAllGoals, updateGoal } from "../../slices/GoalsSlice.js";
 
 // * For navigating to another page
 import { useLocation, useNavigate } from 'react-router-dom';
+import { PauseMenu } from "@/components/TransitionSteps/PauseMenu";
+import { AhaMomentAlertDialog } from "@/components/AhaMomentAlertDialog";
 
 export function TransitionPhase() {
 
@@ -44,6 +46,8 @@ export function TransitionPhase() {
     const [step2Objects, setStep2Objects] = useState([]);
     const [step3Objects, setStep3Objects] = useState([]);
     const [currentObservableObjects, setCurrentObservableObjects] = useState([]);
+    const [ahaMoments, setAhaMoments] = useState([]);
+
 
     function calculateTotalSeconds(duration) {
         let totalSeconds = 0;
@@ -65,8 +69,23 @@ export function TransitionPhase() {
     }
     const [timeLeft, setTimeLeft] = useState(calculateTotalSeconds(preparationPhase.duration));
 
+    const [isAhaMomentDialogOpen, setIsAhaMomentDialogOpen] = useState(false);
+
     const iconHeight = "h-10";
     const iconWidth = "w-6";
+
+    const handleAddAhaMoment = () => {
+        setIsAhaMomentDialogOpen(true);
+    };
+
+    const addAhaMoment = (ahaMoment) => {
+        // Handle the logic to add an Aha moment here
+        setAhaMoments([...ahaMoments, {
+            title: ahaMoment
+        }]);
+        console.log('Aha moment added:', ahaMoment);
+    };
+
 
     const saveObservableObjects = () => {
         if (currentStep === 2) {
@@ -87,6 +106,10 @@ export function TransitionPhase() {
         if (currentStep > 1) setCurrentStep(currentStep - 1);
     };
 
+    const handlePause = () => {
+        setIsPaused(!isPaused);
+    }
+
     const updateGoalsStatus = (updatedGoals) => {
         const newGoals = updatedGoals.map(goal => ({
             ...goal,
@@ -97,7 +120,6 @@ export function TransitionPhase() {
         endMeditation();
 
     };
-
 
     const extractMeditationObject = () => {
         return preparationPhase.goals[0].meditationObject;
@@ -110,16 +132,22 @@ export function TransitionPhase() {
 
     const extendTimer = (extension) => {
         setTimeLeft(extension * 60);
+        preparationPhase.duration = {
+            ...preparationPhase.duration,
+            minute: preparationPhase.duration.minute + extension
+        }
+        console.log(preparationPhase.duration);
     };
 
     useEffect(() => {
-        if (timeLeft > 0) {
+        if (timeLeft > 0 && !isPaused) {
             const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
             return () => clearTimeout(timer);
-        } else {
+        } else if (timeLeft === 0) {
             handleTimerEnd();
         }
-    }, [timeLeft]);
+    }, [timeLeft, isPaused]);
+
 
     function durationToTicks(duration) {
         const hours = duration.hour || 0;
@@ -142,7 +170,7 @@ export function TransitionPhase() {
             startDateTime: preparationPhase.startDateTime,
             endDateTime: new Date().toISOString(),
             meditatorId: 1,
-            ahaMoments: [],
+            ahaMoments: ahaMoments,
             practicedStageIds: [
                 1,
                 2
@@ -156,9 +184,8 @@ export function TransitionPhase() {
             ],
             preparationPhase: {
                 ...preparationPhase,
-                duration: {
-                    ticks: durationToTicks(preparationPhase.duration)
-                }
+                goals: preparationPhase.goals.map(g => g.id),
+                duration: durationToTicks(preparationPhase.duration)
             },
             isDeleted: false
         };
@@ -171,14 +198,14 @@ export function TransitionPhase() {
         console.log(session);
 
         // Create the session in the backend and navigate to the session page with the session ID
-        dispatch(createSession(session)).then((result) => {
-            if (result.meta.requestStatus === 'fulfilled') {
-                const sessionId = result.payload.id; // Adjust this based on your API response
-                navigate(`/Session/:${sessionId}`);
-            } else {
-                console.error('Failed to create session:', result.payload);
-            }
-        });
+        // dispatch(createSession(session)).then((result) => {
+        //     if (result.meta.requestStatus === 'fulfilled') {
+        //         const sessionId = result.payload.id; // Adjust this based on your API response
+        //         navigate(`/Session/:${sessionId}`);
+        //     } else {
+        //         console.error('Failed to create session:', result.payload);
+        //     }
+        // });
     };
 
     return (
@@ -189,56 +216,83 @@ export function TransitionPhase() {
             >{Math.round(timeLeft / 60)} mins left</h3>
 
             <Button
-                onClick={() => setIsPaused(!isPaused)}
+                onClick={handlePause}
                 variant="ghost"
                 className="col-start-10 row-start-1 self-center justify-self m-4"
             >
                 {isPaused ? <Play className={`${iconHeight} ${iconWidth}`} /> : <Pause className={`${iconHeight} ${iconWidth}`} />}
             </Button>
 
-            <Button
-                onClick={handlePreviousStep}
-                disabled={currentStep === 1}
-                variant="ghost"
-                className="col-start-1 row-start-5 self-center justify-self m-4"
-            >
-                <ChevronLeft className={`${iconHeight} ${iconWidth}`} />
-            </Button>
+            {!isPaused &&
+                <Button
+                    onClick={handlePreviousStep}
+                    disabled={currentStep === 1}
+                    variant="ghost"
+                    className="col-start-1 row-start-5 self-center justify-self m-4"
+                >
+                    <ChevronLeft className={`${iconHeight} ${iconWidth}`} />
+                </Button>
+            }
 
-            <div className="col-start-2 col-span-8 row-start-2 row-span-7 flex items-center justify-center">
-                {currentStep === 1 && <Step1Box onDone={handleNextStep} meditationObjectType={typeOptions[0]} />}
-                {currentStep === 2 &&
-                    <Step2N3Box
-                        meditationObject={extractMeditationObject()}
-                        stepNo={2}
-                        initialObjects={step2Objects}
-                        setCurrentObservableObjects={setCurrentObservableObjects}
-                    />}
-                {currentStep === 3 &&
-                    <Step2N3Box
-                        meditationObject={extractMeditationObject()}
-                        stepNo={3}
-                        initialObjects={step3Objects}
-                        setCurrentObservableObjects={setCurrentObservableObjects}
-                    />}
-                {currentStep === 4 && (
-                    <Step4Box
-                        goals={preparationPhase.goals}
-                        onComplete={updateGoalsStatus}
-                    />
+            {isPaused ?
+                (
+                    < div className="col-start-2 col-span-8 row-start-2 row-span-7 flex items-center justify-center">
+                        <PauseMenu onEnd={endMeditation} />
+                    </div>
+                )
+                :
+                (
+                    <div className="col-start-2 col-span-8 row-start-2 row-span-7 flex items-center justify-center">
+
+                        {currentStep === 1 && <Step1Box onDone={handleNextStep} meditationObjectType={typeOptions[0]} />}
+                        {currentStep === 2 &&
+                            <Step2N3Box
+                                meditationObject={extractMeditationObject()}
+                                stepNo={2}
+                                initialObjects={step2Objects}
+                                setCurrentObservableObjects={setCurrentObservableObjects}
+                            />}
+                        {currentStep === 3 &&
+                            <Step2N3Box
+                                meditationObject={extractMeditationObject()}
+                                stepNo={3}
+                                initialObjects={step3Objects}
+                                setCurrentObservableObjects={setCurrentObservableObjects}
+                            />}
+                        {currentStep === 4 && (
+                            <Step4Box
+                                goals={preparationPhase.goals}
+                                onComplete={updateGoalsStatus}
+                            />
+                        )}
+                    </div>
                 )}
+
+            {!isPaused &&
+                <Button
+                    onClick={handleNextStep}
+                    disabled={currentStep === 4}
+                    variant="ghost"
+                    className="col-start-10 row-start-5 self-center justify-self m-4"
+                >
+                    <ChevronRight className={`${iconHeight} ${iconWidth}`} />
+                </Button>
+            }
+
+            <div
+                className="row-start-9 col-start-2 col-span-8 mt-5"
+            >
+
+                <AhaMomentAlertDialog
+                    isOpen={isAhaMomentDialogOpen}
+                    setIsOpen={setIsAhaMomentDialogOpen}
+                    addAhaMoment={addAhaMoment}
+                />
             </div>
 
-            <Button
-                onClick={handleNextStep}
-                disabled={currentStep === 4}
-                variant="ghost"
-                className="col-start-10 row-start-5 self-center justify-self m-4"
-            >
-                <ChevronRight className={`${iconHeight} ${iconWidth}`} />
-            </Button>
 
             <TimeIsUpAlertDialog isOpen={isDialogOpen} setIsOpen={setIsDialogOpen} extendBy={extendTimer} onSessionEnd={endMeditation} />
+
 
         </div>
     );

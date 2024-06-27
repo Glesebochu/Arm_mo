@@ -38,6 +38,13 @@ namespace backend.Services
                 IsDeleted = createSessionDTO.IsDeleted
             };
 
+            // Fetch the goals using the IDs provided in the DTO
+            var goalIds = createSessionDTO.PreparationPhase.Goals;
+            var goals = await _context.Goals.Where(g => goalIds.Contains(g.Id)).ToListAsync();
+
+            // Assign the fetched goals to the PreparationPhase
+            session.PreparationPhase.Goals = goals;
+
             _context.Sessions.Add(session);
             await _context.SaveChangesAsync();
 

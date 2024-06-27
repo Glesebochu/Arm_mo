@@ -62,21 +62,21 @@ const Home = () => {
 
   useEffect(() => {
     if (user) {
-          //console.log(user.user)
-          CallUsage(
-            `http://localhost:5158/api/Analyzer/StartUsage?userId=${user.id}`
-          );
-          const UpdateUsage = () => {
-            CallUsage(`http://localhost:5158/api/Analyzer/UpdateUsage?userId=${user.id}`);
-           //console.log("updated!")
-          };
-      
-          const id = setInterval(UpdateUsage, 10000);
-          setIntervalId(id);
-      
-          return () => {
-            clearInterval(id);
-          };
+      //console.log(user.user)
+      CallUsage(
+        `http://localhost:5158/api/Analyzer/StartUsage?userId=${user.id}`
+      );
+      const UpdateUsage = () => {
+        CallUsage(`http://localhost:5158/api/Analyzer/UpdateUsage?userId=${user.id}`);
+        //console.log("updated!")
+      };
+
+      const id = setInterval(UpdateUsage, 10000);
+      setIntervalId(id);
+
+      return () => {
+        clearInterval(id);
+      };
     }
 
   }, []);
@@ -112,6 +112,10 @@ const Home = () => {
     setOpen(false);
   };
 
+  const handleStartClick = () => {
+    navigate("/PreparationPhase");
+  };
+
   const filteredFrameworks = frameworks;
   return (
     <div className="pt-4">
@@ -131,7 +135,7 @@ const Home = () => {
               >
                 {value
                   ? frameworks.find((framework) => framework.value === value)
-                      ?.label
+                    ?.label
                   : "Select Stage..."}
                 <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
               </Button>
@@ -205,9 +209,8 @@ const Home = () => {
                 <div className="text-center">
                   <h4 className="text-lg font-medium font-k2d mb-2">
                     {user
-                      ? `${user.firstName} ${
-                          user.lastName ? user.lastName : ""
-                        }`
+                      ? `${user.firstName} ${user.lastName ? user.lastName : ""
+                      }`
                       : "Loadings..."}
                   </h4>
                   <div className="relative flex justify-center">
@@ -299,7 +302,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="h-3/5 flex justify-center items-center">
+      <div className="h-3/5 flex justify-center items-center" onClick={handleStartClick}>
         <div className="start-circle-container">
           <div className="start-circle">
             <div className="start-circle-content">

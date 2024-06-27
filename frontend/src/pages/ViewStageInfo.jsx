@@ -3,8 +3,8 @@ import axios from "axios";
 import { Target } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-export default function ViewStageInfo({ defaultStageId = 1 }) {
-  const [stageId, setStageId] = useState(defaultStageId);
+export default function ViewStageInfo({ stageIdParam = 1 }) {
+  const [stageId, setStageId] = useState(stageIdParam);
   const [stageData, setStageData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -23,8 +23,8 @@ export default function ViewStageInfo({ defaultStageId = 1 }) {
   };
 
   useEffect(() => {
-    fetchStageData(stageId);
-  }, [stageId]);
+    fetchStageData(stageIdParam);
+  }, [stageIdParam]);
 
   const handlePrevious = () => {
     setStageId((prevId) => prevId - 1);
@@ -80,7 +80,7 @@ export default function ViewStageInfo({ defaultStageId = 1 }) {
           ))}
         </ul>
       </div>
-      {stageId !== 1 && (
+      {stageIdParam !== 1 && (
         <Button
           onClick={handlePrevious}
           className="col-start-1 col-span-2 row-start-8 row-span-2 mt-5 ml-5 h-10 text-xl bg-gray-100 font-bold border-b-2 border-solid shadow-m"
@@ -89,7 +89,7 @@ export default function ViewStageInfo({ defaultStageId = 1 }) {
           Previous
         </Button>
       )}
-      {stageId !== 10 && (
+      {stageIdParam !== 10 && (
         <Button
           onClick={handleNext}
           className="col-start-10 col-span-2 row-start-8 row-span-2 mt-5 h-10 text-xl bg-gray-100 font-bold border-b-2 border-solid shadow-m"

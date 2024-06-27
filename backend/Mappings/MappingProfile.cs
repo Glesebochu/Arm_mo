@@ -36,8 +36,10 @@ namespace backend.Mappings
             CreateMap<PreparationPhase, CreatePreparationPhaseDTO>();
             CreateMap<CreatePreparationPhaseDTO, PreparationPhase>()
                 .ConstructUsing(dto => new PreparationPhase()) // Ensure the default constructor is used
-                .ForMember(dest => dest.Goals, opt => opt.MapFrom(src => src.Goals))
-                .ForMember(dest => dest.Distractions, opt => opt.MapFrom(src => src.Distractions));
+                .ForMember(dest => dest.Goals, opt => opt.Ignore())
+                .ForMember(dest => dest.Distractions, opt => opt.MapFrom(src => src.Distractions))
+                .ForMember(dest => dest.Duration, opt => opt.MapFrom(src => TimeSpan.FromTicks(src.Duration)))
+            ;
 
             CreateMap<PreparationPhase, PreparationPhaseDTO>();
             CreateMap<PreparationPhaseDTO, PreparationPhase>();

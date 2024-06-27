@@ -81,7 +81,7 @@ export function TransitionPhase() {
     const addAhaMoment = (ahaMoment) => {
         // Handle the logic to add an Aha moment here
         setAhaMoments([...ahaMoments, {
-            title: ahaMoment
+            label: ahaMoment
         }]);
         console.log('Aha moment added:', ahaMoment);
     };
@@ -198,14 +198,14 @@ export function TransitionPhase() {
         console.log(session);
 
         // Create the session in the backend and navigate to the session page with the session ID
-        // dispatch(createSession(session)).then((result) => {
-        //     if (result.meta.requestStatus === 'fulfilled') {
-        //         const sessionId = result.payload.id; // Adjust this based on your API response
-        //         navigate(`/Session/:${sessionId}`);
-        //     } else {
-        //         console.error('Failed to create session:', result.payload);
-        //     }
-        // });
+        dispatch(createSession(session)).then((result) => {
+            if (result.meta.requestStatus === 'fulfilled') {
+                const sessionId = result.payload.id; // Adjust this based on your API response
+                navigate(`/Session/:${sessionId}`);
+            } else {
+                console.error('Failed to create session:', result.payload);
+            }
+        });
     };
 
     return (

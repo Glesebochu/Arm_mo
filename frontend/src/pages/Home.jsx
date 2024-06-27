@@ -117,19 +117,11 @@ const Home = () => {
   };
 
   const filteredFrameworks = frameworks;
-
   return (
     <div className="pt-4">
-      <div className="flex justify-between items-center px-6 h-1/6">
-        <div>
-          <Button
-            variant="ghost"
-            size="lg"
-            onClick={handleSettingsClick}
-            className="px-3 py-4 rounded-full"
-          >
-            <GoGear size={44} />
-          </Button>
+      <div className="flex justify-between items-center m-8">
+        <div className="">
+            <GoGear size={44} className="cursor-pointer" onClick={()=> navigate("/settings")}/>
         </div>
 
         <div>
@@ -200,7 +192,7 @@ const Home = () => {
               <Button variant="ghost" className="p-0 rounded-[50%]">
                 <Avatar className="h-10 w-10">
                   {user?.profilePicture ? (
-                    <AvatarImage src={`http://localhost:5158${user.profilePicture}`} />
+                    <AvatarImage src={user?.profilePicture.startsWith("https") ? user?.profilePicture : `http://localhost:5158${user.profilePicture}`} />
                   ) : (
                     <AvatarFallback className="flex items-center justify-center bg-black text-white">
                       {user?.firstName.charAt(0)}
@@ -225,7 +217,7 @@ const Home = () => {
                     <div className="border-[10px] w-fit rounded-[50%]">
                       <Avatar className="h-16 w-16 mx-auto">
                         {user?.profilePicture ? (
-                          <AvatarImage src={`http://localhost:5158${user.profilePicture}`} />
+                          <AvatarImage src={user?.profilePicture.startsWith("https") ? user?.profilePicture : `http://localhost:5158${user.profilePicture}`} />
                         ) : (
                           <AvatarFallback className="bg-black text-white font-k2d font-bold text-xl">
                             {user?.firstName.charAt(0)}

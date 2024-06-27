@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { TimeInput } from "@nextui-org/date-input";
 import { Time } from "@internationalized/date";
+import { IoLogoAppleAr } from "react-icons/io5";
 import { X } from "lucide-react";
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
@@ -14,10 +15,9 @@ import DistractionsTable from "@/components/DistractionsTable.jsx";
 import "normalize.css";
 import { motion } from "framer-motion";
 // * For navigating to another page
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 export default function CreatePreparationPhase() {
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const goals = useSelector((state) => state.Goals.goals);
@@ -44,7 +44,6 @@ export default function CreatePreparationPhase() {
     distractions: [],
     expectation: "",
   });
-
 
   // The function that updates the goaltable's preparation data
   // const handleGoalsSelection = (selectedGoals) => {
@@ -254,7 +253,7 @@ export default function CreatePreparationPhase() {
     preparationData.goals = selectedGoals;
     console.log(preparationData);
 
-    navigate('/TransitionPhase', { state: preparationData })
+    navigate("/TransitionPhase", { state: preparationData });
   };
 
   const handleCancel = () => {
@@ -287,29 +286,36 @@ export default function CreatePreparationPhase() {
   const progress = stepIndex === 0 ? 0 : ((stepIndex + 1) / steps.length) * 100;
 
   return (
-    <div className="grid grid-cols-8 grid-rows-11 gap-2 h-[85vh] m-20">
+    <div className="grid grid-cols-9 grid-rows-11 gap-2 h-[85vh] m-20 mt-5">
+      <a
+        href="/home"
+        className="col-start-1 row-start-1 flex items-center gap-2 font-semibold"
+      >
+        <IoLogoAppleAr className="h-6 w-6" />
+        <span className="font-k2d text-lg"> Arm&rsquo;mo</span>
+      </a>
       <Progress
         value={progress}
-        className=" h-1.5 col-start-1 col-span-9 row-start-1 w-full"
+        className=" h-1.5 col-start-1 col-span-9 row-start-2 w-full mt-5"
       />
       <Button
         onClick={handleCancel}
-        className="col-start-8 row-start-1 font-bold mt-10 hover:bg-gray-50 bg-white border-b-2 shadow-m border-2 border-solid border-red-200 w-[10vw]"
+        className="col-start-9 row-start-1 font-bold mt-5 hover:bg-gray-50 bg-white border-b-2 shadow-m border-2 border-solid border-red-200 w-[10vw]"
         variant="ghost"
       >
         Cancel
       </Button>
       {isFirstStep && (
         <>
-          <div className="col-start-1 col-span-9 row-start-2 row-span-2 font-bold">
-            <h2 className="col-start-1 col-span-4 row-start-2 text-4xl font-bold pb-2">
+          <div className="col-start-1 col-span-9 row-start-3 row-span-2 font-bold">
+            <h2 className="col-start-1 col-span-4 row-start-3 text-4xl font-bold pb-2">
               {currentStep.title}
             </h2>
             <p className="col-start-1 col-span-9 row-start-3 text-xl font-bold mt-6 text-gray-600 ">
               {currentStep.instruction}
             </p>
           </div>
-          <div className="col-start-1 col-span-9 row-start-4 row-span-6 mt-5 overflow-auto no-scrollbar scrollbar-hide">
+          <div className="col-start-1 col-span-9 row-start-5 row-span-6 mt-5 overflow-auto no-scrollbar scrollbar-hide">
             {currentStep.component}
           </div>
           <div className="col-start-1 col-span-3 row-start-10 row-span-2 h-10 mt-5 w-[20vw] overflow-hidden">
@@ -317,7 +323,7 @@ export default function CreatePreparationPhase() {
           </div>
           <Button
             onClick={handleNext}
-            className="col-start-7 col-span-2 row-start-10 row-span-2 h-[7vh] mt-5 w-[20vw] overflow-hidden text-xl bg-gray-100 hover:bg-white font-bold border-b-2 border-solid shadow-m"
+            className="col-start-8 col-span-2 row-start-11 row-span-2 h-[7vh] mt-5 w-[20vw] overflow-hidden text-xl bg-gray-100 hover:bg-white font-bold border-b-2 border-solid shadow-m"
             variant="secondary"
           >
             Next
@@ -327,17 +333,17 @@ export default function CreatePreparationPhase() {
 
       {!isFirstStep && !isSixthStep && !isLastStep && !(stepIndex == 3) && (
         <>
-          <h2 className="col-start-1 col-span-8 row-start-2 text-4xl font-bold mt-0 p-0">
+            <h2 className="col-start-1 col-span-4 row-start-3 text-4xl font-bold pb-2">
             {currentStep.title}
           </h2>
-          <p className="col-start-1 col-span-9 row-start-3 text-xl font-bold text-gray-600 mt-5">
+          <p className="col-start-1 col-span-9 row-start-4 text-xl font-bold text-gray-600 mt-5">
             {currentStep.instruction}
           </p>
           {stepIndex === 1 && (
             <>
               <label className="col-start-4 row-start-6 text-xl">Timer</label>
               <div
-                className=" col-start-4 col-span-2 row-start-6 row-span-4 mt-10 mb-10 rounded-md bg-gray-50 hover:bg-gray-100 transition duration-50 
+                className=" col-start-4 col-span-2 tracking-wide row-start-6 row-span-4 mt-10 mb-5 rounded-md bg-gray-50 hover:bg-gray-100 transition duration-50 
          text-[7vw] w-[20vw]"
               >
                 {currentStep.component}
@@ -345,13 +351,13 @@ export default function CreatePreparationPhase() {
             </>
           )}
           {!(stepIndex === 1) && (
-            <div className="col-start-1 col-span-9 row-start-5 mt-5 ml-5 text-xl">
+            <div className="col-start-1 col-span-9 row-start-6 mt-5 text-xl">
               {currentStep.component}
             </div>
           )}
           <Button
             onClick={handlePrevious}
-            className="col-start-1 col-span-2 row-start-10 row-span-2 h-[7vh]  mt-5 w-[20vw] overflow-hidden text-xl bg-gray-100 font-bold border-b-2 border-solid shadow-m"
+            className="col-start-1 col-span-2 row-start-11 row-span-2 h-[7vh] mt-5 w-[20vw] overflow-hidden text-xl bg-gray-100 hover:bg-white font-bold border-b-2 border-solid shadow-m"
             variant="secondary"
           >
             Previous
@@ -360,24 +366,24 @@ export default function CreatePreparationPhase() {
       )}
       {stepIndex == 3 && (
         <>
-          <h2 className="col-start-1 col-span-8 row-start-2 text-4xl font-bold mt-0">
+            <h2 className="col-start-1 col-span-4 row-start-3 text-4xl font-bold pb-2">
             {currentStep.title}
           </h2>
 
-          <p className="col-start-1 col-span-9 row-start-3 text-xl font-bold text-gray-600 mt-5">
+          <p className="col-start-1 col-span-9 row-start-4 text-xl font-bold text-gray-600 mt-5">
             {currentStep.instruction}
           </p>
           <div className="col-start-1 col-span-2 row-start-4 h-10 ml-0 overflow-hidden">
             {currentStep.errorComponent}
           </div>
 
-          <div className="col-start-1 col-span-9 row-start-5 row-span-6 text-xl overflow-auto position-sticky no-scrollbar scrollbar-hide">
+          <div className="col-start-1 col-span-9 row-start-6 row-span-6 text-xl overflow-auto position-sticky no-scrollbar scrollbar-hide">
             {currentStep.component}
           </div>
 
           <Button
             onClick={handlePrevious}
-            className="col-start-1 col-span-2 row-start-10 row-span-2 h-[7vh]  mt-5 w-[20vw] overflow-hidden text-xl bg-gray-100 font-bold border-b-2 border-solid shadow-m"
+            className="col-start-1 col-span-2 row-start-11 row-span-2 h-[7vh] mt-5 w-[20vw] overflow-hidden text-xl bg-gray-100 hover:bg-white font-bold border-b-2 border-solid shadow-m"
             variant="secondary"
           >
             Previous
@@ -386,10 +392,10 @@ export default function CreatePreparationPhase() {
       )}
       {isSixthStep ? (
         <>
-          <h2 className="col-start-1 col-span-8 row-start-2 text-4xl font-bold mt-0">
+            <h2 className="col-start-1 col-span-4 row-start- text-4xl font-bold pb-2">
             {currentStep.title}
           </h2>
-          <div className="col-start-1 col-span-9 row-start-4 text-4xl">
+          <div className="col-start-1 col-span-9 row-start-5 text-4xl">
             <h3 className="text-4xl mt-5 font-bold text-gray-600">
               {currentStep.instruction}
             </h3>
@@ -399,14 +405,14 @@ export default function CreatePreparationPhase() {
           </div>
           <Button
             onClick={handlePrevious}
-            className="col-start-1 col-span-2 row-start-10 row-span-2 h-[7vh]  mt-5 w-[20vw] overflow-hidden text-xl bg-gray-100 font-bold border-b-2 border-solid shadow-m"
+            className="col-start-1 col-span-2 row-start-11 row-span-2 h-[7vh] mt-5 w-[20vw] overflow-hidden text-xl bg-gray-100 hover:bg-white font-bold border-b-2 border-solid shadow-m"
             variant="secondary"
           >
             Previous
           </Button>
           <Button
             onClick={handleNext}
-            className="col-start-7 col-span-2 row-start-10 row-span-2 h-[7vh] mt-5 w-[20vw] overflow-hidden text-xl bg-gray-100 font-bold border-b-2 border-solid shadow-m"
+            className="col-start-8 col-span-2 row-start-11 row-span-2 h-[7vh] mt-5 w-[20vw] overflow-hidden text-xl bg-gray-100 hover:bg-white font-bold border-b-2 border-solid shadow-m"
             variant="secondary"
           >
             Ready
@@ -414,10 +420,10 @@ export default function CreatePreparationPhase() {
         </>
       ) : isLastStep ? (
         <>
-          <h2 className="col-start-1 col-span-8 row-start-2 text-4xl font-bold mt-0">
+            <h2 className="col-start-1 col-span-4 row-start- text-4xl font-bold pb-2">
             {currentStep.title}
           </h2>
-          <div className="col-start-1 col-span-9 row-start-4 text-4xl">
+          <div className="col-start-1 col-span-9 row-start-5 text-4xl">
             <h3 className="text-4xl mt-5 font-bold text-gray-600">
               {currentStep.instruction}
             </h3>
@@ -427,14 +433,14 @@ export default function CreatePreparationPhase() {
           </div>
           <Button
             onClick={handlePrevious}
-            className="col-start-1 col-span-2 row-start-10 row-span-2 h-[7vh]  mt-5 w-[20vw] overflow-hidden text-xl bg-gray-100 font-bold border-b-2 border-solid shadow-m"
+            className="col-start-1 col-span-2 row-start-11 row-span-2 h-[7vh] mt-5 w-[20vw] overflow-hidden text-xl bg-gray-100 hover:bg-white font-bold border-b-2 border-solid shadow-m"
             variant="secondary"
           >
             Previous
           </Button>
           <Button
             onClick={handleSave}
-            className="col-start-7 col-span-2 row-start-10 row-span-2 h-[7vh]  mt-5 w-[20vw] overflow-hidden text-xl bg-gray-100 font-bold border-b-2 border-solid shadow-m"
+            className="col-start-8 col-span-2 row-start-11 row-span-2 h-[7vh] mt-5 w-[20vw] overflow-hidden text-xl bg-gray-100 hover:bg-white font-bold border-b-2 border-solid shadow-m"
             variant="secondary"
           >
             Save
@@ -445,7 +451,7 @@ export default function CreatePreparationPhase() {
           <>
             <Button
               onClick={handleNext}
-              className="col-start-7 col-span-2 row-start-10 row-span-2 h-[7vh]  mt-5 w-[20vw] overflow-hidden text-xl bg-gray-100 font-bold border-b-2 border-solid shadow-m"
+              className="col-start-8 col-span-2 row-start-11 row-span-2 h-[7vh] mt-5 w-[20vw] overflow-hidden text-xl bg-gray-100 hover:bg-white font-bold border-b-2 border-solid shadow-m"
               variant="secondary"
             >
               Next

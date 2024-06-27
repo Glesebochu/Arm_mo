@@ -113,7 +113,7 @@ const Profile = () => {
               <div className="border-[10px] w-fit rounded-[50%]">
                 <Avatar className="h-16 w-16 mx-auto">
                   {user?.profilePicture ? (
-                    <AvatarImage src={`http://localhost:5158${user.profilePicture}`} />
+                    <AvatarImage src={user?.profilePicture.startsWith("https") ? user?.profilePicture : `http://localhost:5158${user.profilePicture}`} />
                   ) : (
                     <AvatarFallback className="bg-black text-white">
                       {user?.firstName.charAt(0)}

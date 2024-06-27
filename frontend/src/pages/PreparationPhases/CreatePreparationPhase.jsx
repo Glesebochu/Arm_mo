@@ -343,7 +343,7 @@ export default function CreatePreparationPhase() {
             <>
               <label className="col-start-4 row-start-6 text-xl">Timer</label>
               <div
-                className=" col-start-4 col-span-2 row-start-6 row-span-4 mt-10 mb-5 rounded-md bg-gray-50 hover:bg-gray-100 transition duration-50 
+                className=" col-start-4 col-span-2 tracking-wide row-start-6 row-span-4 mt-10 mb-5 rounded-md bg-gray-50 hover:bg-gray-100 transition duration-50 
          text-[7vw] w-[20vw]"
               >
                 {currentStep.component}

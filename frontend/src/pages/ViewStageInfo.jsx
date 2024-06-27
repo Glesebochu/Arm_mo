@@ -3,8 +3,8 @@ import axios from "axios";
 import { Target } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-export default function ViewStageInfo({ stageId = 1 }) {
-  const [stageId, setStageId] = useState(stageId);
+export default function ViewStageInfo({ defaultStageId = 1 }) {
+  const [stageId, setStageId] = useState(defaultStageId);
   const [stageData, setStageData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

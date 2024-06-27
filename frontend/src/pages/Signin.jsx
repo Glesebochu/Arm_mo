@@ -53,7 +53,6 @@ const Signin = () => {
         }
         navigate("/home");
       }
-      console.log(error.title, "the title");
       notifyError(error.title);
       setIsSubmitting(false);
     }

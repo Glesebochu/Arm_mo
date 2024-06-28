@@ -5,7 +5,7 @@ import { TypewriterEffectSmooth } from "./TypeWritter";
 
 const Testimonial = () =>{
   return (
-    <div className="mt-[-150px] h-full flex items-center justify-center flex-col w-full bg-white bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]">
+    <div className="mt-[-80px] h-full flex items-center justify-center flex-col w-full bg-white bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]">
         <div className="mb-10">
             <TypewriterEffectSmooth words={words} />
         </div>

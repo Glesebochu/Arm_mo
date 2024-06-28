@@ -16,6 +16,8 @@ import "normalize.css";
 import { motion } from "framer-motion";
 // * For navigating to another page
 import { useNavigate } from "react-router-dom";
+import { notifyError } from "../../../utils/Toast.js";
+import { ToastContainer } from "react-toastify";
 
 export default function CreatePreparationPhase() {
   const navigate = useNavigate();
@@ -38,13 +40,18 @@ export default function CreatePreparationPhase() {
     endDateTime: "",
   });
   const [stepErrorClasses, setStepErrorClasses] = useState({
-    // Goals: [],
+    Goals: [],
     duration: "",
     motivation: "",
     distractions: [],
     expectation: "",
   });
-
+  const handleGoalsSelection = (selectedGoals) => {
+    setPreparationData((prevData) => ({
+      ...prevData,
+      Goals: selectedGoals,
+    }));
+  };
   // The function that updates the goaltable's preparation data
   // const handleGoalsSelection = (selectedGoals) => {
   //   setPreparationData({ ...preparationData, Goals: selectedGoals });
@@ -56,7 +63,8 @@ export default function CreatePreparationPhase() {
       instruction:
         "Set a complete and achievable goal for your meditation session.",
       component: (
-        <GoalsTable goals={goals} onSelectedGoals={setSelectedGoals} />
+        <GoalsTable goals={goals} onSelectedGoals={setSelectedGoals} 
+        onSelectedGoalsChange={handleGoalsSelection}/>
       ),
       errorComponent: (
         <Alert variant="destructive" className="bg-red-100 h-10 p-3.5 hidden">
@@ -183,7 +191,9 @@ export default function CreatePreparationPhase() {
       errorComponent: null,
     },
   ];
-
+  // if (stepIndex == 0) {
+  //   preparationData.goals = selectedGoals;
+  // }
   const handleNext = () => {
     let hasError = false;
     const newStepErrorClasses = { ...stepErrorClasses };
@@ -207,6 +217,16 @@ export default function CreatePreparationPhase() {
       newStepErrorClasses.duration = "border-grey-500";
     }
 
+    if (stepIndex == 0 && preparationData.goals.length == 0) {
+      notifyError("Please select one or more goals.", "bottom-left", true);
+      hasError = true;
+    }
+    console.log(
+      preparationData.goals,
+      stepIndex,
+      "hi",
+      stepIndex == 0 && preparationData.goals.length == 0
+    );
     // if (stepIndex === 2 && preparationData.motivation.length <= 1) {
     //   newStepErrorClasses.motivation = "border-red-500";
     //   hasError = true;
@@ -250,7 +270,6 @@ export default function CreatePreparationPhase() {
 
   const handleSave = () => {
     preparationData.endDateTime = new Date().toISOString();
-    preparationData.goals = selectedGoals;
     console.log(preparationData);
 
     navigate("/TransitionPhase", { state: preparationData });
@@ -333,7 +352,7 @@ export default function CreatePreparationPhase() {
 
       {!isFirstStep && !isSixthStep && !isLastStep && !(stepIndex == 3) && (
         <>
-            <h2 className="col-start-1 col-span-4 row-start-3 text-4xl font-bold pb-2">
+          <h2 className="col-start-1 col-span-4 row-start-3 text-4xl font-bold pb-2">
             {currentStep.title}
           </h2>
           <p className="col-start-1 col-span-9 row-start-4 text-xl font-bold text-gray-600 mt-5">
@@ -366,7 +385,7 @@ export default function CreatePreparationPhase() {
       )}
       {stepIndex == 3 && (
         <>
-            <h2 className="col-start-1 col-span-4 row-start-3 text-4xl font-bold pb-2">
+          <h2 className="col-start-1 col-span-4 row-start-3 text-4xl font-bold pb-2">
             {currentStep.title}
           </h2>
 
@@ -392,7 +411,7 @@ export default function CreatePreparationPhase() {
       )}
       {isSixthStep ? (
         <>
-            <h2 className="col-start-1 col-span-4 row-start- text-4xl font-bold pb-2">
+          <h2 className="col-start-1 col-span-4 row-start- text-4xl font-bold pb-2">
             {currentStep.title}
           </h2>
           <div className="col-start-1 col-span-9 row-start-5 text-4xl">
@@ -420,7 +439,7 @@ export default function CreatePreparationPhase() {
         </>
       ) : isLastStep ? (
         <>
-            <h2 className="col-start-1 col-span-4 row-start- text-4xl font-bold pb-2">
+          <h2 className="col-start-1 col-span-4 row-start- text-4xl font-bold pb-2">
             {currentStep.title}
           </h2>
           <div className="col-start-1 col-span-9 row-start-5 text-4xl">
@@ -459,6 +478,7 @@ export default function CreatePreparationPhase() {
           </>
         )
       )}
+      <ToastContainer />
     </div>
   );
 }

@@ -334,7 +334,7 @@ export default function CreatePreparationPhase() {
               {currentStep.instruction}
             </p>
           </div>
-          <div className="col-start-1 col-span-9 row-start-5 row-span-6 mt-5 overflow-auto no-scrollbar scrollbar-hide">
+          <div className="col-start-1 col-span-9 row-start-5 row-span-6 mt-5 overflow-auto no-scrollbar scrollbar-hide p-2">
             {currentStep.component}
           </div>
           <div className="col-start-1 col-span-3 row-start-10 row-span-2 h-10 mt-5 w-[20vw] overflow-hidden">

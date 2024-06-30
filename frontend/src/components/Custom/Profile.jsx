@@ -53,14 +53,14 @@ const Profile = () => {
       if (updateUserPassword.fulfilled.match(resultAction)) {
         const status = resultAction.payload;
         if (status === "succeded") {
-          notifySuccess("Password changed successfully", "bottom-right");
+          notifySuccess("Password changed successfully", "bottom-right",true);
         } else {
-          notifyError("Your current password is incorrect", "bottom-right");
+          notifyError("Your current password is incorrect", "bottom-right", true);
         }
       }
     }catch(error){ 
       if(error instanceof z.ZodError){
-        error.errors.forEach(err => notifyError(err.message))
+        error.errors.forEach(err => notifyError(err.message, "bottom-right", true))
       }
     }
   }

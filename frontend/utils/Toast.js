@@ -29,7 +29,7 @@ export const notifyError = (message, position = "bottom-right",hideProgressBar=f
 
 // Export a function to display a success notification
 // with a specified message at the top-right position
-export const notifySuccess = (message, position = "top-right") => {
+export const notifySuccess = (message, position = "top-right", hideProgressBar = false) => {
   // Use toast.success from react-toastify to display the success message
   // with the specified options
   toast.success(message, {
@@ -40,7 +40,7 @@ export const notifySuccess = (message, position = "top-right") => {
     // Set the autoClose time to 5000 milliseconds (5 seconds)
     autoClose: 5000,
     // Show the progress bar
-    hideProgressBar: false,
+    hideProgressBar: hideProgressBar,
     // Close the notification when clicked
     closeOnClick: true,
     // Pause the notification when hovered

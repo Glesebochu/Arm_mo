@@ -131,7 +131,7 @@ const Home = () => {
                 variant="outline"
                 role="combobox"
                 aria-expanded={open}
-                className="w-[240px] justify-between"
+                className="w-[240px] justify-between font-k2d"
               >
                 {value
                   ? frameworks.find((framework) => framework.value === value)
@@ -165,6 +165,7 @@ const Home = () => {
                           key={framework.value}
                           value={framework.value}
                           onSelect={handleStageSelect}
+                          className="font-k2d"
                         >
                           <Check
                             className={cn(

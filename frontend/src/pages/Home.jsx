@@ -302,7 +302,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="h-3/5 flex justify-center items-center" onClick={handleStartClick}>
+      <div className="h-3/5 flex justify-center items-center cursor-pointer font-delius" onClick={handleStartClick}>
         <div className="start-circle-container">
           <div className="start-circle">
             <div className="start-circle-content">

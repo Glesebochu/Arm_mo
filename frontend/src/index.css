@@ -67,7 +67,7 @@
 @layer base {
   * {
     @apply border-border;
-    font-family: @apply font-normal;
+    @apply font-normal;
   }
   body {
     @apply bg-background text-foreground m-10;

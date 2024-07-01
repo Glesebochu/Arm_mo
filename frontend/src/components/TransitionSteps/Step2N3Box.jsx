@@ -91,6 +91,7 @@ export function Step2N3Box({ stepNo, meditationObject, initialObjects, setCurren
 
 					flex flex-wrap gap-3 justify-start items-start
 					overflow-y-auto
+					no-scrollbar
 				"
 			>
 				{observableObjects.map((observableObject) => (

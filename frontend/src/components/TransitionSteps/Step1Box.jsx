@@ -1,5 +1,4 @@
 import React from 'react';
-import { Button } from '../ui/button';
 import { Card } from '../ui/card';
 
 export function Step1Box({ meditationObjectType, onDone }) {
@@ -14,10 +13,6 @@ export function Step1Box({ meditationObjectType, onDone }) {
                 <br />
                 Take in everything as objectively as possible - as it is.
             </h3>
-
-            {/* <Button onClick={onDone} className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">
-                Done
-            </Button> */}
         </Card>
     );
 };

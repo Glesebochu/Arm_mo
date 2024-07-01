@@ -118,7 +118,6 @@ export function TransitionPhase() {
         setGoals(newGoals);
 
         endMeditation();
-
     };
 
     const extractMeditationObject = () => {
@@ -201,7 +200,7 @@ export function TransitionPhase() {
         dispatch(createSession(session)).then((result) => {
             if (result.meta.requestStatus === 'fulfilled') {
                 const sessionId = result.payload.id; // Adjust this based on your API response
-                navigate(`/Session/:${sessionId}`);
+                navigate(`/Session/${sessionId}`);
             } else {
                 console.error('Failed to create session:', result.payload);
             }
@@ -209,7 +208,7 @@ export function TransitionPhase() {
     };
 
     return (
-        <div className="transition-phase grid grid-cols-10 grid-rows-9 h-[100vh] w-full">
+        <div className="transition-phase pt-5 pb-5 grid grid-cols-10 grid-rows-9 h-[100vh] w-full">
 
             <h3
                 className="col-start-4 col-span-4 row-start-1 self-center text-center m-4"

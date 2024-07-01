@@ -110,6 +110,15 @@ export function TransitionPhase() {
         setIsPaused(!isPaused);
     }
 
+    const handleRestart = () => {
+        setCurrentStep(1);
+        setStep2Objects([]);
+        setStep3Objects([]);
+        setCurrentObservableObjects([]);
+        setIsPaused(false);
+        setTimeLeft(calculateTotalSeconds(preparationPhase.duration));
+    };
+
     const updateGoalsStatus = (updatedGoals) => {
         const newGoals = updatedGoals.map(goal => ({
             ...goal,
@@ -236,7 +245,7 @@ export function TransitionPhase() {
             {isPaused ?
                 (
                     < div className="col-start-2 col-span-8 row-start-2 row-span-7 flex items-center justify-center">
-                        <PauseMenu onEnd={endMeditation} />
+                        <PauseMenu onEnd={endMeditation} onRestart={handleRestart} />
                     </div>
                 )
                 :

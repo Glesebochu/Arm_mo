@@ -51,12 +51,6 @@ export function TransitionPhase() {
         endDateTime: new Date().toISOString(),
     };
 
-    // TODO: Remove this after testing
-    useEffect(() => {
-        dispatch(getAllGoals());
-    }, [dispatch]);
-    // ! Until here
-
     const navigate = useNavigate();
 
 
@@ -70,6 +64,12 @@ export function TransitionPhase() {
     const [ahaMoments, setAhaMoments] = useState([]);
     const [activePauseMenuComponent, setActivePauseMenuComponent] = useState(null);
 
+    // TODO: Remove this after testing
+    useEffect(() => {
+        dispatch(getAllGoals());
+        setGoals(preparationPhase.goals)
+    }, [dispatch]);
+    // ! Until here
 
     function calculateTotalSeconds(duration) {
         let totalSeconds = 0;

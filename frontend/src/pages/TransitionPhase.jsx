@@ -288,7 +288,7 @@ export function TransitionPhase() {
                 (
                     < div className="col-start-2 col-span-8 row-start-2 row-span-7 flex justify-center overflow-y-auto no-scrollbar">
                         {activePauseMenuComponent === 'ViewInfo' && <ViewStageInfo stageIdParam={2} />}
-                        {activePauseMenuComponent === 'ShowGoals' && <GoalsTable goals={goals} doNotIncludeStatus="" />}
+                        {activePauseMenuComponent === 'ShowGoals' && <GoalsTable goals={goals} doNotIncludeStatus="" isSubGoals={true} />}
                         {/* {activePauseMenuComponent === 'NextStage' && <NextStageComponent />} */}
                         {activePauseMenuComponent === null &&
                             <PauseMenu

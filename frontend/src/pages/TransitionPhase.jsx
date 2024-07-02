@@ -67,9 +67,12 @@ export function TransitionPhase() {
     // TODO: Remove this after testing
     useEffect(() => {
         dispatch(getAllGoals());
-        setGoals(preparationPhase.goals)
     }, [dispatch]);
     // ! Until here
+
+    useEffect(() => {
+        setGoals(preparationPhase.goals)
+    }, [dispatch]);
 
     function calculateTotalSeconds(duration) {
         let totalSeconds = 0;

@@ -2,12 +2,9 @@ import { Button } from "../ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
-  CardTitle,
 } from "../ui/card";
-import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -54,6 +51,10 @@ const Profile = () => {
         const status = resultAction.payload;
         if (status === "succeded") {
           notifySuccess("Password changed successfully", "bottom-right",true);
+          setUserPassword({
+            currentPassword: "",
+            newPassword: "",
+          });
         } else {
           notifyError("Your current password is incorrect", "bottom-right", true);
         }
@@ -95,9 +96,15 @@ const Profile = () => {
   const handleAccountSubmit = () => {
     const data = {
       ...userAccount,
-      id: user.id
-    }
+      id: user.id,
+    };
     dispatch(updateUserAccount(data));
+    setUserAccount({
+      profilePicture: "",
+      firstName: "",
+      lastName: "",
+      username: "",
+    });
   };
 
   return (
@@ -137,6 +144,7 @@ const Profile = () => {
               <AnimatedInput
                 id="firstName"
                 name="firstName"
+                value={userAccount.firstName}
                 placeholder={user.firstName}
                 onChange={handleAccountChange}
               />
@@ -146,6 +154,7 @@ const Profile = () => {
               <AnimatedInput
                 id="lastName"
                 name="lastName"
+                value={userAccount.lastName}
                 placeholder={
                   user.lastName ? `${user.lastName}` : "You don't have lastname"
                 }
@@ -157,6 +166,7 @@ const Profile = () => {
               <AnimatedInput
                 id="username"
                 name="username"
+                value={userAccount.username}
                 placeholder={
                   user.username
                     ? `@${user.username}`
@@ -182,11 +192,11 @@ const Profile = () => {
           <CardContent>
             <div className="">
               <Label htmlFor="current">Current password</Label>
-              <AnimatedInput id="current" type="password" name="currentPassword" value={userPassword["currentPassword"]} onChange={handlePasswordChange} />
+              <AnimatedInput id="current" type="password" name="currentPassword" value={userPassword.currentPassword} onChange={handlePasswordChange} />
             </div>
             <div className="mt-[-2px] font-k2d">
               <Label htmlFor="new">New password</Label>
-              <AnimatedInput id="new" type="password"  name="newPassword" onChange={handlePasswordChange} value={userPassword["newPassword"]}/>
+              <AnimatedInput id="new" type="password"  name="newPassword" onChange={handlePasswordChange} value={userPassword.newPassword}/>
             </div>
           </CardContent>
           <CardFooter className="flex justify-center">

@@ -57,7 +57,7 @@ const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(null);
   const [frameworks, setFrameworks] = useState([]);
   const [intervalId, setIntervalId] = useState(null);
 
@@ -151,6 +151,8 @@ const Home = () => {
     console.log(`Selected stage: ${currentValue} with stageId: ${stageId}`);
     setOpen(false);
   };
+
+  console.log(value, "Value");
 
   const handleStartClick = () => {
     navigate("/PreparationPhase");
@@ -343,7 +345,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="h-3/5 flex justify-center items-center cursor-pointer font-delius" onClick={handleStartClick}>
+      <button className="h-3/5 flex justify-center items-center cursor-pointer font-delius" onClick={handleStartClick} disabled={value == null ? true : false}>
         <div className="start-circle-container">
           <div className="start-circle">
             <div className="start-circle-content">
@@ -351,7 +353,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </div>
+      </button>
     </div>
   );
 };

@@ -6,6 +6,7 @@ const initialState = {
   isLoading: false,
   error: null,
   isError: false,
+  practicingStage: null,
   sessions: [],
 };
 
@@ -89,10 +90,14 @@ export const deleteSession = createAsyncThunk(
   }
 );
 
-const sessionsSlice = createSlice({
+const SessionsSlice = createSlice({
   name: "Sessions",
   initialState,
-  reducers: {},
+  reducers: {
+    setPracticingStage: (state, action) => {
+      state.practicingStage = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       // For getting all sessions
@@ -181,4 +186,5 @@ const sessionsSlice = createSlice({
   },
 });
 
-export default sessionsSlice.reducer;
+export const { setPracticingStage } = SessionsSlice.actions;
+export default SessionsSlice.reducer;

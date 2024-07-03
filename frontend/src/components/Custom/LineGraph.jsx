@@ -223,7 +223,7 @@ export const LineGraph = () => {
   return (
     <ResponsiveContainer>
       <div className="container recharts-responsive-container">
-        <h1 className="mb-4 mt-4 text-1xl font-light leading-none tracking-tight text-black md:text-5xl lg:text-4xl dark:text-white">
+        <h1 className="mb-4 mt-4 text-1xl leading-none tracking-tight text-black font-semibold md:text-5xl lg:text-4xl dark:text-white">
           Sessions Analysis
         </h1>
         <div className="chart-container relative w-full h-[500px] mx-auto px-0 recharts-responsive-container">

@@ -69,7 +69,7 @@ export function GoalsTable({ goals = [], isSubGoals = false, parentGoalId = null
     };
 
     // Remove completed goals from the list
-    goals = goals.filter(g => g.status != doNotIncludeStatus);
+    // goals = goals.filter(g => g.status != doNotIncludeStatus);
 
     const [data, setData] = useState(goals);
     const [sorting, setSorting] = useState([]);
@@ -86,6 +86,7 @@ export function GoalsTable({ goals = [], isSubGoals = false, parentGoalId = null
             const organizedData = organizeGoals(goals);
             setData(organizedData);
         }
+
     }, [goals]);
 
     useEffect(() => {
@@ -153,7 +154,7 @@ export function GoalsTable({ goals = [], isSubGoals = false, parentGoalId = null
         }));
         setData([...data, newGoalData]);
         // * Testing
-        // console.log(localData);
+        console.log(data);
         setIsEditing(newId);
         setIsCreating(true);
     };
@@ -232,8 +233,21 @@ export function GoalsTable({ goals = [], isSubGoals = false, parentGoalId = null
         }));
     };
 
+    // const handleDateChange = (date, id) => {
+    //     const formattedDate = date.toISOString().split('T')[0];
+    //     setLocalData((prevData) => ({
+    //         ...prevData,
+    //         [id]: {
+    //             ...prevData[id],
+    //             dueDate: formattedDate,
+    //         },
+    //     }));
+    // };
+
     const handleDateChange = (date, id) => {
-        const formattedDate = date.toISOString().split('T')[0];
+        const utcDate = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+        const formattedDate = utcDate.toISOString().split('T')[0];
+
         setLocalData((prevData) => ({
             ...prevData,
             [id]: {
@@ -242,6 +256,7 @@ export function GoalsTable({ goals = [], isSubGoals = false, parentGoalId = null
             },
         }));
     };
+
 
     const handleToggleExpand = (id) => {
         setExpandedRows((prev) => ({
@@ -373,9 +388,10 @@ export function GoalsTable({ goals = [], isSubGoals = false, parentGoalId = null
 
                 return isEditingRow ? (
                     <DatePicker
-                        initialDate={dueDate}
+                        initialDate={dueDate ? new Date(Date.UTC(dueDate.getFullYear(), dueDate.getMonth(), dueDate.getDate())) : null}
                         onDateChange={(date) => handleDateChange(date, row.original.id)}
                     />
+
                 ) : (
                     <div>{dueDate ? format(dueDate, 'yyyy-MM-dd') : ''}</div>
                 );

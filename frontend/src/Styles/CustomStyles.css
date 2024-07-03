@@ -38,12 +38,13 @@
   background-color: #f0f0f0;
   box-shadow: 1px 1px 0 1px #f9f9fb, -1px 0 28px 0 rgba(34, 33, 81, 0.01),
     1px 5px 1px 0 rgba(34, 33, 81, 0.25);
+  margin-bottom: 40px;
 }
 
 .circle-container {
   position: relative;
-  margin-top: 50px;
-  margin-left: 20px; /* Adjust the margin as needed */
+  /* margin-top: 50px; */
+  /* margin-left: 20px; Adjust the margin as needed */
 }
 
 /* .circle {

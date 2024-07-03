@@ -53,6 +53,7 @@ export default function DistractionsTable({
                   placeholder="e.g., Restlessness"
                   value={row.title}
                   onChange={(event) => handleTitleChange(index, event)}
+                  className="focus-visible:ring-1"
                 />
               </TableCell>
               <TableCell>
@@ -82,7 +83,7 @@ export default function DistractionsTable({
               </TableCell>
               <TableCell>
                 <Button
-                  onClick={(index) => onDeleteRow(index)}
+                  onClick={() => onDeleteRow(index)}
                   variant="destructive"
                 >
                   Delete
@@ -94,9 +95,9 @@ export default function DistractionsTable({
       </Table>
       <Button
         onClick={onAddRow}
-        variant="outline"
         size="sm"
-        className="ml-[10px] mt-[10px] w-1/4 p-4 font-bold"
+        variant="secondary"
+        className="ml-[10px] mt-[10px] w-1/6 p-4 font-bold overflow-hidden bg-gray-100 hover:bg-white border-b-2 border-solid shadow-m"
       >
         Add Distraction
       </Button>

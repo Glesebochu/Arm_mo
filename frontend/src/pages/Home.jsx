@@ -33,9 +33,11 @@ import { logout } from "../../slices/AuthSlice";
 import { useSelector } from "react-redux";
 import { FaPen } from "react-icons/fa";
 
+// For setting the practicing stage value
+import { setPracticingStage } from "../../slices/SessionsSlice";
+
 const numberToString = (number) => {
   const numberStrings = [
-    "Zero",
     "One",
     "Two",
     "Three",
@@ -55,10 +57,9 @@ const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(null);
   const [frameworks, setFrameworks] = useState([]);
   const [intervalId, setIntervalId] = useState(null);
-
 
   useEffect(() => {
     if (user) {
@@ -68,7 +69,7 @@ const Home = () => {
       );
       const UpdateUsage = () => {
         CallUsage(`http://localhost:5158/api/Analyzer/UpdateUsage?userId=${user.id}`);
-        //console.log("updated!")
+        console.log("updated!")
       };
 
       const id = setInterval(UpdateUsage, 10000);
@@ -82,7 +83,7 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    console.log(user);
+    //console.log(user);
     // Determine the maximum practiced stage
     var maxPracticedStage = Math.max(
       ...user.practicedStages.map((stage) => stage.stageId)
@@ -90,8 +91,8 @@ const Home = () => {
 
     // Set frameworks up to the maximum practiced stage
     let stages = Array.from({ length: maxPracticedStage }, (_, i) => ({
-      value: numberToString(i + 1).toLowerCase(),
-      label: numberToString(i + 1),
+      value: numberToString(i).toLowerCase(),
+      label: numberToString(i),
     }));
 
     // Check if stages is empty and add "One" if it is
@@ -107,10 +108,51 @@ const Home = () => {
   };
 
   const handleStageSelect = (currentValue) => {
+    var stageId = 1;
+    switch (currentValue) {
+      case "one":
+        stageId = 1;
+        break;
+      case "two":
+        stageId = 2;
+        break;
+      case "three":
+        stageId = 3;
+        break;
+      case "four":
+        stageId = 4;
+        break;
+      case "five":
+        stageId = 5;
+        break;
+      case "six":
+        stageId = 6;
+        break;
+      case "seven":
+        stageId = 7;
+        break;
+      case "eight":
+        stageId = 8;
+        break;
+      case "nine":
+        stageId = 9;
+        break;
+      case "ten":
+        stageId = 10;
+        break;
+      default:
+        stageId = 1;
+        break;
+    }
+    // Set the store variable here
+    dispatch(setPracticingStage(stageId));
+
     setValue(currentValue);
-    console.log(`Selected stage: ${currentValue}`);
+    console.log(`Selected stage: ${currentValue} with stageId: ${stageId}`);
     setOpen(false);
   };
+
+  console.log(value, "Value");
 
   const handleStartClick = () => {
     navigate("/PreparationPhase");
@@ -118,10 +160,10 @@ const Home = () => {
 
   const filteredFrameworks = frameworks;
   return (
-    <div className="pt-4">
+    <div className="">
       <div className="flex justify-between items-center m-8">
         <div className="">
-            <GoGear size={44} className="cursor-pointer" onClick={()=> navigate("/settings")}/>
+          <GoGear size={44} className="cursor-pointer" onClick={() => navigate("/settings")} />
         </div>
 
         <div>
@@ -303,7 +345,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="h-3/5 flex justify-center items-center cursor-pointer font-delius" onClick={handleStartClick}>
+      <button className="h-3/5 flex justify-center items-center cursor-pointer font-delius" onClick={handleStartClick} disabled={!value}>
         <div className="start-circle-container">
           <div className="start-circle">
             <div className="start-circle-content">
@@ -311,7 +353,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </div>
+      </button>
     </div>
   );
 };

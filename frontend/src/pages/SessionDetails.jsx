@@ -161,6 +161,13 @@ function SessionDetails({ sessionId = null }) {
 
   return (
     <div className="session-details-container">
+      <a
+        href="/home"
+        className="flex self-start gap-2 font-bold"
+      >
+        <IoLogoAppleAr className="h-8 w-8" />
+        <span className="font-k2d text-2xl"> Arm'mo</span>
+      </a>
       <h1 className="mt-7 text-2xl font-semibold leading-none tracking-tight text-black lg:text-5xl dark:text-white">
         {sessionTitle}
       </h1>

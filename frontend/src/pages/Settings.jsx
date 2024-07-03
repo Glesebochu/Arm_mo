@@ -4,7 +4,8 @@ import {
   User,
   Menu,
   Settings2,
-  SlidersHorizontal
+  SlidersHorizontal,
+  Mountain
 } from "lucide-react"
 import { IoLogoAppleAr } from "react-icons/io5";
 import { Button } from "../components/ui/button"
@@ -20,8 +21,9 @@ import { useState } from "react"
 import { motion } from "framer-motion";
 import Profile from "../components/Custom/Profile"
 import { cn } from "../../utils/cn";
+import { Goals } from "@/pages/Goals"
 
-const Settings = ()=> {
+const Settings = () => {
   const sidebarTabs = [
     {
       title: "My Account",
@@ -29,8 +31,17 @@ const Settings = ()=> {
       content: (
         <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-white border">
           <div className="flex justify-center">
-            <Profile/>
+            <Profile />
           </div>
+        </div>
+      ),
+    },
+    {
+      title: "Goals",
+      value: "goals",
+      content: (
+        <div className="w-full overflow-auto no-scrollbar relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold bg-white border">
+          <Goals />
         </div>
       ),
     },
@@ -42,14 +53,7 @@ const Settings = ()=> {
         </div>
       ),
     },
-    {
-      title: "Game Play Settings",
-      value: "plaGamePlaySettingsyground",
-      content: (
-        <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-white border">
-        </div>
-      ),
-    },
+
   ];
   const [active, setActive] = useState(sidebarTabs[0]);
   const [tabs, setTabs] = useState(sidebarTabs);
@@ -78,7 +82,7 @@ const Settings = ()=> {
           </div>
           <div className="flex-1">
             <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
-              {sidebarTabs.map((tab, idx)=> {
+              {sidebarTabs.map((tab, idx) => {
                 return (
                   <a
                     key={idx}
@@ -102,9 +106,9 @@ const Settings = ()=> {
                         )}
                       />
                     )}
-                    {tab.value == "MyAccount" ? <User className={`relative ${active.value == tab.value ? "text-primary" : ""}`}/> : ""}
-                    {tab.value == "GameSettings" ? <Settings2 className={`relative ${active.value == tab.value ? "text-primary" : ""}`}/> : ""}
-                    {tab.value == "plaGamePlaySettingsyground" ? <SlidersHorizontal className={`relative ${active.value == tab.value ? "text-primary" : ""}`}/> : ""}
+                    {tab.value == "MyAccount" ? <User className={`relative ${active.value == tab.value ? "text-primary" : ""}`} /> : ""}
+                    {tab.value == "GameSettings" ? <Settings2 className={`relative ${active.value == tab.value ? "text-primary" : ""}`} /> : ""}
+                    {tab.value == "goals" ? <Mountain className={`relative ${active.value == tab.value ? "text-primary" : ""}`} /> : ""}
                     <span className={`relative block dark:text-white font-k2d text-[16px] ${active.value == tab.value ? "text-primary" : ""}`}>
                       {tab.title}
                     </span>
@@ -146,7 +150,7 @@ const Settings = ()=> {
             </SheetTrigger>
             <SheetContent side="left" className="flex flex-col">
               <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
-                {sidebarTabs.map((tab, idx)=> {
+                {sidebarTabs.map((tab, idx) => {
                   return (
                     <a
                       key={idx}
@@ -171,9 +175,9 @@ const Settings = ()=> {
                         />
                       )}
 
-                      {tab.value == "MyAccount" ? <User className={`relative ${active.value == tab.value ? "text-primary" : ""}`}/> : ""}
-                      {tab.value == "GameSettings" ? <Settings2 className={`relative ${active.value == tab.value ? "text-primary" : ""}`}/> : ""}
-                      {tab.value == "plaGamePlaySettingsyground" ? <SlidersHorizontal className={`relative ${active.value == tab.value ? "text-primary" : ""}`}/> : ""}
+                      {tab.value == "MyAccount" ? <User className={`relative ${active.value == tab.value ? "text-primary" : ""}`} /> : ""}
+                      {tab.value == "GameSettings" ? <Settings2 className={`relative ${active.value == tab.value ? "text-primary" : ""}`} /> : ""}
+                      {tab.value == "plaGamePlaySettingsyground" ? <SlidersHorizontal className={`relative ${active.value == tab.value ? "text-primary" : ""}`} /> : ""}
 
                       <span className={`relative block dark:text-white font-k2d text-[16px] ${active.value == tab.value ? "text-primary" : ""}`}>
                         {tab.title}
@@ -182,25 +186,25 @@ const Settings = ()=> {
                   );
                 })}
               </nav>
-                <div className="mt-auto p-4">
-                  <Card x-chunk="dashboard-02-chunk-0">
-                    <CardHeader className="p-2 pt-0 md:p-4">
-                      <CardTitle className="font-bold font-k2d">Upgrade to Pro</CardTitle>
-                      <CardDescription>
-                        Unlock all features and get unlimited access to our support
-                        team.
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent className="p-2 pt-0 md:p-4 md:pt-0">
-                      <Button size="lg" className="w-full font-k2d font-bold">
-                        Upgrade
-                      </Button>
-                    </CardContent>
-                  </Card>
-                </div>
+              <div className="mt-auto p-4">
+                <Card x-chunk="dashboard-02-chunk-0">
+                  <CardHeader className="p-2 pt-0 md:p-4">
+                    <CardTitle className="font-bold font-k2d">Upgrade to Pro</CardTitle>
+                    <CardDescription>
+                      Unlock all features and get unlimited access to our support
+                      team.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="p-2 pt-0 md:p-4 md:pt-0">
+                    <Button size="lg" className="w-full font-k2d font-bold">
+                      Upgrade
+                    </Button>
+                  </CardContent>
+                </Card>
+              </div>
             </SheetContent>
           </Sheet>
-          <LogOut/>
+          <LogOut />
         </header>
         <main className={`w-full h-full`}>
           <FadeInDiv

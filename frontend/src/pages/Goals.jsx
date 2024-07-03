@@ -15,7 +15,7 @@ export function Goals() {
   }, [dispatch]);
 
   return (
-    <div className="m-20">
+    <div className="m-5">
       <h2>Goals</h2>
       {goals && goals.length > 0 ? (
         <GoalsTable goals={goals} doNotIncludeStatus="" />

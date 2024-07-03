@@ -7,8 +7,13 @@ import SessionDuration from "@/components/Custom/SessionDuration"; // Import the
 import "@/Styles/SessionDetails.css"; // Make sure to import the CSS file
 import { useParams } from "react-router-dom";
 
-function SessionDetails() {
-  const {sessionId} = useParams();
+function SessionDetails({ sessionId = null }) {
+
+  const { sessionIdFromUseParam } = useParams();
+  // Check if there is a passed id through the parameter
+  if (sessionId == null) {
+    sessionId = sessionIdFromUseParam;
+  }
   const [sessionData, setSessionData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -144,19 +149,19 @@ function SessionDetails() {
 
   const sessionTitle =
     sessionData.preparationPhase?.goals[0]?.parentGoal &&
-    sessionData.preparationPhase?.goals[0]?.parentGoal.activity?.title &&
-    sessionData.preparationPhase?.goals[0]?.parentGoal.meditationObject?.title
+      sessionData.preparationPhase?.goals[0]?.parentGoal.activity?.title &&
+      sessionData.preparationPhase?.goals[0]?.parentGoal.meditationObject?.title
       ? `${sessionData.preparationPhase.goals[0].parentGoal.activity.title}: ` +
-        `${sessionData.preparationPhase.goals[0].parentGoal.meditationObject.title}`
+      `${sessionData.preparationPhase.goals[0].parentGoal.meditationObject.title}`
       : sessionData.preparationPhase?.goals[0]?.activity?.title &&
         sessionData.preparationPhase?.goals[0]?.meditationObject?.title
-      ? `${sessionData.preparationPhase.goals[0].activity.title}: ` +
+        ? `${sessionData.preparationPhase.goals[0].activity.title}: ` +
         `${sessionData.preparationPhase.goals[0].meditationObject.title}`
-      : "Session Details";
+        : "Session Details";
 
   return (
     <div className="session-details-container">
-      <h1 className="mb-4 text-2xl font-semibold leading-none tracking-tight text-black lg:text-5xl dark:text-white">
+      <h1 className="mt-7 text-2xl font-semibold leading-none tracking-tight text-black lg:text-5xl dark:text-white">
         {sessionTitle}
       </h1>
       <div className="text-center mb-8">
@@ -221,8 +226,8 @@ function SessionDetails() {
           )}
         </div>
       </div>
-      <div className="stage-card-container">
-        <h2 className="mb-4 text-xl font-light leading-none tracking-tight text-black md:text-4xl lg:text-3xl dark:text-white">
+      <div className="card-container">
+        <h2 className="mb-4 text-xl font-light w-full text-center leading-none tracking-tight text-black md:text-4xl lg:text-5xl dark:text-white">
           Practiced Stages
         </h2>
         {sessionData.practicedStages.length > 0 && (

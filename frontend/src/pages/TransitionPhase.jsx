@@ -31,25 +31,26 @@ export function TransitionPhase() {
     const dispatch = useDispatch();
     const location = useLocation();
     var preparationPhase = location.state;
+    var practicingStage = useSelector(state => state.Session.practicingStage);
 
     // TODO: Remove this after testing
-    preparationPhase = {
-        duration: {
-            hour: 1,
-            minute: 30
-        },
-        motivation: "To unify this mind.",
-        goals: useSelector(state => state.Goals.goals).filter(g => g.id < 4),
-        expectation: "None",
-        distractions: [
-            {
-                title: "Eneksh eneka",
-                type: "WorldlyDesire"
-            }
-        ], // Initialize with an empty row
-        startDateTime: new Date().toISOString(),
-        endDateTime: new Date().toISOString(),
-    };
+    // preparationPhase = {
+    //     duration: {
+    //         hour: 1,
+    //         minute: 30
+    //     },
+    //     motivation: "To unify this mind.",
+    //     goals: useSelector(state => state.Goals.goals).filter(g => g.id < 4),
+    //     expectation: "None",
+    //     distractions: [
+    //         {
+    //             title: "Eneksh eneka",
+    //             type: "WorldlyDesire"
+    //         }
+    //     ], // Initialize with an empty row
+    //     startDateTime: new Date().toISOString(),
+    //     endDateTime: new Date().toISOString(),
+    // };
 
     const navigate = useNavigate();
 
@@ -65,10 +66,10 @@ export function TransitionPhase() {
     const [activePauseMenuComponent, setActivePauseMenuComponent] = useState(null);
 
     // TODO: Remove this after testing
-    useEffect(() => {
-        dispatch(getAllGoals());
-        setGoals(preparationPhase.goals)
-    }, [dispatch]);
+    // useEffect(() => {
+    //     dispatch(getAllGoals());
+    //     setGoals(preparationPhase.goals)
+    // }, [dispatch]);
     // ! Until here
 
     function calculateTotalSeconds(duration) {
@@ -129,7 +130,6 @@ export function TransitionPhase() {
     };
 
     const handlePause = () => {
-        console.log(activePauseMenuComponent);
         if (activePauseMenuComponent) {
             setActivePauseMenuComponent(null);
         } else {
@@ -222,12 +222,9 @@ export function TransitionPhase() {
             meditatorId: 1,
             ahaMoments: ahaMoments,
             practicedStageIds: [
-                1,
-                2
+                practicingStage
             ],
-            newlyMasteredStageIds: [
-                2
-            ],
+            newlyMasteredStageIds: [],
             observableObjects: [
                 ...step2Objects,
                 ...step3Objects

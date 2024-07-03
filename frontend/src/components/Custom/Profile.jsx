@@ -99,6 +99,7 @@ const Profile = () => {
       id: user.id,
     };
     dispatch(updateUserAccount(data));
+    notifySuccess("Account updated successfully", "bottom-right", true);
     setUserAccount({
       profilePicture: "",
       firstName: "",

@@ -53,6 +53,7 @@ export default function DistractionsTable({
                   placeholder="e.g., Restlessness"
                   value={row.title}
                   onChange={(event) => handleTitleChange(index, event)}
+                  className="focus-visible:ring-1"
                 />
               </TableCell>
               <TableCell>
@@ -96,7 +97,8 @@ export default function DistractionsTable({
         onClick={onAddRow}
         variant="outline"
         size="sm"
-        className="ml-[10px] mt-[10px] w-1/4 p-4 font-bold"
+        className="ml-[10px] mt-[10px] w-1/6 p-4 font-bold overflow-hidden bg-gray-100 hover:bg-white border-b-2 border-solid shadow-m"
+        variant="secondary"
       >
         Add Distraction
       </Button>

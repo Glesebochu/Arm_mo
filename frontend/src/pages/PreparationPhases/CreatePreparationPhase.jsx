@@ -18,6 +18,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { notifyError } from "../../../utils/Toast.js";
 import { ToastContainer } from "react-toastify";
+// import { title } from "process";
 
 export default function CreatePreparationPhase() {
   const navigate = useNavigate();
@@ -46,12 +47,6 @@ export default function CreatePreparationPhase() {
     distractions: [],
     expectation: "",
   });
-  const handleGoalsSelection = (selectedGoals) => {
-    setPreparationData((prevData) => ({
-      ...prevData,
-      Goals: selectedGoals,
-    }));
-  };
   // The function that updates the goaltable's preparation data
   // const handleGoalsSelection = (selectedGoals) => {
   //   setPreparationData({ ...preparationData, Goals: selectedGoals });
@@ -63,16 +58,7 @@ export default function CreatePreparationPhase() {
       instruction:
         "Set a complete and achievable goal for your meditation session.",
       component: (
-        <GoalsTable goals={goals} onSelectedGoals={setSelectedGoals} 
-        onSelectedGoalsChange={handleGoalsSelection}/>
-      ),
-      errorComponent: (
-        <Alert variant="destructive" className="bg-red-100 h-10 p-3.5 hidden">
-          <ExclamationTriangleIcon className="h-4 w-5 p-0 m-0 font-bold" />
-          <AlertDescription className="font-bold ml-2">
-            Please select one or more goals.
-          </AlertDescription>
-        </Alert>
+        <GoalsTable goals={goals} onSelectedGoals={setSelectedGoals} />
       ),
     },
     {
@@ -88,7 +74,7 @@ export default function CreatePreparationPhase() {
               duration: value,
             }))
           }
-          className="w-full h-full"
+          className="center-self"
         />
       ),
       errorComponent: null,
@@ -107,7 +93,7 @@ export default function CreatePreparationPhase() {
               motivation: e.target.value,
             })
           }
-          className="text-xl "
+          className="text-xl pl-10 pr-10 focus-visible:ring-1 ${stepErrorClasses}"
         />
       ),
       errorComponent: null,
@@ -146,17 +132,6 @@ export default function CreatePreparationPhase() {
           }}
         />
       ),
-      errorComponent: (
-        <Alert
-          variant="destructive"
-          className="bg-red-100 h-10 font-bold hidden"
-        >
-          <ExclamationTriangleIcon className="h-4 w-4" />
-          <AlertDescription>
-            Please add your distraction(s) correctly.
-          </AlertDescription>
-        </Alert>
-      ),
     },
     {
       title: "Expectation",
@@ -173,7 +148,7 @@ export default function CreatePreparationPhase() {
               expectation: e.target.value,
             })
           }
-          className="text-xl"
+          className="text-xl pl-10 pr-10 focus-visible:ring-1"
         />
       ),
       errorComponent: null,
@@ -191,6 +166,13 @@ export default function CreatePreparationPhase() {
       errorComponent: null,
     },
   ];
+  useEffect(() => {
+    setPreparationData({
+      ...preparationData,
+      goals: selectedGoals,
+    });
+  }, [selectedGoals]);
+
   // if (stepIndex == 0) {
   //   preparationData.goals = selectedGoals;
   // }
@@ -210,53 +192,55 @@ export default function CreatePreparationPhase() {
       preparationData.duration.minute === 0 &&
       preparationData.duration.second === 0
     ) {
-      newStepErrorClasses.duration = "border-red-500";
+      newStepErrorClasses.duration = "bg-red-100";
       hasError = true;
       console.log(preparationData.duration);
     } else {
-      newStepErrorClasses.duration = "border-grey-500";
+      newStepErrorClasses.duration = " ";
     }
 
     if (stepIndex == 0 && preparationData.goals.length == 0) {
       notifyError("Please select one or more goals.", "bottom-left", true);
       hasError = true;
     }
+    if (stepIndex === 2 && preparationData.motivation.length <= 1) {
+      newStepErrorClasses.motivation =
+        "focus-visible:ring-0 border-red-500 border-2";
+      hasError = true;
+    } else {
+      newStepErrorClasses.motivation = "";
+    }
+
+    if (stepIndex === 4 && preparationData.expectation.length <= 1) {
+      newStepErrorClasses.expectation =
+        "focus-visible:ring-0 border-red-500 border-2";
+      hasError = true;
+    } else {
+      newStepErrorClasses.expectation = "";
+    }
     console.log(
-      preparationData.goals,
+      preparationData,
       stepIndex,
       "hi",
-      stepIndex == 0 && preparationData.goals.length == 0
+      // stepIndex == 3 && preparationData.goals.length == 0
     );
-    // if (stepIndex === 2 && preparationData.motivation.length <= 1) {
-    //   newStepErrorClasses.motivation = "border-red-500";
-    //   hasError = true;
-    // } else {
-    //   newStepErrorClasses.motivation = "";
-    // }
 
-    // if (stepIndex === 4 && preparationData.expectation.length <= 1) {
-    //   newStepErrorClasses.expectation = "border-red-500";
-    //   hasError = true;
-    // } else {
-    //   newStepErrorClasses.expectation = "";
-    // }
+    if (stepIndex === 3) {
+      preparationData.distractions.forEach((distraction, index) => {
+        if (distraction.title.length <= 1) {
+          notifyError("Please select one or more goals.", "bottom-left", true);
+          hasError = true;
+        }
 
-    // if (stepIndex === 3) {
-    //   preparationData.Distractions.forEach((distraction, index) => {
-    //     if (distraction.title.length <= 1) {
-    //       newDistractionErrors[index].title = "border-red-500";
-    //       hasError = true;
-    //     }
+        if (distraction.type === "select type") {
+          notifyError("Please select one or more goals.", "bottom-left", true);
+          hasError = true;
+        }
+      });
+    }
 
-    //     if (distraction.type === "select type") {
-    //       newDistractionErrors[index].type = "border-red-500";
-    //       hasError = true;
-    //     }
-    //   });
-    // }
-
-    // newStepErrorClasses.Distractions = newDistractionErrors;
-    // setStepErrorClasses(newStepErrorClasses);
+    newStepErrorClasses.distractions = newDistractionErrors;
+    setStepErrorClasses(newStepErrorClasses);
 
     if (!hasError) {
       setStepIndex((prevIndex) => prevIndex + 1);
@@ -334,7 +318,7 @@ export default function CreatePreparationPhase() {
               {currentStep.instruction}
             </p>
           </div>
-          <div className="col-start-1 col-span-9 row-start-5 row-span-6 mt-5 overflow-auto no-scrollbar scrollbar-hide">
+          <div className="col-start-1 col-span-9 row-start-5 row-span-6 mt-5 overflow-auto no-scrollbar scrollbar-hide pl-3">
             {currentStep.component}
           </div>
           <div className="col-start-1 col-span-3 row-start-10 row-span-2 h-10 mt-5 w-[20vw] overflow-hidden">
@@ -362,8 +346,8 @@ export default function CreatePreparationPhase() {
             <>
               <label className="col-start-4 row-start-6 text-xl">Timer</label>
               <div
-                className=" col-start-4 col-span-2 tracking-wide row-start-6 row-span-4 mt-10 mb-5 rounded-md bg-gray-50 hover:bg-gray-100 transition duration-50 
-         text-[7vw] w-[20vw]"
+                className=" col-start-4 col-span-2 tracking-wide row-start-6 row-span-4 mt-10 mb-5 ml-0 mr-0 pr-5 pt-0 pb-3 pl-5
+                rounded-md bg-gray-50 hover:bg-gray-100 transition duration-50 text-[8vw] w-[25vw] shadow-xl `${stepErrorClasses}`"
               >
                 {currentStep.component}
               </div>

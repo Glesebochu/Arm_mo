@@ -38,7 +38,6 @@ import { setPracticingStage } from "../../slices/SessionsSlice";
 
 const numberToString = (number) => {
   const numberStrings = [
-    "Zero",
     "One",
     "Two",
     "Three",
@@ -92,8 +91,8 @@ const Home = () => {
 
     // Set frameworks up to the maximum practiced stage
     let stages = Array.from({ length: maxPracticedStage }, (_, i) => ({
-      value: numberToString(i + 1).toLowerCase(),
-      label: numberToString(i + 1),
+      value: numberToString(i).toLowerCase(),
+      label: numberToString(i),
     }));
 
     // Check if stages is empty and add "One" if it is

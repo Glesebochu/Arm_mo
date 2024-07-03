@@ -33,6 +33,9 @@ import { logout } from "../../slices/AuthSlice";
 import { useSelector } from "react-redux";
 import { FaPen } from "react-icons/fa";
 
+// For setting the practicing stage value
+import { setPracticingStage } from "../../slices/SessionsSlice";
+
 const numberToString = (number) => {
   const numberStrings = [
     "Zero",
@@ -58,7 +61,6 @@ const Home = () => {
   const [value, setValue] = useState("");
   const [frameworks, setFrameworks] = useState([]);
   const [intervalId, setIntervalId] = useState(null);
-
 
   useEffect(() => {
     if (user) {
@@ -107,8 +109,47 @@ const Home = () => {
   };
 
   const handleStageSelect = (currentValue) => {
+    var stageId = 1;
+    switch (currentValue) {
+      case "one":
+        stageId = 1;
+        break;
+      case "two":
+        stageId = 2;
+        break;
+      case "three":
+        stageId = 3;
+        break;
+      case "four":
+        stageId = 4;
+        break;
+      case "five":
+        stageId = 5;
+        break;
+      case "six":
+        stageId = 6;
+        break;
+      case "seven":
+        stageId = 7;
+        break;
+      case "eight":
+        stageId = 8;
+        break;
+      case "nine":
+        stageId = 9;
+        break;
+      case "ten":
+        stageId = 10;
+        break;
+      default:
+        stageId = 1;
+        break;
+    }
+    // Set the store variable here
+    dispatch(setPracticingStage(stageId));
+
     setValue(currentValue);
-    console.log(`Selected stage: ${currentValue}`);
+    console.log(`Selected stage: ${currentValue} with stageId: ${stageId}`);
     setOpen(false);
   };
 
@@ -121,7 +162,7 @@ const Home = () => {
     <div className="pt-4">
       <div className="flex justify-between items-center m-8">
         <div className="">
-            <GoGear size={44} className="cursor-pointer" onClick={()=> navigate("/settings")}/>
+          <GoGear size={44} className="cursor-pointer" onClick={() => navigate("/settings")} />
         </div>
 
         <div>

@@ -161,7 +161,7 @@ function SessionDetails({ sessionId = null }) {
 
   return (
     <div className="session-details-container">
-      <h1 className="mb-4 text-2xl font-semibold leading-none tracking-tight text-black lg:text-5xl dark:text-white">
+      <h1 className="mt-7 text-2xl font-semibold leading-none tracking-tight text-black lg:text-5xl dark:text-white">
         {sessionTitle}
       </h1>
       <div className="text-center mb-8">
@@ -226,8 +226,8 @@ function SessionDetails({ sessionId = null }) {
           )}
         </div>
       </div>
-      <div className="stage-card-container">
-        <h2 className="mb-4 text-xl font-light leading-none tracking-tight text-black md:text-4xl lg:text-3xl dark:text-white">
+      <div className="card-container">
+        <h2 className="mb-4 text-xl font-light w-full text-center leading-none tracking-tight text-black md:text-4xl lg:text-5xl dark:text-white">
           Practiced Stages
         </h2>
         {sessionData.practicedStages.length > 0 && (

@@ -345,7 +345,7 @@ const Home = () => {
         </div>
       </div>
 
-      <button className="h-3/5 flex justify-center items-center cursor-pointer font-delius" onClick={handleStartClick} disabled={value == null ? true : false}>
+      <button className="h-3/5 flex justify-center items-center cursor-pointer font-delius" onClick={handleStartClick} disabled={!value}>
         <div className="start-circle-container">
           <div className="start-circle">
             <div className="start-circle-content">

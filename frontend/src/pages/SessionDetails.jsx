@@ -6,13 +6,16 @@ import StageCard from "@/components/Custom/PracticedStageCard"; // Import the St
 import SessionDuration from "@/components/Custom/SessionDuration"; // Import the new SessionDuration component
 import "@/Styles/SessionDetails.css"; // Make sure to import the CSS file
 import { useParams } from "react-router-dom";
+import { IoLogoAppleAr } from "react-icons/io5";
 
-function SessionDetails({ sessionId = null }) {
+function SessionDetails({ sessionId: sessionIdParam = null }) {
 
-  const { sessionIdFromUseParam } = useParams();
+  const { sessionId } = useParams();
   // Check if there is a passed id through the parameter
-  if (sessionId == null) {
-    sessionId = sessionIdFromUseParam;
+  if (sessionIdParam == null) {
+    console.log("SessionId", sessionIdParam);
+    console.log("SessionIdfromparam", sessionId);
+    sessionIdParam = sessionId;
   }
   const [sessionData, setSessionData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -27,11 +30,11 @@ function SessionDetails({ sessionId = null }) {
   useEffect(() => {
     const fetchSessionData = async () => {
       try {
-        console.log(`Fetching session data for session ID: ${sessionId}`);
+        console.log(`Fetching session data for session ID: ${sessionIdParam}`);
 
         // Fetch session data
         const sessionResponse = await axios.get(
-          `http://localhost:5158/api/Analyzer/GetSession?SessionId=${sessionId}`,
+          `http://localhost:5158/api/Analyzer/GetSession?SessionId=${sessionIdParam}`,
           {
             withCredentials: true,
           }
@@ -41,7 +44,7 @@ function SessionDetails({ sessionId = null }) {
 
         // Fetch the meditator ID for this session
         const meditatorResponse = await axios.get(
-          `http://localhost:5158/api/Analyzer/GetMeditatorForSession?sessionId=${sessionId}`,
+          `http://localhost:5158/api/Analyzer/GetMeditatorForSession?sessionId=${sessionIdParam}`,
           {
             withCredentials: true,
           }
@@ -133,7 +136,7 @@ function SessionDetails({ sessionId = null }) {
     };
 
     fetchSessionData();
-  }, [sessionId]);
+  }, [sessionIdParam]);
 
   if (loading) {
     return <div>Loading session data...</div>;
@@ -171,8 +174,8 @@ function SessionDetails({ sessionId = null }) {
       <h1 className="mt-7 text-2xl font-semibold leading-none tracking-tight text-black lg:text-5xl dark:text-white">
         {sessionTitle}
       </h1>
-      <div className="text-center mb-8">
-        <SessionDuration sessionId={sessionId} />
+      <div className="text-center mb-4">
+        <SessionDuration sessionId={sessionIdParam} />
       </div>
       <div className="card-container">
         <div className="card">
@@ -234,7 +237,7 @@ function SessionDetails({ sessionId = null }) {
         </div>
       </div>
       <div className="card-container">
-        <h2 className="mb-4 text-xl font-light w-full text-center leading-none tracking-tight text-black md:text-4xl lg:text-5xl dark:text-white">
+        <h2 className="mb-4 text-xl font-light w-full text-center leading-none tracking-tight text-black md:text-4xl lg:text-4xl dark:text-white">
           Practiced Stages
         </h2>
         {sessionData.practicedStages.length > 0 && (

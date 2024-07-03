@@ -1,7 +1,6 @@
 import clsx from "clsx";
 import { SkeletonMd } from "./Skeleton";
-
-
+import { useState, useEffect, useRef } from "react";
 function BrowserTab({ icon, title, isActive }) {
   return (
     <div
@@ -17,12 +16,59 @@ function BrowserTab({ icon, title, isActive }) {
     >
       <div className={clsx("flex w-full gap-2 px-2 text-xs")}>
         {icon}
-        <div className={clsx("flex-1 truncate")}>{title}</div>
+        <div className={clsx("flex-1 truncate font-k2d font-bold w-40")}>
+          <TypewriterEffect word={"https://Arm'mo.com"} typingDelay={150}/> 
+        </div>
       </div>
     </div>
   );
 }
 
+export const TypewriterEffect = ({ word, typingDelay = 100 }) => {
+  const [displayText, setDisplayText] = useState('');
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isTypingComplete, setIsTypingComplete] = useState(false);
+  const elementRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (entry.isIntersecting && !isTypingComplete) {
+          startTyping();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (elementRef.current) {
+      observer.observe(elementRef.current);
+    }
+
+    return () => {
+      if (elementRef.current) {
+        observer.unobserve(elementRef.current);
+      }
+    };
+  }, [isTypingComplete]);
+
+  const startTyping = () => {
+    const typingInterval = setInterval(() => {
+      setDisplayText((prevText) => {
+        const nextChar = word[prevText.length];
+        if (nextChar !== undefined) {
+          return prevText + nextChar;
+        } else {
+          clearInterval(typingInterval);
+          setIsTypingComplete(true);
+          return prevText;
+        }
+      });
+    }, typingDelay);
+  };
+
+  return <span ref={elementRef}>{displayText}</span>;
+};
 
 function AppWindow({
   children = null,
@@ -77,7 +123,11 @@ function AppWindow({
         {type === "browser" && (
           <>
             <div className={clsx("flex h-10 items-center justify-center")}>
-              <SkeletonMd w={160} />
+              <BrowserTab
+                  title={"Arm'mo.com"}
+                  isActive={true}
+                    
+              />
             </div>
             {isWithBrowserTabs && (
               <div className={clsx("mt-2 flex gap-2 px-3")}>

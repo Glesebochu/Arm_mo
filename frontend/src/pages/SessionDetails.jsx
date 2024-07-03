@@ -5,8 +5,10 @@ import AhaMomentCard from "@/components/Custom/AhaMomentCard";
 import StageCard from "@/components/Custom/PracticedStageCard"; // Import the StageCard component
 import SessionDuration from "@/components/Custom/SessionDuration"; // Import the new SessionDuration component
 import "@/Styles/SessionDetails.css"; // Make sure to import the CSS file
+import { useParams } from "react-router-dom";
 
-function SessionDetails({ sessionId }) {
+function SessionDetails() {
+  const {sessionId} = useParams();
   const [sessionData, setSessionData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

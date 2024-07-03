@@ -9,7 +9,7 @@ import { Step1Box } from "@/components/TransitionSteps/Step1Box";
 import { Step2N3Box } from "@/components/TransitionSteps/Step2N3Box";
 import { Step4Box } from "@/components/TransitionSteps/Step4Box";
 import { TimeIsUpAlertDialog } from "@/components/TimeIsUpAlertDialog"
-import { ChevronRight, ChevronLeft, Pause, Play } from "lucide-react"
+import { ChevronRight, ChevronLeft, Pause, Play, X } from "lucide-react"
 import { typeOptions, subTypeOptions, statusOptions } from '../../constants/constants';
 
 // For creating the session on the backend
@@ -23,21 +23,36 @@ import { getAllGoals, updateGoal } from "../../slices/GoalsSlice.js";
 import { useLocation, useNavigate } from 'react-router-dom';
 import { PauseMenu } from "@/components/TransitionSteps/PauseMenu";
 import { AhaMomentAlertDialog } from "@/components/AhaMomentAlertDialog";
+import ViewStageInfo from "./ViewStageInfo";
+import { GoalsTable } from "@/components/GoalsTable";
 
 export function TransitionPhase() {
 
+    const dispatch = useDispatch();
     const location = useLocation();
-    const preparationPhase = location.state;
+    var preparationPhase = location.state;
+
+    // TODO: Remove this after testing
+    preparationPhase = {
+        duration: {
+            hour: 1,
+            minute: 30
+        },
+        motivation: "To unify this mind.",
+        goals: useSelector(state => state.Goals.goals).filter(g => g.id < 4),
+        expectation: "None",
+        distractions: [
+            {
+                title: "Eneksh eneka",
+                type: "WorldlyDesire"
+            }
+        ], // Initialize with an empty row
+        startDateTime: new Date().toISOString(),
+        endDateTime: new Date().toISOString(),
+    };
 
     const navigate = useNavigate();
 
-    // ! For testing purposes only
-    const dispatch = useDispatch();
-
-    // useEffect(() => {
-    //     dispatch(getAllGoals());
-    // }, [dispatch]);
-    // ! Until here
 
     const [currentStep, setCurrentStep] = useState(1);
     const [goals, setGoals] = useState(preparationPhase.goals);
@@ -47,7 +62,14 @@ export function TransitionPhase() {
     const [step3Objects, setStep3Objects] = useState([]);
     const [currentObservableObjects, setCurrentObservableObjects] = useState([]);
     const [ahaMoments, setAhaMoments] = useState([]);
+    const [activePauseMenuComponent, setActivePauseMenuComponent] = useState(null);
 
+    // TODO: Remove this after testing
+    useEffect(() => {
+        dispatch(getAllGoals());
+        setGoals(preparationPhase.goals)
+    }, [dispatch]);
+    // ! Until here
 
     function calculateTotalSeconds(duration) {
         let totalSeconds = 0;
@@ -107,8 +129,37 @@ export function TransitionPhase() {
     };
 
     const handlePause = () => {
-        setIsPaused(!isPaused);
+        console.log(activePauseMenuComponent);
+        if (activePauseMenuComponent) {
+            setActivePauseMenuComponent(null);
+        } else {
+            setIsPaused(!isPaused);
+        }
     }
+
+    const handleRestart = () => {
+        setCurrentStep(1);
+        setStep2Objects([]);
+        setStep3Objects([]);
+        setCurrentObservableObjects([]);
+        setIsPaused(false);
+        setTimeLeft(calculateTotalSeconds(preparationPhase.duration));
+        setActivePauseMenuComponent(null); // Reset active component
+    };
+
+    // * For the pause menu pages
+    const handleViewInfo = () => {
+        setActivePauseMenuComponent('ViewInfo');
+    };
+
+    const handleShowGoals = () => {
+        console.log(goals);
+        setActivePauseMenuComponent('ShowGoals');
+    };
+
+    const handleNextStage = () => {
+        setActivePauseMenuComponent('NextStage');
+    };
 
     const updateGoalsStatus = (updatedGoals) => {
         const newGoals = updatedGoals.map(goal => ({
@@ -118,7 +169,6 @@ export function TransitionPhase() {
         setGoals(newGoals);
 
         endMeditation();
-
     };
 
     const extractMeditationObject = () => {
@@ -201,7 +251,7 @@ export function TransitionPhase() {
         dispatch(createSession(session)).then((result) => {
             if (result.meta.requestStatus === 'fulfilled') {
                 const sessionId = result.payload.id; // Adjust this based on your API response
-                navigate(`/Session/:${sessionId}`);
+                navigate(`/Session/${sessionId}`);
             } else {
                 console.error('Failed to create session:', result.payload);
             }
@@ -209,7 +259,7 @@ export function TransitionPhase() {
     };
 
     return (
-        <div className="transition-phase grid grid-cols-10 grid-rows-9 h-[100vh] w-full">
+        <div className="transition-phase pt-5 pb-5 grid grid-cols-10 grid-rows-9 h-[100vh] w-full">
 
             <h3
                 className="col-start-4 col-span-4 row-start-1 self-center text-center m-4"
@@ -236,8 +286,20 @@ export function TransitionPhase() {
 
             {isPaused ?
                 (
-                    < div className="col-start-2 col-span-8 row-start-2 row-span-7 flex items-center justify-center">
-                        <PauseMenu onEnd={endMeditation} />
+                    < div className="col-start-2 col-span-8 row-start-2 row-span-7 flex justify-center overflow-y-auto no-scrollbar">
+                        {activePauseMenuComponent === 'ViewInfo' && <ViewStageInfo stageIdParam={2} />}
+                        {activePauseMenuComponent === 'ShowGoals' && <GoalsTable goals={goals} doNotIncludeStatus="" isSubGoals={true} />}
+                        {/* {activePauseMenuComponent === 'NextStage' && <NextStageComponent />} */}
+                        {activePauseMenuComponent === null &&
+                            <PauseMenu
+                                onEnd={endMeditation}
+                                onViewInfo={handleViewInfo}
+                                onShowGoals={handleShowGoals}
+                                onRestart={handleRestart}
+                                onNextStage={handleNextStage}
+                            />
+                        }
+
                     </div>
                 )
                 :

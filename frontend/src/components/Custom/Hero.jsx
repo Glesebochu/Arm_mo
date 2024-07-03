@@ -3,13 +3,20 @@ import { FlipWords } from "./FlipWords";
 import { FaArrowRight } from "react-icons/fa";
 import Arc from "./Arc";
 import UnderLine from "./Underline";
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { SparklesCore } from "./Sparkles";
 import { useNavigate } from "react-router-dom";
 
 const words = ["Inner Peace", "Focus", "Zen"];
 const Hero = () => {
+  const videoRef = useRef(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.playbackRate = 2;
+    }
+  }, []);
 
   const navigateToSignupScreen = ()=> {
     navigate("/Signup")
@@ -81,7 +88,7 @@ const Hero = () => {
       {/* Right Hero pannel */}
       <div className="hidden lg:flex-[.6] lg:flex justify-center ">
         <div
-          className="w-[580px] h-[350px] transition-transform duration-500"
+          className="w-[580px] h-[330px] transition-transform duration-500"
           style={{
             transform: "perspective(1000px) rotateY(-10deg)",
             transition: "transform 0.5s ease",
@@ -95,7 +102,9 @@ const Hero = () => {
               "perspective(1000px) rotateY(-10deg)")
           }
         >
-          <AppWindow type="browser" browserTabs={[]}></AppWindow>
+          <AppWindow type="browser" browserTabs={[]}>
+            <video className="w-full h-auto mt-[-20px]" src="../../../public/video5.mp4" autoPlay muted loop ref={videoRef}></video>
+          </AppWindow>
         </div>
       </div>
     </div>

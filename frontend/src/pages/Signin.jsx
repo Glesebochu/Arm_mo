@@ -82,6 +82,7 @@ const Signin = () => {
   // Return the JSX for the signin form
   return (
     <div className="container flex h-screen w-screen flex-col items-center justify-center">
+      <h2 className="mb-5">Sign in to <span className="font-bold">Arm'mo</span></h2>
       <div className="relative overflow-hidden grid gap-6 bg-white w-full max-w-[390px] shadow-input rounded-tl-none rounded-2xl p-8 mx-4">
         <div className="grid gap-2 z-50">
           <div className="grid gap-1">

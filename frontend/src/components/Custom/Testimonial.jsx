@@ -36,26 +36,31 @@ export const Highlight = ({
 const words = [
     {
         text: "See",
+        className: "font-semibold"
     },
     {
         text: "what",
+        className: "font-semibold"
     },
     {
         text: "our",
+        className: "font-semibold"
     },
     {
         text: "users",
+        className: "font-semibold"
     },
     {
         text: "say",
+        className: "font-semibold"
     },
     {
         text: "About",
-        className: "text-blue-500 dark:text-blue-500",
+        className: "text-blue-500 dark:text-blue-500 font-bold",
     },
     {
         text: "Us",
-        className: "text-blue-500 dark:text-blue-500",
+        className: "text-blue-500 dark:text-blue-500 font-bold",
     }
 ]
 

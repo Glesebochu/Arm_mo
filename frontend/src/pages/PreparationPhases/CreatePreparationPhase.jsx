@@ -36,17 +36,17 @@ export default function CreatePreparationPhase() {
     motivation: "",
     goals: [],
     expectation: "",
-    distractions: [], // Initialize with an empty row
+    distractions: [{ title: "", type: "" }], // Initialize with an empty row
     startDateTime: "",
     endDateTime: "",
   });
-  const [stepErrorClasses, setStepErrorClasses] = useState({
-    Goals: [],
-    duration: "",
-    motivation: "",
-    distractions: [],
-    expectation: "",
-  });
+  // const [stepErrorClasses, setStepErrorClasses] = useState({
+  //   Goals: [],
+  //   duration: "",
+  //   motivation: "",
+  //   distractions: [],
+  //   expectation: "",
+  // });
   // The function that updates the goaltable's preparation data
   // const handleGoalsSelection = (selectedGoals) => {
   //   setPreparationData({ ...preparationData, Goals: selectedGoals });
@@ -74,7 +74,7 @@ export default function CreatePreparationPhase() {
               duration: value,
             }))
           }
-          className="center-self"
+          className="h-[1vh] self-center"
         />
       ),
       errorComponent: null,
@@ -129,6 +129,8 @@ export default function CreatePreparationPhase() {
               ...preparationData,
               distractions: newDistractions,
             });
+            var a = index;
+            console.log(a);
           }}
         />
       ),
@@ -178,7 +180,7 @@ export default function CreatePreparationPhase() {
   // }
   const handleNext = () => {
     let hasError = false;
-    const newStepErrorClasses = { ...stepErrorClasses };
+    // const newStepErrorClasses = { ...stepErrorClasses };
     const newDistractionErrors = preparationData.distractions.map(
       (distraction) => ({
         title: "",
@@ -186,65 +188,57 @@ export default function CreatePreparationPhase() {
       })
     );
 
-    if (
+    if (stepIndex == 0 && preparationData.goals.length == 0) {
+      notifyError("Please select one or more goals.", "bottom-left", true);
+      hasError = true;
+    } else if (
       stepIndex === 1 &&
       preparationData.duration.hour === 0 &&
       preparationData.duration.minute === 0 &&
       preparationData.duration.second === 0
     ) {
-      newStepErrorClasses.duration = "bg-red-100";
       hasError = true;
-      console.log(preparationData.duration);
-    } else {
-      newStepErrorClasses.duration = " ";
-    }
-
-    if (stepIndex == 0 && preparationData.goals.length == 0) {
-      notifyError("Please select one or more goals.", "bottom-left", true);
+      notifyError("Please add an appropriate duration.", "bottom-left", true);
       hasError = true;
-    }
-    if (stepIndex === 2 && preparationData.motivation.length <= 1) {
-      newStepErrorClasses.motivation =
-        "focus-visible:ring-0 border-red-500 border-2";
+    } else if (stepIndex === 2 && preparationData.motivation.length <= 1) {
+      notifyError("Please add your motivation correctly.", "bottom-left", true);
       hasError = true;
-    } else {
-      newStepErrorClasses.motivation = "";
-    }
-
-    if (stepIndex === 4 && preparationData.expectation.length <= 1) {
-      newStepErrorClasses.expectation =
-        "focus-visible:ring-0 border-red-500 border-2";
-      hasError = true;
-    } else {
-      newStepErrorClasses.expectation = "";
-    }
-    console.log(
-      preparationData,
-      stepIndex,
-      "hi",
-      // stepIndex == 3 && preparationData.goals.length == 0
-    );
-
-    if (stepIndex === 3) {
+    } else if (stepIndex === 3) {
       preparationData.distractions.forEach((distraction, index) => {
-        if (distraction.title.length <= 1) {
-          notifyError("Please select one or more goals.", "bottom-left", true);
+        if (distraction.title.length <= 1 && distraction.type === "") {
+          notifyError(
+            "Please enter you distraction(s) correctly.",
+            "bottom-left",
+            true
+          );
           hasError = true;
-        }
-
-        if (distraction.type === "select type") {
-          notifyError("Please select one or more goals.", "bottom-left", true);
+        } else if (distraction.title.length <= 1) {
+          notifyError(
+            "Please specify the title of your distraction(s).",
+            "bottom-left",
+            true
+          );
+          hasError = true;
+        } else if (distraction.type === "") {
+          notifyError(
+            "Please select the type of your distraction(s).",
+            "bottom-left",
+            true
+          );
           hasError = true;
         }
       });
+    } else if (stepIndex === 4 && preparationData.expectation.length <= 1) {
+      notifyError(
+        "Please add your expectation correctly.",
+        "bottom-left",
+        true
+      );
+      hasError = true;
     }
-
-    newStepErrorClasses.distractions = newDistractionErrors;
-    setStepErrorClasses(newStepErrorClasses);
-
     if (!hasError) {
       setStepIndex((prevIndex) => prevIndex + 1);
-      // console.log(preparationData.duration);
+      console.log(preparationData.distractions);
     }
   };
 
@@ -380,7 +374,7 @@ export default function CreatePreparationPhase() {
             {currentStep.errorComponent}
           </div>
 
-          <div className="col-start-1 col-span-9 row-start-6 row-span-6 text-xl overflow-auto position-sticky no-scrollbar scrollbar-hide">
+          <div className="col-start-1 col-span-9 row-start-6 row-span-5 text-xl overflow-auto position-sticky no-scrollbar scrollbar-hide">
             {currentStep.component}
           </div>
 

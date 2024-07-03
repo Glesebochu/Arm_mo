@@ -22,8 +22,11 @@ import { motion } from "framer-motion";
 import Profile from "../components/Custom/Profile"
 import { cn } from "../../utils/cn";
 import { Goals } from "@/pages/Goals"
+import { logout } from "../../slices/AuthSlice";
+import { useDispatch } from "react-redux";
 
 const Settings = () => {
+  const dispatch = useDispatch();
   const sidebarTabs = [
     {
       title: "My Account",
@@ -204,7 +207,7 @@ const Settings = () => {
               </div>
             </SheetContent>
           </Sheet>
-          <LogOut />
+          <LogOut onClick={()=> dispatch(logout())} className="cursor-pointer"/>
         </header>
         <main className={`w-full h-full`}>
           <FadeInDiv

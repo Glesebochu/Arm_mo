@@ -6,7 +6,7 @@ const Developers = () => {
   return (
     <div className="flex flex-col justify-center items-center pt-10 mt-48 lg:mt-10">
       <div className="font-k2d font-bold text-4xl mt-8 mb-4 text-neutral-600">
-        The Minds behind <Highlight className="font-k2d">Arm&rsquo;mo<BlinkingCursor/></Highlight>
+        The Minds behind <Highlight className="font-k2d font-semibold">Arm&rsquo;mo<BlinkingCursor/></Highlight>
       </div>
       <div>
         <svg

@@ -69,7 +69,7 @@ export function GoalsTable({ goals = [], isSubGoals = false, parentGoalId = null
     };
 
     // Remove completed goals from the list
-    goals = goals.filter(g => g.status != doNotIncludeStatus);
+    // goals = goals.filter(g => g.status != doNotIncludeStatus);
 
     const [data, setData] = useState(goals);
     const [sorting, setSorting] = useState([]);
@@ -86,6 +86,7 @@ export function GoalsTable({ goals = [], isSubGoals = false, parentGoalId = null
             const organizedData = organizeGoals(goals);
             setData(organizedData);
         }
+
     }, [goals]);
 
     useEffect(() => {
@@ -153,7 +154,7 @@ export function GoalsTable({ goals = [], isSubGoals = false, parentGoalId = null
         }));
         setData([...data, newGoalData]);
         // * Testing
-        // console.log(localData);
+        console.log(data);
         setIsEditing(newId);
         setIsCreating(true);
     };

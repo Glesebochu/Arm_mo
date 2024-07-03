@@ -74,7 +74,7 @@ export default function CreatePreparationPhase() {
               duration: value,
             }))
           }
-          className="col-start-4 col-span-2 tracking-wide row-start-6 row-span-4 self-center text-9xl mt-3 pl-2"
+          className="tracking-wide self-center text-[8vw] w-[22vw] h-[26.5vh] p-0 m-0"
         />
       ),
       errorComponent: null,
@@ -93,7 +93,7 @@ export default function CreatePreparationPhase() {
               motivation: e.target.value,
             })
           }
-          className="text-xl pl-10 pr-10 focus-visible:ring-1 ${stepErrorClasses}"
+          className="text-xl focus-visible:ring-1 ${stepErrorClasses}"
         />
       ),
       errorComponent: null,
@@ -150,7 +150,7 @@ export default function CreatePreparationPhase() {
               expectation: e.target.value,
             })
           }
-          className="text-xl pl-10 pr-10 focus-visible:ring-1"
+          className="text-xl focus-visible:ring-1"
         />
       ),
       errorComponent: null,
@@ -338,12 +338,9 @@ export default function CreatePreparationPhase() {
           </p>
           {stepIndex === 1 && (
             <>
-              <label className="col-start-4 row-start-6 text-xl ml-[2vw]">
-                Timer
-              </label>
               <div
-                className=" col-start-4 col-span-2 row-start-7 row-span-3 ml-[2vw] p-0
-                rounded-md bg-gray-50 hover:bg-gray-100 transition duration-50 w-[21vw] h-[21.5vh] shadow-xl self-center"
+                className=" col-start-4 col-span-2 row-start-6 row-span-3 p-0 m-0
+                rounded-md bg-gray-50 hover:bg-gray-100 transition duration-50 w-[22vw] h-[26.5vh] shadow-xl self-center items-center"
               >
                 {currentStep.component}
               </div>

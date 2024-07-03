@@ -158,7 +158,7 @@ const Home = () => {
 
   const filteredFrameworks = frameworks;
   return (
-    <div className="pt-4">
+    <div className="">
       <div className="flex justify-between items-center m-8">
         <div className="">
           <GoGear size={44} className="cursor-pointer" onClick={() => navigate("/settings")} />

@@ -69,7 +69,7 @@ const Home = () => {
       );
       const UpdateUsage = () => {
         CallUsage(`http://localhost:5158/api/Analyzer/UpdateUsage?userId=${user.id}`);
-        //console.log("updated!")
+        console.log("updated!")
       };
 
       const id = setInterval(UpdateUsage, 10000);
@@ -83,7 +83,7 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    console.log(user);
+    //console.log(user);
     // Determine the maximum practiced stage
     var maxPracticedStage = Math.max(
       ...user.practicedStages.map((stage) => stage.stageId)

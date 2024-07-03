@@ -103,7 +103,7 @@ const Hero = () => {
           }
         >
           <AppWindow type="browser" browserTabs={[]}>
-            <video className="w-full h-auto mt-[-20px]" src="../../../public/video5.mp4" autoPlay muted loop ref={videoRef}></video>
+            <video className="w-full h-auto mt-[-20px]" src="/video5.mp4" autoPlay muted loop ref={videoRef}></video>
           </AppWindow>
         </div>
       </div>

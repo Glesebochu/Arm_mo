@@ -20,7 +20,7 @@ const Features = ()=> {
         "Elevate your meditation practice with our innovative Guided Meditation Transition Feature. This interactive experience guides you through a structured series of steps designed to gradually narrow your focus from the broad present moment to a single meditation object. Each phase is carefully crafted to enhance your mindfulness, improve concentration, and deepen your meditation practice. Watch our video to see how you can effortlessly move through each transition phase, add personalized observable objects, and achieve your meditation goals.",
       content: (
         <div className="flex items-center justify-center border max-w-[38rem] mx-auto">
-          <video class="w-full h-auto" src="../../../public/video2.mp4" autoPlay muted loop ref={videoRef}></video>
+          <video class="w-full h-auto" src="/video2.mp4" autoPlay muted loop ref={videoRef}></video>
         </div>
       ),
     },
@@ -30,7 +30,7 @@ const Features = ()=> {
         "Welcome to the Preparation Phase of your meditation journey. This step-by-step guide is designed to help you set clear goals, establish a meaningful motivation, and create a focused environment free from distractions. Follow each step to ensure you are fully prepared for a productive and peaceful meditation session. Let's begin your path to mindfulness and inner peace.",
       content: (
         <div className="flex items-center justify-center border max-w-[38rem] mx-auto">
-          <video class="w-full h-auto" src="../../../public/video1.mp4" autoPlay muted loop ref={videoRef}></video>
+          <video class="w-full h-auto" src="/video1.mp4" autoPlay muted loop ref={videoRef}></video>
         </div>
       ),
     },
@@ -40,7 +40,7 @@ const Features = ()=> {
             "Provides you with a graph that shows you the time you spent on the app in a given week.",
       content: (
         <div className="flex items-center justify-center border max-w-[38rem] mx-auto">
-          <video class="w-full h-auto" src="../../../public/video3.mp4" autoPlay muted loop ref={videoRef}></video>
+          <video class="w-full h-auto" src="/video3.mp4" autoPlay muted loop ref={videoRef}></video>
         </div>
       ),
     },
@@ -50,7 +50,7 @@ const Features = ()=> {
             "View a comprehensive summary of the sessions you had recently in a tabular format.",
       content: (
         <div className="flex items-center justify-center border max-w-[38rem] mx-auto">
-          <video class="w-full h-auto" src="../../../public/video4.mp4" autoPlay muted loop ref={videoRef}></video>
+          <video class="w-full h-auto" src="/video4.mp4" autoPlay muted loop ref={videoRef}></video>
         </div>
       ),
     },

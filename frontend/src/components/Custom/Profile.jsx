@@ -178,7 +178,7 @@ const Profile = () => {
             </div>
           </CardContent>
           <CardFooter className="flex justify-center">
-            <Button onClick={handleAccountSubmit}>Save changes</Button>
+            <Button onClick={handleAccountSubmit} disabled={!(userAccount.firstName || userAccount.lastName || userAccount.username || userAccount.profilePicture)}>Save changes</Button>
           </CardFooter>
         </Card>
       </TabsContent>
@@ -201,7 +201,7 @@ const Profile = () => {
             </div>
           </CardContent>
           <CardFooter className="flex justify-center">
-            <Button onClick={handlePasswordSubmit}>Change password</Button>
+            <Button onClick={handlePasswordSubmit} disabled={!(userPassword.currentPassword || userPassword.newPassword)}>Change password</Button>
           </CardFooter>
         </Card>
       </TabsContent>

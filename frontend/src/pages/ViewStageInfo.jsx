@@ -87,7 +87,7 @@ export default function ViewStageInfo({ stageIdParam = 1 }) {
           Previous
         </Button>
       )}
-      {stageIdParam !== 10 && (
+      {stageId !== 10 && (
         <Button
           onClick={handleNext}
           className="col-start-9 col-span-3 row-start-8 row-span-2 mt-5 h-10 text-xl bg-gray-100 font-bold border-b-2 border-solid shadow-m"

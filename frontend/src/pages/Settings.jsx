@@ -5,7 +5,8 @@ import {
   Menu,
   Settings2,
   SlidersHorizontal,
-  Mountain
+  Mountain,
+  Target
 } from "lucide-react"
 import { IoLogoAppleAr } from "react-icons/io5";
 import { Button } from "../components/ui/button"
@@ -24,6 +25,7 @@ import { cn } from "../../utils/cn";
 import { Goals } from "@/pages/Goals"
 import { logout } from "../../slices/AuthSlice";
 import { useDispatch } from "react-redux";
+import ViewStageInfo from "./ViewStageInfo";
 
 const Settings = () => {
   const dispatch = useDispatch();
@@ -32,7 +34,7 @@ const Settings = () => {
       title: "My Account",
       value: "MyAccount",
       content: (
-        <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-white border">
+        <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-white border-2">
           <div className="flex justify-center">
             <Profile />
           </div>
@@ -43,16 +45,17 @@ const Settings = () => {
       title: "Goals",
       value: "goals",
       content: (
-        <div className="w-full overflow-auto no-scrollbar relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold bg-white border">
+        <div className="w-full overflow-auto no-scrollbar relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold bg-white border-2">
           <Goals />
         </div>
       ),
     },
     {
-      title: "Game Settings",
-      value: "GameSettings",
+      title: "Stage Information",
+      value: "stageInformation",
       content: (
-        <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-white border">
+        <div className="w-full overflow-auto no-scrollbar relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-white border-2">
+          <ViewStageInfo />
         </div>
       ),
     },
@@ -110,7 +113,7 @@ const Settings = () => {
                       />
                     )}
                     {tab.value == "MyAccount" ? <User className={`relative ${active.value == tab.value ? "text-primary" : ""}`} /> : ""}
-                    {tab.value == "GameSettings" ? <Settings2 className={`relative ${active.value == tab.value ? "text-primary" : ""}`} /> : ""}
+                    {tab.value == "stageInformation" ? <Target className={`relative ${active.value == tab.value ? "text-primary" : ""}`} /> : ""}
                     {tab.value == "goals" ? <Mountain className={`relative ${active.value == tab.value ? "text-primary" : ""}`} /> : ""}
                     <span className={`relative block dark:text-white font-k2d text-[16px] ${active.value == tab.value ? "text-primary" : ""}`}>
                       {tab.title}
@@ -179,8 +182,8 @@ const Settings = () => {
                       )}
 
                       {tab.value == "MyAccount" ? <User className={`relative ${active.value == tab.value ? "text-primary" : ""}`} /> : ""}
-                      {tab.value == "GameSettings" ? <Settings2 className={`relative ${active.value == tab.value ? "text-primary" : ""}`} /> : ""}
-                      {tab.value == "plaGamePlaySettingsyground" ? <SlidersHorizontal className={`relative ${active.value == tab.value ? "text-primary" : ""}`} /> : ""}
+                      {tab.value == "stageInformation" ? <Target className={`relative ${active.value == tab.value ? "text-primary" : ""}`} /> : ""}
+                      {tab.value == "goals" ? <Mountain className={`relative ${active.value == tab.value ? "text-primary" : ""}`} /> : ""}
 
                       <span className={`relative block dark:text-white font-k2d text-[16px] ${active.value == tab.value ? "text-primary" : ""}`}>
                         {tab.title}
@@ -209,13 +212,13 @@ const Settings = () => {
           </Sheet>
           <LogOut onClick={()=> dispatch(logout())} className="cursor-pointer"/>
         </header>
-        <main className={`w-full h-full`}>
+        <main className={`w-full h-fit px-6 mt-4`}>
           <FadeInDiv
             tabs={tabs}
             active={active}
             key={active.value}
             hovering={hovering}
-            className={cn(`w-full h-[563px] ${hovering ? "mt-6" : ""}`)}
+            className={cn(`w-full h-[563px] ${hovering ? "mt-9" : ""}`)}
           />
         </main>
       </div>

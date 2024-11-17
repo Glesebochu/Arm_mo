@@ -64,10 +64,6 @@ npm start
 
 After launching the game, follow the on-screen instructions on the introductory page to start your meditation journey. Use the home page to navigate between different stages and access the customization options for your meditation sessions.
 
-## License
-
-This project is licensed under ______________________________________________
-
 ## Support
 
 If you encounter any issues or have suggestions, please file an issue or reach out to us via our support channels.
